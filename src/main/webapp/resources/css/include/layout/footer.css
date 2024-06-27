@@ -60,7 +60,7 @@
 .footer_address_item {
 	display: inline-block;
 	position: relative;
-	margin-right: 8px;
+	padding: 5px 10px;
 }
 
 .footer_address_item+.footer_address_item::before {

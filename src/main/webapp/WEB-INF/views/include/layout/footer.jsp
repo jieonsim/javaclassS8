@@ -31,18 +31,18 @@
 		</div>
 	</div>
 	<div class="footer_inner container py-4">
-		<span class="footer_corp_title font-weight-bold">엔에이치엔링크 주식회사</span>
+		<span class="footer_corp_title font-weight-bold">티켓챔프 주식회사</span>
 		<address class="footer_address mt-2">
-			<p>
-				<span class="footer_address_item d-inline-block mr-3">주소: 06043 서울특별시 강남구 강남대로 586, 제이빌딩</span>
-				<span class="footer_address_item d-inline-block mr-3">대표이사: 심지언</span>
-				<span class="footer_address_item d-inline-block mr-3">사업자등록번호: 144-81-25090</span>
+			<p style="margin-bottom: 0px;">
+				<span class="footer_address_item d-inline-block">주소: 06043 서울특별시 강남구 강남대로 586, 제이빌딩</span>
+				<span class="footer_address_item d-inline-block">대표이사: 심지언</span>
+				<span class="footer_address_item d-inline-block">사업자등록번호: 123-45-78901</span>
 			</p>
 			<p>
-				<span class="footer_address_item d-inline-block mr-3">1588-7890</span>
-				<span class="footer_address_item d-inline-block mr-3">membership@nhnlink.co.kr</span>
-				<span class="footer_address_item d-inline-block mr-3">통신판매업 신고번호: 제 2024-충북청주-77777호</span>
-				<span class="footer_address_item d-inline-block mr-3"> 사업자정보확인</span>
+				<span class="footer_address_item d-inline-block">1234-1234</span>
+				<span class="footer_address_item d-inline-block">membership@ticketchamp.co.kr</span>
+				<span class="footer_address_item d-inline-block">통신판매업 신고번호: 제 2024-충북청주-77777호</span>
+				<span class="footer_address_item d-inline-block"> 사업자정보확인</span>
 				<span class="footer_address_item d-inline-block">개인정보보호 책임자: 심지언</span>
 			</p>
 		</address>

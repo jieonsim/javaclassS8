@@ -10,13 +10,33 @@
 	color: #878d95;
 }
 
-.header_inner {
-	height: 88px;
+.header_util_right .nav .nav-item {
+	display: inline-block;
+	position: relative;
+	padding: 0 10px; /* 간격 조정 */
+}
+
+.header_util_right .nav .nav-item:not(:last-child)::after {
+	content: '';
+	position: absolute;
+	right: -5px;
+	top: 50%;
+	width: 1px;
+	height: 10px; /* 구분선 길이 조정 */
+	background: gray; /* 구분선 색상 조정 */
+	transform: translateY(-50%);
+}
+
+#header_title_logo {
+	color: red;
+	font-size: 60px;
 }
 
 .header_title_link {
 	color: black;
-	font-family: Pretendard-Regular;
+	font-family: LINESeedKR-Bd, sans-serif;
+	text-decoration: none;
+	font-size: 0;
 }
 
 .header_title_link:hover {
@@ -24,14 +44,22 @@
 	text-decoration: none;
 }
 
-.header_nav .nav-link {
-	font-size: 26px;
-	font-family: Pretendard-Bold;
-	color: #333;
+.logo-text {
+	display: inline-block;
+	font-size: 40px;
+}
+
+.logo-text.champ {
+	color: red;
+}
+
+.header_inner .banner-text {
+	font-family: Pretendard-Regular;
 }
 
 .header_gnb {
 	border-bottom: 1px solid #000;
+	border-top: 1px solid #ddd;
 }
 
 .header_gnb .nav-link {
