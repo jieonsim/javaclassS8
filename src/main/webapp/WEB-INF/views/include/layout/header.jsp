@@ -21,7 +21,7 @@
 						<a href="#" id="reserve" class="nav-link text-dark">예매확인/취소</a>
 					</li>
 					<li class="nav-item">
-						<a href="#" id="joinBtn" class="nav-link text-dark">회원가입</a>
+						<a href="${ctp}/signup/agreement" id="joinBtn" class="nav-link text-dark">회원가입</a>
 					</li>
 					<li class="nav-item">
 						<a href="${ctp}/help/main" class="nav-link text-dark">고객센터</a>
@@ -35,8 +35,8 @@
 	</div>
 	<div class="header_inner container d-flex align-items-center py-3">
 		<h1 class="header_title mb-0">
-			<i class="ph ph-person-simple-throw" id="header_title_logo"></i>
 			<a class="header_title_link" href="${ctp}/">
+				<i class="ph ph-person-simple-throw" id="header_title_logo"></i>
 				<span class="logo-text">ticket</span>
 				<span class="logo-text champ">champ</span>
 			</a>

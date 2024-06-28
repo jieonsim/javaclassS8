@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>로그인</title>
+<title>로그인-티켓챔프</title>
 <jsp:include page="/WEB-INF/views/include/common/utility.jsp" />
 <link rel="stylesheet" href="${ctp}/css/member/login.css">
 <link rel="icon" href="${ctp}/images/common/favicon.png">
@@ -16,11 +16,10 @@
 	<div class="container" id="login_container">
 		<div class="row justify-content-center">
 			<div class="col-md-8 col-lg-6">
-				<header></header>
 				<div class="loginWrap">
 					<div class="loginLogo text-center mb-4">
-						<i class="ph ph-person-simple-throw" id="header_title_logo"></i>
 						<a class="header_title_link" href="${ctp}/">
+							<i class="ph ph-person-simple-throw" id="header_title_logo"></i>
 							<span class="logo-text">ticket</span>
 							<span class="logo-text champ">champ</span>
 						</a>
@@ -68,7 +67,7 @@
 									<a class="nav-link px-2" id="findPwd" href="#">비밀번호 찾기</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link px-2" id="signup" href="#">회원가입</a>
+									<a class="nav-link px-2" id="signup" href="${ctp}/signup/agreement">회원가입</a>
 								</li>
 							</ul>
 						</div>
