@@ -1,15 +1,7 @@
 @charset "UTF-8";
 
 #login_container {
-	padding-top: 3rem;
-}
-
-#login_container header {
-	display: flex;
-	height: 5rem;
-	padding: 0 .8rem;
-	align-items: center;
-	justify-content: right;
+	padding-top: 5.2rem;
 }
 
 #header_title_logo {
@@ -39,26 +31,12 @@
 }
 
 .loginInner {
-	margin-top: 2rem;
+	margin-top: 3rem;
 }
 
-/* .input-group-text {
-	background-color: transparent;
-	border-right: none;
-}
-
-.custom-input {
-	border-left: none;
-	font-family: Pretendard-Light;
-}
-
-.custom-input:focus {
-	box-shadow: none;
-	border-color: #ced4da;
-} */
 .custom-input-group {
 	border: 1px solid #ced4da;
-	border-radius: 5px;
+	border-radius: 0px;
 	overflow: hidden;
 	background-color: white;
 	padding: 5px;
@@ -118,21 +96,18 @@
 }
 
 /* 체크박스가 체크되었을 때 빨간색으로 변경 */
-.loginInner .custom-control-input:checked+.custom-control-label::before {
+.loginInner .custom-control-input:checked+.custom-control-label::before
+	{
 	background-color: red;
 	border-color: red;
 	box-shadow: none;
 }
 
 /* 체크박스가 해제되었을 때 기본 색상으로 유지 */
-.loginInner .custom-control-input:not(:checked) + .custom-control-label::before {
-    border-color: #ced4da !important;
+.loginInner .custom-control-input:not(:checked)+.custom-control-label::before
+	{
+	border-color: #ced4da !important;
 }
-
-/* 체크 표시 스타일 */
-/* .custom-control-input:checked+.custom-control-label::after {
-	border-color: #ced4da;
-} */
 
 .loginInner .loginBtn {
 	height: 3.5rem;
@@ -140,11 +115,25 @@
 	color: #fff;
 	font-weight: 700;
 	font-size: 1.2rem;
-	border-radius: 15px;
+	font-family: Pretendard-Bold;
+	border-radius: 0px;
 }
 
 .loginInner .loginBtn:hover {
 	color: #fff;
+}
+
+.loginInner .loginBtn:focus {
+	box-shadow: none;
+}
+
+.loginInner .findList {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-top: 1.5rem;
 }
 
 .loginInner .findList .nav-link {
@@ -172,6 +161,30 @@
 	position: relative;
 	padding-right: 10px; /* 구분선과 텍스트 사이의 간격을 조절하세요 */
 	padding-left: 10px; /* 구분선과 텍스트 사이의 간격을 조절하세요 */
+}
+
+.loginInner .snsLogin {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin: 4rem 0 5.2rem;
+}
+
+.loginInner .snsLogin ul {
+	margin: 0;
+	padding: 0;
+}
+
+.loginInner .snsLogin li {
+	position: relative;
+	display: inline-block;
+	padding: 0 1rem;
+	box-sizing: border-box;
+}
+
+.loginInner .snsLogin img {
+	width: 48px;
 }
 
 @media ( min-width : 768px) {

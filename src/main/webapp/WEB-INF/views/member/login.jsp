@@ -27,28 +27,6 @@
 					</div>
 					<div class="loginInner">
 						<form id="loginForm" name="loginForm" method="post">
-							<!-- <div class="form-group">
-								<div class="input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text">
-											<i class="ph ph-user"></i>
-										</span>
-									</div>
-									<input type="email" class="form-control custom-input"
-										name="email" id="email" placeholder="이메일 아이디">
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text">
-											<i class="ph ph-lock"></i>
-										</span>
-									</div>
-									<input type="password" class="form-control custom-input"
-										name="password" id="password" placeholder="비밀번호">
-								</div>
-							</div> -->
 							<div class="form-group">
 								<div class="input-group custom-input-group">
 									<span class="input-group-prepend">
@@ -76,13 +54,12 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<button type="button" class="btn btn-block loginBtn"
-									id="loginBtn">
+								<button type="submit" class="btn btn-block loginBtn">
 									<span>로그인</span>
 								</button>
 							</div>
 						</form>
-						<div class="findList mt-3">
+						<div class="findList">
 							<ul class="nav justify-content-center">
 								<li class="nav-item">
 									<a class="nav-link px-2" id="findId" href="#">아이디 찾기</a>
@@ -92,6 +69,25 @@
 								</li>
 								<li class="nav-item">
 									<a class="nav-link px-2" id="signup" href="#">회원가입</a>
+								</li>
+							</ul>
+						</div>
+						<div class="snsLogin">
+							<ul>
+								<li>
+									<a href="#">
+										<img alt="카카오로그인" src="${ctp}/images/member/login/kakao.png">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img alt="네이버로그인" src="${ctp}/images/member/login/naver.png">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img alt="애플로그인" src="${ctp}/images/member/login/apple.png">
+									</a>
 								</li>
 							</ul>
 						</div>
