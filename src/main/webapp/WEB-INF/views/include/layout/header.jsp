@@ -21,7 +21,7 @@
 						<a href="#" id="reserve" class="nav-link text-dark">예매확인/취소</a>
 					</li>
 					<li class="nav-item">
-						<a href="${ctp}/signup/agreement" id="joinBtn" class="nav-link text-dark">회원가입</a>
+						<a href="${ctp}/signup" id="joinBtn" class="nav-link text-dark">회원가입</a>
 					</li>
 					<li class="nav-item">
 						<a href="${ctp}/help/main" class="nav-link text-dark">고객센터</a>

@@ -186,10 +186,12 @@ select {
 .logo-text {
 	/* display: inline-block; */
 	font-size: 24px;
+	font-family: LINESeedKR-Bd, sans-serif;
 }
 
 .logo-text.champ {
 	color: red;
+	font-family: LINESeedKR-Bd, sans-serif;
 }
 
 .header .headerTitle {

@@ -9,9 +9,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원가입-티켓챔프</title>
 <jsp:include page="/WEB-INF/views/include/common/utility.jsp" />
+<jsp:include page="/WEB-INF/views/member/signup/이용약관.jsp" />
 <link rel="stylesheet" href="${ctp}/css/member/signup/common.css">
-<link rel="stylesheet" href="${ctp}/css/member/signup/signup.css">
+<link rel="stylesheet" href="${ctp}/css/member/signup/agreement.css">
 <link rel="icon" href="${ctp}/images/common/favicon.png">
+<style type="text/css">
+.uCheckbox .text:after {
+	background: url('${ctp}/images/member/signup/icon_check_new.png') 0 0
+		no-repeat;
+	background-size: 100% auto;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 28px;
+	height: 28px;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	background-position: 0 0;
+	background-size: 100% auto;
+	border-radius: 50%;
+}
+</style>
 </head>
 <body>
 	<div class="memberContainer">
@@ -47,7 +67,7 @@
 								</div>
 							</label>
 							<div class="checkboxCont">
-								<a href="#" class="btn btnLink">[필수] 이용약관</a>
+								<a href="#" class="btn btnLink"  data-toggle="modal" data-target="#이용약관">[필수] 이용약관</a>
 							</div>
 						</div>
 						<div class="uCheckbox sType">
