@@ -3,9 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <link rel="stylesheet" href="${ctp}/css/layout/header.css">
+<!-- 모바일 헤더 -->
 <div class="m_header">
-	<div class="container">
-		<div class="headerInner my-2">
+	<div class="container-fluid">
+		<div class="headerInner my-3 px-2">
 			<a class="header_title_link" href="${ctp}/">
 				<i class="ph ph-person-simple-throw" id="header_title_logo"></i>
 				<span class="logo-text">ticket</span>
@@ -15,6 +16,7 @@
 	</div>
 </div>
 
+<!-- PC 헤더 -->
 <header class="common_header">
 	<div class="header_util bg-light py-2">
 		<div class="container d-flex justify-content-between">
@@ -22,24 +24,27 @@
 			<div class="header_util_right">
 				<ul class="nav">
 					<li class="nav-item">
-						<a href="${ctp}/login" id="loginBtn" class="nav-link text-dark">로그인</a>
+						<a href="${ctp}/login" class="nav-link">로그인</a>
+					</li>
+					<%-- <li class="nav-item">
+						<a href="${ctp}/my/memberInfo/info"
+							class="nav-link">zieonsim@gmail.com</a>
+					</li> --%>
+					<%-- <li class="nav-item">
+						<a href="${ctp}/my/reserve" class="nav-link">예매확인/취소</a>
+					</li> --%>
+					<%-- <li class="nav-item">
+						<a href="${ctp}/logout" class="nav-link">로그아웃</a>
+					</li> --%>
+					<li class="nav-item">
+						<a href="${ctp}/signup" class="nav-link">회원가입</a>
 					</li>
 					<li class="nav-item">
-						<a href="${ctp}/my/memberInfo/info" id="loggedIn"
-							class="nav-link text-dark">zieonsim@gmail.com</a>
+						<a href="${ctp}/help/main" class="nav-link">고객센터</a>
 					</li>
-					<li class="nav-item">
-						<a href="#" id="reserve" class="nav-link text-dark">예매확인/취소</a>
-					</li>
-					<li class="nav-item">
-						<a href="${ctp}/signup" id="joinBtn" class="nav-link text-dark">회원가입</a>
-					</li>
-					<li class="nav-item">
-						<a href="${ctp}/help/main" class="nav-link text-dark">고객센터</a>
-					</li>
-					<li class="nav-item">
-						<a href="#" class="nav-link text-dark">어드민</a>
-					</li>
+					<%-- <li class="nav-item">
+						<a href="${ctp}/admin/main" class="nav-link">어드민</a>
+					</li> --%>
 				</ul>
 			</div>
 		</div>
@@ -68,7 +73,7 @@
 			<nav class="header_gnb_area">
 				<ul class="nav">
 					<li class="nav-item">
-						<a class="nav-link" href="${ctp}/">홈</a>
+						<a class="nav-link is-active" href="${ctp}/">홈</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/sports/baseball">야구</a>
@@ -108,6 +113,7 @@
 	</div>
 </header>
 
+<!-- 모바일 툴바 -->
 <nav class="m_toolbar">
 	<ul class="toolbar_menu">
 		<li class="toolbar_item">

@@ -5,41 +5,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" href="${ctp}/images/common/favicon.png"
+	type="image/png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원가입-티켓챔프</title>
 <jsp:include page="/WEB-INF/views/common/utility.jsp" />
 <jsp:include page="/WEB-INF/views/member/signup/이용약관.jsp" />
+<jsp:include page="/WEB-INF/views/member/signup/전자금융거래이용약관.jsp" />
+<jsp:include page="/WEB-INF/views/member/signup/개인정보수집동의서_필수.jsp" />
+<jsp:include page="/WEB-INF/views/member/signup/개인정보수집동의서_선택.jsp" />
+<jsp:include page="/WEB-INF/views/member/signup/위치기반서비스이용약관.jsp" />
 <link rel="stylesheet" href="${ctp}/css/member/signup/common.css">
 <link rel="stylesheet" href="${ctp}/css/member/signup/agreement.css">
-<link rel="icon" href="${ctp}/images/common/favicon.png">
-<style type="text/css">
-.uCheckbox .text:after {
-	background: url('${ctp}/images/member/signup/icon_check_new.png') 0 0
-		no-repeat;
-	background-size: 100% auto;
-	content: "";
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 28px;
-	height: 28px;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	background-color: #fff;
-	background-position: 0 0;
-	background-size: 100% auto;
-	border-radius: 50%;
-}
-</style>
 </head>
 <body>
 	<div class="memberContainer">
 		<div class="header">
 			<div class="headerInner">
-				<%-- <a href="${ctp}/" class="headerLogo">
-					<span class="blind">TicketChamp</span>
-				</a> --%>
 				<a class="header_title_link" href="${ctp}/">
 					<i class="ph ph-person-simple-throw" id="header_title_logo"></i>
 					<span class="logo-text">ticket</span>
@@ -61,35 +44,38 @@
 					<div class="termsItem">
 						<div class="uCheckbox sType">
 							<label>
-								<div class="inputWrap">
+								<span class="inputWrap">
 									<input type="checkbox" class="singleSelector requireSelector">
 									<span class="text"></span>
-								</div>
+								</span>
 							</label>
 							<div class="checkboxCont">
-								<a href="#" class="btn btnLink"  data-toggle="modal" data-target="#이용약관">[필수] 이용약관</a>
+								<a href="#" class="btn btnLink" data-toggle="modal"
+									data-target="#이용약관">[필수] 이용약관</a>
 							</div>
 						</div>
 						<div class="uCheckbox sType">
 							<label>
-								<div class="inputWrap">
+								<span class="inputWrap">
 									<input type="checkbox" class="singleSelector requireSelector">
 									<span class="text"></span>
-								</div>
+								</span>
 							</label>
 							<div class="checkboxCont">
-								<a href="#" class="btn btnLink">[필수] 전자금융거래 이용약관</a>
+								<a href="#" class="btn btnLink" data-toggle="modal"
+									data-target="#전자금융거래이용약관">[필수] 전자금융거래 이용약관</a>
 							</div>
 						</div>
 						<div class="uCheckbox sType">
 							<label>
-								<div class="inputWrap">
+								<span class="inputWrap">
 									<input type="checkbox" class="singleSelector requireSelector">
 									<span class="text"></span>
-								</div>
+								</span>
 							</label>
 							<div class="checkboxCont">
-								<a href="#" class="btn btnLink">[필수] 개인정보 수집동의서</a>
+								<a href="#" class="btn btnLink" data-toggle="modal"
+									data-target="#개인정보수집동의서_필수">[필수] 개인정보 수집동의서</a>
 							</div>
 						</div>
 					</div>
@@ -99,32 +85,36 @@
 					<div class="termsItem">
 						<div class="uCheckbox sType">
 							<label>
-								<div class="inputWrap">
+								<span class="inputWrap">
 									<input type="checkbox" class="singleSelector">
 									<span class="text"></span>
-								</div>
+								</span>
 							</label>
 							<div class="checkboxCont">
-								<a href="#" class="btn btnLink">[선택] 개인정보 수집동의서</a>
+								<a href="#" class="btn btnLink" data-toggle="modal"
+									data-target="#개인정보수집동의서_선택">[선택] 개인정보 수집동의서</a>
 							</div>
 						</div>
 						<div class="uCheckbox sType">
 							<label>
-								<div class="inputWrap">
+								<span class="inputWrap">
 									<input type="checkbox" class="singleSelector">
 									<span class="text"></span>
-								</div>
+								</span>
 							</label>
 							<div class="checkboxCont">
-								<a href="#" class="btn btnLink">[선택] 위치기반서비스 이용약관</a>
+								<a href="#" class="btn btnLink" data-toggle="modal"
+									data-target="#위치기반서비스이용약관">[선택] 위치기반서비스 이용약관</a>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="ubtnArea">
 					<div class="col">
-						<button type="button" class="uBtn active" disabled=""
-							data-id="nextStep">다음단계</button>
+						<button type="button" class="uBtn active" disabled
+							data-id="nextStep" onclick="location.href='${ctp}/signup/form'">다음단계</button>
+						<button type="button" class="uBtn active"
+							data-id="nextStep" onclick="location.href='${ctp}/signup/form'">다음단계</button>
 					</div>
 				</div>
 			</div>

@@ -23,7 +23,7 @@
 	top: 50%;
 	width: 1px;
 	height: 10px; /* 구분선 길이 조정 */
-	background: gray; /* 구분선 색상 조정 */
+	background: #878d95; /* 구분선 색상 조정 */
 	transform: translateY(-50%);
 }
 
@@ -40,13 +40,13 @@
 }
 
 .header_title_link:hover {
-	color: black;
 	text-decoration: none;
 }
 
 .logo-text {
 	display: inline-block;
 	font-size: 40px;
+	color: black;
 }
 
 .logo-text.champ {
@@ -62,13 +62,20 @@
 	border-top: 1px solid #ddd;
 }
 
+.header_gnb .nav-link.is-active {
+	font-family: Pretendard-Bold;
+	font-size: 16px;
+	color: #fa2828;
+}
+
 .header_gnb .nav-link {
 	font-family: Pretendard-SemiBold;
 	font-size: 16px;
 	color: #242428;
 }
 
-.header_gnb .nav-link:hover {
+.header_gnb .nav-link:hover,
+.header_gnb .nav-link:active {
 	color: #fa2828;
 	font-family: Pretendard-Bold;
 }
@@ -187,10 +194,10 @@
 	}
 	.toolbar_util {
 		position: absolute;
-		margin-bottom: 10px; 
-		right: 20px;
+		margin-bottom: 10px; right : 20px;
 		bottom: calc(76px + env(safe-area-inset-bottom));
 		width: 40px;
+		right: 20px;
 	}
 	.toolbar_util .toolbar_refresh, .toolbar_util .toolbar_top {
 		position: relative;
@@ -210,16 +217,14 @@
 		content: '';
 	}
 	.toolbar_refresh::before {
-		/* @include useSvg-common('refresh', 24px) 대체 */
-		/* 여기에 SVG 백그라운드 이미지를 직접 지정해야 함 */
-		background-image: url('path_to_refresh_icon.svg');
+		background-image: url('../../images/layout/header/refresh.svg');
 		width: 24px;
 		height: 24px;
 		background-size: contain;
 		background-repeat: no-repeat;
 	}
 	.toolbar_top::before {
-		background-image: url('../../images/common/arrow-up.svg');
+		background-image: url('../../images/layout/header/arrow-up.svg');
 		width: 24px;
 		height: 24px;
 		background-size: contain;

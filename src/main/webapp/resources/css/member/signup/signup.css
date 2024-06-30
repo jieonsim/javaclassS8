@@ -366,7 +366,7 @@
 	margin-top: -7.5px;
 	background:
 		url("//openimage.interpark.com/member/common/icon/icon_arrow_left.png")
-		0 0 no-repeat;
+		0 0 no-repeat;	
 	background-size: 100% auto;
 	content: "";
 	width: 15px;
@@ -631,7 +631,6 @@ select::-ms-expand {
 	line-height: 38px;
 }
 
-/*
 .joinContent .listSns .btnSns>span:after {
 	position: absolute;
 	top: 50%;
@@ -641,10 +640,10 @@ select::-ms-expand {
 	left: 0;
 	width: 20px;
 	background:
-		url("//openimage.interpark.com/member/common/icon/icon_sns_logo.png")
+		url("../../../images/member/signup/icon_sns_logo.png")
 		center 0 no-repeat;
 	background-size: 100% auto;
-} */
+}
 
 .joinContent .listSns .btnSns.snsNaverBtn {
 	background: #2db400;

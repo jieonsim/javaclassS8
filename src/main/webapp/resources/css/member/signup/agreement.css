@@ -323,9 +323,9 @@
 	font-family: Pretendard-Bold;
 }
 
-/* .uCheckbox .text:after {
+.uCheckbox .text:after {
 	background:
-		url("//openimage.interpark.com/member/common/icon/icon_check_new.png")
+		url("../../../images/member/signup/icon_check_new.png")
 		0 0 no-repeat;
 	background-size: 100% auto;
 	content: "";
@@ -340,7 +340,8 @@
 	background-position: 0 0;
 	background-size: 100% auto;
 	border-radius: 50%;
-} */
+}
+
 
 .uCheckbox .checkboxCont {
 	overflow: hidden;
@@ -367,10 +368,13 @@
 	top: 50%;
 	height: 15px;
 	margin-top: -7.5px;
-	background:
+	/* background:
 		url("//openimage.interpark.com/member/common/icon/icon_arrow_left.png")
 		0 0 no-repeat;
-	background-size: 100% auto;
+	background-size: 100% auto; */
+	background-image: url('../../../images/member/signup/icon_arrow_left.png');
+	background-size: contain;
+	background-repeat: no-repeat;
 	content: "";
 	width: 15px;
 	right: 0;

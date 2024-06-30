@@ -24,4 +24,10 @@ public class MemberController {
 	public String signupAgreement() {
 		return "member/signup/agreement";
 	}
+	
+	// 회원가입 폼
+	@RequestMapping(value = "/signup/form", method = RequestMethod.GET)
+	public String signupForm() {
+		return "member/signup/form";
+	}
 }

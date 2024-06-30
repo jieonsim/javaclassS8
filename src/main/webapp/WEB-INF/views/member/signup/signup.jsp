@@ -12,19 +12,7 @@
 <link rel="stylesheet" href="${ctp}/css/member/signup/common.css">
 <link rel="stylesheet" href="${ctp}/css/member/signup/signup.css">
 <link rel="icon" href="${ctp}/images/common/favicon.png">
-<style type="text/css">
-.joinContent .listSns .btnSns>span:after {
-	position: absolute;
-	top: 50%;
-	height: 20px;
-	margin-top: -10px;
-	content: "";
-	left: 0;
-	width: 20px;
-	background: url('${ctp}/images/member/signup/icon_sns_logo.png') center 0 no-repeat;
-	background-size: 100% auto;
-}
-</style>
+<script src="${ctp}/js/member/signup/signup.js"></script>
 </head>
 <body>
 	<div class="memberContainer">
@@ -50,7 +38,7 @@
 					<div class="snsJoinArea">
 						<ul class="listSns">
 							<li class="snsNaver">
-								<a href="#" class="btnSns snsNaverBtn">
+								<a href="javascript:snsNaver();" class="btnSns snsNaverBtn">
 									<span>네이버로 가입</span>
 								</a>
 							</li>
