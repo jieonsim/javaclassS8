@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원가입-티켓챔프</title>
-<jsp:include page="/WEB-INF/views/include/common/utility.jsp" />
+<jsp:include page="/WEB-INF/views/common/utility.jsp" />
 <jsp:include page="/WEB-INF/views/member/signup/이용약관.jsp" />
 <link rel="stylesheet" href="${ctp}/css/member/signup/common.css">
 <link rel="stylesheet" href="${ctp}/css/member/signup/agreement.css">

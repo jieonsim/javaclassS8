@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 .common_footer {
 	border-top: 1px solid #000;
 	background-color: #fff;
@@ -37,10 +38,12 @@
 .footer_menu_link {
 	color: #333;
 	text-decoration: none;
+	font-family: 'Pretendard-Regular';
 }
 
-.footer_menu_link .text_bold {
-	font-weight: 700;
+.footer_menu_link:hover {
+	color: #333;
+	text-decoration: none;
 }
 
 .footer_inner {
@@ -50,11 +53,11 @@
 }
 
 .footer_corp_title {
-	font-weight: 700;
+	font-family: 'Pretendard-Bold';
 }
 
 .footer_address {
-	margin-top: 10px;
+	font-family: 'Pretendard-Regular';
 }
 
 .footer_address_item {

@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>로그인-티켓챔프</title>
-<jsp:include page="/WEB-INF/views/include/common/utility.jsp" />
+<jsp:include page="/WEB-INF/views/common/utility.jsp" />
 <link rel="stylesheet" href="${ctp}/css/member/login/login.css">
 <link rel="icon" href="${ctp}/images/common/favicon.png">
 </head>

@@ -1,0 +1,143 @@
+/* footer {
+	display: block;
+	margin: 0;
+	padding: 0;
+	unicode-bidi: isolate;
+}
+
+body {
+	font-family: "Notosans", -apple-system, BlinkMacSystemFont,
+		Apple SD Gothic Neo, "Malgun Gothic", Arial, sans-serif;
+	font-size: 14px;
+	letter-spacing: -0.03em;
+	color: #242428
+} */
+
+.common_footer {
+	border-top: 1px solid #000000;
+}
+
+.footer_menu {
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.footer_menu_list {
+	margin: 0 auto;
+	width: 1080px;
+	font-size: 0;
+}
+
+.footer_menu_item {
+	display: inline-block;
+	position: relative;
+	padding: 16px 20px;
+}
+
+.footer_menu_item+.footer_menu_item::before {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 1px;
+	height: 12px;
+	background: #f0f0f0;
+	transform: translateY(-50%);
+	content: '';
+}
+
+.footer_menu_item:first-child {
+	padding-left: 0;
+}
+
+.footer_menu_link {
+	display: block;
+	font-size: 13px;
+	line-height: 18px;
+	color: #000000;
+}
+
+.footer_menu_link .text_bold {
+	font-weight: 700;
+}
+
+.footer_inner {
+	position: relative;
+	margin: 0 auto;
+	width: 1080px;
+	padding: 26px 0 85px;
+	font-size: 12px;
+	line-height: 16px;
+	color: #888888;
+}
+
+.footer_corp_title {
+	font-weight: 700;
+}
+
+.footer_address {
+	margin-top: 10px;
+	font-size: 0;
+}
+
+.footer_address_item {
+	display: inline-block;
+	position: relative;
+	padding: 2px 8px;
+	font-size: 12px;
+	line-height: 16px;
+}
+
+.footer_address_item+.footer_address_item::before {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 1px;
+	height: 10px;
+	background: #cccccc;
+	transform: translateY(-50%);
+	content: '';
+}
+
+.footer_address_item:first-child {
+	padding-left: 0;
+}
+
+.footer_address_item .btn_hyperlink {
+	margin-left: 2px;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 16px;
+}
+
+.footer_address_item .btn_hyperlink::before {
+	display: none;
+}
+
+.footer_copyright {
+	display: block;
+	margin-top: 15px;
+	letter-spacing: -0.04em;
+	color: #999999;
+}
+
+.footer_etc {
+	position: absolute;
+	top: 96px;
+	right: 0;
+}
+
+.footer_sns {
+	margin-top: 0px;
+	font-size: 0;
+}
+
+.footer_sns_item {
+	display: inline-block;
+}
+
+.footer_sns_item+.footer_sns_item {
+	margin-left: 16px;
+}
+
+.footer_sns_link {
+	display: block;
+}

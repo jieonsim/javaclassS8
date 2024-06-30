@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>티켓챔프이용약관(필수)</title>
-<jsp:include page="/WEB-INF/views/include/common/utility.jsp" />
+<jsp:include page="/WEB-INF/views/common/utility.jsp" />
 <link rel="icon" href="${ctp}/images/common/favicon.png">
 </head>
 <div class="winPopWrapper">
