@@ -104,3 +104,10 @@
 	color: #666;
 	text-decoration: none;
 }
+
+/* 데스크톱용 푸터를 모바일에서 숨기기 */
+@media screen and (max-width: 991px) {
+	.common_footer {
+		display: none;
+	}
+}

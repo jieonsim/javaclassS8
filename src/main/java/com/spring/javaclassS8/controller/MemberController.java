@@ -24,10 +24,4 @@ public class MemberController {
 	public String signupAgreement() {
 		return "member/signup/agreement";
 	}
-
-	// 회원가입 티켓챔프이용약관
-	@RequestMapping(value = "/signup/pop", method = RequestMethod.GET)
-	public String pop() {
-		return "member/signup/pop_agreement";
-	}
 }

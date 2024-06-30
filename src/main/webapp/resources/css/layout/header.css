@@ -104,171 +104,171 @@
 	color: #333;
 }
 
-/* 모바일 */
-.m_toolbar {
-	position: fixed;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	padding-bottom: env(safe-area-inset-bottom); /* @include safeArea 대체 */
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	background-color: #ffffff; /* $color-white 대체 */
-	box-shadow: 0 -4px 14px 0 rgba(26, 41, 69, 0.05);
-	z-index: 100; /* map-get($z-index, nav-fixed) 대체 */
-	transition: transform 0.2s;
+/* 데스크톱에서 모바일 요소 숨기기 */
+.m_header, .m_toolbar {
+	display: none;
 }
 
-.m_toolbar.is-hide {
-	transform: translateY(100%);
-}
-
-.toolbar_menu {
-	display: flex;
-	justify-content: space-around;
-	padding-left: 0;
-}
-
-.toolbar_item {
-	display: flex;
-	flex: 1;
-	align-items: center;
-	height: 60px;
-}
-
-.toolbar_link {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	height: 100%;
-	color: #000000; /* $color-black 대체 */
-}
-
-.toolbar_link:hover {
-	text-decoration: none;
-	color: #fa2828;
-}
-
-.toolbar_link.is-active {
-	/* color: #007bff; $color-primary 대체 */
-	color: #fa2828;
-}
-
-.toolbar_link .icon_toolbar {
-	width: 24px;
-	height: 24px;
-}
-
-.toolbar_link .toolbar_text {
-	display: inline-block;
-	margin: 4px 0 7px;
-	font-size: 9px;
-	line-height: 1;
-	vertical-align: top;
-}
-
-.toolbar_util {
-	position: absolute;
-	right: 20px;
-	bottom: calc(76px + env(safe-area-inset-bottom));
-	/* @include safeArea 대체 */
-	width: 40px;
-}
-
-.toolbar_util .toolbar_refresh, .toolbar_util .toolbar_top {
-	position: relative;
-	width: 40px;
-	height: 40px;
-	margin-top: 14px;
-	border: solid 1px #e5e5e5; /* map-get($color-line, line-01) 대체 */
-	border-radius: 50%;
-	background: rgba(255, 255, 255, 0.95);
-	/* rgba($color: $color-white, $alpha: 0.95) 대체 */
-}
-
-.toolbar_util .toolbar_refresh::before, .toolbar_util .toolbar_top::before
-	{
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	content: '';
-}
-
-.toolbar_refresh::before {
-	/* @include useSvg-common('refresh', 24px) 대체 */
-	/* 여기에 SVG 백그라운드 이미지를 직접 지정해야 함 */
-	background-image: url('path_to_refresh_icon.svg');
-	width: 24px;
-	height: 24px;
-	background-size: contain;
-	background-repeat: no-repeat;
-}
-
-.toolbar_top::before {
-	background-image: url('../../images/common/arrow-up.svg');
-	width: 24px;
-	height: 24px;
-	background-size: contain;
-	background-repeat: no-repeat;
-}
-
-.blind {
-	overflow: hidden;
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	margin: -1px;
-	padding: 0;
-	border: 0;
-	clip: rect(0, 0, 0, 0);
-}
-
-.toolbar_item svg {
-	width: 24px;
-	height: 24px;
-	background-size: contain;
-	background-repeat: no-repeat;
-}
-
-.toolbar_item .category {
-	background-image: url('../../images/layout/header/category.svg');
-}
-
-.toolbar_item .category:hover, .toolbar_item .category:active {
-	background-image: url('../../images/layout/header/category_red.svg');
-}
-
-.toolbar_item .search {
-	background-image: url('../../images/layout/header/search.svg');
-}
-
-.toolbar_item .search:hover, .toolbar_item .search:active {
-	background-image: url('../../images/layout/header/search_red.svg');
-}
-
-.toolbar_item .home {
-	background-image: url('../../images/layout/header/home.svg');
-}
-
-.toolbar_item .home:hover, .toolbar_item .home:active {
-	background-image: url('../../images/layout/header/home_red.svg');
-}
-
-.toolbar_item .ticket {
-	background-image: url('../../images/layout/header/ticket.svg');
-}
-
-.toolbar_item .ticket:hover, .toolbar_item .ticket:active {
-	background-image: url('../../images/layout/header/ticket_red.svg');
-}
-
-.toolbar_item .my {
-	background-image: url('../../images/layout/header/my.svg');
-}
-
-.toolbar_item .my:hover, .toolbar_item .my:active {
-	background-image: url('../../images/layout/header/my_red.svg');
+/* 모바일 기기 (태블릿 포함)에서 모바일 요소 표시 */
+@media screen and (max-width: 991px) {
+	/* 데스크톱용 헤더를 모바일에서 숨기기 */
+	.common_header {
+		display: none;
+	}
+	.m_header, .m_toolbar {
+		display: block;
+	}
+	.m_header #header_title_logo {
+		color: #fa2828;
+		font-size: 30px;
+	}
+	.m_header .logo-text {
+		display: inline-block;
+		font-size: 24px;
+	}
+	.m_toolbar {
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		padding-bottom: env(safe-area-inset-bottom);
+		/* @include safeArea 대체 */
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+		background-color: #ffffff; /* $color-white 대체 */
+		box-shadow: 0 -4px 14px 0 rgba(26, 41, 69, 0.05);
+		z-index: 100; /* map-get($z-index, nav-fixed) 대체 */
+		transition: transform 0.2s;
+	}
+	.m_toolbar.is-hide {
+		transform: translateY(100%);
+	}
+	.toolbar_menu {
+		display: flex;
+		justify-content: space-around;
+		padding-left: 0;
+	}
+	.toolbar_item {
+		display: flex;
+		flex: 1;
+		align-items: center;
+		height: 60px;
+	}
+	.toolbar_link {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+		color: #000000; /* $color-black 대체 */
+	}
+	.toolbar_link:hover {
+		text-decoration: none;
+		color: black;
+	}
+	.toolbar_link:active {
+		text-decoration: none;
+		color: #fa2828;
+	}
+	.toolbar_link.is-active {
+		color: #fa2828;
+	}
+	.toolbar_link .icon_toolbar {
+		width: 24px;
+		height: 24px;
+	}
+	.toolbar_link .toolbar_text {
+		display: inline-block;
+		margin: 4px 0 7px;
+		font-size: 9px;
+		line-height: 1;
+		vertical-align: top;
+	}
+	.toolbar_util {
+		position: absolute;
+		margin-bottom: 10px; 
+		right: 20px;
+		bottom: calc(76px + env(safe-area-inset-bottom));
+		width: 40px;
+	}
+	.toolbar_util .toolbar_refresh, .toolbar_util .toolbar_top {
+		position: relative;
+		width: 40px;
+		height: 40px;
+		margin-top: 14px;
+		border: solid 1px #e5e5e5; /* map-get($color-line, line-01) 대체 */
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.95);
+	}
+	.toolbar_util .toolbar_refresh::before, .toolbar_util .toolbar_top::before
+		{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		content: '';
+	}
+	.toolbar_refresh::before {
+		/* @include useSvg-common('refresh', 24px) 대체 */
+		/* 여기에 SVG 백그라운드 이미지를 직접 지정해야 함 */
+		background-image: url('path_to_refresh_icon.svg');
+		width: 24px;
+		height: 24px;
+		background-size: contain;
+		background-repeat: no-repeat;
+	}
+	.toolbar_top::before {
+		background-image: url('../../images/common/arrow-up.svg');
+		width: 24px;
+		height: 24px;
+		background-size: contain;
+		background-repeat: no-repeat;
+	}
+	.blind {
+		overflow: hidden;
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0;
+		border: 0;
+		clip: rect(0, 0, 0, 0);
+	}
+	.toolbar_item svg {
+		width: 24px;
+		height: 24px;
+		background-size: contain;
+		background-repeat: no-repeat;
+	}
+	.toolbar_item .category {
+		background-image: url('../../images/layout/header/category.svg');
+	}
+	.toolbar_item .category:active {
+		background-image: url('../../images/layout/header/category_red.svg');
+	}
+	.toolbar_item .search {
+		background-image: url('../../images/layout/header/search.svg');
+	}
+	.toolbar_item .search:active {
+		background-image: url('../../images/layout/header/search_red.svg');
+	}
+	.toolbar_item .is-active .home {
+		background-image: url('../../images/layout/header/home_red.svg');
+	}
+	.toolbar_item .home:active {
+		background-image: url('../../images/layout/header/home_red.svg');
+	}
+	.toolbar_item .ticket {
+		background-image: url('../../images/layout/header/ticket.svg');
+	}
+	.toolbar_item .ticket:active {
+		background-image: url('../../images/layout/header/ticket_red.svg');
+	}
+	.toolbar_item .my {
+		background-image: url('../../images/layout/header/my.svg');
+	}
+	.toolbar_item .my:active {
+		background-image: url('../../images/layout/header/my_red.svg');
+	}
 }

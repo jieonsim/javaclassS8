@@ -3,6 +3,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <link rel="stylesheet" href="${ctp}/css/layout/header.css">
+<div class="m_header">
+	<div class="container">
+		<div class="headerInner my-2">
+			<a class="header_title_link" href="${ctp}/">
+				<i class="ph ph-person-simple-throw" id="header_title_logo"></i>
+				<span class="logo-text">ticket</span>
+				<span class="logo-text champ">champ</span>
+			</a>
+		</div>
+	</div>
+</div>
+
 <header class="common_header">
 	<div class="header_util bg-light py-2">
 		<div class="container d-flex justify-content-between">
@@ -99,18 +111,16 @@
 <nav class="m_toolbar">
 	<ul class="toolbar_menu">
 		<li class="toolbar_item">
-			<a class="toolbar_link " href="/category">
+			<a class="toolbar_link " href="#">
 				<span class="icon_toolbar toolbar_category">
-					<%-- <img alt="마이" src="${ctp}/images/layout/header/list.svg"> --%>
 					<svg class="category"></svg>
 				</span>
 				<span class="toolbar_text">카테고리</span>
 			</a>
 		</li>
 		<li class="toolbar_item">
-			<a class="toolbar_link " href="/search">
+			<a class="toolbar_link " href="#">
 				<span class="icon_toolbar toolbar_search">
-					<%-- <img alt="마이" src="${ctp}/images/layout/header/search.svg"> --%>
 					<svg class="search"></svg>
 				</span>
 				<span class="toolbar_text">검색</span>
@@ -119,25 +129,22 @@
 		<li class="toolbar_item">
 			<a href="${ctp}/" class="toolbar_link is-active">
 				<span class="icon_toolbar toolbar_home">
-					<%-- <img alt="마이" src="${ctp}/images/layout/header/house.svg"> --%>
 					<svg class="home"></svg>
 				</span>
 				<span class="toolbar_text">홈</span>
 			</a>
 		</li>
 		<li class="toolbar_item">
-			<a class="toolbar_link " href="/ticket">
+			<a class="toolbar_link " href="#">
 				<span class="icon_toolbar toolbar_ticket">
-					<%-- <img alt="마이" src="${ctp}/images/layout/header/ticket.svg"> --%>
 					<svg class="ticket"></svg>
 				</span>
 				<span class="toolbar_text">티켓</span>
 			</a>
 		</li>
 		<li class="toolbar_item">
-			<a class="toolbar_link " href="/my">
+			<a class="toolbar_link " href="${ctp}/login">
 				<span class="icon_toolbar toolbar_my">
-					<%-- <img alt="마이" src="${ctp}/images/layout/header/user.svg"> --%>
 					<svg class="my"></svg>
 				</span>
 				<span class="toolbar_text">마이</span>

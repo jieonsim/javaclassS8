@@ -5,7 +5,7 @@
 }
 
 #header_title_logo {
-	color: red;
+	color: #fa2828;
 	font-size: 60px;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .logo-text.champ {
-	color: red;
+	color: #fa2828;
 }
 
 .loginInner {
@@ -92,14 +92,14 @@
 /* 체크박스 클릭 시 그림자 없애기 */
 .loginInner .custom-control-input:focus+.custom-control-label::before {
 	box-shadow: none;
-	border-color: red;
+	border-color: #fa2828;
 }
 
 /* 체크박스가 체크되었을 때 빨간색으로 변경 */
 .loginInner .custom-control-input:checked+.custom-control-label::before
 	{
-	background-color: red;
-	border-color: red;
+	background-color: #fa2828;
+	border-color: #fa2828;
 	box-shadow: none;
 }
 
@@ -111,7 +111,7 @@
 
 .loginInner .loginBtn {
 	height: 3.5rem;
-	background-color: red;
+	background-color: #fa2828;
 	color: #fff;
 	font-weight: 700;
 	font-size: 1.2rem;
@@ -143,7 +143,7 @@
 }
 
 .loginInner .findList #signup {
-	color: red
+	color: #fa2828
 }
 
 .loginInner .findList .nav-item:not(:last-child)::after {
