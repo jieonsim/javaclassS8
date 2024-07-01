@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>티켓챔프</title>
 <jsp:include page="/WEB-INF/views/common/utility.jsp" />
-<link rel="icon" href="${ctp}/images/common/favicon.png">
+<link rel="icon" href="${ctp}/images/common/favicon.ico" type="image/x-icon">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/layout/header.jsp" />

@@ -13,6 +13,12 @@ public class MemberController {
 		return "member/login/login";
 	}
 
+	// 디폴트 로그인2 (뷰 테스트)
+	@RequestMapping(value = "/login2", method = RequestMethod.GET)
+	public String login2() {
+		return "member/login/login2";
+	}
+
 	// 회원가입 선택
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signup() {
@@ -24,10 +30,16 @@ public class MemberController {
 	public String signupAgreement() {
 		return "member/signup/agreement";
 	}
-	
+
 	// 회원가입 폼
 	@RequestMapping(value = "/signup/form", method = RequestMethod.GET)
 	public String signupForm() {
 		return "member/signup/form";
+	}
+	
+	// 회원가입 성공
+	@RequestMapping(value = "/signup/completed", method = RequestMethod.GET)
+	public String signupCompleted() {
+		return "member/signup/completed";
 	}
 }

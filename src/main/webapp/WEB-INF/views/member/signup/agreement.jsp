@@ -5,8 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="icon" href="${ctp}/images/common/favicon.png"
-	type="image/png">
+<link rel="icon" href="${ctp}/images/common/favicon.ico" type="image/x-icon">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원가입-티켓챔프</title>

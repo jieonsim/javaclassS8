@@ -9,9 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원가입-티켓챔프</title>
 <jsp:include page="/WEB-INF/views/common/utility.jsp" />
+<link rel="icon" href="${ctp}/images/common/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="${ctp}/css/member/signup/common.css">
 <link rel="stylesheet" href="${ctp}/css/member/signup/signup.css">
-<link rel="icon" href="${ctp}/images/common/favicon.png">
 <script src="${ctp}/js/member/signup/signup.js"></script>
 </head>
 <body>
@@ -34,7 +34,7 @@
 						<br>
 						다양한 서비스를 경험해보세요
 					</p>
-					<button type="button" class="uBtn point btnJoin" onclick="location.href='${ctp}/signup/agreement'">개인 회원가입</button>
+					<button type="button" class="uBtn point btnJoin" onclick="location.href='${ctp}/signup/agreement'">일반 회원가입</button>
 					<div class="snsJoinArea">
 						<ul class="listSns">
 							<li class="snsNaver">

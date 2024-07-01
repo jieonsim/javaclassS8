@@ -31,8 +31,8 @@
 									<span class="input-group-prepend">
 										<i class="ph ph-user"></i>
 									</span>
-									<input type="email" class="form-control custom-input"
-										name="email" id="email" placeholder="이메일 아이디">
+									<input type="text" class="form-control custom-input"
+										name="userId" id="userId" placeholder="아이디">
 								</div>
 							</div>
 							<div class="form-group">
@@ -44,7 +44,10 @@
 										name="password" id="password" placeholder="비밀번호">
 								</div>
 							</div>
-							<div class="form-group">
+							<div class="errorMessage">
+								<div class="message">아이디 또는 비밀번호가 맞지 않아요. 다시 입력해 주세요.</div>
+							</div>
+							<div class="form-group loginStay">
 								<div class="custom-control custom-checkbox">
 									<input type="checkbox" class="custom-control-input"
 										id="saveSession" name="saveSession" value="N">

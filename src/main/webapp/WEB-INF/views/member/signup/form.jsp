@@ -5,8 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="icon" href="${ctp}/images/common/favicon.png"
-	type="image/png">
+<link rel="icon" href="${ctp}/images/common/favicon.ico" type="image/x-icon">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원가입-티켓챔프</title>
@@ -42,6 +41,9 @@
 						</div>
 					</div>
 					<div class="uErrorText" style="display: block;"></div>
+					<!-- 이미 사용 중이거나 탈퇴한 아이디입니다. -->
+					<!-- 영문으로 시작하는 6~20자 영문(소문자), 숫자만 사용 가능합니다. -->
+					<!-- 필수 정보입니다. 아이디를 입력해주세요. -->
 				</div>
 				<div class="uBlock">
 					<div class="uInputArea">
@@ -62,6 +64,8 @@
 						</div>
 					</div>
 					<div class="uErrorText" style="display: block;"></div>
+					<!-- 8~12자의 영문, 숫자, 특수문자 중 2가지 이상으로만 가능합니다. -->
+					<!-- 필수 정보입니다. 비밀번호를 입력해주세요. -->
 				</div>
 				<div class="uBlock">
 					<div class="uInputArea">
@@ -82,6 +86,8 @@
 						</div>
 					</div>
 					<div class="uErrorText" style="display: block;"></div>
+					<!-- 8~12자의 영문, 숫자, 특수문자 중 2가지 이상으로만 가능합니다. -->
+					<!-- 필수 정보입니다. 비밀번호를 입력해주세요. -->
 				</div>
 				<div class="uBlock">
 					<div class="uInputArea">
@@ -97,6 +103,8 @@
 						</div>
 					</div>
 					<div class="uErrorText" style="display: block;"></div>
+					<!-- 한글과 영문 대,소문자를 사용해주세요. -->
+					<!-- 필수 정보 입니다. 이름을 입력해주세요. -->
 				</div>
 				<div class="uBlock">
 					<div class="uInputArea emailType">
@@ -105,7 +113,7 @@
 								<label for="inputEmail">이메일</label>
 								<div class="inputBox">
 									<input type="text" id="inputEmail" class="inputText"
-										tabindex="5" value="">
+										tabindex="5" value="" placeholder="계정 찾기 시 사용되니, 정확한 이메일 주소를 작성/계정 찾기 시 사용됩니다.">
 								</div>
 							</div>
 						</div>
@@ -123,6 +131,8 @@
 						</div>
 					</div>
 					<div class="uErrorText" style="display: block;"></div>
+					<!-- 비밀번호 찾기 시 사용되니, 정확한 이메일 주소를 작성해주세요. -->
+					<!-- 이메일 주소 양식에 맞게 작성해주세요. -->
 					<div class="accountValiBlock" style="display: none;">
 						<div class="accountGuide"></div>
 						<p class="blockText">동일 정보로 가입된 계정으로 로그인 하시겠습니까?</p>
@@ -256,6 +266,7 @@
 				<div class="ubtnArea">
 					<div class="col">
 						<button type="button" class="uBtn point" disabled>가입완료</button>
+						<button type="button" class="uBtn point" onclick="location.href='${ctp}/signup/completed';">가입완료</button>
 					</div>
 				</div>
 			</div>

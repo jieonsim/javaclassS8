@@ -9,7 +9,8 @@
 	color: #000;
 	background: #fff;
 	border: 1px solid #ccc;
-	border-radius: 0px;
+	/* border-radius: 0px; */
+	border-radius: 10px;
 	cursor: pointer;
 	font-family: Pretendard-Bold;
 	letter-spacing: 1px;

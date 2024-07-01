@@ -36,7 +36,8 @@
 
 .custom-input-group {
 	border: 1px solid #ced4da;
-	border-radius: 0px;
+	/* border-radius: 0px; */
+	border-radius: 10px;
 	overflow: hidden;
 	background-color: white;
 	padding: 5px;
@@ -116,7 +117,8 @@
 	font-weight: 700;
 	font-size: 1.2rem;
 	font-family: Pretendard-Bold;
-	border-radius: 0px;
+	/* border-radius: 0px; */
+	border-radius: 10px;
 }
 
 .loginInner .loginBtn:hover {
@@ -125,6 +127,23 @@
 
 .loginInner .loginBtn:focus {
 	box-shadow: none;
+}
+
+.loginInner .errorMessage {
+	margin-top: 1.2rem;
+	margin-bottom: 1rem;
+}
+
+.loginInner .errorMessage .message {
+	font-size: 13px;
+	font-family: 'Pretendard-Light';
+	word-break: keep-all;
+	/* color: #ff322e; */
+	color: #dc941b;
+}
+
+.loginInner .form-group .loginStay {
+	margin-top: 1.6rem;
 }
 
 .loginInner .findList {
@@ -142,10 +161,10 @@
 	font-family: Pretendard-Light;
 }
 
-.loginInner .findList #signup {
-	color: #fa2828
+/* .loginInner .findList #signup {
+	color: #fa2828;
 }
-
+ */
 .loginInner .findList .nav-item:not(:last-child)::after {
 	content: "";
 	position: absolute;
@@ -168,7 +187,7 @@
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	margin: 4rem 0 5.2rem;
+	margin: 3rem 0 3rem;
 }
 
 .loginInner .snsLogin ul {
