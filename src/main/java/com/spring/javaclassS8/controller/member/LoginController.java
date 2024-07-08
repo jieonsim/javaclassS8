@@ -61,7 +61,7 @@ public class LoginController {
 				return ResponseEntity.ok(result);
 			}
 		} catch (Exception e) {
-			e.printStackTrace(); // 로그를 출력
+			e.printStackTrace(); // d 로그를 출력
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new LoginResult(false, "자동 로그인 처리 중 오류가 발생했습니다."));
 		}
 	}
