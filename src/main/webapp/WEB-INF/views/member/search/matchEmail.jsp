@@ -55,7 +55,7 @@
 													</p>
 													<div class="inputForm">
 														<div class="inputStyle">
-															<input id="inputName" type="text" name="name" class="searchInput" placeholder="이름">
+															<input id="inputName" type="text" name="name" class="searchInput" placeholder="이름" autofocus>
 															<button type="button" class="inputBtn btnDel">
 																<span class="blind">삭제</span>
 															</button>
@@ -66,25 +66,12 @@
 																<span class="blind">삭제</span>
 															</button>
 														</div>
-														<div class="hasButtonWrap numberSend" style="display: none;">
-															<div class="inputStyle">
-																<input id="inputHpCertNo" type="text" class="certNoInput" maxlength="10" placeholder="인증번호 6자리">
-																<button type="button" class="inputBtn btnDel">
-																	<span class="blind">삭제</span>
-																</button>
-																<div class="count"></div>
-															</div>
-															<div class="buttonStyle">
-																<button type="button">다시 받기</button>
-															</div>
-														</div>
 														<div class="errorMessage">
 															<div class="message" style="display: none;"></div>
 														</div>
 														<div class="confirmWrap">
 															<div class="activeButton">
 																<button type="submit" class="certBtn">이메일 아이디 확인</button>
-																<%-- <button type="button" class="certBtn" onclick="location.href='${ctp}/search/showFoundId';">이메일 아이디 확인</button> --%>
 															</div>
 														</div>
 													</div>

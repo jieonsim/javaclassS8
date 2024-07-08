@@ -48,16 +48,16 @@
 											인증이 완료되었어요<br>비밀번호를 재설정 해주세요
 										</h3>
 										<div class="inputStyle disable">
-											<input type="text" name="" value="jieonshim@naver.com" disabled>
+											<input type="text" name="email">
 										</div>
 										<div class="inputStyle">
-											<input name="pwd" class="pwdInput" type="password" placeholder="새 비밀번호">
+											<input name="password" class="pwdInput" type="password" placeholder="새 비밀번호">
 											<button type="button" class="inputBtn btnDel">
 												<span class="blind">삭제</span>
 											</button>
 										</div>
 										<div class="inputStyle">
-											<input name="pwd_confirm" class="pwdInput" type="password" placeholder="새 비밀번호 확인">
+											<input name="passwordConfirm" class="pwdInput" type="password" placeholder="새 비밀번호 확인">
 											<button type="button" class="inputBtn btnDel">
 												<span class="blind">삭제</span>
 											</button>
@@ -76,7 +76,6 @@
 										<div class="signinStay">
 											<div class="checkbox">
 												<input type="checkbox" id="saveSess" name="saveSess" checked>
-
 											</div>
 										</div>
 									</div>

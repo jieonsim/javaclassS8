@@ -1,5 +1,5 @@
 /**
-- 로그인 폼
+- login.js
 - 사용되는 페이지 : member/login/login.jsp
  */
 
@@ -24,16 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		const errorDiv = document.querySelector('.message');
 		errorDiv.style.display = 'none';
 	}
-
-	/*	// 로그인 성공 처리 함수
-		function handleLoginSuccess(member) {
-			console.log('로그인 성공:', member);  // member 객체 로깅
-			sessionStorage.setItem('isLoggedIn', 'true');
-			sessionStorage.setItem('userEmail', member.email);
-			sessionStorage.setItem('userRole', member.role);
-			// 위 세개 추가
-			window.location.href = ctp + '/';
-		}*/
 
 	function handleLoginSuccess(member) {
 		console.log('로그인 성공:', member);

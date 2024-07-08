@@ -141,6 +141,10 @@
 	background-color: #fff;
 }
 
+.loginInner .loginForm .inputBox input {
+	cursor: text;
+}
+
 .loginInner .loginForm .inputBox .inputStyle {
 	position: relative;
 	display: block;
@@ -701,7 +705,6 @@
 	margin-bottom: 5px;
 	color: white;
 } */
-
 @media screen and (min-width: 1024px) {
 	.login header {
 		display: none;
@@ -722,8 +725,7 @@
 	}
 }
 
-@media screen and (max-width: 320px) {
-	/* .layerContainer .layer {
+@media screen and (max-width: 320px) { /* .layerContainer .layer {
 		width: calc(100% - 1rem);
 	} */
 }

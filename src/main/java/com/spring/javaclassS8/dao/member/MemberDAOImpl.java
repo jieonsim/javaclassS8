@@ -60,7 +60,14 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.getMapper(MemberDAO.class).findAutoLoginToken(token);
 	}
 
+	// 이름 + 휴대폰번호 조합으로 회원 리스트 찾기
 	public List<MemberVO> findByNameAndPhone(String name, String phone) {
 		return sqlSession.getMapper(MemberDAO.class).findByNameAndPhone(name, phone);
+	}
+
+	// 이름 + 이메일 조합으로 회원 정보 찾기
+	@Override
+	public MemberVO findByNameAndEmail(String name, String email) {
+		return sqlSession.getMapper(MemberDAO.class).findByNameAndEmail(name, email);
 	}
 }

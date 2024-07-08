@@ -2,6 +2,8 @@ package com.spring.javaclassS8.dao.member;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.spring.javaclassS8.vo.member.AutoLoginTokenVO;
 import com.spring.javaclassS8.vo.member.MemberVO;
 
@@ -30,4 +32,7 @@ public interface MemberDAO {
 
 	// 이름 + 휴대폰 번호 조합으로 이메일 아이디 찾기
 	public List<MemberVO> findByNameAndPhone(String name, String phone);
+
+	// 이름 + 이메일 조합으로 회원 정보 찾기
+	public MemberVO findByNameAndEmail(@Param("name") String name, @Param("email") String email);
 }

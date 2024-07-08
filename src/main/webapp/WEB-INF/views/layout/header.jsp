@@ -167,7 +167,7 @@
 			</a>
 		</li>
 		<li class="toolbar_item">
-			<a class="toolbar_link " href="${ctp}/login">
+			<a class="toolbar_link" href="${ctp}/login">
 				<span class="icon_toolbar toolbar_my">
 					<svg class="my"></svg>
 				</span>

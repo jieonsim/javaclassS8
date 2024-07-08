@@ -82,12 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			.replace(/'/g, "&#039;");
 	}
 
-	/*function updateMenu(user) {
-		const nav = document.querySelector('.nav');
-		nav.innerHTML = user ? getLoggedInMenu(user) : getLoggedOutMenu();
-	}
-	*/
-
 	window.updateMenu = function(user) {
 		const nav = document.querySelector('.nav');
 		nav.innerHTML = user ? getLoggedInMenu(user) : getLoggedOutMenu();
@@ -118,7 +112,6 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
 	}
 
-	//checkAutoLogin();
 	checkLoginStatus();
 
 	if (sessionStorage.getItem('isLoggedIn') === 'true') {

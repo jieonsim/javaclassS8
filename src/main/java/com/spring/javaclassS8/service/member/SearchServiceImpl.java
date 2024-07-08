@@ -7,12 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.javaclassS8.dao.member.MemberDAO;
+import com.spring.javaclassS8.utils.CertificationEmailService;
 import com.spring.javaclassS8.vo.member.MemberVO;
 
 @Service
@@ -23,6 +25,9 @@ public class SearchServiceImpl implements SearchService {
 
 	@Autowired
 	private HttpSession session;
+
+	@Autowired
+	private CertificationEmailService certificationEmailService;
 
 	// 이름과 휴대폰 번호 조합으로 이메일 아이디 찾기
 	@Override
@@ -67,5 +72,71 @@ public class SearchServiceImpl implements SearchService {
 	// 가입일자 포맷
 	private String formatCreatedAt(Timestamp createdAt) {
 		return createdAt.toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
+	}
+
+	// 이름 + 이메일 조합으로 회원 정보 확인 후 인증번호 발송
+	@Override
+	public Map<String, Object> sendPasswordCertification(String name, String email) throws MessagingException {
+		Map<String, Object> response = new HashMap<>();
+		MemberVO member = memberDAO.findByNameAndEmail(name, email);
+
+		if (member == null) {
+			response.put("success", false);
+			response.put("message", "입력하신 정보와 일치하는 회원이 없습니다. 다시 확인해 주세요.");
+		} else {
+			String certificationNumber = certificationEmailService.sendCertificationEmail(email);
+
+			// 인증번호를 세션에 저장(유효시간 10분)
+			session.setAttribute("certificationNumber", certificationNumber);
+			session.setAttribute("certificationTime", System.currentTimeMillis());
+			session.setAttribute("certificationEmail", email);
+
+			response.put("success", true);
+			response.put("message", "인증번호가 발송되었습니다.");
+		}
+		return response;
+	}
+
+	@Override
+	public Map<String, Object> verifyPasswordCertification(String name, String email, String certificationNumber) {
+		Map<String, Object> response = new HashMap<>();
+		MemberVO member = memberDAO.findByNameAndEmail(name, email);
+
+		if (member == null) {
+			response.put("success", false);
+			response.put("message", "입력하신 정보와 일치하는 회원이 없습니다.");
+		} else {
+			String storedCertificationNumber = (String) session.getAttribute("certificationNumber");
+			Long certificationTime = (Long) session.getAttribute("certificationTime");
+			String certificationEmail = (String) session.getAttribute("certificationEmail");
+
+			if (storedCertificationNumber == null || certificationTime == null || certificationEmail == null) {
+				response.put("success", false);
+				response.put("message", "인증 정보가 없습니다. 인증번호를 다시 받아주세요.");
+				return response;
+			}
+
+			// 10분(600000 밀리초) 이내인지 확인
+			if (System.currentTimeMillis() - certificationTime > 600000) {
+				response.put("success", false);
+				response.put("message", "인증번호 유효시간이 초과되었습니다. 인증번호를 다시 받아주세요.");
+				return response;
+			}
+
+			// 이메일과 인증번호가 일치하는지 확인
+			if (email.equals(certificationEmail) && certificationNumber.equals(storedCertificationNumber)) {
+				response.put("success", true);
+				response.put("message", "인증이 완료되었습니다.");
+
+				// 인증 완료 후 세션에서 인증 정보 제거
+				session.removeAttribute("passwordCertificationNumber");
+				session.removeAttribute("passwordCertificationTime");
+				session.removeAttribute("passwordCertificationEmail");
+			} else {
+				response.put("success", false);
+				response.put("message", "인증번호가 일치하지 않아요. 다시 확인해 주세요.");
+			}
+		}
+		return response;
 	}
 }

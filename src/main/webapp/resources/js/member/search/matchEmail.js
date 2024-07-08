@@ -38,6 +38,20 @@ document.addEventListener('DOMContentLoaded', function() {
 		return true;
 	}
 
+	// 삭제 버튼 기능 추가
+	const nameDelBtn = document.querySelector('#inputName + .btnDel');
+	const phoneDelBtn = document.querySelector('#inputPhone + .btnDel');
+
+	nameDelBtn.addEventListener('click', function() {
+		nameInput.value = '';
+		nameInput.focus();
+	});
+
+	phoneDelBtn.addEventListener('click', function() {
+		phoneInput.value = '';
+		phoneInput.focus();
+	});
+
 	form.addEventListener('submit', function(e) {
 		e.preventDefault();
 

@@ -23,7 +23,7 @@
 			</tr>
 			<tr>
 				<td align="left">
-					<form name="matchIdForm" method="post">
+					<form name="matchPasswordForm" id="matchPasswordForm">
 						<div class="searchContainer">
 							<div class="infoSearchWrap">
 								<div class="infoSearchHeader">
@@ -55,24 +55,24 @@
 													</p>
 													<div class="inputForm">
 														<div class="inputStyle">
-															<input id="inputEmailMemNm" type="text" class="searchInput" placeholder="이름">
+															<input id="inputName" type="text" name="name" class="searchInput" placeholder="이름" autofocus>
 															<button type="button" class="inputBtn btnDel">
 																<span class="blind">삭제</span>
 															</button>
 														</div>
 														<div class="inputStyle">
-															<input id="inputEmail" type="text" class="searchInput" placeholder="이메일 아이디">
+															<input id="inputEmail" type="text" name="email" class="searchInput" placeholder="이메일 아이디">
 															<button type="button" class="inputBtn btnDel">
 																<span class="blind">삭제</span>
 															</button>
 														</div>
 														<div class="hasButtonWrap numberSend" style="display: none;">
 															<div class="inputStyle">
-																<input id="inputEmailCertNo" type="text" class="certNoInput" maxlength="10" placeholder="인증번호 8자리">
+																<input id="inputEmailCertNo" type="text" class="certNoInput" maxlength="10" placeholder="인증번호 8자리" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
 																<button type="button" class="inputBtn btnDel">
 																	<span class="blind">삭제</span>
 																</button>
-																<div class="count">09:13</div>
+																<div class="count">00:00</div>
 															</div>
 															<div class="buttonStyle">
 																<button type="button">다시 받기</button>
@@ -80,17 +80,14 @@
 														</div>
 														<div class="errorMessage">
 															<div class="message"></div>
-															<!-- 이름 공백일 때 : 이름을 입력해 주세요. -->
-															<!-- 이메일 공백일 때 : 이메일을 입력해 주세요. -->
 															<!-- 인증 번호 공백일 때 or 인증번호 시간 만료되었을 때 : 인증번호를 입력해 주세요. -->
-															<!-- 이메일 정규식에 맞지 않을 때 : 잘못된 이메일 형식입니다. -->
 															<!-- 인증번호 불일치 일 때 : 인증번호가 일치하지 않아요. 다시 확인해 주세요. -->
 															<!-- 인증번호 입력시간 만료 후 기존에 발송된 인증번호로 입력하거나 만료 후 아무번호나 넣었을 때 : 인증번호 유효시간이 초과되었습니다.-->
 														</div>
 														<div class="confirmWrap">
 															<div class="activeButton">
-																<button type="button" class="certBtn" style="display: none;">인증번호 받기</button>
-																<button type="button" class="confirmBtn" style="display: block;" onclick="location.href='${ctp}/search/resetPassword';">확인</button>
+																<button type="button" class="certBtn" style="display: block;">인증번호 받기</button>
+																<button type="button" class="confirmBtn" style="display: none;">확인</button>
 															</div>
 														</div>
 													</div>
@@ -98,7 +95,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="intToast" role="alert" aria-live="assertive">인증번호를 보냈어요</div>
+									<div class="intToast" role="alert" aria-live="assertive" style="display: none;">인증번호를 보냈어요</div>
 								</div>
 							</div>
 						</div>
@@ -112,12 +109,6 @@
 			</tr>
 		</tbody>
 	</table>
+	<script src="${ctp}/js/member/search/matchPassword.js"></script>
 </body>
-<script>
-	$(document).ready(function() {
-		$(".certBtn").click(function() {
-			$('.intToast').toast('show');
-		});
-	});
-</script>
 </html>

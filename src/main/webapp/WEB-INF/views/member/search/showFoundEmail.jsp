@@ -52,7 +52,7 @@
 										<ul>
 											<c:forEach items="${members}" var="member" varStatus="loop">
 												<li class="items">
-													<input type="radio" name="idlist" id="id_${loop.index}" value="${member.originalEmail}">
+													<input type="radio" name="idlist" id="id_${loop.index}" value="${member.originalEmail}" <c:if test="${loop.index == 0}">checked</c:if>>
 													<label for="id_${loop.index}">
 														<div class="id">${member.maskedEmail}</div>
 														<div class="date">${member.createdAt}&nbsp;가입</div>

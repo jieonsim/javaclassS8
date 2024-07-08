@@ -5,16 +5,16 @@
 'use strict'
 
 function saveSelectedEmail() {
-	var selectedEmail = $('input[name="idlist"]:checked').val();
+	let selectedEmail = $('input[name="idlist"]:checked').val();
 	if (selectedEmail) {
 		$.ajax({
-			url: '${ctp}/search/saveSelectedEmail',
+			url: ctp + '/search/saveSelectedEmail',
 			type: 'POST',
 			data: {
 				selectedEmail: selectedEmail
 			},
 			success: function() {
-				location.href = '${ctp}/login';
+				location.href = ctp + '/login';
 			}
 		});
 	}
