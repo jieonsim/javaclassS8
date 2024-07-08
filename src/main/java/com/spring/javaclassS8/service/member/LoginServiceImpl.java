@@ -105,7 +105,10 @@ public class LoginServiceImpl implements LoginService {
 		Cookie cookie = new Cookie("autoLoginToken", token);
 		cookie.setMaxAge(30 * 24 * 60 * 60); // 30일
 		cookie.setPath("/");
-		//cookie.setHttpOnly(true);
 		response.addCookie(cookie);
+
+		// HttpOnly 속성 수동 설정
+		response.setHeader("Set-Cookie",
+				"autoLoginToken=" + token + "; HttpOnly; Max-Age=" + (30 * 24 * 60 * 60) + "; Path=/");
 	}
 }

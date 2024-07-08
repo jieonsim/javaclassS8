@@ -6,32 +6,11 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', function() {
-	function checkAutoLogin() {
-		fetch(ctp + '/autoLogin', {
-			method: 'GET',
-			credentials: 'include'
-		})
-			.then(response => response.json())
-			.then(result => {
-				if (result.success) {
-					console.log('자동 로그인 성공:', result.member);
-					window.location.href = ctp + '/'; // 홈페이지로 리다이렉트
-				}
-			})
-			.catch(error => {
-				console.error('Auto login error:', error);
-			});
-	}
-
-	// 페이지 로드 시 자동 로그인 체크
-	checkAutoLogin();
-	
 	// 폼과 인풋 요소들
-	//const form = document.getElementById('loginForm');
 	const emailInput = document.getElementById('userId');
 	const passwordInput = document.getElementById('userPwd');
 	const loginBtn = document.getElementById('btn_login');
-	const autoLoginCheckbox = document.getElementById('autoLogin');
+	const saveSessionCheckbox = document.getElementById('saveSession');
 
 	// 에러 메시지 표시 함수
 	function showError(message) {
@@ -58,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		const email = emailInput.value.trim();
 		const password = passwordInput.value.trim();
-		const autoLogin = autoLoginCheckbox.checked;
+		const saveSession = saveSessionCheckbox.checked;
 
 		if (email === '') {
 			showError('이메일을 입력해 주세요.');
@@ -81,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			body: JSON.stringify({
 				email: email,
 				password: password,
-				saveSession: autoLogin
+				saveSession: saveSession
 			}),
 		})
 			.then(response => response.json())

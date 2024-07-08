@@ -59,8 +59,10 @@
 					</div>
 					<div class="signinStay">
 						<div class="checkbox">
-							<input type="checkbox" id="autoLogin" name="autoLogin">
-							<label for="autoLogin">로그인 상태 유지</label>
+							<!-- <input type="checkbox" id="autoLogin" name="autoLogin">
+							<label for="autoLogin">로그인 상태 유지</label> -->
+							<input type="checkbox" id="saveSession" name="saveSession">
+							<label for="saveSession">로그인 상태 유지</label>
 						</div>
 					</div>
 					<div class="loginButtonBox">
@@ -105,9 +107,6 @@
 			</form>
 		</div>
 	</div>
-	<!-- <script>
-		var ctp = '${ctp}';
-	</script> -->
 	<script src="${ctp}/js/member/login/login.js"></script>
 </body>
 </html>

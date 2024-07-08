@@ -36,6 +36,7 @@
 			</div>
 		</div>
 	</div>
+	<script src="${ctp}/js/member/login/autoLogin.js"></script>
 	<script src="${ctp}/js/admin/off-canvas.js"></script>
 	<script src="${ctp}/js/admin/hoverable-collapse.js"></script>
 	<script src="${ctp}/js/admin/template.js"></script>

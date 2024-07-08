@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
+	/*const header = document.querySelector('.common_header');
+	if (!header) {
+		// 헤더가 없는 경우 스크립트 실행 중단
+		return;
+	}
+*/
 	const API = {
 		autoLogin: `${ctp}/autoLogin`,
 		logout: `${ctp}/logout`,
@@ -11,18 +17,29 @@ document.addEventListener('DOMContentLoaded', function() {
 	};
 
 	function checkAutoLogin() {
-		fetch(API.autoLogin, {
-			method: 'GET',
-			credentials: 'include'
-		})
-			.then(response => {
-				if (!response.ok) {
-					throw new Error(`HTTP error! status: ${response.status}`);
-				}
-				return response.json();
+		if (sessionStorage.getItem('isLoggedIn') === 'true') {
+			// 세션 스토리지에 로그인 정보가 있으면 메뉴 업데이트
+			const userEmail = sessionStorage.getItem('userEmail');
+			const userRole = sessionStorage.getItem('userRole');
+			updateMenu({ email: userEmail, role: userRole });
+		} else if (document.cookie.includes('autoLoginToken')) {
+			// 자동 로그인 토큰이 있으면 서버에 확인 요청
+			fetch(API.autoLogin, {
+				method: 'GET',
+				credentials: 'include'
 			})
-			.then(handleLoginResult)
-			.catch(handleLoginError);
+				.then(response => {
+					if (!response.ok) {
+						throw new Error(`HTTP error! status: ${response.status}`);
+					}
+					return response.json();
+				})
+				.then(handleLoginResult)
+				.catch(handleLoginError);
+		} else {
+			// 로그인 정보도 없고 자동 로그인 토큰도 없으면 로그아웃 상태로 처리
+			updateMenu(null);
+		}
 	}
 
 	function handleLoginResult(result) {
@@ -34,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			sessionStorage.setItem('userRole', safeUserData.role);
 			updateMenu(safeUserData);
 		} else {
-			//console.warn('자동 로그인 실패:', result.message);
+			console.warn('자동 로그인 실패:', result.message);
 			clearLoginSession();
 		}
 	}
@@ -92,9 +109,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	checkAutoLogin();
 
-	if (sessionStorage.getItem('isLoggedIn') === 'true') {
+	/*if (sessionStorage.getItem('isLoggedIn') === 'true') {
 		const userEmail = sessionStorage.getItem('userEmail');
 		const userRole = sessionStorage.getItem('userRole');
 		updateMenu({ email: userEmail, role: userRole });
-	}
+	}*/
+	// 페이지 로드 시 세션 스토리지 확인 또는 자동 로그인 시도
+	/*if (sessionStorage.getItem('isLoggedIn') === 'true') {
+		const userEmail = sessionStorage.getItem('userEmail');
+		const userRole = sessionStorage.getItem('userRole');
+		updateMenu({ email: userEmail, role: userRole });
+	} else {
+		checkAutoLogin();
+	}*/
 });

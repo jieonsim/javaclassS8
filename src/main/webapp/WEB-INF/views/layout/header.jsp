@@ -9,7 +9,7 @@
 <div class="m_header">
 	<div class="container-fluid">
 		<div class="headerInner my-3 px-2">
-			<a class="header_title_link" href="${ctp}/home">
+			<a class="header_title_link" href="${ctp}/">
 				<i class="ph-bold ph-person-simple-throw" id="header_title_logo"></i>
 				<span class="logo-text">ticket</span>
 				<span class="logo-text champ">champ</span>
@@ -66,7 +66,7 @@
 	</div>
 	<div class="header_inner container d-flex align-items-center py-3">
 		<h1 class="header_title mb-0">
-			<a class="header_title_link" href="${ctp}/home">
+			<a class="header_title_link" href="${ctp}/">
 				<i class="ph-bold ph-person-simple-throw" id="header_title_logo"></i>
 				<span class="logo-text">ticket</span>
 				<span class="logo-text champ">champ</span>
@@ -89,7 +89,7 @@
 				<ul class="nav">
 					<li class="nav-item">
 						<a class="nav-link ${currentPage == 'home' ? 'is-active' : ''}"
-							href="${ctp}/home">홈</a>
+							href="${ctp}/">홈</a>
 					</li>
 					<li class="nav-item">
 						<a

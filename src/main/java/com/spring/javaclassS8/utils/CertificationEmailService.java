@@ -33,7 +33,7 @@ public class CertificationEmailService {
 		return String.format("%08d", new Random().nextInt(100000000));
 	}
 
-	// 프로젝트 제출 전 'localhost:9090' 을 '49.142.157.251:9090' 으로 수정하기 ?
+	// 프로젝트 제출 전 'localhost:9090' 을 '49.142.157.251:9090' 으로 수정하기 !!!
 	private String getHtmlTemplate(String certificationNumber, String certificationTime) {
 		return "<div>\r\n"
 				+ "	<div\r\n"
@@ -55,7 +55,7 @@ public class CertificationEmailService {
 				+ "									<tr>\r\n"
 				+ "										<th colspan=\"1\" rowspan=\"1\"\r\n"
 				+ "											style=\"width: 560px; height: 22px; padding: 0 3.3%; font-size: 0; text-align: left\">\r\n"
-				+ "											<a href=\"http://localhost:9090/javaclassS8/home\"\r\n"
+				+ "											<a href=\"http://localhost:9090/javaclassS8/\"\r\n"
 				+ "												target=\"_blank\"\r\n"
 				+ "												style=\"display: block; text-decoration: none; color: #fff\"\r\n"
 				+ "												rel=\"noreferrer noopener\">\r\n"
@@ -176,7 +176,7 @@ public class CertificationEmailService {
 				+ "										<td\r\n"
 				+ "											style=\"width: 100%; Margin: 0; padding: 0 3.3%; background-color: #f4f4f4; text-align: center; font-size: 11px; color: #707070; line-height: 18px;\">\r\n"
 				+ "											본 메일은 발신전용입니다. 궁금한 사항은 티켓챔프 고객센터를 이용해 주십시오.\r\n"
-				+ "											<a href=\"http://localhost:9090/javaclassS8/home\" title=\"고객센터 연결하기\"\r\n"
+				+ "											<a href=\"http://localhost:9090/javaclassS8/\" title=\"고객센터 연결하기\"\r\n"
 				+ "												style=\"text-decoration: none; color: #707070\"\r\n"
 				+ "												rel=\"noreferrer noopener\" target=\"_blank\">고객센터 :\r\n"
 				+ "												1234-1234</a>\r\n"

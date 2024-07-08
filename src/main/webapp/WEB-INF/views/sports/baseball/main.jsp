@@ -93,5 +93,6 @@
 		</button>
 	</div>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
+	<script src="${ctp}/js/member/login/autoLogin.js"></script>
 </body>
 </html>

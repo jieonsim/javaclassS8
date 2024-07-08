@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
@@ -39,6 +38,7 @@
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
+	<script src="${ctp}/js/member/login/autoLogin.js"></script>
 	<script src="${ctp}/js/layout/header.js"></script>
 </body>
 </html>

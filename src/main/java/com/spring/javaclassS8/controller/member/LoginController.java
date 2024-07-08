@@ -31,7 +31,8 @@ public class LoginController {
 	// 로그인 처리
 	@PostMapping("/login")
 	@ResponseBody
-	public LoginResult login(@RequestBody LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response) {
+	public LoginResult login(@RequestBody LoginRequest loginRequest, HttpServletRequest request,
+			HttpServletResponse response) {
 		LoginResult result = loginService.login(loginRequest, request, response);
 		if (result.isSuccess()) {
 			HttpSession session = request.getSession();
@@ -56,13 +57,12 @@ public class LoginController {
 			if (result.isSuccess()) {
 				HttpSession session = request.getSession();
 				session.setAttribute("loginMember", result.getMember());
-				return ResponseEntity.ok(result);
-			} else {
-				return ResponseEntity.ok(result);
 			}
+			return ResponseEntity.ok(result);
 		} catch (Exception e) {
-			e.printStackTrace(); // d 로그를 출력
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new LoginResult(false, "자동 로그인 처리 중 오류가 발생했습니다."));
+			e.printStackTrace(); // 로그를 출력
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new LoginResult(false, "자동 로그인 처리 중 오류가 발생했습니다."));
 		}
 	}
 }
