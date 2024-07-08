@@ -1,3 +1,7 @@
+/*
+- 자동 로그인 스크립트
+*/
+
 document.addEventListener('DOMContentLoaded', function() {
 	const API = {
 		autoLogin: `${ctp}/autoLogin`,
@@ -9,6 +13,16 @@ document.addEventListener('DOMContentLoaded', function() {
 		helpMain: `${ctp}/help/main`,
 		adminMain: `${ctp}/admin/main`
 	};
+
+	function checkLoginStatus() {
+		if (sessionStorage.getItem('isLoggedIn') === 'true') {
+			const userEmail = sessionStorage.getItem('userEmail');
+			const userRole = sessionStorage.getItem('userRole');
+			updateMenu({ email: userEmail, role: userRole });
+		} else {
+			checkAutoLogin();
+		}
+	}
 
 	function checkAutoLogin() {
 		fetch(API.autoLogin, {
@@ -24,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			.then(handleLoginResult)
 			.catch(handleLoginError);
 	}
+
 
 	function handleLoginResult(result) {
 		if (result.success) {
@@ -67,10 +82,23 @@ document.addEventListener('DOMContentLoaded', function() {
 			.replace(/'/g, "&#039;");
 	}
 
-	function updateMenu(user) {
+	/*function updateMenu(user) {
 		const nav = document.querySelector('.nav');
 		nav.innerHTML = user ? getLoggedInMenu(user) : getLoggedOutMenu();
 	}
+	*/
+
+	window.updateMenu = function(user) {
+		const nav = document.querySelector('.nav');
+		nav.innerHTML = user ? getLoggedInMenu(user) : getLoggedOutMenu();
+	};
+
+	window.handleLogout = function() {
+		sessionStorage.removeItem('isLoggedIn');
+		sessionStorage.removeItem('userEmail');
+		sessionStorage.removeItem('userRole');
+		updateMenu(null);
+	};
 
 	function getLoggedInMenu(user) {
 		return `
@@ -90,11 +118,25 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
 	}
 
-	checkAutoLogin();
+	//checkAutoLogin();
+	checkLoginStatus();
 
 	if (sessionStorage.getItem('isLoggedIn') === 'true') {
 		const userEmail = sessionStorage.getItem('userEmail');
 		const userRole = sessionStorage.getItem('userRole');
 		updateMenu({ email: userEmail, role: userRole });
 	}
+	
+	document.addEventListener('click', function(e) {
+		if (e.target && e.target.matches('a[href$="/logout"]')) {
+			e.preventDefault();
+			fetch(e.target.href, {
+				method: 'GET',
+				credentials: 'include'
+			}).then(() => {
+				window.handleLogout();
+				window.location.href = ctp + '/'; // 홈페이지로 리다이렉트
+			}).catch(error => console.error('Logout error:', error));
+		}
+	});
 });

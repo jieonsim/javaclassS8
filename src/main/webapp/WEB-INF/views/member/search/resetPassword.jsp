@@ -36,10 +36,10 @@
 									<div class="searhTabWrap">
 										<div class="tabWrap">
 											<div class="tab">
-												<a href="${ctp}/search/matchId">아이디 찾기</a>
+												<a href="${ctp}/search/matchEmail">아이디 찾기</a>
 											</div>
 											<div class="tab current">
-												<a href="${ctp}/search/checkId">비밀번호 찾기</a>
+												<a href="${ctp}/search/matchPassword">비밀번호 찾기</a>
 											</div>
 										</div>
 									</div>

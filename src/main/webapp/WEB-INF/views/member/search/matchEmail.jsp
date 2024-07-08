@@ -23,7 +23,7 @@
 			</tr>
 			<tr>
 				<td align="left">
-					<form name="matchIdForm" method="post">
+					<form name="matchEmailForm" method="post" id="matchEmailForm">
 						<div class="searchContainer">
 							<div class="infoSearchWrap">
 								<div class="infoSearchHeader">
@@ -36,10 +36,10 @@
 									<div class="searhTabWrap">
 										<div class="tabWrap">
 											<div class="tab current">
-												<a href="${ctp}/search/matchId">아이디 찾기</a>
+												<a href="${ctp}/search/matchEmail">아이디 찾기</a>
 											</div>
 											<div class="tab">
-												<a href="${ctp}/search/checkId">비밀번호 찾기</a>
+												<a href="${ctp}/search/matchPassword">비밀번호 찾기</a>
 											</div>
 										</div>
 									</div>
@@ -55,13 +55,13 @@
 													</p>
 													<div class="inputForm">
 														<div class="inputStyle">
-															<input id="inputHpMemNm" type="text" class="searchInput" placeholder="이름">
+															<input id="inputName" type="text" name="name" class="searchInput" placeholder="이름">
 															<button type="button" class="inputBtn btnDel">
 																<span class="blind">삭제</span>
 															</button>
 														</div>
 														<div class="inputStyle">
-															<input id="inputHp" type="tel" class="searchInput" placeholder="휴대폰 번호 (- 없이 입력)">
+															<input id="inputPhone" type="text" name="phone" class="searchInput" placeholder="휴대폰 번호 (- 없이 입력)">
 															<button type="button" class="inputBtn btnDel">
 																<span class="blind">삭제</span>
 															</button>
@@ -75,19 +75,16 @@
 																<div class="count"></div>
 															</div>
 															<div class="buttonStyle">
-																<button type="button" onclick="javascript:getCertCheckNo('hp'); return false;">다시 받기</button>
+																<button type="button">다시 받기</button>
 															</div>
 														</div>
 														<div class="errorMessage">
 															<div class="message" style="display: none;"></div>
-															<!-- 이름을 입력해주세요. -->
-															<!-- 잘못된 휴대폰 형식입니다. (-없이 입력) -->
-															<!-- 입력하신 정보와 일치하는 회원이 없습니다. 다시 시도해주세요. -->
 														</div>
 														<div class="confirmWrap">
 															<div class="activeButton">
-																<button type="button" class="certBtn" onclick="location.href='${ctp}/search/showFoundId';">이메일 아이디 확인</button>
-																<%-- <button type="submit" class="certBtn">이메일 아이디 확인하기</button> --%>
+																<button type="submit" class="certBtn">이메일 아이디 확인</button>
+																<%-- <button type="button" class="certBtn" onclick="location.href='${ctp}/search/showFoundId';">이메일 아이디 확인</button> --%>
 															</div>
 														</div>
 													</div>
@@ -108,5 +105,6 @@
 			</tr>
 		</tbody>
 	</table>
+	<script src="${ctp}/js/member/search/matchEmail.js"></script>
 </body>
 </html>

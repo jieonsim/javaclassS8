@@ -175,6 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	getCertifyNumBtn.addEventListener('click', function() {
 		const email = emailInput.value.trim();
 
+		// 이메일 공백 체크
 		if (!email) {
 			showError(emailInput, '필수 정보입니다. 이메일을 입력해주세요.');
 			return;
@@ -352,7 +353,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			hideError(passwordConfirmInput);
 		}
 
-
 		// 이름 유효성 검사
 		if (nameInput.value.trim() === '') {
 			showError(nameInput, '이름을 입력해주세요.');
@@ -387,7 +387,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					if (data.success) {
 						window.location.href = ctp + '/signup/complete';
 					} else {
-						alert('회원가입 중 오류가 발생했습니다1.');
+						alert('회원가입 중 오류가 발생했습니다.');
 					}
 				})
 				.catch(error => {

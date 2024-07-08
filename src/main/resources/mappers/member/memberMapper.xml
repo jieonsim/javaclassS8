@@ -19,6 +19,13 @@
 		SELECT * FROM auto_login_tokens WHERE token = #{token}
 	</select>
 
+	<!-- 이름과 휴대폰번호 조합으로 id, email, createdAt 찾기 -->
+	<select id="findByNameAndPhone" parameterType="map"
+		resultType="com.spring.javaclassS8.vo.member.MemberVO">
+		SELECT id, email, createdAt FROM members WHERE name =
+		#{param1} AND phone = #{param2}
+	</select>
+
 	<!-- 회원가입 -->
 	<insert id="insertMember"
 		parameterType="com.spring.javaclassS8.vo.member.MemberVO">

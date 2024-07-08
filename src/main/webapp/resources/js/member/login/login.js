@@ -7,9 +7,9 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 	// 폼과 인풋 요소들
+	const form = document.getElementById('loginForm');
 	const emailInput = document.getElementById('userId');
 	const passwordInput = document.getElementById('userPwd');
-	const loginBtn = document.getElementById('btn_login');
 	const saveSessionCheckbox = document.getElementById('saveSession');
 
 	// 에러 메시지 표시 함수
@@ -25,13 +25,32 @@ document.addEventListener('DOMContentLoaded', function() {
 		errorDiv.style.display = 'none';
 	}
 
-	// 로그인 성공 처리 함수
+	/*	// 로그인 성공 처리 함수
+		function handleLoginSuccess(member) {
+			console.log('로그인 성공:', member);  // member 객체 로깅
+			sessionStorage.setItem('isLoggedIn', 'true');
+			sessionStorage.setItem('userEmail', member.email);
+			sessionStorage.setItem('userRole', member.role);
+			// 위 세개 추가
+			window.location.href = ctp + '/';
+		}*/
+
 	function handleLoginSuccess(member) {
-		console.log('로그인 성공:', member);  // member 객체 로깅
+		console.log('로그인 성공:', member);
+		sessionStorage.setItem('isLoggedIn', 'true');
+		sessionStorage.setItem('userEmail', member.email);
+		sessionStorage.setItem('userRole', member.role);
+
+		// 메뉴 업데이트 함수 호출
+		if (typeof window.updateMenuAfterLogin === 'function') {
+			window.updateMenuAfterLogin({ email: member.email, role: member.role });
+		}
+
+		// 홈페이지로 리다이렉트
 		window.location.href = ctp + '/';
 	}
 
-	loginBtn.addEventListener('click', function(e) {
+	form.addEventListener('submit', function(e) {
 		e.preventDefault();
 		hideError();
 

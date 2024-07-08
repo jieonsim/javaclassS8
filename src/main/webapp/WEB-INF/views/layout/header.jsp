@@ -41,7 +41,7 @@
 						<c:otherwise>
 							<!-- 로그인 후 -->
 							<li class="nav-item">
-								<a href="${ctp}/my/memberInfo/info" class="nav-link">${sessionScope.loginMember.email}</a>
+								<a href="${ctp}/my/memberInfo/info" class="nav-link">${loginMember.email}</a>
 							</li>
 							<li class="nav-item">
 								<a href="${ctp}/my/reserve" class="nav-link">예매확인/취소</a>
@@ -53,7 +53,7 @@
 								<a href="${ctp}/help/main" class="nav-link">고객센터</a>
 							</li>
 							<!-- 관리자 -->
-							<c:if test="${sessionScope.loginMember.role eq 'ADMIN'}">
+							<c:if test="${loginMember.role eq 'ADMIN'}">
 								<li class="nav-item">
 									<a href="${ctp}/admin/main" class="nav-link">어드민</a>
 								</li>
@@ -182,3 +182,4 @@
 	</div>
 </nav>
 <script src="${ctp}/js/layout/header.js"></script>
+<script src="${ctp}/js/member/login/autoLogin.js"></script>

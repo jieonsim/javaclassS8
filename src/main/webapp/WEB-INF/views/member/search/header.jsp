@@ -6,7 +6,7 @@
 	<div class="empty"></div>
 	<div class="headerInner">
 		<div class="inner">
-			<a class="header_title_link" href="${ctp}/home">
+			<a class="header_title_link" href="${ctp}/">
 				<i class="ph-bold ph-person-simple-throw" id="header_title_logo"></i>
 				<span class="logo-text">ticket</span>
 				<span class="logo-text champ">champ</span>

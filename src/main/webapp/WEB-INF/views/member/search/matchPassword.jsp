@@ -36,10 +36,10 @@
 									<div class="searhTabWrap">
 										<div class="tabWrap">
 											<div class="tab">
-												<a href="${ctp}/search/matchId">아이디 찾기</a>
+												<a href="${ctp}/search/matchEmail">아이디 찾기</a>
 											</div>
 											<div class="tab current">
-												<a href="${ctp}/search/checkId">비밀번호 찾기</a>
+												<a href="${ctp}/search/matchPassword">비밀번호 찾기</a>
 											</div>
 										</div>
 									</div>
@@ -80,12 +80,12 @@
 														</div>
 														<div class="errorMessage">
 															<div class="message"></div>
-															<!-- 이름을 입력해 주세요. -->
-															<!-- 이메일을 입력해 주세요. -->
-															<!-- 인증번호를 입력해 주세요. (인증번호가 공백일 때, 인증번호 입력 시간 만료되었을 때) -->
-															<!-- 잘못된 이메일 형식입니다. -->
-															<!-- 인증번호가 일치하지 않아요. 다시 확인해 주세요. -->
-															<!-- 인증번호 유효시간이 초과되었습니다. (인증번호 입력시간 만료 후 기존에 발송된 인증번호로 입력하거나 만료 후 아무번호나 넣었을 때-->
+															<!-- 이름 공백일 때 : 이름을 입력해 주세요. -->
+															<!-- 이메일 공백일 때 : 이메일을 입력해 주세요. -->
+															<!-- 인증 번호 공백일 때 or 인증번호 시간 만료되었을 때 : 인증번호를 입력해 주세요. -->
+															<!-- 이메일 정규식에 맞지 않을 때 : 잘못된 이메일 형식입니다. -->
+															<!-- 인증번호 불일치 일 때 : 인증번호가 일치하지 않아요. 다시 확인해 주세요. -->
+															<!-- 인증번호 입력시간 만료 후 기존에 발송된 인증번호로 입력하거나 만료 후 아무번호나 넣었을 때 : 인증번호 유효시간이 초과되었습니다.-->
 														</div>
 														<div class="confirmWrap">
 															<div class="activeButton">

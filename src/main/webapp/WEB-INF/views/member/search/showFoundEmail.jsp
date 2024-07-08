@@ -35,10 +35,10 @@
 								<div class="searhTabWrap">
 									<div class="tabWrap">
 										<div class="tab current">
-											<a href="${ctp}/search/matchId">아이디 찾기</a>
+											<a href="${ctp}/search/matchEmail">아이디 찾기</a>
 										</div>
 										<div class="tab">
-											<a href="${ctp}/search/checkId">비밀번호 찾기</a>
+											<a href="${ctp}/search/matchPassword">비밀번호 찾기</a>
 										</div>
 									</div>
 								</div>
@@ -50,20 +50,15 @@
 									<!-- 로그인으로 이동할 때 radio로 선택된 이메일 아이디를 로그인 폼 아이디 인풋에 value로 넣어주기 -->
 									<div class="resultListWrap">
 										<ul>
-											<li class="items">
-												<input type="radio" name="idlist" id="id_1" value="wldjs0***@naver.com" checked>
-												<label for="id_1">
-													<div class="id">wldjs0***@naver.com</div>
-													<div class="date">2018.06.09 가입</div>
-												</label>
-											</li>
-											<li class="items">
-												<input type="radio" name="idlist" id="id_2" value="wldjs5***@gmail.com">
-												<label for="id_2">
-													<div class="id">wldjs5***@gmail.com</div>
-													<div class="date">2024.07.03 가입</div>
-												</label>
-											</li>
+											<c:forEach items="${members}" var="member" varStatus="loop">
+												<li class="items">
+													<input type="radio" name="idlist" id="id_${loop.index}" value="${member.originalEmail}">
+													<label for="id_${loop.index}">
+														<div class="id">${member.maskedEmail}</div>
+														<div class="date">${member.createdAt}&nbsp;가입</div>
+													</label>
+												</li>
+											</c:forEach>
 										</ul>
 									</div>
 								</div>
@@ -72,7 +67,7 @@
 										<span>아이디를 선택해주세요</span>
 									</div>
 									<button type="button" class="basicBtn" onclick="location.href='${ctp}/search/matchPassword'">비밀번호 찾기</button>
-									<button type="button" class="redBtn" onclick="location.href='${ctp}/login'">로그인</button>
+									<button type="button" class="redBtn" onclick="saveSelectedEmail(); location.href='${ctp}/login'">로그인</button>
 								</div>
 							</div>
 						</div>
@@ -86,5 +81,6 @@
 			</tr>
 		</tbody>
 	</table>
+	<script src="${ctp}/js/member/search/showFoundEmail.js"></script>
 </body>
 </html>

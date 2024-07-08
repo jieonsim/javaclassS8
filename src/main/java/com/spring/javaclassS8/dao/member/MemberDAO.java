@@ -1,5 +1,7 @@
 package com.spring.javaclassS8.dao.member;
 
+import java.util.List;
+
 import com.spring.javaclassS8.vo.member.AutoLoginTokenVO;
 import com.spring.javaclassS8.vo.member.MemberVO;
 
@@ -26,4 +28,6 @@ public interface MemberDAO {
 	// 자동 로그인 토큰 조회
 	AutoLoginTokenVO findAutoLoginToken(String token);
 
+	// 이름 + 휴대폰 번호 조합으로 이메일 아이디 찾기
+	public List<MemberVO> findByNameAndPhone(String name, String phone);
 }

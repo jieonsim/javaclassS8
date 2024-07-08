@@ -1,5 +1,7 @@
 package com.spring.javaclassS8.dao.member;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -24,7 +26,7 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberVO findById(int memberId) {
 		return sqlSession.getMapper(MemberDAO.class).findById(memberId);
 	}
-	
+
 	// 회원가입
 	@Override
 	public void insertMember(MemberVO member) {
@@ -56,5 +58,9 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public AutoLoginTokenVO findAutoLoginToken(String token) {
 		return sqlSession.getMapper(MemberDAO.class).findAutoLoginToken(token);
+	}
+
+	public List<MemberVO> findByNameAndPhone(String name, String phone) {
+		return sqlSession.getMapper(MemberDAO.class).findByNameAndPhone(name, phone);
 	}
 }
