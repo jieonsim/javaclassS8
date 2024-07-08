@@ -1,0 +1,29 @@
+package com.spring.javaclassS8.dao.member;
+
+import com.spring.javaclassS8.vo.member.AutoLoginTokenVO;
+import com.spring.javaclassS8.vo.member.MemberVO;
+
+public interface MemberDAO {
+
+	// 이메일로 회원 조회
+	public MemberVO findByEmail(String email);
+
+	// 회원 고유번호로 회원 조회
+	public MemberVO findById(int memberId);
+	
+	// 회원 가입
+	public void insertMember(MemberVO member);
+
+	// 마지막 로그인 일시 업데이트
+	void updateLastLoginAt(MemberVO member);
+
+	// 자동 로그인 토큰 저장
+	void saveAutoLoginToken(AutoLoginTokenVO tokenVO);
+
+	// 자동 로그인 토큰 삭제
+	void deleteAutoLoginToken(String token);
+
+	// 자동 로그인 토큰 조회
+	AutoLoginTokenVO findAutoLoginToken(String token);
+
+}

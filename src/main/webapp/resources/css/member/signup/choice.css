@@ -1,0 +1,774 @@
+.uBtn {
+	display: block;
+	width: 100%;
+	height: 50px;
+	padding-bottom: 1px;
+	font-size: 15px;
+	color: #000;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	cursor: pointer;
+	font-family: Pretendard-Bold;
+	letter-spacing: 1px;
+}
+
+.uBtn:disabled {
+	color: #fff;
+	font-weight: bold;
+	background: #ccc;
+	border: 0;
+}
+
+.uBtn.active {
+	color: #fff;
+	font-weight: bold;
+	background: #333;
+	border: 0;
+}
+
+.uBtn.active:disabled {
+	background: #ccc;
+}
+
+.uBtn.point {
+	color: #fff;
+	font-weight: bold;
+	/* background: #1769ff; */
+	background: #fa2828;
+	border: 0;
+}
+
+.uBtn.point:disabled {
+	background: #ccc;
+}
+
+.uInputArea {
+	display: table;
+	width: 100%;
+	height: 30px;
+	padding: 10px 0;
+	border-bottom: 1px solid #000;
+}
+
+.uInputArea.emailType {
+	position: relative;
+	background: url("../../../images/member/icon/icon_arrow_down.png") 100%
+		50% no-repeat;
+	background-size: 22px auto;
+}
+
+.uInputArea.emailType .uInput .inputBox .inputText {
+	padding-right: 0;
+}
+
+.uInputArea.emailType .uSelectBox label {
+	min-width: 106px;
+	background: none;
+}
+
+.uInputArea.emailType .uSelectBox select {
+	padding-left: 0;
+}
+
+.uInputArea.emailType.active .inputBox {
+	padding-right: 60px;
+}
+
+.uInputArea.emailType.active .selectCol {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	padding: 0;
+	opacity: 0;
+	margin-top: -15px;
+}
+
+.uInputArea.emailType.active .selectCol label {
+	min-width: 0;
+	width: 50px;
+	height: 100%;
+	padding: 0;
+}
+
+@media screen and (min-width: 769px) {
+	.uInputArea.emailType.active .selectCol label {
+		min-width: 130px;
+		width: auto;
+		height: 100%;
+		padding: 0;
+	}
+}
+
+.uInputArea .col {
+	display: table-cell;
+	vertical-align: top;
+}
+
+.uInputArea .col:first-child {
+	width: 100%;
+	padding-left: 5px;
+}
+
+.uInputArea .col:last-child {
+	padding-right: 5px;
+}
+
+.uInputArea .label {
+	display: inline-block;
+	height: 30px;
+	padding: 0;
+	line-height: 30px;
+}
+
+.uInputArea .label {
+	display: inline-block;
+	height: 30px;
+	padding: 0;
+	line-height: 30px;
+}
+
+.uInputArea .uInput:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.uInputArea .uInput label {
+	font-size: 15px;
+	line-height: 30px;
+	color: #000;
+	float: left;
+	font-weight: bold;
+}
+
+.uInputArea .uInput .inputBox {
+	overflow: hidden;
+	position: relative;
+}
+
+.uInputArea .uInput .inputBox .inputText {
+	font-size: 15px;
+	line-height: 30px;
+	color: #000;
+	display: block;
+	width: 100%;
+	height: 30px;
+	padding: 0 25px 0 10px;
+	box-sizing: border-box;
+	border: 0;
+	outline: 0;
+	background: none;
+}
+
+.uInputArea .uInput .inputBox .inputText:-webkit-autofill, .uInputArea .uInput .inputBox .inputText:-webkit-autofill:hover,
+	.uInputArea .uInput .inputBox .inputText:-webkit-autofill:focus,
+	.uInputArea .uInput .inputBox .inputText:-webkit-autofill:active {
+	-webkit-box-shadow: 0 0 0 30px #fff inset !important;
+	box-shadow: 0 0 0 30px #fff inset !important; /* 표준 속성 추가 */
+}
+
+.uInputArea .uInput .inputBox .inputText::placeholder {
+	font-size: 15px;
+	line-height: 30px;
+	color: #000;
+	color: #ccc;
+}
+
+.uInputArea .uInput .inputBox .btnDel {
+	display: none;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 25px;
+	height: 30px;
+}
+
+.uInputArea .uInput .inputBox .btnDel:after {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 14px;
+	height: 14px;
+	margin: -7px 0 0 -7px;
+	background: url("../../../images/member/icon/icon_delete.png") 0 0
+		no-repeat;
+	background-size: 100% auto;
+	content: "";
+}
+
+.uInputArea .ubtnArea {
+	white-space: nowrap;
+	font-size: 0;
+}
+
+.uInputArea .ubtnArea .uBtn {
+	display: inline-block;
+	width: auto;
+	font-size: 13px;
+	height: 30px;
+	margin-left: 5px;
+	color: #666;
+	border: 0;
+}
+
+.uInputArea .ubtnArea .uBtn:first-child {
+	margin-left: 0;
+}
+
+.uInputArea .ubtnArea .uBtn.borderType {
+	min-width: 70px;
+	padding-left: 10px;
+	padding-right: 10px;
+	box-sizing: border-box;
+	border-radius: 6px;
+	border: 1px solid #ccc;
+	color: #000;
+}
+
+.uErrorText {
+	font-size: 13px;
+	line-height: 20px;
+	color: #dc941b;
+	margin-top: 5px;
+	padding: 0 5px;
+}
+
+.uNoticeText {
+	font-size: 13px;
+	line-height: 20px;
+	color: #999;
+	margin-top: 5px;
+	padding: 0 5px;
+}
+
+.uNoticeText.point {
+	color: #dc941b;
+}
+
+.businessJoinNotice {
+	font-size: 13px;
+	line-height: 20px;
+	color: #999;
+	margin-top: 13px;
+	padding: 0 5px;
+}
+
+.businessJoinNotice p {
+	position: relative;
+	padding-left: 8px;
+}
+
+.businessJoinNotice p::before {
+	position: absolute;
+	top: 8px;
+	left: 0;
+	display: inline-block;
+	content: "";
+	width: 3px;
+	height: 3px;
+	background-color: #999;
+	border-radius: 100%;
+}
+
+.businessJoinNotice p a {
+	color: #999;
+	text-decoration: underline;
+}
+
+.uCheckbox {
+	font-size: 0;
+}
+
+.uCheckbox:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.uCheckbox.sType label {
+	min-height: 23px;
+}
+
+.uCheckbox.sType .text {
+	padding-top: 2px;
+}
+
+.uCheckbox.sType .text:after {
+	width: 23px;
+	height: 23px;
+}
+
+.uCheckbox input[type="checkbox"] {
+	position: absolute;
+	clip: rect(0, 0, 0, 0);
+	pointer-events: none;
+}
+
+.uCheckbox input[type="checkbox"]:checked+.text:after {
+	background-position: 0 100%;
+}
+
+.uCheckbox label {
+	float: left;
+	min-height: 28px;
+}
+
+.uCheckbox .text {
+	font-size: 13px;
+	line-height: 20px;
+	color: #000;
+	display: inline-block;
+	position: relative;
+	height: 100%;
+	padding-top: 4px;
+	padding-left: 33px;
+	cursor: pointer;
+}
+
+.uCheckbox .text:after {
+	background: url("../../../images/member/icon/icon_check.png") 0 0
+		no-repeat;
+	background-size: 100% auto;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 28px;
+	height: 28px;
+}
+
+.uCheckbox .checkboxCont {
+	overflow: hidden;
+}
+
+.uCheckbox .checkboxCont .uNoticeText {
+	padding: 0;
+}
+
+.uCheckbox .btnLink {
+	font-size: 15px;
+	line-height: 20px;
+	color: #666;
+	display: inline-block;
+	position: relative;
+	padding-right: 20px;
+	vertical-align: top;
+}
+
+.uCheckbox .btnLink:after {
+	position: absolute;
+	top: 50%;
+	height: 15px;
+	margin-top: -7.5px;
+	background: url("../../../images/member/icon/icon_arrow_left.png") 0 0
+		no-repeat;
+	background-size: 100% auto;
+	content: "";
+	width: 15px;
+	right: 0;
+}
+
+.uCheckbox .btnLink.hasSmallLink:after {
+	display: none;
+}
+
+.uCheckbox .btnLink em {
+	font-size: 13px;
+	line-height: 20px;
+	color: #666;
+	position: relative;
+	display: inline-block;
+	width: auto;
+	margin-left: 10px;
+}
+
+.uCheckbox .btnLink em:after {
+	position: absolute;
+	top: 50%;
+	height: 14px;
+	margin-top: -7px;
+	background: url("../../../images/member/icon/icon_arrow_left.png") 0 0
+		no-repeat;
+	background-size: 100% auto;
+	background-position: 50% 50%;
+	content: "";
+	width: 15px;
+	right: -14px;
+}
+
+@media screen and (max-width: 420px) {
+	.uCheckbox .btnLink em {
+		margin-top: 10px;
+		margin-left: 0;
+	}
+}
+
+.label {
+	font-size: 15px;
+	line-height: 22px;
+	color: #000;
+	padding: 10px 0;
+	font-weight: bold;
+}
+
+.uRadioBox {
+	overflow: hidden;
+	height: 40px;
+	padding: 2px;
+	box-sizing: border-box;
+	border-radius: 10px;
+	background: #f3f3f3;
+}
+
+.uRadioBox input[type="radio"] {
+	position: absolute;
+	clip: rect(0, 0, 0, 0);
+	pointer-events: none;
+}
+
+.uRadioBox input[type="radio"]:checked+.text {
+	background: #fff;
+	color: #000;
+	border-radius: 8px;
+	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
+}
+
+.uRadioBox .uRadio {
+	font-size: 15px;
+	line-height: 36px;
+	color: #666;
+	float: left;
+	width: 50%;
+	height: 100%;
+	background: #f3f3f3;
+	text-align: center;
+}
+
+.uRadioBox .uRadio label, .uRadioBox .uRadio .text {
+	display: block;
+	position: relative;
+	height: 100%;
+}
+
+.uSelectBox label {
+	display: inline-block;
+	position: relative;
+	min-width: 160px;
+	height: 30px;
+	vertical-align: top;
+	background: url("../../../images/member/icon/icon_arrow_down.png") 100%
+		50% no-repeat;
+	background-size: 22px auto;
+}
+
+.uSelectBox label select {
+	padding: 0 14px 0 10px;
+	height: 100%;
+	border: 0;
+	background: none;
+	outline: 0;
+	width: 100%;
+	-webkit-appearance: none;
+	appearance: none;
+	font-size: 15px;
+	line-height: 30px;
+	color: #666;
+}
+
+button {
+	-webkit-appearance: none;
+	appearance: none;
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: none;
+	background: transparent;
+	-webkit-user-select: none;
+	user-select: none;
+	font-family: -apple-system, BlinkMacSystemFont, Roboto, "Droid Sans",
+		"Helvetica Neue", "Apple SD Gothic Neo", "sans-serif", sans-serif;
+}
+
+button:active {
+	opacity: 0.5;
+}
+
+select::-ms-expand {
+	display: none;
+}
+
+.contentWrapper {
+	padding: 0 20px;
+}
+
+@media screen and (min-width: 769px) {
+	.contentWrapper {
+		width: 500px;
+		min-height: 800px;
+		box-sizing: border-box;
+		margin: 0 auto;
+		padding: 0;
+	}
+}
+
+.joinContent {
+	padding-top: 30px;
+	padding-bottom: 78px;
+}
+
+@media screen and (min-width: 769px) {
+	.joinContent {
+		padding-top: 75px;
+	}
+}
+
+.joinContent .joinBlock h2.title {
+	font-size: 25px;
+	line-height: 37px;
+	color: #000;
+	font-weight: bold;
+	text-align: center;
+	font-family: Pretendard-Bold;
+}
+
+.joinContent .joinBlock .text {
+	font-size: 15px;
+	line-height: 22px;
+	color: #666;
+	margin-top: 10px;
+	text-align: center;
+	font-family: Pretendard-Regular;
+}
+
+.joinContent .singleBlock {
+	padding-bottom: 100px;
+}
+
+@media screen and (min-width: 769px) {
+	.joinContent .singleBlock {
+		padding-bottom: 70px;
+	}
+	.joinContent .singleBlock br {
+		display: none;
+	}
+}
+
+.joinContent .btnJoin {
+	margin-top: 30px;
+	font-size: 17px;
+}
+
+.joinContent .snsJoinArea .guideText {
+	font-size: 13px;
+	line-height: 20px;
+	color: #999;
+	margin-top: 15px;
+	text-align: center;
+	font-family: Pretendard-Light;
+}
+
+.joinContent .listSns {
+	margin: 31px -4px 0;
+	padding: 0 5px;
+}
+
+.joinContent .listSns:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+@media screen and (min-width: 769px) {
+	.joinContent .listSns {
+		padding: 0 10px;
+		display: flex;
+		justify-content: center;
+	}
+}
+
+.joinContent .listSns li {
+	float: left;
+	width: 50%;
+	margin-top: 9px;
+	padding: 0 4px;
+	box-sizing: border-box;
+}
+
+@media screen and (min-width: 769px) {
+	.joinContent .listSns li {
+		width: 33.3%;
+	}
+	.joinContent .listSns li.snsApple {
+		display: none;
+	}
+}
+
+.joinContent .listSns .btnSns {
+	display: block;
+	height: 40px;
+	border-radius: 6px;
+	text-align: center;
+	color: #000;
+	box-sizing: border-box;
+}
+
+.joinContent .listSns .btnSns>span {
+	font-size: 15px;
+	line-height: 38px;
+	color: #000;
+	position: relative;
+	display: inline-block;
+	padding-left: 25px;
+	vertical-align: top;
+	font-size: 15px;
+	line-height: 38px;
+}
+
+.joinContent .listSns .btnSns>span:after {
+	position: absolute;
+	top: 50%;
+	height: 20px;
+	margin-top: -10px;
+	content: "";
+	left: 0;
+	width: 20px;
+	background: url("../../../images/member/icon/icon_sns_logo.png") center
+		0 no-repeat;
+	background-size: 100% auto;
+}
+
+.joinContent .listSns .btnSns.snsNaverBtn {
+	background: #2db400;
+	border: 1px solid #2db400;
+}
+
+.joinContent .listSns .btnSns.snsNaverBtn>span {
+	color: #fff;
+	font-family: Pretendard-Regular;
+}
+
+.joinContent .listSns .btnSns.snsKakaoBtn {
+	background: #fde102;
+	border: 1px solid #fde102;
+}
+
+.joinContent .listSns .btnSns.snsKakaoBtn>span {
+	color: #391c1c;
+	font-family: Pretendard-Regular;
+}
+
+.joinContent .listSns .btnSns.snsKakaoBtn>span:after {
+	background-position-y: 25%;
+}
+
+.joinContent .listSns .btnSns.snsPaycoBtn {
+	background: #fff;
+	border: 1px solid #ccc;
+}
+
+.joinContent .listSns .btnSns.snsPaycoBtn>span:after {
+	background-position-y: 50%;
+}
+
+.joinContent .listSns .btnSns.snsAppleBtn {
+	background: #050708;
+	border: 1px solid #050708;
+}
+
+.joinContent .listSns .btnSns.snsAppleBtn>span {
+	color: #fff;
+}
+
+.joinContent .listSns .btnSns.snsAppleBtn>span:after {
+	background-position-y: 75%;
+}
+
+.joinContent .businessBlock {
+	padding-top: 40px;
+	border-top: 1px solid #ddd;
+}
+
+.joinContent .businessBlock .uBtn {
+	font-weight: bold;
+	border-color: #999;
+}
+
+@media screen and (min-width: 769px) {
+	.joinContent .businessBlock {
+		padding-top: 0;
+		border-top: 0;
+	}
+}
+
+.joinContent .sellerBlock {
+	display: none;
+	margin-top: 55px;
+	padding-top: 44px;
+	border-top: 1px solid #ddd;
+}
+
+.joinContent .sellerBlock h3.title {
+	font-size: 20px;
+	line-height: 28px;
+	font-weight: normal;
+	text-align: center;
+}
+
+.joinContent .sellerBlock .sellerJoinArea {
+	margin-top: 36px;
+}
+
+.joinContent .sellerBlock .listSeller {
+	margin: 0 -7px;
+}
+
+.joinContent .sellerBlock .listSeller:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.joinContent .sellerBlock .listSeller li {
+	float: left;
+	width: 50%;
+	padding: 0 7px;
+	box-sizing: border-box;
+}
+
+.joinContent .sellerBlock .listSeller .btnSeller {
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.joinContent .sellerBlock .listSeller .guideText {
+	font-size: 15px;
+	line-height: 20px;
+	color: #666;
+	margin-top: 16px;
+	text-align: center;
+}
+
+@media screen and (min-width: 769px) {
+	.joinContent .sellerBlock {
+		display: block;
+	}
+}
+
+.joinContent .businessJoinArea {
+	margin: 15px auto 0;
+	display: block;
+	color: #666;
+	font-size: 15px;
+	text-align: center;
+	width: 210px;
+}
+
+@media screen and (min-width: 769px) {
+	.joinContent .businessJoinArea {
+		margin: 15px auto 0;
+		width: 100%;
+	}
+}

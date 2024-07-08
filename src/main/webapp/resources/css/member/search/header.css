@@ -1,0 +1,198 @@
+@charset "UTF-8";
+
+html {
+	font-size: 62.5%;
+}
+
+html, body * {
+	font-family: "Pretendard", Pretendard, -apple-system, BlinkMacSystemFont,
+		system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo",
+		"Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol", sans-serif;
+}
+
+.intCommonHeader {
+	position: relative;
+	box-sizing: border-box;
+	padding: 0 16px;
+	background-color: #fff;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+	z-index: 999;
+}
+
+.intCommonHeader .blind {
+	position: absolute;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	margin: -0.1rem;
+	width: 0.1rem;
+	height: 0.1rem;
+}
+
+.intCommonHeader .headerInner {
+	position: relative;
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	margin: 0 auto;
+}
+
+.intCommonHeader .title {
+	width: 100%;
+	padding: 0 40px;
+	font-size: 15px;
+	font-weight: normal;
+	text-align: center;
+	box-sizing: border-box;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.intCommonHeader .myMenu {
+	display: none;
+}
+
+.intCommonHeader .loginSignupBtn {
+	text-decoration: none;
+}
+
+@media ( min-width : 1024px) {
+	.intCommonHeader .headerInner {
+		display: flex;
+		align-items: center;
+		height: 88px;
+		line-height: 68px;
+		max-width: 1280px;
+	}
+	.intCommonHeader .headerInner .inner {
+		display: flex;
+		align-items: center;
+		width: 100%;
+	}
+	.intCommonHeader .title, .intCommonHeader .btnSearch, .intCommonHeader .myMenu li.layerBtn
+		{
+		display: none;
+	}
+	.intCommonHeader .mainNav {
+		display: none;
+	}
+	.intCommonHeader .mainMenu {
+		display: flex;
+		justify-content: left;
+		align-items: center;
+		margin-left: 4px;
+	}
+	.intCommonHeader .mainMenu li {
+		width: 30px;
+		height: 30px;
+		margin-left: 16px;
+		font-size: 0;
+	}
+	.intCommonHeader .mainMenu li img {
+		width: 100%;
+		vertical-align: top;
+	}
+	.intCommonHeader .myMenu {
+		display: flex;
+		align-items: center;
+		height: 100%;
+		margin-left: auto;
+	}
+	.intCommonHeader .myMenu>li {
+		position: relative;
+		display: inline-flex;
+		height: 100%;
+		align-items: center;
+		margin-left: 2rem;
+	}
+	.intCommonHeader .myMenu>li:first-child {
+		margin: 0;
+	}
+	.intCommonHeader .myMenu a, .intCommonHeader .myMenu button {
+		font-size: 1.5rem;
+		color: #111;
+		font-weight: 500;
+	}
+	.intCommonHeader .myMenu button {
+		position: relative;
+		cursor: pointer;
+	}
+	.intCommonHeader .myMenu button::after {
+		content: "";
+		position: absolute;
+		right: -1.2rem;
+		top: 50%;
+		transform: translateY(-50%);
+		display: block;
+		width: 0.8rem;
+		height: 0.4rem;
+		background: url("../../../images/icon/icon_back.svg") no-repeat center
+			center;
+	}
+	.intCommonHeader .myMenu .layerBtn:hover .selectLayer, .intCommonHeader .myMenu .layerBtn:focus .selectLayer
+		{
+		display: block;
+	}
+	.intCommonHeader .myMenu .selectLayer {
+		display: none;
+		position: absolute;
+		right: -0.8rem;
+		top: 4.7rem;
+		padding: 1.9rem 2rem;
+		background: #fff;
+		box-shadow: 0 0 1.6rem rgba(0, 0, 0, 0.2);
+		border-radius: 1.4rem;
+		z-index: 10;
+	}
+	.intCommonHeader .myMenu .selectLayer.active {
+		display: block;
+	}
+	.intCommonHeader .myMenu .selectLayer li {
+		display: block;
+		padding: 1.4rem 0 0 0;
+		text-align: left;
+		line-height: 1.8rem;
+		white-space: nowrap;
+	}
+	.intCommonHeader .myMenu .selectLayer li a {
+		font-size: 1.4rem;
+	}
+	.intCommonHeader .myMenu .selectLayer li:first-child {
+		padding: 0;
+	}
+	.intCommonHeader.fixed .headerInner {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+		max-width: none;
+		height: 70px;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+		background-color: #fff;
+		transition: height 0.2s;
+		z-index: 10;
+	}
+	.intCommonHeader.fixed .headerInner .inner {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		max-width: 1280px;
+		margin: 0 auto;
+	}
+	.intCommonHeader.fixed .mainNav {
+		display: flex;
+		height: 100%;
+	}
+	.intCommonHeader.fixed .myMenu li {
+		display: block;
+		line-height: 70px;
+	}
+	.intCommonHeader.fixed .myMenu li.layerBtn {
+		display: none !important;
+	}
+	.intCommonHeader.fixed .empty {
+		height: 70px;
+	}
+}
