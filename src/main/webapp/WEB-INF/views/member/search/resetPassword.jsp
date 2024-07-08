@@ -23,7 +23,7 @@
 			</tr>
 			<tr>
 				<td align="left">
-					<form name="matchIdForm" method="post">
+					<form name="restPasswordForm" method="post">
 						<div class="searchContainer">
 							<div class="infoSearchWrap">
 								<div class="infoSearchHeader">
@@ -48,10 +48,10 @@
 											인증이 완료되었어요<br>비밀번호를 재설정 해주세요
 										</h3>
 										<div class="inputStyle disable">
-											<input type="text" name="email">
+											<input type="text" name="email" value="" disabled>
 										</div>
 										<div class="inputStyle">
-											<input name="password" class="pwdInput" type="password" placeholder="새 비밀번호">
+											<input name="password" class="pwdInput" type="password" placeholder="새 비밀번호" autofocus>
 											<button type="button" class="inputBtn btnDel">
 												<span class="blind">삭제</span>
 											</button>

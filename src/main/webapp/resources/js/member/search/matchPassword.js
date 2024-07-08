@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const emailDelBtn = document.querySelector('#inputEmail + .btnDel');
 
 	let timer;
-	let certificationNumber;
+	//let certificationNumber;
 
 	// 이름 인풋 다시입력 버튼
 	nameDelBtn.addEventListener('click', function() {
