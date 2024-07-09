@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+.btn_move_top {
+	visibility: hidden;
+	position: fixed;
+	bottom: 20px;
+	right: 50%;
+	margin-right: -640px;
+	width: 40px;
+	height: 40px;
+	border: 1px solid gray;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.95);
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+	opacity: 0;
+	transition: visibility 0.3s linear, opacity 0.3s linear;
+	z-index: 1000;
+}
+
+.btn_move_top::before {
+	display: block;
+	width: 24px;
+	height: 24px;
+	margin: 0 auto;
+	background: url('../../images/icon/arrow-up.svg') center/24px no-repeat;
+	content: '';
+}
+
+.btn_move_top:hover, .btn_move_top:focus {
+	border-color: black;
+	background-color: black;
+}
+
+.btn_move_top:hover::before, .btn_move_top:focus::before {
+	filter: brightness(0) invert(1);
+}
+
+.btn_move_top.is-active {
+	visibility: visible;
+	opacity: 1;
+}
+
+.btn_move_top.is-stuck {
+	position: absolute;
+	bottom: 285px;
+}
+
+@media screen and (max-width: 1296px) {
+	.btn_move_top.is-stuck {
+		right: 20px;
+		margin-right: 0;
+	}
+}

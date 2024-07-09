@@ -1,0 +1,954 @@
+@charset "UTF-8";
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	background-color: white;
+	margin: 0;
+	padding: 0;
+}
+
+table {
+	width: 100%;
+	border: 0;
+	border-collapse: collapse; /* cellspacing 대신 */
+	align-items: center;
+}
+
+table td, table th {
+	padding: 0; /* cellpadding 대신 */
+}
+
+#commonHeaderDom {
+	display: none;
+}
+
+.searchContainer * {
+	line-height: 1.5;
+	font-family: "Pretendard", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol", sans-serif;
+}
+
+.searchContainer .blind {
+	position: absolute;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	margin: -.1rem;
+	width: .1rem;
+	height: .1rem;
+}
+
+.searchContainer .intToast {
+	z-index: 1001;
+	display: block;
+	position: fixed;
+	bottom: calc(env(safe-area-inset-bottom)+ 1.6rem);
+	left: 50%;
+	transform: translateX(-50%);
+	width: calc(100% - 3.2rem);
+	max-width: 40rem;
+	padding: 1.2rem 1.6rem;
+	border-radius: .8rem;
+	background: rgba(28, 28, 30, 0.96);
+	box-shadow: 0 0.5rem 1.2rem 0 rgba(0, 0, 0, 0.08);
+	box-sizing: border-box;
+	text-align: left;
+	font-size: 1.5rem;
+	color: #fff;
+}
+
+@media screen and (min-width: 1024px) {
+	#commonHeaderDom {
+		display: block;
+	}
+}
+
+.infoSearchHeader {
+	position: relative;
+	height: 5rem;
+	padding: 1.5rem 2rem;
+	box-sizing: border-box;
+}
+
+.infoSearchHeader h2 {
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.7rem;
+	color: #1c1c1e;
+}
+
+.infoSearchHeader .backButton {
+	position: absolute;
+	top: .8rem;
+	left: .8rem;
+	font-size: 0;
+}
+
+.infoSearchHeader .backButton button {
+	display: block;
+	width: 3.4rem;
+	height: 3.4rem;
+	background: url("../../../images/icon/icon_back.svg") no-repeat center center;
+	text-indent: -9999rem;
+	font-size: 0;
+}
+
+.infoSearchHeader .closeBtn {
+	position: absolute;
+	top: 1.5rem;
+	right: 2rem;
+	font-size: 0;
+}
+
+.infoSearchHeader .closeBtn button {
+	width: 2rem;
+	height: 2rem;
+	background: url("../../../images/icon/icon_close.svg") no-repeat center center;
+	text-indent: -9999rem;
+	font-size: 0;
+}
+
+.infoSearchBody {
+	padding: 0 2rem;
+}
+
+.infoSearchBody h3 {
+	margin: 4rem 0;
+	line-height: 143%;
+	font-weight: bold;
+	font-size: 2.2rem;
+	color: #1c1c13;
+}
+
+.infoSearchBody .inputStyle {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 4.8rem;
+}
+
+.infoSearchBody .inputStyle .btnDel {
+	opacity: 0;
+	position: absolute;
+	top: 1.6rem;
+	right: 1.2rem;
+	z-index: 1;
+	width: 1.6rem;
+	height: 1.6rem;
+	background: url("../../../images/icon/input_del.svg") center center no-repeat;
+	background-size: 100%;
+}
+
+.infoSearchBody .inputStyle input {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding: 1.2rem 3rem 1.2rem 1.2rem;
+	border: .1rem solid #ddd;
+	border-radius: 1.2rem;
+	background-color: #fff;
+	box-sizing: border-box;
+	font-size: 1.5rem;
+	color: #1c1c1e;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.infoSearchBody .inputStyle input::placeholder {
+	color: #999;
+}
+
+.infoSearchBody .inputStyle input:focus {
+	border: .1rem solid #666;
+}
+
+.infoSearchBody .inputStyle input:focus:not(:placeholder-shown) ~ .btnDel {
+	opacity: 1;
+}
+
+.infoSearchBody .inputStyle input:disabled {
+	opacity: 1;
+	-webkit-text-fill-color: #666;
+	background-color: #f8f8f8;
+	color: #666;
+}
+
+.infoSearchBody .inputStyle .count {
+	position: absolute;
+	top: 50%;
+	right: 1.2rem;
+	display: inline-block;
+	font-size: 1.3rem;
+	color: #ff322e;
+	transform: translateY(-50%);
+}
+
+.infoSearchBody .buttonStyle {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 4.8rem;
+	padding: 0 1.5rem;
+	border: .1rem solid #ddd;
+	border-radius: 1.2rem;
+	background-color: #fff;
+	box-sizing: border-box;
+}
+
+.infoSearchBody .buttonStyle button {
+	display: block;
+	width: 100%;
+	height: 100%;
+	font-weight: bold;
+	font-size: 1.3rem;
+	color: #1c1c1e;
+}
+
+.infoSearchBody .activeButton {
+	width: 100%;
+	height: 5.2rem;
+}
+
+.infoSearchBody .activeButton button {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 1.2rem;
+	background-color: #fa2828;
+	/* background-color: #1769ff; */
+	font-weight: bold;
+	font-size: 1.7rem;
+	color: #fff;
+}
+
+.infoSearchBody .activeButton button:disabled {
+	background-color: #ddd;
+}
+
+.infoSearchBody .selectStyle {
+	position: relative;
+	display: inline-block;
+	z-index: 99;
+}
+
+.infoSearchBody .selectStyle .viewPoint {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding: 1.2rem 1.5rem 1.2rem;
+	box-sizing: border-box;
+	border: .1rem solid #ccc;
+	border-radius: .8rem;
+	background-color: #fff;
+	font-size: 1.5rem;
+	color: #1c1c1e;
+}
+
+.infoSearchBody .selectStyle .viewPoint:after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 1.2rem;
+	width: 1.6rem;
+	height: 1.6rem;
+	margin-top: -.9rem;
+	background: url("../../../images/icon/icon_select.svg") no-repeat 0 0;
+}
+
+.infoSearchBody .selectStyle .optionList {
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 1;
+	width: 100%;
+	padding-top: 3.5rem;
+	background: #fff;
+	border: .1rem solid #ccc;
+	border-radius: .8rem;
+	box-shadow: 0 0.6rem 1.5rem 0 rgba(0, 0, 0, 0.2);
+	overflow: hidden;
+}
+
+.infoSearchBody .selectStyle .optionList:before {
+	content: "";
+	position: absolute;
+	top: 2rem;
+	right: 1.2rem;
+	width: 1.6rem;
+	height: 1.6rem;
+	margin-top: -.9rem;
+	background: url("../../../images/icon/icon_select.svg") no-repeat 0 0;
+	transform: rotate(180deg);
+}
+
+.infoSearchBody .selectStyle .optionList:after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 1.2rem;
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, #fff 80%);
+	pointer-events: none;
+}
+
+.infoSearchBody .selectStyle .optionList ul {
+	overflow: hidden;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.infoSearchBody .selectStyle .optionList ul li a {
+	display: block;
+	padding: .85rem 1rem;
+	font-size: 1.5rem;
+	color: #1c1c1e;
+}
+
+.infoSearchBody .selectStyle .optionList ul li.current a {
+	background-color: #eee;
+}
+
+.infoSearchBody .selectStyle .invisible+.optionList {
+	padding-top: 0;
+}
+
+.infoSearchBody .selectStyle .invisible+.optionList li a {
+	padding: .85rem 1.2rem;
+}
+
+.infoSearchBody .selectStyle .invisible+.optionList li:last-child a {
+	padding-bottom: 2rem;
+}
+
+.infoSearchBody .selectStyle.on .optionList {
+	display: block;
+}
+
+.infoSearchBody .selectStyle.on .viewPoint::after {
+	transform: rotate(180deg);
+}
+
+.infoSearchBody .searhTabWrap {
+	margin-top: 2rem;
+	box-sizing: border-box;
+}
+
+.infoSearchBody .searhTabWrap .tabWrap {
+	display: flex;
+	height: 3.6rem;
+	justify-content: center;
+	align-items: center;
+	border-bottom: .1rem solid #eee;
+	box-sizing: border-box;
+}
+
+.infoSearchBody .searhTabWrap .tabWrap .tab {
+	position: relative;
+	width: 50%;
+	height: 100%;
+	text-align: center;
+}
+
+.infoSearchBody .searhTabWrap .tabWrap .tab a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	font-size: 1.5rem;
+	color: #666;
+	text-decoration: none;
+}
+
+.infoSearchBody .searhTabWrap .tabWrap .tab.current::after {
+	content: "";
+	position: absolute;
+	bottom: -.1rem;
+	left: 0;
+	width: 100%;
+	height: .3rem;
+	background-color: #1c1c1e;
+}
+
+.infoSearchBody .searhTabWrap .tabWrap .tab.current a {
+	font-weight: bold;
+	color: #1c1c1e;
+}
+
+.infoSearchBody .searchContentsWrapper {
+	margin: .8rem 0;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents {
+	border-bottom: .1rem solid #f8f8f8;
+	background-color: #fff;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents:last-child {
+	border-bottom: 0;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .titleWrap {
+	position: relative;
+	margin: 20px 0 8px 0;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .titleWrap .titleText {
+	font-size: 1.5rem;
+	color: #1c1c1e;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap {
+	max-height: 0;
+	overflow: hidden;
+	padding-bottom: 0;
+	visibility: hidden;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner {
+	/* padding: 0 0 2rem 3.2rem; */
+	padding: 0 0 0 0;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .message {
+	padding-bottom: .8rem;
+	font-size: 1.3rem;
+	color: #666;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .confirmWrap {
+	margin-top: 1.2rem;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm {
+	margin-top: 1.2rem;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .inputStyle+.inputStyle {
+	margin-top: 1.2rem;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .hasButtonWrap {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 1.2rem;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .hasButtonWrap .inputStyle {
+	flex-shrink: 0;
+	width: calc(100% - 8.8rem);
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .hasButtonWrap .buttonStyle {
+	width: 8rem;
+	margin-left: .8rem;
+	padding: 0;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .hasButtonWrap.numberSend .inputStyle input {
+	padding-right: 6rem;
+	box-sizing: border-box;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .hasButtonWrap.numberSend .inputStyle .btnDel {
+	right: 5.2rem;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .hasButtonWrap.numberSend+.inputStyle {
+	margin-top: 1.2rem;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .emailWrap {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 1.2rem;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .emailWrap .inputStyle {
+	flex-shrink: 0;
+	width: calc(100% - 12rem);
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .emailWrap .selectStyle {
+	width: 11.2rem;
+	margin-left: .8rem;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .emailWrap .selectStyle .optionList {
+	width: 16rem;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .emailWrap.numberSend+.inputStyle {
+	margin-top: 1.2rem;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .emailCheck, .infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .numberSendBtn
+	{
+	margin-top: 1.2rem;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .passwordCheck {
+	display: none;
+	margin-top: 1.2rem;
+	border-color: #73afff;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .passwordCheck button {
+	color: #1769ff;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .numberInput {
+	display: flex;
+	margin-top: 1.2rem;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .numberInput .inputStyle {
+	width: calc(100% - 7.9rem);
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .numberInput .buttonStyle {
+	width: 7.1rem;
+	margin-left: .8rem;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .hide {
+	display: none;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .inputForm .errorMessage+.inputStyle {
+	margin-top: 1.2rem;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .errorMessage {
+	padding-top: .8rem;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .errorMessage .message {
+	padding-bottom: .4rem;
+	font-size: 1.3rem;
+	color: #ff322e;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .snsLogin {
+	display: flex;
+	align-items: center;
+	padding-top: 1.2rem;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .snsLogin .snsBtn {
+	width: 4.8rem;
+	height: 4.8rem;
+	margin-right: 1.6rem;
+	text-align: center;
+	border-radius: 100%;
+	box-sizing: border-box;
+	background-color: #fff;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .snsLogin .snsBtn.kakao {
+	background-color: #fedd35;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .snsLogin .snsBtn.kakao a span {
+	background: url("//openimage.interpark.com/UI/login/mobile/icon_kakao.svg") no-repeat center;
+	background-size: 100% auto;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .snsLogin .snsBtn.naver {
+	background-color: #1ec800;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .snsLogin .snsBtn.naver a span {
+	background: url("//openimage.interpark.com/UI/login/mobile/icon_naver.svg") no-repeat center;
+	background-size: 100% auto;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .snsLogin .snsBtn.google {
+	background-color: #fff;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .snsLogin .snsBtn.google a span {
+	background: url("//openimage.interpark.com/UI/login/mobile/icon_google.svg") no-repeat center;
+	background-size: 100% auto;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .snsLogin .snsBtn.apple {
+	background-color: #111;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .snsLogin .snsBtn.apple a span {
+	background: url("//openimage.interpark.com/UI/login/mobile/icon_apple.svg") no-repeat center;
+	background-size: 100% auto;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .snsLogin .snsBtn a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding: 1.2rem;
+	box-sizing: border-box;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .snsLogin .snsBtn a span {
+	display: block;
+	width: 100%;
+	height: 100%;
+	font-size: 0;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .noticeWrap {
+	margin-top: 1.6rem;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .noticeWrap ul li {
+	position: relative;
+	padding-left: .6rem;
+	font-size: 1.3rem;
+	color: #999;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .noticeWrap ul li::before {
+	content: "";
+	position: absolute;
+	top: .8rem;
+	left: 0;
+	width: .2rem;
+	height: .2rem;
+	border-radius: 100%;
+	background-color: #999;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .noticeWrap ul li+li {
+	margin-top: .4rem;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .idConfirmWrap {
+	margin-top: 8px;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .idConfirmWrap .inputWrap {
+	display: flex;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .idConfirmWrap .inputWrap+.inputWrap {
+	margin-top: 8px;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .idConfirmWrap .inputWrap .buttonStyle+.buttonStyle {
+	margin-left: 8px;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .idConfirmWrap .errorMessage {
+	padding-bottom: 12px;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .idInput {
+	display: flex;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .idInput+.inputStyle {
+	margin-top: 12px;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents .contentsWrap .inner .idInput .buttonStyle {
+	width: 80px;
+	margin-left: 8px;
+}
+
+.infoSearchBody .searchContentsWrapper .searchContents.current>.contentsWrap {
+	max-height: 100%;
+	visibility: visible;
+	transition: max-height 2s ease;
+}
+
+.infoSearchBody .searchContentsWrapper .resultListWrap {
+	padding-bottom: 5rem;
+}
+
+.infoSearchBody .searchContentsWrapper .infoMessage {
+	padding: 16px 20px 0;
+}
+
+.infoSearchBody .searchContentsWrapper .infoMessage p {
+	padding: 0 4px 7px;
+	font-size: 13px;
+	color: #999;
+}
+
+.infoSearchBody .searchContentsWrapper .resultListWrap ul li {
+	padding-bottom: 2.6rem;
+}
+
+.infoSearchBody .searchContentsWrapper .resultListWrap input[type="radio"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+}
+
+.infoSearchBody .searchContentsWrapper .resultListWrap input[type="radio"]:checked ~ label .id {
+	background: url("../../../images/icon/icon_radio_on.svg") no-repeat 0 center;
+}
+
+.infoSearchBody .searchContentsWrapper .resultListWrap label {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	box-sizing: border-box;
+}
+
+.infoSearchBody .searchContentsWrapper .resultListWrap label .id {
+	position: relative;
+	padding-right: .4rem;
+	padding-left: 3.2rem;
+	background: url("../../../images/icon/icon_radio_off.svg") no-repeat 0 center;
+	background-size: 2.4rem auto;
+	font-weight: bold;
+	font-size: 1.7rem;
+	color: #000;
+}
+
+.infoSearchBody .searchContentsWrapper .resultListWrap label .icon {
+	height: 2rem;
+	margin-left: .4rem;
+	padding: .2rem .6rem;
+	border: 0.1rem solid #d0e7ff;
+	border-radius: .4rem;
+	box-sizing: border-box;
+	background-color: #fff;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1rem;
+	color: #5194ff;
+}
+
+.infoSearchBody .searchContentsWrapper .resultListWrap label .icon.sleep {
+	border-color: #ddd;
+	color: #999;
+}
+
+.infoSearchBody .searchContentsWrapper .resultListWrap label .date {
+	margin-left: auto;
+	font-size: 1.3rem;
+	color: #999;
+}
+
+.infoSearchBody .searchContentsWrapper .failWrap {
+	margin: 20rem 0;
+}
+
+.infoSearchBody .searchContentsWrapper .failImg {
+	width: 8rem;
+	height: 8rem;
+	margin: 0 auto;
+}
+
+.infoSearchBody .searchContentsWrapper .failTitle {
+	display: block;
+	margin-top: 3rem;
+	text-align: center;
+	font-weight: bold;
+	font-size: 2rem;
+	color: #1c1c1e;
+}
+
+.infoSearchBody .searchContentsWrapper .failSub {
+	margin-top: .8rem;
+	text-align: center;
+	font-size: 1.5rem;
+	color: #666;
+}
+
+.infoSearchBody .bottomBtnWrap {
+	display: flex;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 8px 16px;
+	background-color: #fff;
+}
+
+.infoSearchBody .bottomBtnWrap button {
+	width: 100%;
+	height: 5.2rem;
+	border-radius: 1.2rem;
+	font-weight: bold;
+	font-size: 1.7rem;
+	box-sizing: border-box;
+}
+
+.infoSearchBody .bottomBtnWrap button+button {
+	margin-left: 10px;
+}
+
+.infoSearchBody .bottomBtnWrap button.basicBtn {
+	border: .1rem solid #ddd;
+	background-color: #fff;
+	color: #1c1c1e;
+}
+
+.infoSearchBody .bottomBtnWrap button.redBtn {
+	background-color: #fa2828;
+	color: #fff;
+}
+
+.infoSearchBody .bottomBtnWrap button:disabled {
+	background-color: #ddd;
+}
+
+.infoSearchBody .bottomBtnWrap .textBubble {
+	position: absolute;
+	bottom: 7.7rem;
+	left: 1.6rem;
+	width: auto;
+	height: 4.6rem;
+	padding: 1.1rem 1.4rem;
+	box-sizing: border-box;
+	border: .1rem solid #e8e8e8;
+	border-radius: 1rem;
+	box-shadow: 0 0 0.8rem 0 rgba(17, 17, 21, 0.12);
+	background-color: #fff;
+}
+
+.infoSearchBody .bottomBtnWrap .textBubble span {
+	white-space: nowrap;
+	font-size: 1.5rem;
+	color: #1c1c1e;
+}
+
+.infoSearchBody .bottomBtnWrap .textBubble::after {
+	content: "";
+	position: absolute;
+	top: 4rem;
+	left: 50%;
+	width: .8rem;
+	height: .8rem;
+	margin-left: -.4rem;
+	border-top: .1rem solid #e8e8e8;
+	border-right: 1px solid #e8e8e8;
+	transform: rotate(135deg);
+	background-color: #fff;
+}
+
+.infoSearchBody .resetWrapper h3 {
+	margin-bottom: 3.2rem;
+}
+
+.infoSearchBody .resetWrapper .inputStyle+.inputStyle {
+	margin-top: 1.2rem;
+}
+
+.infoSearchBody .resetWrapper .message {
+	font-size: 1.3rem;
+	color: #666;
+}
+
+.infoSearchBody .resetWrapper .dotMessage {
+	position: relative;
+	margin-top: 1.2rem;
+	padding-left: .7rem;
+}
+
+.infoSearchBody .resetWrapper .dotMessage::before {
+	content: "";
+	position: absolute;
+	top: .8rem;
+	left: 0;
+	width: .3rem;
+	height: .3rem;
+	border-radius: 100%;
+	background-color: #ccc;
+}
+
+.infoSearchBody .resetWrapper .errorMessage {
+	margin: .8rem 0 1.6rem;
+}
+
+.infoSearchBody .resetWrapper .errorMessage .message {
+	color: #ff322e;
+}
+
+.infoSearchBody .resetWrapper .signinStay {
+	position: relative;
+	display: flex;
+	margin-top: 2rem;
+}
+
+.infoSearchBody .resetWrapper .signinStay .checkbox {
+	position: relative;
+	display: inline-block;
+}
+
+.infoSearchBody .resetWrapper .signinStay .checkbox input[type="checkbox"] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 0;
+	border: none;
+	opacity: .00001;
+}
+
+.infoSearchBody .resetWrapper .signinStay .checkbox input[type="checkbox"]:checked+label {
+	background: url("../../../images/icon/icon_checkbox_on.svg") no-repeat;
+	background-size: 2rem 2rem;
+}
+
+.infoSearchBody .resetWrapper .signinStay .checkbox label {
+	display: inline-block;
+	height: 2rem;
+	padding-left: 2.8rem;
+	font-size: 1.3rem;
+	color: #1c1c1e;
+	background: url("../../../images/icon/icon_checkbox_off.svg") no-repeat;
+	background-size: 2rem 2rem;
+}
+
+@media screen and (min-width: 1024px) {
+	.infoSearchWrap {
+		max-width: 40rem;
+		margin: 6rem auto;
+	}
+	.infoSearchHeader {
+		height: auto;
+		padding: 0;
+		margin-bottom: 2.8rem;
+	}
+	.infoSearchHeader .backButton {
+		display: none;
+	}
+	.infoSearchHeader h2 {
+		font-size: 2.8rem;
+	}
+	.infoSearchBody {
+		padding: 0;
+	}
+	.infoSearchBody .bottomBtnWrap {
+		position: relative;
+		padding: 4rem 0;
+	}
+	.infoSearchBody .bottomBtnWrap .textBubble {
+		left: 0;
+		bottom: 10.8rem;
+	}
+	.infoSearchBody .searchContentsWrapper .failWrap {
+		margin: 8rem 0 4rem;
+	}
+	.result .infoSearchBody .bottomBtnWrap {
+		padding-top: 6.6rem;
+	}
+}
+
+@media all and (max-width: 320px) {
+	.infoSearchBody .searchContentsWrapper .failWrap {
+		margin-top: 4rem;
+	}
+}

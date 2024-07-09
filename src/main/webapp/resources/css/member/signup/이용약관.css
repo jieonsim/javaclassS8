@@ -1,0 +1,384 @@
+@charset "UTF-8";
+
+html {
+	height: 100%;
+	-webkit-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	text-size-adjust: none;
+	-webkit-touch-callout: none;
+	touch-action: manipulation;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+	height: 100%;
+	display: block;
+}
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p,
+	blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd,
+	q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
+	fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr,
+	th, td, article, aside, canvas, details, figcaption, figure, footer,
+	header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup,
+	menu, nav, section {
+	display: block;
+}
+
+ul, ol {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+	content: "";
+	content: none;
+}
+
+em, dfn, i {
+	font-style: normal;
+}
+
+a {
+	margin: 0;
+	padding: 0;
+	vertical-align: baseline;
+	background: transparent;
+	text-decoration: none;
+}
+
+a:link, a:visited, a:active {
+	color: #202020;
+	text-decoration: none;
+}
+
+ins {
+	background-color: #ff9;
+	color: #000;
+	text-decoration: none;
+}
+
+mark {
+	background-color: #ff9;
+	color: #000;
+	font-style: italic;
+	font-weight: bold;
+}
+
+del {
+	text-decoration: line-through;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+hr {
+	display: none;
+}
+
+input, select {
+	vertical-align: middle;
+}
+
+input {
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 0;
+}
+
+input[type="checkbox"] {
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+input[type="text"]::-ms-clear {
+	display: none;
+	width: 0;
+	height: 0;
+}
+
+input[type="text"]::-ms-reveal {
+	display: none;
+	width: 0;
+	height: 0;
+}
+
+input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-search-cancel-button,
+	input[type="search"]::-webkit-search-results-button, input[type="search"]::-webkit-search-results-decoration
+	{
+	display: none;
+}
+
+* {
+	font-family: -apple-system, system-ui, BlinkMacSystemFont, "맑은 고딕",
+		"Malgun Gothic", "돋움", Dotum, Helvetica, "Apple SD Gothic Neo",
+		sans-serif;
+}
+
+#agreementWrap {
+	position: relative;
+	width: 980px;
+	margin: 0 auto;
+	padding: 0;
+	z-index: 1;
+}
+
+#Tit_agreement {
+	height: 80px;
+	text-align: center;
+	background: #e83535;
+}
+
+#Tit_agreement h1 {
+	width: 980px;
+	text-align: left;
+	margin: 0 auto;
+	padding: 20px 0 0 0;
+}
+
+.agree {
+	width: 980px;
+	text-align: left;
+}
+
+.pdt20 {
+	padding-top: 20px;
+}
+
+#agreement_table {
+	font-weight: normal;
+	font-size: 12px;
+	line-height: 140%;
+	margin: 10px;
+	color: #333;
+}
+
+#agreement_table h2 {
+	font-size: 16px;
+	margin: 0;
+}
+
+#agreement_table h3 {
+	font-size: 14px;
+	color: #000;
+}
+
+#agreement_table dl {
+	font-size: 14px;
+	margin: 25px 0 0 0;
+}
+
+#agreement_table dt {
+	margin: 0;
+	font-size: 14px;
+	font-weight: bold;
+	color: #000;
+	line-height: 24px;
+}
+
+#agreement_table dt.txtGray {
+	font-weight: normal;
+	color: #666;
+}
+
+#agreement_table dd, #agreement_table ul {
+	margin: 0;
+	font-size: 14px;
+	line-height: 24px;
+	color: #666;
+	font-weight: normal;
+}
+
+#agreement_table li {
+	margin: 25px 0 0 0;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+#agreement_table li:first-child {
+	margin: 0;
+}
+
+#agreement_table li li {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+}
+
+#agreement_table li li li {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+}
+
+#agreement_table li li div {
+	text-indent: 0;
+	font-size: 14px;
+}
+
+#agreement_table .txtRed {
+	color: #666;
+	font-weight: normal;
+}
+
+#agreement_table .txtRednon {
+	color: #000;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.agree_tline {
+	clear: both;
+	width: 100%;
+	margin: 10px 0 20px 0;
+}
+
+.agree_tline th, .agree_tline td {
+	padding: 5px 5px 7px;
+	font-size: 14px;
+	line-height: 130%;
+	border: 1px solid #dfe5ed;
+	vertical-align: top;
+	font-weight: normal;
+	color: #000;
+}
+
+.agree_tline th {
+	text-align: center;
+}
+
+
+.usedPrivacyWrap {
+	padding: 0 5px 0 5px;
+}
+
+.usedPrivacyWrap .contents {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.usedPrivacyWrap .contents .scrollWrap .mainText {
+	text-align: left;
+	font-size: 13px;
+	line-height: 21px;
+	color: #666;
+	padding: 0 5px;
+}
+
+.usedPrivacyWrap .contents .scrollWrap .mainText .orange {
+	color: #dc941b;
+	font-weight: bold;
+}
+
+.usedPrivacyWrap .contents .scrollWrap .mainText p {
+	font-weight: normal;
+}
+
+.usedPrivacyWrap .contents .scrollWrap h2 {
+	font-size: 15px;
+	color: #000;
+	margin-bottom: 10px;
+	margin-top: 20px;
+	padding: 0 5px;
+	text-align: left;
+}
+
+.usedPrivacyWrap .contents .scrollWrap .subTitle {
+	text-align: left;
+	font-size: 13px;
+	font-weight: bold;
+	color: #000;
+	margin-bottom: 10px;
+	padding: 0 5px;
+}
+
+.usedPrivacyWrap .contents .scrollWrap .desc, .usedPrivacyWrap .contents .scrollWrap .desc2,
+	.usedPrivacyWrap .contents .scrollWrap .desc3 {
+	text-align: left;
+	font-size: 13px;
+	font-weight: normal;
+	color: #666;
+	margin-bottom: 10px;
+	padding: 0 5px;
+}
+
+.usedPrivacyWrap .contents .scrollWrap .desc .orange, .usedPrivacyWrap .contents .scrollWrap .desc2 .orange,
+	.usedPrivacyWrap .contents .scrollWrap .desc3 .orange {
+	color: #dc941b;
+	font-weight: bold;
+}
+
+.usedPrivacyWrap .contents .scrollWrap .subDesc {
+	text-align: left;
+	font-size: 13px;
+	color: #000;
+	margin-bottom: 2px;
+	padding: 0 5px;
+	font-weight: bold;
+}
+
+.usedPrivacyWrap .contents .scrollWrap .tableWrap {
+	text-align: left;
+	border: 1px solid #e4e4e4;
+	border-radius: 4px;
+	margin-bottom: 20px;
+	overflow: hidden;
+}
+
+.usedPrivacyWrap .contents .scrollWrap table {
+	width: 100%;
+	width: calc(100% + 1px);
+	table-layout: fixed;
+	margin-left: -1px;
+}
+
+.usedPrivacyWrap .contents .scrollWrap table th, .usedPrivacyWrap .contents .scrollWrap table td
+	{
+	padding: 8px 12px;
+	box-sizing: border-box;
+	border: 1px solid #e4e4e4;
+	border-right: none;
+	border-bottom: none;
+	font-size: 13px;
+	color: #000;
+	font-weight: normal;
+	border-collapse: collapse;
+}
+
+.usedPrivacyWrap .contents .scrollWrap table th {
+	background-color: #f3f3f3;
+	text-align: center;
+	border-top: none;
+}
+
+.article {
+	margin-bottom: 30px;
+}
+
+.article .article_title {
+	color: #000;
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.article .article_text {
+	color: #666;
+	font-size: 14px;
+	font-weight: normal;
+	margin-bottom: 10px;
+}

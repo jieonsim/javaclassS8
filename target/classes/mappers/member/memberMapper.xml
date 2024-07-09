@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.javaclassS8.dao.member.MemberDAO">
+	<!-- 회원 이메일로 회원 찾기 -->
+	<select id="findByEmail" resultType="com.spring.javaclassS8.vo.member.MemberVO">
+		SELECT * FROM members WHERE email = #{email}
+	</select>
+
+	<!-- 회원 고유번호로 회원 찾기 -->
+	<select id="findById" resultType="com.spring.javaclassS8.vo.member.MemberVO">
+		SELECT * FROM members WHERE id = #{id}
+	</select>
+
+	<!-- 자동 로그인 토큰 찾기 -->
+	<select id="findAutoLoginToken" resultType="com.spring.javaclassS8.vo.member.AutoLoginTokenVO">
+		SELECT * FROM auto_login_tokens WHERE token = #{token}
+	</select>
+	
+	<!-- 이름과 휴대폰번호 조합으로 id, email, createdAt 찾기 -->
+	<select id="findByNameAndPhone" parameterType="map" resultType="com.spring.javaclassS8.vo.member.MemberVO">
+		SELECT id, email, createdAt FROM members WHERE name = #{param1} AND phone = #{param2}
+	</select>
+	
+	<!-- 이름과 이메일 조합으로 회원 정보 찾기 -->
+	<select id="findByNameAndEmail" resultType="com.spring.javaclassS8.vo.member.MemberVO">
+		SELECT * FROM members WHERE name = #{name} AND email = #{email}
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="insertMember" parameterType="com.spring.javaclassS8.vo.member.MemberVO">
+		INSERT INTO members (email, password, name, phone)
+		VALUES (#{email}, #{password}, #{name}, #{phone})
+	</insert>
+	
+	<!-- 자동 로그인 토큰 저장 -->
+	<insert id="saveAutoLoginToken">
+		INSERT INTO auto_login_tokens (memberId, token, expiresAt, createdAt)
+		VALUES (#{memberId}, #{token}, #{expiresAt}, #{createdAt})
+	</insert>
+	
+	<!-- 마지막 로그인 일시 업데이트 -->
+	<update id="updateLastLoginAt">
+		UPDATE members SET lastLoginAt = #{lastLoginAt} WHERE id = #{id}
+	</update>
+	
+	<!-- 비밀번호 찾기 - 새로운 비밀번호로 재설정 -->
+	<update id="updatePassword">
+		UPDATE members SET password = #{password} WHERE id = #{id}
+	</update>
+	
+	<!-- 자동 로그인 토큰 삭제 -->
+	<delete id="deleteAutoLoginToken">
+		DELETE FROM auto_login_tokens WHERE token = #{token}
+	</delete>
+</mapper>

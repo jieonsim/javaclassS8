@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+
+.complete-text {
+	margin-top: 10%;
+}
+
+#completeText1 {
+	font-family: 'Pretendard-SemiBold';
+	font-size: large;
+}
+
+#completeText2 {
+	font-family: 'Pretendard-Regular';
+}
