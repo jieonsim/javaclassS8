@@ -1,0 +1,4349 @@
+@charset "UTF-8";
+
+.blind {
+	position: absolute;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	margin: -.1rem;
+	width: .1rem;
+	height: .1rem
+}
+
+ul, ol {
+	list-style: none;
+}
+
+/** 종목페이지 - 서브 **/
+.sports_cont .rightcont_inner .play_list .frame_today .ico_todayopen, .sports_cont .rightcont_inner .play_list .play_line.standby .reserve_sports2, .sp_tit, .seat_tit_area .info span {
+	display: inline-block;
+	overflow: hidden;
+	font-size: 1px;
+	line-height: 999px;
+	background: url(../img/sports/sp_sports_sub.png) no-repeat
+}
+
+.sports_sub {
+	position: relative;
+	background: #f8f9fa
+}
+
+.common_container.sports_sub .inner {
+	padding-top: 30px;
+}
+
+.sports_sub .sports_cont_top {
+	overflow: hidden;
+	margin-bottom: 10px;
+	height: 16px;
+}
+
+.sports_sub .location_path {
+	float: left;
+	font-size: 14px;
+	line-height: 16px;
+	color: #242428;
+}
+
+.sports_sub .sports_cont_top .location_path a {
+	color: #242428;
+	text-decoration: none;
+	font-family: 'Pretendard-Regular';
+}
+
+.sports_sub .current_time {
+	float: right;
+	vertical-align: top;
+	height: 16px;
+	line-height: 16px;
+	font-size: 14px;
+	font-family: 'Pretendard-Regular';
+}
+
+.sports_sub .current_time em {
+	width: 16px;
+	height: 16px;
+	line-height: 20px;
+	vertical-align: middle;
+	margin-right: 5px;
+	display: inline-block;
+	font-size: 0;
+	margin-top: -4px;
+	background: url("../../images/icon/clock.svg") 0 0 no-repeat;
+}
+
+.sports_sub .current_time span {
+	display: inline-block;
+	margin-top: -1px;
+	margin-left: 5px;
+	line-height: 17px;
+	color: #fa2828;
+	font-size: 14px;
+}
+
+.sports_cont {
+	position: relative;
+	width: 1120px;
+	border: 1px solid #ecedf2;
+	background: #fff;
+	box-sizing: border-box
+}
+
+.sports_cont::before {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 256px;
+	width: 1px;
+	background: #ecedf2;
+	content: ''
+}
+
+.sports_cont:after {
+	clear: both;
+	display: block;
+	content: ''
+}
+
+.sports_cont .cont_left {
+	float: left;
+	width: 255px
+}
+
+.sports_cont .cont_left .sportsmenuTEAM, .sports_cont .cont_left .sportsmenu1, .sports_cont .cont_left .sportsmenu2 {
+	font-family: 'Pretendard-Bold';
+}
+
+.sports_cont .cont_left .left_sportsmenu .left_submenu {
+	font-family: 'Pretendard-SemiBold';
+}
+
+.sports_cont .cont_left a:hover {
+	text-decoration: none;
+}
+
+.sports_cont .cont_right {
+	float: left;
+	width: 862px
+}
+
+.sports_cont.news_detail {
+	padding: 40px
+}
+
+.sports_sub .band_ban {
+	position: relative;
+	width: 990px;
+	height: 75px;
+	overflow: hidden;
+	border-radius: 2px;
+	margin-bottom: 20px;
+	margin-top: -8px
+}
+
+.sports_cont .cont_left .games_logo {
+	padding: 30px 25px 18px;
+	border-bottom: 1px solid #ecedf2;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 22px;
+	margin-bottom: 0;
+}
+
+.sports_cont .cont_left .games_logo_v2 {
+	padding-top: 40px
+}
+
+.sports_cont ul {
+	padding: 0;
+}
+
+.sports_cont .left_sportsmenu li {
+	padding: 20px 18px 20px 26px;
+	border-bottom: 1px solid #ecedf2
+}
+
+.sports_cont .left_sportsmenu li a {
+	display: block;
+	color: #878d95;
+	font-size: 13px;
+	font-weight: 500;
+	line-height: 18px
+}
+
+.sports_cont .left_sportsmenu li.on a {
+	/* background: url(../img/sports/ico_menuon.gif) no-repeat 200px 50% */
+	background: url(../../../images/icon/caret-right.svg) no-repeat 200px 50%
+}
+
+.sports_cont .left_sportsmenu li span {
+	display: block;
+	font-size: 16px;
+	line-height: 24px;
+	font-weight: 700;
+	color: #242428
+}
+
+.sports_cont .left_sportsmenu li.on span {
+	color: #fa2828
+}
+
+.sports_cont .left_sportsmenu .left_submenu {
+	margin-top: 4px;
+}
+
+.sports_cont .left_sportsmenu .left_submenu li {
+	height: auto;
+	margin-top: 8px;
+	padding: 0;
+	border: 0;
+	line-height: 18px;
+	word-break: keep-all;
+	word-wrap: break-word
+}
+
+.sports_cont .left_sportsmenu .left_submenu li.on a {
+	position: relative;
+	font-weight: 500;
+	color: #fa2828;
+	background: none;
+	line-height: 18px
+}
+
+.sports_cont .left_sportsmenu .left_submenu li.on a:after {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	transform: translateY(-50%);
+	content: ''
+}
+
+.sports_cont .left_sportsmenu .left_submenu li.menu_option {
+	line-height: 20px;
+	margin-top: 8px;
+}
+
+.sports_cont .cont_left .ad_ban a {
+	display: block
+}
+
+.sports_cont .cont_left .ad_ban img {
+	width: 256px;
+	height: auto;
+	max-height: 255px
+}
+
+.sports_cont strong.placing {
+	margin: 24px 20px 15px;
+	display: block;
+	font-size: 18px;
+	line-height: 22px;
+	font-weight: 700;
+}
+
+.sports_cont .sports_placing table {
+	width: 100%;
+	border: 1px solid #fff;
+	border: none;
+	font-size: 12px;
+	text-align: center;
+	color: #62676c
+}
+
+.sports_cont .sports_placing thead tr {
+	background: #f6f6f6;
+	border: 1px solid #efefef;
+	border-width: 1px 0;
+	position: relative;
+}
+
+.sports_cont .sports_placing th {
+	font-weight: normal;
+	height: 23px;
+	line-height: 24px;
+	border: 1px solid #ecedf2;
+	border-width: 1px 0;
+	border-bottom: 0;
+	background: #f5f6f9;
+}
+
+*:first-child+html .sports_cont .sports_placing th {
+	border: 0;
+	height: 25px;
+	line-height: 25px
+}
+
+.sports_cont .sports_placing th:first-child {
+	border-left: 1px solid #f6f6f6
+}
+
+.sports_cont .sports_placing th.last {
+	border-right: 1px solid #f6f6f6
+}
+
+.sports_cont .sports_placing td {
+	height: 9px;
+	padding: 5px 0 2px;
+	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, 'Malgun Gothic', Arial, sans-serif;
+	font-weight: 400;
+	line-height: 1
+}
+
+.sports_cont .sports_placing .team {
+	padding-left: 5px;
+	font-family: 'Notosans', -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Roboto, Arial, sans-serif;
+	font-weight: 400;
+	text-align: left
+}
+
+.sports_cont .sports_placing .team img {
+	margin-right: 7px;
+	vertical-align: middle
+}
+
+.sports_cont .sports_placing .play {
+	color: #878d95
+}
+
+.sports_cont .sports_placing .myteam td {
+	padding: 4px 0 2px;
+	border: 1px solid #242428;
+	border-width: 1px 0
+}
+
+.sports_cont .sports_placing .myteam td.team {
+	padding-left: 4px
+}
+
+.sports_cont .sports_placing .myteam td:first-child {
+	border-left: 1px solid #242428
+}
+
+.sports_cont .sports_placing .myteam td.fbold {
+	border-right: 1px solid #242428
+}
+
+.sports_cont .sports_placing tbody tr.myteam:first-child td {
+	border-top: 1px solid #242428
+}
+
+.sports_cont .cont_left .update_info {
+	border-width: 1px 0;
+	border-style: solid;
+	border-color: #ecedf2;
+	background: #f5f6f9;
+	color: #62676c;
+	font-size: 12px;
+	height: 26px;
+	line-height: 26px;
+	padding-left: 17px;
+	box-sizing: border-box;
+}
+
+.sports_cont .cont_right .ad_ban_top {
+	overflow: hidden;
+	width: 743px;
+	height: 90px;
+	margin: 7px auto 0
+}
+
+.sports_cont .cont_right .rightcont_inner {
+	position: relative;
+	padding: 30px 59px 50px 60px;
+	box-sizing: border-box
+}
+
+.sports_cont .cont_right .rightcont_inner .team_toparea {
+	height: 101px;
+	width: 100%;
+	overflow: hidden;
+	display: table;
+	margin-bottom: 18px
+}
+
+.sports_cont .cont_right .rightcont_inner .team_toparea dd {
+	display: table-cell;
+	vertical-align: middle;
+	width: 101px
+}
+
+.sports_cont .cont_right .rightcont_inner .team_toparea dd.team_name {
+	padding: 0 10px 0 20px;
+	width: 546px;
+	font-size: 0
+}
+
+.sports_cont .cont_right .rightcont_inner .team_toparea dd.team_name strong {
+	display: inline-block;
+	color: #242428;
+	font-size: 24px;
+	font-weight: 700;
+	letter-spacing: -2px;
+	vertical-align: middle
+}
+
+.sports_cont .cont_right .rightcont_inner .team_toparea dd.team_name .team_notice {
+	margin-top: 10px;
+	color: #fa2828
+}
+
+.sports_cont .cont_right .rightcont_inner .team_toparea dd.my_team {
+	width: 66px;
+	position: relative;
+}
+
+.sports_cont .cont_right .rightcont_inner .team_toparea dd.my_team a {
+	overflow: hidden;
+	position: absolute;
+	top: 8px;
+	right: 0;
+	width: 68px;
+	height: 62px;
+	border: 1px solid #ecedf2;
+	font-size: 12px;
+	line-height: 12px;
+	padding-top: 42px;
+	box-sizing: border-box;
+	color: #878d95;
+	text-align: center;
+	font-weight: 700;
+}
+
+.sports_cont .cont_right .rightcont_inner .team_toparea dd.my_team a::before {
+	position: absolute;
+	top: 8px;
+	left: 50%;
+	transform: translateX(-50%);
+	content: '';
+}
+
+.sports_cont .cont_right .rightcont_inner .team_toparea dd.my_team a.on {
+	background-position: -66px -35px
+}
+
+.sports_cont .cont_right .rightcont_inner .team_toparea.no_team .team_name {
+	width: 566px
+}
+
+.sports_cont .cont_right .rightcont_inner .team_notice.off {
+	display: none
+}
+
+.sports_cont .cont_right .rightcont_inner .team_notice {
+	display: table;
+	width: 100%;
+	padding: 12px 14px 12px 0;
+	margin: 18px 0 20px;
+	border: 1px solid #ecedf2;
+	background: #f8f9fa;
+	box-sizing: border-box;
+	table-layout: fixed
+}
+
+.sports_cont .cont_right .rightcont_inner .team_notice .dummy_td {
+	display: table-cell;
+	width: 106px;
+	vertical-align: middle;
+	text-align: center
+}
+
+.sports_cont .cont_right .rightcont_inner .team_notice .dummy_td .title {
+	font-size: 14px;
+	line-height: 22px;
+	color: #242428;
+	letter-spacing: -1px
+}
+
+.sports_cont .cont_right .rightcont_inner .team_notice .bx_notice {
+	display: table-cell;
+	max-width: 561px;
+	max-height: 54px
+}
+
+.sports_cont .cont_right .rightcont_inner .team_notice .bx_notice .txt_info {
+	display: block;
+	font-size: 13px;
+	color: #62676c;
+	line-height: 22px
+}
+
+.sports_cont .cont_right .rightcont_inner .team_notice .dsc_notice {
+	font-size: 13px;
+	line-height: 22px;
+}
+
+/* 종목페이지 - 첫 화면 */
+.no_team {
+	width: 100%;
+	text-align: center;
+	padding-top: 100px
+}
+
+.tab_content .no_team {
+	margin: 0 auto;
+	padding: 90px 0;
+	text-align: center
+}
+
+.sch_tbl .no_team {
+	padding: 200px 0
+}
+
+/* 이벤트 페이지 */
+.sports_cont .cont_right .rightcont_event {
+	padding: 10px 4px 24px
+}
+
+/* 종목페이지 탭메뉴 */
+.rightcont_inner .team_tab {
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+	margin-top: 20px;
+	border-radius: 2px
+}
+
+.rightcont_inner .team_tab li {
+	display: table-cell;
+	width: 100%;
+	height: 48px;
+	border: 1px solid #ecedf2;
+	border-left: 0;
+	background: #fff;
+	text-align: center;
+	box-sizing: border-box;
+	vertical-align: middle
+}
+
+.rightcont_inner .team_tab li:first-child {
+	border-left: 1px solid #ecedf2;
+	margin-left: 0
+}
+
+.rightcont_inner .team_tab li.on {
+	background: #242428;
+	border-color: #242428
+}
+
+.rightcont_inner .team_tab li a {
+	display: block;
+	height: 100%;
+	padding-top: 13px;
+	font-size: 14px;
+	box-sizing: border-box;
+	font-weight: 500;
+}
+
+.rightcont_inner .team_tab li span, .rightcont_inner .team_tab li.system em {
+	background-image: none;
+	font-size: 14px;
+	line-height: 14px;
+	letter-spacing: -0.5px;
+	font-weight: 500;
+}
+
+.rightcont_inner .team_tab li em {
+	display: none
+}
+
+.rightcont_inner .team_tab li.on span {
+	color: #fff
+}
+
+.rightcont_inner .team_tab li.off span {
+	color: #a7acb6
+}
+
+.rightcont_inner .team_tab li.system span {
+	display: none
+}
+
+.rightcont_inner .team_tab li.system em {
+	display: inline-block
+}
+
+.rightcont_inner .team_tab li.system.on em {
+	color: #fff
+}
+
+.rightcont_inner .team_tab li.system.off em {
+	color: #a7acb6;
+	line-height: 22px;
+}
+
+/* 종목페이지 - 예매하기 */
+.sports_cont .rightcont_inner .play_list {
+	position: relative
+}
+
+.sports_cont .rightcont_inner .play_list .play_line {
+	position: relative;
+	overflow: hidden;
+	min-height: 115px;
+	border-bottom: 1px solid #efefef;
+	padding-top: 25px
+}
+
+.sports_cont .rightcont_inner .play_list dd {
+	float: left
+}
+
+.sports_cont .rightcont_inner .play_list dd.play_date {
+	position: relative;
+	font-weight: bold;
+	font-size: 23px;
+	padding: 20px 0 0 14px;
+	width: 105px;
+	line-height: 23px
+}
+
+.sports_cont .rightcont_inner .play_list dd.play_date em {
+	font-family: Noto-R;
+	font-size: 12px;
+	font-weight: bold
+}
+
+.sports_cont .rightcont_inner .play_list dd.play_date span {
+	font-size: 12px;
+	font-weight: normal;
+	display: none;
+	margin: -3px 0 0 5px
+}
+
+.sports_cont .rightcont_inner .play_list dd .match {
+	float: left;
+	padding: 0 20px
+}
+
+.sports_cont .rightcont_inner .play_list dd .play_detail_info {
+	float: left;
+	width: 230px;
+	line-height: 22px
+}
+
+.sports_cont .rightcont_inner .play_list .frame_today .play_date.cleanreserve {
+	margin-top: 17px
+}
+
+.sports_cont .rightcont_inner .play_list .play_line .btn {
+	position: absolute;
+	right: 20px;
+	top: 50%;
+	margin-top: -13px;
+	z-index: 10
+}
+
+.sports_cont .rightcont_inner .play_list .play_line.today .reserve_sports2 {
+	background-position: -225px -165px
+}
+
+.sports_cont .rightcont_inner .play_list .play_line.standby.today .reserve_sports2 {
+	background-position: -204px -35px
+}
+
+.sports_cont .rightcont_inner .play_list .play_line.standby .reserve_sports2 {
+	background-position: -204px -62px
+}
+
+.sports_cont .rightcont_inner .play_list .play_line.standby dd.play_date {
+	padding-top: 10px
+}
+
+.sports_cont .rightcont_inner .play_list .play_line.standby dd.play_date span {
+	display: block
+}
+
+.sports_cont .rightcont_inner .play_list .play_line.standby dd.play_date.cleanreserve {
+	padding-top: 20px
+}
+
+.play_list .play_detail_info .info_lst {
+	overflow: hidden
+}
+
+.play_list .play_detail_info .info_lst dt {
+	float: left;
+	clear: left
+}
+
+.play_list .play_detail_info .info_lst dd {
+	overflow: hidden;
+	float: none;
+	word-break: break-all
+}
+
+/* 날짜/회차 선택 */
+#wrap_reserve.sports_sub {
+	height: auto;
+	min-height: 790px
+}
+
+.reserve_lst_bx ul li {
+	display: -webkit-box;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	min-height: 136px;
+	padding: 32px 0 31px;
+	border-top: 1px solid #ecedf2;
+	box-sizing: border-box
+}
+
+.reserve_lst_bx ul li:first-child {
+	border-top: 0
+}
+
+.reserve_lst_bx .match_day {
+	display: table-cell;
+	width: 160px;
+	font-size: 0;
+	padding-left: 20px
+}
+
+.reserve_lst_bx .match_day .date {
+	display: inline-block;
+	overflow: hidden;
+	padding-left: 1px;
+	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Roboto, Arial, sans-serif;
+	font-size: 0;
+	vertical-align: middle
+}
+
+.reserve_lst_bx .match_day .day_time {
+	display: inline-block;
+	margin-left: 9px;
+	font-size: 0;
+	vertical-align: middle
+}
+
+.reserve_lst_bx .match_day .time {
+	color: #62676c;
+	font-size: 17px;
+	line-height: 18px;
+	margin-bottom: 6px;
+	font-weight: 400;
+	letter-spacing: -4px
+}
+
+.reserve_lst_bx .match_info_bx {
+	display: table-cell
+}
+
+.reserve_lst_bx .match_btn {
+	display: block;
+	z-index: 99;
+	margin-left: auto;
+	padding-right: 20px
+}
+
+.reserve_lst_bx .match_day .date_num {
+	display: inline-block;
+	font-size: 40px;
+	line-height: 40px;
+	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Roboto, Arial, sans-serif;
+	font-weight: 300;
+	letter-spacing: -0.04em
+}
+
+.reserve_lst_bx .match_day .dot {
+	width: 7px;
+}
+
+.reserve_lst_bx .match_day .day_lst {
+	display: inline-block;
+	margin-bottom: 2px;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 14px;
+	color: #62676c;
+	letter-spacing: -0.04em
+}
+
+.reserve_lst_bx .match_day .day_6 {
+	color: #3d85b9
+}
+
+.reserve_lst_bx .match_day .day_7 {
+	color: #dd6045
+}
+
+.reserve_lst_bx .match_day .time_num {
+	display: inline-block;
+	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Roboto, Arial, sans-serif;
+	font-size: 17px;
+	line-height: 18px;
+	color: #62676c;
+	letter-spacing: -0.04em
+}
+
+.reserve_lst_bx .match_team_info .emblem_bx {
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: -5px;
+	font-size: 0;
+	text-align: left
+}
+
+.reserve_lst_bx .match_team_info .match_info_bx {
+	display: inline-block;
+	max-width: 158px;
+	vertical-align: middle;
+	margin-left: 25px;
+	font-size: 0;
+	text-align: left
+}
+
+.reserve_lst_bx .match_team_info .match_info_bx .flag_area {
+	margin-bottom: 5px
+}
+
+.reserve_lst_bx .match_team_info .match_info_bx .match_tit, .reserve_lst_bx .match_team_info .match_info_bx .team_name {
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: bold;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-height: 48px;
+	word-wrap: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical
+}
+
+.reserve_lst_bx .match_team_info .match_info_bx .place {
+	overflow: hidden;
+	display: -webkit-box;;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	max-height: 44px;
+	margin-top: 5px;
+	font-size: 13px;
+	line-height: 20px;
+	text-overflow: ellipsis;
+	word-wrap: break-word
+}
+
+.reserve_lst_bx .match_team_info .bx_img {
+	display: inline-block;
+	width: 70px;
+	height: 70px;
+	vertical-align: middle
+}
+
+.reserve_lst_bx .match_team_info .bx_img_v2 {
+	display: inline-block;
+	width: 190px;
+	height: 68px;
+	vertical-align: middle
+}
+
+.reserve_lst_bx .match_team_info .bx_img img {
+	width: 100%;
+	height: 100%
+}
+
+.reserve_lst_bx .match_team_info .bx_img_v2 img {
+	width: 100%;
+	height: 100%
+}
+
+.reserve_lst_bx .match_team_info .versus {
+	display: inline-block;
+	width: 22px;
+	height: 14px;
+	margin: 2px 12px 0 13px;
+	font-size: 17px;
+	line-height: 14px;
+	color: #878d95;
+	vertical-align: middle;
+}
+
+.reserve_lst_bx .place {
+	letter-spacing: -0.06em
+}
+
+.reserve_lst_bx .btn {
+	display: block;
+	width: 123px
+}
+
+.reserve_lst_bx .btn:hover {
+	text-decoration: none
+}
+
+.reserve_lst_bx .btn.btn_reserve_scdl {
+	padding: 4px 11px;
+	font-size: 12px;
+	line-height: 16px
+}
+
+.reserve_lst_bx {
+	width: 100%
+}
+
+/* 매치 텍스트 배경색 설정 */
+.bgcolor_pink {
+	background: rgb(255, 255, 255);
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 60%, rgba(255, 199, 222, 1) 40%, rgba(255, 199, 222, 1) 100%);
+}
+
+.bgcolor_yellow {
+	background: rgb(255, 255, 255);
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 60%, rgba(255, 244, 149, 1) 40%, rgba(255, 244, 149, 1) 100%);
+}
+
+.bgcolor_green {
+	background: rgb(255, 255, 255);
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 60%, rgba(173, 255, 210, 1) 40%, rgba(173, 255, 210, 1) 100%);
+}
+
+.bgcolor_blue {
+	background: rgb(255, 255, 255);
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 60%, rgba(170, 217, 255, 1) 40%, rgba(170, 217, 255, 1) 100%);
+}
+
+/* 예매하기 - 오늘오픈 프레임 */
+.ico_todayopen {
+	display: none
+}
+
+.reserve_lst_bx ul li.today_frame {
+	position: relative
+}
+
+.reserve_lst_bx ul li.today_frame .ico_todayopen {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 8px 14px 6px
+}
+
+.reserve_lst_bx ul li.today_frame .ico_todayopen::before {
+	position: absolute;
+	top: 0;
+	left: -6px;
+	width: 110px;
+	height: 36px;
+	background: #fa2828;
+	transform: skew(-18deg);
+	content: ''
+}
+
+.reserve_lst_bx ul li.today_frame .ico_todayopen::after {
+	position: absolute;
+	top: 36px;
+	left: -12px;
+	border-top: 10px solid #e81c1c;
+	border-left: 12px solid transparent;
+	content: ''
+}
+
+.reserve_lst_bx ul li.today_frame .ico_todayopen .text {
+	display: inline-flex;
+	align-items: center;
+	position: relative;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 20px;
+	color: #fff;
+	letter-spacing: normal;
+	z-index: 1
+}
+
+.reserve_lst_bx ul li.today_frame .ico_todayopen .text::before {
+	margin-right: 4px;
+	content: ''
+}
+
+.reserve_lst_bx ul li.today_frame {
+	border-top: 0
+}
+
+.reserve_lst_bx ul li.today_frame+li {
+	border-top: 0
+}
+
+.reserve_lst_bx ul li.today_frame+.today_frame .ico_todayopen {
+	display: none
+}
+
+.reserve_lst_bx ul li.today_frame:before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border: 2px solid #fa2828;
+	box-sizing: border-box;;
+	content: '';
+}
+
+.reserve_lst_bx ul li.today_frame+.today_frame:before {
+	border-top: 0
+}
+
+.reserve_lst_bx ul li.today_frame+.today_frame:after {
+	position: absolute;
+	top: -2px;
+	left: 2px;
+	right: 2px;
+	height: 1px;
+	border-top: 1px solid #ecedf2;
+	background: #fff;
+	content: ''
+}
+
+/* 전체일정 */
+.sports_cont .sch_date {
+	position: relative;
+	padding-left: 34px;
+	margin: 7px 0 23px;
+	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Roboto, Arial, sans-serif;
+	font-weight: 700;
+	font-size: 25px;
+	color: #242428;
+	letter-spacing: -0.04em;
+}
+
+.sports_cont .sch_date a {
+	width: 9px;
+	height: 13px;
+	position: absolute;
+	top: 50%;
+	text-indent: -9999px;
+	transform: translateY(-50%);
+	font-size: 0;
+}
+
+.sports_cont .sch_date a.prev {
+	left: 0px;
+	transform: translateY(-50%) rotate(180deg)
+}
+
+.sports_cont .sch_date a.next {
+	left: 138px
+}
+
+.sports_cont .sch_tbl {
+	border-top: 2px solid #242428
+}
+
+.sports_cont .sch_tbl table {
+	width: 100%
+}
+
+.sports_cont .sch_tbl table th, .sports_cont .sch_tbl table td {
+	border: 1px solid #ecedf2;
+	text-align: center;
+	height: 46px;
+	line-height: 46px;
+	box-sizing: border-box;
+}
+
+.sports_cont .sch_tbl table thead th {
+	height: 51px;
+	border-top: 0;
+	background: #fff;
+	font-size: 12px;
+	line-height: 15px;
+	color: #242428
+}
+
+.sports_cont .sch_tbl table thead th span {
+	font-weight: 700;
+	font-size: 12px
+}
+
+.sports_cont .sch_tbl table tbody tr.even td {
+	background: #fafafa
+}
+
+.sports_cont .sch_tbl table tbody td {
+	font-size: 12px;
+	color: #62676c
+}
+
+.sports_cont .sch_tbl table tbody td span {
+	color: #a7acb6;
+	letter-spacing: -0.05em
+}
+
+.sports_cont .sch_tbl table tbody td.date {
+	font-weight: bold;
+	font-size: 12px;
+	color: #242428;
+	letter-spacing: -1px;
+	background: #fff !important
+}
+
+.sports_cont .sch_tbl table tbody td.date em {
+	display: inline-block;
+	margin-right: 5px;
+	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Roboto, Arial, sans-serif;
+	font-size: 18px;
+	vertical-align: top;
+	letter-spacing: 0
+}
+
+.sports_cont .sch_tbl table tbody td.match {
+	color: #242428
+}
+
+.sports_cont .sch_tbl table tbody td.match span {
+	display: inline-block;
+	margin: 0 10px;
+	font-weight: 700;
+	color: #242428;
+	letter-spacing: -0.04em
+}
+
+.sports_cont .sch_tbl table tbody td.on {
+	line-height: 0
+}
+
+.sports_cont .sch_tbl table tbody td.on span {
+	display: none
+}
+
+.sports_cont .sch_tbl table tbody td .btn {
+	display: none;
+	width: 80px;
+	padding: 4px 11px;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 18px
+}
+
+.sports_cont .sch_tbl table tbody .on a.btn {
+	display: inline-block
+}
+
+.sports_cont .sch_tbl table tbody .off em.btn {
+	display: inline-block
+}
+
+/* 경기일정 */
+.sports_cont .tab_content .sch_date {
+	margin-top: 34px
+}
+
+.sports_cont .sch_date .match_info {
+	position: absolute;
+	top: 10px;
+	left: 192px;
+	color: #62676c;
+	font-size: 12px;
+	letter-spacing: -1px;
+	line-height: 12px;
+	font-weight: 400;
+}
+
+.sports_cont .sch_date .only_home {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: 1px solid #242428;
+	background: #f5f6f9;
+	color: #242428;
+	font-size: 12px;
+	letter-spacing: -1px;
+	height: 32px;
+	line-height: 30px;
+	box-sizing: border-box;
+	padding: 0 6px 0 9px;
+}
+
+.sports_cont .sch_date .only_home .checkbox {
+	margin-top: -3px
+}
+
+.sports_cont .sch_tbl_v2 table {
+	table-layout: fixed
+}
+
+.sports_cont .sch_tbl_v2 table thead th {
+	background: none;
+	border-top: 0;
+	height: 51px
+}
+
+.sports_cont .sch_tbl_v2 table thead th span {
+	font-size: 12px;
+	line-height: 15px;
+	color: #242428;
+	font-weight: 700;
+}
+
+.sports_cont .sch_tbl_v2 table thead th span.sat {
+	color: #3d85b9;
+}
+
+.sports_cont .sch_tbl_v2 table thead th span.sun {
+	color: #dd6045;
+}
+
+.sports_cont .sch_tbl_v2 table tbody td {
+	min-height: 139px;
+	line-height: 15px;
+	vertical-align: top
+}
+
+.sports_cont .sch_tbl_v2 table tbody td span {
+	color: #62676c;
+	letter-spacing: -0.04em
+}
+
+.sports_cont .sch_tbl_v2 table tbody td .date {
+	text-align: left;
+	font-size: 12px;
+	padding: 0 1px;
+	color: #62676c;
+	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Roboto, Arial, sans-serif;
+	line-height: 15px;
+}
+
+.sports_cont .sch_tbl_v2 table tbody td .date a {
+	display: none
+}
+
+.sports_cont .sch_tbl_v2 table tbody td .date.anni {
+	margin: -1px 0;
+	padding: 1px;
+	background: #1a81bb;
+	color: #fff
+}
+
+.sports_cont .sch_tbl_v2 table tbody td .date.anni a {
+	display: inline-block;
+	letter-spacing: -1px;
+	margin-left: 4px;
+	color: #fff
+}
+
+.sports_cont .sch_tbl_v2 table tbody td .match {
+	font-size: 12px;
+	line-height: 15px;
+	cursor: default
+}
+
+.sports_cont .sch_tbl_v2 table tbody td .match .vs {
+	margin: 7px 0 5px 13px;
+	text-align: left;
+}
+
+.sports_cont .sch_tbl_v2 table tbody td .match .vs .ico_vs {
+	display: inline-block;
+	margin-right: 7px;
+	font-size: 12px;
+	line-height: 12px;
+	color: #a7acb6;
+	vertical-align: middle
+}
+
+.sports_cont .sch_tbl_v2 table tbody td .match .vs img {
+	vertical-align: middle
+}
+
+.sports_cont .sch_tbl_v2 table tbody td .match .match_tit {
+	width: 82px;
+	height: 30px;
+	margin: 10px auto 5px;
+	padding: 0;
+	text-align: center;
+	box-sizing: border-box
+}
+
+.sports_cont .sch_tbl_v2 table tbody td .match .match_tit img {
+	width: 82px;
+	height: 30px
+}
+
+.sports_cont .sch_tbl_v2 table tbody td .open_time .btn {
+	position: absolute;
+	bottom: 9px;
+	left: 12px
+}
+
+.sports_cont .sch_tbl_v2 table tbody td .open_time.on, .sports_cont .sch_tbl_v2 table tbody td .open_time.off {
+	height: 33px
+}
+
+.sports_cont .sch_tbl_v2 table tbody td .open_time.on span, .sports_cont .sch_tbl_v2 table tbody td .open_time.off span {
+	display: none
+}
+
+.sports_cont .sch_tbl_v2 table tbody td div.frame {
+	position: relative;
+	border: 0;
+	font-size: 12px;
+	color: #62676c;
+	padding: 8px 5px;
+	min-height: 139px;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.sports_cont .sch_tbl_v2 table tbody td.today div.frame {
+	position: relative;
+	height: 100%
+}
+
+.sports_cont .sch_tbl_v2 table tbody td.today div.frame::before {
+	position: absolute;
+	top: -1px;
+	right: -1px;
+	bottom: -1px;
+	left: -1px;
+	border: 1px solid #242428;
+	content: ''
+}
+
+.sports_cont .sch_tbl_v2 table tbody td.home_play div.frame {
+	background: #f8f9fa
+}
+
+/* 예매가이드 */
+.reserve_guide h4 {
+	display: inline-block;
+	overflow: hidden;
+	font-size: 1px;
+	line-height: 999px !important;
+	background: url(../img/sp_help.png) no-repeat;
+	vertical-align: middle
+}
+
+.reserve_guide {
+	padding-bottom: 79px !important
+}
+
+.reserve_guide h4.baseball {
+	margin-bottom: 7px;
+	width: 354px;
+	height: 24px;
+	background-position: 0 -576px
+}
+
+.reserve_guide h4.basketball {
+	width: 354px;
+	height: 24px;
+	background-position: 0 -601px
+}
+
+.reserve_guide h4.volleyball {
+	width: 354px;
+	height: 24px;
+	background-position: 0 -626px
+}
+
+.reserve_guide h4.soccer {
+	width: 354px;
+	height: 24px;
+	background-position: 0 -651px
+}
+
+.info_memlist_block {
+	margin-top: 27px;
+	clear: both
+}
+
+.info_memlist_block strong {
+	line-height: 22px;
+	font-size: 14px;
+	letter-spacing: -1px;
+	color: #242428;
+	margin-left: -3px
+}
+
+.info_memlist_block p {
+	line-height: 22px;
+	padding-top: 5px
+}
+
+.info_memlist_block a {
+	color: #fa2828;
+	text-decoration: underline;
+	line-height: 24px
+}
+
+.info_memlist_block.dotline {
+	padding-bottom: 24px;
+	background: url(../img/bg_dotline_d8.png) repeat-x -2px 100%
+}
+
+.reserve_guide .info_memlist_block .btn {
+	margin: -3px 0 0 14px
+}
+
+.reserve_guide .info_memlist_block .fs11_v2 {
+	line-height: 16px
+}
+
+.reserve_guide .info_memlist_block .basic_tbl_v5 {
+	margin-top: 17px
+}
+
+.reserve_guide .info_memlist_block .module_setting {
+	position: absolute;
+	right: 20px;
+	top: 50%;
+	margin-top: -13px;
+	height: 24px;
+	line-height: 26px;
+	padding: 0 21px;
+	text-decoration: none;
+	color: #767676
+}
+
+.reserve_guide .info_memlist_block .go_quick {
+	position: absolute;
+	right: 20px;
+	top: 50%;
+	margin-top: -13px;
+	height: 24px;
+	line-height: 26px;
+	width: 108px;
+	padding: 0;
+	text-align: center;
+	text-decoration: none;
+	color: #767676
+}
+
+.reserve_guide .clear_wrap:after {
+	display: block;
+	clear: both;
+	content: ''
+}
+
+.reserve_guide .clear_wrap .fl {
+	width: 45%
+}
+
+.reserve_guide .clear_wrap .btn_area {
+	float: left;
+	width: 55%;
+	padding-top: 22px
+}
+
+.reserve_guide .clear_wrap .btn_area a {
+	margin: 0 0 0 28px
+}
+
+.reserve_guide .clear_wrap .btn_area a:first-child {
+	margin-left: 0
+}
+
+.reserve_guide .guide_step_lst {
+	margin: 2px 0 28px -16px
+}
+
+.reserve_guide .guide_step_lst:after {
+	display: block;
+	clear: both;
+	content: ''
+}
+
+.reserve_guide .guide_step_lst li {
+	float: left;
+	margin: 28px 0 0 16px
+}
+
+.reserve_guide .guide_step_lst .img_wrap {
+	margin-top: 10px
+}
+
+.reserve_guide .guide_step_lst.type2 {
+	margin-left: -50px
+}
+
+.reserve_guide .guide_step_lst.type2 li {
+	margin-left: 50px
+}
+
+.reserve_guide .new_team {
+	overflow: hidden;
+	width: 695px;
+	margin-top: 20px;
+	background: url(../img/sports/guide/img_guide_add01.gif) no-repeat -20px 0
+}
+
+.reserve_guide .new_team li {
+	float: left;
+	width: 115px;
+	height: 97px;
+	overflow: hidden;
+	line-height: 999px
+}
+
+.reserve_guide .new_team.v2 {
+	width: 380px;
+	background: url(../img/sports/guide/img_guide_add02.gif) no-repeat
+}
+
+.reserve_guide .new_team.v2 li {
+	width: 95px;
+	height: 91px
+}
+
+.reserve_guide .img_area_guide {
+	overflow: hidden;
+	margin-top: 20px
+}
+
+.reserve_guide .img_area_guide:after {
+	display: block;
+	clear: both;
+	content: ''
+}
+
+.reserve_guide .img_area_guide li {
+	float: right;
+	text-align: center
+}
+
+.reserve_guide .img_area_guide li:first-child {
+	float: left
+}
+
+.reserve_guide .img_area_guide li img {
+	display: block;
+	margin-bottom: 20px
+}
+
+/* 요금/할인카드 */
+.tab_content h4 img {
+	margin-top: 40px
+}
+
+.sp_tit {
+	height: 25px;
+	margin-top: 40px
+}
+
+.sp_tit.cost {
+	width: 90px;
+	background-position: -64px -160px
+}
+
+.sp_tit.salecrd {
+	width: 132px;
+	margin-top: 36px;
+	background-position: -64px -187px
+}
+
+.sp_tit.saleinfo {
+	width: 207px;
+	margin-top: 36px;
+	background-position: -420px -511px
+}
+
+.basic_tbl.cost {
+	position: relative;
+	margin-top: 20px
+}
+
+.basic_tbl.cost .tbl_dsc_notice {
+	position: absolute;
+	right: 0;
+	top: -25px
+}
+
+.basic_tbl.cost {
+	margin-top: 20px
+}
+
+.basic_tbl.cost thead th {
+	padding: 17px 0 14px
+}
+
+.basic_tbl.cost tbody th {
+	border-top: 1px solid #ececec;
+	font-weight: normal;
+	color: #767676
+}
+
+.basic_tbl.cost tbody tr:first-child th {
+	border-top: 0
+}
+
+.basic_tbl.cost tbody td {
+	padding: 9px 0 6px;
+	border-left: 1px solid #ececec
+}
+
+.basic_tbl.cost td.sort {
+	color: #242428;
+	text-align: center
+}
+
+.basic_tbl.cost td.info {
+	padding-left: 20px;
+	color: #242428;
+	text-align: left
+}
+
+.basic_tbl.cost td.cost {
+	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Arial, sans-serif;
+	font-weight: 700;
+	color: #fa2828
+}
+
+.cost_info {
+	margin-top: 17px;
+	color: #767676;
+	line-height: 25px
+}
+
+.cost_info h5 {
+	margin-bottom: 6px;
+	font-size: 12px;
+	color: #4d4d4d
+}
+
+.cost_info .desc {
+	letter-spacing: -0.04em
+}
+
+.salecrd_wrap {
+	overflow: hidden;
+	position: relative;
+	margin-top: 20px;
+	padding-bottom: 20px;
+	border-top: 1px solid #c7c7c7;
+	background: #efefef
+}
+
+.salecrd_lst {
+	overflow: hidden;
+	position: relative;
+	margin-left: -1px
+}
+
+.salecrd_lst li {
+	float: left;
+	width: 120px;
+	margin-top: 20px;
+	padding-left: 16px;
+	background: url(../img/sports/bg_dot.gif) 0 1px repeat-y;
+	color: #242428
+}
+
+.salecrd_lst li a {
+	display: inline-block
+}
+
+.salecrd_lst li .info {
+	margin-top: 20px;
+	line-height: 18px
+}
+
+.salecrd_lst li .info dd {
+	font-size: 12px;
+	letter-spacing: -1px;
+	white-space: nowrap
+}
+
+.salecrd_lst .sale {
+	color: #fa2828
+}
+
+/* 좌석도 */
+.sp_tit.base_jamsil {
+	width: 162px;
+	background-position: -70px -214px
+}
+
+.sp_tit.base_daegu {
+	width: 160px;
+	background-position: -70px -241px
+}
+
+.sp_tit.base_gwanju {
+	width: 173px;
+	background-position: -70px -268px
+}
+
+.sp_tit.base_hanhwa {
+	width: 203px;
+	background-position: -70px -485px
+}
+
+.sp_tit.base_hanhwa2 {
+	width: 114px;
+	margin-top: 50px;
+	background-position: -70px -322px
+}
+
+.sp_tit.foot_pohang {
+	width: 135px;
+	background-position: -70px -349px
+}
+
+.sp_tit.foot_sungnam {
+	width: 152px;
+	background-position: -70px -376px
+}
+
+.sp_tit.foot_jeonnam {
+	width: 173px;
+	background-position: -70px -403px
+}
+
+.sp_tit.foot_sangju {
+	width: 153px;
+	background-position: -70px -430px
+}
+
+.sp_tit.foot_gangwon {
+	width: 153px;
+	background-position: -70px -457px
+}
+
+.sp_tit.foot_gangwon2 {
+	width: 153px;
+	margin-top: 50px;
+	background-position: -245px -160px
+}
+
+/*.sp_tit.foot_gwangju{width:173px;background-position:-245px -187px}*/
+/* 광주월드컵경기장 백업 */
+.sp_tit.foot_gwangju {
+	width: 128px;
+	background-position: -420px -484px
+}
+
+.sp_tit.foot_suwon {
+	width: 153px;
+	background-position: -245px -214px
+}
+
+.sp_tit.foot_anyang {
+	width: 153px;
+	background-position: -245px -241px
+}
+
+.sp_tit.foot_goyang {
+	width: 153px;
+	background-position: -245px -268px
+}
+
+.sp_tit.foot_bucheon {
+	width: 153px;
+	background-position: -245px -295px
+}
+
+.sp_tit.foot_chungju {
+	width: 153px;
+	background-position: -245px -322px
+}
+
+.sp_tit.foot_ansan {
+	width: 163px;
+	background-position: -245px -349px
+}
+
+.sp_tit.basket_jamsil {
+	width: 153px;
+	background-position: -245px -376px
+}
+
+.sp_tit.basket_jeonju {
+	width: 153px;
+	background-position: -245px -403px
+}
+
+.sp_tit.basket_changwon {
+	width: 153px;
+	background-position: -245px -430px
+}
+
+.sp_tit.basket_wonju {
+	width: 153px;
+	background-position: -245px -457px
+}
+
+.sp_tit.basket_yongin {
+	width: 153px;
+	background-position: -420px -160px
+}
+
+.sp_tit.basket_incheon {
+	width: 160px;
+	background-position: -420px -187px
+}
+
+.sp_tit.basket_chuncheon {
+	width: 153px;
+	background-position: -420px -214px
+}
+
+.sp_tit.basket_bucheon {
+	width: 153px;
+	background-position: -420px -241px
+}
+
+.sp_tit.basket_guri {
+	width: 153px;
+	background-position: -420px -268px
+}
+
+.sp_tit.basket_cheongju {
+	width: 160px;
+	background-position: -420px -295px
+}
+
+.sp_tit.volley_daejeon {
+	width: 153px;
+	background-position: -420px -322px
+}
+
+.sp_tit.volley_gumi {
+	width: 178px;
+	background-position: -420px -349px
+}
+
+.sp_tit.volley_suwon {
+	width: 153px;
+	background-position: -420px -376px
+}
+
+.sp_tit.volley_ansan {
+	width: 173px;
+	background-position: -420px -403px
+}
+
+.sp_tit.volley_sungnam {
+	width: 153px;
+	background-position: -420px -430px
+}
+
+.sp_tit.volley_hwasung {
+	width: 173px;
+	background-position: -420px -457px
+}
+
+.seat_plan {
+	margin-top: 30px
+}
+
+.seat_tit_area {
+	position: relative;
+	margin-top: 30px
+}
+
+.seat_tit_area .sp_tit.seat {
+	width: 87px;
+	height: 13px;
+	margin-top: 0;
+	background-position: -286px -74px
+}
+
+.seat_tit_area .info {
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 13px
+}
+
+.seat_tit_area .info span {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	margin: -2px 0 0 3px;
+	background-position: -311px -35px;
+	vertical-align: middle
+}
+
+.seat_lst_wrap {
+	overflow: hidden;
+	position: relative;
+	margin-top: 20px;
+	border: 1px solid #d4d4d4
+}
+
+.seat_lst_wrap .bar {
+	position: absolute;
+	top: 0;
+	left: 229px;
+	bottom: 0;
+	width: 1px;
+	background: #ececec
+}
+
+.seat_lst_wrap .bar.v2 {
+	left: 463px
+}
+
+.seat_lst {
+	float: left;
+	width: 217px;
+	padding: 12px 0 11px 15px
+}
+
+.seat_lst:first-child {
+	width: 216px
+}
+
+.seat_lst li {
+	font-size: 14px;
+	color: #777;
+	line-height: 26px
+}
+
+.cbx {
+	display: inline-block;
+	width: 11px;
+	height: 10px;
+	margin: -2px 6px 0 0;
+	vertical-align: middle
+}
+
+.cbx.base_ds07, .cbx.base_lg10 {
+	width: 7px;
+	height: 6px;
+	border: 2px solid #e12411;
+	background: #63c436
+}
+
+/* 응원석 */
+.seat_lst li em {
+	text-decoration: underline
+}
+
+.seat_lst li .depth {
+	margin-left: 17px
+}
+
+/* 구단안내 */
+.edit_cnt {
+	padding: 41px 30px 100px
+}
+
+.edit_cnt .tit {
+	display: block;
+	margin-bottom: 8px
+}
+
+.edit_cnt .txt {
+	margin-bottom: 28px;
+	line-height: 18px;
+	color: #767676
+}
+
+/* 구단안내 (신규템플릿, 170517) */
+.edit_cnt_new .bx_cnt {
+	padding-top: 44px
+}
+
+.bx_cnt+.bx_cnt {
+	margin-top: 44px
+}
+
+.bx_cnt .tit, .place_info .btn, .ticket_info .btn, .bx_dsc .btn, .place_info .stadium_place em, .place_info .stadium_place em:before, .basic_tbl .notice li:before {
+	display: block;
+	background: url(../img/sports/sp_sports_sub.png) no-repeat;
+	font-size: 0
+}
+
+.bx_cnt .tit {
+	height: 21px
+}
+
+.bx_cnt .tit.home {
+	width: 112px;
+	background-position: -600px -160px
+}
+
+.bx_cnt .tit.reserve_info {
+	width: 72px;
+	background-position: -600px -183px
+}
+
+.bx_cnt .tit.reserve {
+	width: 142px;
+	background-position: -600px -206px
+}
+
+.bx_cnt .tit.sell {
+	width: 72px;
+	background-position: -600px -229px
+}
+
+.bx_cnt .tit.stadium {
+	width: 90px;
+	background-position: -600px -252px
+}
+
+.bx_cnt .tit.public {
+	width: 141px;
+	background-position: -600px -275px
+}
+
+.bx_cnt .tit.refund {
+	width: 110px;
+	background-position: -600px -298px
+}
+
+.bx_cnt .dsc {
+	margin-top: 18px;
+	font-size: 14px;
+	line-height: 22px;
+	color: #999
+}
+
+.bx_cnt .dsc li {
+	position: relative;
+	margin-left: 1px;
+	padding-left: 10px
+}
+
+.bx_cnt .dsc li:before {
+	position: absolute;
+	top: 5px;
+	left: 2px;
+	width: 2px;
+	height: 2px;
+	background: #6f6f6f;
+	content: ''
+}
+
+.bx_cnt .dsc.type2 {
+	margin: 19px 0 0 0;
+	font-size: 14px;
+	line-height: 22px;
+	color: #242428
+}
+
+.bx_cnt .dsc.type2 li {
+	margin-left: 0;
+	padding-left: 9px
+}
+
+.bx_dsc {
+	padding: 16px 0 12px 23px;
+	border-bottom: 1px solid #c7c7c7
+}
+
+.bx_dsc .dsc.type2 {
+	margin: 0
+}
+
+.bx_dsc .dsc.type2+.dsc.type2 {
+	margin-top: 4px
+}
+
+.bx_dsc .dsc.type2 .btn {
+	display: inline-block;
+	width: 96px;
+	height: 25px;
+	background-position: -600px -407px;
+	vertical-align: middle
+}
+
+.bx_cnt .basic_tbl.cost .th {
+	padding: 18px 0;
+	color: #767676;
+	line-height: 20px
+}
+
+.bx_cnt .basic_tbl.cost td {
+	color: #242428
+}
+
+.bx_cnt .basic_tbl.cost_v1 td {
+	padding: 12px;
+	text-align: left
+}
+
+.bx_cnt .tbl_dsc {
+	display: block;
+	position: relative;
+	margin-top: 27px;
+	padding-left: 9px
+}
+
+.bx_cnt .tbl_dsc:before {
+	position: absolute;
+	top: 5px;
+	left: 1px;
+	width: 2px;
+	height: 2px;
+	background: #707070;
+	content: ''
+}
+
+.bx_cnt .tbl_dsc+.cost {
+	margin-top: 9px
+}
+
+.bx_cnt img {
+	display: block
+}
+
+.bx_cnt .link {
+	font-weight: bold;
+	color: #40b409;
+	text-decoration: underline
+}
+
+.bx_cnt .ico_phone {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	margin: 0 3px 3px 3px;
+	background: url(../img/sports/sp_sports_sub.png) no-repeat -651px -143px;
+	vertical-align: middle;
+	content: ''
+}
+
+.bx_cnt .bx_match {
+	padding: 58px 88px 81px 78px
+}
+
+.bx_cnt .bx_match:after {
+	display: block;
+	clear: both;
+	content: ''
+}
+
+.bx_cnt .bx_match .match_info {
+	float: left
+}
+
+.bx_cnt .bx_match .play_info {
+	float: right;
+	margin-top: 11px
+}
+
+.bx_match .match_info .match:after {
+	display: block;
+	clear: both;
+	content: ''
+}
+
+.bx_match .match_info .match img {
+	float: left
+}
+
+.bx_match .match_info .match .vs {
+	float: left;
+	width: 19px;
+	height: 12px;
+	margin: 38px 21px 0;
+	background: url(../img/sports/sp_sports_sub.png) no-repeat -323px -18px;
+	font-size: 0
+}
+
+.bx_match .play_info dd {
+	margin-top: 6px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #242428;
+	letter-spacing: -1px
+}
+
+.bx_cnt .sell_info {
+	margin-top: 19px
+}
+
+.bx_cnt .sell_info:after {
+	display: block;
+	clear: both;
+	content: ''
+}
+
+.bx_cnt .sell_info dt {
+	font-weight: bold;
+	letter-spacing: -1px
+}
+
+.bx_cnt .sell_info dd:before {
+	display: inline-block;
+	width: 1px;
+	height: 11px;
+	margin: -3px 12px 0;
+	background: #d8d8d8;
+	vertical-align: middle;
+	content: ''
+}
+
+.bx_cnt .sell_info dt, .bx_cnt .sell_info dd {
+	float: left
+}
+
+.bx_cnt .sell_info dd+dt {
+	margin-left: 73px
+}
+
+.bx_cnt .bx_place {
+	position: relative;
+	min-height: 475px;
+	margin-top: 19px;
+	border: 1px solid #c7c7c7;
+	border-left: 0;
+	border-right: 0;
+	background: #efefef
+}
+
+.bx_cnt .bx_place:after {
+	display: block;
+	clear: both;
+	content: ''
+}
+
+.bx_place .place_info {
+	float: left;
+	width: 320px;
+	padding: 40px 17px;
+	box-sizing: border-box
+}
+
+.place_info dt, .place_info dd {
+	line-height: 22px
+}
+
+.place_info dt {
+	margin-top: 20px;
+	font-weight: bold;
+	letter-spacing: -1px
+}
+
+.place_info .stadium_place {
+	font-weight: bold;
+	letter-spacing: -1px
+}
+
+.place_info .stadium_place em {
+	margin: 0 0 8px 21px
+}
+
+.place_info .stadium_place em:before {
+	width: 13px;
+	height: 19px;
+	margin-left: -21px;
+	background-position: -636px -139px;
+	content: ''
+}
+
+.place_info .stadium_place span {
+	display: block;
+	font-weight: normal;
+	font-size: 12px;
+	color: #999;
+	line-height: 20px;
+	letter-spacing: 0
+}
+
+.place_info .stadium_place .btn {
+	width: 198px;
+	height: 50px;
+	margin-top: 14px;
+	background-position: -600px -354px
+}
+
+.place_info .parking {
+	margin-top: 3px
+}
+
+.place_info .parking li {
+	padding-left: 11px;
+	text-indent: -11px
+}
+
+.place_info .parking .btn {
+	width: 197px;
+	height: 31px;
+	margin-top: 11px;
+	background-position: -600px -321px
+}
+
+.bx_place .map {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	font-size: 0
+}
+
+.bx_place .map:before {
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+	content: ''
+}
+
+.bx_place .map table {
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: middle
+}
+
+.bx_place .map table img {
+	width: 100%
+}
+
+.bx_cnt .ticket_info dt {
+	margin-top: 25px;
+	font-weight: bold
+}
+
+.bx_cnt .ticket_info dt:first-child {
+	margin-top: 0
+}
+
+.ticket_info .btn {
+	display: inline-block;
+	width: 96px;
+	height: 25px;
+	background-position: -600px -407px
+}
+
+.basic_tbl .notice {
+	margin-top: 4px
+}
+
+.basic_tbl .notice li {
+	font-size: 12px;
+	color: #999;
+	line-height: 20px
+}
+
+.basic_tbl .notice li:before {
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	margin-right: 4px;
+	background-position: -668px -146px;
+	vertical-align: middle;
+	content: ''
+}
+
+.bx_cnt .transport dt {
+	font-size: 0
+}
+
+.bx_cnt .transport dd {
+	margin-top: 17px;
+	padding-left: 3px;
+	font-weight: bold;
+	font-size: 14px;
+	color: #242428
+}
+
+.bx_cnt .transport dd span {
+	display: inline-block;
+	letter-spacing: -1px;
+	vertical-align: middle
+}
+
+.bx_cnt .transport dd:before {
+	display: inline-block;
+	width: 16px;
+	margin-right: 12px;
+	background: url(../img/sports/sp_sports_sub.png) no-repeat;
+	vertical-align: middle;
+	content: ''
+}
+
+.bx_cnt .transport .bus:before {
+	height: 19px;
+	background-position: -600px -139px
+}
+
+.bx_cnt .transport .subway:before {
+	height: 23px;
+	background-position: -618px -135px
+}
+
+.bx_cnt .transport .way {
+	margin-top: 23px;
+	font-weight: normal;
+	line-height: 22px;
+	color: #242428
+}
+
+.bx_cnt .transport .way li+li {
+	margin-top: 7px
+}
+
+.bx_cnt .transport .way span {
+	font-weight: bold;
+	color: #40b409;
+	letter-spacing: 0
+}
+
+.bx_cnt .transport .subway {
+	margin-top: 30px
+}
+
+/* 서브페이지 - SK 예매 */
+.sports_cont .cont_right .rightcont_inner .team_toparea.sk {
+	margin-bottom: 0
+}
+
+.team_toparea dd.team_name .notice {
+	margin-top: 10px;
+	letter-spacing: -1px
+}
+
+.team_toparea dd.team_name .notice span {
+	color: #fa2828
+}
+
+.team_reserve_area strong, .team_reserve_area .btn_rsv {
+	display: inline-block;
+	overflow: hidden;
+	background: url(../img/sports/sp_sports_sub.png) no-repeat;
+	line-height: 999px;
+	vertical-align: middle
+}
+
+.team_reserve_area {
+	margin: -32px 0 8px;
+	font-size: 0;
+	text-align: right
+}
+
+.team_reserve_area strong {
+	width: 132px;
+	height: 23px;
+	background-position: -380px -72px
+}
+
+.team_reserve_area .btn_rsv {
+	width: 57px;
+	height: 22px;
+	margin-left: 8px;
+	background-position: -380px -97px
+}
+
+.team_reserve_area .btn_rsv.v2 {
+	width: 82px;
+	height: 22px;
+	margin-left: 4px;
+	background-position: -439px -97px
+}
+
+.team_reserve_area .btn_rsv.v3 {
+	width: 133px;
+	height: 20px;
+	background-position: -523px -97px
+}
+
+.team_reserve_area.sk strong, .team_reserve_area.sk .btn_rsv.v3 {
+	vertical-align: baseline
+}
+
+.team_notice+.team_reserve_area {
+	margin-top: -11px
+}
+
+/* 서브페이지 - SKY_PASS 회원 예매 */
+.team_reserve_area_sky {
+	margin-top: 20px;
+	background: #eef8ff;
+	border: 1px solid #9fd1f1;
+	box-sizing: border-box
+}
+
+.team_reserve_area_sky .reserve_category_title {
+	display: inline-block;
+	width: 106px;
+	padding: 24px 0 27px;
+	color: #0068b7;
+	font-size: 14px;
+	line-height: 18px;
+	text-align: center
+}
+
+.team_reserve_area_sky .reserve_category_con {
+	display: inline-block;
+	vertical-align: top
+}
+
+.team_reserve_area_sky .btn {
+	width: 160px;
+	margin-top: 15px;
+	padding: 4px 0;
+	border-radius: 6px;
+	text-align: center;
+	font-size: 13px;
+	line-height: 18px
+}
+
+.team_reserve_area_sky .btn_full {
+	border-color: #0068b7;
+	background: #0068b7;
+	color: #fff
+}
+
+.team_reserve_area_sky .btn_full:hover {
+	border-color: #01477C;
+	background: #01477C
+}
+
+.team_reserve_area_sky .btn_blank {
+	color: #0068b7;
+	background: #fff;
+	border: 1px solid #0068b7
+}
+
+.team_reserve_area_sky .btn_blank:hover {
+	background: #f5f6f9
+}
+
+.team_reserve_area_sky .btn:not(:first-child) {
+	margin-left: 7px
+}
+
+.team_reserve_area_sky .reserve_dsc {
+	margin-top: 10px;
+	color: #62676c;
+	font-size: 13px;
+	line-height: 18px
+}
+
+/* 서브페이지 - 제주유나이티드 회원 예매 */
+.team_reserve_area_jeju {
+	display: flex;
+	align-items: center;
+	margin-top: 20px;
+	padding: 13px 20px;
+	background: #fff;
+	border: 1px solid #f58026;
+	box-sizing: border-box;
+	overflow: hidden
+}
+
+.team_reserve_area_jeju .reserve_title {
+	color: #ee3900;
+	font-size: 16px;
+	line-height: 18px
+}
+
+.team_reserve_area_jeju .reserve_dsc {
+	margin-top: 7px;
+	color: #62676c;
+	font-size: 13px;
+	line-height: 18px
+}
+
+.team_reserve_area_jeju .reserve_category_btn {
+	margin-left: auto
+}
+
+.team_reserve_area_jeju .btn {
+	display: block;
+	width: 160px;
+	padding: 4px 0;
+	border-radius: 6px;
+	text-align: center;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 18px
+}
+
+.team_reserve_area_jeju .btn_full {
+	border-color: #f36a00;
+	background: #f36a00;
+	color: #fff
+}
+
+.team_reserve_area_jeju .btn_full:hover {
+	border-color: #f36a00;
+	background: #f36a00
+}
+
+.team_reserve_area_jeju .btn_blank {
+	color: #f36a00;
+	background: #fff;
+	border: 1px solid #f36a00
+}
+
+.team_reserve_area_jeju .btn_blank:hover {
+	background: #f5f6f9
+}
+
+.team_reserve_area_jeju .btn:not(:first-child) {
+	margin-top: 7px
+}
+
+/* 멤버십 상품 */
+.team_reserve_membership {
+	display: flex;
+	align-items: center;
+	gap: 0 10px;
+	overflow: hidden;
+	margin-top: 20px;
+	padding: 13px 20px;
+	border: 1px solid;
+	box-sizing: border-box;
+	background: #fff
+}
+
+.team_reserve_membership .reserve_title {
+	font-size: 16px;
+	line-height: 18px
+}
+
+.team_reserve_membership .reserve_dsc {
+	margin-top: 7px;
+	color: #62676c;
+	font-size: 13px;
+	line-height: 18px
+}
+
+.team_reserve_membership .reserve_category_btn {
+	margin-left: auto
+}
+
+.team_reserve_membership .btn {
+	display: block;
+	width: 160px;
+	padding: 4px 0;
+	border-radius: 6px;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 18px;
+	text-align: center
+}
+
+.team_reserve_membership .btn:not(:first-child) {
+	margin-top: 7px
+}
+
+.team_reserve_membership.jeju {
+	border-color: #f58026
+}
+
+.team_reserve_membership.jeju .reserve_title {
+	color: #ee3900
+}
+
+.team_reserve_membership.jeju .btn_full {
+	border-color: #f36a00;
+	background: #f36a00;
+	color: #fff
+}
+
+.team_reserve_membership.jeju .btn_full:hover {
+	border-color: #f36a00;
+	background: #f36a00
+}
+
+.team_reserve_membership.jeju .btn_blank {
+	color: #f36a00;
+	background: #fff;
+	border: 1px solid #f36a00
+}
+
+.team_reserve_membership.jeju .btn_blank:hover {
+	border-color: #f36a00;
+	background: #f5f6f9
+}
+
+.team_reserve_membership.daegufc {
+	border-color: #9FD1F1
+}
+
+.team_reserve_membership.daegufc .reserve_title {
+	color: #0068B7
+}
+
+.team_reserve_membership.daegufc .btn_full {
+	border-color: #0068b7;
+	background: #0068b7;
+	color: #fff
+}
+
+.team_reserve_membership.daegufc .btn_full:hover {
+	border-color: #01477C;
+	background: #01477C
+}
+
+.team_reserve_membership.daegufc .btn_blank {
+	color: #0068B7;
+	background: #fff;
+	border: 1px solid #0068b7
+}
+
+.team_reserve_membership.daegufc .btn_blank:hover {
+	border-color: #0068B7;
+	background: #F5F6F9
+}
+
+.team_reserve_membership.fcanyang {
+	border-color: #61309A
+}
+
+.team_reserve_membership.fcanyang .reserve_title {
+	color: #4B237A
+}
+
+.team_reserve_membership.fcanyang .btn_full {
+	border-color: #4B237A;
+	background: #4B237A;
+	color: #fff
+}
+
+.team_reserve_membership.fcanyang .btn_full:hover {
+	border-color: #2D0161;
+	background: #2D0161
+}
+
+.team_reserve_membership.fcanyang .btn_blank {
+	color: #4B237A;
+	background: #fff;
+	border: 1px solid #4B237A
+}
+
+.team_reserve_membership.fcanyang .btn_blank:hover {
+	border-color: #4B237A;
+	background: #F5F6F9
+}
+
+.team_reserve_membership.gimpofc {
+	border-color: #2E533E
+}
+
+.team_reserve_membership.gimpofc .reserve_title {
+	color: #2E533E
+}
+
+.team_reserve_membership.gimpofc .btn_full {
+	border-color: #2E533E;
+	background: #2E533E;
+	color: #fff
+}
+
+.team_reserve_membership.gimpofc .btn_full:hover {
+	border-color: #2E533E;
+	background: #2E533E
+}
+
+.team_reserve_membership.gimpofc .btn_blank {
+	color: #2E533E;
+	background: #fff;
+	border: 1px solid #2E533E
+}
+
+.team_reserve_membership.gimpofc .btn_blank:hover {
+	border-color: #2E533E;
+	background: #F5F6F9
+}
+
+/* 구단 현금영수증 */
+.cash_wrap img {
+	display: block
+}
+
+.cash_wrap .tbl {
+	position: relative
+}
+
+.tbl_inner {
+	position: absolute;
+	left: 9px;
+	top: 69px;
+	padding: 4px 4px 5px 4px;
+	border-top: 0;
+	font-family: Noto-R;
+	font-size: 12px
+}
+
+.tbl_type {
+	height: 92px;
+	border-spacing: 0;
+	border-collapse: collapse;
+	table-layout: fixed;
+	color: #363636
+}
+
+.tbl_type tbody th, .tbl_type tbody td {
+	padding: 5px 5px 4px;
+	vertical-align: top
+}
+
+.tbl_type tbody th {
+	font-weight: normal;
+	color: #656565;
+	text-align: left
+}
+
+.tbl_type .title {
+	height: 23px;
+	padding: 0
+}
+
+.tbl_type .th_type {
+	padding-left: 8px
+}
+
+.tbl_type .td_type {
+	overflow: hidden;
+	max-width: 101px;
+	text-overflow: ellipsis;
+	white-space: nowrap
+}
+
+.tbl_inner2:after {
+	clear: both;
+	display: block;
+	content: ''
+}
+
+.bx_small, .bx_small2 {
+	float: left;
+	width: 211px;
+	margin-top: 8px
+}
+
+.bx_small2 {
+	margin-left: 4px
+}
+
+.tbl_type_v1, .tbl_type_v2 {
+	height: 114px
+}
+
+.tbl_type_v1 .title, .tbl_type_v2 .title {
+	height: 22px
+}
+
+.tbl_type_v1 tbody th, .tbl_type_v1 tbody td {
+	padding-top: 5px;
+	padding-bottom: 0
+}
+
+.tbl_type_v1 tbody td {
+	padding-top: 4px;
+	padding-left: 7px;
+	line-height: 16px
+}
+
+.tbl_type_v2 tbody td {
+	padding-right: 4px;
+	text-align: right
+}
+
+.tbl_type_v2 .sum {
+	color: #d23c42
+}
+
+.tbl_type_v3 {
+	height: 139px;
+	margin-top: 8px
+}
+
+.tbl_type_v3 .th_type {
+	padding-left: 5px;
+	vertical-align: middle
+}
+
+.tbl_type_v3 .color {
+	color: #41b409
+}
+
+.tbl_p {
+	margin: 7px 0 0 5px;
+	color: #828080;
+	line-height: 16px
+}
+
+.tbl_p a {
+	color: #828080
+}
+
+.tbl_type a {
+	color: #363636;
+	text-decoration: none
+}
+
+.tbl_btn {
+	position: absolute;
+	bottom: 25px;
+	width: 101px;
+	height: 32px;
+	border: 0;
+	background: none;
+	cursor: pointer
+}
+
+.tbl_btn.print {
+	left: 122px
+}
+
+.tbl_btn.close {
+	left: 226px
+}
+
+/* 프로농구 프로배구*/
+.tit_team_man, .tit_team_woman {
+	display: block;
+	width: 87px;
+	height: 13px;
+	margin: 27px 0 0 7px;
+	background: url(../img/sports/sp_sports_sub.png) -492px -36px no-repeat
+}
+
+.tit_team_woman {
+	margin-top: 22px;
+	background-position: -492px -51px
+}
+
+.new_team.basketball, .new_team.volleyball {
+	width: 646px;
+	margin-top: 4px;
+	border: 1px solid #ecedf2;
+	box-sizing: border-box;
+	background: url(../img/sports/guide/img_newteam_basketball_man.gif) 0 0 no-repeat
+}
+
+.new_team.basketball li {
+	width: 120px;
+	height: 135px
+}
+
+.new_team.basketball li:first-child {
+	margin-left: 25px
+}
+
+.new_team.basketball.woman {
+	background-image: url(../img/sports/guide/img_newteam_basketball_woman.gif)
+}
+
+.new_team.basketball.woman li:first-child {
+	width: 125px;
+	margin-left: 75px
+}
+
+.new_team.volleyball {
+	background: url(../img/sports/guide/img_newteam_volleyball_man.gif) 0 0 no-repeat
+}
+
+.new_team.volleyball li {
+	width: 110px;
+	height: 135px
+}
+
+.new_team.volleyball li:first-child {
+	margin-left: 40px
+}
+
+.new_team.volleyball.woman {
+	background-image: url(../img/sports/guide/img_newteam_volleyball_woman.gif)
+}
+
+/* 서브페이지 - FC Seoul 예매 */
+.sports_cont .cont_right .rightcont_inner.fcseoul .team_toparea {
+	margin-bottom: 12px
+}
+
+.team_reserve_area.fcseoul {
+	margin: -2px 0 18px
+}
+
+.sports_cont .cont_right .rightcont_inner.fcseoul .team_notice {
+	margin-bottom: 18px
+}
+
+.sports_cont .cont_right .rightcont_inner.fcseoul .team_reserve_area {
+	margin: 0 0 18px
+}
+
+.team_reserve_area .inner_box:after {
+	display: block;
+	clear: both;
+	content: ''
+}
+
+.team_reserve_area .inner_box li {
+	float: left;
+	width: 343px;
+	height: 142px;
+	padding: 16px 0 10px;
+	border: 1px solid #ecedf2;
+	text-align: center;
+	box-sizing: border-box
+}
+
+.team_reserve_area .inner_box li:first-child {
+	margin-left: 0
+}
+
+.team_reserve_area .inner_box li:last-child {
+	float: right
+}
+
+.team_reserve_area .inner_box li .dsc_match {
+	margin: 0 auto 14px;
+	font-size: 0
+}
+
+.team_reserve_area .inner_box li .dsc_match img {
+	display: inline-block
+}
+
+.dsc_match .versus {
+	display: inline-block;
+	width: 19px;
+	height: 12px;
+	margin: 3px 13px 0;
+	background: url(../img/sports/sp_sports_sub.png) no-repeat -323px -18px;
+	vertical-align: middle
+}
+
+.team_reserve_area .inner_box li .bx_btn {
+	font-size: 0
+}
+
+.team_reserve_area .match_tit {
+	display: block;
+	width: auto;
+	height: auto;
+	margin: 0 auto 11px;
+	background: none;
+	font-size: 0;
+	line-height: normal
+}
+
+.rightcont_inner.fcseoul .team_reserve_area .btn_rsv {
+	width: 70px;
+	height: 20px;
+	margin: 0 3px 0 0;
+	background-position: -380px -121px
+}
+
+.rightcont_inner.fcseoul .team_reserve_area .btn_rsv.v2 {
+	width: 96px;
+	height: 20px;
+	margin: 0;
+	background-position: -452px -121px
+}
+
+/* 구단 배너영역 */
+.sports_cont .bx_banner {
+	margin-bottom: 20px
+}
+
+.sports_cont .bx_banner img {
+	display: block;
+	width: 100%;
+	height: auto
+}
+
+/* 브릿지 관련 ---------------------------------------*/
+/* 한화 브릿지 */
+.area_top, .area_bottom {
+	position: relative
+}
+
+.area_top .tab {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 697px;
+	height: 70px
+}
+
+.area_top .tab:after {
+	display: block;
+	clear: both;
+	content: ''
+}
+
+.area_top .tab li {
+	float: left
+}
+
+.area_top .tab .btn_tabmenu {
+	display: block;
+	width: 349px;
+	height: 63px;
+	margin-top: 7px;
+	border: 0;
+	background: none;
+	font-size: 0;
+	cursor: pointer
+}
+
+.area_top .tab .btn_tabmenu.on {
+	width: 348px;
+	height: 70px;
+	margin-top: 0
+}
+
+.area_bottom .btn_link {
+	position: absolute;
+	top: 81px;
+	left: 135px;
+	width: 428px;
+	height: 74px;
+	font-size: 0
+}
+
+/* 2018 SK 와이번스 브릿지 */
+/* web bridge common (180206 추가) */
+#wrap.web_bridge {
+	min-width: auto
+}
+
+#wrap.web_bridge .contents {
+	position: relative
+}
+
+.web_bridge .bx_info {
+	position: absolute
+}
+
+.web_bridge .bx_input {
+	font-family: '굴림', Gulim;
+	font-size: 0;
+	color: #2f2826
+}
+
+.web_bridge .bx_input input, .web_bridge .bx_input label {
+	display: inline-block;
+	vertical-align: middle
+}
+
+.web_bridge .bx_input input {
+	margin-top: 3px
+}
+
+.web_bridge .bx_input label {
+	font-size: 12px
+}
+
+.web_bridge .bx_info .btn_link {
+	position: absolute
+}
+
+.web_bridge .btn_buy {
+	position: absolute;
+	font-size: 0
+}
+
+.ly_pop_wrap.ly_web_bridge {
+	width: 500px;
+	background-color: #fff
+}
+
+.ly_web_bridge .pop_header {
+	position: relative;
+	height: 65px;
+	padding: 38px 0 0 34px;
+	border-bottom: 4px solid #e0002a;
+	box-sizing: border-box;
+	background-color: #242428
+}
+
+.ly_web_bridge .pop_header .tit {
+	display: block;
+	width: 190px;
+	height: 17px;
+	background: url(../img/sp_pop.png) no-repeat -619px -98px
+}
+
+.ly_web_bridge .pop_header .ico_amblem {
+	position: absolute;
+	top: 23px;
+	right: 47px;
+	z-index: 1;
+	width: 76px;
+	height: 76px;
+	background: url(../img/sp_pop.png) no-repeat -223px -210px
+}
+
+.ly_web_bridge .pop_contents {
+	position: relative;
+	padding: 55px 34px 38px;
+	background-color: #fff
+}
+
+.ly_web_bridge .sub_tit {
+	position: absolute;
+	top: 11px;
+	left: 34px;
+	width: 263px;
+	height: 24px;
+	background: url(../img/sp_pop.png) no-repeat -604px -26px;
+	font-size: 0
+}
+
+.ly_web_bridge .sub_tit.agree {
+	width: 96px;
+	background-position: -604px 0
+}
+
+.ly_web_bridge .area_info {
+	overflow-y: auto;
+	height: 382px;
+	padding: 14px 10px;
+	border: 1px solid #eaeaea;
+	box-sizing: border-box;
+	font-family: '굴림', Gulim
+}
+
+.ly_web_bridge .area_info .info_tit {
+	display: block;
+	margin-top: 25px;
+	font-weight: bold;
+	font-family: '굴림', Gulim;
+	color: #242428
+}
+
+.ly_web_bridge .area_info .info_tit:first-child {
+	margin-top: 0
+}
+
+.ly_web_bridge .area_info .dsc {
+	font-family: '굴림', Gulim;
+	color: #242428;
+	letter-spacing: -0.02em
+}
+
+.ly_web_bridge .area_info .dsc dt {
+	margin-top: 14px
+}
+
+.ly_web_bridge .area_info .dsc dt:first-child {
+	margin-top: 0
+}
+
+.ly_web_bridge .area_info .lst_dsc {
+	margin-top: 14px
+}
+
+.ly_web_bridge .area_info .lst_dsc li {
+	color: #242428
+}
+
+.ly_web_bridge .area_info .lst_dsc li+li {
+	margin-top: 14px
+}
+
+/* SK 와이번스 시즌권 */
+#wrap.play_with {
+	min-width: auto
+}
+
+#wrap.play_with .contents {
+	position: relative
+}
+
+.play_with .bx_info {
+	position: absolute;
+	top: 667px;
+	left: 119px
+}
+
+.play_with .bx_info li {
+	margin-top: 6px;
+	font-size: 0
+}
+
+.play_with .bx_info li:first-child {
+	margin-top: 0
+}
+
+.play_with .bx_info li .bx_ipt {
+	font-family: '굴림', Gulim;
+	font-size: 12px;
+	color: #2f2826
+}
+
+.play_with .bx_info .ipt_chk {
+	display: inline-block;
+	width: 13px;
+	height: 13px;
+	vertical-align: middle
+}
+
+.play_with .bx_info .dsc_info {
+	display: inline-block;
+	letter-spacing: -0.02em;
+	vertical-align: middle
+}
+
+.play_with .btn_thirdparty, .play_with .btn_agree {
+	display: inline-block;
+	margin-top: 1px;
+	font-family: '굴림', Gulim;
+	font-size: 12px;
+	color: #2f2826;
+	vertical-align: top
+}
+
+.play_with .btn_buy {
+	position: absolute;
+	top: 729px;
+	left: 210px;
+	width: 275px;
+	height: 85px;
+	font-size: 0
+}
+
+.ly_pop_wrap.ly_play_with {
+	width: 500px;
+	background-color: #fff
+}
+
+.ly_play_with .pop_header {
+	position: relative;
+	height: 65px;
+	padding: 38px 0 0 34px;
+	border-bottom: 4px solid #e0002a;
+	box-sizing: border-box;
+	background-color: #242428
+}
+
+.ly_play_with .pop_header .tit {
+	display: block;
+	width: 190px;
+	height: 17px;
+	background: url(../img/sp_pop.png) no-repeat -619px -98px
+}
+
+.ly_play_with .pop_header .ico_amblem {
+	position: absolute;
+	top: 23px;
+	right: 47px;
+	z-index: 1;
+	width: 76px;
+	height: 76px;
+	background: url(../img/sp_pop.png) no-repeat -223px -210px
+}
+
+.ly_play_with .pop_contents {
+	position: relative;
+	padding: 55px 34px 38px;
+	background-color: #fff
+}
+
+.ly_play_with .sub_tit {
+	position: absolute;
+	top: 11px;
+	left: 34px;
+	width: 263px;
+	height: 24px;
+	background: url(../img/sp_pop.png) no-repeat -604px -26px;
+	font-size: 0
+}
+
+.ly_play_with .sub_tit.agree {
+	width: 96px;
+	background-position: -604px 0
+}
+
+.ly_play_with .area_info {
+	overflow-y: auto;
+	height: 382px;
+	padding: 14px 10px;
+	border: 1px solid #eaeaea;
+	box-sizing: border-box;
+	font-family: '굴림', Gulim
+}
+
+.ly_play_with .area_info .dsc {
+	font-family: '굴림', Gulim;
+	color: #242428;
+	letter-spacing: -0.02em
+}
+
+.ly_play_with .area_info .dsc dt {
+	margin-top: 14px
+}
+
+.ly_play_with .area_info .dsc dt:first-child {
+	margin-top: 0
+}
+
+.ly_play_with .area_info .lst_dsc {
+	margin-top: 14px
+}
+
+.ly_play_with .area_info .lst_dsc li {
+	color: #242428
+}
+
+.ly_play_with .area_info .lst_dsc li+li {
+	margin-top: 14px
+}
+
+/* KIA 타이거즈 시즌권 */
+.web_bridge .kia_tigers .bx_info {
+	top: 902px;
+	left: 90px
+}
+
+.web_bridge .kia_tigers .bx_input {
+	font-family: Noto-r, '맑은 고딕', malgun-gothic;
+	color: #fff
+}
+
+.web_bridge .kia_tigers .bx_input input {
+	width: 14px;
+	height: 14px;
+	margin-right: 19px
+}
+
+.web_bridge .kia_tigers .bx_input label {
+	font-size: 19px;
+	letter-spacing: -2px
+}
+
+.web_bridge .kia_tigers .btn_buy {
+	top: 803px;
+	left: 109px;
+	width: 476px;
+	height: 90px
+}
+
+.web_bridge .kia_tigers .btn_link {
+	top: 30px;
+	right: 0;
+	font-family: Noto-R, '맑은 고딕', malgun-gothic;
+	font-size: 19px;
+	color: #fff;
+	letter-spacing: -2px
+}
+
+.ly_kia_tigers {
+	border-bottom-color: #d2232a
+}
+
+.ly_kia_tigers .pop_header {
+	padding: 34px 0 0 38px
+}
+
+.ly_kia_tigers .pop_header .tit {
+	width: 178px;
+	background-position: -715px -263px
+}
+
+.ly_kia_tigers .pop_header .ico_amblem {
+	top: 21px;
+	right: 30px;
+	width: 117px;
+	height: 88px;
+	background-position: -708px -370px
+}
+
+.ly_kia_tigers .sub_tit {
+	top: 10px;
+	left: 37px
+}
+
+/* 클린예매 서비스 */
+.sports_cont .cont_right .rightcont_inner .ico_tag {
+	display: inline-block;
+	width: 77px;
+	height: 30px;
+	margin-left: 5px;
+	background: url(../img/sp.png) no-repeat;
+	cursor: pointer;
+	font-size: 0;
+	vertical-align: middle
+}
+
+.sports_cont .cont_right .rightcont_inner .team_toparea .ico_cleanreserve {
+	background-position: 0 -655px
+}
+
+.sports_cont .cont_right .rightcont_inner .team_toparea .ico_coupon {
+	background-position: 0 -655px
+}
+
+.sports_cont .cont_right .rightcont_inner .play_date .ico_cleanreserve {
+	display: block;
+	position: absolute;
+	top: -4px;
+	right: 12px;
+	width: 51px;
+	height: 25px;
+	margin: 0;
+	background-position: -300px -115px;
+	font-size: 0
+}
+
+.team_notice .clean_reserve {
+	font-size: 0
+}
+
+.sports_cont .cont_right .rightcont_inner .team_notice .bx_notice .clean_reserve .txt_info {
+	display: inline-block;
+	font-size: 14px;
+	font-weight: 700;
+	color: #1aa8bb;
+	vertical-align: middle;
+}
+
+.team_notice .clean_reserve .ico_info {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	margin-left: 5px;
+	background: url(../img/sports/sp_sports_sub.png) no-repeat -329px -35px;
+	vertical-align: middle;
+	cursor: pointer
+}
+
+.team_notice .clean_reserve .ico_info.on+.ly_clean_reserve {
+	display: block
+}
+
+.ly_clean_reserve {
+	display: none;
+	position: absolute;
+	top: 90px;
+	left: 203px;
+	z-index: 100;
+	width: 410px;
+	height: 423px;
+	padding: 20px;
+	border: 1px solid #4d4d4d;
+	box-sizing: border-box;
+	background-color: #fff;
+	text-align: center
+}
+
+.ly_clean_reserve .sp {
+	display: block;
+	background-image: url(../img/sports/sp_sports_sub.png);
+	background-repeat: no-repeat;
+	font-size: 0;
+	/* vertical-align: middle; */
+	/* display: flex;
+	align-items: center; */
+}
+
+.ly_clean_reserve .pop_tit {
+	display: block;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #d4d4d4
+}
+
+.ly_clean_reserve .pop_tit .sp {
+	width: 140px;
+	height: 17px;
+	margin: 0 auto;
+	background-position: -344px -17px
+}
+
+.ly_clean_reserve .pop_contents .dsc {
+	margin-top: 10px;
+	color: #767676
+}
+
+.ly_clean_reserve .img_dsc {
+	width: 373px;
+	height: 256px;
+	margin-top: 20px;
+	background-image: url(../img/sports/clean_reserve_info.jpg);
+	font-size: 0
+}
+
+.ly_clean_reserve .lst_dsc {
+	margin-top: 11px;
+	padding-left: 30px;
+	text-align: left
+}
+
+.ly_clean_reserve .lst_dsc li {
+	margin-top: 5px;;
+	font-size: 12px;
+	color: #767676;
+	letter-spacing: -1px
+}
+
+.ly_clean_reserve .lst_dsc li:first-child {
+	margin-top: 0
+}
+
+/* 서브페이지 재설정 */
+.cont_right .team_top_area {
+	position: relative;
+	font-size: 0;
+	z-index: 1
+}
+
+.cont_right .team_top_area .product_detail_option {
+	position: static;
+	margin-top: 14px
+}
+
+.cont_right .team_top_area:after {
+	display: block;
+	clear: both;
+	content: ''
+}
+
+.cont_right .team_top_area .img_area {
+	display: inline-block;
+	width: 101px;
+	height: 101px;
+	vertical-align: middle
+}
+
+.cont_right .team_top_area .team_info_area {
+	display: inline-block;
+	width: 528px;
+	padding-left: 20px;
+	vertical-align: middle;
+	box-sizing: border-box
+}
+
+.cont_right .team_top_area .team_info_area .common_popup_wrap {
+	left: 0;
+	right: auto
+}
+
+.cont_right .team_top_area .team_name {
+	font-size: 24px;
+	line-height: 24px;
+	font-weight: bold;
+	letter-spacing: -0.5px;
+	color: #242428
+}
+
+.cont_right .team_top_area .group_tag {
+	margin-top: 14px;
+	font-size: 0
+}
+
+.cont_right .team_top_area .group_tag .ico_tag {
+	display: inline-block;
+	background: url(../img/sp.png) no-repeat;
+	background-size: 424px auto
+}
+
+.cont_right .team_top_area .group_tag .ico_tag:first-child {
+	margin: 0
+}
+
+.cont_right .team_top_area .group_tag .tag_coupon {
+	width: 77px;
+	background-position: -115px -655px;
+	cursor: pointer
+}
+
+.cont_right .team_top_area .group_tag .tag_clean {
+	width: 77px;
+	background-position: 0 -655px;
+	cursor: pointer
+}
+
+.cont_right .team_top_area .my_team {
+	overflow: hidden;
+	position: absolute;
+	top: 20px;
+	right: 0;
+	width: 68px;
+	height: 62px;
+	border: 1px solid #ecedf2;
+	font-size: 12px;
+	line-height: 12px;
+	padding-top: 42px;
+	box-sizing: border-box;
+	color: #878d95;
+	text-align: center;
+	font-weight: 700;
+}
+
+.cont_right .team_top_area .my_team::before {
+	position: absolute;
+	top: 8px;
+	left: 50%;
+	transform: translateX(-50%);
+	content: '';
+	width: 32px;
+	height: 32px;
+}
+
+.cont_right .team_top_area .my_team.on {
+	color: #878d95;
+}
+
+/* 전북 현대 예매 가이드 (영문) */
+.bx_guide {
+	position: absolute;
+	top: 42px;
+	right: 143px;
+	z-index: 1
+}
+
+.bx_guide .btn_guide {
+	width: 79px;
+	height: 76px;
+	padding: 4px;
+	border: 1px solid #ecedf2;
+	border-radius: 10px;
+	background: #fff;
+	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Roboto, Arial, sans-serif;
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 12px;
+	box-sizing: border-box;
+	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1)
+}
+
+.bx_guide .btn_guide:before {
+	display: block;
+	margin: 0 auto -4px;
+	content: ''
+}
+
+.bx_guide .btn_close {
+	position: absolute;
+	top: -7px;
+	right: -6px;
+	width: 20px;
+	height: 20px;
+	border: 1px solid #ecedf2;
+	border-radius: 50%;
+	background: #fff
+}
+
+.bx_guide .btn_close:before {
+	display: block;
+	margin: 0 auto;
+	content: ''
+}
+
+.pop_guide_wrap {
+	letter-spacing: -0.2px;
+	background: #f8f9fa;
+}
+
+.pop_guide_wrap .point {
+	color: #fa2828 !important
+}
+
+.pop_guide_wrap .guide_header {
+	padding: 32px 36px 32px 106px;
+	background: #ecedf2;
+	height: 111px;
+	box-sizing: border-box;
+}
+
+.pop_guide_wrap .guide_header .tit {
+	background: none;
+	font-size: 18px;
+	color: #242428;
+	line-height: 1
+}
+
+.pop_guide_wrap .guide_header .txt {
+	margin-top: 8px;
+	font-size: 14px;
+	color: #62676c;
+	line-height: 1
+}
+
+.pop_guide_wrap .guide_header .logo {
+	position: absolute;
+	top: 30px;
+	left: 36px
+}
+
+.pop_guide_wrap .bx_tab {
+	padding: 0 36px
+}
+
+.pop_guide_wrap .tab_lst {
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+	border-bottom: 1px solid #ecedf2;
+	text-align: center
+}
+
+.pop_guide_wrap .tab {
+	display: table-cell;
+	height: 54px;
+	vertical-align: middle
+}
+
+.pop_guide_wrap .tab a {
+	position: relative;
+	padding: 20px 0 17px;
+	font-size: 14px;
+	font-weight: 700;
+	color: #242428;
+	line-height: 1
+}
+
+.pop_guide_wrap .tab.is_active a {
+	color: #242428;
+	font-size: 16px;
+}
+
+.pop_guide_wrap .tab.is_active a:after {
+	position: absolute;
+	bottom: 2px;
+	left: 0;
+	width: 100%;
+	border-bottom: 4px solid #242428;
+	content: ''
+}
+
+.pop_guide_wrap .guide_container {
+	padding: 0 36px
+}
+
+.pop_guide_wrap .guide_container .tit {
+	margin: 60px 0 43px;
+	font-size: 28px;
+	color: #242428;
+	line-height: 1
+}
+
+.pop_guide_wrap .guide_section {
+	position: relative;
+	padding-bottom: 90px
+}
+
+.pop_guide_wrap .guide_section .step {
+	font-size: 24px;
+	color: #fa2828;
+	line-height: 1
+}
+
+.pop_guide_wrap .guide_section .txt {
+	margin-top: 13px;
+	font-size: 18px;
+	color: #242428;
+	line-height: 26px
+}
+
+.pop_guide_wrap .guide_section .sub_txt {
+	font-size: 16px;
+	color: #62676C;
+	line-height: 24px
+}
+
+.pop_guide_wrap .guide_section .txt+.sub_txt {
+	margin-top: 4px
+}
+
+.pop_guide_wrap .guide_section .logo_payco {
+	display: inline-block;
+	margin-top: 0;
+	vertical-align: top
+}
+
+.pop_guide_wrap .guide_section img {
+	margin-top: 35px
+}
+
+.pop_guide_wrap .guide_section .btn_more {
+	position: absolute;
+	left: 408px;
+	width: 24px;
+	height: 24px;
+	background: none;
+	appearance: none
+}
+
+.pop_guide_wrap .guide_section .btn_more1 {
+	top: 477px
+}
+
+.pop_guide_wrap .guide_section .btn_more2 {
+	top: 509px
+}
+
+.pop_guide_wrap .guide_section .btn_more3 {
+	top: 535px
+}
+
+.pop_guide_wrap .guide_section .btn_more4 {
+	top: 561px
+}
+
+.pop_guide_wrap .guide_section .btn_more5 {
+	top: 1122px;
+	left: 580px;
+	width: 257px;
+	height: 56px
+}
+
+.pop_guide_wrap .ly_pop_wrap {
+	width: 100%;
+	height: 100%
+}
+
+.pop_guide_wrap .ly_pop_wrap .dimmed {
+	display: block
+}
+
+.ly_inner_pop {
+	overflow: hidden;
+	position: fixed;
+	z-index: 300;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	width: 720px;
+	max-height: 500px;
+	padding-top: 40px;
+	border: 1px solid #242428;
+	background: #fff
+}
+
+.ly_inner_pop .ly_header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 11px 20px 10px;
+	border-bottom: 1px solid #ecedf2;
+	box-sizing: border-box
+}
+
+.ly_inner_pop .ly_header .ly_tit {
+	font-size: 14px;
+	font-weight: normal;
+	color: #242428;
+	line-height: 18px;
+	font-weight: 700;
+}
+
+.ly_inner_pop .ly_header .btn_close {
+	position: absolute;
+	top: 11px;
+	right: 20px;
+	background: none;
+	appearance: none
+}
+
+.ly_inner_pop .ly_header .btn_close::before {
+	display: block;
+	content: ''
+}
+
+.ly_inner_pop .ly_content {
+	overflow-y: auto;
+	max-height: 500px;
+	padding: 22px 20px 30px;
+	box-sizing: border-box
+}
+
+.ly_inner_pop .ly_content .txt {
+	margin-top: 12px;
+	font-size: 14px;
+	color: #242428;
+	line-height: 20px
+}
+
+.ly_inner_pop .ly_content .txt .point {
+	color: #fa2828;
+}
+
+.ly_inner_pop .ly_content .txt+img {
+	margin-top: 38px
+}
+
+.ly_inner_pop .ly_content .terms_tit {
+	display: block;
+	margin-top: 24px;
+	font-size: 16px;
+	color: #242428;
+	line-height: 1
+}
+
+.ly_inner_pop .ly_content .terms_txt {
+	margin-top: 8px;
+	font-size: 13px;
+	color: #62676c;
+	line-height: 18px
+}
+
+.ly_inner_pop .ly_content .item_tit {
+	display: block;
+	margin-top: 13px;
+	font-size: 14px;
+	color: #242428;
+	line-height: 1
+}
+
+.ly_inner_pop .ly_content .item_txt {
+	margin-top: 6px;
+	font-size: 13px;
+	color: #62676C;
+	line-height: 18px
+}
+
+.ly_inner_pop .ly_content .manual_tit {
+	display: block;
+	margin-top: 20px;
+	font-size: 14px;
+	font-weight: normal;
+	color: #242428;
+	line-height: 18px
+}
+
+.ly_inner_pop .ly_content .manual_txt {
+	margin-top: 6px;
+	font-size: 14px;
+	color: #62676c;
+	line-height: 18px
+}
+
+.ly_inner_pop .ly_content .manual_lst {
+	margin-top: 6px
+}
+
+.ly_inner_pop .ly_content .manual_lst li {
+	padding-left: 8px;
+	font-size: 13px;
+	color: #62676c;
+	line-height: 19px;
+	text-indent: -8px
+}
+
+/* 스포츠-종목-비시즌 */
+.sports_sub {
+	background-color: #fff;
+}
+
+.sports_sub .section_season_off .tit_wrap {
+	position: relative;
+	margin: 44px 0 30px;
+	padding-top: 10px;
+}
+
+.sports_sub .section_season_off .tit_wrap .season_off_tit {
+	font-size: 40px;
+	display: inline-block;
+	position: relative
+}
+
+.sports_sub .section_season_off .tit_wrap .season_off_tit::after {
+	position: absolute;
+	content: "";
+	width: 110px;
+	height: 37px;
+	background: url(../img/sports/season_off_icon.png) no-repeat 0 0/100%;
+	top: -10px;
+	right: -110px;
+}
+
+.sports_sub .section_season_off .tit_wrap .season_off_tit.season_on::after {
+	display: none
+}
+
+.sports_sub .section_season_off .season_off_content {
+	background-color: #fff;
+	box-shadow: 0px 17px 21px rgba(0, 0, 0, 0.04);
+	border-radius: 10px;
+	padding: 26px 30px;
+	overflow: hidden;
+}
+
+.sports_sub .season_off_content .con_txt {
+	font-size: 20px;
+	line-height: 46px;
+	font-weight: 500
+}
+
+.sports_sub .season_off_content .con_txt span {
+	display: inline-block;
+	width: 46px;
+	height: 46px;
+	background: url(../img/sports/desc_icon.png) no-repeat 0 0/100%;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+
+.sports_sub .season_off_content .desc_txt {
+	margin-top: 10px;
+}
+
+.sports_sub .season_off_content .desc_txt p {
+	line-height: 28px;
+}
+
+.sports_sub .sub_alarm {
+	font-size: 16px;
+	line-height: 27px;
+	margin-top: 8px;
+}
+
+.sports_sub .sub_alarm span {
+	width: 50px;
+	height: 28px;
+	vertical-align: middle;
+	display: inline-block;
+	background: url(../img/sports/alarm_toggle_not.png) no-repeat 0 0/100%;
+	margin-left: 5px;
+}
+
+.sports_sub .sub_alarm p.on span {
+	width: 50px;
+	height: 28px;
+	vertical-align: middle;
+	display: inline-block;
+	background: url(../img/sports/alarm_toggle_on.png) no-repeat 0 0/100%;
+	margin-left: 5px;
+}
+
+/* 비시즌 스와이퍼 */
+.sports_sub .common_section {
+	margin-top: 80px;
+}
+
+.sports_sub .common_section.section_sport_season_banner {
+	margin-top: 40px;
+	padding-bottom: 20px
+}
+
+.sports_sub .common_section.section_season_off {
+	margin-top: 45px
+}
+
+.sports_sub .section_sport_type {
+	width: 100%;
+	background-color: #F8F9FA;
+}
+
+.sports_sub .section_sport_type>.inner_box {
+	max-width: 1120px;
+	margin: 0 auto;
+	padding: 60px 0 80px
+}
+
+.sports_sub .sport_open_filter {
+	height: 40px;
+	margin-bottom: 20px;
+}
+
+.sports_sub .sport_swiper_wrap {
+	overflow: hidden;
+	width: 1120px
+}
+
+.sports_sub .item_card_product {
+	width: 100%;
+	height: 350px;
+	text-align: center;
+	border: 1px solid #ecedf2;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0px 17px 21px rgba(0, 0, 0, 0.04);
+	box-sizing: border-box;
+}
+
+.sports_sub .item_card_info {
+	padding: 20px;
+	text-align: left;
+}
+
+.sports_sub .item_card_info .type_capsule {
+	display: inline-block;
+	padding: 4px 8px;
+	border: 1px solid #D8D8D8;
+	font-size: 12px;
+	border-radius: 100px;
+}
+
+.sports_sub .item_imgbox img {
+	width: 100%;
+}
+
+.sports_sub .sport_type {
+	cursor: pointer
+}
+
+.sports_sub .item_card_info .item_tit {
+	font-size: 24px;
+	margin: 8px 0 8px;
+}
+
+.sports_sub .item_card_info>p {
+	font-size: 14px;
+	line-height: 16px;
+	font-weight: normal;
+}
+
+.sports_sub .sport_type_txt {
+	text-align: center;
+	margin-top: 24px
+}
+
+/* 비시즌-배너 */
+.sports_sub .section_banner_middle .promotion_banner {
+	border: 0;
+	box-shadow: none;
+	height: 130px;
+}
+
+.sports_sub .promotion_banner_link+.promotion_banner_link::before {
+	content: none;
+}
+
+.sports_sub .promotion_banner .promotion_banner_link {
+	width: 48.5%;
+	height: 100%;
+	border: 1px solid #E6EAF2;
+	box-sizing: border-box;
+}
+
+.sports_sub .promotion_banner .promotion_banner_link:first-child {
+	margin-right: 20px;
+}
+
+.sports_sub .section_event_banner .promotion_banner {
+	height: 130px;
+	margin-bottom: 20px;
+	box-shadow: none;
+	text-align: left;
+}
+
+.sports_sub .section_event_banner .promotion_banner:last-of-type {
+	margin-bottom: 0;
+}
+
+.sports_sub .section_event_banner .promotion_banner_link {
+	width: 550px;
+}
+
+.sports_sub .section_event_banner .img_box {
+	height: 100%;
+}
+
+.sports_sub .sports_rule .promotion_banner_link .img_box {
+	width: 105px;
+	height: 90px;
+	margin: 20px 20px;
+}
+
+.sports_sub .sports_rule .promotion_banner_link .img_box img {
+	width: 100%;
+}
+
+.sports_sub .sports_rule .promotion_banner_link .txt_wrap {
+	width: 65%;
+	text-align: left;
+	margin-top: 33px;
+}
+
+.sports_sub .sports_rule .promotion_banner_link .txt_wrap>p {
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 32px;
+}
+
+.sports_sub .sports_rule .promotion_banner_link .txt_wrap>span {
+	color: #242428;
+	font-size: 15px;
+	line-height: 22px;
+	text-decoration: underline;
+}
+
+.sports_sub .common_section.season_middle_banner {
+	margin-top: 70px;
+	width: 1120px;
+}
+
+/* 비시즌-배구구단 스와이퍼 */
+.sports_sub .volley_team {
+	height: 238px;
+	border-radius: 10px;
+	background-color: #F8F9FA;
+}
+
+.sports_sub .volley_team .item_imgbox {
+	padding: 34px 58px 0
+}
+
+.sports_sub .volley_team .sport_type_txt .item_tit {
+	line-height: 28px;
+	font-size: 18px;
+	font-weight: 500;
+	letter-spacing: -0.54px
+}
+
+.sports_sub .volley_team_swiper .volley_team {
+	position: relative;
+}
+
+.sports_sub .volley_team_swiper .volley_team>a {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	text-indent: -99999px;
+}
+
+.sports_sub .volley_team_swiper .volley_team .subscribe {
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	background: url(../img/sports/sub_not.png) no-repeat 0 0/100%;
+}
+
+.sports_sub .volley_team_swiper .volley_team .subscribe.on {
+	background: url(../img/sports/sub_on.png) no-repeat 0 0/100%;
+}
+
+/* 2022-23시즌순위 */
+.sports_sub .sport_banner {
+	background-color: #F8F9FA;
+	border-radius: 10px;
+	display: flex;
+}
+
+.sports_sub .sport_banner_heading {
+	margin-right: 78px
+}
+
+.sports_sub .sport_banner_heading .sport_banner_title {
+	width: 151px;
+	font-size: 26px;
+	font-weight: 500;
+	padding: 30px;
+	letter-spacing: -1.3px;
+	line-height: 32px
+}
+
+.sports_sub .sport_list {
+	display: flex;
+	width: 831px
+}
+
+.sports_sub .sport_list .sport_team_item {
+	margin-right: 37px;
+	padding: 10px 0;
+	display: flex
+}
+
+.sports_sub .sport_list .sport_team_item:last-of-type {
+	margin-right: 18px
+}
+
+.sports_sub .sport_list .sport_team_item .img_box {
+	width: 72px;
+	height: 72px;
+	margin-right: 15px;
+}
+
+.sports_sub .sport_list .sport_team_item .img_box img {
+	width: 100%;
+}
+
+.sports_sub .sport_list .sport_team_item .txt_wrap {
+	padding: 11.5px 0px 11.5px;
+	letter-spacing: -0.8px;
+	width: 160px
+}
+
+.sports_sub .sport_list .sport_team_item .txt_wrap>h3 {
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.sports_sub .sport_list .sport_team_item .txt_wrap>p {
+	font-size: 14px;
+	font-weight: 400;
+}
