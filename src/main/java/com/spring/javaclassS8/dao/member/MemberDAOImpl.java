@@ -70,4 +70,9 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberVO findByNameAndEmail(String name, String email) {
 		return sqlSession.getMapper(MemberDAO.class).findByNameAndEmail(name, email);
 	}
+
+	@Override
+	public boolean updatePassword(MemberVO member) {
+		return sqlSession.getMapper(MemberDAO.class).updatePassword(member);
+	}
 }

@@ -42,7 +42,7 @@ public class SignupController {
 		return "member/signup/form";
 	}
 
-	// 회원가입 처리 (ajax 호출 : member/signup/form.js)
+	// 회원가입 처리
 	@PostMapping("/form")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> postSignup(@ModelAttribute MemberVO member) {
@@ -63,7 +63,7 @@ public class SignupController {
 		return "member/signup/complete";
 	}
 
-	// 이메일 아이디 유무 및 탈퇴여부 확인 (ajax 호출 : member/signup/form.js)
+	// 이메일 아이디 유무 및 탈퇴여부 확인
 	@PostMapping("/checkEmail")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> checkEmail(@RequestParam String email) {
@@ -71,7 +71,7 @@ public class SignupController {
 		return ResponseEntity.ok(response);
 	}
 
-	// 인증번호 메일 발송 (ajax 호출 : member/signup/form.js)
+	// 인증번호 메일 발송
 	@PostMapping("/sendCertification")
 	@ResponseBody
 	public ResponseEntity<String> sendCertification(@RequestParam String email) throws MessagingException {
@@ -79,7 +79,7 @@ public class SignupController {
 		return ResponseEntity.ok(certificationNumber);
 	}
 
-	// 인증번호 일치여부 확인 (ajax 호출 : member/signup/form.js)
+	// 인증번호 일치여부 확인
 	@PostMapping("/verifyCertification")
 	@ResponseBody
 	public ResponseEntity<Boolean> verifyCertification(@RequestParam String email, @RequestParam String certificationNumber) {

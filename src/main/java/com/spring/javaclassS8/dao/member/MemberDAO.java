@@ -35,4 +35,7 @@ public interface MemberDAO {
 
 	// 이름 + 이메일 조합으로 회원 정보 찾기
 	public MemberVO findByNameAndEmail(@Param("name") String name, @Param("email") String email);
+
+	// 비밀번호 찾기 - 비밀번호 재설정 처리
+	public boolean updatePassword(MemberVO member);
 }

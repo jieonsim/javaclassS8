@@ -1,9 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
+<%-- 미리 문자열을 결합합니다 --%>
+<c:set var="homeUri" value="${ctp}/" />
+<c:set var="javaclassUri" value="${ctp}/javaclassS8" />
+<c:set var="baseballUri" value="${ctp}/sports/baseball" />
 <link rel="stylesheet" href="${ctp}/css/layout/header.css">
-
 
 <!-- 모바일 헤더 -->
 <div class="m_header">
@@ -73,8 +76,7 @@
 			</a>
 		</h1>
 		<div class="header_banner ml-auto d-flex align-items-center">
-			<img src="${ctp}/images/layout/header/banner.jpg" alt="헤더 광고 배너"
-				class="img-fluid mr-3" style="width: 200px;">
+			<img src="${ctp}/images/layout/header/banner.jpg" alt="헤더 광고 배너" class="img-fluid mr-3" style="width: 200px;">
 			<div class="banner-text">
 				<p class="mb-1">
 					<strong>모든 스포츠, 하나의 플랫폼</strong>
@@ -88,13 +90,10 @@
 			<nav class="header_gnb_area">
 				<ul class="nav">
 					<li class="nav-item">
-						<a class="nav-link ${currentPage == 'home' ? 'is-active' : ''}"
-							href="${ctp}/">홈</a>
+						<a class="nav-link ${currentPage == 'home' ? 'is-active' : ''}" href="${ctp}/">홈</a>
 					</li>
 					<li class="nav-item">
-						<a
-							class="nav-link ${currentPage == 'baseball' ? 'is-active' : ''}"
-							href="${ctp}/sports/baseball">야구</a>
+						<a class="nav-link ${currentPage == 'baseball' ? 'is-active' : ''}" href="${ctp}/sports/baseball/main">야구</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/sports/football">축구</a>
@@ -118,8 +117,7 @@
 			</nav>
 			<div class="header_search ml-auto">
 				<div class="search-wrapper input-group">
-					<input type="search" class="form-control"
-						placeholder="검색어를 입력해 주세요">
+					<input type="search" class="form-control" placeholder="검색어를 입력해 주세요">
 					<div class="input-group-append">
 						<button class="btn" type="button">
 							<i class="ph ph-magnifying-glass"></i>

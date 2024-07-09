@@ -45,17 +45,15 @@ public class LoginController {
 		if (result.isSuccess()) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", result.getMember());
-			System.out.println("로그인 성공: " + result.getMember().getEmail());
+			System.out.println("로그인 성공: " + result.getMember());
+			
+			// 로그인 성공 후 selectedEmail 세션 삭제
+			session.removeAttribute("selectedEmail");
 		}
 		return result;
 	}
 
 	// 로그아웃
-//	@GetMapping("/logout")
-//	public String logout(HttpServletRequest request, HttpServletResponse response) {
-//		loginService.logout(request, response);
-//		return "redirect:/";
-//	}
 	@GetMapping("/logout")
 	@ResponseBody
 	public ResponseEntity<Map<String, String>> logout(HttpServletRequest request, HttpServletResponse response) {

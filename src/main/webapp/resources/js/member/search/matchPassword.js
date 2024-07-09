@@ -1,6 +1,6 @@
 /**
- * matchPassword.js
- 사용되는 페이지 : 비밀번호 찾기 (member/search/matchPassword.jsp)
+비밀번호 찾기 Depth1 : 이름과 이메일 아이디로 계정 확인 후 해당 이메일로 인증번호 발송, 인증번호 확인 후 resetPassword로 이동
+사용되는 페이지 : member/search/matchPassword.jsp
  */
 
 'use strict';
@@ -24,9 +24,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	// 인풋 내용 삭제 버튼
 	const nameDelBtn = document.querySelector('#inputName + .btnDel');
 	const emailDelBtn = document.querySelector('#inputEmail + .btnDel');
+	const certDelBtn = document.querySelector('#inputEmailCertNo + .btnDel');
 
 	let timer;
-	//let certificationNumber;
+	let certificationNumber;
 
 	// 이름 인풋 다시입력 버튼
 	nameDelBtn.addEventListener('click', function() {
@@ -38,6 +39,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	emailDelBtn.addEventListener('click', function() {
 		emailInput.value = '';
 		emailInput.focus();
+	});
+	
+	// 인증번호 인풋 다시입력 버튼
+	certDelBtn.addEventListener('click', function() {
+		certNoInput.value = '';
+		certNoInput.focus();
 	});
 
 	// 에러 메시지 표시 함수
@@ -99,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			btn.disabled = true;
 		});
 
-		fetch(ctp + '/search/sendPasswordCertification', {
+		fetch(ctp + '/search/sendCertification', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -117,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					confirmBtn.style.display = 'block';
 					resendBtn.textContent = '다시 받기';
 					resendBtn.disabled = false;
+					certNoInput.disabled = false; // 인증번호 입력 필드 활성화
 				} else {
 					showError(data.message);
 					// certBtn과 resendBtn 모두 원래 상태로 복구
@@ -198,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		// 버튼 텍스트 변경 및 비활성화
 		this.textContent = '발송 중';
 		this.disabled = true;
-		
+
 		sendCertification();
 	});
 
@@ -236,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			return;
 		}
 
-		fetch(ctp + '/search/verifyPasswordCertification', {
+		fetch(ctp + '/search/verifyCertification', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

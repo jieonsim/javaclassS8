@@ -171,7 +171,8 @@ ul, ol {
 }
 
 .sports_cont .left_sportsmenu li.on a {
-	background: url(../img/sports/ico_menuon.gif) no-repeat 200px 50%
+	/* background: url(../img/sports/ico_menuon.gif) no-repeat 200px 50% */
+	background: url(../../../images/icon/caret-right.svg) no-repeat 200px 50%
 }
 
 .sports_cont .left_sportsmenu li span {

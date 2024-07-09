@@ -11,6 +11,7 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.spring.javaclassS8.dao.member.MemberDAO;
@@ -28,6 +29,9 @@ public class SearchServiceImpl implements SearchService {
 
 	@Autowired
 	private CertificationEmailService certificationEmailService;
+
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
 	// 이름과 휴대폰 번호 조합으로 이메일 아이디 찾기
 	@Override
@@ -76,7 +80,7 @@ public class SearchServiceImpl implements SearchService {
 
 	// 이름 + 이메일 조합으로 회원 정보 확인 후 인증번호 발송
 	@Override
-	public Map<String, Object> sendPasswordCertification(String name, String email) throws MessagingException {
+	public Map<String, Object> sendCertification(String name, String email) throws MessagingException {
 		Map<String, Object> response = new HashMap<>();
 		MemberVO member = memberDAO.findByNameAndEmail(name, email);
 
@@ -97,8 +101,9 @@ public class SearchServiceImpl implements SearchService {
 		return response;
 	}
 
+	// 비밀번호 찾기 - 발송된 인증번호와 입력한 인증번호 일치여부 확인
 	@Override
-	public Map<String, Object> verifyPasswordCertification(String name, String email, String certificationNumber) {
+	public Map<String, Object> verifyCertification(String name, String email, String certificationNumber) {
 		Map<String, Object> response = new HashMap<>();
 		MemberVO member = memberDAO.findByNameAndEmail(name, email);
 
@@ -129,14 +134,49 @@ public class SearchServiceImpl implements SearchService {
 				response.put("message", "인증이 완료되었습니다.");
 
 				// 인증 완료 후 세션에서 인증 정보 제거
-				session.removeAttribute("passwordCertificationNumber");
-				session.removeAttribute("passwordCertificationTime");
-				session.removeAttribute("passwordCertificationEmail");
+				session.removeAttribute("certificationNumber");
+				session.removeAttribute("certificationTime");
+				session.removeAttribute("certificationEmail");
+
+				// 비밀번호 재설정을 위해 이메일을 세션에 저장
+				session.setAttribute("resetPasswordEmail", email);
 			} else {
 				response.put("success", false);
 				response.put("message", "인증번호가 일치하지 않아요. 다시 확인해 주세요.");
 			}
 		}
 		return response;
+	}
+
+	// 비밀번호 찾기 - 비밀번호 재설정 처리
+	@Override
+	public Map<String, Object> resetPassword(String email, String newPassword) {
+		Map<String, Object> result = new HashMap<>();
+		MemberVO member = memberDAO.findByEmail(email);
+
+		if (member == null) {
+			result.put("success", false);
+			result.put("error", "USER_NOT_FOUOND");
+			return result;
+		}
+
+		if (passwordEncoder.matches(newPassword, member.getPassword())) {
+			result.put("success", false);
+			result.put("error", "SAME_PASSWORD");
+			return result;
+		}
+
+		String econdedPassword = passwordEncoder.encode(newPassword);
+		member.setPassword(econdedPassword);
+
+		boolean updateSucess = memberDAO.updatePassword(member);
+
+		if (updateSucess) {
+			result.put("success", true);
+		} else {
+			result.put("success", false);
+			result.put("error", "UPDATE_FAILED");
+		}
+		return result;
 	}
 }

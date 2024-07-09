@@ -68,10 +68,14 @@
 	color: #242428;
 }
 
-.header_gnb .nav-link.is-active, .header_gnb .nav-link:hover,
-	.header_gnb .nav-link:active {
+.header_gnb .nav-link.is-active, .header_gnb .nav-link:hover, .header_gnb .nav-link:active {
 	font-family: Pretendard-Bold;
 	color: #fa2828;
+}
+
+.header_gnb .nav-link[aria-current="page"] {
+	font-family: Pretendard-Bold !important;
+	color: #fa2828
 }
 
 .header_search .search-wrapper {
@@ -203,8 +207,7 @@
 		border-radius: 50%;
 		background: rgba(255, 255, 255, 0.95);
 	}
-	.toolbar_util .toolbar_refresh::before, .toolbar_util .toolbar_top::before
-		{
+	.toolbar_util .toolbar_refresh::before, .toolbar_util .toolbar_top::before {
 		position: absolute;
 		top: 50%;
 		left: 50%;

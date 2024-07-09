@@ -23,7 +23,7 @@
 			</tr>
 			<tr>
 				<td align="left">
-					<form name="restPasswordForm" method="post">
+					<form name="restPasswordForm" method="post" id="restPasswordForm">
 						<div class="searchContainer">
 							<div class="infoSearchWrap">
 								<div class="infoSearchHeader">
@@ -48,39 +48,29 @@
 											인증이 완료되었어요<br>비밀번호를 재설정 해주세요
 										</h3>
 										<div class="inputStyle disable">
-											<input type="text" name="email" value="" disabled>
+											<input type="text" name="email" id="inputEmail" value="${email}" disabled>
 										</div>
 										<div class="inputStyle">
-											<input name="password" class="pwdInput" type="password" placeholder="새 비밀번호" autofocus>
+											<input type="password" name="password" class="pwdInput" id="inputNewPassword" placeholder="새 비밀번호" autofocus>
 											<button type="button" class="inputBtn btnDel">
 												<span class="blind">삭제</span>
 											</button>
 										</div>
 										<div class="inputStyle">
-											<input name="passwordConfirm" class="pwdInput" type="password" placeholder="새 비밀번호 확인">
+											<input type="password" name="passwordConfirm" class="pwdInput" id="inputNewPasswordConfirm" placeholder="새 비밀번호 확인">
 											<button type="button" class="inputBtn btnDel">
 												<span class="blind">삭제</span>
 											</button>
 										</div>
 										<div class="errorMessage">
 											<div class="message"></div>
-											<!-- (공백일 때)영문, 숫자, 특수문자 8~12자로 입력해주세요. -->
-											<!-- (정규식 불일치 시) 비밀번호 설정 규칙에 맞지 않습니다. -->
-											<!-- (비밀번호 확인 인풋 발류가 위 비밀번호랑 다를 때) 비밀번호가 일치하지 않습니다. -->
-											<!-- 현재의 비밀번호와 새로운 비밀번호를 다르게 설정해 주세요. (!!알럿!!) -->
-											<!-- 회원님께서 요청하신 새로운 비밀번호로 변경하였습니다. (!!알럿!!) -->
 										</div>
 										<div class="dotMessage">
 											<div class="message">영문/숫자/특수문자 중 2가지 이상을 포함하여 8~12자로 입력해주세요.</div>
 										</div>
-										<div class="signinStay">
-											<div class="checkbox">
-												<input type="checkbox" id="saveSess" name="saveSess" checked>
-											</div>
-										</div>
 									</div>
 									<div class="bottomBtnWrap">
-										<button type="button" class="redBtn" onclick="location.href='${ctp}/login'">확인</button>
+										<button type="submit" class="redBtn">확인</button>
 									</div>
 								</div>
 							</div>
@@ -95,5 +85,6 @@
 			</tr>
 		</tbody>
 	</table>
+	<script src="${ctp}/js/member/search/resetPassword.js"></script>
 </body>
 </html>

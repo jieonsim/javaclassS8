@@ -15,7 +15,6 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/layout/header.jsp" />
-	<!-- 데스크탑 -->
 	<div class="container">
 		<main id="content" class="common_container sports_sub" role="main">
 			<div class="inner">
@@ -28,6 +27,8 @@
 						<a href="${ctp}/">티켓챔프 홈</a>
 						&gt;
 						<a href="${ctp}/sports/baseball">야구</a>
+						&gt;
+						<b>LG트윈스</b>
 					</p>
 					<p class="current_time">
 						<em></em>현재시간
@@ -43,8 +44,8 @@
 							<li class="_teamArea">
 								<span class="sportsmenuTEAM">TEAM</span>
 								<ul class="left_submenu">
-									<li>
-										<a href="${ctp}/sports/baseball/lg/reservation">LG트윈스</a>
+									<li class="on menu_option">
+										<a href="#">LG트윈스</a>
 									</li>
 									<li>
 										<a href="/sports/baseball/kt">kt wiz</a>
@@ -88,9 +89,6 @@
 				</div>
 			</div>
 		</main>
-		<button type="button" id="back_to_top" class="btn_move_top is-active is-stuck" onclick="window.scrollTo(0,0);">
-			<span class="blind">맨 위로 이동하기</span>
-		</button>
 	</div>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
 </body>

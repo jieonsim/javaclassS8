@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			.catch(handleLoginError);
 	}
 
-
 	function handleLoginResult(result) {
 		if (result.success) {
 			console.log('자동 로그인 성공');

@@ -1,5 +1,5 @@
 /**
-- login.js
+- 로그인 폼 스크립트
 - 사용되는 페이지 : member/login/login.jsp
  */
 
