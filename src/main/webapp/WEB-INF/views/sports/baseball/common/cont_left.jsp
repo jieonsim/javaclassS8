@@ -3,7 +3,7 @@
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <div class="cont_left">
 	<p class="games_logo">
-		<img src="${ctp}/images/sports/baseball/logo_baseball.gif" alt="logo_baseball">
+		<img src="${ctp}/images/sports/baseball/common/2024_kbo_league.gif" alt="logo_baseball">
 	</p>
 	<ul class="left_sportsmenu">
 		<li class="_teamArea">
@@ -29,14 +29,13 @@
 				</li>
 			</ul>
 		</li>
-		<!-- seasonoff -->
 		<li class="_scheduleArea">
 			<a href="${ctp}/sports/baseball/schedule">
 				<span class="sportsmenu1">전체일정</span>
 			</a>
 		</li>
 		<li class="_guideArea">
-			<a href="/help/guide/reservation/baseball">
+			<a href="/help/guide/reservation">
 				<span class="sportsmenu2">예매가이드</span>
 			</a>
 		</li>

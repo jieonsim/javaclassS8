@@ -10,4 +10,5 @@
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
 <script>
 	var ctp = '${ctp}';
+	var currentTeam = '${currentTeam}';
 </script>

@@ -9,7 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class CurrentPageInterceptor implements HandlerInterceptor {
 
 	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
 		if (modelAndView != null) {
 			String uri = request.getRequestURI();
 			String contextPath = request.getContextPath();
@@ -21,11 +22,14 @@ public class CurrentPageInterceptor implements HandlerInterceptor {
 				currentPage = "home";
 			} else if (uri.startsWith(contextPath + "/sports/baseball")) {
 				currentPage = "baseball";
-			} else if (uri.startsWith(contextPath + "/sports/baseball")) {
+			} else if (uri.startsWith(contextPath + "/sports/football")) {
 				currentPage = "football";
+			} else if (uri.startsWith(contextPath + "/sports/basketball")) {
+				currentPage = "basketball";
+			} else if (uri.startsWith(contextPath + "/sports/volleyball")) {
+				currentPage = "volleyball";
 			}
 
-			// baseball > left submenu 활성화를 위한 설정
 			if (uri.contains("/sports/baseball/lg")) {
 				currentTeam = "lg";
 				teamName = "LG트윈스";
@@ -44,6 +48,30 @@ public class CurrentPageInterceptor implements HandlerInterceptor {
 			} else if (uri.contains("/sports/baseball/hanhwa")) {
 				currentTeam = "hanhwa";
 				teamName = "한화이글스";
+			} else if (uri.contains("/sports/football/uhfc")) {
+				currentTeam = "uhfc";
+				teamName = "울산 HD FC";
+			} else if (uri.contains("/sports/football/steelers")) {
+				currentTeam = "steelers";
+				teamName = "포항 스틸러스";
+			} else if (uri.contains("/sports/football/gwangjufc")) {
+				currentTeam = "gwangjufc";
+				teamName = "광주 FC";
+			} else if (uri.contains("/sports/football/hyundaimotorsfc")) {
+				currentTeam = "hyundaimotorsfc";
+				teamName = "전북 현대모터스 ";
+			} else if (uri.contains("/sports/football/incheonutd")) {
+				currentTeam = "hyundaiMotorsfc";
+				teamName = "인천 유나이티드";
+			} else if (uri.contains("/sports/football/daegufc")) {
+				currentTeam = "daegufc";
+				teamName = "대구FC";
+			} else if (uri.contains("/sports/football/fcseoul")) {
+				currentTeam = "fcseoul";
+				teamName = "FC서울";
+			} else if (uri.contains("/sports/football/gimcheonfc")) {
+				currentTeam = "gimcheonfc";
+				teamName = "김천상무프로축구단";
 			}
 
 			modelAndView.addObject("currentPage", currentPage);
@@ -53,12 +81,14 @@ public class CurrentPageInterceptor implements HandlerInterceptor {
 	}
 
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
 		return true;
 	}
 
 	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+			throws Exception {
 
 	}
 }

@@ -20,4 +20,4 @@
 		<span>00:00</span>
 	</p>
 </div>
-<script src="${ctp}/js/sports/currentTime.js"></script>
+<script src="${ctp}/js/sports/common/currentTime.js"></script>

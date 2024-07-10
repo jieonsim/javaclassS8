@@ -27,5 +27,5 @@ body.no-scroll {
 
 .common_section, .common_inner {
 	margin: 0 auto;
-	width: 1180px; /* 이 값은 $content-width 변수의 실제 값으로 대체해야 합니다 */
+	width: 1180px;
 }
