@@ -1,0 +1,162 @@
+@charset "UTF-8";
+
+main {
+	display: block;
+	font-size: 14px;
+	letter-spacing: -0.03em;
+	color: #242428;
+}
+
+.blind, dt, legend, caption {
+	overflow: hidden;
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	clip: rect(0, 0, 0, 0);
+}
+
+.common_container {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	padding-bottom: 160px;
+}
+
+.event_cont {
+	background: #f8f9fa;
+}
+
+.common_container.event_cont .inner {
+	padding-top: 0;
+}
+
+.inner {
+	width: 1120px;
+	margin: 0 auto;
+	position: relative;
+}
+
+.event_cont button {
+	overflow: visible;
+	border: 0;
+	background-color: rgba(0, 0, 0, 0);
+	cursor: pointer;
+	border-radius: 0;
+	appearance: none;
+	letter-spacing: -0.03em;
+}
+
+.page_heading {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	margin-bottom: 46px;
+	padding-top: 64px;
+}
+
+.page_heading .page_title {
+	flex: none;
+	background: none;
+	font-size: 40px;
+	font-family: 'Pretendard-Bold';
+	line-height: 40px;
+	color: black;
+}
+
+.page_heading .page_title+.common_tab.type_underline {
+	margin: 0 -10px -3px 0;
+}
+
+.common_tab.type_underline .common_tab_list {
+	margin: -2px 0 0 -2px;
+}
+
+.common_tab_area ul {
+	color: #62676c;
+	list-style: none;
+	padding: 0;
+}
+
+.common_tab_list {
+	font-size: 0;
+}
+
+.common_tab.type_underline .common_tab_item {
+	margin: 2px 0 0 2px;
+}
+
+.common_tab_item {
+	display: inline-block;
+}
+
+.common_tab_item li {
+	border: 0;
+	vertical-align: top;
+	padding: 0;
+}
+
+.common_tab.type_underline .common_tab_btn[aria-selected=true] {
+	color: #242428;
+}
+
+.common_tab.type_underline .common_tab_btn {
+	position: relative;
+	padding: 7px 10px;
+	min-height: 40px;
+	font-size: 18px;
+	font-family: 'Pretendard-Medium';
+	line-height: 26px;
+	color: #878d95;
+}
+
+.common_tab.type_underline .common_tab_btn:hover {
+	color: #242428;
+}
+
+.common_tab_btn {
+	outline: none;
+}
+
+.common_tab.type_underline .common_tab_btn[aria-selected=true]::before {
+	position: absolute;
+	bottom: 4px;
+	left: 10px;
+	right: 10px;
+	height: 2px;
+	background: #242428;
+	content: "";
+}
+
+/*목록보기버튼*/
+.list_btn .btn {
+	display: inline-block;
+	overflow: hidden;
+	border-radius: 6px;
+	box-sizing: border-box;
+}
+
+.list_btn .btn_blank {
+	padding: 9px 11px;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 22px;
+	text-align: center;
+	vertical-align: middle;
+	border: 1px solid #dcdde1;
+	background: #fff;
+	color: #242428;
+	width: 90px;
+}
+
+.list_btn .btn:focus {
+	box-shadow: none;
+	border: 1px solid black;
+}
+
+.list_btn .btn a {
+	font-family: 'Pretendard-Regular';
+}

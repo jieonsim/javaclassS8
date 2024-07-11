@@ -385,7 +385,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				.then(response => response.json())
 				.then(data => {
 					if (data.success) {
-						window.location.href = ctp + '/signup/complete';
+						window.location.href = ctp + '/signup/completed';
 					} else {
 						alert('회원가입 중 오류가 발생했습니다.');
 					}

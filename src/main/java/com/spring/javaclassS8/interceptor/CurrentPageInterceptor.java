@@ -2,9 +2,12 @@ package com.spring.javaclassS8.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.spring.javaclassS8.vo.member.MemberVO;
 
 public class CurrentPageInterceptor implements HandlerInterceptor {
 
@@ -17,7 +20,9 @@ public class CurrentPageInterceptor implements HandlerInterceptor {
 			String currentPage = "other";
 			String currentTeam = "";
 			String teamName = "";
+			String currentSelected = "";
 
+			// 헤더 내비
 			if (uri.equals(contextPath + "/") || uri.equals(contextPath)) {
 				currentPage = "home";
 			} else if (uri.startsWith(contextPath + "/sports/baseball")) {
@@ -30,6 +35,7 @@ public class CurrentPageInterceptor implements HandlerInterceptor {
 				currentPage = "volleyball";
 			}
 
+			// 야구 + 축구 탭
 			if (uri.contains("/sports/baseball/lg")) {
 				currentTeam = "lg";
 				teamName = "LG트윈스";
@@ -74,9 +80,33 @@ public class CurrentPageInterceptor implements HandlerInterceptor {
 				teamName = "김천상무프로축구단";
 			}
 
+			// 이벤트 페이지 처리
+			if (uri.startsWith(contextPath + "/event")) {
+				currentPage = "event";
+				if (uri.equals(contextPath + "/event/main") || (uri.equals(contextPath + "/event/contentDetail"))) {
+					currentSelected = "eventMain";
+				} else if (uri.equals(contextPath + "/event/winner")  || (uri.equals(contextPath + "/event/winnerDetail"))) {
+					currentSelected = "eventWinner";
+				} else if (uri.equals(contextPath + "/event/upload")) {
+					currentSelected = "eventUpload";
+				}
+			}
+
+			// 현재 로그인한 사용자의 역할 확인
+			boolean isAdmin = false;
+			HttpSession session = request.getSession(false);
+			if (session != null) {
+				MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
+				if (loginMember != null && loginMember.getRole() == MemberVO.Role.ADMIN) {
+					isAdmin = true;
+				}
+			}
+
 			modelAndView.addObject("currentPage", currentPage);
 			modelAndView.addObject("currentTeam", currentTeam);
 			modelAndView.addObject("teamName", teamName);
+			modelAndView.addObject("currentSelected", currentSelected);
+			modelAndView.addObject("isAdmin", isAdmin);
 		}
 	}
 

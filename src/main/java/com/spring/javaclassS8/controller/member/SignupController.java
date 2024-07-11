@@ -58,9 +58,9 @@ public class SignupController {
 	}
 
 	// 회원가입 성공
-	@GetMapping("/complete")
+	@GetMapping("/completed")
 	public String getSignupCompleted() {
-		return "member/signup/complete";
+		return "member/signup/completed";
 	}
 
 	// 이메일 아이디 유무 및 탈퇴여부 확인

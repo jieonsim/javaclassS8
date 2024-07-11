@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+.event_cont_box #event-title {
+	border-bottom: 1px solid #d2d2d2;
+}
+
+.event_cont_box #event-title input {
+    margin-right: 10px;
+    border: none;
+    font-size: 20px;
+    line-height: 24px;
+    vertical-align: middle;
+    font-family: 'Pretendard-Regular';
+}
+
+ .event_cont_box #event-title input:focus {
+    box-shadow: none;
+}

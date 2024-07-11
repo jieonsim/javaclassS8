@@ -1,0 +1,535 @@
+@charset "UTF-8";
+
+ul, li {
+	list-style: none;
+}
+
+.evt_tit {
+	margin-bottom: 20px;
+	font-size: 26px;
+	color: #242428;
+	line-height: 26px;
+	letter-spacing: -0.5px;
+}
+
+.evt_tit4 {
+	font-size: 26px;
+	font-family: 'Pretendard-Medium';
+}
+
+.event_top_list ul .event_top_list li .event_top_info dt, .event_list_inner li dt, .evt_detail dt {
+	overflow: hidden;
+	display: block;
+	visibility: hidden;
+	position: absolute;
+	top: -1000em;
+	left: 0;
+	list-style: none;
+}
+
+.event_cont {
+	background: #f8f9fa;
+}
+
+.event_top_list {
+	margin-bottom: 37px;
+	/* display: flex; */
+	display: -webkit-box;
+	width: 100%;
+	justify-content: space-between;
+	padding: 0;
+}
+
+.event_top_list li {
+	width: 356px;
+	margin-left: 26px;
+	border-radius: 2px;
+	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+	box-sizing: border-box;
+}
+
+.event_top_list li:first-child {
+	margin-left: 0;
+}
+
+.event_top_list li a {
+	display: block;
+	/* background: url(../img/img_defalt_evt.jpg) no-repeat 0 0; */
+	height: 568px;
+	position: relative;
+}
+
+.event_top_list li .event_top_info {
+	background: #fff;
+	padding: 19px 21px 24px;
+	display: block;
+	box-sizing: border-box;
+	height: 148px;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.event_top_list li .event_top_info dd {
+	color: #878d95;
+	line-height: 20px;
+}
+
+.event_top_list li .event_top_info .event_title {
+	overflow: hidden;
+	width: 100%;
+	font-size: 16px;
+	font-family: 'Pretendard-Bold';
+	letter-spacing: -1px;
+	color: #242428;
+	margin: 0 0 5px 0;
+	line-height: 20px;
+	max-height: 40px;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+/*이벤트 카테고리 강조*/
+.event_top_list li .event_top_info .event_title span {
+	color: #fa2828;
+	margin-right: 5px;
+}
+
+.event_top_list li .event_top_info .event_title .point {
+	color: #fa2828;
+	margin-right: 5px;
+}
+
+.event_top_list li .event_top_info .event_date {
+	font-size: 13px;
+	margin-top: 8px;
+	font-family: 'Pretendard-Regular';
+}
+
+/*이벤트 디테일*/
+.event_cont_box {
+	overflow: hidden;
+	min-height: 242px;
+	padding: 35px 30px 101px;
+	border: 1px solid #ecedf2;
+	border-radius: 2px;
+	background: #fff;
+}
+
+.event_cont_box_v2 {
+	position: relative;
+	padding: 31px 30px
+}
+
+.event_cont_box.nodata .event_list_inner, .event_cont_box.nodata .paging, .event_cont_box .nodata_txt {
+	display: none
+}
+
+.event_cont_box.nodata .nodata_txt {
+	display: block;
+	text-align: center;
+	padding-top: 147px;
+	font-size: 14px;
+	color: #62676c;
+}
+
+.event_cont_box ul {
+	overflow: hidden;
+	margin-left: -20px
+}
+
+.event_cont_box ul:after {
+	display: block;
+	clear: both;
+	content: ''
+}
+
+.event_cont_box li {
+	float: left;
+	width: 324px;
+	margin: 0 0 30px 20px;
+	padding-left: 130px;
+	position: relative;
+	min-height: 134px
+}
+
+.event_cont_box li dd {
+	color: #62676c;
+	line-height: 18px;
+	font-size: 12px
+}
+
+.event_cont_box li .thumb {
+	position: absolute;
+	left: 0;
+	top: 0
+}
+
+.event_cont_box li .event_title {
+	width: 100%;
+	font-size: 16px;
+	line-height: 24px;
+	font-weight: bold;
+	color: #242428;
+	margin: 9px 0 5px -3px
+}
+
+.event_cont_box li .event_title span {
+	color: #fa2828;
+	margin-right: 5px
+}
+
+.event_cont_box li .event_title .point {
+	color: #fa2828;
+	margin-right: 5px
+}
+
+.event_cont_box li .event_date {
+	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, 'Malgun Gothic', Arial, sans-serif;;
+	font-size: 14px;
+	line-height: 20px;
+	margin-top: 5px
+}
+
+.event_cont_box .review_list ul {
+	margin: 0
+}
+
+.event_cont_box .review_list ul li {
+	float: none;
+	width: 100%;
+	min-height: auto;
+	margin: 0;
+	padding: 30px 10px 31px;
+	font-size: 12px;
+	line-height: 18px;
+	box-sizing: border-box
+}
+
+.event_cont_box .review_list ul li pre {
+	white-space: pre-wrap
+}
+
+.event_cont_box .review_list ul li.no_data {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	color: #62676c;
+	line-height: 153px
+}
+
+.event_cont_box .review_list ul li .review_info {
+	overflow: visible;
+	margin: 0 0 7px 0
+}
+
+.event_cont_box .review_list ul li .review_info .star_average {
+	margin: 0
+}
+
+.event_cont_box .event_list {
+	width: 994px;
+	margin: 0
+}
+
+.event_cont_box .event_list:after {
+	display: block;
+	clear: both;
+	content: ''
+}
+
+.event_cont_box .event_item {
+	float: left;
+	width: 465px;
+	margin: 0 0 30px 0;
+	padding: 0
+}
+
+.event_cont_box .event_item:nth-of-type(odd) {
+	margin-right: 64px;
+}
+
+.event_cont_box .event_item_link {
+	display: block;
+	font-size: 0
+}
+
+.event_cont_box .event_img_area {
+	display: inline-block;
+	width: 110px;
+	vertical-align: middle
+}
+
+.event_cont_box .event_img_area img {
+	width: 100%
+}
+
+.event_cont_box .event_info_area {
+	display: inline-block;
+	width: 353px;
+	padding: 0 60px 0 17px;
+	vertical-align: middle;
+	box-sizing: border-box
+}
+
+.event_cont_box .event_info_area .event_title {
+	width: 100%;
+	font-size: 16px;
+	line-height: 24px;
+	font-weight: 500;
+	color: #242428;
+	margin: 0
+}
+
+.event_cont_box .event_info_area .event_title .point {
+	color: #fa2828;
+	margin-right: 5px;
+	font-weight: 700;
+}
+
+.event_cont_box .event_info_area .event_date {
+	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, 'Malgun Gothic', Arial, sans-serif;;
+	font-size: 14px;
+	line-height: 20px;
+	margin-top: 10px
+}
+
+.event_cont_box .write_review {
+	height: 70px
+}
+
+.event_cont_box .write_review textarea {
+	display: block;
+	width: 931px;
+	height: 70px;
+	padding: 25px 27px;
+	border-radius: 0;
+	box-sizing: border-box;
+	resize: none;;
+	color: #242428
+}
+
+.event_cont_box .write_review textarea::placeholder {
+	font-size: 14px;
+	color: #878d95;
+}
+
+.event_cont_box .star_review+.list_btn {
+	margin: 23px 0 10px
+}
+
+.event_cont_box+.list_btn {
+	margin: 30px 0;
+	height: 42px;
+}
+
+.event_cont_box .star_review+.list_btn>.fl {
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 28px;
+	margin-top: 0;
+}
+
+.event_cont_box .star_review+.list_btn>.fl .fbold {
+	font-weight: 700;
+}
+
+.event_cont_box .star_review+.list_btn>.fr {
+	font-size: 14px;
+	line-height: 28px;
+}
+
+.event_cont_box .star_review+.list_btn>.fr .btn_text2 {
+	margin-top: 0;
+}
+
+.evt_detail .evt_title {
+	font-family: 'Pretendard-Bold';
+	line-height: 25px;
+	font-size: 20px;
+	color: #242428;
+	width: 840px;
+	margin-bottom: 1px;
+	line-height: 25px;
+}
+
+.evt_detail .evt_title span {
+	color: #fa2828;
+	margin-right: 5px
+}
+
+.evt_detail .evt_date {
+	font-family: 'Pretendard-Light';
+	font-size: 14px;
+	line-height: 18px;
+	color: #62676c;
+	letter-spacing: -0.4px;
+}
+
+.evt_detail .evt_cont {
+	margin-top: 35px
+}
+
+.evt_detail+.social {
+	top: 10px;
+	right: 30px
+}
+
+.event_cont .list_view .list_cont {
+	min-height: 403px !important
+}
+
+.common_container.event_cont .inner {
+	padding-top: 0;
+}
+
+/*댓글*/
+.star_review {
+	background: #f5f6f9;
+}
+
+.star_review.inquire {
+	padding: 20px 23px 20px 20px
+}
+
+.star_review.inquire .write_review {
+	display: flex;
+	display: -webkit-box;
+	justify-content: flex-start;
+	align-items: center;
+	padding-top: 0
+}
+
+.event_cont_box .write_review textarea {
+	display: block;
+	width: 931px;
+	height: 70px;
+	padding: 25px 27px;
+	border-radius: 0;
+	box-sizing: border-box;
+	color: #242428;
+	font-family: 'Pretendard-Regular';
+}
+
+.write_review textarea {
+	border: 1px solid #e8eaf1;
+	line-height: 18px;
+	overflow-y: auto;
+}
+
+.write_review .btn {
+	width: 84px;
+	padding: 25px 0;
+	border-radius: 0;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 500;
+	text-align: center;
+	line-height: 18px;
+}
+
+.btn_full {
+	background: #242428;
+	border: 1px solid #242428;
+	color: #fff;
+}
+
+/*당첨자 발표 테이블*/
+.basic_tbl table {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	margin: 0;
+	padding: 0;
+	table-layout: fixed;
+	border: 0;
+	display: table;
+	text-indent: initial;
+}
+
+.basic_tbl table thead {
+	display: table-header-group;
+	vertical-align: middle;
+	unicode-bidi: isolate;
+	border-color: inherit;
+}
+
+.basic_tbl table thead th {
+	background: #f8f9fa;
+	font-size: 14px;
+	line-height: 14px;
+	letter-spacing: -1px;
+}
+
+.event_cont .basic_tbl table thead th {
+	color: #878d95;
+	padding: 16px 18px 15px;
+	font-family: 'Pretendard-Bold';
+}
+
+.basic_tbl table tbody tr:first-child td {
+	padding-top: 15px;
+	border-top: 0;
+}
+
+.basic_tbl table tbody td {
+	padding: 8px 18px;
+	border-top: 1px solid #ecedf2;
+	color: #62676c;
+	font-size: 14px;
+	text-align: center;
+	line-height: 22px;
+	font-family: 'Pretendard-Regular';
+}
+
+.basic_tbl table tbody td a {
+	color: #242428;
+}
+
+/*당첨자 발표 디테일*/
+.mgt10 {
+	margin-top: 10px !important;
+}
+
+.list_view {
+	overflow: hidden;
+	border-width: 1px 0;
+	border-style: solid;
+	border-color: #cfd0d7;
+	position: relative;
+	border-bottom-color: #ecedf2;
+}
+
+.list_view dd {
+	margin: 0;
+	display: block;
+	margin-inline-start: 40px;
+	unicode-bidi: isolate;
+}
+
+.list_view .list_title {
+	padding: 20px;
+	border-bottom: 1px solid #ecedf2;
+	font-size: 16px;
+	font-family: 'Pretendard-Bold';
+	color: #242428;
+	line-height: 23px;
+	letter-spacing: -0.04em;
+	margin-left: 0;
+}
+
+.list_view .list_cont {
+	color: #242428;
+	padding: 30px 20px;
+	line-height: 16px;
+	font-size: 14px;
+	margin: 0;
+}
+
+.list_view_v2 .list_title {
+	background: #f8f9fa;
+}

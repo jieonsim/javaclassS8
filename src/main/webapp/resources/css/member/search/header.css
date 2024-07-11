@@ -55,6 +55,7 @@ html {
 
 .intCommonHeader .loginSignupBtn {
 	text-decoration: none;
+	font-family: 'Pretendard-Regular';
 }
 
 @media ( min-width : 1024px) {

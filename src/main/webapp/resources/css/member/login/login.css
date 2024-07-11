@@ -520,9 +520,9 @@
 }
 
 .loginInner .loginButtonBox .loginBtn span {
-	font-weight: 700;
 	font-size: 1.7rem;
 	color: #fff;
+	font-family: 'Pretendard-Bold';
 }
 
 .loginInner .findList {
