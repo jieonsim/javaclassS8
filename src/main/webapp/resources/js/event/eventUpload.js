@@ -1,5 +1,5 @@
 /*
-이벤트 업로드를 위한 CKEDITOR 스크립트
+CKEDITOR 스크립트
  */
 
 CKEDITOR.replace("eventContent", {

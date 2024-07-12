@@ -31,10 +31,4 @@ public class EventController {
 	public String getEventWinnerDetail() {
 		return "event/winnerDetail";
 	}
-
-	// 이벤트 업로드 관리자용
-	@GetMapping("/upload")
-	public String getEventUpload() {
-		return "event/upload";
-	}
 }

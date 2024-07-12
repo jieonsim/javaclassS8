@@ -15,11 +15,6 @@
 				<li role="none" class="common_tab_item">
 					<button type="button" role="tab" onclick="location.href='${ctp}/my/activity/event');" class="common_tab_btn">참여 이벤트</button>
 				</li>
-				<c:if test="${isAdmin}">
-					<li role="none" class="common_tab_item">
-						<button type="button" role="tab" onclick="location.href='${ctp}/event/upload';" class="common_tab_btn" <c:if test="${currentSelected == 'eventUpload'}">aria-selected="true"</c:if>>이벤트 업로드</button>
-					</li>
-				</c:if>
 			</ul>
 		</div>
 	</div>

@@ -1,10 +1,5 @@
-/*
-- 자동 로그인 스크립트
-*/
-
 document.addEventListener('DOMContentLoaded', function() {
 	const API = {
-		autoLogin: `${ctp}/autoLogin`,
 		logout: `${ctp}/logout`,
 		myInfo: `${ctp}/my/memberInfo/info`,
 		myReserve: `${ctp}/my/reserve`,
@@ -15,48 +10,58 @@ document.addEventListener('DOMContentLoaded', function() {
 	};
 
 	function checkLoginStatus() {
-		if (sessionStorage.getItem('isLoggedIn') === 'true') {
-			const userEmail = sessionStorage.getItem('userEmail');
-			const userRole = sessionStorage.getItem('userRole');
-			updateMenu({ email: userEmail, role: userRole });
-		} else {
-			checkAutoLogin();
-		}
-	}
+		fetch(`${ctp}/checkLoginStatus`, {
+			method: 'GET',
+			credentials: 'include'
+		})
+			.then(response => response.json())
+			.then(data => {
+				if (data.isLoggedIn) {
+					sessionStorage.setItem('isLoggedIn', 'true');
+					sessionStorage.setItem('userEmail', data.email);
+					sessionStorage.setItem('userRole', data.role);
+					updateMenu({ email: data.email, role: data.role });
 
-	function checkAutoLogin() {
-		fetch(API.autoLogin, {
+					if (data.autoLoginSuccess) {
+						console.log("자동 로그인 성공");
+						// 필요한 경우 추가 작업 수행
+					}
+				} else {
+					clearLoginSession();
+				}
+			})
+			.catch(error => {
+				console.error('Error checking login status:', error);
+				clearLoginSession();
+			});
+	}
+	
+	/*function checkLoginStatus() {
+		fetch(`${ctp}/checkLoginStatus`, {
 			method: 'GET',
 			credentials: 'include'
 		})
 			.then(response => {
 				if (!response.ok) {
-					throw new Error(`HTTP error! status: ${response.status}`);
+					throw new Error('Network response was not ok');
 				}
 				return response.json();
 			})
-			.then(handleLoginResult)
-			.catch(handleLoginError);
-	}
-
-	function handleLoginResult(result) {
-		if (result.success) {
-			console.log('자동 로그인 성공');
-			const safeUserData = sanitizeUserData(result.member);
-			sessionStorage.setItem('isLoggedIn', 'true');
-			sessionStorage.setItem('userEmail', safeUserData.email);
-			sessionStorage.setItem('userRole', safeUserData.role);
-			updateMenu(safeUserData);
-		} else {
-			//console.warn('자동 로그인 실패:', result.message);
-			clearLoginSession();
-		}
-	}
-
-	function handleLoginError(error) {
-		console.error('Auto login error:', error);
-		clearLoginSession();
-	}
+			.then(data => {
+				if (data.isLoggedIn) {
+					sessionStorage.setItem('isLoggedIn', 'true');
+					sessionStorage.setItem('userEmail', data.email);
+					sessionStorage.setItem('userRole', data.role);
+					updateMenu({ email: data.email, role: data.role });
+				} else {
+					clearLoginSession();
+				}
+			})
+			.catch(error => {
+				console.error('Error checking login status:', error);
+				clearLoginSession();
+			});
+	}*/
 
 	function clearLoginSession() {
 		sessionStorage.removeItem('isLoggedIn');
@@ -65,32 +70,13 @@ document.addEventListener('DOMContentLoaded', function() {
 		updateMenu(null);
 	}
 
-	function sanitizeUserData(userData) {
-		return {
-			email: escapeHtml(userData.email),
-			role: userData.role
-		};
-	}
-
-	function escapeHtml(unsafe) {
-		return unsafe
-			.replace(/&/g, "&amp;")
-			.replace(/</g, "&lt;")
-			.replace(/>/g, "&gt;")
-			.replace(/"/g, "&quot;")
-			.replace(/'/g, "&#039;");
-	}
-
 	window.updateMenu = function(user) {
 		const nav = document.querySelector('.nav');
 		nav.innerHTML = user ? getLoggedInMenu(user) : getLoggedOutMenu();
 	};
 
 	window.handleLogout = function() {
-		sessionStorage.removeItem('isLoggedIn');
-		sessionStorage.removeItem('userEmail');
-		sessionStorage.removeItem('userRole');
-		updateMenu(null);
+		clearLoginSession();
 	};
 
 	function getLoggedInMenu(user) {
@@ -113,12 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	checkLoginStatus();
 
-	if (sessionStorage.getItem('isLoggedIn') === 'true') {
-		const userEmail = sessionStorage.getItem('userEmail');
-		const userRole = sessionStorage.getItem('userRole');
-		updateMenu({ email: userEmail, role: userRole });
-	}
-	
 	document.addEventListener('click', function(e) {
 		if (e.target && e.target.matches('a[href$="/logout"]')) {
 			e.preventDefault();
@@ -126,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				method: 'GET',
 				credentials: 'include'
 			}).then(() => {
-				window.handleLogout();
+				handleLogout();
 				window.location.href = ctp + '/'; // 홈페이지로 리다이렉트
 			}).catch(error => console.error('Logout error:', error));
 		}

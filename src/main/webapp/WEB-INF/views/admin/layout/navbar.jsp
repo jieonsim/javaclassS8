@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
-<link rel="stylesheet" href="${ctp}/css/admin/navbar_title.css">
+<link rel="stylesheet" href="${ctp}/css/admin/vertical-layout-light/navbar_title.css">
 <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
 	<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
 		<div class="me-3">
@@ -13,7 +13,7 @@
 			<%-- <a class="navbar-brand brand-logo" href="${ctp}/admin/main">
 				<img src="${ctp}/images/admin/logo.svg" alt="logo" />
 			</a> --%>
-			<a class="navbar-brand brand-logo" href="${ctp}/">
+			<a class="navbar-brand brand-logo" href="${ctp}/admin/main">
 				<i class="ph-bold ph-person-simple-throw" id="header_title_logo"></i>
 				<span class="logo-text">ticketchamp</span>
 			</a>

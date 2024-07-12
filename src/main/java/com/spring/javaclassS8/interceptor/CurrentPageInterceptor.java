@@ -85,10 +85,9 @@ public class CurrentPageInterceptor implements HandlerInterceptor {
 				currentPage = "event";
 				if (uri.equals(contextPath + "/event/main") || (uri.equals(contextPath + "/event/contentDetail"))) {
 					currentSelected = "eventMain";
-				} else if (uri.equals(contextPath + "/event/winner")  || (uri.equals(contextPath + "/event/winnerDetail"))) {
+				} else if (uri.equals(contextPath + "/event/winner")
+						|| (uri.equals(contextPath + "/event/winnerDetail"))) {
 					currentSelected = "eventWinner";
-				} else if (uri.equals(contextPath + "/event/upload")) {
-					currentSelected = "eventUpload";
 				}
 			}
 

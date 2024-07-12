@@ -71,6 +71,7 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.getMapper(MemberDAO.class).findByNameAndEmail(name, email);
 	}
 
+	// 비밀번호 찾기 - 새로운 비밀번호로 변경
 	@Override
 	public boolean updatePassword(MemberVO member) {
 		return sqlSession.getMapper(MemberDAO.class).updatePassword(member);
