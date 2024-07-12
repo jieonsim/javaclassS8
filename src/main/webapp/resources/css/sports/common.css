@@ -85,7 +85,7 @@ button{cursor:pointer}
 .pdl5{padding-left:5px !important}
 .pdl10{padding-left:10px !important}
 
-.tbl04 th span, h1, .ribbon, .sport_ban li .today, .ui-datepicker .ui-datepicker-header a,.layer a.close, .radio, .detail_box_top .title em, .wing_ban strong, .list_search .input_field .btn_search, .notes2 ol li a span, .mberguide dd p span, .btn_help_gray, .slide_ctrl button, .ico_dnld{display:inline-block;overflow:hidden;font-size:0;background:url(../img/sp.png) no-repeat}
+.tbl04 th span, h1, .ribbon, .sport_ban li .today, .ui-datepicker .ui-datepicker-header a,.layer a.close, .radio, .detail_box_top .title em, .wing_ban strong, .list_search .input_field .btn_search, .notes2 ol li a span, .mberguide dd p span, .btn_help_gray, .slide_ctrl button, .ico_dnld{display:inline-block;overflow:hidden;font-size:0;}
 .btn{display:inline-block;overflow:hidden;border-radius:6px;box-sizing:border-box}
 
 .tl_link{float:left;font-size:12px;letter-spacing:-1px;height:16px}

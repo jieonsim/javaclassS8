@@ -63,24 +63,6 @@ public class LoginController {
 		return ResponseEntity.ok(result);
 	}
 
-	// 자동 로그인 ==> 240712 interceptor 처리로 수정
-//	@GetMapping("/autoLogin")
-//	@ResponseBody
-//	public ResponseEntity<LoginResult> autoLogin(HttpServletRequest request, HttpServletResponse response) {
-//		try {
-//			LoginResult result = loginService.autoLogin(request, response);
-//			if (result.isSuccess()) {
-//				HttpSession session = request.getSession();
-//				session.setAttribute("loginMember", result.getMember());
-//			}
-//			return ResponseEntity.ok(result);
-//		} catch (Exception e) {
-//			e.printStackTrace(); // 로그를 출력
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//					.body(new LoginResult(false, "자동 로그인 처리 중 오류가 발생했습니다."));
-//		}
-//	}
-
 	// 자동로그인
 	@GetMapping("/checkLoginStatus")
 	@ResponseBody

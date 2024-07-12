@@ -38,9 +38,5 @@
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
-	<%-- <script src="${ctp}/js/layout/header.js"></script> --%>
-	<!-- <script>
-		document.querySelector('.nav-link[aria-current="page"]')
-	</script> -->
 </body>
 </html>

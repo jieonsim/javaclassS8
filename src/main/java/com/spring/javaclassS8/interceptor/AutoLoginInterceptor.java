@@ -28,9 +28,6 @@ public class AutoLoginInterceptor implements HandlerInterceptor {
 				LoginResult result = loginService.autoLogin(request, response);
 				if (result.isSuccess()) {
 					session.setAttribute("loginMember", result.getMember());
-					// 클라이언트에 로그인 정보 전달
-					//response.setContentType("application/json");
-					//response.getWriter().write("{\"isLoggedIn\": true, \"email\": \"" + result.getMember().getEmail() + "\", \"role\": \"" + result.getMember().getRole() + "\"}");
 					
 					// 자동 로그인 성공 여부를 request 속성에 저장
 					request.setAttribute("autoLoginSuccess", true);

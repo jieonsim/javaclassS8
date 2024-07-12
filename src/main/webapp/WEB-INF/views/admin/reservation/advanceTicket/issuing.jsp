@@ -44,6 +44,16 @@
 								</div>
 							</div>
 						</div>
+						<div class="col-md-6 grid-margin stretch-card">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">신규 발행된 예매권 목록</h4>
+									<ul id="ticketList" class="list-group">
+										<!-- 여기에 동적으로 예매권 목록이 추가됨 -->
+									</ul>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<jsp:include page="/WEB-INF/views/admin/layout/footer.jsp" />

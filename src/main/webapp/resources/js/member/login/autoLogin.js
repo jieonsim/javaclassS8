@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 					if (data.autoLoginSuccess) {
 						console.log("자동 로그인 성공");
-						// 필요한 경우 추가 작업 수행
 					}
 				} else {
 					clearLoginSession();
@@ -36,33 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			});
 	}
 	
-	/*function checkLoginStatus() {
-		fetch(`${ctp}/checkLoginStatus`, {
-			method: 'GET',
-			credentials: 'include'
-		})
-			.then(response => {
-				if (!response.ok) {
-					throw new Error('Network response was not ok');
-				}
-				return response.json();
-			})
-			.then(data => {
-				if (data.isLoggedIn) {
-					sessionStorage.setItem('isLoggedIn', 'true');
-					sessionStorage.setItem('userEmail', data.email);
-					sessionStorage.setItem('userRole', data.role);
-					updateMenu({ email: data.email, role: data.role });
-				} else {
-					clearLoginSession();
-				}
-			})
-			.catch(error => {
-				console.error('Error checking login status:', error);
-				clearLoginSession();
-			});
-	}*/
-
 	function clearLoginSession() {
 		sessionStorage.removeItem('isLoggedIn');
 		sessionStorage.removeItem('userEmail');
