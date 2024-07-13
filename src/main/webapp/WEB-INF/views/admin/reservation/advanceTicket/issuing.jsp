@@ -48,7 +48,7 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">신규 발행된 예매권 목록</h4>
-									<ul id="ticketList" class="list-group">
+									<ul id="ticketList" class="list-group p-3">
 										<!-- 여기에 동적으로 예매권 목록이 추가됨 -->
 									</ul>
 								</div>

@@ -54,7 +54,7 @@ function updateTicketList(newTickets) {
 
 	newTickets.forEach(ticket => {
 		const li = document.createElement('li');
-		li.textContent = `예매권 번호: ${ticket.advanceTicketNumber}, 만료일: ${ticket.expiresAt}`;
+		li.textContent = `예매권 번호: ${ticket.advanceTicketNumber}`;
 		li.classList.add('new-ticket');
 		ticketList.appendChild(li);
 

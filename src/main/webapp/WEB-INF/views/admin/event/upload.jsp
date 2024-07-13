@@ -29,46 +29,60 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">이벤트 업로드</h4>
-									<p class="card-description">등록할 이벤트의 제목, 시작일, 종료일, 본문을 기재해주세요.</p>
-									<form class="forms-sample">
+									<p class="card-description">등록할 이벤트의 제목, 카테고리, 시작일, 종료일, 본문을 기재해주세요.</p>
+									<form class="forms-sample" id="eventUploadForm" enctype="multipart/form-data">
 										<div class="form-group" id="eventTitle">
 											<label for="title"></label>
-											<input type="text" class="form-control" name="title" placeholder="이벤트명을 입력하세요.">
+											<input type="text" class="form-control" id="inputEventTitle" name="title" placeholder="이벤트명을 입력하세요.">
 										</div>
 										<div class="row">
-											<div class="col-md-6">
-												<label class="col-sm-3 col-form-label">시작일</label>
+											<div class="col-md-4">
+												<label class="col-sm-5 col-form-label">카테고리</label>
 												<div class="form-group row">
-													<div class="col-sm-9">
-														<input type="date" class="form-control" id="startDate" name="startDate">
+													<div class="col-sm-7 ml-3">
+														<select class="form-control" id="inputCategory" name="category">
+															<c:forEach var="category" items="${categories}">
+																<option value="${category}">${category.displayName}</option>
+															</c:forEach>
+														</select>
 													</div>
 												</div>
 											</div>
-											<div class="col-md-6">
-												<label class="col-sm-3 col-form-label">종료일</label>
+											<div class="col-md-4">
+												<label class="col-sm-4 col-form-label">시작일</label>
 												<div class="form-group row">
-													<div class="col-sm-9">
-														<input type="date" class="form-control" id="endDate" name="endDate">
+													<div class="col-sm-8 ml-3">
+														<input type="date" class="form-control" id="inputStartDate" name="startDate">
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<label class="col-sm-4 col-form-label">종료일</label>
+												<div class="form-group row">
+													<div class="col-sm-8 ml-3">
+														<input type="date" class="form-control" id="inputEndDate" name="endDate">
 													</div>
 												</div>
 											</div>
 										</div>
 										<div class="form-group">
 											<label for="thumbnail"></label>
-											<input type="file" name="thumbnail" class="file-upload-default">
-											<div class="input-group col-xs-12">
+											<input type="file" name="thumbnail" id="inputThumbnail" class="file-upload-default">
+											<div class="input-group col-xs-12 px-3">
 												<input type="text" class="form-control file-upload-info" disabled placeholder="썸네일 이미지를 업로드하세요.">
 												<span class="input-group-append">
-													<button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+													<button class="file-upload-browse btn btn-primary" type="button" id="thumbnailUplodBtn">Upload</button>
 												</span>
 											</div>
 										</div>
-										<div class="form-group">
+										<div class="form-group px-3">
 											<label for="content"></label>
 											<textarea class="form-control" rows="6" name="content" id="CKEDITOR"></textarea>
 										</div>
-										<button type="submit" class="btn btn-primary me-2">Submit</button>
-										<button class="btn btn-light">Cancel</button>
+										<div class="form-group px-3">
+											<button type="submit" class="btn btn-primary me-2" id="submitBtn">Submit</button>
+											<button class="btn btn-light">Cancel</button>
+										</div>
 									</form>
 								</div>
 							</div>
@@ -80,11 +94,13 @@
 		</div>
 	</div>
 	<script src="${ctp}/js/member/login/autoLogin.js"></script>
-	<script src="${ctp}/js/common/ckeditor.js"></script>
+	<%-- <script src="${ctp}/js/admin/common/ckeditor.js"></script> --%>
 	<script src="${ctp}/js/admin/common/off-canvas.js"></script>
 	<script src="${ctp}/js/admin/common/hoverable-collapse.js"></script>
 	<script src="${ctp}/js/admin/common/template.js"></script>
 	<script src="${ctp}/js/admin/common/settings.js"></script>
-	<script src="${ctp}/js/admin/common/file-upload.js"></script>
+	<script src="${ctp}/js/admin/common/settings.js"></script>
+	<script src="${ctp}/js/admin/event/upload.js"></script>
+	<%-- <script src="${ctp}/js/admin/common/file-upload.js"></script> --%>
 </body>
 </html>

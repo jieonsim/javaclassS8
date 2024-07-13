@@ -5,13 +5,12 @@
 }
 
 #eventTitle input {
-	padding-bottom: 20px;
+	padding-bottom: 30px;
     margin-right: 10px;
     border: none;
     font-size: 20px;
     line-height: 24px;
     vertical-align: middle;
-    font-family: 'Pretendard-Regular';
 }
 
 #eventTitle input:focus {
