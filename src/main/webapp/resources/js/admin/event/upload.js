@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const thumbnailUploadBtn = document.getElementById('thumbnailUploadBtn');
 
 	// CKEditor 초기화
-	CKEDITOR.replace('content', {
+	CKEDITOR.replace('CKEDITOR', {
 		height: 750,
 		filebrowserUploadUrl: `${ctp}/admin/event/imageUpload`,
 		uploadUrl: `${ctp}/admin/event/imageUpload`
@@ -33,11 +33,19 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	});
 
-	// 폼 제출 이벤트
-	form.addEventListener('submit', function(e) {
-		e.preventDefault();
-		if (validateForm()) {
-			this.submit();
+	// 날짜 입력 필드 초기화 및 유효성 검사
+	const today = new Date().toISOString().split('T')[0];
+	startDateInput.min = today;
+	endDateInput.min = today;
+
+	startDateInput.addEventListener('change', function() {
+		endDateInput.min = this.value;
+	});
+
+	endDateInput.addEventListener('change', function() {
+		if (this.value < startDateInput.value) {
+			alert('종료일은 시작일 이후여야 합니다.');
+			this.value = '';
 		}
 	});
 
@@ -55,12 +63,18 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 		});
 
-		const content = CKEDITOR.instances.content.getData().trim();
-		if (!content) {
-			isValid = false;
-			document.querySelector('#cke_content').classList.add('is-invalid');
+		// CKEditor 인스턴스 존재 여부 확인
+		if (CKEDITOR.instances.CKEDITOR) {
+			const content = CKEDITOR.instances.CKEDITOR.getData().trim();
+			if (!content) {
+				isValid = false;
+				CKEDITOR.instances.CKEDITOR.container.addClass('is-invalid');
+			} else {
+				CKEDITOR.instances.CKEDITOR.container.removeClass('is-invalid');
+			}
 		} else {
-			document.querySelector('#cke_content').classList.remove('is-invalid');
+			console.error('CKEditor instance "CKEDITOR" not found');
+			isValid = false;
 		}
 
 		if (!isValid) {
@@ -70,19 +84,41 @@ document.addEventListener('DOMContentLoaded', function() {
 		return isValid;
 	}
 
-	// 날짜 입력 필드 초기화 및 유효성 검사
-	const today = new Date().toISOString().split('T')[0];
-	startDateInput.min = today;
-	endDateInput.min = today;
+	// 이벤트 업로드 함수
+	function uploadEvent() {
+		const formData = new FormData(form);
 
-	startDateInput.addEventListener('change', function() {
-		endDateInput.min = this.value;
-	});
+		fetch(`${ctp}/admin/event/upload`, {
+			method: 'POST',
+			body: formData
+		})
+			.then(response => response.json())
+			.then(data => {
+				if (data.status === 'success') {
+					alert(data.message);
+					resetForm();
+				} else {
+					alert('업로드 실패: ' + data.message);
+				}
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				alert('업로드 중 오류가 발생했습니다.');
+			});
+	}
 
-	endDateInput.addEventListener('change', function() {
-		if (this.value < startDateInput.value) {
-			alert('종료일은 시작일 이후여야 합니다.');
-			this.value = '';
+	// 폼 초기화 함수
+	function resetForm() {
+		form.reset();
+		CKEDITOR.instances.CKEDITOR.setData('');
+		thumbnailInfoInput.value = '';
+	}
+
+	// 폼 제출 이벤트
+	form.addEventListener('submit', function(e) {
+		e.preventDefault();
+		if (validateForm()) {
+			uploadEvent();
 		}
 	});
 });

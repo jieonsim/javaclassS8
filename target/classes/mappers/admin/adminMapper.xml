@@ -7,4 +7,10 @@
 		INSERT INTO advance_tickets (adminId, advanceTicketNumber, used, expiresAt, issuedAt)
 		VALUES (#{adminId},	#{advanceTicketNumber}, #{used}, #{expiresAt}, #{issuedAt})
 	</insert>
+	
+	<!-- 이벤트 업로드 -->
+	<insert id="insertEvent" parameterType="com.spring.javaclassS8.vo.event.EventVO">
+        INSERT INTO events (adminId, eventCategory, title, content, thumbnail, startDate, endDate, status)
+        VALUES (#{adminId}, #{eventCategory}, #{title}, #{content}, #{thumbnail}, #{startDate}, #{endDate}, 'UPCOMING')
+    </insert>
 </mapper>

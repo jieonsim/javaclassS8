@@ -30,7 +30,7 @@
 								<div class="card-body">
 									<h4 class="card-title">이벤트 업로드</h4>
 									<p class="card-description">등록할 이벤트의 제목, 카테고리, 시작일, 종료일, 본문을 기재해주세요.</p>
-									<form class="forms-sample" id="eventUploadForm" enctype="multipart/form-data">
+									<form class="forms-sample" id="eventUploadForm" enctype="multipart/form-data" method="post">
 										<div class="form-group" id="eventTitle">
 											<label for="title"></label>
 											<input type="text" class="form-control" id="inputEventTitle" name="title" placeholder="이벤트명을 입력하세요.">
@@ -71,7 +71,7 @@
 											<div class="input-group col-xs-12 px-3">
 												<input type="text" class="form-control file-upload-info" disabled placeholder="썸네일 이미지를 업로드하세요.">
 												<span class="input-group-append">
-													<button class="file-upload-browse btn btn-primary" type="button" id="thumbnailUplodBtn">Upload</button>
+													<button class="file-upload-browse btn btn-primary" type="button" id="thumbnailUploadBtn">Upload</button>
 												</span>
 											</div>
 										</div>
@@ -94,6 +94,7 @@
 		</div>
 	</div>
 	<script src="${ctp}/js/member/login/autoLogin.js"></script>
+	<script src="${ctp}/ckeditor/ckeditor.js"></script>
 	<%-- <script src="${ctp}/js/admin/common/ckeditor.js"></script> --%>
 	<script src="${ctp}/js/admin/common/off-canvas.js"></script>
 	<script src="${ctp}/js/admin/common/hoverable-collapse.js"></script>

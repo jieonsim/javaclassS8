@@ -5,10 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.javaclassS8.vo.admin.AdvanceTicketVO;
+import com.spring.javaclassS8.vo.event.EventVO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
-	
+
 	@Autowired
 	private SqlSession sqlSession;
 
@@ -18,4 +19,9 @@ public class AdminDAOImpl implements AdminDAO {
 		sqlSession.getMapper(AdminDAO.class).insertAdvanceTicket(ticket);
 	}
 
+	// 이벤트 업로드
+	@Override
+	public void insertEvent(EventVO event) {
+		sqlSession.getMapper(AdminDAO.class).insertEvent(event);
+	}
 }
