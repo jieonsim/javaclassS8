@@ -8,7 +8,8 @@ public interface AdminDAO {
 	// 예매권 발행하기 처리
 	void insertAdvanceTicket(AdvanceTicketVO ticket);
 
-	// 이벤트 업로드
-	void insertEvent(EventVO event);
+	// 이벤트 업로드 처리
+	int insertEvent(EventVO event);
+
 
 }

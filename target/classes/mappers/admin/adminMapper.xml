@@ -10,7 +10,8 @@
 	
 	<!-- 이벤트 업로드 -->
 	<insert id="insertEvent" parameterType="com.spring.javaclassS8.vo.event.EventVO">
-        INSERT INTO events (adminId, eventCategory, title, content, thumbnail, startDate, endDate, status)
-        VALUES (#{adminId}, #{eventCategory}, #{title}, #{content}, #{thumbnail}, #{startDate}, #{endDate}, 'UPCOMING')
+    	INSERT INTO events (adminId, eventCategory, title, content, startDate, endDate)
+        <!-- VALUES (#{adminId}, #{eventCategory}, #{title}, #{content}, #{thumbnail}, #{startDate}, #{endDate}, #{status}) -->
+        VALUES (3, '예매권', #{title}, #{content}, #{startDate}, #{endDate})
     </insert>
 </mapper>

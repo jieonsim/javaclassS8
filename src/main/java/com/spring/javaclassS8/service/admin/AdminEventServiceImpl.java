@@ -1,20 +1,17 @@
 package com.spring.javaclassS8.service.admin;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.spring.javaclassS8.dao.admin.AdminDAO;
 import com.spring.javaclassS8.vo.event.EventVO;
@@ -25,65 +22,60 @@ public class AdminEventServiceImpl implements AdminEventService {
 	@Autowired
 	private AdminDAO adminDAO;
 
-	@Value("${file.upload.path}")
-	private String fileUploadPath;
-
+	// content에 이미지가 있다면 이미지를 'ckeditor'폴더에서 'board'폴더로 복사처리한다.
 	@Override
-	public void uploadEvent(EventVO event, MultipartFile thumbnail) throws Exception {
-		// 1. 썸네일 이미지 저장
-		String thumbnailPath = saveThumbnail(thumbnail);
-		event.setThumbnail(thumbnailPath);
+	public void imgCheck(String content) {
+		//      0         1         2         3
+		//                01234567890123456789012345678901234567890
+		// <p><img alt="" src="/javaclassS/data/ckeditor/240626093722_5.jpg" style="height:433px; width:700px" /></p>
+		// <p><img alt="" src="/javaclassS/data/board/240626093722_5.jpg" style="height:433px; width:700px" /></p>
 
-		// 2. 컨텐츠 이미지 처리
-		String content = processContentImages(event.getContent());
-		event.setContent(content);
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+		String realPath = request.getSession().getServletContext().getRealPath("/resources/data/");
 
-		// 3. 이벤트 정보 저장
-		adminDAO.insertEvent(event);
-	}
+		int position = 31;
+		String nextImg = content.substring(content.indexOf("src=\"/") + position);
+		boolean sw = true;
 
-	@Override
-	public Map<String, Object> uploadImage(MultipartFile file) {
-		Map<String, Object> result = new HashMap<>();
-		try {
-			String fileName = file.getOriginalFilename();
-			String filePath = fileUploadPath + "/ckeditor/event/" + fileName;
-			File dest = new File(filePath);
-			file.transferTo(dest);
+		while (sw) {
+			String imgFile = nextImg.substring(0, nextImg.indexOf("\""));
 
-			result.put("uploaded", 1);
-			result.put("fileName", fileName);
-			result.put("url", "/data/ckeditor/event/" + fileName);
-		} catch (IOException e) {
-			result.put("uploaded", 0);
-			Map<String, String> errorMap = new HashMap<>();
-			errorMap.put("message", "파일 업로드에 실패했습니다.");
-			result.put("error", errorMap);
+			String origFilePath = realPath + "ckeditor/" + imgFile;
+			String copyFilePath = realPath + "event/" + imgFile;
+
+			fileCopyCheck(origFilePath, copyFilePath); // ckeditor폴더의 그림파일을 event폴더위치로 복사처리하는 메소드.
+
+			if (nextImg.indexOf("src=\"/") == -1)
+				sw = false;
+			else
+				nextImg = nextImg.substring(nextImg.indexOf("src=\"/") + position);
 		}
-		return result;
 	}
 
-	private String saveThumbnail(MultipartFile thumbnail) throws IOException {
-		String fileName = thumbnail.getOriginalFilename();
-		String filePath = fileUploadPath + "/event/thumbnail/" + fileName;
-		File dest = new File(filePath);
-		thumbnail.transferTo(dest);
-		return "/data/event/thumbnail/" + fileName;
-	}
+	// 파일 복사처리
+		private void fileCopyCheck(String origFilePath, String copyFilePath) {
+			try {
+				FileInputStream fis = new FileInputStream(new File(origFilePath));
+				FileOutputStream fos = new FileOutputStream(new File(copyFilePath));
 
-	private String processContentImages(String content) throws IOException {
-		Document doc = Jsoup.parse(content);
-		Elements imgs = doc.select("img");
-		for (Element img : imgs) {
-			String src = img.attr("src");
-			if (src.startsWith("/data/ckeditor/event/")) {
-				String fileName = src.substring(src.lastIndexOf("/") + 1);
-				File source = new File(fileUploadPath + "/ckeditor/event/" + fileName);
-				File dest = new File(fileUploadPath + "/event/content/" + fileName);
-				Files.copy(source.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
-				img.attr("src", "/data/event/content/" + fileName);
+				byte[] b = new byte[2048];
+				int cnt = 0;
+				while ((cnt = fis.read(b)) != -1) {
+					fos.write(b, 0, cnt);
+				}
+				fos.flush();
+				fos.close();
+				fis.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
-		return doc.body().html();
-	}
+
+		@Override
+		public int insertEvent(EventVO event) {
+			return adminDAO.insertEvent(event);
+		}
+
 }

@@ -11,9 +11,9 @@ public class EventVO {
 	private EventCategory eventCategory;
 	private String title;
 	private String content;
-	private String thumbnail;
-	private Timestamp startDate;
-	private Timestamp endDate;
+	/* private String thumbnail; */
+	private String startDate;
+	private String endDate;
 	private Status status;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;

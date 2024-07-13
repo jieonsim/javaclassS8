@@ -18,8 +18,8 @@
 	<resources mapping="/data/**" location="/resources/data/" />
 	<resources mapping="/vendors/**" location="/resources/vendors/" />
 	<resources mapping="/ckeditor/**" location="/resources/ckeditor/" />
-	<resources mapping="/data/ckeditor/**" location="/resources/data/ckeditor/" />
-	<resources mapping="/data/event/**" location="/resources/data/event/" />
+	<resources mapping="/event/content/**" location="/resources/data/event/content/" />
+	<resources mapping="/event/thumbnails/**" location="/resources/data/event/thumbnails/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -38,4 +38,6 @@
 		<beans:property name="maxUploadSize" value="20971520" />
 		<beans:property name="defaultEncoding" value="utf-8" />
 	</beans:bean>
+	
+	<context:component-scan base-package="com.spring.javaclassS8, com.spring.javaclassS8.exception" />
 </beans:beans>
