@@ -1,5 +1,7 @@
 show tables;
 
+drop table events;
+
 /* 이벤트 */
 CREATE TABLE events (
     id INT NOT NULL AUTO_INCREMENT COMMENT '이벤트 고유번호',

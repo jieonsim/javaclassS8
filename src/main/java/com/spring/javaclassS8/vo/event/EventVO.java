@@ -2,6 +2,8 @@ package com.spring.javaclassS8.vo.event;
 
 import java.sql.Timestamp;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -11,12 +13,13 @@ public class EventVO {
 	private EventCategory eventCategory;
 	private String title;
 	private String content;
-	/* private String thumbnail; */
+	private String thumbnail;
 	private String startDate;
 	private String endDate;
 	private Status status;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
+	private MultipartFile thumbnailFile;
 
 	public enum EventCategory {
 		예매권("예매권"), 기타("기타");

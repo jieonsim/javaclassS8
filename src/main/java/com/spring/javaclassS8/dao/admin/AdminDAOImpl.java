@@ -19,6 +19,7 @@ public class AdminDAOImpl implements AdminDAO {
 		sqlSession.getMapper(AdminDAO.class).insertAdvanceTicket(ticket);
 	}
 
+	// 이벤트 업로드
 	@Override
 	public int insertEvent(EventVO event) {
 		return sqlSession.getMapper(AdminDAO.class).insertEvent(event);
