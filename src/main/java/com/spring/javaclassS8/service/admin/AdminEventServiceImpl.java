@@ -22,13 +22,12 @@ public class AdminEventServiceImpl implements AdminEventService {
 	@Autowired
 	private AdminDAO adminDAO;
 
-	// content에 이미지가 있다면 이미지를 'ckeditor'폴더에서 'board'폴더로 복사처리한다.
+	// content에 이미지가 있다면 이미지를 'ckeditor'폴더에서 'event'폴더로 복사처리한다.
 	@Override
 	public void imgCheck(String content) {
-		//      0         1         2         3
+		//                0         1         2         3
 		//                01234567890123456789012345678901234567890
 		// <p><img alt="" src="/javaclassS/data/ckeditor/240626093722_5.jpg" style="height:433px; width:700px" /></p>
-		// <p><img alt="" src="/javaclassS/data/board/240626093722_5.jpg" style="height:433px; width:700px" /></p>
 
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 		String realPath = request.getSession().getServletContext().getRealPath("/resources/data/");
