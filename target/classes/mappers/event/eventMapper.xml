@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.javaclassS8.dao.event.EventDAO">
+	<resultMap id="eventResultMap" type="com.spring.javaclassS8.vo.event.EventVO">
+		<result property="eventCategory" column="eventCategory" javaType="com.spring.javaclassS8.vo.event.EventVO$EventCategory" 
+        typeHandler="com.spring.javaclassS8.typehandler.EventCategoryTypeHandler"/>
+    	<result property="status" column="status" javaType="com.spring.javaclassS8.vo.event.EventVO$Status" 
+            typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+	</resultMap>
+
+	<select id="getAllEvents" resultMap="eventResultMap">
+    	SELECT * FROM events ORDER BY startDate DESC
+	</select>
+	<select id="getEventId" parameterType="int" resultMap="eventResultMap">
+    	SELECT * FROM events WHERE id = #{id}
+	</select>
+</mapper>

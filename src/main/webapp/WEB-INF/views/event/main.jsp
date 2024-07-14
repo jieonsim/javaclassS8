@@ -18,56 +18,50 @@
 		<div class="inner">
 			<jsp:include page="/WEB-INF/views/event/header.jsp" />
 			<h2 class="blind">이벤트</h2>
-			<ul class="event_top_list">
+			<c:forEach items="${events}" var="event" varStatus="status">
+				<c:if test="${status.index % 3 == 0}">
+					<ul class="event_top_list">
+				</c:if>
 				<li>
-					<a href="${ctp}/event/contentDetail">
-						<img src="${ctp}/images/event_dummy/sanrio/sanrio_thumbnail1.gif" alt="K리그X산리오" width="356" height="420">
+					<a href="${ctp}/event/contentDetail?id=${event.id}">
+						<img src="${ctp}/event/thumbnails/${event.thumbnail}" alt="이벤트썸네일" width="356" height="420">
 						<div class="event_top_info">
 							<dl>
 								<dt>제목</dt>
 								<dd class="event_title">
-									<span class="point">[예매권]</span>
-									'산리오캐릭터즈 X K리그' 콜라보 출시 이벤트
+									<span class="point">[${event.eventCategory}]</span>
+									${event.title}
 								</dd>
 								<dt>기간</dt>
-								<dd class="event_date">2024.07.10 ~ 2024.07.17</dd>
+								<dd class="event_date">${event.startDate}~${event.endDate}</dd>
 							</dl>
 						</div>
 					</a>
 				</li>
-				<li>
-					<a href="${ctp}/event/contentDetail">
-						<img src="${ctp}/images/event_dummy/lessey/thumbnail.jpg" alt="KBOX최강레시" width="356" height="420">
-						<div class="event_top_info">
-							<dl>
-								<dt>제목</dt>
-								<dd class="event_title">
-									<span class="point">[예매권]</span>
-									'레시앤프렌즈 X KBO' 콜라보 출시 이벤트
-								</dd>
-								<dt>기간</dt>
-								<dd class="event_date">2024.07.01 ~ 2024.07.26</dd>
-							</dl>
-						</div>
-					</a>
-				</li>
-				<li>
-					<a href="${ctp}/event/contentDetail">
-						<img src="${ctp}/images/event_dummy/kakao/emoticon_thumbnail.png" alt="KBOX카카오이모티콘" width="356" height="420">
-						<div class="event_top_info">
-							<dl>
-								<dt>제목</dt>
-								<dd class="event_title">
-									<span class="point">[예매권]</span>
-									'슈야와 토야 X KBO' 이모티콘 출시 이벤트
-								</dd>
-								<dt>기간</dt>
-								<dd class="event_date">2024.06.18 ~ 2024.08.04</dd>
-							</dl>
-						</div>
-					</a>
-				</li>
-			</ul>
+				<c:if test="${status.index % 3 == 2 || status.last}">
+					</ul>
+				</c:if>
+			</c:forEach>
+			<%-- <ul class="event_top_list">
+				<c:forEach items="${events}" var="event">
+					<li>
+						<a href="${ctp}/event/contentDetail?id=${event.id}">
+							<img src="${ctp}/event/thumbnails/${event.thumbnail}" alt="이벤트썸네일" width="356" height="420">
+							<div class="event_top_info">
+								<dl>
+									<dt>제목</dt>
+									<dd class="event_title">
+										<span class="point">[${event.eventCategory}]</span>
+										${event.title}
+									</dd>
+									<dt>기간</dt>
+									<dd class="event_date">${event.startDate}~${event.endDate}</dd>
+								</dl>
+							</div>
+						</a>
+					</li>
+				</c:forEach>
+			</ul> --%>
 			<p class="nodata_txt" style="display: none;">등록된 이벤트가 없습니다.</p>
 		</div>
 	</main>

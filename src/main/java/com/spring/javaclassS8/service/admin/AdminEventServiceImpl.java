@@ -5,7 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.UUID;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,7 @@ public class AdminEventServiceImpl implements AdminEventService {
 
 	@Autowired
 	private AdminDAO adminDAO;
-	
+
 	@Autowired
 	private ServletContext servletContext;
 
@@ -39,33 +40,57 @@ public class AdminEventServiceImpl implements AdminEventService {
 		return adminDAO.insertEvent(event);
 	}
 
-	
 	// 이벤트 업로드 컨텐츠 이미지 처리
 	@Override
 	public void imgCheck(String content) {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-		String realPath = request.getSession().getServletContext().getRealPath("/resources/data/");
+	    HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+	    String realPath = request.getSession().getServletContext().getRealPath("/resources/data/");
 
-		// src="/javaclassS/data/ckeditor/event/240626093722_5.jpg"
-		// s에서 0부터 시작 / event의 e: 37 
-		int position = 37;
-		String nextImg = content.substring(content.indexOf("src=\"/") + position);
-		boolean sw = true;
+	    int startIndex = 0;
+	    while (true) {
+	        int srcIndex = content.indexOf("src=\"/", startIndex);
+	        if (srcIndex == -1) break; // 더 이상 이미지가 없으면 종료
 
-		while (sw) {
-			String imgFile = nextImg.substring(0, nextImg.indexOf("\""));
+	        int pathStartIndex = content.indexOf("/data/", srcIndex);
+	        int pathEndIndex = content.indexOf("\"", pathStartIndex);
+	        
+	        if (pathStartIndex == -1 || pathEndIndex == -1) break; // 올바른 경로를 찾지 못하면 종료
 
-			String origFilePath = realPath + "ckeditor/event" + imgFile;
-			String copyFilePath = realPath + "event/content/" + imgFile;
+	        String imgPath = content.substring(pathStartIndex + 6, pathEndIndex); // "/data/" 이후의 경로
+	        
+	        String origFilePath = realPath + imgPath;
+	        String copyFilePath = realPath + "event/content/" + imgPath.substring(imgPath.lastIndexOf("/") + 1);
 
-			fileCopyCheck(origFilePath, copyFilePath);
+	        fileCopyCheck(origFilePath, copyFilePath);
 
-			if (nextImg.indexOf("src=\"/") == -1)
-				sw = false;
-			else
-				nextImg = nextImg.substring(nextImg.indexOf("src=\"/") + position);
-		}
+	        startIndex = pathEndIndex; // 다음 검색을 위해 인덱스 업데이트
+	    }
 	}
+//	@Override
+//	public void imgCheck(String content) {
+//		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+//		String realPath = request.getSession().getServletContext().getRealPath("/resources/data/");
+//
+//		// src="/javaclassS/data/ckeditor/event/240626093722_5.jpg"
+//		// s에서 0부터 시작 / event의 e: 37
+//		int position = 37;
+//		String nextImg = content.substring(content.indexOf("src=\"/") + position);
+//		boolean sw = true;
+//
+//		while (sw) {
+//			String imgFile = nextImg.substring(0, nextImg.indexOf("\""));
+//
+//			String origFilePath = realPath + "ckeditor/event" + imgFile;
+//			String copyFilePath = realPath + "event/content/" + imgFile;
+//
+//			fileCopyCheck(origFilePath, copyFilePath);
+//
+//			if (nextImg.indexOf("src=\"/") == -1)
+//				sw = false;
+//			else
+//				nextImg = nextImg.substring(nextImg.indexOf("src=\"/") + position);
+//		}
+//	}
 
 	// data/ckeditor/event > data/event/content로 이미지 파일 복사 처리
 	private void fileCopyCheck(String origFilePath, String copyFilePath) {
@@ -91,9 +116,20 @@ public class AdminEventServiceImpl implements AdminEventService {
 	// 썸네일 저장
 	@Override
 	public String saveThumbnail(MultipartFile file) throws IOException {
-		String realPath = servletContext.getRealPath("/resources/data/event/thumbnails/");
-		String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+//		String realPath = servletContext.getRealPath("/resources/data/event/thumbnails/");
+//		String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+//
+//		File saveFile = new File(realPath, fileName);
+//		file.transferTo(saveFile);
 
+		String realPath = servletContext.getRealPath("/resources/data/event/thumbnails/");
+
+		// 현재 날짜와 시간을 이용하여 파일 이름 생성
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
+		String fileName = sdf.format(date) + "_" + file.getOriginalFilename();
+
+		// 파일 저장
 		File saveFile = new File(realPath, fileName);
 		file.transferTo(saveFile);
 

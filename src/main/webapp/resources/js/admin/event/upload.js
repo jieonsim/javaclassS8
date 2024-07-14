@@ -1,3 +1,5 @@
+/*js/admin/event/upload.js*/
+
 document.addEventListener('DOMContentLoaded', function() {
 	const form = document.getElementById('eventUploadForm');
 	const titleInput = document.getElementById('inputEventTitle');

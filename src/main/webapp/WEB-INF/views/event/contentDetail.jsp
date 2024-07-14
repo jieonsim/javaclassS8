@@ -23,17 +23,13 @@
 				<dl class="evt_detail">
 					<dt>이벤트 제목</dt>
 					<dd class="evt_title" id="eventTitle">
-						<span>[예매권]</span>
-						'산리오캐릭터즈 X K리그' 콜라보 출시 이벤트
+						<span>[${event.eventCategory}]</span>
+						${event.title}
 					</dd>
 					<dt>이벤트 기간</dt>
-					<dd class="evt_date">2024.07.10~2024.07.17</dd>
+					<dd class="evt_date">${event.startDate} ~ ${event.endDate}</dd>
 					<dt>이벤트 내용</dt>
-					<dd class="evt_cont">
-						<img src="${ctp}/images/event_dummy/sanrio/FC서울_kitty.jfif" title="이벤트_pc_미오프라텔로퀴즈.jpg" border="0" width="500">
-						<img src="${ctp}/images/event_dummy/sanrio/대구FC_mymelody.jfif" title="이벤트_pc_미오프라텔로퀴즈.jpg" border="0" width="500">
-						<img src="${ctp}/images/event_dummy/sanrio/팀K리그_badbadtzmaru.jfif" title="이벤트_pc_미오프라텔로퀴즈.jpg" border="0" width="500">
-					</dd>
+					<dd class="evt_cont">${event.content}</dd>
 				</dl>
 			</div>
 			<div class="list_btn">

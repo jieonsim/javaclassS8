@@ -43,7 +43,8 @@ public class AdminEventController {
 	}
 	
 	// 이벤트 업로드 시 ckeditor 이미지 업로드 처리
-	@RequestMapping(value = "/imageUpload")
+	/* @RequestMapping(value = "/imageUpload") */
+	@PostMapping("/imageUpload")
 	public void imageUploadGet(MultipartFile upload, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
@@ -66,39 +67,78 @@ public class AdminEventController {
 		fos.close();
 	}
 	
+//	// 이벤트 업로드 처리
+//	@PostMapping("/upload")
+//	@ResponseBody
+//	public ResponseEntity<?> uploadEvent(@ModelAttribute EventVO event, HttpSession session) {
+//		try {
+//			MemberVO admin = (MemberVO) session.getAttribute("loginMember");
+//			if (admin == null) {
+//				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.singletonMap("error", "로그인이 필요합니다."));
+//			}
+//			event.setAdminId(admin.getId());
+//
+//			// 썸네일 처리
+//			if (event.getThumbnailFile() != null && !event.getThumbnailFile().isEmpty()) {
+//			    String thumbnailFileName = adminEventService.saveThumbnail(event.getThumbnailFile());
+//			    event.setThumbnail(thumbnailFileName);
+//			}
+//			
+//			// 컨텐츠 이미지 처리
+//			if (event.getContent().indexOf("src=\"/") != -1) {
+//				adminEventService.imgCheck(event.getContent());
+//			}
+//			event.setContent(event.getContent().replace("/data/ckeditor/event/", "/data/event/content/"));
+//
+//			int res = adminEventService.insertEvent(event);
+//
+//			if (res != 0) {
+//				return ResponseEntity.ok(Collections.singletonMap("message", "이벤트가 성공적으로 업로드되었습니다."));
+//			} else {
+//				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "이벤트 업로드에 실패했습니다."));
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "이벤트 업로드 중 오류가 발생했습니다: " + e.getMessage()));
+//		}
+//	}
 	// 이벤트 업로드 처리
 	@PostMapping("/upload")
 	@ResponseBody
 	public ResponseEntity<?> uploadEvent(@ModelAttribute EventVO event, HttpSession session) {
-		try {
-			MemberVO admin = (MemberVO) session.getAttribute("loginMember");
-			if (admin == null) {
-				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.singletonMap("error", "로그인이 필요합니다."));
-			}
-			event.setAdminId(admin.getId());
+	    try {
+	        MemberVO admin = (MemberVO) session.getAttribute("loginMember");
+	        if (admin == null) {
+	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.singletonMap("error", "로그인이 필요합니다."));
+	        }
+	        event.setAdminId(admin.getId());
 
-			// 썸네일 처리
-			if (event.getThumbnailFile() != null && !event.getThumbnailFile().isEmpty()) {
-			    String thumbnailFileName = adminEventService.saveThumbnail(event.getThumbnailFile());
-			    event.setThumbnail(thumbnailFileName);
-			}
-			
-			// 컨텐츠 이미지 처리
-			if (event.getContent().indexOf("src=\"/") != -1) {
-				adminEventService.imgCheck(event.getContent());
-			}
-			event.setContent(event.getContent().replace("/data/ckeditor/", "/data/event/content"));
+	        // 썸네일 처리
+	        if (event.getThumbnailFile() != null && !event.getThumbnailFile().isEmpty()) {
+	            String thumbnailFileName = adminEventService.saveThumbnail(event.getThumbnailFile());
+	            event.setThumbnail(thumbnailFileName);
+	        }
+	        
+	        // 컨텐츠 이미지 처리
+	        if (event.getContent() != null && event.getContent().indexOf("src=\"/") != -1) {
+	            adminEventService.imgCheck(event.getContent());
+	        }
+	        
+	        // 컨텐츠 처리 - 맨 앞의 쉼표 제거 및 경로 변경
+	        if (event.getContent() != null) {
+	            event.setContent(event.getContent().replaceFirst("^,", "").replace("/data/ckeditor/event/", "/data/event/content/"));
+	        }
 
-			int res = adminEventService.insertEvent(event);
+	        int res = adminEventService.insertEvent(event);
 
-			if (res != 0) {
-				return ResponseEntity.ok(Collections.singletonMap("message", "이벤트가 성공적으로 업로드되었습니다."));
-			} else {
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "이벤트 업로드에 실패했습니다."));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "이벤트 업로드 중 오류가 발생했습니다: " + e.getMessage()));
-		}
+	        if (res != 0) {
+	            return ResponseEntity.ok(Collections.singletonMap("message", "이벤트가 성공적으로 업로드되었습니다."));
+	        } else {
+	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "이벤트 업로드에 실패했습니다."));
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "이벤트 업로드 중 오류가 발생했습니다: " + e.getMessage()));
+	    }
 	}
 }
