@@ -33,10 +33,6 @@ public class AdminEventServiceImpl implements AdminEventService {
 	// 이벤트 업로드 처리
 	@Override
 	public int insertEvent(EventVO event) {
-		// eventCategory 처리
-		if (event.getEventCategory() == null) {
-			event.setEventCategory(EventCategory.예매권); // 기본값 설정
-		}
 		return adminDAO.insertEvent(event);
 	}
 
@@ -66,33 +62,8 @@ public class AdminEventServiceImpl implements AdminEventService {
 	        startIndex = pathEndIndex; // 다음 검색을 위해 인덱스 업데이트
 	    }
 	}
-//	@Override
-//	public void imgCheck(String content) {
-//		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-//		String realPath = request.getSession().getServletContext().getRealPath("/resources/data/");
-//
-//		// src="/javaclassS/data/ckeditor/event/240626093722_5.jpg"
-//		// s에서 0부터 시작 / event의 e: 37
-//		int position = 37;
-//		String nextImg = content.substring(content.indexOf("src=\"/") + position);
-//		boolean sw = true;
-//
-//		while (sw) {
-//			String imgFile = nextImg.substring(0, nextImg.indexOf("\""));
-//
-//			String origFilePath = realPath + "ckeditor/event" + imgFile;
-//			String copyFilePath = realPath + "event/content/" + imgFile;
-//
-//			fileCopyCheck(origFilePath, copyFilePath);
-//
-//			if (nextImg.indexOf("src=\"/") == -1)
-//				sw = false;
-//			else
-//				nextImg = nextImg.substring(nextImg.indexOf("src=\"/") + position);
-//		}
-//	}
 
-	// data/ckeditor/event > data/event/content로 이미지 파일 복사 처리
+	// data/ckeditor/event 에서 data/event/content로 이미지 파일 복사 처리
 	private void fileCopyCheck(String origFilePath, String copyFilePath) {
 		try {
 			FileInputStream fis = new FileInputStream(new File(origFilePath));

@@ -128,6 +128,11 @@ public class AdminEventController {
 	        if (event.getContent() != null) {
 	            event.setContent(event.getContent().replaceFirst("^,", "").replace("/data/ckeditor/event/", "/data/event/content/"));
 	        }
+	        
+	        // eventCategory 처리
+	        if (event.getEventCategory() == null) {
+	            event.setEventCategory(EventVO.EventCategory.예매권); // 기본값 설정
+	        }
 
 	        int res = adminEventService.insertEvent(event);
 

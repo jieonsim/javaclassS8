@@ -40,7 +40,7 @@
 												<label class="col-sm-5 col-form-label">카테고리</label>
 												<div class="form-group row">
 													<div class="col-sm-7 ml-3">
-														<select class="form-control" id="inputCategory" name="category">
+														<select class="form-control" id="inputCategory" name="eventCategory">
 															<c:forEach var="category" items="${categories}">
 																<option value="${category}">${category.displayName}</option>
 															</c:forEach>
