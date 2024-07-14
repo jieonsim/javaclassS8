@@ -165,9 +165,6 @@
 				reserved.</div>
 		</div>
 	</div>
-	<!-- <script>
-		var ctp = '${ctp}';
-	</script> -->
 	<script src="${ctp}/js/member/signup/form.js"></script>
 </body>
 </html>

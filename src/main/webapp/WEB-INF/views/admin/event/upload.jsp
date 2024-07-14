@@ -29,15 +29,15 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">이벤트 업로드</h4>
-									<p class="card-description">등록할 이벤트의 제목, 카테고리, 시작일, 종료일, 본문을 기재해주세요.</p>
+									<p class="card-description">이벤트 상태를 <mark class="bg-warning text-white">진행 중으로 선택 시 이벤트 메인에 즉시 업로드</mark>됩니다.</p>
 									<form class="forms-sample" id="eventUploadForm" name="eventUploadForm" method="post" enctype="multipart/form-data">
 										<div class="form-group" id="eventTitle">
 											<label for="inputEventTitle"></label>
 											<input type="text" class="form-control" id="inputEventTitle" name="title" placeholder="이벤트명을 입력하세요.">
 										</div>
 										<div class="row">
-											<div class="col-md-4">
-												<label class="col-sm-5 col-form-label">카테고리</label>
+											<div class="col-md-3">
+												<label class="col-sm-5 col-form-label" for="inputCategory">카테고리</label>
 												<div class="form-group row">
 													<div class="col-sm-7 ml-3">
 														<select class="form-control" id="inputCategory" name="eventCategory">
@@ -48,16 +48,28 @@
 													</div>
 												</div>
 											</div>
-											<div class="col-md-4">
-												<label class="col-sm-4 col-form-label">시작일</label>
+											<div class="col-md-3">
+												<label class="col-sm-5 col-form-label" for="inputStatus">상태</label>
+												<div class="form-group row">
+													<div class="col-sm-7 ml-3">
+														<select class="form-control" id="inputStatus" name="status">
+															<c:forEach var="status" items="${status}">
+																<option value="${status}">${status.displayName}</option>
+															</c:forEach>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<label class="col-sm-4 col-form-label" for="inputStartDate">시작일</label>
 												<div class="form-group row">
 													<div class="col-sm-8 ml-3">
 														<input type="date" class="form-control" id="inputStartDate" name="startDate">
 													</div>
 												</div>
 											</div>
-											<div class="col-md-4">
-												<label class="col-sm-4 col-form-label">종료일</label>
+											<div class="col-md-3">
+												<label class="col-sm-4 col-form-label" for="inputEndDate">종료일</label>
 												<div class="form-group row">
 													<div class="col-sm-8 ml-3">
 														<input type="date" class="form-control" id="inputEndDate" name="endDate">

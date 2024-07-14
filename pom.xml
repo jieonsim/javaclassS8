@@ -222,6 +222,22 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.17.2</version>
 		</dependency>
+		
+		<!-- backend 체크를 위한 validator 라이브러리 (data 검증 : 유효성검사) -->
+		<!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.2.0.Final</version>
+		</dependency>
+
+		<!--Transaction(트랜잭션) 처리를 위한 라이브러리(스프링 프레임워크의 버전과 통일) -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>4.3.14.RELEASE</version>
+		</dependency>
 
 	</dependencies>
 	<build>

@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const categorySelect = document.getElementById('inputCategory');
 	const startDateInput = document.getElementById('inputStartDate');
 	const endDateInput = document.getElementById('inputEndDate');
+	const statusInput = document.getElementById('inputStatus');
 	const thumbnailInput = document.getElementById('inputThumbnail');
 	const thumbnailInfoInput = document.querySelector('.file-upload-info');
 	const thumbnailUploadBtn = document.getElementById('thumbnailUploadBtn');
@@ -60,7 +61,8 @@ document.addEventListener('DOMContentLoaded', function() {
 				.then(data => {
 					if (data.message) {
 						alert(data.message);
-						resetForm();
+						//resetForm();
+						window.location.href = ctp + '/admin/event/list';
 					} else if (data.error) {
 						alert(data.error);
 					}
@@ -78,6 +80,10 @@ document.addEventListener('DOMContentLoaded', function() {
 			return false;
 		}
 		if (!categorySelect.value) {
+			alert('카테고리를 선택해주세요.');
+			return false;
+		}
+		if (!statusInput.value) {
 			alert('카테고리를 선택해주세요.');
 			return false;
 		}
@@ -100,8 +106,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		return true;
 	}
 
-	function resetForm() {
+	/*function resetForm() {
 		form.reset();
 		CKEDITOR.instances.CKEDITOR.setData('');
-	}
+	}*/
 });

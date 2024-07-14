@@ -48,22 +48,8 @@ public class EventVO {
 	    }
 	}
 
-//	public enum Status {
-//		ONGOING("진행중"), ENDED("종료"), UPCOMING("예정");
-//
-//		private final String displayName;
-//
-//		Status(String displayName) {
-//			this.displayName = displayName;
-//		}
-//
-//		public String getDisplayName() {
-//			return displayName;
-//		}
-//	}
-	
 	public enum Status {
-	    ONGOING("진행중"), ENDED("종료"), UPCOMING("예정");
+	    ONGOING("진행 중"), ENDED("종료"), UPCOMING("예정");
 
 	    private final String displayName;
 

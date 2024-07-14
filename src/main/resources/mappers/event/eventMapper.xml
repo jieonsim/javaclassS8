@@ -8,13 +8,45 @@
             typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
 	</resultMap>
 
+	<!-- 이벤트 전체 목록 가져오기 -->
 	<select id="getAllEvents" resultMap="eventResultMap">
-    	SELECT * FROM events ORDER BY startDate DESC
+    	SELECT * FROM events ORDER BY createdAt DESC
 	</select>
+	
+	<!-- 진행 중인 이벤트만 가져오기 -->
 	<select id="getOngoingEvents" resultMap="eventResultMap">
     	SELECT * FROM events WHERE status = 'ONGOING' ORDER BY startDate DESC
 	</select>
-	<select id="getEventId" parameterType="int" resultMap="eventResultMap">
+	
+	<!-- 이벤트 아이디로 이벤트 데이터 가져오기 -->
+	<select id="getEventById" parameterType="int" resultMap="eventResultMap">
     	SELECT * FROM events WHERE id = #{id}
+	</select>
+	
+	<!-- 이벤트 응모 여부 확인 -->
+	<select id="hasParticipated" resultType="boolean">
+		SELECT COUNT(*) > 0
+   	 	FROM event_participants
+    	WHERE eventId = #{param1} AND memberId = #{param2}
+	</select>
+	
+	<!-- 이벤트 컨텐츠 디테일에 댓글 달기 -->
+	<insert id="insertEventComment">
+		INSERT INTO event_comments (eventId, memberId, comment)
+		VALUES (#{eventId}, #{memberId}, #{comment})
+	</insert>
+	
+	<!-- 이벤트 응모 처리하기 -->
+	<insert id="insertEventParticipant">
+		INSERT INTO event_participants (eventId, memberId)
+		VALUES (#{eventId}, #{memberId})
+	</insert>
+	
+	<select id="getEventComments" resultType="com.spring.javaclassS8.vo.event.EventCommentVO">
+    	SELECT ec.*, m.email
+    	FROM event_comments ec
+    	JOIN members m ON ec.memberId = m.id
+    	WHERE ec.eventId = #{eventId}
+    	ORDER BY ec.createdAt DESC
 	</select>
 </mapper>

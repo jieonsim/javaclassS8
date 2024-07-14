@@ -35,6 +35,14 @@
 										<table class="table">
 											<thead>
 												<tr>
+													<th>
+														<div class="form-check form-check-flat my-0">
+															<label class="form-check-label m-0">
+																<input type="checkbox" class="form-check-input" aria-checked="false">
+																<i class="input-helper"></i>
+															</label>
+														</div>
+													</th>
 													<th>No.</th>
 													<th>카테고리</th>
 													<th>이벤트명</th>
@@ -46,6 +54,14 @@
 											<tbody>
 												<c:forEach items="${events}" var="event" varStatus="loop">
 													<tr>
+														<td>
+															<div class="form-check form-check-flat my-0">
+																<label class="form-check-label">
+																	<input type="checkbox" class="form-check-input" aria-checked="false">
+																	<i class="input-helper"></i>
+																</label>
+															</div>
+														</td>
 														<td>${loop.index + 1}</td>
 														<td>${event.eventCategory.displayName}</td>
 														<td>${event.title}</td>

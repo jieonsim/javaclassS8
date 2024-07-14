@@ -10,7 +10,6 @@ public class AdvanceTicketVO {
 	private int adminId;
 	private String advanceTicketNumber;
 	private boolean used;
-	/* private int used; */
 	private Timestamp expiresAt;
 	private Timestamp issuedAt;
 	private Timestamp usedAt;
