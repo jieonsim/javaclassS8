@@ -11,6 +11,9 @@
 	<select id="getAllEvents" resultMap="eventResultMap">
     	SELECT * FROM events ORDER BY startDate DESC
 	</select>
+	<select id="getOngoingEvents" resultMap="eventResultMap">
+    	SELECT * FROM events WHERE status = 'ONGOING' ORDER BY startDate DESC
+	</select>
 	<select id="getEventId" parameterType="int" resultMap="eventResultMap">
     	SELECT * FROM events WHERE id = #{id}
 	</select>

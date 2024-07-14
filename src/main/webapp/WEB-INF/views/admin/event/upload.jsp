@@ -32,7 +32,7 @@
 									<p class="card-description">등록할 이벤트의 제목, 카테고리, 시작일, 종료일, 본문을 기재해주세요.</p>
 									<form class="forms-sample" id="eventUploadForm" name="eventUploadForm" method="post" enctype="multipart/form-data">
 										<div class="form-group" id="eventTitle">
-											<label for="title"></label>
+											<label for="inputEventTitle"></label>
 											<input type="text" class="form-control" id="inputEventTitle" name="title" placeholder="이벤트명을 입력하세요.">
 										</div>
 										<div class="row">
@@ -66,7 +66,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label for="thumbnail"></label>
+											<label for="inputThumbnail"></label>
 											<input type="file" name="thumbnailFile" id="inputThumbnail" class="file-upload-default">
 											<div class="input-group col-xs-12 px-3">
 												<input type="text" class="form-control file-upload-info" disabled placeholder="썸네일 이미지를 업로드하세요.">
@@ -76,7 +76,7 @@
 											</div>
 										</div>
 										<div class="form-group px-3">
-											<label for="content"></label>
+											<label for="CKEDITOR"></label>
 											<textarea class="form-control" rows="6" name="content" id="CKEDITOR"></textarea>
 										</div>
 										<div class="form-group px-3">

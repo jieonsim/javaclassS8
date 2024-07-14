@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.javaclassS8.dao.admin.AdminDAO;
 import com.spring.javaclassS8.vo.event.EventVO;
-import com.spring.javaclassS8.vo.event.EventVO.EventCategory;
 
 @Service
 public class AdminEventServiceImpl implements AdminEventService {

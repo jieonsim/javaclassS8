@@ -22,8 +22,9 @@ public class EventController {
 	// 이벤트 메인 화면, 전체 이벤트 목록 가져오기
 	@GetMapping("/main")
 	public String getEventMain(Model model) {
-		List<EventVO> events = eventService.getAllEvents();
-		model.addAttribute("events", events);
+		List<EventVO> ongoingEvents = eventService.getOngoingEvents();
+		/* List<EventVO> events = eventService.getAllEvents(); */
+		model.addAttribute("events", ongoingEvents);
 		return "event/main";
 	}
 

@@ -9,6 +9,10 @@ public interface EventDAO {
 	// 전체 이벤트 목록 가져오기
 	public List<EventVO> getAllEvents();
 
+	// 진행 중인 이벤트만 가져오기
+	public List<EventVO> getOngoingEvents();
+
 	// 이벤트 아이디로 이벤트 데이터 가져오기
 	public EventVO getEventId(int id);
+
 }

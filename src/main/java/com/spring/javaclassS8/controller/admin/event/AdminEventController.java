@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.javaclassS8.service.admin.AdminEventService;
+import com.spring.javaclassS8.service.event.EventService;
 import com.spring.javaclassS8.vo.event.EventVO;
 import com.spring.javaclassS8.vo.event.EventVO.EventCategory;
 import com.spring.javaclassS8.vo.member.MemberVO;
@@ -35,7 +37,19 @@ public class AdminEventController {
 
 	@Autowired
 	private AdminEventService adminEventService;
+	
+	@Autowired
+	private EventService eventService;
 
+	// 이벤트 리스트
+	@GetMapping("/list")
+	public String getEventList(Model model) {
+		List<EventVO> events = eventService.getAllEvents();
+		model.addAttribute("events", events);
+		return "admin/event/list";
+	}
+	
+	// 이벤트 업로드 폼
 	@GetMapping("/upload")
 	public String showUploadForm(Model model) {
 		model.addAttribute("categories", EventCategory.values());
@@ -43,7 +57,6 @@ public class AdminEventController {
 	}
 	
 	// 이벤트 업로드 시 ckeditor 이미지 업로드 처리
-	/* @RequestMapping(value = "/imageUpload") */
 	@PostMapping("/imageUpload")
 	public void imageUploadGet(MultipartFile upload, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setCharacterEncoding("utf-8");
@@ -67,41 +80,6 @@ public class AdminEventController {
 		fos.close();
 	}
 	
-//	// 이벤트 업로드 처리
-//	@PostMapping("/upload")
-//	@ResponseBody
-//	public ResponseEntity<?> uploadEvent(@ModelAttribute EventVO event, HttpSession session) {
-//		try {
-//			MemberVO admin = (MemberVO) session.getAttribute("loginMember");
-//			if (admin == null) {
-//				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.singletonMap("error", "로그인이 필요합니다."));
-//			}
-//			event.setAdminId(admin.getId());
-//
-//			// 썸네일 처리
-//			if (event.getThumbnailFile() != null && !event.getThumbnailFile().isEmpty()) {
-//			    String thumbnailFileName = adminEventService.saveThumbnail(event.getThumbnailFile());
-//			    event.setThumbnail(thumbnailFileName);
-//			}
-//			
-//			// 컨텐츠 이미지 처리
-//			if (event.getContent().indexOf("src=\"/") != -1) {
-//				adminEventService.imgCheck(event.getContent());
-//			}
-//			event.setContent(event.getContent().replace("/data/ckeditor/event/", "/data/event/content/"));
-//
-//			int res = adminEventService.insertEvent(event);
-//
-//			if (res != 0) {
-//				return ResponseEntity.ok(Collections.singletonMap("message", "이벤트가 성공적으로 업로드되었습니다."));
-//			} else {
-//				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "이벤트 업로드에 실패했습니다."));
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "이벤트 업로드 중 오류가 발생했습니다: " + e.getMessage()));
-//		}
-//	}
 	// 이벤트 업로드 처리
 	@PostMapping("/upload")
 	@ResponseBody

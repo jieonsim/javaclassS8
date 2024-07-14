@@ -20,9 +20,16 @@ public class EventDAOImpl implements EventDAO {
 		return sqlSession.getMapper(EventDAO.class).getAllEvents();
 	}
 
+	// 진행 중인 이벤트만 가져오기
+	@Override
+	public List<EventVO> getOngoingEvents() {
+		return sqlSession.getMapper(EventDAO.class).getOngoingEvents();
+	}
+
 	// 이벤트 아이디로 이벤트 데이터 가져오기
 	@Override
 	public EventVO getEventId(int id) {
 		return sqlSession.getMapper(EventDAO.class).getEventId(id);
 	}
+
 }

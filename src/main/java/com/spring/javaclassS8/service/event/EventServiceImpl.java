@@ -20,9 +20,16 @@ public class EventServiceImpl implements EventService {
 		return eventDAO.getAllEvents();
 	}
 
+	// 진행 중인 이벤트만 가져오기
+	@Override
+	public List<EventVO> getOngoingEvents() {
+		return eventDAO.getOngoingEvents();
+	}
+
 	// 이벤트 아이디로 이벤트 데이터 가져오기
 	@Override
 	public EventVO getEventId(int id) {
 		return eventDAO.getEventId(id);
 	}
+
 }
