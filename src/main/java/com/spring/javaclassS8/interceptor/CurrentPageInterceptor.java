@@ -33,6 +33,10 @@ public class CurrentPageInterceptor implements HandlerInterceptor {
 				currentPage = "basketball";
 			} else if (uri.startsWith(contextPath + "/sports/volleyball")) {
 				currentPage = "volleyball";
+			} else if (uri.startsWith(contextPath + "/event")) {
+				currentPage = "event";
+			} else if (uri.startsWith(contextPath + "/news")) {
+				currentPage = "news";
 			}
 
 			// 야구 + 축구 탭
@@ -81,14 +85,10 @@ public class CurrentPageInterceptor implements HandlerInterceptor {
 			}
 
 			// 이벤트 페이지 처리
-			if (uri.startsWith(contextPath + "/event")) {
-				currentPage = "event";
-				if (uri.equals(contextPath + "/event/main") || (uri.equals(contextPath + "/event/contentDetail"))) {
-					currentSelected = "eventMain";
-				} else if (uri.equals(contextPath + "/event/winner")
-						|| (uri.equals(contextPath + "/event/winnerDetail"))) {
-					currentSelected = "eventWinner";
-				}
+			if (uri.equals(contextPath + "/event/main") || (uri.equals(contextPath + "/event/contentDetail"))) {
+				currentSelected = "eventMain";
+			} else if (uri.equals(contextPath + "/event/winner") || (uri.equals(contextPath + "/event/winnerDetail"))) {
+				currentSelected = "eventWinner";
 			}
 
 			// 현재 로그인한 사용자의 역할 확인

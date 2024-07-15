@@ -41,6 +41,7 @@ public class EventController {
 	@GetMapping("/contentDetail")
 	public String getEventContentDetail(@RequestParam("id") int eventId, Model model, HttpSession session) {
 		EventVO event = eventService.getEventById(eventId);
+		// 댓글 상태가 active인 것만 가져오기
 		List<EventCommentVO> eventComments = eventService.getActiveEventComments(eventId);
 		int commentCount = eventComments.size();
 
