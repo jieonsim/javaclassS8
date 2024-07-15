@@ -19,27 +19,4 @@ public class EventCommentVO {
 	public enum Status {
 		ACTIVE, DELETED
 	}
-
-//	public enum Status {
-//		ACTIVE("active"), DELETED("deleted");
-//
-//	    private final String displayName;
-//
-//	    Status(String displayName) {
-//	        this.displayName = displayName;
-//	    }
-//
-//	    public String getDisplayName() {
-//	        return displayName;
-//	    }
-//
-//	    public static Status fromString(String text) {
-//	        for (Status status : Status.values()) {
-//	            if (status.name().equalsIgnoreCase(text)) {
-//	                return status;
-//	            }
-//	        }
-//	        throw new IllegalArgumentException("No constant with text " + text + " found");
-//	    }
-//	}
 }

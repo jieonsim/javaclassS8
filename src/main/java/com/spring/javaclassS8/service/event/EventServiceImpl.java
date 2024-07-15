@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.javaclassS8.dao.event.EventDAO;
 import com.spring.javaclassS8.vo.event.EventCommentVO;
+import com.spring.javaclassS8.vo.event.EventParticipantVO;
 import com.spring.javaclassS8.vo.event.EventVO;
 
 @Service
@@ -30,8 +31,8 @@ public class EventServiceImpl implements EventService {
 
 	// 이벤트 아이디로 이벤트 데이터 가져오기
 	@Override
-	public EventVO getEventById(int id) {
-		return eventDAO.getEventById(id);
+	public EventVO getEventById(int eventId) {
+		return eventDAO.getEventById(eventId);
 	}
 
 	// 이벤트 응모 여부 확인
@@ -55,10 +56,34 @@ public class EventServiceImpl implements EventService {
 		return true;
 	}
 
+	// 이벤트 컨텐츠 디테일에 작성된 모든 댓글 가져오기
 	@Override
-	public List<EventCommentVO> getEventComments(int eventId) {
-		return  eventDAO.getEventComments(eventId);
+	public List<EventCommentVO> getAllEventComments(int eventId) {
+		return  eventDAO.getAllEventComments(eventId);
 	}
 
+	// 이벤트 컨텐츠 디테일에 작성된 댓글 중 status가 active인것만 가져오기
+	@Override
+	public List<EventCommentVO> getActiveEventComments(int eventId) {
+		return eventDAO.getActiveEventComments(eventId);
+	}
+
+	// 이벤트 컨텐츠의 댓글 내용 수정
+	@Override
+	@Transactional
+	public boolean updateEventComment(int commentId, String comment) {
+		return eventDAO.updateEventComment(commentId, comment);
+	}
+
+	// 이벤트 컨텐츠의 댓글 삭제 및 이벤트 참여 철회
+	@Override
+	@Transactional
+	public boolean deleteEventComment(int commentId) {
+		// 이벤트 컨텐츠의 댓글 삭제 -> event_comments 테이블의 status 필드 데이터 업데이트
+		boolean commentUpdated = eventDAO.updateEventCommentStatus(commentId, EventCommentVO.Status.DELETED);
+		// 이벤트 참여 철회 -> event_participants 테이블의 status 필드 데이터 업데이트
+		boolean participationUpdated = eventDAO.updateEventParticipationStatus(commentId, EventParticipantVO.Status.CANCELLED);
+		return commentUpdated &&  participationUpdated;
+	}
 
 }

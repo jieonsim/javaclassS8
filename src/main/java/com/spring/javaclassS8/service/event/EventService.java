@@ -14,7 +14,7 @@ public interface EventService {
 	public List<EventVO> getOngoingEvents();
 
 	// 이벤트 아이디로 이벤트 데이터 가져오기
-	public EventVO getEventById(int id);
+	public EventVO getEventById(int eventId);
 
 	// 이벤트 응모 여부 확인
 	public boolean hasParticipated(int eventId, int memberId);
@@ -22,6 +22,18 @@ public interface EventService {
 	// 이벤트 댓글달기 및 응모 처리
 	public boolean insertEventCommentAndParticipate(int eventId, int memberId, String comment);
 
-	public List<EventCommentVO> getEventComments(int eventId);
+	// 이벤트 컨텐츠 디테일에 작성된 모든 댓글 가져오기
+	public List<EventCommentVO> getAllEventComments(int eventId);
+	
+	// 이벤트 컨텐츠 디테일에 작성된 댓글 중 status가 active인것만 가져오기
+	public List<EventCommentVO> getActiveEventComments(int eventId);
+
+	// 이벤트 컨텐츠의 댓글 내용 수정
+	public boolean updateEventComment(int commentId, String comment);
+
+	// 이벤트 컨텐츠의 댓글 삭제 및 이벤트 참여 철회
+	public boolean deleteEventComment(int commentId);
+
+	
 
 }

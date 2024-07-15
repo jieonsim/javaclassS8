@@ -9,5 +9,11 @@ public class EventParticipantVO {
 	private int id;
 	private int eventId;
 	private int memberId;
+	private Status status;
 	private Timestamp participatedAt;
+	private Timestamp cancelledAt;
+	
+	public enum Status {
+		ACTIVE, CANCELLED
+	}
 }

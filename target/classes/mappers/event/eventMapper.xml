@@ -30,6 +30,24 @@
     	WHERE eventId = #{param1} AND memberId = #{param2}
 	</select>
 	
+	<!-- 이벤트 컨텐츠 디테일에 작성된 모든 댓글 가져오기 -->
+	<select id="getAllEventComments" resultType="com.spring.javaclassS8.vo.event.EventCommentVO">
+    	SELECT ec.*, m.email
+    	FROM event_comments ec
+    	JOIN members m ON ec.memberId = m.id
+    	WHERE ec.eventId = #{eventId}
+    	ORDER BY ec.createdAt DESC
+	</select>
+	
+	<!-- 이벤트 컨텐츠 디테일에 작성된 댓글 중 status가 active인것만 가져오기 -->
+	<select id="getActiveEventComments" resultType="com.spring.javaclassS8.vo.event.EventCommentVO">
+	    SELECT ec.*, m.email
+	    FROM event_comments ec
+	    JOIN members m ON ec.memberId = m.id
+	    WHERE ec.eventId = #{eventId} AND ec.status = 'ACTIVE'
+	    ORDER BY ec.createdAt DESC
+	</select>
+	
 	<!-- 이벤트 컨텐츠 디테일에 댓글 달기 -->
 	<insert id="insertEventComment">
 		INSERT INTO event_comments (eventId, memberId, comment)
@@ -42,11 +60,26 @@
 		VALUES (#{eventId}, #{memberId})
 	</insert>
 	
-	<select id="getEventComments" resultType="com.spring.javaclassS8.vo.event.EventCommentVO">
-    	SELECT ec.*, m.email
-    	FROM event_comments ec
-    	JOIN members m ON ec.memberId = m.id
-    	WHERE ec.eventId = #{eventId}
-    	ORDER BY ec.createdAt DESC
-	</select>
+	<!-- 이벤트 컨텐츠의 댓글 내용 수정 -->
+	<update id="updateEventComment">
+		UPDATE event_comments
+		SET comment = #{comment}, updatedAt = CURRENT_TIMESTAMP
+		WHERE id = #{commentId}
+	</update>
+	
+	<!-- 이벤트 컨텐츠의 댓글 삭제 -> event_comments 테이블의 status 필드 데이터 업데이트 -->
+	<update id="updateEventCommentStatus">
+		UPDATE event_comments
+		SET status = #{status}, updatedAt = CURRENT_TIMESTAMP
+		WHERE id = #{commentId}
+	</update>
+	
+	<!-- 이벤트 참여 철회 -> event_participants 테이블의 status 필드 데이터 업데이트 -->
+	<update id="updateEventParticipationStatus">
+		UPDATE event_participants
+		SET status = #{status}, cancelledAt = CURRENT_TIMESTAMP
+		WHERE eventId = (SELECT eventId FROM event_comments WHERE id = #{commentId})
+		AND memberId = (SELECT memberId FROM event_comments WHERE id = #{commentId})
+	</update>
+
 </mapper>

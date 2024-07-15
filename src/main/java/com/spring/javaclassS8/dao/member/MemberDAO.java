@@ -14,7 +14,7 @@ public interface MemberDAO {
 
 	// 회원 고유번호로 회원 조회
 	public MemberVO findById(int memberId);
-	
+
 	// 회원 가입
 	public void insertMember(MemberVO member);
 
@@ -31,7 +31,7 @@ public interface MemberDAO {
 	AutoLoginTokenVO findAutoLoginToken(String token);
 
 	// 이름 + 휴대폰 번호 조합으로 이메일 아이디 찾기
-	public List<MemberVO> findByNameAndPhone(String name, String phone);
+	public List<MemberVO> findByNameAndPhone(@Param("name") String name, @Param("phone") String phone);
 
 	// 이름 + 이메일 조합으로 회원 정보 찾기
 	public MemberVO findByNameAndEmail(@Param("name") String name, @Param("email") String email);

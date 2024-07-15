@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://localhost/customFunctions" %>
+<%@ taglib prefix="fn" uri="http://localhost/customFunctions"%>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -43,8 +43,9 @@
 						<legend>이벤트 댓글 작성</legend>
 						<form id="eventCommentForm" method="post" action="${ctp}/event/insertEventComment">
 							<div class="write_review">
+								<input type="hidden" id="isLoggedIn" value="${isLoggedIn}">
 								<input type="hidden" id="eventId" name="eventId" value="${event.id}">
-								<textarea title="이벤트 댓글 작성하기" id="inputEventComment" name="comment" placeholder="이메일, 전화번호 등 개인정보 노출 시, 타인이 이를 악용할 수 있으니 삼가 바랍니다." maxlength="3000" style="resize: none"></textarea>
+								<textarea title="이벤트 댓글 작성하기" id="inputEventComment" name="comment" placeholder="이메일, 전화번호 등 개인정보 노출 시, 타인이 이를 악용할 수 있으니 삼가 바랍니다." maxlength="3000" class="eventCommentTextarea"></textarea>
 								<a href="#" id="insertEventCommentBtn" class="btn btn_full">댓글입력</a>
 							</div>
 						</form>
@@ -68,27 +69,47 @@
 						<c:forEach items="${eventComments}" var="comment">
 							<li>
 								<div class="review_info">
-									<dl class="star_average d-flex justify-content-start">
+									<dl class="star_average d-flex">
 										<dt>아이디</dt>
 										<dd class="review_user mr-2">${fn:maskEmail(comment.email)}</dd>
 										<dt>날짜</dt>
 										<dd class="review_date">
 											<fmt:formatDate value="${comment.createdAt}" pattern="yyyy-MM-dd HH:mm" />
 										</dd>
+										<c:if test="${loginMember.id eq comment.memberId}">
+											<dt>수정</dt>
+											<dd class="ml-auto">
+												<button class="commentEditBtn" data-comment-id="${comment.id}">
+													<span class="badge badge-pill badge-secondary">수정</span>
+												</button>
+											</dd>
+											<dt>삭제</dt>
+											<dd>
+												<button class="commentDeleteBtn" data-comment-id="${comment.id}">
+													<span class="badge badge-pill badge-secondary">삭제</span>
+												</button>
+											</dd>
+										</c:if>
 									</dl>
 								</div>
 								<pre>${comment.comment}</pre>
+								<div class="star_review inquire p-2" id="eventCommentEditBox_${comment.id}" style="display: none;">
+									<fieldset>
+										<legend>이벤트 댓글 수정</legend>
+										<form id="eventCommentEditForm_${comment.id}" data-comment-id="${comment.id}" method="post">
+											<div class="write_review">
+												<input type="hidden" name="commentId" value="${comment.id}">
+												<textarea title="이벤트 댓글 수정하기" id="updateEventComment" name="comment" placeholder="이메일, 전화번호 등 개인정보 노출 시, 타인이 이를 악용할 수 있으니 삼가 바랍니다." maxlength="3000" class="eventCommentTextarea">${comment.comment}</textarea>
+												<a href="#" id="updateEventCommentBtn_${comment.id}" class="btn btn_full updateEventCommentBtn" data-comment-id="${comment.id}">댓글수정</a>
+											</div>
+										</form>
+									</fieldset>
+									<div id="comment_validation"></div>
+								</div>
 							</li>
 						</c:forEach>
- 					</ul>
+					</ul>
 				</div>
-				<!-- <div class="paging" id="pagination">
-					<a href="javascript:goPage('1')" class="first">맨앞</a>
-					<a href="javascript:goPage('1')" class="prev">이전</a>
-					<strong>1</strong>
-					<a href="javascript:goPage('1')" class="next">다음</a>
-					<a href="javascript:goPage('1')" class="end">맨뒤</a>
-				</div> -->
 			</div>
 		</div>
 	</main>

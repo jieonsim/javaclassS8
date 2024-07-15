@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,16 +39,21 @@ public class EventController {
 
 	// 이벤트 컨텐츠 디테일
 	@GetMapping("/contentDetail")
-	public String getEventContentDetail(@RequestParam("id") int id, Model model) {
-	    EventVO event = eventService.getEventById(id);
-	    List<EventCommentVO> eventComments = eventService.getEventComments(id);
-	    int commentCount = eventComments.size();
+	public String getEventContentDetail(@RequestParam("id") int eventId, Model model, HttpSession session) {
+		EventVO event = eventService.getEventById(eventId);
+		List<EventCommentVO> eventComments = eventService.getActiveEventComments(eventId);
+		int commentCount = eventComments.size();
 
-	    model.addAttribute("event", event);
-	    model.addAttribute("eventComments", eventComments);
-	    model.addAttribute("commentCount", commentCount);
-	    model.addAttribute("newLine", "\n");
-	    return "event/contentDetail";
+		model.addAttribute("event", event);
+		model.addAttribute("eventComments", eventComments);
+		model.addAttribute("commentCount", commentCount);
+		model.addAttribute("newLine", "\n");
+
+		// 로그인 상태 확인
+		boolean isLoggedIn = session.getAttribute("loginMember") != null;
+		model.addAttribute("isLoggedIn", isLoggedIn);
+
+		return "event/contentDetail";
 	}
 
 	// 이벤트 응모 여부 확인
@@ -59,10 +65,11 @@ public class EventController {
 		return Collections.singletonMap("hasParticipated", hasParticipated);
 	}
 
-	// 이벤트 댓글달기 및 응모 처리
+	// 이벤트 댓글 달기 및 응모 처리
 	@PostMapping("/insertEventComment")
 	@ResponseBody
-	public Map<String, Object> insertEventComment(@RequestParam("eventId") int eventId, @RequestParam("comment") String comment, HttpSession session) {
+	public Map<String, Object> insertEventComment(@RequestParam("eventId") int eventId,
+			@RequestParam("comment") String comment, HttpSession session) {
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		Map<String, Object> result = new HashMap<>();
 
@@ -79,6 +86,29 @@ public class EventController {
 		}
 
 		return result;
+	}
+
+	// 이벤트 컨텐츠의 댓글 내용 수정
+	@PostMapping("/updateEventComment")
+	@ResponseBody
+	public Map<String, Object> updateEventComment(@RequestBody Map<String, String> payload) {
+		int commentId = Integer.parseInt(payload.get("commentId"));
+		String comment = payload.get("comment");
+		boolean success = eventService.updateEventComment(commentId, comment);
+		Map<String, Object> response = new HashMap<>();
+		response.put("success", success);
+		return response;
+	}
+
+	// 이벤트 컨텐츠의 댓글 삭제 및 이벤트 참여 철회
+	@PostMapping("/deleteEventComment")
+	@ResponseBody
+	public Map<String, Object> deleteEventComment(@RequestBody Map<String, String> payload) {
+		int commentId = Integer.parseInt(payload.get("commentId"));
+		boolean success = eventService.deleteEventComment(commentId);
+		Map<String, Object> response = new HashMap<>();
+		response.put("success", success);
+		return response;
 	}
 
 	// 이벤트 당첨자 발표

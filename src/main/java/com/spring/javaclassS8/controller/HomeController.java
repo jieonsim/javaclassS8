@@ -23,4 +23,10 @@ public class HomeController {
 	public String advanceTicketMail() {
 		return "mail/advanceTicketMail";
 	}
+	
+	// 메일 테스트
+	@GetMapping("/certificationMail")
+	public String certificationMail() {
+		return "mail/certificationMail";
+	}
 }
