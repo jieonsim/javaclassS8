@@ -29,7 +29,7 @@
 						${event.title}
 					</dd>
 					<dt>이벤트 기간</dt>
-					<dd class="evt_date">${event.startDate}~${event.endDate}</dd>
+					<dd class="evt_date">${event.startDate}&nbsp;~&nbsp;${event.endDate}</dd>
 					<dt>이벤트 내용</dt>
 					<dd class="evt_cont">${event.content}</dd>
 				</dl>
@@ -114,6 +114,6 @@
 		</div>
 	</main>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
-	<script src="${ctp}/js/event/contentDetail.js"></script>
+	<script src="${ctp}/js/event/detail.js"></script>
 </body>
 </html>

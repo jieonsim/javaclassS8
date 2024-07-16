@@ -35,8 +35,8 @@ public class CurrentPageInterceptor implements HandlerInterceptor {
 				currentPage = "volleyball";
 			} else if (uri.startsWith(contextPath + "/event")) {
 				currentPage = "event";
-			} else if (uri.startsWith(contextPath + "/news")) {
-				currentPage = "news";
+			} else if (uri.startsWith(contextPath + "/hotIssue")) {
+				currentPage = "hotIssue";
 			}
 
 			// 야구 + 축구 탭

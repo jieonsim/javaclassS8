@@ -1,4 +1,4 @@
-package com.spring.javaclassS8.controller.news;
+package com.spring.javaclassS8.controller.hotIssue;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -19,19 +19,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.spring.javaclassS8.vo.news.NewsItem;
+import com.spring.javaclassS8.vo.hotIssue.NewsItem;
 
 @Controller
-public class NewsController {
+public class HotIssueController {
 
-	@GetMapping("/news")
+	@GetMapping("/hotIssue")
 	public String news() {
-		return "news/main";
-	}
-
-	@GetMapping("/news2")
-	public String news2() {
-		return "news/main2";
+		return "hotIssue/main";
 	}
 
 	@GetMapping("/api/news")

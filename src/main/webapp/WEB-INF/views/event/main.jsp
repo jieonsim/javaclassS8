@@ -23,7 +23,7 @@
 					<ul class="event_top_list">
 				</c:if>
 				<li>
-					<a href="${ctp}/event/contentDetail?id=${event.id}">
+					<a href="${ctp}/event/detail?eventId=${event.id}">
 						<img src="${ctp}/event/thumbnails/${event.thumbnail}" alt="이벤트썸네일" width="356" height="420">
 						<div class="event_top_info">
 							<dl>
@@ -42,26 +42,6 @@
 					</ul>
 				</c:if>
 			</c:forEach>
-			<%-- <ul class="event_top_list">
-				<c:forEach items="${events}" var="event">
-					<li>
-						<a href="${ctp}/event/contentDetail?id=${event.id}">
-							<img src="${ctp}/event/thumbnails/${event.thumbnail}" alt="이벤트썸네일" width="356" height="420">
-							<div class="event_top_info">
-								<dl>
-									<dt>제목</dt>
-									<dd class="event_title">
-										<span class="point">[${event.eventCategory}]</span>
-										${event.title}
-									</dd>
-									<dt>기간</dt>
-									<dd class="event_date">${event.startDate}~${event.endDate}</dd>
-								</dl>
-							</div>
-						</a>
-					</li>
-				</c:forEach>
-			</ul> --%>
 			<p class="nodata_txt" style="display: none;">등록된 이벤트가 없습니다.</p>
 		</div>
 	</main>

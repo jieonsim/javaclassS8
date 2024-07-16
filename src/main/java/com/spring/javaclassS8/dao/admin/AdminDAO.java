@@ -11,5 +11,8 @@ public interface AdminDAO {
 	// 이벤트 업로드 처리
 	int insertEvent(EventVO event);
 
+	// 이벤트 컨텐츠 수정 처리
+	int updateEvent(EventVO event);
+
 
 }

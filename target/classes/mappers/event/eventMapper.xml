@@ -27,7 +27,7 @@
 	<select id="hasParticipated" resultType="boolean">
 		SELECT COUNT(*) > 0
    	 	FROM event_participants
-    	WHERE eventId = #{param1} AND memberId = #{param2}
+    	WHERE eventId = #{eventId} AND memberId = #{memberId} AND status = 'ACTIVE'
 	</select>
 	
 	<!-- 이벤트 컨텐츠 디테일에 작성된 모든 댓글 가져오기 -->

@@ -22,11 +22,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.javaclassS8.service.admin.AdminEventService;
 import com.spring.javaclassS8.service.event.EventService;
+import com.spring.javaclassS8.vo.event.EventCommentVO;
 import com.spring.javaclassS8.vo.event.EventVO;
 import com.spring.javaclassS8.vo.event.EventVO.EventCategory;
 import com.spring.javaclassS8.vo.event.EventVO.Status;
@@ -54,7 +56,7 @@ public class AdminEventController {
 	@GetMapping("/upload")
 	public String showUploadForm(Model model) {
 		model.addAttribute("categories", EventCategory.values());
-		model.addAttribute("status", Status.values());
+		model.addAttribute("statuses", Status.values());
 		return "admin/event/upload";
 	}
 
@@ -109,21 +111,79 @@ public class AdminEventController {
 				event.setContent(event.getContent().replaceFirst("^,", "").replace("/data/ckeditor/event/", "/data/event/content/"));
 			}
 
-			// eventCategory 처리
-			if (event.getEventCategory() == null) {
-				event.setEventCategory(EventVO.EventCategory.예매권); // 기본값 설정
-			}
+			int result = adminEventService.insertEvent(event);
 
-			int res = adminEventService.insertEvent(event);
-
-			if (res != 0) {
-				return ResponseEntity.ok(Collections.singletonMap("message", "이벤트가 성공적으로 업로드되었습니다."));
+			if (result != 0) {
+				return ResponseEntity.ok(Collections.singletonMap("message", "이벤트가 성공적으로 등록되었습니다."));
 			} else {
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "이벤트 업로드에 실패했습니다."));
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "이벤트 등록에 실패했습니다."));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "이벤트 업로드 중 오류가 발생했습니다: " + e.getMessage()));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "이벤트 등록 중 오류가 발생했습니다: " + e.getMessage()));
 		}
 	}
+
+	// 이벤트 컨텐츠 디테일
+	@GetMapping("/detail")
+	public String getEventContentDetail(@RequestParam("eventId") int eventId, Model model) {
+		EventVO event = eventService.getEventById(eventId);
+		// 댓글 상태 active/deleted 상관없이 모두 가져오기
+		List<EventCommentVO> eventComments = eventService.getAllEventComments(eventId);
+		int commentCount = eventComments.size();
+
+		model.addAttribute("event", event);
+		model.addAttribute("eventComments", eventComments);
+		model.addAttribute("commentCount", commentCount);
+		model.addAttribute("newLine", "\n");
+
+		return "admin/event/detail";
+	}
+
+	// 이벤트 컨텐츠 수정 폼
+	@GetMapping("/update")
+	public String updateEventContent(@RequestParam("eventId") int eventId, Model model) {
+		EventVO event = eventService.getEventById(eventId);
+
+		// 이벤트 수정하기 폼 접속 시 기존 컨텐츠 내 이미지가 존재한다면
+		// 현재 폴더(event/content)의 이미지를 ckeditor/event로 복사 처리
+		if (event.getContent().indexOf("src=\"/") != -1) {
+			adminEventService.imgBackup(event.getContent());
+		}
+		model.addAttribute("event", event);
+		model.addAttribute("categories", EventCategory.values());
+		model.addAttribute("statuses", Status.values());
+
+		return "admin/event/update";
+	}
+
+	// 이벤트 컨텐츠 수정 처리
+	@PostMapping("/update")
+	@ResponseBody
+	public ResponseEntity<?> updateEvent(@ModelAttribute EventVO event, HttpSession session) {
+		try {
+			MemberVO admin = (MemberVO) session.getAttribute("loginMember");
+			if (admin == null) {
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.singletonMap("error", "로그인이 필요합니다."));
+			}
+			event.setAdminId(admin.getId());
+
+			// 컨텐츠 처리
+			if (event.getContent() != null) {
+				event.setContent(event.getContent().replaceFirst("^,", "")); // 맨 앞의 쉼표 제거
+			}
+			
+			int result = adminEventService.updateEvent(event);
+
+			if (result != 0) {
+				return ResponseEntity.ok(Collections.singletonMap("message", "이벤트가 성공적으로 수정되었습니다."));
+			} else {
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.singletonMap("error", "이벤트 수정에 실패했습니다."));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "이벤트 수정 중 오류가 발생했습니다."));
+		}
+	}
+
 }

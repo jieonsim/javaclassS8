@@ -1,9 +1,29 @@
+/*
+js/hotIssue/main.js
+스포츠 핫이슈 페이지에 스포츠 기사, 주요 경기 일정, kbo 팀 랭킹 크롤링하여 보여주기 
+*/
+
 document.addEventListener('DOMContentLoaded', function() {
 	const newsTable = document.querySelector('.news-table tbody');
 	const scheduleTable = document.querySelector('.majorGameSchedule table');
+	const loadingContainer = document.getElementById('loding_container');
+	const contentContainer = document.getElementById('content_container');
 
+	// 모든 데이터 로딩을 추적하기 위한 Promise 배열
+	const loadingPromises = [];
+
+	function showLoading() {
+		loadingContainer.style.display = 'block';
+		contentContainer.style.display = 'none';
+	}
+
+	function hideLoading() {
+		loadingContainer.style.display = 'none';
+		contentContainer.style.display = 'block';
+	}
+	
 	function fetchNewsData() {
-		fetch(`${ctp}/api/news`)
+		return fetch(`${ctp}/api/news`)
 			.then(response => response.json())
 			.then(newsItems => {
 				displayNewsItems(newsItems);
@@ -16,16 +36,16 @@ document.addEventListener('DOMContentLoaded', function() {
 			const tr = document.createElement('tr');
 			tr.innerHTML = `
                 <td>
-                    <a href="${item.link}">
+                    <a href="${item.link}" target="_blank">
                         <img src="${item.imgSrc}" alt="News Image">
                     </a>
                 </td>
                 <td class="news-content">
                     <div class="news-title">
-                        <a href="${item.link}">${item.title}</a>
+                        <a href="${item.link}" target="_blank">${item.title}</a>
                     </div>
                     <div class="news-desc">
-                        <a href="${item.link}">${item.desc}</a>
+                        <a href="${item.link}" target="_blank">${item.desc}</a>
                     </div>
                     <div class="news-info">
                         <span>${item.time}</span>
@@ -39,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 	function fetchScheduleData() {
-		fetch(`${ctp}/api/schedule`)
+		return fetch(`${ctp}/api/schedule`)
 			.then(response => response.json())
 			.then(scheduleData => {
 				displayScheduleData(scheduleData);
@@ -101,10 +121,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 	function fetchKBORankingData() {
-		fetch(`${ctp}/api/kboRanking`)
+		return fetch(`${ctp}/api/kboRanking`)
 			.then(response => response.json())
 			.then(rankingData => {
-				console.log("받은 랭킹 데이터", rankingData)
 				displayKBORanking(rankingData);
 			})
 			.catch(error => console.error('Error fetching KBO ranking:', error));
@@ -135,8 +154,25 @@ document.addEventListener('DOMContentLoaded', function() {
 			tbody.appendChild(tr);
 		});
 	}
-
-	fetchNewsData();
-	fetchScheduleData();
-	fetchKBORankingData();
+	
+	// 데이터 로딩 시작
+	showLoading();
+	
+	// 각 데이터 로딩 Promise를 배열에 추가
+	loadingPromises.push(fetchNewsData());
+	loadingPromises.push(fetchScheduleData());
+	loadingPromises.push(fetchKBORankingData());
+	
+	// 모든 Promise가 완료될 때까지 기다림
+	
+	Promise.all(loadingPromises)
+	.then(() => {
+		// 모든 데이터가 로드되면 로딩을 숨기고 컨첸츠를 표시
+		hideLoading();
+	})
+	.catch(error => {
+		console.error('Error loading data:', error);
+		// 에러 발생 시에도 로딩을 숨기기
+		hideLoading();
+	})
 });

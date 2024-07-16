@@ -85,5 +85,4 @@ public class EventServiceImpl implements EventService {
 		boolean participationUpdated = eventDAO.updateEventParticipationStatus(commentId, EventParticipantVO.Status.CANCELLED);
 		return commentUpdated &&  participationUpdated;
 	}
-
 }

@@ -35,12 +35,15 @@
 				</table>
 				<div class="promotion">
 					<a href="${ctp}/event/main">
-						<div class="card" style="border: none">
+						<div class="card bg-light text-dark">
 							<div class="card-body d-flex justify-content-start">
-								<img src="${ctp}/images/icon/tickets.png"/>
-								<div class="card-text m-3 pt-3">
-									<p>직관 보러가고싶은 사람?</p>
-									<p>이벤트 응모하고 예매권 받으러가기</p>
+								<img src="${ctp}/images/icon/tickets.png">
+								<div class="card-text m-3 p-3">
+									<p class="m-0">경기장의 열기를 직접 느끼고 싶다면?</p>
+									<p class="ml-0 mr-0 mt-0 mb-2">지금 댓글 남기고 무료 예매권의 주인공이 되세요!</p>
+									<p class="m-0">
+										<strong>티켓챔프 이벤트 참여하러 가기 &gt;&gt;</strong>
+									</p>
 								</div>
 							</div>
 						</div>
@@ -75,6 +78,6 @@
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
-	<script src="${ctp}/js/news/news.js"></script>
+	<script src="${ctp}/js/hotIssue/main.js"></script>
 </body>
 </html>

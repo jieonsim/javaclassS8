@@ -28,12 +28,17 @@
 						<div class="col-12 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">이벤트 등록</h4>
-									<p class="card-description">이벤트 상태를 <mark class="bg-warning text-white">진행 중으로 선택 시 이벤트 메인에 즉시 업로드</mark>됩니다.</p>
-									<form class="forms-sample" id="eventUploadForm" name="eventUploadForm" method="post" enctype="multipart/form-data">
+									<h4 class="card-title">이벤트 수정</h4>
+									<p class="card-description">
+										이벤트 상태를
+										<mark class="bg-warning text-white">진행 중으로 선택 시 이벤트 메인에 즉시 업로드</mark>
+										됩니다.
+									</p>
+									<form class="forms-sample" id="eventUpdateForm" name="eventUpdateForm" method="post" enctype="multipart/form-data">
+										<input type="hidden" name="id" value="${event.id}">
 										<div class="form-group" id="eventTitle">
 											<label for="inputEventTitle"></label>
-											<input type="text" class="form-control" id="inputEventTitle" name="title" placeholder="이벤트명을 입력하세요.">
+											<input type="text" class="form-control" id="inputEventTitle" name="title" placeholder="이벤트명을 입력하세요." value="${event.title}">
 										</div>
 										<div class="row">
 											<div class="col-md-3">
@@ -42,7 +47,7 @@
 													<div class="col-sm-7 ml-3">
 														<select class="form-control" id="inputCategory" name="eventCategory">
 															<c:forEach var="category" items="${categories}">
-																<option value="${category}">${category.displayName}</option>
+																<option value="${category}" ${event.eventCategory == category ? 'selected' : ''}>${category.displayName}</option>
 															</c:forEach>
 														</select>
 													</div>
@@ -54,7 +59,7 @@
 													<div class="col-sm-7 ml-3">
 														<select class="form-control" id="inputStatus" name="status">
 															<c:forEach var="status" items="${statuses}">
-																<option value="${status}">${status.displayName}</option>
+																<option value="${status}" ${event.status == status ? 'selected' : ''}>${status.displayName}</option>
 															</c:forEach>
 														</select>
 													</div>
@@ -64,7 +69,7 @@
 												<label class="col-sm-4 col-form-label" for="inputStartDate">시작일</label>
 												<div class="form-group row">
 													<div class="col-sm-8 ml-3">
-														<input type="date" class="form-control" id="inputStartDate" name="startDate">
+														<input type="date" class="form-control" id="inputStartDate" name="startDate" value="${event.startDate}">
 													</div>
 												</div>
 											</div>
@@ -72,7 +77,7 @@
 												<label class="col-sm-4 col-form-label" for="inputEndDate">종료일</label>
 												<div class="form-group row">
 													<div class="col-sm-8 ml-3">
-														<input type="date" class="form-control" id="inputEndDate" name="endDate">
+														<input type="date" class="form-control" id="inputEndDate" name="endDate" value="${event.endDate}">
 													</div>
 												</div>
 											</div>
@@ -81,7 +86,7 @@
 											<label for="inputThumbnail"></label>
 											<input type="file" name="thumbnailFile" id="inputThumbnail" class="file-upload-default">
 											<div class="input-group col-xs-12 px-3">
-												<input type="text" class="form-control file-upload-info" disabled placeholder="썸네일 이미지를 업로드하세요.">
+												<input type="text" class="form-control file-upload-info" disabled placeholder="썸네일 이미지를 업로드하세요." value="${event.thumbnail}" data-original="${event.thumbnail}">
 												<span class="input-group-append">
 													<button class="file-upload-browse btn btn-primary" type="button" id="thumbnailUploadBtn">Upload</button>
 												</span>
@@ -89,7 +94,7 @@
 										</div>
 										<div class="form-group px-3">
 											<label for="CKEDITOR"></label>
-											<textarea class="form-control" rows="6" name="content" id="CKEDITOR"></textarea>
+											<textarea class="form-control" rows="6" name="content" id="CKEDITOR">${event.content}</textarea>
 										</div>
 										<div class="form-group px-3">
 											<button type="submit" class="btn btn-primary me-2" id="submitBtn">Submit</button>
@@ -110,6 +115,6 @@
 	<script src="${ctp}/js/admin/common/hoverable-collapse.js"></script>
 	<script src="${ctp}/js/admin/common/template.js"></script>
 	<script src="${ctp}/js/admin/common/settings.js"></script>
-	<script src="${ctp}/js/admin/event/upload.js"></script>
+	<script src="${ctp}/js/admin/event/update.js"></script>
 </body>
 </html>

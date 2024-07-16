@@ -34,6 +34,4 @@ public interface EventService {
 	// 이벤트 컨텐츠의 댓글 삭제 및 이벤트 참여 철회
 	public boolean deleteEventComment(int commentId);
 
-	
-
 }

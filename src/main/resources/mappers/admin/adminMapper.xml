@@ -12,4 +12,17 @@
     	INSERT INTO events (adminId, eventCategory, title, content, thumbnail, startDate, endDate, status)
     	VALUES (#{adminId}, #{eventCategory}, #{title}, #{content}, #{thumbnail}, #{startDate}, #{endDate}, #{status})
 	</insert>
+	
+	<update id="updateEvent" parameterType="com.spring.javaclassS8.vo.event.EventVO">
+        UPDATE events
+        SET title = #{title},
+            eventCategory = #{eventCategory},
+            content = #{content},
+            thumbnail = #{thumbnail},
+            startDate = #{startDate},
+            endDate = #{endDate},
+            status = #{status},
+            updatedAt = CURRENT_TIMESTAMP
+        WHERE id = #{id}
+	</update>
 </mapper>

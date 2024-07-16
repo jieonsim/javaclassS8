@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
 				hasParticipated = data.hasParticipated;
 				if (hasParticipated) {
 					commentInput.placeholder = '이미 응모하신 이벤트입니다. 이벤트는 한 번만 참여할 수 있습니다.';
+				} else {
+					commentInput.placeholder = '이메일, 전화번호 등 개인정보 노출 시, 타인이 이를 악용할 수 있으니 삼가 바랍니다.';
 				}
 			})
 			.catch(error => console.error('Error:', error));
@@ -91,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	/* 이벤트 댓글 수정 및 삭제 */
 	commentEditBtns.forEach(btn => {
-		btn.addEventListener('click', function(e) {
+		btn.addEventListener('click', function() {
 			const commentId = this.getAttribute('data-comment-id');
 			const editBox = document.getElementById(`eventCommentEditBox_${commentId}`);
 			editBox.style.display = 'block';

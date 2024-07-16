@@ -1,4 +1,4 @@
-package com.spring.javaclassS8.vo.news;
+package com.spring.javaclassS8.vo.hotIssue;
 
 import lombok.Data;
 

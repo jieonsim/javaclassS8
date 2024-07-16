@@ -30,7 +30,11 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">이벤트 리스트</h4>
-									<p class="card-description">등록된 이벤트의 전체 리스트를 확인할 수 있습니다.</p>
+									<p class="card-description">
+										등록된 이벤트의 전체 리스트를 확인할 수 있습니다.
+										<br>
+										이벤트명 클릭 시 상세 페이지로 이동합니다.
+									</p>
 									<div class="table-responsive">
 										<table class="table">
 											<thead>
@@ -64,7 +68,9 @@
 														</td>
 														<td>${loop.index + 1}</td>
 														<td>${event.eventCategory.displayName}</td>
-														<td>${event.title}</td>
+														<td>
+															<a href="${ctp}/admin/event/detail?eventId=${event.id}" style="text-decoration: none; color: #212529;">${event.title}</a>
+														</td>
 														<td>${event.startDate}</td>
 														<td>${event.endDate}</td>
 														<td>

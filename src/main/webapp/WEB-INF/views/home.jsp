@@ -27,52 +27,52 @@
 					<div class="row club-list">
 						<div class="col">
 							<a href="http://www.lgtwins.com/" target="_blank">
-								<img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/KBOHome/resources/images/emblem/regular/2022/LG.png" alt="LG 트윈스">
+								<img src="${ctp}/images/sports/KBO/LG.png" alt="LG 트윈스">
 							</a>
 						</div>
 						<div class="col">
 							<a href="http://www.ktwiz.co.kr/sports/site/baseball/main.do" target="_blank">
-								<img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/KBOHome/resources/images/emblem/regular/2022/KT.png" alt="kt wiz">
+								<img src="${ctp}/images/sports/KBO/KT.png" alt="kt wiz">
 							</a>
 						</div>
 						<div class="col">
 							<a href="http://www.ssglanders.com" target="_blank">
-								<img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/KBOHome/resources/images/emblem/regular/2024/SK.png" alt="SSG 랜더스">
+								<img src="${ctp}/images/sports/KBO/SSG.png" alt="SSG 랜더스">
 							</a>
 						</div>
 						<div class="col">
 							<a href="https://www.ncdinos.com/" target="_blank">
-								<img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/KBOHome/resources/images/emblem/regular/2022/NC.png" alt="NC 다이노스">
+								<img src="${ctp}/images/sports/KBO/NC.png" alt="NC 다이노스">
 							</a>
 						</div>
 						<div class="col">
 							<a href="http://www.doosanbears.com/" target="_blank">
-								<img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/KBOHome/resources/images/emblem/regular/2022/OB.png" alt="두산 베어스">
+								<img src="${ctp}/images/sports/KBO/DS.png" alt="두산 베어스">
 							</a>
 						</div>
 						<div class="col">
 							<a href="http://www.tigers.co.kr" target="_blank">
-								<img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/KBOHome/resources/images/emblem/regular/2022/HT.png" alt="KIA 타이거즈">
+								<img src="${ctp}/images/sports/KBO/KIA.png" alt="KIA 타이거즈">
 							</a>
 						</div>
 						<div class="col">
 							<a href="http://www.giantsclub.com/html/" target="_blank">
-								<img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/KBOHome/resources/images/emblem/regular/2022/LT.png" alt="롯데 자이언츠">
+								<img src="${ctp}/images/sports/KBO/LT.png" alt="롯데 자이언츠">
 							</a>
 						</div>
 						<div class="col">
 							<a href="http://www.samsunglions.com/" target="_blank">
-								<img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/KBOHome/resources/images/emblem/regular/2022/SS.png" alt="삼성 라이온즈">
+								<img src="${ctp}/images/sports/KBO/SS.png" alt="삼성 라이온즈">
 							</a>
 						</div>
 						<div class="col">
 							<a href="http://www.hanwhaeagles.co.kr/" target="_blank">
-								<img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/KBOHome/resources/images/emblem/regular/2022/HH.png" alt="한화 이글스">
+								<img src="${ctp}/images/sports/KBO/HH.png" alt="한화 이글스">
 							</a>
 						</div>
 						<div class="col">
 							<a href="http://www.heroesbaseball.co.kr/index.do" target="_blank">
-								<img src="//lgcxydabfbch3774324.cdn.ntruss.com/KBO_IMAGE/KBOHome/resources/images/emblem/regular/2022/WO.png" alt="키움 히어로즈">
+								<img src="${ctp}/images/sports/KBO/KW.png" alt="키움 히어로즈">
 							</a>
 						</div>
 					</div>

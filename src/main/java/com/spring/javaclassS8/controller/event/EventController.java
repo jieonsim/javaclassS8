@@ -38,8 +38,8 @@ public class EventController {
 	}
 
 	// 이벤트 컨텐츠 디테일
-	@GetMapping("/contentDetail")
-	public String getEventContentDetail(@RequestParam("id") int eventId, Model model, HttpSession session) {
+	@GetMapping("/detail")
+	public String getEventContentDetail(@RequestParam("eventId") int eventId, Model model, HttpSession session) {
 		EventVO event = eventService.getEventById(eventId);
 		// 댓글 상태가 active인 것만 가져오기
 		List<EventCommentVO> eventComments = eventService.getActiveEventComments(eventId);
@@ -54,7 +54,7 @@ public class EventController {
 		boolean isLoggedIn = session.getAttribute("loginMember") != null;
 		model.addAttribute("isLoggedIn", isLoggedIn);
 
-		return "event/contentDetail";
+		return "event/detail";
 	}
 
 	// 이벤트 응모 여부 확인

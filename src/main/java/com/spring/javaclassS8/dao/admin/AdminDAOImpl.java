@@ -24,4 +24,10 @@ public class AdminDAOImpl implements AdminDAO {
 	public int insertEvent(EventVO event) {
 		return sqlSession.getMapper(AdminDAO.class).insertEvent(event);
 	}
+
+	// 이벤트 컨텐츠 수정 처리
+	@Override
+	public int updateEvent(EventVO event) {
+		return sqlSession.getMapper(AdminDAO.class).updateEvent(event);
+	}
 }

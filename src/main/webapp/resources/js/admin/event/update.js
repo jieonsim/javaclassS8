@@ -1,7 +1,7 @@
-/*js/admin/event/upload.js*/
+/*js/admin/event/update.js*/
 
 document.addEventListener('DOMContentLoaded', function() {
-	const form = document.getElementById('eventUploadForm');
+	const form = document.getElementById('eventUpdateForm');
 	const titleInput = document.getElementById('inputEventTitle');
 	const categorySelect = document.getElementById('inputCategory');
 	const startDateInput = document.getElementById('inputStartDate');
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const thumbnailInfoInput = document.querySelector('.file-upload-info');
 	const thumbnailUploadBtn = document.getElementById('thumbnailUploadBtn');
 	const resetBtn = document.getElementById('resetBtn');
-	
+
 	CKEDITOR.replace('CKEDITOR', {
 		height: 700,
 		filebrowserUploadUrl: `${ctp}/admin/event/imageUpload`,
@@ -24,11 +24,14 @@ document.addEventListener('DOMContentLoaded', function() {
 		thumbnailInput.click();
 	});
 
-	// 썸네일 파일 선택 시 이벤트
+	// 썸네일 파일 선택 시 기존 이미지 처리 이벤트
 	thumbnailInput.addEventListener('change', function() {
 		if (this.files && this.files[0]) {
 			const fileName = this.files[0].name;
 			thumbnailInfoInput.value = fileName;
+			// 썸네일 이미지를 변경하지 않았을 경우 기존 이미지 정보를 서버에 전송
+		} else if (thumbnailInfoInput.getAttribute('data-original')) {
+			thumbnailInfoInput.value = thumbnailInfoInput.getAttribute('data-original');
 		}
 	});
 
@@ -52,10 +55,19 @@ document.addEventListener('DOMContentLoaded', function() {
 	form.addEventListener('submit', function(e) {
 		e.preventDefault();
 		if (validateForm()) {
+			// CKEditor 내용을 업데이트합니다.
+			for (instance in CKEDITOR.instances) {
+				CKEDITOR.instances[instance].updateElement();
+			}
+			
 			const formData = new FormData(form);
-			formData.append('content', CKEDITOR.instances.CKEDITOR.getData());
+			
+			// 썸네일 처리
+			if (!thumbnailInput.files[0] && thumbnailInfoInput.getAttribute(`data-original`)) {
+				formData.append('thumbnail', thumbnailInput.getAttribute(`data-original`));
+			}
 
-			fetch(`${ctp}/admin/event/upload`, {
+			fetch(`${ctp}/admin/event/update`, {
 				method: 'POST',
 				body: formData
 			})
@@ -96,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			alert('종료일을 선택해주세요.');
 			return false;
 		}
-		if (!thumbnailInfoInput.value) {
+		if (!thumbnailInfoInput.value && !thumbnailInfoInput.getAttribute(`data-original`)) {
 			alert('썸네일 이미지를 업로드하세요.');
 			return false;
 		}
@@ -109,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// 취소 버튼 이벤트 추가
 	resetBtn.addEventListener('click', function() {
-		if (confirm('이벤트 등록을 취소하시겠습니까?')) {
+		if (confirm('변경 사항을 취소하시겠습니까?')) {
 			window.location.href = `${ctp}/admin/event/list`;
 		}
 	})
