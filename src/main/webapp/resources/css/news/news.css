@@ -37,16 +37,6 @@
 	text-align: center;
 }
 
-.promotion .card-text {
-	color: black;
-	font-family: 'Pretendard-Regular';
-}
-
-.promotion a:hover {
-	color: black;
-	text-decoration: none;
-}
-
 .news-table .news-content {
 	vertical-align: top;
 	text-align: left;
@@ -87,4 +77,18 @@
 
 .kboTeamRanking, .majorGameSchedule {
 	font-family: 'Pretendard-Regular'
+}
+
+.promotion a .card .card-body .card-text p {
+	color: black;
+	font-family: 'Pretendard-Regular';
+}
+
+.promotion a:hover {
+	text-decoration: none;
+}
+
+.promotion a .card .card-body .card-text p:hover {
+	color: black;
+	text-decoration: none;
 }

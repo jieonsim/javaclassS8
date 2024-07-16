@@ -1,15 +1,21 @@
 package com.spring.javaclassS8.controller.news;
 
-import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import javax.servlet.http.HttpServletRequest;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,38 +25,184 @@ import com.spring.javaclassS8.vo.news.NewsItem;
 public class NewsController {
 
 	@GetMapping("/news")
-	public String news(Model model) {
-	    List<NewsItem> newsItems = fetchNewsItems();
-	    model.addAttribute("newsItems", newsItems);
-	    return "news/main";
+	public String news() {
+		return "news/main";
+	}
+
+	@GetMapping("/news2")
+	public String news2() {
+		return "news/main2";
 	}
 
 	@GetMapping("/api/news")
 	@ResponseBody
-	public List<NewsItem> fetchNewsItems() {
-		String url = "https://sports.daum.net/news/ranking";
+	public List<NewsItem> fetchNewsItems(HttpServletRequest request) {
+		System.out.println("fetchNewsItems 메소드 시작");
 		List<NewsItem> newsItems = new ArrayList<>();
 
+		// ChromeDriver 경로 설정
+		String realPath = request.getSession().getServletContext().getRealPath("/resources/crawling/");
+		System.setProperty("webdriver.chrome.driver", realPath + "chromedriver.exe");
+
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--headless"); // 브라우저를 열지 않고 백그라운드에서 실행
+
+		WebDriver driver = new ChromeDriver(options);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
 		try {
-			Document doc = Jsoup.connect(url).get();
-			Elements newsElements = doc.select("ol.list_news li");
+			driver.get("https://sports.daum.net/news/ranking");
+
+			// 페이지가 로드될 때까지 대기
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("ol.list_news > li")));
+
+			List<WebElement> newsElements = driver.findElements(By.cssSelector("ol.list_news > li"));
+
+			System.out.println("크롤링된 뉴스 개수: " + newsElements.size());
 
 			for (int i = 0; i < Math.min(5, newsElements.size()); i++) {
-				Element newsElement = newsElements.get(i);
+				WebElement newsElement = newsElements.get(i);
 
-				String link = newsElement.select("a").attr("href");
-				String imgSrc = newsElement.select("a.link_thumb img").attr("src");
-				String title = newsElement.select("a.link_txt").text();
-				String desc = newsElement.select("a.link_desc").text();
-				String time = newsElement.select("span.txt_info.txt_num").text();
-				String source = newsElement.select("span.txt_info:not(.txt_num)").text();
+				String link = newsElement.findElement(By.cssSelector("a.link_txt")).getAttribute("href");
+				String imgSrc = newsElement.findElement(By.cssSelector("a.link_thumb img")).getAttribute("src");
+				String title = newsElement.findElement(By.cssSelector("a.link_txt")).getText();
+				String desc = newsElement.findElement(By.cssSelector("a.link_desc")).getText();
+				String time = newsElement.findElement(By.cssSelector("span.txt_info.txt_num")).getText();
+				String source = newsElement.findElement(By.cssSelector("span.txt_info:not(.txt_num)")).getText();
 
 				newsItems.add(new NewsItem(link, imgSrc, title, desc, time, source));
+				System.out.println("뉴스 아이템 추가: " + title);
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("크롤링 중 오류 발생: " + e.getMessage());
+		} finally {
+			driver.quit(); // 브라우저 종료
 		}
 
+		System.out.println("fetchNewsItems 메소드 종료, 반환 아이템 수: " + newsItems.size());
 		return newsItems;
+	}
+
+	@GetMapping("/api/schedule")
+	@ResponseBody
+	public Map<String, Object> fetchSchedule(HttpServletRequest request) {
+		System.out.println("fetchSchedule 메소드 시작");
+		Map<String, Object> scheduleData = new HashMap<>();
+
+		String realPath = request.getSession().getServletContext().getRealPath("/resources/crawling/");
+		System.setProperty("webdriver.chrome.driver", realPath + "chromedriver.exe");
+
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--headless");
+
+		WebDriver driver = new ChromeDriver(options);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+		try {
+			driver.get("https://sports.daum.net/");
+
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.top_sched")));
+
+			WebElement dateElement = driver.findElement(By.cssSelector("div.date_select strong.tit_date"));
+			String date = dateElement.getText();
+
+			List<WebElement> matchElements = driver.findElements(By.cssSelector("div.bundle_sched.bundle_home a.link_sched"));
+			List<Map<String, String>> matches = new ArrayList<>();
+
+			for (int i = 0; i < Math.min(4, matchElements.size()); i++) {
+				WebElement matchElement = matchElements.get(i);
+				Map<String, String> match = new HashMap<>();
+				match.put("teamLeft", matchElement.findElement(By.cssSelector(".team_left .inner_tit")).getText());
+				match.put("teamRight", matchElement.findElement(By.cssSelector(".team_right .inner_tit")).getText());
+				match.put("status", matchElement.findElement(By.cssSelector(".info_sched .txt_status")).getText());
+
+				WebElement timeElement = matchElement.findElement(By.cssSelector(".info_sched .num_time"));
+				match.put("time", timeElement != null ? timeElement.getText() : "");
+
+				match.put("league", matchElement.findElement(By.cssSelector(".info_sched .txt_league")).getText());
+				match.put("teamLeftLogo", matchElement.findElement(By.cssSelector(".team_left img.thumb_g")).getAttribute("src"));
+				match.put("teamRightLogo", matchElement.findElement(By.cssSelector(".team_right img.thumb_g")).getAttribute("src"));
+
+				// 점수 정보 추가
+				try {
+					match.put("scoreLeft", matchElement.findElement(By.cssSelector(".team_left .num_score")).getText());
+					match.put("scoreRight", matchElement.findElement(By.cssSelector(".team_right .num_score")).getText());
+				} catch (Exception e) {
+					// 점수 정보가 없는 경우 (경기 전)
+					match.put("scoreLeft", "");
+					match.put("scoreRight", "");
+				}
+
+				matches.add(match);
+			}
+
+			scheduleData.put("date", date);
+			scheduleData.put("matches", matches);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("크롤링 중 오류 발생: " + e.getMessage());
+		} finally {
+			driver.quit();
+		}
+
+		System.out.println("fetchSchedule 메소드 종료");
+		return scheduleData;
+	}
+	
+	@GetMapping("/api/kboRanking")
+	@ResponseBody
+	public Map<String, Object> fetchKBORanking(HttpServletRequest request) {
+	    System.out.println("fetchKBORanking 메소드 시작");
+	    Map<String, Object> rankingData = new HashMap<>();
+
+	    String realPath = request.getSession().getServletContext().getRealPath("/resources/crawling/");
+		System.setProperty("webdriver.chrome.driver", realPath + "chromedriver.exe");
+
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--headless");
+
+		WebDriver driver = new ChromeDriver(options);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+	    try {
+	        driver.get("https://www.koreabaseball.com/Default.aspx");
+
+	        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#tblTeamRank")));
+
+	        WebElement dateElement = driver.findElement(By.cssSelector("#lblTeamRank"));
+	        String date = dateElement.getText();
+
+	        List<WebElement> rows = driver.findElements(By.cssSelector("#tblTeamRank tbody tr"));
+	        List<Map<String, String>> teams = new ArrayList<>();
+
+	        for (WebElement row : rows) {
+	            Map<String, String> team = new HashMap<>();
+	            team.put("rank", row.findElement(By.cssSelector("th")).getText());
+	            team.put("name", row.findElement(By.cssSelector("td .team-name")).getText());
+	            List<WebElement> cells = row.findElements(By.cssSelector("td"));
+	            team.put("games", cells.get(0).getText());
+	            team.put("wins", cells.get(1).getText());
+	            team.put("losses", cells.get(2).getText());
+	            team.put("draws", cells.get(3).getText());
+	            team.put("winRate", cells.get(4).getText());
+	            team.put("gameBehind", cells.get(5).getText());
+	            team.put("streak", cells.get(6).getText());
+	            teams.add(team);
+	        }
+
+	        rankingData.put("date", date);
+	        rankingData.put("teams", teams);
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        System.out.println("크롤링 중 오류 발생: " + e.getMessage());
+	    } finally {
+	        driver.quit();
+	    }
+
+	    System.out.println("fetchKBORanking 메소드 종료");
+	    return rankingData;
 	}
 }

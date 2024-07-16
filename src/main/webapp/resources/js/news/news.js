@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
 	const newsTable = document.querySelector('.news-table tbody');
+	const scheduleTable = document.querySelector('.majorGameSchedule table');
 
-	// 서버에서 뉴스 데이터를 가져오는 함수
 	function fetchNewsData() {
-		fetch(`${ctp}/api/news`)  // 서버의 API 엔드포인트
+		fetch(`${ctp}/api/news`)
 			.then(response => response.json())
 			.then(newsItems => {
 				displayNewsItems(newsItems);
@@ -11,58 +11,130 @@ document.addEventListener('DOMContentLoaded', function() {
 			.catch(error => console.error('Error fetching news:', error));
 	}
 
-	// 뉴스 아이템을 화면에 표시하는 함수
+	function fetchScheduleData() {
+		fetch(`${ctp}/api/schedule`)
+			.then(response => response.json())
+			.then(scheduleData => {
+				displayScheduleData(scheduleData);
+			})
+			.catch(error => console.error('Error fetching schedule:', error));
+	}
+
 	function displayNewsItems(newsItems) {
-		newsItems.forEach(item => {
+		newsItems.forEach((item, index) => {
 			const tr = document.createElement('tr');
-
-			const tdImg = document.createElement('td');
-			const imgLink = document.createElement('a');
-			imgLink.href = item.link;
-			const img = document.createElement('img');
-			img.src = item.imgSrc;
-			img.alt = "News Image";
-			imgLink.appendChild(img);
-			tdImg.appendChild(imgLink);
-
-			const tdContent = document.createElement('td');
-			tdContent.className = 'news-content';
-
-			const titleDiv = document.createElement('div');
-			titleDiv.className = 'news-title';
-			const titleLink = document.createElement('a');
-			titleLink.href = item.link;
-			titleLink.textContent = item.title;
-			titleDiv.appendChild(titleLink);
-
-			const descDiv = document.createElement('div');
-			descDiv.className = 'news-desc';
-			const descLink = document.createElement('a');
-			descLink.href = item.link;
-			descLink.textContent = item.desc;
-			descDiv.appendChild(descLink);
-
-			const infoDiv = document.createElement('div');
-			infoDiv.className = 'news-info';
-			const timeSpan = document.createElement('span');
-			timeSpan.textContent = item.time;
-			const sourceSpan = document.createElement('span');
-			sourceSpan.textContent = item.source;
-			infoDiv.appendChild(timeSpan);
-			infoDiv.appendChild(document.createTextNode(' | '));
-			infoDiv.appendChild(sourceSpan);
-
-			tdContent.appendChild(titleDiv);
-			tdContent.appendChild(descDiv);
-			tdContent.appendChild(infoDiv);
-
-			tr.appendChild(tdImg);
-			tr.appendChild(tdContent);
-
+			tr.innerHTML = `
+                <td>
+                    <a href="${item.link}">
+                        <img src="${item.imgSrc}" alt="News Image">
+                    </a>
+                </td>
+                <td class="news-content">
+                    <div class="news-title">
+                        <a href="${item.link}">${item.title}</a>
+                    </div>
+                    <div class="news-desc">
+                        <a href="${item.link}">${item.desc}</a>
+                    </div>
+                    <div class="news-info">
+                        <span>${item.time}</span>
+                        |
+                        <span>${item.source}</span>
+                    </div>
+                </td>
+            `;
 			newsTable.appendChild(tr);
 		});
 	}
 
-	// 뉴스 데이터 가져오기 실행
+	function displayScheduleData(scheduleData) {
+		const thead = scheduleTable.querySelector('thead');
+		const tbody = scheduleTable.querySelector('tbody');
+
+		if (scheduleData && scheduleData.date) {
+			// 날짜 표시
+			thead.innerHTML = `
+            <tr>
+                <th colspan="5" class="text-center">
+                    <div class="date-select">
+                        <strong>${scheduleData.date}</strong>
+                    </div>
+                </th>
+            </tr>
+        `;
+
+			// 경기 정보 표시
+			tbody.innerHTML = '';
+			if (scheduleData.matches && scheduleData.matches.length > 0) {
+				scheduleData.matches.forEach(match => {
+					const tr = document.createElement('tr');
+					tr.innerHTML = `
+                    <td class="text-left">
+                        <img src="${match.teamLeftLogo}" class="team-logo" alt="팀 로고">
+                        <span class="team-name ml-2">${match.teamLeft}</span>
+                    </td>
+                    <td class="text-center">
+                        <span class="score">${match.scoreLeft || ''}</span>
+                    </td>
+                    <td class="text-center league-info">
+                        <div>${match.status}</div>
+                        ${match.time ? `<div><b>${match.time}</b></div>` : ''}
+                        <div>${match.league}</div>
+                    </td>
+                    <td class="text-center">
+                        <span class="score">${match.scoreRight || ''}</span>
+                    </td>
+                    <td class="text-right">
+                        <span class="team-name mr-2">${match.teamRight}</span>
+                        <img src="${match.teamRightLogo}" class="team-logo" alt="팀 로고">
+                    </td>
+                `;
+					tbody.appendChild(tr);
+				});
+			} else {
+				tbody.innerHTML = '<tr><td colspan="5" class="text-center">경기 일정이 없습니다.</td></tr>';
+			}
+		} else {
+			thead.innerHTML = '<tr><th colspan="5" class="text-center">일정 데이터를 불러올 수 없습니다.</th></tr>';
+			tbody.innerHTML = '';
+		}
+	}
+
+	function fetchKBORankingData() {
+		fetch(`${ctp}/api/kboRanking`)
+			.then(response => response.json())
+			.then(rankingData => {
+				displayKBORanking(rankingData);
+			})
+			.catch(error => console.error('Error fetching KBO ranking:', error));
+	}
+
+	function displayKBORanking(rankingData) {
+		const rankingTable = document.querySelector('.kboTeamRanking table');
+		const tbody = rankingTable.querySelector('tbody');
+		const dateElement = document.querySelector('.kboTeamRanking .hotIssue-title');
+
+		dateElement.textContent = rankingData.date;
+		tbody.innerHTML = '';
+
+		rankingData.teams.forEach(team => {
+			const tr = document.createElement('tr');
+			tr.innerHTML = `
+            <td>${team.rank}</td>
+            <td>${team.name}</td>
+            <td>${team.games}</td>
+            <td>${team.wins}</td>
+            <td>${team.losses}</td>
+            <td>${team.draws}</td>
+            <td>${team.winRate}</td>
+            <td>${team.gameBehind}</td>
+            <td>${team.streak}</td>
+        `;
+			tbody.appendChild(tr);
+		});
+	}
+
 	fetchNewsData();
+	fetchScheduleData();
+	fetchKBORankingData();
 });

@@ -14,27 +14,33 @@
 <body>
 	<jsp:include page="/WEB-INF/views/layout/header.jsp" />
 	<div class="container">
+		<%-- <div class="loading_icon text-center my-5">
+			<img src="${ctp}/images/icon/loading_2_256.png">
+		</div> --%>
 		<div class="sportsRankingNews mt-5">
 			<span class="hotIssue-title">스포츠 랭킹 뉴스</span>
+			<div class="loading_icon text-center my-5">
+				<img src="${ctp}/images/icon/loading_2_128.png">
+			</div>
 			<table class="table news-table">
 				<tbody>
-					<tr>
+					<!-- <tr>
 						<td>
 							<a href="https://v.daum.net/v/20240715174020210">
-								a.link_thumb
+								<img src="//img1.daumcdn.net/thumb/S240x138/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fnews%2F202407%2F16%2Fpoctan%2F20240716055125365axot.jpg&amp;scode=sports" alt="News Image">
 							</a>
 						</td>
 						<td class="news-content">
 							<div class="news-title">
-								<a href="https://v.daum.net/v/20240715174020210">a.link_txt</a>
+								<a href="https://v.daum.net/v/20240715174020210">이런 투수가 한국서 방출됐다니…ML 1위팀 최다승, 분노의 삼진 잡고 포효 "그래서 여기 있다"</a>
 							</div>
 							<div class="news-desc">
-								<a href="https://v.daum.net/v/20240715174020210">a.link_desc</a>
+								<a href="https://v.daum.net/v/20240715174020210">[OSEN=이상학 기자] KBO리그 삼성 라이온즈에서 3년을 뛰었으나 부상과 부진으로 방출됐던 우완 투수 벤 라이블리(32)가 메이저리그에서 성공 가도를 달리고 있다. 아메리칸리그(AL) 최고 성적을 내고 있는 클리블랜드 가디언스에서 전반기 최다승 투수로 변모했다. 라이블리는 지난 15일(이하 한국시간) 미국 플로리다주 세인트피터스버그 트로피카나필드에</a>
 							</div>
 							<div class="news-info">
-								<span>span.txt_info.txt_num</span>
+								<span>2024.07.16 05:51</span>
 								|
-								<span>span.txt_info</span>
+								<span>OSEN</span>
 							</div>
 						</td>
 					</tr>
@@ -117,7 +123,7 @@
 								<span>엑스포츠뉴스</span>
 							</div>
 						</td>
-					</tr>
+					</tr> -->
 				</tbody>
 			</table>
 		</div>
@@ -141,14 +147,15 @@
 								<span class="team-name ml-2">LA 다저스</span>
 							</td>
 							<td class="text-center">
-								<span class="score">3</span>
+								<!-- <span class="score">3</span> -->
 							</td>
 							<td class="text-center league-info">
-								<div>종료</div>
+								<div>경기전</div>
+								<div>18:30</div>
 								<div>메이저리그</div>
 							</td>
 							<td class="text-center">
-								<span class="score">4</span>
+								<!-- <span class="score">4</span> -->
 							</td>
 							<td class="text-right">
 								<span class="team-name mr-2">디트로이트</span>

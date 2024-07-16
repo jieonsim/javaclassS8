@@ -222,6 +222,13 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.17.2</version>
 		</dependency>
+		<!-- 웹 크롤링을 하기 위한 라이브러리(selenium) -->
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>4.18.1</version>
+		</dependency>
 		
 		<!-- backend 체크를 위한 validator 라이브러리 (data 검증 : 유효성검사) -->
 		<!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
