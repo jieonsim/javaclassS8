@@ -58,8 +58,6 @@ public class NewsController {
 
 			List<WebElement> newsElements = driver.findElements(By.cssSelector("ol.list_news > li"));
 
-			System.out.println("크롤링된 뉴스 개수: " + newsElements.size());
-
 			for (int i = 0; i < Math.min(5, newsElements.size()); i++) {
 				WebElement newsElement = newsElements.get(i);
 
@@ -71,7 +69,6 @@ public class NewsController {
 				String source = newsElement.findElement(By.cssSelector("span.txt_info:not(.txt_num)")).getText();
 
 				newsItems.add(new NewsItem(link, imgSrc, title, desc, time, source));
-				System.out.println("뉴스 아이템 추가: " + title);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,7 +77,7 @@ public class NewsController {
 			driver.quit(); // 브라우저 종료
 		}
 
-		System.out.println("fetchNewsItems 메소드 종료, 반환 아이템 수: " + newsItems.size());
+		System.out.println("fetchNewsItems 메소드 종료");
 		return newsItems;
 	}
 
@@ -150,14 +147,14 @@ public class NewsController {
 		System.out.println("fetchSchedule 메소드 종료");
 		return scheduleData;
 	}
-	
+
 	@GetMapping("/api/kboRanking")
 	@ResponseBody
 	public Map<String, Object> fetchKBORanking(HttpServletRequest request) {
-	    System.out.println("fetchKBORanking 메소드 시작");
-	    Map<String, Object> rankingData = new HashMap<>();
+		System.out.println("fetchKBORanking 메소드 시작");
+		Map<String, Object> rankingData = new HashMap<>();
 
-	    String realPath = request.getSession().getServletContext().getRealPath("/resources/crawling/");
+		String realPath = request.getSession().getServletContext().getRealPath("/resources/crawling/");
 		System.setProperty("webdriver.chrome.driver", realPath + "chromedriver.exe");
 
 		ChromeOptions options = new ChromeOptions();
@@ -166,43 +163,43 @@ public class NewsController {
 		WebDriver driver = new ChromeDriver(options);
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-	    try {
-	        driver.get("https://www.koreabaseball.com/Default.aspx");
+		try {
+			driver.get("https://www.koreabaseball.com/Default.aspx");
 
-	        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#tblTeamRank")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#tblTeamRank")));
 
-	        WebElement dateElement = driver.findElement(By.cssSelector("#lblTeamRank"));
-	        String date = dateElement.getText();
+			WebElement dateElement = driver.findElement(By.cssSelector("#lblTeamRank"));
+			String date = dateElement.getText();
 
-	        List<WebElement> rows = driver.findElements(By.cssSelector("#tblTeamRank tbody tr"));
-	        List<Map<String, String>> teams = new ArrayList<>();
+			List<WebElement> rows = driver.findElements(By.cssSelector("#tblTeamRank tbody tr"));
+			List<Map<String, String>> teams = new ArrayList<>();
 
-	        for (WebElement row : rows) {
-	            Map<String, String> team = new HashMap<>();
-	            team.put("rank", row.findElement(By.cssSelector("th")).getText());
-	            team.put("name", row.findElement(By.cssSelector("td .team-name")).getText());
-	            List<WebElement> cells = row.findElements(By.cssSelector("td"));
-	            team.put("games", cells.get(0).getText());
-	            team.put("wins", cells.get(1).getText());
-	            team.put("losses", cells.get(2).getText());
-	            team.put("draws", cells.get(3).getText());
-	            team.put("winRate", cells.get(4).getText());
-	            team.put("gameBehind", cells.get(5).getText());
-	            team.put("streak", cells.get(6).getText());
-	            teams.add(team);
-	        }
+			for (WebElement row : rows) {
+				Map<String, String> team = new HashMap<>();
+				team.put("rank", row.findElement(By.cssSelector("th")).getText());
+				team.put("name", row.findElement(By.cssSelector("td .team-name")).getText());
+				List<WebElement> cells = row.findElements(By.cssSelector("td"));
+				team.put("games", cells.get(0).getText());
+				team.put("wins", cells.get(1).getText());
+				team.put("losses", cells.get(2).getText());
+				team.put("draws", cells.get(3).getText());
+				team.put("winRate", cells.get(4).getText());
+				team.put("gameBehind", cells.get(5).getText());
+				team.put("streak", cells.get(6).getText());
+				teams.add(team);
+			}
 
-	        rankingData.put("date", date);
-	        rankingData.put("teams", teams);
+			rankingData.put("date", date);
+			rankingData.put("teams", teams);
 
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        System.out.println("크롤링 중 오류 발생: " + e.getMessage());
-	    } finally {
-	        driver.quit();
-	    }
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("크롤링 중 오류 발생: " + e.getMessage());
+		} finally {
+			driver.quit();
+		}
 
-	    System.out.println("fetchKBORanking 메소드 종료");
-	    return rankingData;
+		System.out.println("fetchKBORanking 메소드 종료");
+		return rankingData;
 	}
 }

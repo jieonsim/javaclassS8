@@ -13,7 +13,10 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/layout/header.jsp" />
-	<div class="container">
+	<div class="container text-center my-5 py-5" id="loding_container">
+		<img src="${ctp}/images/icon/loading_2_256.png" />
+	</div>
+	<div class="container" id="content_container">
 		<div class="sportsRankingNews mt-5">
 			<span class="hotIssue-title">스포츠 랭킹 뉴스</span>
 			<table class="table news-table">
@@ -66,116 +69,6 @@
 						</tr>
 					</thead>
 					<tbody>
-						<!-- <tr>
-							<td>1</td>
-							<td>KIA</td>
-							<td>89</td>
-							<td>52</td>
-							<td>35</td>
-							<td>2</td>
-							<td>0.598</td>
-							<td>-</td>
-							<td>1승</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>삼성</td>
-							<td>90</td>
-							<td>48</td>
-							<td>40</td>
-							<td>2</td>
-							<td>0.545</td>
-							<td>4.5</td>
-							<td>1승</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>LG</td>
-							<td>92</td>
-							<td>48</td>
-							<td>42</td>
-							<td>2</td>
-							<td>0.533</td>
-							<td>5.5</td>
-							<td>2승</td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>두산</td>
-							<td>92</td>
-							<td>48</td>
-							<td>42</td>
-							<td>2</td>
-							<td>0.533</td>
-							<td>5.5</td>
-							<td>1패</td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td>SSG</td>
-							<td>90</td>
-							<td>45</td>
-							<td>44</td>
-							<td>1</td>
-							<td>0.506</td>
-							<td>8</td>
-							<td>2승</td>
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>NC</td>
-							<td>87</td>
-							<td>42</td>
-							<td>43</td>
-							<td>2</td>
-							<td>0.494</td>
-							<td>9</td>
-							<td>2승</td>
-						</tr>
-						<tr>
-							<td>7</td>
-							<td>KT</td>
-							<td>88</td>
-							<td>41</td>
-							<td>45</td>
-							<td>2</td>
-							<td>0.477</td>
-							<td>10.5</td>
-							<td>2승</td>
-						</tr>
-						<tr>
-							<td>8</td>
-							<td>한화</td>
-							<td>88</td>
-							<td>39</td>
-							<td>49</td>
-							<td>2</td>
-							<td>0.442</td>
-							<td>13.5</td>
-							<td>2패</td>
-						</tr>
-						<tr>
-							<td>9</td>
-							<td>롯데</td>
-							<td>86</td>
-							<td>36</td>
-							<td>48</td>
-							<td>2</td>
-							<td>0.430</td>
-							<td>13.5</td>
-							<td>3패</td>
-						</tr>
-						<tr>
-							<td>10</td>
-							<td>키움</td>
-							<td>86</td>
-							<td>37</td>
-							<td>49</td>
-							<td>0</td>
-							<td>0.430</td>
-							<td>14.5</td>
-							<td>2패</td>
-						</tr> -->
 					</tbody>
 				</table>
 			</div>

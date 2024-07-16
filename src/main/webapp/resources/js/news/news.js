@@ -11,15 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			.catch(error => console.error('Error fetching news:', error));
 	}
 
-	function fetchScheduleData() {
-		fetch(`${ctp}/api/schedule`)
-			.then(response => response.json())
-			.then(scheduleData => {
-				displayScheduleData(scheduleData);
-			})
-			.catch(error => console.error('Error fetching schedule:', error));
-	}
-
 	function displayNewsItems(newsItems) {
 		newsItems.forEach((item, index) => {
 			const tr = document.createElement('tr');
@@ -45,6 +36,15 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
 			newsTable.appendChild(tr);
 		});
+	}
+
+	function fetchScheduleData() {
+		fetch(`${ctp}/api/schedule`)
+			.then(response => response.json())
+			.then(scheduleData => {
+				displayScheduleData(scheduleData);
+			})
+			.catch(error => console.error('Error fetching schedule:', error));
 	}
 
 	function displayScheduleData(scheduleData) {
@@ -104,10 +104,12 @@ document.addEventListener('DOMContentLoaded', function() {
 		fetch(`${ctp}/api/kboRanking`)
 			.then(response => response.json())
 			.then(rankingData => {
+				console.log("받은 랭킹 데이터", rankingData)
 				displayKBORanking(rankingData);
 			})
 			.catch(error => console.error('Error fetching KBO ranking:', error));
 	}
+
 
 	function displayKBORanking(rankingData) {
 		const rankingTable = document.querySelector('.kboTeamRanking table');
