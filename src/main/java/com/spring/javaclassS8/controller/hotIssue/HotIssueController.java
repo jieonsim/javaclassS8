@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -109,8 +110,13 @@ public class HotIssueController {
 				match.put("teamRight", matchElement.findElement(By.cssSelector(".team_right .inner_tit")).getText());
 				match.put("status", matchElement.findElement(By.cssSelector(".info_sched .txt_status")).getText());
 
-				WebElement timeElement = matchElement.findElement(By.cssSelector(".info_sched .num_time"));
-				match.put("time", timeElement != null ? timeElement.getText() : "");
+				// 시간 정보 처리
+		        try {
+		            WebElement timeElement = matchElement.findElement(By.cssSelector(".info_sched .num_time"));
+		            match.put("time", timeElement.getText());
+		        } catch (NoSuchElementException e) {
+		            match.put("time", ""); // 시간 정보가 없을 경우 빈 문자열 설정
+		        }
 
 				match.put("league", matchElement.findElement(By.cssSelector(".info_sched .txt_league")).getText());
 				match.put("teamLeftLogo", matchElement.findElement(By.cssSelector(".team_left img.thumb_g")).getAttribute("src"));
