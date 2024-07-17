@@ -178,20 +178,22 @@ public class HotIssueController {
 			for (WebElement row : rows) {
 				Map<String, String> team = new HashMap<>();
 				team.put("rank", row.findElement(By.cssSelector("th")).getText());
-				team.put("name", row.findElement(By.cssSelector("td .team-name")).getText());
+				//team.put("name", row.findElement(By.cssSelector("td .team-name")).getText());
 				List<WebElement> cells = row.findElements(By.cssSelector("td"));
-				team.put("games", cells.get(0).getText());
-				team.put("wins", cells.get(1).getText());
-				team.put("losses", cells.get(2).getText());
-				team.put("draws", cells.get(3).getText());
-				team.put("winRate", cells.get(4).getText());
-				team.put("gameBehind", cells.get(5).getText());
-				team.put("streak", cells.get(6).getText());
+				team.put("name", cells.get(0).getText());
+				team.put("games", cells.get(1).getText());
+				team.put("wins", cells.get(2).getText());
+				team.put("losses", cells.get(3).getText());
+				team.put("draws", cells.get(4).getText());
+				team.put("winRate", cells.get(5).getText());
+				team.put("gameBehind", cells.get(6).getText());
+				team.put("streak", cells.get(7).getText());
 				teams.add(team);
 			}
 
 			rankingData.put("date", date);
 			rankingData.put("teams", teams);
+			System.out.println("크롤링된 데이터: " + rankingData);
 
 		} catch (Exception e) {
 			e.printStackTrace();

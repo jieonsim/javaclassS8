@@ -125,6 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			.then(response => response.json())
 			.then(rankingData => {
 				displayKBORanking(rankingData);
+				console.log("받은 랭킹 데이터:", rankingData);
 			})
 			.catch(error => console.error('Error fetching KBO ranking:', error));
 	}
