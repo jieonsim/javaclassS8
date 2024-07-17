@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="${ctp}/vendors/ti-icons/css/themify-icons.css">
 <link rel="stylesheet" href="${ctp}/vendors/simple-line-icons/css/simple-line-icons.css">
 <link rel="stylesheet" href="${ctp}/css/admin/vertical-layout-light/style.css">
-<link rel="stylesheet" href="${ctp}/css/admin/event/upload.css">
+<link rel="stylesheet" href="${ctp}/css/admin/event/event.css">
 <link rel="icon" href="${ctp}/images/admin/favicon.ico">
 </head>
 <body>
@@ -45,7 +45,7 @@
 												<label class="col-sm-5 col-form-label" for="inputCategory">카테고리</label>
 												<div class="form-group row">
 													<div class="col-sm-7 ml-3">
-														<select class="form-control" id="inputCategory" name="eventCategory">
+														<select class="form-control bg-light" id="inputCategory" name="eventCategory">
 															<c:forEach var="category" items="${categories}">
 																<option value="${category}" ${event.eventCategory == category ? 'selected' : ''}>${category.displayName}</option>
 															</c:forEach>
@@ -57,7 +57,7 @@
 												<label class="col-sm-5 col-form-label" for="inputStatus">상태</label>
 												<div class="form-group row">
 													<div class="col-sm-7 ml-3">
-														<select class="form-control" id="inputStatus" name="status">
+														<select class="form-control bg-light" id="inputStatus" name="status">
 															<c:forEach var="status" items="${statuses}">
 																<option value="${status}" ${event.status == status ? 'selected' : ''}>${status.displayName}</option>
 															</c:forEach>
@@ -69,7 +69,7 @@
 												<label class="col-sm-4 col-form-label" for="inputStartDate">시작일</label>
 												<div class="form-group row">
 													<div class="col-sm-8 ml-3">
-														<input type="date" class="form-control" id="inputStartDate" name="startDate" value="${event.startDate}">
+														<input type="date" class="form-control bg-light" id="inputStartDate" name="startDate" value="${event.startDate}">
 													</div>
 												</div>
 											</div>
@@ -77,7 +77,7 @@
 												<label class="col-sm-4 col-form-label" for="inputEndDate">종료일</label>
 												<div class="form-group row">
 													<div class="col-sm-8 ml-3">
-														<input type="date" class="form-control" id="inputEndDate" name="endDate" value="${event.endDate}">
+														<input type="date" class="form-control bg-light" id="inputEndDate" name="endDate" value="${event.endDate}">
 													</div>
 												</div>
 											</div>

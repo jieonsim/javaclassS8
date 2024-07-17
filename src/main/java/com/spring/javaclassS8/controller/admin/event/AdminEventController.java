@@ -49,6 +49,8 @@ public class AdminEventController {
 	public String getEventList(Model model) {
 		List<EventVO> events = eventService.getAllEvents();
 		model.addAttribute("events", events);
+		model.addAttribute("categories", EventCategory.values());
+		model.addAttribute("statuses", Status.values());
 		return "admin/event/list";
 	}
 
@@ -125,7 +127,7 @@ public class AdminEventController {
 	}
 
 	// 이벤트 컨텐츠 디테일
-	@GetMapping("/detail")
+	@GetMapping("/contentDetail")
 	public String getEventContentDetail(@RequestParam("eventId") int eventId, Model model) {
 		EventVO event = eventService.getEventById(eventId);
 		// 댓글 상태 active/deleted 상관없이 모두 가져오기
@@ -137,7 +139,7 @@ public class AdminEventController {
 		model.addAttribute("commentCount", commentCount);
 		model.addAttribute("newLine", "\n");
 
-		return "admin/event/detail";
+		return "admin/event/contentDetail";
 	}
 
 	// 이벤트 컨텐츠 수정 폼
@@ -172,7 +174,7 @@ public class AdminEventController {
 			if (event.getContent() != null) {
 				event.setContent(event.getContent().replaceFirst("^,", "")); // 맨 앞의 쉼표 제거
 			}
-			
+
 			int result = adminEventService.updateEvent(event);
 
 			if (result != 0) {
@@ -185,5 +187,27 @@ public class AdminEventController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "이벤트 수정 중 오류가 발생했습니다."));
 		}
 	}
+
+	// 이벤트 리스트 조건 검색
+	@PostMapping("/filter")
+	@ResponseBody
+	public ResponseEntity<List<EventVO>> filterEvents(@RequestParam(required = false) String eventCategory, @RequestParam(required = false) String status,
+			@RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate, @RequestParam(required = false) String keyword, Model model) {
+
+		List<EventVO> filteredEvents = adminEventService.filterEvents(eventCategory, status, startDate, endDate, keyword);
+		model.addAttribute("statuses", Status.values());
+		return ResponseEntity.ok(filteredEvents);
+	}
+	
+	// 이벤트 당첨자 리스트
+	@GetMapping("/winnerList")
+	public String getwinnerList(Model model) {
+		List<EventVO> events = eventService.getAllEvents();
+		model.addAttribute("events", events);
+		model.addAttribute("categories", EventCategory.values());
+		model.addAttribute("statuses", Status.values());
+		return "admin/event/winnerList";
+	}
+
 
 }

@@ -1,5 +1,7 @@
 package com.spring.javaclassS8.dao.admin;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,5 +31,11 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public int updateEvent(EventVO event) {
 		return sqlSession.getMapper(AdminDAO.class).updateEvent(event);
+	}
+
+	// 이벤트 리스트 조건 검색
+	@Override
+	public List<EventVO> filterEvents(String eventCategory, String status, String startDate, String endDate, String keyword) {
+		return sqlSession.getMapper(AdminDAO.class).filterEvents(eventCategory, status, startDate, endDate, keyword);
 	}
 }

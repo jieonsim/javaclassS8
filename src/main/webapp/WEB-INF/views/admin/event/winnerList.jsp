@@ -32,7 +32,7 @@
 								<div class="card-body">
 									<form id="searchForm">
 										<div class="d-flex justify-content-between">
-											<h4 class="card-title">이벤트 리스트</h4>
+											<h4 class="card-title">이벤트 추첨 리스트</h4>
 											<div class="d-flex justify-content-end mb-2">
 												<div class="mx-2">
 													<select class="form-control bg-white text-dark" id="inputCategory" name="eventCategory">
@@ -57,9 +57,9 @@
 										</div>
 										<div class="d-flex justify-content-between pb-3">
 											<p class="card-description mb-0">
-												등록된 이벤트의 전체 리스트를 확인할 수 있습니다.
+												이벤트명 클릭 시 당첨자 리스트를 확인할 수 있습니다.
 												<br>
-												이벤트명 클릭 시 참여자 확인 및 당첨자 추첨 / 이벤트 수정이 가능합니다.
+												상세 페이지로 이동하여 당첨자 발표 포스팅 및 메일 발송이 가능합니다.
 											</p>
 											<div class="d-flex justify-content-end align-items-end">
 												<div class="mx-2">
@@ -91,9 +91,10 @@
 													<th>No.</th>
 													<th>카테고리</th>
 													<th>이벤트명</th>
-													<th>기간</th>
+													<th>시작일</th>
 													<th>종료일</th>
-													<th>상태</th>
+													<th>당첨자 발표</th>
+													<th>예매권 메일 발송</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -102,26 +103,12 @@
 														<td class="text-center">${loop.index + 1}</td>
 														<td class="text-center">${event.eventCategory.displayName}</td>
 														<td>
-															<a href="${ctp}/admin/event/contentDetail?eventId=${event.id}" style="text-decoration: none; color: #212529;">${event.title}</a>
+															<a href="${ctp}/admin/event/detail?eventId=${event.id}" style="text-decoration: none; color: #212529;">${event.title}</a>
 														</td>
 														<td class="text-center">${event.startDate}</td>
 														<td class="text-center">${event.endDate}</td>
-														<td class="text-center">
-															<c:choose>
-																<c:when test="${event.status == 'ONGOING'}">
-																	<label class="badge badge-danger">${event.status.displayName}</label>
-																</c:when>
-																<c:when test="${event.status == 'ENDED'}">
-																	<label class="badge badge-success">${event.status.displayName}</label>
-																</c:when>
-																<c:when test="${event.status == 'UPCOMING'}">
-																	<label class="badge badge-warning">${event.status.displayName}</label>
-																</c:when>
-																<c:otherwise>
-																	<label class="badge badge-info">${event.status.displayName}</label>
-																</c:otherwise>
-															</c:choose>
-														</td>
+														<td class="text-center">N</td>
+														<td class="text-center">발송 전</td>
 													</tr>
 												</c:forEach>
 											</tbody>

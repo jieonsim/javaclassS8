@@ -93,6 +93,7 @@ public class LoginServiceImpl implements LoginService {
 		return new LoginResult(false, "자동 로그인 실패");
 	}
 
+	// 자동 로그인 생성 및 저장
 	private void createAndSaveAutoLoginToken(MemberVO member, HttpServletResponse response) {
 		String token = UUID.randomUUID().toString();
 		AutoLoginTokenVO tokenVO = new AutoLoginTokenVO();

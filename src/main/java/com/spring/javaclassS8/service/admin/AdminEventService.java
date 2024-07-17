@@ -1,6 +1,7 @@
 package com.spring.javaclassS8.service.admin;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,4 +30,7 @@ public interface AdminEventService {
 	
 	// 기존 썸네일 이미지 삭제
 	void deleteExistingThumbnail(String thumbnailPath);
+	
+	// 이벤트 리스트 조건 검색
+	List<EventVO> filterEvents(String eventCategory, String status, String startDate, String endDate, String keyword);
 }

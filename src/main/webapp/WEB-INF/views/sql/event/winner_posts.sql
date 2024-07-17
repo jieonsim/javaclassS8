@@ -7,8 +7,9 @@ CREATE TABLE winner_posts (
     title VARCHAR(255) NOT NULL COMMENT '게시글 제목',
     content TEXT NOT NULL COMMENT '게시글 내용',
     isPublished BOOLEAN NOT NULL DEFAULT FALSE COMMENT '게시글 공개 여부',
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '게시글 업로드 일시',
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '게시글 생성 일시',
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '게시글 수정 일시',
+    publishedAt TIMESTAMP NULL COMMENT '게시글 공개 일시',
     PRIMARY KEY (id),
     FOREIGN KEY (eventId) REFERENCES events(id),
     FOREIGN KEY (adminId) REFERENCES members(id)

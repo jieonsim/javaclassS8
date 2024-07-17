@@ -178,7 +178,6 @@ public class HotIssueController {
 			for (WebElement row : rows) {
 				Map<String, String> team = new HashMap<>();
 				team.put("rank", row.findElement(By.cssSelector("th")).getText());
-				//team.put("name", row.findElement(By.cssSelector("td .team-name")).getText());
 				List<WebElement> cells = row.findElements(By.cssSelector("td"));
 				team.put("name", cells.get(0).getText());
 				team.put("games", cells.get(1).getText());

@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="${ctp}/vendors/ti-icons/css/themify-icons.css">
 <link rel="stylesheet" href="${ctp}/vendors/simple-line-icons/css/simple-line-icons.css">
 <link rel="stylesheet" href="${ctp}/css/admin/vertical-layout-light/style.css">
-<link rel="stylesheet" href="${ctp}/css/admin/event/upload.css">
+<link rel="stylesheet" href="${ctp}/css/admin/event/event.css">
 <link rel="icon" href="${ctp}/images/admin/favicon.ico">
 </head>
 <body>
@@ -29,7 +29,11 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">이벤트 등록</h4>
-									<p class="card-description">이벤트 상태를 <mark class="bg-warning text-white">진행 중으로 선택 시 이벤트 메인에 즉시 업로드</mark>됩니다.</p>
+									<p class="card-description">
+										이벤트 상태를
+										<mark class="bg-warning text-white">진행 중으로 선택 시 이벤트 메인에 즉시 업로드</mark>
+										됩니다.
+									</p>
 									<form class="forms-sample" id="eventUploadForm" name="eventUploadForm" method="post" enctype="multipart/form-data">
 										<div class="form-group" id="eventTitle">
 											<label for="inputEventTitle"></label>
@@ -40,7 +44,7 @@
 												<label class="col-sm-5 col-form-label" for="inputCategory">카테고리</label>
 												<div class="form-group row">
 													<div class="col-sm-7 ml-3">
-														<select class="form-control" id="inputCategory" name="eventCategory">
+														<select class="form-control bg-light" id="inputCategory" name="eventCategory">
 															<c:forEach var="category" items="${categories}">
 																<option value="${category}">${category.displayName}</option>
 															</c:forEach>
@@ -52,7 +56,7 @@
 												<label class="col-sm-5 col-form-label" for="inputStatus">상태</label>
 												<div class="form-group row">
 													<div class="col-sm-7 ml-3">
-														<select class="form-control" id="inputStatus" name="status">
+														<select class="form-control bg-light" id="inputStatus" name="status">
 															<c:forEach var="status" items="${statuses}">
 																<option value="${status}">${status.displayName}</option>
 															</c:forEach>
@@ -64,7 +68,7 @@
 												<label class="col-sm-4 col-form-label" for="inputStartDate">시작일</label>
 												<div class="form-group row">
 													<div class="col-sm-8 ml-3">
-														<input type="date" class="form-control" id="inputStartDate" name="startDate">
+														<input type="date" class="form-control bg-light" id="inputStartDate" name="startDate">
 													</div>
 												</div>
 											</div>
@@ -72,7 +76,7 @@
 												<label class="col-sm-4 col-form-label" for="inputEndDate">종료일</label>
 												<div class="form-group row">
 													<div class="col-sm-8 ml-3">
-														<input type="date" class="form-control" id="inputEndDate" name="endDate">
+														<input type="date" class="form-control bg-light" id="inputEndDate" name="endDate">
 													</div>
 												</div>
 											</div>

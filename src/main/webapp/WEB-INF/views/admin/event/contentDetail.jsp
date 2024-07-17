@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>어드민-티켓챔프</title>
 <jsp:include page="/WEB-INF/views/admin/common/utility.jsp" />
+<jsp:include page="/WEB-INF/views/admin/event/draw.jsp" />
 <link rel="stylesheet" href="${ctp}/vendors/feather/feather.css">
 <link rel="stylesheet" href="${ctp}/vendors/mdi/css/materialdesignicons.min.css">
 <link rel="stylesheet" href="${ctp}/vendors/ti-icons/css/themify-icons.css">
@@ -60,13 +61,10 @@
 											<a href="${ctp}/admin/event/list" class="btn btn-inverse-dark btn-fw">목록보기</a>
 										</div>
 										<div class="px-2">
-											<button class="btn btn-inverse-success btn-fw" id="drawBtn">추첨하기</button>
+											<a href="#" class="btn btn-inverse-success btn-fw" id="drawBtn" data-toggle="modal" data-target="#draw">추첨하기</a>
 										</div>
 										<div class="px-2">
 											<a href="${ctp}/admin/event/update?eventId=${event.id}" class="btn btn-inverse-warning btn-fw" id="editBtn">수정하기</a>
-										</div>
-										<div class="px-2">
-											<button class="btn btn-inverse-danger btn-fw" id="delBtn">삭제하기</button>
 										</div>
 									</div>
 									<div id="comment_container" class="event_cont_box" style="border: 1px solid gray">

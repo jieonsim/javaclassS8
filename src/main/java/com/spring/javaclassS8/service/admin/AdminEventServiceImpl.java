@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -189,5 +190,11 @@ public class AdminEventServiceImpl implements AdminEventService {
 				file.delete();
 			}
 		}
+	}
+
+	// 이벤트 리스트 조건 검색
+	@Override
+	public List<EventVO> filterEvents(String eventCategory, String status, String startDate, String endDate, String keyword) {
+		return adminDAO.filterEvents(eventCategory, status, startDate, endDate, keyword);
 	}
 }

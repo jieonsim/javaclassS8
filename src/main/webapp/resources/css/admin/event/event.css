@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+#eventTitle {
+	border-bottom: 1px solid #d2d2d2;
+}
+
+#eventTitle input {
+	padding-bottom: 30px;
+	margin-right: 10px;
+	border: none;
+	font-size: 20px;
+	line-height: 24px;
+	vertical-align: middle;
+}
+
+#eventTitle input:focus {
+	box-shadow: none;
+}
+
+.file-upload-info {
+	padding: 23px;
+}
+
+.card-body label {
+	font-size: 14px;
+	font-family: 'Pretendard-SemiBold';
+}
+
+.card-body input, .card-body select {
+	font-family: 'Pretendard-Regular';
+}
+
+.card-title {
+	font-family: 'Pretendard-Bold';
+}
+
+.card-description {
+	font-family: 'Pretendard-Light';
+}
+
+.d-flex.justify-content-end.align-items-end>div {
+	display: flex;
+	flex-direction: column;
+}
+
+#searchForm input:focus {
+	box-shadow: gray;
+}

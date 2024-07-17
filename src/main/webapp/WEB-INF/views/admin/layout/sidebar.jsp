@@ -113,7 +113,7 @@
 			<div class="collapse" id="event">
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item">
-						<a class="nav-link" href="#">이벤트 당첨자 리스트</a>
+						<a class="nav-link" href="${ctp}/admin/event/winnerList">이벤트 추첨 리스트</a>
 					</li>
 				</ul>
 			</div>
