@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const announcementBtn = document.getElementById('announcementBtn');
 	const winnerAnnouncementBox = document.getElementById('winnerAnnouncementBox');
 	const winnerAnnouncementForm = document.getElementById('winnerAnnouncementForm');
-	const togglePublishBtn = document.getElementById('togglePublishBtn');
+	const sendMailBtn = document.getElementById('sendMailBtn');
 	
 	let editor;
 
@@ -79,37 +79,38 @@ document.addEventListener('DOMContentLoaded', function() {
 				alert('당첨자 발표 중 오류가 발생했습니다.');
 			});
 	});
-	
-	// 당첨자 발표 공개 / 비공개 토글 처리
-	if (togglePublishBtn) {
-        togglePublishBtn.addEventListener('click', function() {
-            const currentState = this.textContent.trim() === '비공개로 전환';
-            const newState = !currentState;
-            
-            fetch(`${ctp}/admin/event/toggleWinnerPostPublish`, {
+
+	if (sendMailBtn) {
+        sendMailBtn.addEventListener('click', function() {
+            this.textContent = '메일 발송 중';
+            this.disabled = true;
+
+            fetch(`${ctp}/admin/event/sendWinnerEmails`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    eventId: document.getElementById('eventId').value,
-                    isPublished: newState
+                    eventId: document.getElementById('eventId').value
                 })
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    this.textContent = newState ? '비공개로 전환' : '공개로 전환';
-                    this.classList.toggle('btn-danger');
-                    this.classList.toggle('btn-success');
-                    alert(data.message);
+                    alert('메일 발송이 완료되었습니다.');
+                    this.textContent = '당첨 안내 및 예매권 메일 발송';
+                    this.disabled = false;
                 } else {
-                    alert('상태 변경에 실패했습니다.');
+                    alert('메일 발송 중 오류가 발생했습니다: ' + data.message);
+                    this.textContent = '당첨 안내 및 예매권 메일 발송';
+                    this.disabled = false;
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('상태 변경 중 오류가 발생했습니다.');
+                alert('메일 발송 중 오류가 발생했습니다.');
+                this.textContent = '당첨 안내 및 예매권 메일 발송';
+                this.disabled = false;
             });
         });
     }

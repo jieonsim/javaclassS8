@@ -1,7 +1,6 @@
 package com.spring.javaclassS8.dao.admin;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -54,13 +53,5 @@ public interface AdminDAO {
 	// 이벤트 당첨자 발표 공지 여부
 	boolean isEventAnnounced(int eventId);
 
-	// 이벤트 당첨자 발표 게시글 공개 여부
-	boolean isWinnerPostPublished(int eventId);
-
-	// 이벤트 당첨자 발표 게시글 공개/비공개 처리
-	boolean updateWinnerPostPublishStatus(Map<String, Object> params);
-
-	// 이벤트 당첨자 발표 공지 처리
-	boolean updateWinnersAnnouncedStatus(@Param("eventId") int eventId, @Param("isAnnounced") boolean isAnnounced);
-
+	void updateEmailSentAt(int winnerId);
 }

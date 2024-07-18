@@ -3,6 +3,8 @@ package com.spring.javaclassS8.service.admin;
 import java.io.IOException;
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.javaclassS8.vo.event.EventDrawSummaryVO;
@@ -58,9 +60,6 @@ public interface AdminEventService {
 	// 이벤트 당첨자 발표 공지 여부
 	boolean isEventAnnounced(int eventId);
 
-	// 이벤트 당첨자 발표 게시글 공개 여부
-	boolean isWinnerPostPublished(int eventId);
+	boolean sendWinnerEmails(int eventId) throws MessagingException;
 	
-	// 이벤트 당첨자 발표 게시글 공개/비공개 처리
-	boolean toggleWinnerPostPublish(int eventId, boolean isPublished);
 }

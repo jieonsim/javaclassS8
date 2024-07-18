@@ -15,7 +15,12 @@
 									<tr>
 										<th colspan="1" rowspan="1" style="width: 560px; height: 22px; padding: 0 3.3%; font-size: 0; text-align: left">
 											<a href="http://localhost:9090/javaclassS8/home" target="_blank" style="display: block; text-decoration: none; color: #fff" rel="noreferrer noopener">
-												<img src="http://localhost:9090/javaclassS8/images/common/logo40.svg" alt="티켓챔프로고" style="width: 40px; height: 40px; border: 0">
+												<span style="display: inline-block;">
+													<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#fa2828" viewBox="0 0 256 256">
+														<path d="M128,92A36,36,0,1,0,92,56,36,36,0,0,0,128,92Zm0-48a12,12,0,1,1-12,12A12,12,0,0,1,128,44ZM44,96a20,20,0,1,1,20,20A20,20,0,0,1,44,96Zm184,17.6A12,12,0,0,1,208.49,123s-21-15.48-53.34.28c-.34,4.75-1,10.94-2.13,18l30.66,25.55a12,12,0,0,1,3.7,13l-16,48a12,12,0,1,1-22.76-7.59L162,180l-15.44-12.86a136.39,136.39,0,0,1-5.72,14.23c-14.64,31-39.34,51.93-73.42,62.15A11.82,11.82,0,0,1,64,244a12,12,0,0,1-3.45-23.5c37.84-11.35,60.77-38.71,68.41-81.44-24,13.54-43.11,17-56.46,17A65.87,65.87,0,0,1,51,152.31a12,12,0,0,1,9.72-21.93c.43.17,25.42,9.53,68.5-19.76,54.71-37.18,94.26-6.38,94.26-6.38A12,12,0,0,1,228,113.6Z"></path>
+													</svg>
+													<span style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">티켓챔프 로고</span>
+												</span>
 												<span class="logo-text" style="color: #000000; font-size: 30px; font-family: LINESeedKR-Bd, sans-serif;">ticket</span>
 												<span class="logo-text champ" style="color: #fa2828; font-size: 30px; font-family: LINESeedKR-Bd, sans-serif;">champ</span>
 											</a>
@@ -28,6 +33,7 @@
 									</tr>
 									<tr>
 										<td style="width: 560px; padding: 0 3.3%; font-weight: 400; font-size: 32px; line-height: 38px; color: #202020; font-family: Pretendard-Regular, sans-serif;">
+											응모하신 이벤트에 당첨되어,<br>
 											<span style="color: #fa2828">스포츠 예매권</span>
 											전달드립니다.
 										</td>
@@ -64,8 +70,14 @@
 											<table style="width: 100%; Margin: 0; padding: 0; table-layout: fixed; border-collapse: collapse; border-spacing: 0; border: 0; background-color: #fff; word-break: break-all; font-weight: normal; font-family: '나눔고딕', 'Nanum Gothic', '맑은고딕', 'Malgun Gothic', '돋움', 'Dotum', '굴림', 'gulim', arial, verdana, Helvetica, 'Apple SD Gothic Neo', sans-serif">
 												<tbody>
 													<tr>
-														<td style="width: 25%; height: 54px; border-top: 2px solid #707070; border-bottom: 1px solid #ccc; background-color: #f4f4f4; font-size: 15px; text-align: center; color: #707070" height="54">예매권 번호</td>
+														<td style="width: 25%; height: 54px; border-top: 2px solid #707070; border-bottom: 1px solid #ccc; background-color: #f4f4f4; font-size: 15px; text-align: center; color: #707070" height="54">이벤트명</td>
 														<td style="width: 75%; height: 54px; border-top: 2px solid #707070; border-bottom: 1px solid #ccc; font-weight: bold; font-size: 15px; text-align: left; color: #202020" height="54">
+															<p style="Margin: 0; Margin-left: 20px; padding: 0">이벤트이름어쩌고</p>
+														</td>
+													</tr>
+													<tr>
+														<td style="width: 25%; height: 54px; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; background-color: #f4f4f4; font-size: 15px; text-align: center; color: #707070" height="54">예매권 번호</td>
+														<td style="width: 75%; height: 54px; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; font-weight: bold; font-size: 15px; text-align: left; color: #202020" height="54">
 															<p style="Margin: 0; Margin-left: 20px; padding: 0">1706-2765-1454-4156</p>
 														</td>
 													</tr>

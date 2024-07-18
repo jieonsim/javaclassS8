@@ -7,12 +7,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.mail.MessagingException;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.javaclassS8.dao.admin.AdminDAO;
 import com.spring.javaclassS8.dao.event.EventDAO;
+import com.spring.javaclassS8.utils.EventAdvanceTicketEmailService;
 import com.spring.javaclassS8.vo.admin.AdvanceTicketVO;
 import com.spring.javaclassS8.vo.event.EventDrawSummaryVO;
 import com.spring.javaclassS8.vo.event.EventVO;
@@ -47,6 +47,9 @@ public class AdminEventServiceImpl implements AdminEventService {
 
 	@Autowired
 	private AdminReservationService adminReservationService;
+	
+	@Autowired
+	private EventAdvanceTicketEmailService eventEmailService;
 
 	// 이벤트 업로드 처리
 	@Override
@@ -291,23 +294,19 @@ public class AdminEventServiceImpl implements AdminEventService {
 		return adminDAO.isEventAnnounced(eventId);
 	}
 
-	// 이벤트 당첨자 발표 게시글 공개 여부
-	@Override
-	public boolean isWinnerPostPublished(int eventId) {
-		return adminDAO.isWinnerPostPublished(eventId);
-	}
-	
-	// 이벤트 당첨자 발표 게시글 공개/비공개 처리
 	@Override
 	@Transactional
-	public boolean toggleWinnerPostPublish(int eventId, boolean isPublished) {
-	    Map<String, Object> params = new HashMap<>();
-	    params.put("eventId", eventId);
-	    params.put("isPublished", isPublished);
+	public boolean sendWinnerEmails(int eventId) throws MessagingException {
+	    EventVO event = eventDAO.getEventById(eventId);
+	    List<WinnerDetailVO> winners = adminDAO.getWinnerDetails(eventId);
 	    
-	    boolean updateWinnerPost = adminDAO.updateWinnerPostPublishStatus(params);
-	    boolean updateWinners = adminDAO.updateWinnersAnnouncedStatus(eventId, isPublished);
+	    for (WinnerDetailVO winner : winners) {
+	        eventEmailService.sendAdvanceTicketEmail(winner.getEmail(), event.getTitle(), winner.getAdvanceTicketNumber(), winner.getExpiresAt());
+	        
+	        // 이메일 발송 후 emailSentAt 업데이트
+	        adminDAO.updateEmailSentAt(winner.getWinnerId());
+	    }
 	    
-	    return updateWinnerPost && updateWinners;
+	    return true;
 	}
 }

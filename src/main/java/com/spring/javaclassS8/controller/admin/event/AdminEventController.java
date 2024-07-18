@@ -289,30 +289,27 @@ public class AdminEventController {
 		return ResponseEntity.ok(response);
 	}
 	
-	// 이벤트 발표 공개 / 비공개 토글 처리
-	@PostMapping("/toggleWinnerPostPublish")
+	// 이벤트 당첨자 대상으로 메일 발송
+	@PostMapping("/sendWinnerEmails")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> toggleWinnerPostPublish(@RequestBody Map<String, Object> request) {
+	public ResponseEntity<Map<String, Object>> sendWinnerEmails(@RequestBody Map<String, Object> request) {
 	    int eventId = Integer.parseInt(request.get("eventId").toString());
-	    boolean isPublished = (boolean) request.get("isPublished");
-	    
 	    Map<String, Object> response = new HashMap<>();
 	    
 	    try {
-	        boolean result = adminEventService.toggleWinnerPostPublish(eventId, isPublished);
+	        boolean result = adminEventService.sendWinnerEmails(eventId);
 	        if (result) {
 	            response.put("success", true);
-	            response.put("message", isPublished ? "게시글이 공개되었습니다." : "게시글이 비공개로 전환되었습니다.");
+	            response.put("message", "메일 발송이 완료되었습니다.");
 	        } else {
 	            response.put("success", false);
-	            response.put("message", "상태 변경에 실패했습니다.");
+	            response.put("message", "메일 발송에 실패했습니다.");
 	        }
 	    } catch (Exception e) {
 	        response.put("success", false);
-	        response.put("message", "오류가 발생했습니다: " + e.getMessage());
+	        response.put("message", "메일 발송 중 오류가 발생했습니다: " + e.getMessage());
 	    }
 	    
 	    return ResponseEntity.ok(response);
 	}
-
 }

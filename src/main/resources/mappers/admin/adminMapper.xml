@@ -81,7 +81,8 @@
 			w.id as winnerId,
 			m.name as name,
 			m.email as email,
-			at.advanceTicketNumber as advanceTicketNumber
+			at.advanceTicketNumber as advanceTicketNumber,
+			at.expiresAt
 		FROM
 			winners w
 			JOIN members m ON w.memberId = m.id
@@ -102,14 +103,6 @@
     	WHERE eventId = #{eventId} AND isAnnounced = true
     </select>
     
-    <!-- 이벤트 당첨자 발표 게시글 공개 여부 -->
-    <select id="isWinnerPostPublished" resultType="boolean">
-    	SELECT isPublished
-    	FROM winner_posts
-    	WHERE eventId = #{eventId}
-    	LIMIT 1
-	</select>
-
 	<!-- 예매권 발행 -->
 	<insert id="insertAdvanceTicket" useGeneratedKeys="true"
 		keyProperty="id">
@@ -167,16 +160,10 @@
 		WHERE eventId = #{eventId}
 	</update>
 	
-	<!-- 이벤트 당첨자 발표 공개여부 설정 -->
-	<update id="updateWinnerPostPublishStatus" parameterType="java.util.Map">
-	    UPDATE winner_posts
-	    SET isPublished = #{isPublished}
-	    WHERE eventId = #{eventId}
-	</update>
-	
-	<update id="updateWinnersAnnouncedStatus" parameterType="java.util.Map">
+	<update id="updateEmailSentAt">
 	    UPDATE winners
-	    SET isAnnounced = #{isAnnounced}
-	    WHERE eventId = #{eventId}
+	    SET emailSentAt = CURRENT_TIMESTAMP,
+	        ticketSentStatus = 'SENT'
+	    WHERE id = #{winnerId}
 	</update>
 </mapper>

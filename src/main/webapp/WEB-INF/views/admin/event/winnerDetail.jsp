@@ -38,18 +38,11 @@
 											당첨자 리스트
 										</h4>
 										<div class="d-flex justify-content-end mb-2">
-											<c:choose>
-												<c:when test="${!isAnnounced}">
+												<c:if test="${!isAnnounced}">
 													<div class="mx-2">
 														<button type="button" class="btn btn-sm btn-secondary" id="announcementBtn">당첨자 발표 업로드</button>
 													</div>
-												</c:when>
-												<c:otherwise>
-													<div class="mx-2">
-														<button type="button" class="btn btn-sm btn-${isPublished ? 'danger' : 'success'}" id="togglePublishBtn">${isPublished ? '비공개로 전환' : '공개로 전환'}</button>
-													</div>
-												</c:otherwise>
-											</c:choose>
+												</c:if>
 											<div class="mx-2">
 												<button type="button" class="btn btn-sm btn-secondary" id="sendMailBtn">당첨 안내 및 예매권 메일 발송</button>
 											</div>

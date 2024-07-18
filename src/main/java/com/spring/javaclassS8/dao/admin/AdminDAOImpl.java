@@ -1,8 +1,6 @@
 package com.spring.javaclassS8.dao.admin;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,20 +98,7 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public boolean isWinnerPostPublished(int eventId) {
-		return sqlSession.getMapper(AdminDAO.class).isWinnerPostPublished(eventId);
-	}
-	
-	@Override
-	public boolean updateWinnerPostPublishStatus(Map<String, Object> params) {
-	    return sqlSession.getMapper(AdminDAO.class).updateWinnerPostPublishStatus(params);
-	}
-
-	@Override
-	public boolean updateWinnersAnnouncedStatus(int eventId, boolean isAnnounced) {
-	    Map<String, Object> params = new HashMap<>();
-	    params.put("eventId", eventId);
-	    params.put("isAnnounced", isAnnounced);
-	    return sqlSession.getMapper(AdminDAO.class).updateWinnersAnnouncedStatus(eventId, isAnnounced);
+	public void updateEmailSentAt(int winnerId) {
+	    sqlSession.getMapper(AdminDAO.class).updateEmailSentAt(winnerId);
 	}
 }
