@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -35,20 +36,20 @@
 											<h4 class="card-title">이벤트 추첨 리스트</h4>
 											<div class="d-flex justify-content-end mb-2">
 												<div class="mx-2">
-													<select class="form-control bg-white text-dark" id="inputCategory" name="eventCategory">
+													<%-- <select class="form-control bg-white text-dark" id="inputCategory" name="eventCategory">
 														<option selected disabled>카테고리별 조회</option>
 														<c:forEach var="category" items="${categories}">
 															<option value="${category}">${category.displayName}</option>
 														</c:forEach>
-													</select>
+													</select> --%>
 												</div>
 												<div class="mx-2">
-													<select class="form-control bg-white text-dark" id="inputStatus" name="status">
+													<%-- <select class="form-control bg-white text-dark" id="inputStatus" name="status">
 														<option selected disabled>상태별 조회</option>
 														<c:forEach var="status" items="${statuses}">
 															<option value="${status}">${status.displayName}</option>
 														</c:forEach>
-													</select>
+													</select> --%>
 												</div>
 												<div class="mx-2">
 													<button type="button" class="btn btn-sm btn-secondary" id="resetBtn">전체조회</button>
@@ -91,24 +92,43 @@
 													<th>No.</th>
 													<th>카테고리</th>
 													<th>이벤트명</th>
-													<th>시작일</th>
-													<th>종료일</th>
+													<th>이벤트 기간</th>
 													<th>당첨자 발표</th>
 													<th>예매권 메일 발송</th>
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach items="${events}" var="event" varStatus="loop">
+												<c:forEach items="${drawSummaries}" var="drawSummary" varStatus="status">
 													<tr>
-														<td class="text-center">${loop.index + 1}</td>
-														<td class="text-center">${event.eventCategory.displayName}</td>
+														<td class="text-center">${status.count}</td>
+														<td class="text-center">${drawSummary.eventCategory.displayName}</td>
 														<td>
-															<a href="${ctp}/admin/event/detail?eventId=${event.id}" style="text-decoration: none; color: #212529;">${event.title}</a>
+															<a href="${ctp}/admin/event/winnerDetail?eventId=${drawSummary.eventId}" style="text-decoration: none; color: #212529;">${drawSummary.title}</a>
 														</td>
-														<td class="text-center">${event.startDate}</td>
-														<td class="text-center">${event.endDate}</td>
-														<td class="text-center">N</td>
-														<td class="text-center">발송 전</td>
+														<td class="text-center">${drawSummary.startDate}&nbsp;~&nbsp;${drawSummary.endDate}</td>
+														<td class="text-center">
+															<c:choose>
+																<c:when test="${drawSummary.announced eq '1'}">
+																	<label class="badge badge-success">Y</label>
+																</c:when>
+																<c:otherwise>
+																	<label class="badge badge-danger">N</label>
+																</c:otherwise>
+															</c:choose>
+														</td>
+														<td class="text-center">
+															<c:choose>
+																<c:when test="${drawSummary.ticketSentStatus == 'PENDING'}">
+																	<label class="badge badge-warning">${drawSummary.ticketSentStatus.displayName}</label>
+																</c:when>
+																<c:when test="${drawSummary.ticketSentStatus == 'SENT'}">
+																	<label class="badge badge-success">${drawSummary.ticketSentStatus.displayName}</label>
+																</c:when>
+																<c:when test="${drawSummary.ticketSentStatus == 'FAILED'}">
+																	<label class="badge badge-danger">${drawSummary.ticketSentStatus.displayName}</label>
+																</c:when>
+															</c:choose>
+														</td>
 													</tr>
 												</c:forEach>
 											</tbody>
@@ -124,17 +144,16 @@
 		</div>
 	</div>
 	<script src="${ctp}/js/member/login/autoLogin.js"></script>
-	<script src="${ctp}/js/admin/event/list.js"></script>
 	<script src="${ctp}/js/admin/common/off-canvas.js"></script>
 	<script src="${ctp}/js/admin/common/hoverable-collapse.js"></script>
 	<script src="${ctp}/js/admin/common/template.js"></script>
 	<script src="${ctp}/js/admin/common/settings.js"></script>
-	<script>
+	<!-- 	<script>
     const statusMap = {
         <c:forEach items="${statuses}" var="status" varStatus="loop">
             ${status}: "${status.displayName}"${!loop.last ? ',' : ''}
         </c:forEach>
     };
-</script>
+</script> -->
 </body>
 </html>

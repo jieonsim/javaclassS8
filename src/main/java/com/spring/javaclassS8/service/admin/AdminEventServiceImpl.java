@@ -5,8 +5,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,13 +19,19 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.javaclassS8.dao.admin.AdminDAO;
 import com.spring.javaclassS8.dao.event.EventDAO;
+import com.spring.javaclassS8.vo.admin.AdvanceTicketVO;
+import com.spring.javaclassS8.vo.event.EventDrawSummaryVO;
 import com.spring.javaclassS8.vo.event.EventVO;
+import com.spring.javaclassS8.vo.event.WinnerDetailVO;
+import com.spring.javaclassS8.vo.event.WinnerPostVO;
+import com.spring.javaclassS8.vo.event.WinnerVO;
 
 @Service
 public class AdminEventServiceImpl implements AdminEventService {
@@ -35,6 +44,9 @@ public class AdminEventServiceImpl implements AdminEventService {
 
 	@Autowired
 	private ServletContext servletContext;
+
+	@Autowired
+	private AdminReservationService adminReservationService;
 
 	// 이벤트 업로드 처리
 	@Override
@@ -196,5 +208,106 @@ public class AdminEventServiceImpl implements AdminEventService {
 	@Override
 	public List<EventVO> filterEvents(String eventCategory, String status, String startDate, String endDate, String keyword) {
 		return adminDAO.filterEvents(eventCategory, status, startDate, endDate, keyword);
+	}
+
+	// 이벤트 참여자 수 가져오기
+	@Override
+	public int getParticipantCount(int eventId) {
+		return adminDAO.getParticipantCount(eventId);
+	}
+
+	// 이벤트 참여자 중 랜덤 추첨 + 당첨자들 대상으로 예매권 발행하기
+	@Override
+	@Transactional
+	public boolean drawWinners(int eventId, int numOfWinners) {
+		List<Integer> participants = adminDAO.getActivceParticipants(eventId);
+		if (participants.size() < numOfWinners) {
+			return false;
+		}
+
+		// 랜덤 추첨
+		Collections.shuffle(participants);
+		List<Integer> winners = participants.subList(0, numOfWinners);
+
+		// 예매권 발행
+		List<AdvanceTicketVO> tickets = adminReservationService.issueAdvanceTickets(numOfWinners);
+
+		for (int i = 0; i < numOfWinners; i++) {
+			AdvanceTicketVO ticket = tickets.get(i);
+			// 여기서 ticket이 null이 아닌지, 그리고 id가 제대로 설정되어 있는지 확인
+			if (ticket == null || ticket.getId() == 0) {
+				throw new RuntimeException("Failed to create advance ticket");
+			}
+
+			WinnerVO winner = new WinnerVO();
+			winner.setEventId(eventId);
+			winner.setMemberId(winners.get(i));
+			winner.setAdvanceTicketId(ticket.getId());
+			adminDAO.insertWinner(winner);
+		}
+
+		return true;
+	}
+
+	// 이벤트 추첨 리스트
+	@Override
+	public List<EventDrawSummaryVO> getEventDrawSummaries() {
+		return adminDAO.getEventDrawSummaries();
+	}
+
+	// 이벤트 당첨자 디테일
+	@Override
+	public List<WinnerDetailVO> getWinnerDetails(int eventId) {
+		return adminDAO.getWinnerDetails(eventId);
+	}
+
+	// 이벤트 아이디로 이벤트 가져오기
+	@Override
+	public EventVO getEventById(int eventId) {
+		return adminDAO.getEventById(eventId);
+	}
+
+	// 이벤트 당첨자 발표 포스팅하기
+	@Override
+	@Transactional
+	public boolean createWinnerPost(WinnerPostVO winnerPost) {
+		try {
+			// 당첨자 발표 게시글 저장
+			adminDAO.insertWinnerPost(winnerPost);
+
+			// winners 테이블의 isAnnounced 업데이트
+			adminDAO.updateWinnerIsAnnounced(winnerPost.getEventId());
+
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	// 이벤트 당첨자 발표 공지 여부
+	@Override
+	public boolean isEventAnnounced(int eventId) {
+		return adminDAO.isEventAnnounced(eventId);
+	}
+
+	// 이벤트 당첨자 발표 게시글 공개 여부
+	@Override
+	public boolean isWinnerPostPublished(int eventId) {
+		return adminDAO.isWinnerPostPublished(eventId);
+	}
+	
+	// 이벤트 당첨자 발표 게시글 공개/비공개 처리
+	@Override
+	@Transactional
+	public boolean toggleWinnerPostPublish(int eventId, boolean isPublished) {
+	    Map<String, Object> params = new HashMap<>();
+	    params.put("eventId", eventId);
+	    params.put("isPublished", isPublished);
+	    
+	    boolean updateWinnerPost = adminDAO.updateWinnerPostPublishStatus(params);
+	    boolean updateWinners = adminDAO.updateWinnersAnnouncedStatus(eventId, isPublished);
+	    
+	    return updateWinnerPost && updateWinners;
 	}
 }

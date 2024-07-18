@@ -3,52 +3,180 @@
 <mapper namespace="com.spring.javaclassS8.dao.admin.AdminDAO">
 
 	<!-- 어드민 이벤트 리스트 조건 검색 -->
-<select id="filterEvents" resultType="com.spring.javaclassS8.vo.event.EventVO">
-        SELECT * FROM events
-        WHERE 1=1
-        <if test="eventCategory != null and eventCategory != ''">
-            AND eventCategory = #{eventCategory}
-        </if>
-        <if test="status != null and status != ''">
-            AND status = #{status}
-        </if>
-        <if test="startDate != null and startDate != ''">
-            AND startDate >= #{startDate}
-        </if>
-        <if test="endDate != null and endDate != ''">
-            AND endDate &lt;= #{endDate}
-        </if>
-        <if test="keyword != null and keyword != ''">
-            AND (title LIKE CONCAT('%', #{keyword}, '%') 
-                 OR content LIKE CONCAT('%', #{keyword}, '%')
-                 OR eventCategory LIKE CONCAT('%', #{keyword}, '%')
-                 OR status LIKE CONCAT('%', #{keyword}, '%'))
-        </if>
-        ORDER BY createdAt DESC
-    </select>
+	<select id="filterEvents"
+		resultType="com.spring.javaclassS8.vo.event.EventVO">
+		SELECT * FROM events
+		WHERE 1=1
+		<if test="eventCategory != null and eventCategory != ''">
+			AND eventCategory = #{eventCategory}
+		</if>
+		<if test="status != null and status != ''">
+			AND status = #{status}
+		</if>
+		<if test="startDate != null and startDate != ''">
+			AND startDate >= #{startDate}
+		</if>
+		<if test="endDate != null and endDate != ''">
+			AND endDate &lt;= #{endDate}
+		</if>
+		<if test="keyword != null and keyword != ''">
+			AND (title LIKE CONCAT('%', #{keyword}, '%')
+			OR content
+			LIKE CONCAT('%', #{keyword}, '%')
+			OR eventCategory LIKE CONCAT('%',
+			#{keyword}, '%')
+			OR status LIKE CONCAT('%', #{keyword}, '%'))
+		</if>
+		ORDER BY createdAt DESC
+	</select>
 
-	<!-- 예매권 발행 -->	
-	<insert id="insertAdvanceTicket">
-		INSERT INTO advance_tickets (adminId, advanceTicketNumber, used, expiresAt, issuedAt)
-		VALUES (#{adminId},	#{advanceTicketNumber}, #{used}, #{expiresAt}, #{issuedAt})
-	</insert>
+	<!-- 이벤트 참여자 수 가져오기 -->
+	<select id="getParticipantCount" resultType="int">
+		SELECT COUNT(*) FROM
+		event_participants
+		WHERE eventId = #{eventId} AND status = 'ACTIVE'
+	</select>
+
+	<!-- 이벤트 참여자의 memberId 가져오기 -->
+	<select id="getActivceParticipants" resultType="int">
+		SELECT memberId
+		FROM event_participants
+		WHERE eventId = #{eventId} AND status =
+		'ACTIVE'
+	</select>
+
+	<!-- 이벤트 추첨 리스트 -->
+	<select id="getEventDrawSummaries"
+		resultType="com.spring.javaclassS8.vo.event.EventDrawSummaryVO">
+		SELECT
+			e.id as eventId,
+			e.eventCategory,
+			e.title,
+			e.startDate,
+			e.endDate,
+			CASE WHEN w.isAnnounced = 1 THEN true ELSE false END as isAnnounced,
+			w.ticketSentStatus,
+			w.drawAt
+		FROM
+			events e
+		LEFT JOIN
+			(SELECT
+				eventId,
+				MAX(isAnnounced) as isAnnounced,
+				MAX(ticketSentStatus) as ticketSentStatus,
+				MAX(drawAt) as drawAt
+			FROM
+				winners
+			GROUP BY
+				eventId) w ON e.id = w.eventId
+		WHERE
+			w.eventId IS NOT NULL
+		ORDER BY
+			w.drawAt DESC
+	</select>
 	
+	<!-- 이벤트 당첨자 디테일 -->
+	<select id="getWinnerDetails" resultType="com.spring.javaclassS8.vo.event.WinnerDetailVO">
+		SELECT
+			w.id as winnerId,
+			m.name as name,
+			m.email as email,
+			at.advanceTicketNumber as advanceTicketNumber
+		FROM
+			winners w
+			JOIN members m ON w.memberId = m.id
+			JOIN advance_tickets at ON w.advanceTicketId = at.id
+		WHERE
+			w.eventId = #{eventId}
+	</select>
+	
+	<!-- 이벤트 아이디로 이벤트 정보 가져오기 -->
+	<select id="getEventById" resultType="com.spring.javaclassS8.vo.event.EventVO">
+        SELECT * FROM events WHERE id = #{eventId}
+    </select>
+    
+    <!-- 이벤트 당첨자 발표 여부 -->
+    <select id="isEventAnnounced" resultType="boolean">
+    	SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END
+    	FROM winners
+    	WHERE eventId = #{eventId} AND isAnnounced = true
+    </select>
+    
+    <!-- 이벤트 당첨자 발표 게시글 공개 여부 -->
+    <select id="isWinnerPostPublished" resultType="boolean">
+    	SELECT isPublished
+    	FROM winner_posts
+    	WHERE eventId = #{eventId}
+    	LIMIT 1
+	</select>
+
+	<!-- 예매권 발행 -->
+	<insert id="insertAdvanceTicket" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO advance_tickets (adminId, advanceTicketNumber,
+		used, expiresAt, issuedAt)
+		VALUES (#{adminId}, #{advanceTicketNumber},
+		#{used}, #{expiresAt}, #{issuedAt})
+	</insert>
+
 	<!-- 이벤트 업로드 -->
-	<insert id="insertEvent" parameterType="com.spring.javaclassS8.vo.event.EventVO">
-    	INSERT INTO events (adminId, eventCategory, title, content, thumbnail, startDate, endDate, status)
-    	VALUES (#{adminId}, #{eventCategory}, #{title}, #{content}, #{thumbnail}, #{startDate}, #{endDate}, #{status})
+	<insert id="insertEvent"
+		parameterType="com.spring.javaclassS8.vo.event.EventVO">
+		INSERT INTO events (adminId, eventCategory, title,
+		content, thumbnail,
+		startDate, endDate, status)
+		VALUES (#{adminId},
+		#{eventCategory}, #{title}, #{content}, #{thumbnail},
+		#{startDate},
+		#{endDate}, #{status})
+	</insert>
+
+	<!-- 이벤트 당첨자 저장하기 -->
+	<insert id="insertWinner">
+		INSERT INTO winners (eventId, memberId,
+		advanceTicketId)
+		VALUES (#{eventId}, #{memberId}, #{advanceTicketId})
 	</insert>
 	
-	<update id="updateEvent" parameterType="com.spring.javaclassS8.vo.event.EventVO">
-        UPDATE events
-        SET title = #{title},
-            eventCategory = #{eventCategory},
-            content = #{content},
-            thumbnail = #{thumbnail},
-            startDate = #{startDate},
-            endDate = #{endDate},
-            status = #{status},
-            updatedAt = CURRENT_TIMESTAMP
-        WHERE id = #{id}
+	<!-- 당첨자 발표 게시글 저장 -->
+	<insert id="insertWinnerPost" parameterType="com.spring.javaclassS8.vo.event.WinnerPostVO">
+        INSERT INTO winner_posts (eventId, adminId, title, content)
+        VALUES (#{eventId}, #{adminId}, #{title}, #{content})
+	</insert>
+
+	<!-- 이벤트 내용 수정 -->
+	<update id="updateEvent"
+		parameterType="com.spring.javaclassS8.vo.event.EventVO">
+		UPDATE events
+		SET title = #{title},
+		eventCategory =
+		#{eventCategory},
+		content = #{content},
+		thumbnail = #{thumbnail},
+		startDate = #{startDate},
+		endDate = #{endDate},
+		status = #{status},
+		updatedAt = CURRENT_TIMESTAMP
+		WHERE id = #{id}
+	</update>
+	
+	<!-- winners 테이블의 isAnnounced 업데이트 -->
+	<update id="updateWinnerIsAnnounced">
+		UPDATE winners
+		SET isAnnounced = true
+		WHERE eventId = #{eventId}
+	</update>
+	
+	<!-- 이벤트 당첨자 발표 공개여부 설정 -->
+	<update id="updateWinnerPostPublishStatus" parameterType="java.util.Map">
+	    UPDATE winner_posts
+	    SET isPublished = #{isPublished}
+	    WHERE eventId = #{eventId}
+	</update>
+	
+	<update id="updateWinnersAnnouncedStatus" parameterType="java.util.Map">
+	    UPDATE winners
+	    SET isAnnounced = #{isAnnounced}
+	    WHERE eventId = #{eventId}
 	</update>
 </mapper>

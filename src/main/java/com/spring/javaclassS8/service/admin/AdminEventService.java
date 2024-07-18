@@ -5,7 +5,10 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.spring.javaclassS8.vo.event.EventDrawSummaryVO;
 import com.spring.javaclassS8.vo.event.EventVO;
+import com.spring.javaclassS8.vo.event.WinnerDetailVO;
+import com.spring.javaclassS8.vo.event.WinnerPostVO;
 
 public interface AdminEventService {
 
@@ -33,4 +36,31 @@ public interface AdminEventService {
 	
 	// 이벤트 리스트 조건 검색
 	List<EventVO> filterEvents(String eventCategory, String status, String startDate, String endDate, String keyword);
+
+	// 이벤트 참여자 수 가져오기
+	int getParticipantCount(int eventId);
+
+	// 이벤트 참여자 중 랜덤 추첨
+	boolean drawWinners(int eventId, int numOfWinners);
+
+	// 이벤트 추첨 리스트
+	List<EventDrawSummaryVO> getEventDrawSummaries();
+
+	// 이벤트 당첨자 디테일
+	List<WinnerDetailVO> getWinnerDetails(int eventId);
+
+	// 이벤트 아이디로 이벤트 정보 가져오기
+	EventVO getEventById(int eventId);
+
+	// 이벤트 당첨자 발표 포스팅하기
+	boolean createWinnerPost(WinnerPostVO winnerPost);
+
+	// 이벤트 당첨자 발표 공지 여부
+	boolean isEventAnnounced(int eventId);
+
+	// 이벤트 당첨자 발표 게시글 공개 여부
+	boolean isWinnerPostPublished(int eventId);
+	
+	// 이벤트 당첨자 발표 게시글 공개/비공개 처리
+	boolean toggleWinnerPostPublish(int eventId, boolean isPublished);
 }

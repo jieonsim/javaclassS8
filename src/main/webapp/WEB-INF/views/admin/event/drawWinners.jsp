@@ -2,12 +2,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <jsp:include page="/WEB-INF/views/common/utility.jsp" />
-<!-- The Modal -->
-<div class="modal fade" id="draw">
+<div class="modal fade" id="drawWinners">
 	<div class="modal-dialog modal-dialog-centered modal-sm">
 		<div class="modal-content">
 			<div class="modal-body">
 				<form class="forms-sample" id="drawForm">
+				<input type="hidden" value="${event.id}" name="eventId" id="eventId">
 					<div class="form-group">
 						<div class="row">
 							<div class="input-group">
@@ -17,7 +17,7 @@
 										<span class="ph ph-minus"></span>
 									</button>
 								</span>
-								<input type="text" class="form-control text-center" id="numOfWinners" name="winners" value="1" min="1" max="10">
+								<input type="text" class="form-control text-center" id="numOfWinners" name="numOfWinners" value="1" min="1" max="10">
 								<span class="input-group-btn data-up">
 									<button class="btn btn-inverse-dark btn-fw py-2" id="up">
 										<span class="ph ph-plus"></span>
@@ -27,12 +27,11 @@
 						</div>
 					</div>
 					<div class="d-flex justify-content-center">
-						<button type="submit" class="btn btn-primary me-2" id="drawBtn">Draw</button>
-						<button class="btn btn-secondary" id="cancelBtn">Cancel</button>
+						<button type="submit" class="btn btn-primary me-2" id="drawBtn">추첨</button>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
-<script src="${ctp}/js/admin/event/draw.js"></script>
+<script src="${ctp}/js/admin/event/drawWinners.js"></script>

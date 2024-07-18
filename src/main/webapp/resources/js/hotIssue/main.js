@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		loadingContainer.style.display = 'none';
 		contentContainer.style.display = 'block';
 	}
-	
+
 	function fetchNewsData() {
 		return fetch(`${ctp}/api/news`)
 			.then(response => response.json())
@@ -88,27 +88,40 @@ document.addEventListener('DOMContentLoaded', function() {
 			if (scheduleData.matches && scheduleData.matches.length > 0) {
 				scheduleData.matches.forEach(match => {
 					const tr = document.createElement('tr');
-					tr.innerHTML = `
-                    <td class="text-left">
-                        <img src="${match.teamLeftLogo}" class="team-logo" alt="팀 로고">
-                        <span class="team-name ml-2">${match.teamLeft}</span>
-                    </td>
-                    <td class="text-center">
-                        <span class="score">${match.scoreLeft || ''}</span>
-                    </td>
-                    <td class="text-center league-info">
-                        <div>${match.status}</div>
-                        ${match.time ? `<div><b>${match.time}</b></div>` : ''}
-                        <div>${match.league}</div>
-                    </td>
-                    <td class="text-center">
-                        <span class="score">${match.scoreRight || ''}</span>
-                    </td>
-                    <td class="text-right">
-                        <span class="team-name mr-2">${match.teamRight}</span>
-                        <img src="${match.teamRightLogo}" class="team-logo" alt="팀 로고">
-                    </td>
-                `;
+					if (match.singleEvent === "true") {
+						// 단일 이벤트 (left/right 팀이 없는 경우)
+						tr.innerHTML = `
+                        <td colspan="5" class="text-center">
+                            <div>${match.status}</div>
+                            ${match.time ? `<div><b>${match.time}</b></div>` : ''}
+                            <div><strong>${match.eventName}</strong></div>
+                            <div>${match.league}</div>
+                        </td>
+                    `;
+					} else {
+						// 두 팀 간의 경기
+						tr.innerHTML = `
+                        <td class="text-left">
+                            <img src="${match.teamLeftLogo}" class="team-logo" alt="팀 로고">
+                            <span class="team-name ml-2">${match.teamLeft}</span>
+                        </td>
+                        <td class="text-center">
+                            <span class="score">${match.scoreLeft || ''}</span>
+                        </td>
+                        <td class="text-center league-info">
+                            <div>${match.status}</div>
+                            ${match.time ? `<div><b>${match.time}</b></div>` : ''}
+                            <div>${match.league}</div>
+                        </td>
+                        <td class="text-center">
+                            <span class="score">${match.scoreRight || ''}</span>
+                        </td>
+                        <td class="text-right">
+                            <span class="team-name mr-2">${match.teamRight}</span>
+                            <img src="${match.teamRightLogo}" class="team-logo" alt="팀 로고">
+                        </td>
+                    `;
+					}
 					tbody.appendChild(tr);
 				});
 			} else {
@@ -119,6 +132,59 @@ document.addEventListener('DOMContentLoaded', function() {
 			tbody.innerHTML = '';
 		}
 	}
+
+	/*function displayScheduleData(scheduleData) {
+		const thead = scheduleTable.querySelector('thead');
+		const tbody = scheduleTable.querySelector('tbody');
+
+		if (scheduleData && scheduleData.date) {
+			// 날짜 표시
+			thead.innerHTML = `
+			<tr>
+				<th colspan="5" class="text-center">
+					<div class="date-select">
+						<strong>${scheduleData.date}</strong>
+					</div>
+				</th>
+			</tr>
+		`;
+
+			// 경기 정보 표시
+			tbody.innerHTML = '';
+			if (scheduleData.matches && scheduleData.matches.length > 0) {
+				scheduleData.matches.forEach(match => {
+					const tr = document.createElement('tr');
+					tr.innerHTML = `
+					<td class="text-left">
+						<img src="${match.teamLeftLogo}" class="team-logo" alt="팀 로고">
+						<span class="team-name ml-2">${match.teamLeft}</span>
+					</td>
+					<td class="text-center">
+						<span class="score">${match.scoreLeft || ''}</span>
+					</td>
+					<td class="text-center league-info">
+						<div>${match.status}</div>
+						${match.time ? `<div><b>${match.time}</b></div>` : ''}
+						<div>${match.league}</div>
+					</td>
+					<td class="text-center">
+						<span class="score">${match.scoreRight || ''}</span>
+					</td>
+					<td class="text-right">
+						<span class="team-name mr-2">${match.teamRight}</span>
+						<img src="${match.teamRightLogo}" class="team-logo" alt="팀 로고">
+					</td>
+				`;
+					tbody.appendChild(tr);
+				});
+			} else {
+				tbody.innerHTML = '<tr><td colspan="5" class="text-center">경기 일정이 없습니다.</td></tr>';
+			}
+		} else {
+			thead.innerHTML = '<tr><th colspan="5" class="text-center">일정 데이터를 불러올 수 없습니다.</th></tr>';
+			tbody.innerHTML = '';
+		}
+	}*/
 
 	function fetchKBORankingData() {
 		return fetch(`${ctp}/api/kboRanking`)
@@ -154,25 +220,25 @@ document.addEventListener('DOMContentLoaded', function() {
 			tbody.appendChild(tr);
 		});
 	}
-	
+
 	// 데이터 로딩 시작
 	showLoading();
-	
+
 	// 각 데이터 로딩 Promise를 배열에 추가
 	loadingPromises.push(fetchNewsData());
 	loadingPromises.push(fetchScheduleData());
 	loadingPromises.push(fetchKBORankingData());
-	
+
 	// 모든 Promise가 완료될 때까지 기다림
-	
+
 	Promise.all(loadingPromises)
-	.then(() => {
-		// 모든 데이터가 로드되면 로딩을 숨기고 컨첸츠를 표시
-		hideLoading();
-	})
-	.catch(error => {
-		console.error('Error loading data:', error);
-		// 에러 발생 시에도 로딩을 숨기기
-		hideLoading();
-	})
+		.then(() => {
+			// 모든 데이터가 로드되면 로딩을 숨기고 컨첸츠를 표시
+			hideLoading();
+		})
+		.catch(error => {
+			console.error('Error loading data:', error);
+			// 에러 발생 시에도 로딩을 숨기기
+			hideLoading();
+		})
 });

@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>어드민-티켓챔프</title>
 <jsp:include page="/WEB-INF/views/admin/common/utility.jsp" />
-<jsp:include page="/WEB-INF/views/admin/event/draw.jsp" />
+<jsp:include page="/WEB-INF/views/admin/event/drawWinners.jsp" />
 <link rel="stylesheet" href="${ctp}/vendors/feather/feather.css">
 <link rel="stylesheet" href="${ctp}/vendors/mdi/css/materialdesignicons.min.css">
 <link rel="stylesheet" href="${ctp}/vendors/ti-icons/css/themify-icons.css">
@@ -61,7 +61,7 @@
 											<a href="${ctp}/admin/event/list" class="btn btn-inverse-dark btn-fw">목록보기</a>
 										</div>
 										<div class="px-2">
-											<a href="#" class="btn btn-inverse-success btn-fw" id="drawBtn" data-toggle="modal" data-target="#draw">추첨하기</a>
+											<a href="#" class="btn btn-inverse-success btn-fw" id="drawBtn" data-toggle="modal" data-target="#drawWinners">추첨하기</a>
 										</div>
 										<div class="px-2">
 											<a href="${ctp}/admin/event/update?eventId=${event.id}" class="btn btn-inverse-warning btn-fw" id="editBtn">수정하기</a>
@@ -74,7 +74,7 @@
 												<span class="color_point fbold" id="comment_total_num">
 													<b>${commentCount}</b>
 												</span>
-												명이 응모했어요.
+												개의 의견이 있습니다.
 											</div>
 											<div class="fr">
 												<a href="#" class="btn_text2" data-toggle="modal" data-target="#eventCommentRule">
@@ -94,6 +94,12 @@
 																<dd class="review_date">
 																	<fmt:formatDate value="${comment.createdAt}" pattern="yyyy-MM-dd HH:mm" />
 																</dd>
+																<c:if test="${comment.status eq 'DELETED'}">
+																	<dt>수정</dt>
+																	<dd class="ml-auto">
+																		<span class="badge badge-pill badge-secondary">삭제된 댓글</span>
+																	</dd>
+																</c:if>
 															</dl>
 														</div>
 														<pre>${comment.comment}</pre>

@@ -99,13 +99,6 @@
 			<div class="collapse" id="event">
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item">
-						<a class="nav-link" href="${ctp}/admin/event/list">이벤트 리스트</a>
-					</li>
-				</ul>
-			</div>
-			<div class="collapse" id="event">
-				<ul class="nav flex-column sub-menu">
-					<li class="nav-item">
 						<a class="nav-link" href="${ctp}/admin/event/upload">이벤트 등록</a>
 					</li>
 				</ul>
@@ -113,7 +106,14 @@
 			<div class="collapse" id="event">
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item">
-						<a class="nav-link" href="${ctp}/admin/event/winnerList">이벤트 추첨 리스트</a>
+						<a class="nav-link" href="${ctp}/admin/event/list">이벤트 리스트</a>
+					</li>
+				</ul>
+			</div>
+			<div class="collapse" id="event">
+				<ul class="nav flex-column sub-menu">
+					<li class="nav-item">
+						<a class="nav-link" href="${ctp}/admin/event/drawList">이벤트 추첨 리스트</a>
 					</li>
 				</ul>
 			</div>

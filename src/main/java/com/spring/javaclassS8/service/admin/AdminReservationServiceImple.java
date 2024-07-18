@@ -38,10 +38,13 @@ public class AdminReservationServiceImple implements AdminReservationService {
 			ticket.setExpiresAt(Timestamp.valueOf(LocalDateTime.now().plusDays(30)));
 			ticket.setIssuedAt(Timestamp.valueOf(LocalDateTime.now()));
 			ticket.setUsed(false);
-			/* ticket.setUsed(0); */
 			ticket.setAdminId(adminId);
 
 			adminDAO.insertAdvanceTicket(ticket);
+			// 여기서 ticket 객체의 id가 자동으로 설정
+	        if (ticket.getId() == 0) {
+	            throw new RuntimeException("예매권 ID 생성 실패");
+	        }
 			newTickets.add(ticket);
 		}
 		return newTickets;

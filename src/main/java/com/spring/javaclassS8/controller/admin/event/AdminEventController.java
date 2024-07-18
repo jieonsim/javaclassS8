@@ -7,7 +7,9 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,9 +32,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.spring.javaclassS8.service.admin.AdminEventService;
 import com.spring.javaclassS8.service.event.EventService;
 import com.spring.javaclassS8.vo.event.EventCommentVO;
+import com.spring.javaclassS8.vo.event.EventDrawSummaryVO;
 import com.spring.javaclassS8.vo.event.EventVO;
 import com.spring.javaclassS8.vo.event.EventVO.EventCategory;
 import com.spring.javaclassS8.vo.event.EventVO.Status;
+import com.spring.javaclassS8.vo.event.WinnerDetailVO;
+import com.spring.javaclassS8.vo.event.WinnerPostVO;
 import com.spring.javaclassS8.vo.member.MemberVO;
 
 @Controller
@@ -198,16 +204,115 @@ public class AdminEventController {
 		model.addAttribute("statuses", Status.values());
 		return ResponseEntity.ok(filteredEvents);
 	}
-	
-	// 이벤트 당첨자 리스트
-	@GetMapping("/winnerList")
-	public String getwinnerList(Model model) {
-		List<EventVO> events = eventService.getAllEvents();
-		model.addAttribute("events", events);
-		model.addAttribute("categories", EventCategory.values());
-		model.addAttribute("statuses", Status.values());
-		return "admin/event/winnerList";
+
+	// 이벤트 참여자 수 가져오기
+	@GetMapping("/getParticipantCount")
+	@ResponseBody
+	public ResponseEntity<Map<String, Integer>> getParticipantCount(@RequestParam("eventId") int eventId) {
+		int count = adminEventService.getParticipantCount(eventId);
+		Map<String, Integer> response = new HashMap<>();
+		response.put("pariticipantCount", count);
+		return ResponseEntity.ok(response);
 	}
 
+	// 이벤트 참여자 중 랜덤 추첨
+	@PostMapping("/drawWinners")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> drawWinners(@RequestBody Map<String, Object> request) {
+		try {
+			int eventId = Integer.parseInt(request.get("eventId").toString());
+			int numOfWinners = Integer.parseInt(request.get("numOfWinners").toString());
+
+			boolean success = adminEventService.drawWinners(eventId, numOfWinners);
+			Map<String, Object> response = new HashMap<>();
+			response.put("success", success);
+			return ResponseEntity.ok(response);
+		} catch (Exception e) {
+			e.printStackTrace(); // 서버 로그에 스택 트레이스 출력
+			Map<String, Object> response = new HashMap<>();
+			response.put("success", false);
+			response.put("message", "An error occurred: " + e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+	}
+
+	// 이벤트 추첨 리스트
+	@GetMapping("/drawList")
+	public String getwinnerList(Model model) {
+		List<EventDrawSummaryVO> drawSummaries = adminEventService.getEventDrawSummaries();
+		model.addAttribute("drawSummaries", drawSummaries);
+		return "admin/event/drawList";
+	}
+
+	// 이벤트 당첨자 디테일
+	@GetMapping("/winnerDetail")
+	public String getWinnerDetail(@RequestParam("eventId") int eventId, Model model) {
+		List<WinnerDetailVO> winnerDetails = adminEventService.getWinnerDetails(eventId);
+		EventVO event = adminEventService.getEventById(eventId);
+		boolean isAnnounced = adminEventService.isEventAnnounced(eventId);
+
+		model.addAttribute("winnerDetails", winnerDetails);
+		model.addAttribute("eventTitle", event.getTitle());
+		model.addAttribute("eventId", eventId);
+		model.addAttribute("isAnnounced", isAnnounced);
+
+		return "admin/event/winnerDetail";
+	}
+
+	// 이벤트 당첨자 발표
+	@PostMapping("/uploadWinnerAnnouoncement")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> uploadWinnerAnnouoncement(@RequestBody WinnerPostVO winnerPost, HttpSession session) {
+		Map<String, Object> response = new HashMap<>();
+
+		try {
+			MemberVO admin = (MemberVO) session.getAttribute("loginMember");
+			if (admin == null) {
+				throw new RuntimeException("관리자 로그인이 필요합니다.");
+			}
+
+			winnerPost.setAdminId(admin.getId());
+			boolean result = adminEventService.createWinnerPost(winnerPost);
+
+			if (result) {
+				response.put("success", true);
+				response.put("message", "당첨자 발표가 정상적으로 완료되었습니다.");
+			} else {
+				response.put("success", false);
+				response.put("message", "당첨자 발표에 실패했습니다.");
+			}
+		} catch (Exception e) {
+			response.put("success", false);
+			response.put("message", "당첨자 발표 중 오류가 발생했습니다.");
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(response);
+	}
+	
+	// 이벤트 발표 공개 / 비공개 토글 처리
+	@PostMapping("/toggleWinnerPostPublish")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> toggleWinnerPostPublish(@RequestBody Map<String, Object> request) {
+	    int eventId = Integer.parseInt(request.get("eventId").toString());
+	    boolean isPublished = (boolean) request.get("isPublished");
+	    
+	    Map<String, Object> response = new HashMap<>();
+	    
+	    try {
+	        boolean result = adminEventService.toggleWinnerPostPublish(eventId, isPublished);
+	        if (result) {
+	            response.put("success", true);
+	            response.put("message", isPublished ? "게시글이 공개되었습니다." : "게시글이 비공개로 전환되었습니다.");
+	        } else {
+	            response.put("success", false);
+	            response.put("message", "상태 변경에 실패했습니다.");
+	        }
+	    } catch (Exception e) {
+	        response.put("success", false);
+	        response.put("message", "오류가 발생했습니다: " + e.getMessage());
+	    }
+	    
+	    return ResponseEntity.ok(response);
+	}
 
 }

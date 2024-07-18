@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			.then(response => response.json())
 			.then(data => {
 				if (data.success) {
-					alert('댓글이 삭제되었습니다.\n이벤트 응모가 철회되었으니 응모를 원하신다면 다시 댓글을 작성해주세요.');
+					alert('댓글이 삭제되었습니다.\n이벤트 응모를 원하신다면 다시 댓글을 작성해주세요.');
 					location.reload();
 				} else {
 					alert('댓글 삭제 중 오류가 발생했습니다.');
