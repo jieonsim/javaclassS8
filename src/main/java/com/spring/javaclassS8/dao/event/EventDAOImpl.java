@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.spring.javaclassS8.vo.event.EventCommentVO;
 import com.spring.javaclassS8.vo.event.EventParticipantVO;
 import com.spring.javaclassS8.vo.event.EventVO;
+import com.spring.javaclassS8.vo.event.WinnerEventVO;
+import com.spring.javaclassS8.vo.event.WinnerPostDetailVO;
 
 @Repository
 public class EventDAOImpl implements EventDAO {
@@ -81,5 +83,17 @@ public class EventDAOImpl implements EventDAO {
 	@Override
 	public boolean updateEventParticipationStatus(int commentId, EventParticipantVO.Status status) {
 		return sqlSession.getMapper(EventDAO.class).updateEventParticipationStatus(commentId, status);
+	}
+
+	// 이벤트 당첨자 발표 리스트
+	@Override
+	public List<WinnerEventVO> getWinnerEvents() {
+		return sqlSession.getMapper(EventDAO.class).getWinnerEvents();
+	}
+
+	// 이벤트 당첨자 발표 디테일
+	@Override
+	public WinnerPostDetailVO getWinnerPostDetail(int winnerPostId) {
+		return sqlSession.getMapper(EventDAO.class).getWinnerPostDetail(winnerPostId);
 	}
 }

@@ -537,3 +537,7 @@ ul, li {
 .list_view_v2 .list_title {
 	background: #f8f9fa;
 }
+
+.list_view #title {
+	font-size: 18px;
+}

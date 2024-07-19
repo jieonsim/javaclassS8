@@ -1,5 +1,7 @@
 package com.spring.javaclassS8.service.event;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import com.spring.javaclassS8.dao.event.EventDAO;
 import com.spring.javaclassS8.vo.event.EventCommentVO;
 import com.spring.javaclassS8.vo.event.EventParticipantVO;
 import com.spring.javaclassS8.vo.event.EventVO;
+import com.spring.javaclassS8.vo.event.WinnerEventVO;
+import com.spring.javaclassS8.vo.event.WinnerPostDetailVO;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -84,5 +88,27 @@ public class EventServiceImpl implements EventService {
 		// 이벤트 참여 철회 -> event_participants 테이블의 status 필드 데이터 업데이트
 		boolean participationUpdated = eventDAO.updateEventParticipationStatus(commentId, EventParticipantVO.Status.CANCELLED);
 		return commentUpdated &&  participationUpdated;
+	}
+
+	// 이벤트 당첨자 발표 리스트
+	@Override
+	public List<WinnerEventVO> getWinnerEvents() {
+		 List<WinnerEventVO> events = eventDAO.getWinnerEvents();
+	        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+	        
+	        for (WinnerEventVO event : events) {
+	            LocalDate startDate = LocalDate.parse(event.getStartDate(), inputFormatter);
+	            LocalDate endDate = LocalDate.parse(event.getEndDate(), inputFormatter);
+	            event.setStartDate(startDate.format(outputFormatter));
+	            event.setEndDate(endDate.format(outputFormatter));
+	        }
+	        return events;
+	}
+
+	// 이벤트 당첨자 발표 디테일
+	@Override
+	public WinnerPostDetailVO getWinnerPostDetail(int winnerPostId) {
+		return eventDAO.getWinnerPostDetail(winnerPostId);
 	}
 }

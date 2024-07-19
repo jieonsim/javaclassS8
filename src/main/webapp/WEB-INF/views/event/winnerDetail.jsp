@@ -21,49 +21,11 @@
 			<h3 class="evt_tit evt_tit4">당첨자 발표</h3>
 			<div class="event_cont_box">
 				<dl class="list_view list_view_v2 mgt10">
-					<dt class="th" id="category">예매권</dt>
-					<dd class="list_title">'산리오캐릭터즈 X K리그' 콜라보 출시 이벤트</dd>
-					<dd class="list_cont">
-						<p style="text-align: center;" align="center">
-							<span style="color: rgb(47, 48, 51); font-family: arial; letter-spacing: -1px; font-size: 10pt;">
-								<b>'산리오캐릭터즈 X K리그' 콜라보 출시 이벤트</b>
-							</span>
-						</p>
-						<p style="text-align: center;" align="center">
-							<span style="font-size: 10pt; font-family: arial;">​</span>
-						</p>
-						<p style="text-align: center;" align="center">
-							<span style="font-size: 10pt; font-family: arial;">당첨자발표</span>
-						</p>
-						<p style="text-align: center;" align="center">&nbsp;</p>
-						<p style="text-align: center;" align="center">&nbsp;</p>
-						<p style="text-align: center;" align="center">
-							<span style="background-color: rgb(255, 255, 255); font-family: arial; font-size: 10pt; white-space-collapse: preserve;">임*혜</span>
-						</p>
-						<p style="text-align: center;" align="center">
-							<span style="background-color: rgb(255, 255, 255); font-family: arial; font-size: 10pt; white-space-collapse: preserve;">임*혜</span>
-						</p>
-						<p style="text-align: center;" align="center">
-							<span style="background-color: rgb(255, 255, 255); font-family: arial; font-size: 10pt; white-space-collapse: preserve;">임*혜</span>
-						</p>
-						<p style="text-align: center;" align="center">
-							<span style="font-family: docs-Calibri; font-size: 15px; white-space-collapse: preserve; background-color: rgb(255, 255, 255);">&nbsp;</span>
-						</p>
-						<p style="text-align: center;" align="center">
-							<span style="font-family: docs-Calibri; font-size: 15px; white-space-collapse: preserve; background-color: rgb(255, 255, 255);">&nbsp;</span>
-						</p>
-						<p style="text-align: center;" align="center">
-							<span style="font-family: arial; font-size: 10pt; white-space-collapse: preserve; background-color: rgb(255, 255, 255);">당첨자께는 개별 안내 예정입니다</span>
-						</p>
-						<p style="text-align: center;" align="center">
-							<font face="docs-Calibri"><span style="font-size: 10pt; white-space-collapse: preserve; background-color: rgb(255, 255, 255); font-family: arial;">감사합니다.</span></font>
-						</p>
-						<p style="text-align: center;">
-							<font face="docs-Calibri"><span style="font-size: 15px; white-space-collapse: preserve; background-color: rgb(255, 255, 255);">
-									<br>
-								</span></font>
-						</p>
-					</dd>
+					<div class="d-flex justify-content-start list_title">
+						<dd class="m-0" id="cateogory">${winnerPostDetail.eventCategory}</dd>
+						<dd class="ml-5" id="title">${winnerPostDetail.title}</dd>
+					</div>
+					<dd class="list_cont text-center">${winnerPostDetail.content}</dd>
 				</dl>
 				<div class="list_btn">
 					<div class="fr">

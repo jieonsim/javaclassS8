@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.spring.javaclassS8.service.event.EventService;
 import com.spring.javaclassS8.vo.event.EventCommentVO;
 import com.spring.javaclassS8.vo.event.EventVO;
+import com.spring.javaclassS8.vo.event.WinnerEventVO;
+import com.spring.javaclassS8.vo.event.WinnerPostDetailVO;
 import com.spring.javaclassS8.vo.member.MemberVO;
 
 @Controller
@@ -69,8 +71,7 @@ public class EventController {
 	// 이벤트 댓글 달기 및 응모 처리
 	@PostMapping("/insertEventComment")
 	@ResponseBody
-	public Map<String, Object> insertEventComment(@RequestParam("eventId") int eventId,
-			@RequestParam("comment") String comment, HttpSession session) {
+	public Map<String, Object> insertEventComment(@RequestParam("eventId") int eventId, @RequestParam("comment") String comment, HttpSession session) {
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		Map<String, Object> result = new HashMap<>();
 
@@ -112,15 +113,19 @@ public class EventController {
 		return response;
 	}
 
-	// 이벤트 당첨자 발표
+	// 이벤트 당첨자 발표 리스트
 	@GetMapping("/winner")
-	public String getEventWinner() {
+	public String getEventWinner(Model model) {
+		List<WinnerEventVO> winnerEvents = eventService.getWinnerEvents();
+		model.addAttribute("winnerEvents", winnerEvents);
 		return "event/winner";
 	}
 
 	// 이벤트 당첨자 발표 디테일
 	@GetMapping("/winnerDetail")
-	public String getEventWinnerDetail() {
+	public String getEventWinnerDetail(@RequestParam("winnerPostId") int winnerPostId, Model model) {
+		WinnerPostDetailVO winnerPostDetail = eventService.getWinnerPostDetail(winnerPostId);
+		model.addAttribute("winnerPostDetail", winnerPostDetail);
 		return "event/winnerDetail";
 	}
 }

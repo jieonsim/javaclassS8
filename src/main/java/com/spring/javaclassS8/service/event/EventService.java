@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.spring.javaclassS8.vo.event.EventCommentVO;
 import com.spring.javaclassS8.vo.event.EventVO;
+import com.spring.javaclassS8.vo.event.WinnerEventVO;
+import com.spring.javaclassS8.vo.event.WinnerPostDetailVO;
 
 public interface EventService {
 
@@ -33,5 +35,11 @@ public interface EventService {
 
 	// 이벤트 컨텐츠의 댓글 삭제 및 이벤트 참여 철회
 	public boolean deleteEventComment(int commentId);
+
+	// 이벤트 당첨자 발표 리스트
+	public List<WinnerEventVO> getWinnerEvents();
+
+	// 이벤트 당첨자 발표 디테일
+	public WinnerPostDetailVO getWinnerPostDetail(int winnerPostId);
 
 }

@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import com.spring.javaclassS8.vo.event.EventCommentVO;
 import com.spring.javaclassS8.vo.event.EventParticipantVO;
 import com.spring.javaclassS8.vo.event.EventVO;
+import com.spring.javaclassS8.vo.event.WinnerEventVO;
+import com.spring.javaclassS8.vo.event.WinnerPostDetailVO;
 
 public interface EventDAO {
 
@@ -43,5 +45,11 @@ public interface EventDAO {
 
 	// 이벤트 참여 철회 -> event_participants 테이블의 status 필드 데이터 업데이트
 	public boolean updateEventParticipationStatus(@Param("commentId") int commentId, @Param("status") EventParticipantVO.Status status);
+
+	// 이벤트 당첨자 발표 리스트
+	public List<WinnerEventVO> getWinnerEvents();
+
+	// 이벤트 당첨자 발표 디테일
+	public WinnerPostDetailVO getWinnerPostDetail(int winnerPostId);
 
 }

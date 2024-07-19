@@ -38,30 +38,16 @@
 							</tr>
 						</thead>
 						<tbody id="winnerList">
-							<tr>
-								<td class="ff_tahoma fs11">3</td>
-								<td>예매권</td>
-								<td class="tl">
-									<a href="${ctp}/event/winnerDetail" class="elp">'산리오캐릭터즈 X K리그' 콜라보 출시 이벤트</a>
-								</td>
-								<td class="ff_tahoma fs11">2024.07.10~2024.07.17</td>
-							</tr>
-							<tr>
-								<td class="ff_tahoma fs11">2</td>
-								<td>초대</td>
-								<td class="tl">
-									<a href="${ctp}/event/winnerDetail" class="elp">'레시앤프렌즈 X KBO' 콜라보 출시 이벤트 </a>
-								</td>
-								<td class="ff_tahoma fs11">2024.07.10~2024.07.17</td>
-							</tr>
-							<tr>
-								<td class="ff_tahoma fs11">1</td>
-								<td>초대</td>
-								<td class="tl">
-									<a href="${ctp}/event/winnerDetail" class="elp">'슈야와 토야 X KBO' 이모티콘 출시 이벤트</a>
-								</td>
-								<td class="ff_tahoma fs11">2024.06.24~2024.07.03</td>
-							</tr>
+							<c:forEach items="${winnerEvents}" var="event" varStatus="status">
+								<tr>
+									<td class="ff_tahoma fs11">${status.count}</td>
+									<td>${event.eventCategory}</td>
+									<td class="tl">
+										<a href="${ctp}/event/winnerDetail?winnerPostId=${event.winnerPostId}" class="elp">${event.title}</a>
+									</td>
+									<td class="ff_tahoma fs11">${event.startDate}&nbsp;~&nbsp;${event.endDate}</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>

@@ -48,6 +48,23 @@
 	    ORDER BY ec.createdAt DESC
 	</select>
 	
+	<!-- 이벤트 당첨자 발표 리스트 -->
+	<select id="getWinnerEvents" resultType="com.spring.javaclassS8.vo.event.WinnerEventVO">
+	    SELECT wp.id as winnerPostId, e.eventCategory, e.title, e.startDate, e.endDate
+	    FROM winner_posts wp
+	    JOIN events e ON wp.eventId = e.id
+	    WHERE wp.isPublished = true
+	    ORDER BY wp.createdAt DESC
+	</select>
+	
+	<!-- 이벤트 당첨자 발표 디테일 -->
+	<select id="getWinnerPostDetail" resultType="com.spring.javaclassS8.vo.event.WinnerPostDetailVO">
+		SELECT e.eventCategory, wp.title, wp.content
+	    FROM winner_posts wp
+	    JOIN events e ON wp.eventId = e.id
+	    WHERE wp.id = #{winnerPostId} AND wp.isPublished = true
+	</select>
+	
 	<!-- 이벤트 컨텐츠 디테일에 댓글 달기 -->
 	<insert id="insertEventComment">
 		INSERT INTO event_comments (eventId, memberId, comment)
