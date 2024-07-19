@@ -1,4 +1,4 @@
-package com.spring.javaclassS8.service.admin;
+package com.spring.javaclassS8.service.admin.event;
 
 import java.io.IOException;
 import java.util.List;

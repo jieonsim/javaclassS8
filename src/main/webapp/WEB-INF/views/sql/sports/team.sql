@@ -1,0 +1,14 @@
+
+/* 스포츠 팀 */
+CREATE TABLE teams (
+    id INT NOT NULL AUTO_INCREMENT COMMENT '팀 고유번호',
+    sportId INT NOT NULL COMMENT '스포츠 고유번호',
+    teamName VARCHAR(50) NOT NULL COMMENT '팀 이름',
+    shortName VARCHAR(20) NOT NULL COMMENT '팀 축약 이름',
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '생성일시',
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일시',
+    PRIMARY KEY (id),
+    FOREIGN KEY (sportId) REFERENCES sports(id),
+    UNIQUE KEY (teamName),
+    UNIQUE KEY (shortName)
+);

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.spring.javaclassS8.service.admin.AdminReservationService;
+import com.spring.javaclassS8.service.admin.reservation.AdminReservationService;
 import com.spring.javaclassS8.vo.admin.AdvanceTicketVO;
 
 @Controller

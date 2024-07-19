@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.spring.javaclassS8.service.admin.AdminEventService;
+import com.spring.javaclassS8.service.admin.event.AdminEventService;
 import com.spring.javaclassS8.service.event.EventService;
 import com.spring.javaclassS8.vo.event.EventCommentVO;
 import com.spring.javaclassS8.vo.event.EventDrawSummaryVO;

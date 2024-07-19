@@ -12,6 +12,9 @@ import com.spring.javaclassS8.vo.event.EventVO;
 import com.spring.javaclassS8.vo.event.WinnerDetailVO;
 import com.spring.javaclassS8.vo.event.WinnerPostVO;
 import com.spring.javaclassS8.vo.event.WinnerVO;
+import com.spring.javaclassS8.vo.sport.SportVO;
+import com.spring.javaclassS8.vo.sport.TeamVO;
+import com.spring.javaclassS8.vo.sport.VenueVO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
@@ -97,8 +100,69 @@ public class AdminDAOImpl implements AdminDAO {
 		return sqlSession.getMapper(AdminDAO.class).isEventAnnounced(eventId);
 	}
 
+	// 이벤트 당첨자 메일 발송 후 메일 발송여부 필드 업데이트
 	@Override
 	public void updateEmailSentAt(int winnerId) {
-	    sqlSession.getMapper(AdminDAO.class).updateEmailSentAt(winnerId);
+		sqlSession.getMapper(AdminDAO.class).updateEmailSentAt(winnerId);
+	}
+
+	// 스포츠 종목 등록 처리
+	@Override
+	public int insertSport(String sportName) {
+		return sqlSession.getMapper(AdminDAO.class).insertSport(sportName);
+	}
+
+	// 모든 스포츠 종목 가져오기
+	@Override
+	public List<String> getAllSports() {
+		return sqlSession.getMapper(AdminDAO.class).getAllSports();
+	}
+
+	// 스포츠 종목 이름으로 스포츠 고유번호 가져오기
+	@Override
+	public Integer getSPortIdByName(String sportName) {
+		return sqlSession.getMapper(AdminDAO.class).getSPortIdByName(sportName);
+	}
+
+	// 스포츠 팀 등록 처리
+	@Override
+	public int insertTeam(int sportId, String teamName, String shortName) {
+		return sqlSession.getMapper(AdminDAO.class).insertTeam(sportId, teamName, shortName);
+	}
+
+	// 경기장 등록 처리
+	@Override
+	public int insertVenue(int sportId, int teamId, String venueName, String address, String capacity) {
+		return sqlSession.getMapper(AdminDAO.class).insertVenue(sportId, teamId, venueName, address, capacity);
+	}
+
+	// 팀 이름으로 팀 고유번호 가져오기
+	@Override
+	public Integer getTeamIdByName(String teamName) {
+		return sqlSession.getMapper(AdminDAO.class).getTeamIdByName(teamName);
+	}
+
+	// 해당하는 스포츠에 따른 팀 이름 가져오기
+	@Override
+	public List<TeamVO> getAllTeamsWithSports() {
+		return sqlSession.getMapper(AdminDAO.class).getAllTeamsWithSports();
+	}
+
+	// 모든 스포츠 디테일
+	@Override
+	public List<SportVO> getAllSportsDetails() {
+		return sqlSession.getMapper(AdminDAO.class).getAllSportsDetails();
+	}
+
+	// 모든 팀 디테일
+	@Override
+	public List<TeamVO> getAllTeamsDetails() {
+		return sqlSession.getMapper(AdminDAO.class).getAllTeamsDetails();
+	}
+
+	// 모든 경기장 디테일
+	@Override
+	public List<VenueVO> getAllVenuesDetails() {
+		return sqlSession.getMapper(AdminDAO.class).getAllVenuesDetails();
 	}
 }

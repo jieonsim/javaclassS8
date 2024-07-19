@@ -41,7 +41,7 @@
 							</div>
 							<div class="inputStyle inputPw">
 								<label>
-									<input type="password" class="inputText pw" name="password" id="userPwd" placeholder="비밀번호">
+									<input type="password" class="inputText pw" name="password" id="userPwd" placeholder="비밀번호" autoComplete="off">
 									<span class="focusLine"></span>
 									<i>
 										<img alt="자물쇠아이콘" src="${ctp}/images/icon/lock.svg">

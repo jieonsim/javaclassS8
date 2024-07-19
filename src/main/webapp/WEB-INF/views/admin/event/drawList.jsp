@@ -143,17 +143,9 @@
 			</div>
 		</div>
 	</div>
-	<script src="${ctp}/js/member/login/autoLogin.js"></script>
 	<script src="${ctp}/js/admin/common/off-canvas.js"></script>
 	<script src="${ctp}/js/admin/common/hoverable-collapse.js"></script>
 	<script src="${ctp}/js/admin/common/template.js"></script>
 	<script src="${ctp}/js/admin/common/settings.js"></script>
-	<!-- 	<script>
-    const statusMap = {
-        <c:forEach items="${statuses}" var="status" varStatus="loop">
-            ${status}: "${status.displayName}"${!loop.last ? ',' : ''}
-        </c:forEach>
-    };
-</script> -->
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.spring.javaclassS8.service.admin;
+package com.spring.javaclassS8.service.admin.reservation;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;

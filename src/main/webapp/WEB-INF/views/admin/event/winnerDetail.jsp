@@ -49,9 +49,7 @@
 										</div>
 									</div>
 									<p class="card-description">
-										이벤트명 클릭 시 당첨자 리스트를 확인할 수 있습니다.
-										<br>
-										상세 페이지로 이동하여 당첨자 발표 포스팅 및 메일 발송이 가능합니다.
+										우측 상단 버튼을 통해 당첨자 발표 포스팅 및 예매권 메일 발송이 가능합니다.
 									</p>
 									<div class="table-responsive">
 										<table class="table">
@@ -121,7 +119,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="${ctp}/js/member/login/autoLogin.js"></script>
 	<script src="${ctp}/js/admin/event/winnerDetail.js"></script>
 	<script src="${ctp}/js/admin/common/off-canvas.js"></script>
 	<script src="${ctp}/js/admin/common/hoverable-collapse.js"></script>

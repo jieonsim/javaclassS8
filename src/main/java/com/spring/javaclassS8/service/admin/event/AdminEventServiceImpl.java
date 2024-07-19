@@ -1,4 +1,4 @@
-package com.spring.javaclassS8.service.admin;
+package com.spring.javaclassS8.service.admin.event;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.javaclassS8.dao.admin.AdminDAO;
 import com.spring.javaclassS8.dao.event.EventDAO;
+import com.spring.javaclassS8.service.admin.reservation.AdminReservationService;
 import com.spring.javaclassS8.utils.EventAdvanceTicketEmailService;
 import com.spring.javaclassS8.vo.admin.AdvanceTicketVO;
 import com.spring.javaclassS8.vo.event.EventDrawSummaryVO;

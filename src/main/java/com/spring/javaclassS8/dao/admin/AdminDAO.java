@@ -10,6 +10,9 @@ import com.spring.javaclassS8.vo.event.EventVO;
 import com.spring.javaclassS8.vo.event.WinnerDetailVO;
 import com.spring.javaclassS8.vo.event.WinnerPostVO;
 import com.spring.javaclassS8.vo.event.WinnerVO;
+import com.spring.javaclassS8.vo.sport.SportVO;
+import com.spring.javaclassS8.vo.sport.TeamVO;
+import com.spring.javaclassS8.vo.sport.VenueVO;
 
 public interface AdminDAO {
 
@@ -53,5 +56,36 @@ public interface AdminDAO {
 	// 이벤트 당첨자 발표 공지 여부
 	boolean isEventAnnounced(int eventId);
 
+	// 이벤트 당첨자 메일 발송 후 메일 발송여부 필드 업데이트
 	void updateEmailSentAt(int winnerId);
+
+	// 스포츠 종목 등록 처리
+	int insertSport(String sportName);
+
+	// 모든 스포츠 종목 가져오기
+	List<String> getAllSports();
+
+	// 스포츠 종목 이름으로 스포츠 고유번호 가져오기
+	Integer getSPortIdByName(String sportName);
+
+	// 스포츠 팀 등록 처리
+	int insertTeam(@Param("sportId") int sportId, @Param("teamName") String teamName, @Param("shortName") String shortName);
+
+	// 경기장 등록 처리
+	int insertVenue(@Param("sportId") int sportId, @Param("teamId") int teamId, @Param("venueName") String venueName, @Param("address") String address, @Param("capacity") String capacity);
+
+	// 팀 이름으로 팀 고유번호 가져오기
+	Integer getTeamIdByName(String teamName);
+	
+	// 해당하는 스포츠에 따른 팀 이름 가져오기
+	List<TeamVO> getAllTeamsWithSports();
+
+	// 모든 스포츠 디테일
+	List<SportVO> getAllSportsDetails();
+
+	// 모든 팀 디테일
+	List<TeamVO> getAllTeamsDetails();
+	
+	// 모든 경기장 디테일
+	List<VenueVO> getAllVenuesDetails();
 }

@@ -103,6 +103,51 @@
     	WHERE eventId = #{eventId} AND isAnnounced = true
     </select>
     
+    <!-- 모든 스포츠 종목 가져오기 -->
+	<select id="getAllSports" resultType="String">
+		SELECT sportName FROM sports ORDER BY id
+	</select>
+	
+    <!-- 모든 팀 이름 가져오기 -->
+	<select id="getAllTeamsWithSports" resultType="com.spring.javaclassS8.vo.sport.TeamVO">
+		SELECT t.teamName, s.sportName
+		FROM teams t
+		JOIN sports s ON t.sportId = s.id
+		ORDER BY s.sportName, t.teamName
+	</select>
+	
+	<!-- 스포츠 종목 이름으로 스포츠 고유번호 가져오기 -->
+	<select id="getSPortIdByName" resultType="java.lang.Integer">
+		SELECT id FROM sports WHERE sportName = #{sportName}
+	</select>
+	
+	<!-- 모든 스포츠 디테일 -->
+	<select id="getAllSportsDetails" resultType="com.spring.javaclassS8.vo.sport.SportVO">
+		SELECT * FROM sports ORDER BY id
+	</select>
+	
+	<!-- 모든 팀 디테일 -->
+	<select id="getAllTeamsDetails" resultType="com.spring.javaclassS8.vo.sport.TeamVO">
+	  	SELECT t.*, s.sportName 
+	    FROM teams t
+	    JOIN sports s ON t.sportId = s.id
+	    ORDER BY s.sportName, t.teamName
+	</select>
+	
+	<!-- 모든 경기장 디테일 -->
+	<select id="getAllVenuesDetails" resultType="com.spring.javaclassS8.vo.sport.VenueVO">
+		SELECT v.*, s.sportName, t.teamName
+	    FROM venues v
+	    JOIN sports s ON v.sportId = s.id
+	    JOIN teams t ON v.teamId = t.id
+	    ORDER BY s.sportName, t.teamName, v.venueName
+	</select>
+	
+	<!-- 팀 이름으로 팀 고유번호 가져오기 -->
+	<select id="getTeamIdByName" resultType="java.lang.Integer">
+		SELECT id FROM teams WHERE teamName = #{teamName}
+	</select>
+	
 	<!-- 예매권 발행 -->
 	<insert id="insertAdvanceTicket" useGeneratedKeys="true"
 		keyProperty="id">
@@ -136,6 +181,23 @@
         INSERT INTO winner_posts (eventId, adminId, title, content)
         VALUES (#{eventId}, #{adminId}, #{title}, #{content})
 	</insert>
+	
+	<!-- 스포츠 종목 등록 처리 -->
+	<insert id="insertSport" parameterType="String">
+		INSERT INTO sports (sportName) VALUES (#{sportName})
+	</insert>
+	
+	<!-- 스포츠 팀 등록 처리 -->
+	<insert id="insertTeam">
+		INSERT INTO teams (sportId, teamName, shortName)
+        VALUES (#{sportId}, #{teamName}, #{shortName})
+	</insert>
+	
+	<!-- 스포츠 경기장 등록 처리 -->
+	<insert id="insertVenue">
+		INSERT INTO venues (sportId, teamId, venueName, address, capacity)
+        VALUES (#{sportId}, #{teamId}, #{venueName}, #{address}, #{capacity})
+	</insert>
 
 	<!-- 이벤트 내용 수정 -->
 	<update id="updateEvent"
@@ -160,6 +222,7 @@
 		WHERE eventId = #{eventId}
 	</update>
 	
+	<!-- 이벤트 당첨자 메일 발송 후 메일 발송여부 필드 업데이트 -->
 	<update id="updateEmailSentAt">
 	    UPDATE winners
 	    SET emailSentAt = CURRENT_TIMESTAMP,

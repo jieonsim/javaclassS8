@@ -28,13 +28,20 @@
 		<li class="nav-item">
 			<a class="nav-link" data-toggle="collapse" href="#sports" aria-expanded="false" aria-controls="sports">
 				<i class="menu-icon mdi mdi-bike"></i>
-				<span class="menu-title">경기</span>
+				<span class="menu-title">스포츠</span>
 				<i class="menu-arrow"></i>
 			</a>
 			<div class="collapse" id="sports">
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item">
-						<a class="nav-link" href="#">종목 및 구단 등록</a>
+						<a class="nav-link" href="${ctp}/admin/sports/register">종목 / 구단 / 경기장 등록</a>
+					</li>
+				</ul>
+			</div>
+			<div class="collapse" id="sports">
+				<ul class="nav flex-column sub-menu">
+					<li class="nav-item">
+						<a class="nav-link" href="${ctp}/admin/sports/registrationList">종목 / 구단 / 경기장 리스트</a>
 					</li>
 				</ul>
 			</div>

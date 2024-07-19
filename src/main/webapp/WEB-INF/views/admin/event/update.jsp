@@ -110,7 +110,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="${ctp}/js/member/login/autoLogin.js"></script>
 	<script src="${ctp}/js/admin/common/off-canvas.js"></script>
 	<script src="${ctp}/js/admin/common/hoverable-collapse.js"></script>
 	<script src="${ctp}/js/admin/common/template.js"></script>
