@@ -24,63 +24,26 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 
 	// 팀 수정 기능
-	table.addEventListener('click', function(e) {
-		if (e.target.classList.contains('team-update-btn')) {
-			const row = e.target.closest('tr');
-			const teamNameCell = row.querySelector('.team-name');
-			const teamShortNameCell = row.querySelector('.team-short-name');
+	document.querySelectorAll('.team-update-btn').forEach(button => {
+		button.addEventListener('click', function() {
+			const row = this.closest('tr');
+			const id = row.dataset.id;
+			const nameCells = row.querySelectorAll('.team-name, .team-short-name');
+			const inputCells = row.querySelectorAll('.team-input');
 
-			if (e.target.textContent === '수정') {
+			if (inputCells[0].style.display === 'none') {
 				// 수정 모드로 전환
-				teamNameCell.innerHTML = `<input type="text" class="form-control" value="${teamNameCell.textContent}">`;
-				teamShortNameCell.innerHTML = `<input type="text" class="form-control" value="${teamShortNameCell.textContent}">`;
-				e.target.textContent = '저장';
+				nameCells.forEach(cell => cell.style.display = 'none');
+				inputCells.forEach(cell => cell.style.display = 'table-cell');
+				this.textContent = '저장';
 			} else {
-				// 저장 모드
-				const newName = teamNameCell.querySelector('input').value;
-				const newShortName = teamShortNameCell.querySelector('input').value;
-				const id = row.dataset.id;
-
-				updateTeam(id, newName, newShortName)
-					.then(data => {
-						if (data.success) {
-							teamNameCell.textContent = newName;
-							teamShortNameCell.textContent = newShortName;
-							e.target.textContent = '수정';
-							alert('팀이 성공적으로 업데이트되었습니다.');
-						} else {
-							alert('업데이트 실패: ' + data.message);
-						}
-					})
-					.catch(error => {
-						console.error('Update failed:', error);
-						alert('업데이트에 실패했습니다.');
-					});
+				// 수정 내용 저장
+				const newName = inputCells[0].querySelector('input').value;
+				const newShortName = inputCells[1].querySelector('input').value;
+				updateTeam(id, newName, newShortName, row);
 			}
-		}
+		});
 	});
-
-	// 팀 수정 기능
-	/*	document.querySelectorAll('.team-update-btn').forEach(button => {
-			button.addEventListener('click', function() {
-				const row = this.closest('tr');
-				const id = row.dataset.id;
-				const nameCells = row.querySelectorAll('.team-name, .team-short-name');
-				const inputCells = row.querySelectorAll('.team-input');
-	
-				if (inputCells[0].style.display === 'none') {
-					// 수정 모드로 전환
-					nameCells.forEach(cell => cell.style.display = 'none');
-					inputCells.forEach(cell => cell.style.display = 'block');
-					this.textContent = '저장';
-				} else {
-					// 수정 내용 저장
-					const newName = inputCells[0].querySelector('input').value;
-					const newShortName = inputCells[1].querySelector('input').value;
-					updateTeam(id, newName, newShortName, row);
-				}
-			});
-		});*/
 
 	// 경기장 수정 기능
 	document.querySelectorAll('.venue-update-btn').forEach(button => {
@@ -93,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			if (inputCells[0].style.display === 'none') {
 				// 수정 모드로 전환
 				nameCells.forEach(cell => cell.style.display = 'none');
-				inputCells.forEach(cell => cell.style.display = 'block');
+				inputCells.forEach(cell => cell.style.display = 'table-cell');
 				this.textContent = '저장';
 			} else {
 				// 수정 내용 저장
@@ -145,21 +108,7 @@ function updateSport(id, newName, row) {
 		});
 }
 
-function updateTeam(id, newName, newShortName) {
-    return fetch(`${ctp}/admin/sports/team/update`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, teamName: newName, shortName: newShortName })
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    });
-}
-
-/*function updateTeam(id, newName, newShortName, row) {
+function updateTeam(id, newName, newShortName, row) {
 	fetch(`${ctp}/admin/sports/team/update`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
@@ -170,7 +119,7 @@ function updateTeam(id, newName, newShortName) {
 			if (data.success) {
 				row.querySelector('.team-name').textContent = newName;
 				row.querySelector('.team-short-name').textContent = newShortName;
-				row.querySelectorAll('.team-name, .team-short-name').forEach(cell => cell.style.display = 'block');
+				row.querySelectorAll('.team-name, .team-short-name').forEach(cell => cell.style.display = 'table-cell');
 				row.querySelectorAll('.team-input').forEach(cell => cell.style.display = 'none');
 				row.querySelector('.team-update-btn').textContent = '수정';
 				alert('팀이 성공적으로 업데이트되었습니다.');
@@ -182,32 +131,33 @@ function updateTeam(id, newName, newShortName) {
 			console.error('Error:', error);
 			alert('업데이트 중 오류가 발생했습니다.');
 		});
-}*/
+}
+
 
 function updateVenue(id, newName, newAddress, newCapacity, row) {
-	fetch(`${ctp}/admin/sports/venue/update`, {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ id: id, venueName: newName, address: newAddress, capacity: newCapacity })
-	})
-		.then(response => response.json())
-		.then(data => {
-			if (data.success) {
-				row.querySelector('.venue-name').textContent = newName;
-				row.querySelector('.venue-address').textContent = newAddress;
-				row.querySelector('.venue-capacity').textContent = newCapacity;
-				row.querySelectorAll('.venue-name, .venue-address, .venue-capacity').forEach(cell => cell.style.display = 'block');
-				row.querySelectorAll('.venue-input').forEach(cell => cell.style.display = 'none');
-				row.querySelector('.venue-update-btn').textContent = '수정';
-				alert('경기장이 성공적으로 업데이트되었습니다.');
-			} else {
-				alert('업데이트 실패: ' + data.message);
-			}
-		})
-		.catch(error => {
-			console.error('Error:', error);
-			alert('업데이트 중 오류가 발생했습니다.');
-		});
+    fetch(`${ctp}/admin/sports/venue/update`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: id, venueName: newName, address: newAddress, capacity: newCapacity })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            row.querySelector('.venue-name').textContent = newName;
+            row.querySelector('.venue-address').textContent = newAddress;
+            row.querySelector('.venue-capacity').textContent = newCapacity;
+            row.querySelectorAll('.venue-name, .venue-address, .venue-capacity').forEach(cell => cell.style.display = 'table-cell');
+            row.querySelectorAll('.venue-input').forEach(cell => cell.style.display = 'none');
+            row.querySelector('.venue-update-btn').textContent = '수정';
+            alert('경기장이 성공적으로 업데이트되었습니다.');
+        } else {
+            alert('업데이트 실패: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('업데이트 중 오류가 발생했습니다.');
+    });
 }
 
 function deleteItem(type, id, row) {

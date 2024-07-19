@@ -93,7 +93,13 @@
 													<tr data-id="${team.id}">
 														<td>${team.sportName}</td>
 														<td class="team-name">${team.teamName}</td>
+														<td class="team-input" style="display: none;">
+															<input type="text" class="form-control text-center" name="teamName" value="${team.teamName}">
+														</td>
 														<td class="team-short-name">${team.shortName}</td>
+														<td class="team-input" style="display: none;">
+															<input type="text" class="form-control text-center" name="shortName" value="${team.shortName}">
+														</td>
 														<td>
 															<button class="badge badge-warning bg-white team-update-btn">수정</button>
 														</td>
