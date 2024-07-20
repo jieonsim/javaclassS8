@@ -1,4 +1,3 @@
-show tables;
 
 /* 스포츠 종목 */
 CREATE TABLE sports (

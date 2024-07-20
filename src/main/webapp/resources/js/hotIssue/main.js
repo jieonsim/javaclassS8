@@ -12,16 +12,31 @@ document.addEventListener('DOMContentLoaded', function() {
 	// 모든 데이터 로딩을 추적하기 위한 Promise 배열
 	const loadingPromises = [];
 
+	// 로딩 컨테이너 funfacts
+	const funFacts = ["축구 경기에서 선수들은 평균 10km 이상을 뛰어다닙니다!",
+		"NBA 농구공의 무게는 약 620g입니다.",
+		"테니스 라켓의 줄은 약 16-18kg의 장력으로 당겨져 있습니다.",
+		"야구 투수가 던진 공의 최고 속도는 시속 169km를 넘습니다!",
+		"수영선수 마이클 펠프스의 하루 칼로리 섭취량은 약 12,000kcal였습니다."];
+
+	// 로딩 컨테이너 프로그레스 및 funfacts 변수
+	let progress = 0;
+	const progressBar = document.getElementById('progressBar');
+	const funFactElement = document.getElementById('funFact');
+
+	// 로딩 컨테이너 보여주기
 	function showLoading() {
 		loadingContainer.style.display = 'block';
 		contentContainer.style.display = 'none';
 	}
 
+	// 로딩 컨테이너 숨기기
 	function hideLoading() {
 		loadingContainer.style.display = 'none';
 		contentContainer.style.display = 'block';
 	}
 
+	// 스포츠 주요기사 가져오기
 	function fetchNewsData() {
 		return fetch(`${ctp}/api/news`)
 			.then(response => response.json())
@@ -31,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			.catch(error => console.error('Error fetching news:', error));
 	}
 
+	// 스포츠 주요기사 보여주기
 	function displayNewsItems(newsItems) {
 		newsItems.forEach((item, index) => {
 			const tr = document.createElement('tr');
@@ -58,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	}
 
+	// 스포츠 주요경기 일정 가져오기
 	function fetchScheduleData() {
 		return fetch(`${ctp}/api/schedule`)
 			.then(response => response.json())
@@ -67,6 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			.catch(error => console.error('Error fetching schedule:', error));
 	}
 
+	// 스포츠 주요경기 일정 보여오기
 	function displayScheduleData(scheduleData) {
 		const thead = scheduleTable.querySelector('thead');
 		const tbody = scheduleTable.querySelector('tbody');
@@ -132,60 +150,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			tbody.innerHTML = '';
 		}
 	}
-
-	/*function displayScheduleData(scheduleData) {
-		const thead = scheduleTable.querySelector('thead');
-		const tbody = scheduleTable.querySelector('tbody');
-
-		if (scheduleData && scheduleData.date) {
-			// 날짜 표시
-			thead.innerHTML = `
-			<tr>
-				<th colspan="5" class="text-center">
-					<div class="date-select">
-						<strong>${scheduleData.date}</strong>
-					</div>
-				</th>
-			</tr>
-		`;
-
-			// 경기 정보 표시
-			tbody.innerHTML = '';
-			if (scheduleData.matches && scheduleData.matches.length > 0) {
-				scheduleData.matches.forEach(match => {
-					const tr = document.createElement('tr');
-					tr.innerHTML = `
-					<td class="text-left">
-						<img src="${match.teamLeftLogo}" class="team-logo" alt="팀 로고">
-						<span class="team-name ml-2">${match.teamLeft}</span>
-					</td>
-					<td class="text-center">
-						<span class="score">${match.scoreLeft || ''}</span>
-					</td>
-					<td class="text-center league-info">
-						<div>${match.status}</div>
-						${match.time ? `<div><b>${match.time}</b></div>` : ''}
-						<div>${match.league}</div>
-					</td>
-					<td class="text-center">
-						<span class="score">${match.scoreRight || ''}</span>
-					</td>
-					<td class="text-right">
-						<span class="team-name mr-2">${match.teamRight}</span>
-						<img src="${match.teamRightLogo}" class="team-logo" alt="팀 로고">
-					</td>
-				`;
-					tbody.appendChild(tr);
-				});
-			} else {
-				tbody.innerHTML = '<tr><td colspan="5" class="text-center">경기 일정이 없습니다.</td></tr>';
-			}
-		} else {
-			thead.innerHTML = '<tr><th colspan="5" class="text-center">일정 데이터를 불러올 수 없습니다.</th></tr>';
-			tbody.innerHTML = '';
-		}
-	}*/
-
+	
+	// kbo team ranking 가져오기
 	function fetchKBORankingData() {
 		return fetch(`${ctp}/api/kboRanking`)
 			.then(response => response.json())
@@ -195,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			.catch(error => console.error('Error fetching KBO ranking:', error));
 	}
 
-
+	// kbo team ranking 보여주기
 	function displayKBORanking(rankingData) {
 		const rankingTable = document.querySelector('.kboTeamRanking table');
 		const tbody = rankingTable.querySelector('tbody');
@@ -220,6 +186,27 @@ document.addEventListener('DOMContentLoaded', function() {
 			tbody.appendChild(tr);
 		});
 	}
+
+	// 로딩 컨테이너의 프로그레스 업데이트
+	function updateProgress() {
+		if (progress < 100) {
+			progress += Math.random() * 10;
+			progressBar.style.width = Math.min(progress, 100) + '%';
+			setTimeout(updateProgress, 500);
+		}
+	}
+	
+	// 로딩 컨테이너의 funfact 체인지
+	function changeFunFact() {
+		const randomFact = funFacts[Math.floor(Math.random()
+			* funFacts.length)];
+		funFactElement.textContent = randomFact;
+	}
+	
+	// 로딩컨테이너 처리
+	updateProgress();
+	changeFunFact();
+	setInterval(changeFunFact, 5000);
 
 	// 데이터 로딩 시작
 	showLoading();

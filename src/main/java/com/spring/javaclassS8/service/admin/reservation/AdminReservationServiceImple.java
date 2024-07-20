@@ -13,15 +13,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.spring.javaclassS8.dao.admin.AdminDAO;
-import com.spring.javaclassS8.vo.admin.AdvanceTicketVO;
+import com.spring.javaclassS8.dao.admin.reservation.AdminReservationDAO;
 import com.spring.javaclassS8.vo.member.MemberVO;
+import com.spring.javaclassS8.vo.reservation.AdvanceTicketVO;
 
 @Service
 public class AdminReservationServiceImple implements AdminReservationService {
 
 	@Autowired
-	private AdminDAO adminDAO;
+	private AdminReservationDAO adminReservationDAO;
 
 	// 예매권 발행하기 처리
 	@Override
@@ -40,7 +40,7 @@ public class AdminReservationServiceImple implements AdminReservationService {
 			ticket.setUsed(false);
 			ticket.setAdminId(adminId);
 
-			adminDAO.insertAdvanceTicket(ticket);
+			adminReservationDAO.insertAdvanceTicket(ticket);
 			// 여기서 ticket 객체의 id가 자동으로 설정
 	        if (ticket.getId() == 0) {
 	            throw new RuntimeException("예매권 ID 생성 실패");

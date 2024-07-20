@@ -1,6 +1,5 @@
 /*js/admin/sports.registrationList.js */
 document.addEventListener('DOMContentLoaded', function() {
-	const table = document.querySelector('.table-responsive .table');
 
 	// 스포츠 종목 수정 기능
 	document.querySelectorAll('.sport-update-btn').forEach(button => {
@@ -98,6 +97,7 @@ function updateSport(id, newName, row) {
 				row.querySelector('.sport-input').style.display = 'none';
 				row.querySelector('.sport-update-btn').textContent = '수정';
 				alert('스포츠가 성공적으로 업데이트되었습니다.');
+				location.reload();
 			} else {
 				alert('업데이트 실패: ' + data.message);
 			}
@@ -123,6 +123,7 @@ function updateTeam(id, newName, newShortName, row) {
 				row.querySelectorAll('.team-input').forEach(cell => cell.style.display = 'none');
 				row.querySelector('.team-update-btn').textContent = '수정';
 				alert('팀이 성공적으로 업데이트되었습니다.');
+				location.reload();
 			} else {
 				alert('업데이트 실패: ' + data.message);
 			}
@@ -150,6 +151,7 @@ function updateVenue(id, newName, newAddress, newCapacity, row) {
             row.querySelectorAll('.venue-input').forEach(cell => cell.style.display = 'none');
             row.querySelector('.venue-update-btn').textContent = '수정';
             alert('경기장이 성공적으로 업데이트되었습니다.');
+            location.reload();
         } else {
             alert('업데이트 실패: ' + data.message);
         }

@@ -60,6 +60,7 @@ public interface AdminEventService {
 	// 이벤트 당첨자 발표 공지 여부
 	boolean isEventAnnounced(int eventId);
 
+	// 이벤트 당첨자 대상으로 당첨 안내 및 예매권 번호 메일 발송
 	boolean sendWinnerEmails(int eventId) throws MessagingException;
 	
 }

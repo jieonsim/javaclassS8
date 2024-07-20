@@ -23,22 +23,22 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.spring.javaclassS8.dao.admin.AdminDAO;
+import com.spring.javaclassS8.dao.admin.event.AdminEventDAO;
 import com.spring.javaclassS8.dao.event.EventDAO;
 import com.spring.javaclassS8.service.admin.reservation.AdminReservationService;
 import com.spring.javaclassS8.utils.EventAdvanceTicketEmailService;
-import com.spring.javaclassS8.vo.admin.AdvanceTicketVO;
 import com.spring.javaclassS8.vo.event.EventDrawSummaryVO;
 import com.spring.javaclassS8.vo.event.EventVO;
 import com.spring.javaclassS8.vo.event.WinnerDetailVO;
 import com.spring.javaclassS8.vo.event.WinnerPostVO;
 import com.spring.javaclassS8.vo.event.WinnerVO;
+import com.spring.javaclassS8.vo.reservation.AdvanceTicketVO;
 
 @Service
 public class AdminEventServiceImpl implements AdminEventService {
 
 	@Autowired
-	private AdminDAO adminDAO;
+	private AdminEventDAO adminEventDAO;
 
 	@Autowired
 	private EventDAO eventDAO;
@@ -55,7 +55,7 @@ public class AdminEventServiceImpl implements AdminEventService {
 	// 이벤트 업로드 처리
 	@Override
 	public int insertEvent(EventVO event) {
-		return adminDAO.insertEvent(event);
+		return adminEventDAO.insertEvent(event);
 	}
 
 	// 이벤트 업로드 컨텐츠 이미지 처리
@@ -175,7 +175,7 @@ public class AdminEventServiceImpl implements AdminEventService {
 			event.setContent(originalEvent.getContent());
 		}
 
-		return adminDAO.updateEvent(event);
+		return adminEventDAO.updateEvent(event);
 	}
 
 	// 기존 이벤트 컨텐츠 이미지 삭제
@@ -211,20 +211,20 @@ public class AdminEventServiceImpl implements AdminEventService {
 	// 이벤트 리스트 조건 검색
 	@Override
 	public List<EventVO> filterEvents(String eventCategory, String status, String startDate, String endDate, String keyword) {
-		return adminDAO.filterEvents(eventCategory, status, startDate, endDate, keyword);
+		return adminEventDAO.filterEvents(eventCategory, status, startDate, endDate, keyword);
 	}
 
 	// 이벤트 참여자 수 가져오기
 	@Override
 	public int getParticipantCount(int eventId) {
-		return adminDAO.getParticipantCount(eventId);
+		return adminEventDAO.getParticipantCount(eventId);
 	}
 
 	// 이벤트 참여자 중 랜덤 추첨 + 당첨자들 대상으로 예매권 발행하기
 	@Override
 	@Transactional
 	public boolean drawWinners(int eventId, int numOfWinners) {
-		List<Integer> participants = adminDAO.getActivceParticipants(eventId);
+		List<Integer> participants = adminEventDAO.getActivceParticipants(eventId);
 		if (participants.size() < numOfWinners) {
 			return false;
 		}
@@ -247,7 +247,7 @@ public class AdminEventServiceImpl implements AdminEventService {
 			winner.setEventId(eventId);
 			winner.setMemberId(winners.get(i));
 			winner.setAdvanceTicketId(ticket.getId());
-			adminDAO.insertWinner(winner);
+			adminEventDAO.insertWinner(winner);
 		}
 
 		return true;
@@ -256,19 +256,19 @@ public class AdminEventServiceImpl implements AdminEventService {
 	// 이벤트 추첨 리스트
 	@Override
 	public List<EventDrawSummaryVO> getEventDrawSummaries() {
-		return adminDAO.getEventDrawSummaries();
+		return adminEventDAO.getEventDrawSummaries();
 	}
 
 	// 이벤트 당첨자 디테일
 	@Override
 	public List<WinnerDetailVO> getWinnerDetails(int eventId) {
-		return adminDAO.getWinnerDetails(eventId);
+		return adminEventDAO.getWinnerDetails(eventId);
 	}
 
 	// 이벤트 아이디로 이벤트 가져오기
 	@Override
 	public EventVO getEventById(int eventId) {
-		return adminDAO.getEventById(eventId);
+		return adminEventDAO.getEventById(eventId);
 	}
 
 	// 이벤트 당첨자 발표 포스팅하기
@@ -277,10 +277,10 @@ public class AdminEventServiceImpl implements AdminEventService {
 	public boolean createWinnerPost(WinnerPostVO winnerPost) {
 		try {
 			// 당첨자 발표 게시글 저장
-			adminDAO.insertWinnerPost(winnerPost);
+			adminEventDAO.insertWinnerPost(winnerPost);
 
 			// winners 테이블의 isAnnounced 업데이트
-			adminDAO.updateWinnerIsAnnounced(winnerPost.getEventId());
+			adminEventDAO.updateWinnerIsAnnounced(winnerPost.getEventId());
 
 			return true;
 		} catch (Exception e) {
@@ -292,20 +292,21 @@ public class AdminEventServiceImpl implements AdminEventService {
 	// 이벤트 당첨자 발표 공지 여부
 	@Override
 	public boolean isEventAnnounced(int eventId) {
-		return adminDAO.isEventAnnounced(eventId);
+		return adminEventDAO.isEventAnnounced(eventId);
 	}
 
+	// 이벤트 당첨자 대상으로 당첨 안내 및 예매권 번호 메일 발송
 	@Override
 	@Transactional
 	public boolean sendWinnerEmails(int eventId) throws MessagingException {
 	    EventVO event = eventDAO.getEventById(eventId);
-	    List<WinnerDetailVO> winners = adminDAO.getWinnerDetails(eventId);
+	    List<WinnerDetailVO> winners = adminEventDAO.getWinnerDetails(eventId);
 	    
 	    for (WinnerDetailVO winner : winners) {
 	        eventEmailService.sendAdvanceTicketEmail(winner.getEmail(), event.getTitle(), winner.getAdvanceTicketNumber(), winner.getExpiresAt());
 	        
 	        // 이메일 발송 후 emailSentAt 업데이트
-	        adminDAO.updateEmailSentAt(winner.getWinnerId());
+	        adminEventDAO.updateEmailSentAt(winner.getWinnerId());
 	    }
 	    
 	    return true;

@@ -27,14 +27,14 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml" />
-		<property name="typeHandlers">
-        	<array>
-            	<bean class="org.apache.ibatis.type.EnumTypeHandler">
-                	<constructor-arg value="com.spring.javaclassS8.vo.event.EventVO$Status" />
-            	</bean>
-            	<bean class="com.spring.javaclassS8.typehandler.EventCategoryTypeHandler" />
-        	</array>
-    	</property>
+    	<property name="typeHandlers">
+	    	<array>
+	       		<bean class="org.apache.ibatis.type.EnumTypeHandler">
+	            	<constructor-arg value="com.spring.javaclassS8.vo.event.EventVO$Status" />
+	        	</bean>
+	        	<bean class="com.spring.javaclassS8.typehandler.EventCategoryTypeHandler" />
+	    	</array>
+		</property>
 	</bean>
 	
 	<!-- SqlSessionTemplate 설정 : 생성자를 이용한 주입 -->

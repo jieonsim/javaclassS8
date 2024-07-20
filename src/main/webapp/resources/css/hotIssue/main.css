@@ -1,0 +1,144 @@
+@charset "UTF-8";
+
+.team-logo {
+	width: 30px;
+	height: 30px;
+}
+
+.team-name {
+	font-weight: bold;
+}
+
+.score {
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+
+.league-info {
+	font-size: 0.9rem;
+	text-align: center;
+}
+
+.status {
+	font-size: 0.9rem;
+	color: grey;
+}
+
+.table th, .table td {
+	text-align: center;
+}
+
+.team-ranking th {
+	font-weight: bold;
+	text-align: center;
+}
+
+.team-ranking td {
+	text-align: center;
+}
+
+.news-table .news-content {
+	vertical-align: top;
+	text-align: left;
+}
+
+.news-table .news-title {
+	font-family: 'Pretendard-SemiBold';
+	font-size: 18px;
+}
+
+.news-table .news-title a {
+	color: #000000;
+}
+
+.news-table .news-desc {
+	font-family: 'Pretendard-Light';
+	font-size: 14px;
+	margin-top: 8px;
+}
+
+.news-table .news-desc a {
+	color: #333333;
+}
+
+.news-table .news-title a:hover, .news-table .news-desc a:hover {
+	text-decoration: none;
+}
+
+.news-table .news-info {
+	color: #888;
+	font-size: 0.9rem;
+	margin-top: 8px;
+}
+
+.hotIssue-title {
+	font-family: 'Pretendard-Regular';
+}
+
+.kboTeamRanking, .majorGameSchedule {
+	font-family: 'Pretendard-Regular'
+}
+
+.promotion a .card .card-body .card-text p {
+	color: black;
+	font-family: 'Pretendard-Regular';
+}
+
+.promotion a:hover {
+	text-decoration: none;
+}
+
+.promotion a .card .card-body .card-text p:hover {
+	color: black;
+	text-decoration: none;
+}
+
+/*로딩 컨테이너*/
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.loading-container {
+	margin-top: 120px;
+	margin-bottom: 150px;
+	text-align: center;
+	font-family: 'Arial', sans-serif;
+}
+
+.loading-text {
+	font-size: 24px;
+	margin-bottom: 20px;
+	font-family: 'Pretendard-SemiBold'
+}
+
+.loading-text2 {
+	font-family: 'Pretendard-Regular'
+}
+
+.loading-image {
+	animation: bounce 1s infinite;
+}
+
+.progress-bar {
+	width: 300px;
+	height: 20px;
+	background-color: #f0f0f0;
+	border-radius: 10px;
+	margin: 20px auto;
+	overflow: hidden;
+}
+
+.progress {
+	width: 0%;
+	height: 100%;
+	background-color: #fa2828;
+	transition: width 0.5s;
+}
+
+.fun-fact {
+	font-style: italic;
+	color: #666;
+	margin-top: 50px;
+	font-family: 'Pretendard-Light';
+}

@@ -8,13 +8,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>티켓챔프</title>
 <jsp:include page="/WEB-INF/views/common/utility.jsp" />
-<link rel="stylesheet" href="${ctp}/css/news/news.css">
+<link rel="stylesheet" href="${ctp}/css/hotIssue/main.css">
 <link rel="icon" href="${ctp}/images/common/favicon.ico">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/layout/header.jsp" />
-	<div class="container text-center my-5 py-5" id="loding_container">
-		<img src="${ctp}/images/icon/loading_2_256.png" />
+	<div class="loading-container" id="loding_container">
+		<p class="loading-text">최신 스포츠 핫이슈를 실시간으로 불러오고 있어요!</p>
+		<img src="${ctp}/images/icon/news.png" alt="스포츠 뉴스" class="loading-image">
+		<div class="progress-bar">
+			<div class="progress" id="progressBar"></div>
+		</div>
+		<p class="loading-text2">스포츠 트렌드 분석 중...</p>
+		<p class="fun-fact" id="funFact"></p>
 	</div>
 	<div class="container" id="content_container">
 		<div class="sportsRankingNews mt-5">

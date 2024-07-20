@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.javaclassS8.dao.admin.sports.AdminSportDAO">
+
+    <!-- 모든 스포츠 종목 가져오기 -->
+	<select id="getAllSports" resultType="String">
+		SELECT sportName FROM sports ORDER BY id
+	</select>
+	
+    <!-- 스포츠에 따른 모든 팀 이름 가져오기 -->
+	<select id="getAllTeamsWithSports" resultType="com.spring.javaclassS8.vo.sports.TeamVO">
+		SELECT t.teamName, s.sportName
+		FROM teams t
+		JOIN sports s ON t.sportId = s.id
+		ORDER BY s.sportName, t.teamName
+	</select>
+	
+	<!-- 스포츠 종목 이름으로 스포츠 고유번호 가져오기 -->
+	<select id="getSPortIdByName" resultType="java.lang.Integer">
+		SELECT id FROM sports WHERE sportName = #{sportName}
+	</select>
+	
+	<!-- 모든 스포츠 디테일 -->
+	<select id="getAllSportsDetails" resultType="com.spring.javaclassS8.vo.sports.SportVO">
+		SELECT * FROM sports ORDER BY id
+	</select>
+	
+	<!-- 모든 팀 디테일 -->
+	<select id="getAllTeamsDetails" resultType="com.spring.javaclassS8.vo.sports.TeamVO">
+	  	SELECT t.*, s.sportName 
+	    FROM teams t
+	    JOIN sports s ON t.sportId = s.id
+	    ORDER BY s.sportName, t.teamName
+	</select>
+	
+	<!-- 모든 경기장 디테일 -->
+	<select id="getAllVenuesDetails" resultType="com.spring.javaclassS8.vo.sports.VenueVO">
+		SELECT v.*, s.sportName, t.teamName
+	    FROM venues v
+	    JOIN sports s ON v.sportId = s.id
+	    JOIN teams t ON v.teamId = t.id
+	    ORDER BY s.sportName, t.teamName, v.venueName
+	</select>
+	
+	<!-- 팀 이름으로 팀 고유번호 가져오기 -->
+	<select id="getTeamIdByName" resultType="java.lang.Integer">
+		SELECT id FROM teams WHERE teamName = #{teamName}
+	</select>
+	
+	<!-- 스포츠 하위에 팀이나 경기장이 있는지 여부 확인 -->
+	<select id="countTeamsAndVenuesBySportId" resultType="int">
+		SELECT COUNT(*) FROM(
+			SELECT id FROM teams WHERE sportID = #{sportId}
+			UNION ALL
+			SELECT id FROM venues WHERE sportId = #{sportId}
+		)	AS combined
+	</select>
+	
+	<!-- 팀 하위에 경기장이 있는지 여부 확인 -->
+	<select id="countVenuesByTeamId" resultType="int">
+        SELECT COUNT(*) FROM venues WHERE teamId = #{teamId}
+    </select>
+    
+    <!-- 특정 스포츠의 팀 가져오기 -->
+    <select id="getTeamsBySport" resultType="com.spring.javaclassS8.vo.sports.TeamVO">
+    	SELECT t.*
+    	FROM teams t
+    	JOIN sports s ON t.sportId = s.id
+    	WHERE s.sportName = #{sportName}
+    	ORDER BY t.teamName
+    </select>
+    
+    <!-- 특정 스포츠의 경기장 가져오기 -->
+    <select id="getVenuesByTeam" resultType="com.spring.javaclassS8.vo.sports.VenueVO">
+        SELECT v.*
+        FROM venues v
+        JOIN teams t ON v.teamId = t.id
+        WHERE t.teamName = #{teamName}
+        ORDER BY v.venueName
+    </select>
+    
+    <!-- 가장 최근 등록된 게임 1개 가져오기 -->
+    <select id="getRecentGames"  resultType="com.spring.javaclassS8.vo.sports.GameVO">
+	    SELECT g.*, 
+	           s.sportName, 
+	           ht.teamName AS homeTeamName, 
+	           ht.shortName AS homeTeamShortName,
+	           at.teamName AS awayTeamName, 
+	           at.shortName AS awayTeamShortName,
+	           v.venueName
+	    FROM games g
+	    JOIN sports s ON g.sportId = s.id
+	    JOIN teams ht ON g.homeTeamId = ht.id
+	    JOIN teams at ON g.awayTeamId = at.id
+	    JOIN venues v ON g.venueId = v.id
+	    ORDER BY g.id DESC
+	    LIMIT #{limit}
+    </select>
+	
+	<!-- 스포츠 종목 등록 처리 -->
+	<insert id="insertSport" parameterType="String">
+		INSERT INTO sports (sportName) VALUES (#{sportName})
+	</insert>
+	
+	<!-- 스포츠 팀 등록 처리 -->
+	<insert id="insertTeam">
+		INSERT INTO teams (sportId, teamName, shortName)
+        VALUES (#{sportId}, #{teamName}, #{shortName})
+	</insert>
+	
+	<!-- 스포츠 경기장 등록 처리 -->
+	<insert id="insertVenue">
+		INSERT INTO venues (sportId, teamId, venueName, address, capacity)
+        VALUES (#{sportId}, #{teamId}, #{venueName}, #{address}, #{capacity})
+	</insert>
+	
+	<!-- 경기 등록 처리 -->
+	<insert id="registerGame" parameterType="com.spring.javaclassS8.vo.sports.GameVO">
+	    INSERT INTO games (sportId, homeTeamId, awayTeamId, venueId, gameDate, gameTime)
+	    SELECT s.id, ht.id, at.id, v.id, #{gameDate}, #{gameTime}
+	    FROM sports s
+	    JOIN teams ht ON s.id = ht.sportId AND s.sportName = #{sportName} AND ht.teamName = #{homeTeamName}
+	    JOIN teams at ON s.id = at.sportId AND at.teamName = #{awayTeamName}
+	    JOIN venues v ON v.sportId = s.id AND v.teamId = ht.id AND v.venueName = #{venueName}
+	    LIMIT 1
+	</insert>
+	
+	<!-- 스포츠 이름 수정 -->
+	<update id="updateSport">
+		UPDATE sports
+		SET sportName = #{sportName}
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 스포츠 이름 수정 -->
+	<update id="updateTeam">
+		UPDATE teams
+		SET teamName = #{teamName}, shortName = #{shortName}
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 스포츠 경기장 수정 -->
+	<update id="updateVenue">
+		UPDATE venues
+		SET venueName = #{venueName}, address = #{address}, capacity = #{capacity}
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 스포츠 종목 삭제 -->
+	<delete id="deleteSport">
+        DELETE FROM sports WHERE id = #{id}
+    </delete>
+    
+    <!-- 팀 삭제 -->
+    <delete id="deleteTeam">
+        DELETE FROM teams WHERE id = #{id}
+    </delete>
+
+	<!-- 경기장 삭제 -->
+    <delete id="deleteVenue">
+        DELETE FROM venues WHERE id = #{id}
+    </delete>
+</mapper>

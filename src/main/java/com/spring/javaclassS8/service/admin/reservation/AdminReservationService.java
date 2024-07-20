@@ -2,7 +2,7 @@ package com.spring.javaclassS8.service.admin.reservation;
 
 import java.util.List;
 
-import com.spring.javaclassS8.vo.admin.AdvanceTicketVO;
+import com.spring.javaclassS8.vo.reservation.AdvanceTicketVO;
 
 public interface AdminReservationService {
 

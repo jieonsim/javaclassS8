@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.javaclassS8.dao.admin.reservation.AdminReservationDAO">
+	
+	<!-- 예매권 발행 -->
+	<insert id="insertAdvanceTicket" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO advance_tickets (adminId, advanceTicketNumber,
+		used, expiresAt, issuedAt)
+		VALUES (#{adminId}, #{advanceTicketNumber},
+		#{used}, #{expiresAt}, #{issuedAt})
+	</insert>
+
+</mapper>
