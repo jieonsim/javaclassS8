@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.javaclassS8.service.admin.sports.AdminSportSerivce;
 import com.spring.javaclassS8.vo.sports.GameVO;
+import com.spring.javaclassS8.vo.sports.GameVO.Status;
 import com.spring.javaclassS8.vo.sports.SportVO;
 import com.spring.javaclassS8.vo.sports.TeamVO;
 import com.spring.javaclassS8.vo.sports.VenueVO;
@@ -33,7 +34,7 @@ public class AdminSportController {
 
 	// 스포츠 종목 + 팀 + 경기장 등록 폼
 	@GetMapping("/register")
-	public String registerForm(Model model, @RequestParam(required = false) String selectedSport, @RequestParam(required = false) String selectedTeam) {
+	public String sportTeamVenueRegisterForm(Model model, @RequestParam(required = false) String selectedSport, @RequestParam(required = false) String selectedTeam) {
 		List<String> sports = adminSportService.getAllSports();
 		List<TeamVO> teams = adminSportService.getAllTeamsWithSports();
 
@@ -119,9 +120,9 @@ public class AdminSportController {
 		return ResponseEntity.ok(response);
 	}
 
-	// 스포츠 종목 + 팀 + 경기장 등록 리스트
-	@GetMapping("/registrationList")
-	public String registrationList(Model model) {
+	// 스포츠 종목 + 팀 + 경기장 리스트
+	@GetMapping("/list")
+	public String sportTeamVenueList(Model model) {
 		List<SportVO> sports = adminSportService.getAllSportsDetails();
 		List<TeamVO> teams = adminSportService.getAllTeamsDetails();
 		List<VenueVO> venues = adminSportService.getAllVenuesDetails();
@@ -130,7 +131,7 @@ public class AdminSportController {
 		model.addAttribute("teams", teams);
 		model.addAttribute("venues", venues);
 
-		return "admin/sports/registrationList";
+		return "admin/sports/list";
 	}
 
 	// 종목 / 팀 / 경기장 정보 삭제
@@ -202,7 +203,7 @@ public class AdminSportController {
 		return ResponseEntity.ok(response);
 	}
 
-	// 스포츠 팀 정보 수정
+	// 팀 정보 수정
 	@PostMapping("/team/update")
 	@ResponseBody
 	public ResponseEntity<?> updateTeam(@RequestBody Map<String, Object> payload) {
@@ -229,7 +230,7 @@ public class AdminSportController {
 		return ResponseEntity.ok(response);
 	}
 
-	// 스포츠 경기장 정보 수정
+	// 경기장 정보 수정
 	@PostMapping("/venue/update")
 	@ResponseBody
 	public ResponseEntity<?> updateVenue(@RequestBody Map<String, Object> payload) {
@@ -309,4 +310,13 @@ public class AdminSportController {
 		return ResponseEntity.ok(response);
 	}
 
+	// 모든 경기 리스트
+	@GetMapping("/game/list")
+	public String gameList(Model model) {
+		List<GameVO> games = adminSportService.getAllGamesDetails();
+
+		model.addAttribute("games", games);
+		model.addAttribute("statuses", Status.values());
+		return "admin/sports/game/list";
+	}
 }

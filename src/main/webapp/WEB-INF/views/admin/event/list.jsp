@@ -91,7 +91,7 @@
 													<th>No.</th>
 													<th>카테고리</th>
 													<th>이벤트명</th>
-													<th>기간</th>
+													<th>시작일</th>
 													<th>종료일</th>
 													<th>상태</th>
 												</tr>

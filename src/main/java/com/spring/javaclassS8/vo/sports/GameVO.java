@@ -31,7 +31,29 @@ public class GameVO {
 	private String awayTeamShortName;
 	private String venueName;
 
-	public enum Status {
-		판매예정, 판매중, 판매종료, 경기중, 경기종료
-	}
+	public enum Status { 판매예정, 판매중, 판매종료, 경기중, 경기종료 }
+	 
+	
+//	public enum Status {
+//		판매예정("판매예정"), 판매중("판매중"), 판매종료("판매종료"), 경기중("경기중"), 경기종료("경기종료");
+//
+//		private final String displayName;
+//
+//		Status(String displayName) {
+//			this.displayName = displayName;
+//		}
+//
+//		public String getDisplayName() {
+//			return displayName;
+//		}
+//
+//		public static Status fromString(String text) {
+//			for (Status status : Status.values()) {
+//				if (status.name().equalsIgnoreCase(text)) {
+//					return status;
+//				}
+//			}
+//			throw new IllegalArgumentException("No constant with text " + text + " found");
+//		}
+//	}
 }

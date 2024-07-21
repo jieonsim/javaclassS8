@@ -1,4 +1,4 @@
-/*js/admin/sports.registrationList.js */
+/*js/admin/sports/game/list.js */
 document.addEventListener('DOMContentLoaded', function() {
 
 	// 스포츠 종목 수정 기능

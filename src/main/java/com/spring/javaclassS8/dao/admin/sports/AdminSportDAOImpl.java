@@ -148,4 +148,10 @@ public class AdminSportDAOImpl implements AdminSportDAO {
 	public List<GameVO> getRecentGames(int limit) {
 		return sqlSession.getMapper(AdminSportDAO.class).getRecentGames(limit);
 	}
+
+	// 모든 경기 디테일 가져오기(경기 리스트)
+	@Override
+	public List<GameVO> getAllGamesDetails() {
+		return sqlSession.getMapper(AdminSportDAO.class).getAllGamesDetails();
+	}
 }

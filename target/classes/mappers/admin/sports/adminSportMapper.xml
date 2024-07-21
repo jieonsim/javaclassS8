@@ -96,6 +96,17 @@
 	    ORDER BY g.id DESC
 	    LIMIT #{limit}
     </select>
+    
+    <!-- 모든 경기 디테일 (경기 리스트) -->
+	<select id="getAllGamesDetails" resultType="com.spring.javaclassS8.vo.sports.GameVO">
+		SELECT g.*, s.sportName, ht.teamName AS homeTeamName, at.teamName AS awayTeamName, v.venueName
+	    FROM games g
+	    JOIN sports s ON g.sportId = s.id
+	    JOIN teams ht ON g.HomeTeamId = ht.id
+	    JOIN teams at ON g.awayTeamId = at.id
+	    JOIN venues v ON g.venueId = v.id
+	    ORDER BY g.gameDate
+	</select>
 	
 	<!-- 스포츠 종목 등록 처리 -->
 	<insert id="insertSport" parameterType="String">

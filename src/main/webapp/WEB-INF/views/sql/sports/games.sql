@@ -17,3 +17,5 @@ CREATE TABLE games (
     FOREIGN KEY (venueId) REFERENCES venues(id),
     INDEX idx_game_date (gameDate, gameTime)
 );
+
+show tables;

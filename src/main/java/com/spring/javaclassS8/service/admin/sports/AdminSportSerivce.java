@@ -68,5 +68,8 @@ public interface AdminSportSerivce {
 
 	// 가장 최근 등록된 게임 1개 가져오기
 	List<GameVO> getRecentGames(int limit);
+	
+	// 모든 경기 디테일 가져오기(경기 리스트)
+	List<GameVO> getAllGamesDetails();
 
 }
