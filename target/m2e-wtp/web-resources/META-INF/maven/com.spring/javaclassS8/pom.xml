@@ -245,6 +245,26 @@
 			<artifactId>spring-tx</artifactId>
 			<version>4.3.14.RELEASE</version>
 		</dependency>
+		
+		<!-- 스케줄러 라이브러리 추가(3개) -->
+		<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+		<dependency>
+		    <groupId>org.quartz-scheduler</groupId>
+		    <artifactId>quartz</artifactId>
+		    <version>2.3.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
+		<dependency>
+		    <groupId>com.mchange</groupId>
+		    <artifactId>c3p0</artifactId>
+		    <version>0.9.5.5</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP-java7 -->
+		<dependency>
+		    <groupId>com.zaxxer</groupId>
+		    <artifactId>HikariCP-java7</artifactId>
+		    <version>2.4.13</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

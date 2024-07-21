@@ -12,7 +12,7 @@ CREATE TABLE gameBookingPolicies (
     maxTotalTickets INT NOT NULL COMMENT '경기당 총 구매 가능 티켓 수',
     bookingFeePerTicket DECIMAL(10,2) NOT NULL DEFAULT '1000' COMMENT '예매수수료',
     cancellationFeeRate DECIMAL(5,2) NOT NULL DEFAULT '10' COMMENT '취소수수료',
-    cancellationDeadlineHours INT NOT NULL DEFAULT '24' COMMENT '전액 환불 기한',
+        fullRefundUntilMidnight BOOLEAN NOT NULL DEFAULT TRUE COMMENT '예매 당일 자정까지 전액 환불 가능 여부',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '정책 생성 일시',
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '정책 수정 일시',
     PRIMARY KEY (id),

@@ -76,7 +76,13 @@ public interface AdminSportDAO {
 
 	// 가장 최근 등록된 게임 1개 가져오기
 	List<GameVO> getRecentGames(int limit);
-	
+
 	// 모든 경기 디테일 가져오기(경기 리스트)
 	List<GameVO> getAllGamesDetails();
+
+	// 경기 정보 수정
+	int updateGame(@Param("id") int id, @Param("gameDate") String gameDate, @Param("gameTime") String gameTime, @Param("status") String status);
+	
+	// 경기 삭제
+	void deleteGame(int id);
 }

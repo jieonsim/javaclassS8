@@ -245,10 +245,10 @@ public class AdminSportController {
 			boolean result = adminSportService.updateVenue(id, venueName, address, capacity);
 			if (result) {
 				response.put("success", true);
-				response.put("message", "팀이 성공적으로 업데이트 되었습니다.");
+				response.put("message", "경기장이 성공적으로 업데이트 되었습니다.");
 			} else {
 				response.put("success", false);
-				response.put("message", "팀 업데이트에 실패했습니다.");
+				response.put("message", "경기장 업데이트에 실패했습니다.");
 			}
 		} catch (Exception e) {
 			response.put("success", false);
@@ -318,5 +318,51 @@ public class AdminSportController {
 		model.addAttribute("games", games);
 		model.addAttribute("statuses", Status.values());
 		return "admin/sports/game/list";
+	}
+
+	// 경기 정보 수정
+	@PostMapping("/game/update")
+	@ResponseBody
+	public ResponseEntity<?> updateGame(@RequestBody Map<String, Object> payload) {
+		int id = Integer.parseInt((String) payload.get("id"));
+		String gameDate = (String) payload.get("gameDate");
+		String gameTime = (String) payload.get("gameTime");
+		String status = (String) payload.get("status");
+
+		Map<String, Object> response = new HashMap<>();
+
+		try {
+			boolean result = adminSportService.updateGame(id, gameDate, gameTime, status);
+			if (result) {
+				response.put("success", true);
+				response.put("message", "경기가 성공적으로 업데이트 되었습니다.");
+			} else {
+				response.put("success", false);
+				response.put("message", "경기 업데이트에 실패했습니다.");
+			}
+		} catch (Exception e) {
+			response.put("success", false);
+			response.put("message", "오류 발생 : " + e.getMessage());
+		}
+
+		return ResponseEntity.ok(response);
+	}
+	
+	// 경기 삭제
+	@PostMapping("/game/delete")
+	@ResponseBody
+	public ResponseEntity<?> deleteGame(@RequestBody Map<String, Integer> payload) {
+	    int id = payload.get("id");
+	    Map<String, Object> response = new HashMap<>();
+
+	    try {
+	        adminSportService.deleteGame(id);
+	        response.put("success", true);
+	        return ResponseEntity.ok(response);
+	    } catch (Exception e) {
+	        response.put("success", false);
+	        response.put("message", e.getMessage());
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+	    }
 	}
 }

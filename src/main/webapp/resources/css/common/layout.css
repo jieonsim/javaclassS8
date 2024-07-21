@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+body {
+	background: #fff;
+}
+
+body.no-scroll {
+	overflow: hidden;
+}
+
+.common_wrap {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	min-width: 1180px;
+	min-height: 100%;
+}
+
+.common_container {
+	flex: 1;
+	padding-bottom: 160px;
+}
+
+.common_container .inner {
+	padding-top: 50px;
+}
+
+.common_section, .common_inner {
+	margin: 0 auto;
+	width: 1180px;
+}

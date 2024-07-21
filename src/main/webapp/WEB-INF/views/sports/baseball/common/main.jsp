@@ -8,8 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>티켓챔프</title>
 <jsp:include page="/WEB-INF/views/common/utility.jsp" />
-<link rel="stylesheet" href="${ctp}/css/sports/layout.css">
-<link rel="stylesheet" href="${ctp}/css/sports/common.css">
+<link rel="stylesheet" href="${ctp}/css/common/layout.css">
+<link rel="stylesheet" href="${ctp}/css/common/common.css">
 <link rel="stylesheet" href="${ctp}/css/sports/sports.css">
 <link rel="stylesheet" href="${ctp}/css/common/button.css">
 <link rel="icon" href="${ctp}/images/common/favicon.ico">

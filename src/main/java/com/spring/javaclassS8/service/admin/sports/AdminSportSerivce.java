@@ -47,7 +47,7 @@ public interface AdminSportSerivce {
 
 	// 경기장 삭제
 	void deleteVenue(int id);
-	
+
 	// 스포츠 종목 이름 수정
 	boolean updateSport(int id, String sportName);
 
@@ -68,8 +68,14 @@ public interface AdminSportSerivce {
 
 	// 가장 최근 등록된 게임 1개 가져오기
 	List<GameVO> getRecentGames(int limit);
-	
+
 	// 모든 경기 디테일 가져오기(경기 리스트)
 	List<GameVO> getAllGamesDetails();
+
+	// 경기 정보 수정
+	boolean updateGame(int id, String gameDate, String gameTime, String status);
+
+	// 경기 삭제
+	void deleteGame(int id) throws Exception;
 
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.javaclassS8.dao.sports.GameDAO">
+	
+	<select id="getGamesToStartSale" resultType="com.spring.javaclassS8.vo.sports.GameVO">
+	    SELECT g.*, p.bookingOpenDaysBefore
+	    FROM games g
+	    JOIN sportBookingPolicies p ON g.sportId = p.sportId
+	    WHERE g.gameDate = #{date}
+	    AND g.status = '판매예정'
+	    AND g.gameTime BETWEEN '14:00:00' AND '19:30:00'
+	</select>
+	
+	<select id="getGamesToEndSale" resultType="com.spring.javaclassS8.vo.sports.GameVO">
+	    SELECT g.*, p.bookingCloseMinutesAfterStart
+	    FROM games g
+	    JOIN sportBookingPolicies p ON g.sportId = p.sportId
+	    WHERE g.gameDate = #{date}
+	    AND g.status = '판매중'
+	    AND g.gameTime BETWEEN '14:00:00' AND '19:30:00'
+	</select>
+
+</mapper>

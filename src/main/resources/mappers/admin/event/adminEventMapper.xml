@@ -117,8 +117,7 @@
 
 	<!-- 이벤트 당첨자 저장하기 -->
 	<insert id="insertWinner">
-		INSERT INTO winners (eventId, memberId,
-		advanceTicketId)
+		INSERT INTO winners (eventId, memberId, advanceTicketId)
 		VALUES (#{eventId}, #{memberId}, #{advanceTicketId})
 	</insert>
 	

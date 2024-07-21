@@ -181,4 +181,21 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 	public List<GameVO> getAllGamesDetails() {
 		return adminSportDAO.getAllGamesDetails();
 	}
+
+	// 경기 정보 수정
+	@Override
+	@Transactional
+	public boolean updateGame(int id, String gameDate, String gameTime, String status) {
+		if (gameDate == null || gameDate.trim().isEmpty() || gameTime == null || gameTime.trim().isEmpty() || status == null || status.trim().isEmpty()) {
+			throw new IllegalArgumentException("경기 날짜와 시간, 상태는 필수 입력 항목입니다.");
+		}
+		return adminSportDAO.updateGame(id, gameDate, gameTime, status) > 0;
+	}
+
+	// 경기 삭제
+    @Override
+    @Transactional
+    public void deleteGame(int id) throws Exception {
+        adminSportDAO.deleteGame(id);
+    }
 }

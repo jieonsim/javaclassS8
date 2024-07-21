@@ -31,29 +31,16 @@ public class GameVO {
 	private String awayTeamShortName;
 	private String venueName;
 
-	public enum Status { 판매예정, 판매중, 판매종료, 경기중, 경기종료 }
-	 
-	
-//	public enum Status {
-//		판매예정("판매예정"), 판매중("판매중"), 판매종료("판매종료"), 경기중("경기중"), 경기종료("경기종료");
-//
-//		private final String displayName;
-//
-//		Status(String displayName) {
-//			this.displayName = displayName;
-//		}
-//
-//		public String getDisplayName() {
-//			return displayName;
-//		}
-//
-//		public static Status fromString(String text) {
-//			for (Status status : Status.values()) {
-//				if (status.name().equalsIgnoreCase(text)) {
-//					return status;
-//				}
-//			}
-//			throw new IllegalArgumentException("No constant with text " + text + " found");
-//		}
-//	}
+	// 새로 추가한 필드
+	private int bookingOpenDaysBefore;
+	private int bookingCloseMinutesAfterStart;
+
+	public enum Status {
+		판매예정, 판매중, 판매종료
+	}
+
+    // bookingOpenMinutesBefore를 계산하는 메서드
+    public long getBookingOpenMinutesBefore() {
+        return (long) bookingOpenDaysBefore * 24 * 60; // 일 단위를 분 단위로 변환
+    }
 }

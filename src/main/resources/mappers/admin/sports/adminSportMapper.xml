@@ -105,7 +105,7 @@
 	    JOIN teams ht ON g.HomeTeamId = ht.id
 	    JOIN teams at ON g.awayTeamId = at.id
 	    JOIN venues v ON g.venueId = v.id
-	    ORDER BY g.gameDate
+	    ORDER BY g.gameDate, ht.teamName
 	</select>
 	
 	<!-- 스포츠 종목 등록 처리 -->
@@ -157,6 +157,12 @@
 		WHERE id = #{id}
 	</update>
 	
+	<update id="updateGame">
+		UPDATE games
+		SET gameDate = #{gameDate}, gameTime = #{gameTime}, status = #{status}
+		WHERE id = #{id}
+	</update>
+	
 	<!-- 스포츠 종목 삭제 -->
 	<delete id="deleteSport">
         DELETE FROM sports WHERE id = #{id}
@@ -170,5 +176,10 @@
 	<!-- 경기장 삭제 -->
     <delete id="deleteVenue">
         DELETE FROM venues WHERE id = #{id}
+    </delete>
+    
+    <!-- 경기 삭제 -->
+    <delete id="deleteGame" parameterType="int">
+    	DELETE FROM games WHERE id = #{id}
     </delete>
 </mapper>

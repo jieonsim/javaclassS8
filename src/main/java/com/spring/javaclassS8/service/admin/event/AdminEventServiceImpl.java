@@ -25,14 +25,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.javaclassS8.dao.admin.event.AdminEventDAO;
 import com.spring.javaclassS8.dao.event.EventDAO;
-import com.spring.javaclassS8.service.admin.reservation.AdminReservationService;
+import com.spring.javaclassS8.service.admin.reserve.AdminReserveService;
 import com.spring.javaclassS8.utils.EventAdvanceTicketEmailService;
 import com.spring.javaclassS8.vo.event.EventDrawSummaryVO;
 import com.spring.javaclassS8.vo.event.EventVO;
 import com.spring.javaclassS8.vo.event.WinnerDetailVO;
 import com.spring.javaclassS8.vo.event.WinnerPostVO;
 import com.spring.javaclassS8.vo.event.WinnerVO;
-import com.spring.javaclassS8.vo.reservation.AdvanceTicketVO;
+import com.spring.javaclassS8.vo.reserve.AdvanceTicketVO;
 
 @Service
 public class AdminEventServiceImpl implements AdminEventService {
@@ -47,7 +47,7 @@ public class AdminEventServiceImpl implements AdminEventService {
 	private ServletContext servletContext;
 
 	@Autowired
-	private AdminReservationService adminReservationService;
+	private AdminReserveService adminReserveService;
 	
 	@Autowired
 	private EventAdvanceTicketEmailService eventEmailService;
@@ -234,7 +234,7 @@ public class AdminEventServiceImpl implements AdminEventService {
 		List<Integer> winners = participants.subList(0, numOfWinners);
 
 		// 예매권 발행
-		List<AdvanceTicketVO> tickets = adminReservationService.issueAdvanceTickets(numOfWinners);
+		List<AdvanceTicketVO> tickets = adminReserveService.issueAdvanceTickets(numOfWinners);
 
 		for (int i = 0; i < numOfWinners; i++) {
 			AdvanceTicketVO ticket = tickets.get(i);

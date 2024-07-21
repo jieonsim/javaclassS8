@@ -154,4 +154,16 @@ public class AdminSportDAOImpl implements AdminSportDAO {
 	public List<GameVO> getAllGamesDetails() {
 		return sqlSession.getMapper(AdminSportDAO.class).getAllGamesDetails();
 	}
+
+	// 경기 정보 수정
+	@Override
+	public int updateGame(int id, String gameDate, String gameTime, String status) {
+		return sqlSession.getMapper(AdminSportDAO.class).updateGame(id, gameDate, gameTime, status);
+	}
+
+	// 경기 삭제
+	@Override
+	public void deleteGame(int id) {
+		sqlSession.getMapper(AdminSportDAO.class).deleteGame(id);
+	}
 }

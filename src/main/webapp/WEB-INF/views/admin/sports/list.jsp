@@ -26,7 +26,7 @@
 			<div class="main-panel">
 				<div class="content-wrapper">
 					<div class="row">
-						<div class="col-lg-6 grid-margin stretch-card">
+						<div class="col-lg-12 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">스포츠 종목 (Sports)</h4>
@@ -67,18 +67,18 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-6 grid-margin stretch-card">
+						<div class="col-lg-12 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">팀 (Teams)</h4>
 									<div class="table-responsive">
 										<table class="table">
 											<colgroup>
-												<col style="width: 10%" />
-												<col style="width: 40%" />
+												<col style="width: 15%" />
+												<col style="width: 35%" />
 												<col style="width: 20%" />
-												<col style="width: 10%" />
-												<col style="width: 10%" />
+												<col style="width: 15%" />
+												<col style="width: 15%" />
 											</colgroup>
 											<thead class="text-center">
 												<tr>
