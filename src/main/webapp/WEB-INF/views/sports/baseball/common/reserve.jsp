@@ -9,64 +9,34 @@
 <title>티켓챔프</title>
 <jsp:include page="/WEB-INF/views/common/utility.jsp" />
 <link rel="stylesheet" href="${ctp}/css/sports/reserve.css">
+<link rel="stylesheet" href="${ctp}/css/common/common.css">
 <link rel="icon" href="${ctp}/images/common/favicon.ico">
 </head>
-<body ng-controller="defaultCtrl" class="ng-scope">
+<body class="ng-scope">
 	<div id="wrap_reserve">
 		<div id="header">
 			<div class="reserve_title">
 				<h1>
-					<span class="blind"> 티켓링크 </span>
+					<span class="blind">티켓챔프</span>
 				</h1>
-				<h2>예매</h2>
+				<h2>티켓챔프 예매</h2>
 			</div>
-			<ul class="reserve_step ng-isolate-scope" ng-class="bar.version" step="plan" product-type-code="product.productTypeCode" product-class-type="product.productClassType">
-				<!-- ngRepeat: element in bar.elements -->
-				<!-- ngIf: element.isExposed -->
-				<li ng-repeat="element in bar.elements" ng-if="element.isExposed" class="step1" ng-class="isOn(element)">
-					<!-- ngIf: globalLocaleYn -->
-					<span ng-if="globalLocaleYn" class="ng-binding ng-scope">날짜/회차선택</span>
-					<!-- end ngIf: globalLocaleYn -->
-					<!-- ngIf: !globalLocaleYn -->
+			<ul class="reserve_step ng-isolate-scope">
+				<li class="step1">
+					<span class="ng-binding ng-scope">날짜/회차선택</span>
 				</li>
-				<!-- end ngIf: element.isExposed -->
-				<!-- end ngRepeat: element in bar.elements -->
-				<!-- ngIf: element.isExposed -->
-				<li ng-repeat="element in bar.elements" ng-if="element.isExposed" class="step2 on" ng-class="isOn(element)">
-					<!-- ngIf: globalLocaleYn -->
-					<span ng-if="globalLocaleYn" class="ng-binding ng-scope">등급/좌석선택</span>
-					<!-- end ngIf: globalLocaleYn -->
-					<!-- ngIf: !globalLocaleYn -->
+				<li class="step2 on">
+					<span class="ng-binding ng-scope">등급/좌석선택</span>
 				</li>
-				<!-- end ngIf: element.isExposed -->
-				<!-- end ngRepeat: element in bar.elements -->
-				<!-- ngIf: element.isExposed -->
-				<li ng-repeat="element in bar.elements" ng-if="element.isExposed" class="step3" ng-class="isOn(element)">
-					<!-- ngIf: globalLocaleYn -->
-					<span ng-if="globalLocaleYn" class="ng-binding ng-scope">권종/할인/매수선택</span>
-					<!-- end ngIf: globalLocaleYn -->
-					<!-- ngIf: !globalLocaleYn -->
+				<li class="step3">
+					<span class="ng-binding ng-scope">권종/할인/매수선택</span>
 				</li>
-				<!-- end ngIf: element.isExposed -->
-				<!-- end ngRepeat: element in bar.elements -->
-				<!-- ngIf: element.isExposed -->
-				<li ng-repeat="element in bar.elements" ng-if="element.isExposed" class="step4" ng-class="isOn(element)">
-					<!-- ngIf: globalLocaleYn -->
-					<span ng-if="globalLocaleYn" class="ng-binding ng-scope">배송선택/예매확인</span>
-					<!-- end ngIf: globalLocaleYn -->
-					<!-- ngIf: !globalLocaleYn -->
+				<li class="step4">
+					<span class="ng-binding ng-scope">배송선택/예매확인</span>
 				</li>
-				<!-- end ngIf: element.isExposed -->
-				<!-- end ngRepeat: element in bar.elements -->
-				<!-- ngIf: element.isExposed -->
-				<li ng-repeat="element in bar.elements" ng-if="element.isExposed" class="step5" ng-class="isOn(element)">
-					<!-- ngIf: globalLocaleYn -->
-					<span ng-if="globalLocaleYn" class="ng-binding ng-scope">결제</span>
-					<!-- end ngIf: globalLocaleYn -->
-					<!-- ngIf: !globalLocaleYn -->
+				<li class="step5">
+					<span class="ng-binding ng-scope">결제</span>
 				</li>
-				<!-- end ngIf: element.isExposed -->
-				<!-- end ngRepeat: element in bar.elements -->
 			</ul>
 			<h2 class="blind">좌석선택</h2>
 		</div>
@@ -74,7 +44,7 @@
 			<div class="reserve_content">
 				<div class="reserve_left reserve_left_type1 ng-isolate-scope">
 					<div class="reserve_prdt_info">
-						<div class="tit tit_type1" ng-mouseover="left.showTitleTooltip = true" ng-mouseleave="left.showTitleTooltip = false">
+						<div class="tit tit_type1">
 							<h4 class="prdt ng-binding">KIA 타이거즈 vs NC 다이노스</h4>
 						</div>
 						<p class="etc_info etc_info_type1">
@@ -83,11 +53,10 @@
 						</p>
 						<!-- [D] tit에 마우스 올라간 경우 tit_tooltip display:block 해주시고,
                  tit_tooltip이 block된 상태일땐 마우스나 tit_tooltip 영역을 벗어났을때 none처리 해주세요 -->
-						<div class="tit_tooltip" ng-mouseover="left.showTitleTooltip = true" ng-mouseleave="left.showTitleTooltip = false" ng-style="{'display': left.showTitleTooltip? 'block' : 'none'}" style="display: none;">
+						<div class="tit_tooltip" style="display: none;">
 							<h4 class="prdt ng-binding">KIA 타이거즈 vs NC 다이노스</h4>
 							<p class="place ng-binding">- KIA 챔피언스필드</p>
 						</div>
-						<!-- ngIf: left.seatScheduleChangeUseYn -->
 					</div>
 					<div id="main_view_top" class="select_seat ng-isolate-scope">
 						<a class="btn reserve_wait ng-hide" ng-show="showInSaleButton" ng-click="reservationWaitingPage()" style="z-index: 99;">
@@ -116,11 +85,9 @@
 						</div>
 
 						<div id="seat_option" class="seat_option" style="z-index: 20;">
-							<!-- ngIf: !view.isViewAllView -->
 							<button type="button" id="btn_allview" class="btn_allview ng-scope" ng-click="view.allView()" ng-if="!view.isViewAllView" title="좌석도 뒤로가기(전체보기)">
 								<span class="ng-binding">공연장 전체보기</span>
 							</button>
-							<!-- end ngIf: !view.isViewAllView -->
 							<button type="button" id="btn_zoom" class="btn_zoom" ng-click="view.zoom(1)" title="확대">
 								<span class="ng-binding">확대보기</span>
 							</button>
@@ -149,28 +116,16 @@
 						<div class="select_seat_info ng-isolate-scope" ng-init="showSelectedSeatInfo = false" style="z-index: 20;; z-index: 20;">
 							<a href="#" class="seat_header" ng-class="{open: showSelectedSeatInfo}" ng-click="showSelectedSeatInfo = !showSelectedSeatInfo">
 								<div ng-show="!selected.isWaitingReservation">
-									<!-- ngIf: selected.isAutoSelfShow() -->
 									<strong class="tit ng-binding ng-scope" ng-if="selected.isAutoSelfShow()">등급을 먼저 선택 후, 좌석선택 유형을 선택해 주세요.</strong>
-									<!-- end ngIf: selected.isAutoSelfShow() -->
-									<!-- ngIf: selected.isAutoShow() -->
-									<!-- ngIf: selected.isSelfShow() -->
-									<!-- ngIf: !selected.isAutoShow() && !selected.isAutoSelfShow() && !selected.isSelfShow() -->
 								</div>
 								<div ng-show="selected.isWaitingReservation" class="ng-hide">
 									<div ng-show="selected.reservationType === 'SEAT'" class="ng-hide">
-										<!-- ngIf: selected.selectedSeatsAndZones.length === 0 -->
 										<strong class="tit ng-scope" ng-if="selected.selectedSeatsAndZones.length === 0"> 최대 <span class="txt_orange ng-binding">0석</span>까지 선택할 수 있어요!
 										</strong>
-										<!-- end ngIf: selected.selectedSeatsAndZones.length === 0 -->
-										<!-- ngIf: selected.selectedSeatsAndZones.length !== 0 -->
 									</div>
 									<div ng-show="selected.reservationType === 'SECTION'" class="ng-hide">
-										<!-- ngIf: selected.selectedSectionMap.length === 0 -->
-										<!-- ngIf: selected.selectedSectionMap.length === 0 -->
-										<!-- ngIf: selected.selectedSectionMap.length !== 0 -->
 										<strong class="tit ng-scope" ng-if="selected.selectedSectionMap.length !== 0" style="display: inline;">선택된 정보 ( <span class="number ng-binding"></span> 개)
 										</strong>
-										<!-- end ngIf: selected.selectedSectionMap.length !== 0 -->
 									</div>
 								</div>
 							</a>
@@ -188,58 +143,30 @@
 					</div>
 				</div>
 				<div class="reserve_right ng-isolate-scope">
-					<div id="minimap_view" class="top_info_area map_area" style="text-align: left; padding-left: 18px;">
-
-						<!-- 미사용, 사용시 이미지 경로 수정 필요 -->
-						<!--<img-->
-						<!--ng-show="!right.viewState.isViewOn()"-->
-						<!--src="{{right.global.imgUrl}}/reserve_tx.jpg"-->
-						<!--width="160" height="15"-->
-						<!--alt="등급을 먼저 선택해 주세요."-->
-						<!--class="alert">-->
-						<canvas width="173" style="position: absolute; touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);" height="173"></canvas>
-					</div>
-
-					<div class="reserve_artbx ng-isolate-scope" ng-class="{
-        tab_cont: frontPlanTypeCode !== 'NONE',
-    }">
-						<div ng-show="frontPlanTypeCode === 'NONE'">
-							<div class="reload2" ng-style="{
-            display:select.showLoading?'block':'none'
-         }" style="display: none;">
+					<div class="reserve_artbx ng-isolate-scope">
+						<div>
+							<div class="reload2" style="display: none;">
 								<span class="ng-binding">로딩중</span>
 							</div>
 							<div class="bx_tit">
 								<h4 class="reserve_tit seat_select ng-binding">등급 선택</h4>
-								<a href="#" class="btn btn_blank ng-binding" ng-click="select.clearGradeAndBlock()">새로고침</a>
+								<a href="#" class="btn btn_blank ng-binding">새로고침</a>
 							</div>
 						</div>
-						<ul id="select_seat_grade" class="seat_lst" ngcloak="" style="height: 258px" ng-class="{
-            type_waiting: frontPlanTypeCode !== 'NONE',
-        }">
-							<li ng-click="select.total()" ng-show="select.useGradeSelect === false">
-								<a href="#" ng-class="{
-                   select: !select.selectState.selectedGrade,
-               }" style="cursor: pointer" class="select">
+						<!-- <ul id="select_seat_grade" class="seat_lst" style="height: 258px"> -->
+						<ul id="select_seat_grade" class="seat_lst" style="height: 550px">
+							<li>
+								<a href="#" style="cursor: pointer" class="select">
 									<span class="seat_color"></span>
 									<div class="seat_detail_info">
 										<span class="seat_level ng-binding">전체</span>
 									</div>
 								</a>
 							</li>
-							<!-- ngRepeat: grade in select.grades -->
-							<!-- ngIf: !grade.restriction -->
-							<li id="seat_grade_96023" depth="1" grade="grade" zones="grade.zones" selected="selected" ng-if="!grade.restriction" ng-click="select.select($event, $index, grade)" ng-mouseover="select.showTooltipAction($event,grade)" ng-mouseleave="select.hideTooltipAction($event)" ng-init="select.selectedList[$index] = select.selectState.selectedGrade.gradeId === grade.gradeId|| false" ng-repeat="grade in select.grades" class="ng-scope ng-isolate-scope">
+							<li id="seat_grade_96023" depth="1" grade="grade" zones="grade.zones" selected="selected" class="ng-scope ng-isolate-scope">
 								<!-- [D] 좌석 선택된 경우 클래스명 select 추가, 구역이 선택된 경우엔 클래스명 select2로 변경 -->
-								<a href="#" style="cursor: pointer" ng-class="{
-           select: grade.selected === true,
-           zero: grade.grade.remainCnt === 0
-       }" class="zero">
-									<!-- ngIf: grade.grade.color !== undefined -->
-									<span class="seat_color ng-scope" style="background: #d15050" ng-style="{
-            background:grade.grade.color
-          }" ng-if="grade.grade.color !== undefined"></span>
-									<!-- end ngIf: grade.grade.color !== undefined -->
+								<a href="#" style="cursor: pointer" class="zero">
+									<span class="seat_color ng-scope" style="background: #d15050"></span>
 									<div class="seat_detail_info">
 										<!-- ngIf: grade.depth === 1 -->
 										<span class="seat_grade ng-binding ng-scope" ng-if="grade.depth === 1">챔피언석</span>
@@ -254,12 +181,6 @@
 										<!-- end ngIf: grade.isRemainExposure && grade.grade.remainCnt !== undefined -->
 									</div>
 								</a>
-								<!-- ngIf: grade.isShowBtn() -->
-								<!-- ngIf: grade.isShowZones() -->
-							</li>
-							<!-- end ngIf: !grade.restriction -->
-							<!-- end ngRepeat: grade in select.grades -->
-							<!-- ngIf: !grade.restriction -->
 							<li id="seat_grade_96027" depth="1" grade="grade" zones="grade.zones" selected="selected" ng-if="!grade.restriction" ng-click="select.select($event, $index, grade)" ng-mouseover="select.showTooltipAction($event,grade)" ng-mouseleave="select.hideTooltipAction($event)" ng-init="select.selectedList[$index] = select.selectState.selectedGrade.gradeId === grade.gradeId|| false" ng-repeat="grade in select.grades" class="ng-scope ng-isolate-scope">
 								<!-- [D] 좌석 선택된 경우 클래스명 select 추가, 구역이 선택된 경우엔 클래스명 select2로 변경 -->
 								<a href="#" style="cursor: pointer" ng-class="{

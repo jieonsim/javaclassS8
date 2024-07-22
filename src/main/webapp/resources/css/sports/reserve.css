@@ -41,9 +41,9 @@
 filter:alpha(opacity=60);
 -ms-filter:alpha(opacity=60);
 -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";content:''}*/
-#wrap_reserve{position:relative;width:990px;height:100%}
+#wrap_reserve{position:relative;width:990px;height:100%;margin:0;padding:0}
 #wrap_reserve.error{background-color:#f8f9fa}
-#header{position:fixed;z-index:100;width:990px;background:#fff}
+#header{position:fixed;z-index:100;width:990px;background:#fff;margin:0;padding:0}
 #container{margin:0;padding-top:100px;background:#fff;box-sizing:border-box}
 #container.step_none{padding-top:56px}
 .reserve_content{position:relative;zoom:1}
@@ -78,7 +78,8 @@ filter:alpha(opacity=60);
 .reserve_left_type1{overflow-x:hidden}
 .reserve_left:after{display:block;clear:both;content:''}
 
-.reserve_right{float:left;position:relative;width:269px;height:auto;min-height:700px;margin-left:-1px;padding:20px 30px 85px 29px;border-left:1px solid #ecedf2;box-sizing:border-box;background:#fff}
+/* .reserve_right{float:left;position:relative;width:269px;height:auto;min-height:700px;margin-left:-1px;padding:20px 30px 85px 29px;border-left:1px solid #ecedf2;box-sizing:border-box;background:#fff} */
+.reserve_right{float:left;position:relative;width:269px;height:auto;min-height:700px;left:41px;padding:20px 30px 85px 29px;border-left:1px solid #ecedf2;box-sizing:border-box;background:#fff}
 .reserve_right.right_type_2{padding:20px 30px 200px}
 
 /* uio 공통 */
