@@ -16,20 +16,21 @@
 <link rel="stylesheet" href="${ctp}/css/common/button.css">
 <link rel="icon" href="${ctp}/images/common/favicon.ico">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/layout/header.jsp" />
 	<div class="container">
 		<main id="content" class="common_container sports_sub" role="main">
 			<div class="inner">
-				<jsp:include page="/WEB-INF/views/sports/football/common/sports_cont_top.jsp" />
+				<jsp:include page="/WEB-INF/views/sports/baseball/common/sports_cont_top.jsp" />
 				<div class="sports_cont">
-					<jsp:include page="/WEB-INF/views/sports/football/common/cont_left.jsp" />
+					<jsp:include page="/WEB-INF/views/sports/baseball/common/cont_left.jsp" />
 					<div class="cont_right">
 						<div class='rightcont_inner'>
-							<jsp:include page="/WEB-INF/views/sports/football/common/team_top_area.jsp" />
-							<jsp:include page="/WEB-INF/views/sports/football/common/team_notice.jsp" />
-							<jsp:include page="/WEB-INF/views/sports/football/common/team_tab.jsp">
+							<jsp:include page="/WEB-INF/views/sports/baseball/common/team_top_area.jsp" />
+							<jsp:include page="/WEB-INF/views/sports/baseball/common/team_notice.jsp" />
+							<jsp:include page="/WEB-INF/views/sports/baseball/common/team_tab.jsp">
 								<jsp:param value="reservation" name="activeTab" />
 							</jsp:include>
 							<div class="tab_content" data-team="${currentTeam}">
@@ -63,27 +64,25 @@
 												</div>
 
 												<c:set var="emblemMap" value="${{
-                                                    '울산': 'uhfc',
-                                                    '포항': 'steelers',
-                                                    '광주FC': 'gwangjufc',
-                                                    '전북현대': 'hyundaimotorsfc',
-                                                    '인천': 'hyundaiMotorsfc',
-                                                    '대구': 'daegufc',
-                                                    'FC서울': 'fcseoul',
-                                                    '김천': 'gimcheonfc',
-                                                    '강원': 'gangwon',
-                                                    '수원FC': 'suwonfc',
-                                                    '제주': 'jeju',
-                                                    '대전': 'daejeon'
+                                                    'LG': 'lg',
+                                                    'kt': 'kt',
+                                                    'SSG': 'ssg',
+                                                    'KIA': 'kia',
+                                                    '삼성': 'samsung',
+                                                    '한화': 'hanhwa',
+                                                    '두산': 'doosan',
+                                                    'NC': 'nc',
+                                                    '키움': 'kiwoom',
+                                                    '롯데': 'lotte'
                                                 }}" />
 												<div class="match_team_info">
 													<div class="emblem_bx">
 														<span class="bx_img">
-															<img src="${ctp}/images/sports/football/emblem/${emblemMap[game.homeTeamShortName]}.png" alt="홈팀 엠블럼">
+															<img src="${ctp}/images/sports/baseball/emblem/${emblemMap[game.homeTeamShortName]}.png" alt="홈팀 엠블럼">
 														</span>
 														<span class="versus">VS</span>
 														<span class="bx_img">
-															<img src="${ctp}/images/sports/football/emblem/${emblemMap[game.awayTeamShortName]}.png" alt="원정팀 엠블럼">
+															<img src="${ctp}/images/sports/baseball/emblem/${emblemMap[game.awayTeamShortName]}.png" alt="원정팀 엠블럼">
 														</span>
 													</div>
 

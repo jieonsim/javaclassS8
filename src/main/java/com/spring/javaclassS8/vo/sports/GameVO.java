@@ -11,13 +11,7 @@ public class GameVO {
 	private int homeTeamId;
 	private int awayTeamId;
 	private int venueId;
-	/* @DateTimeFormat(pattern = "yyyy-MM-dd") */
-	/* @JsonFormat(pattern = "yyyy-MM-dd") */
-	/* private LocalDate gameDate; */
 	private String gameDate;
-	/* @DateTimeFormat(pattern = "HH:mm") */
-	/* @JsonFormat(pattern = "HH:mm:ss") */
-	/* private LocalTime gameTime; */
 	private String gameTime;
 	private Status status;
 	private Timestamp createdAt;
@@ -35,7 +29,7 @@ public class GameVO {
 	private int bookingOpenDaysBefore;
 	private int bookingCloseMinutesAfterStart;
 	private String bookingOpenTime;
-
+	
 	public enum Status {
 		판매예정, 판매중, 판매종료
 	}

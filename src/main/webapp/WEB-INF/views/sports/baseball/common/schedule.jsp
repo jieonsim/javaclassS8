@@ -27,8 +27,8 @@
 					<div class="cont_right">
 						<div class="rightcont_inner">
 							<div class="sch_date">
-								<a href="#" class="prev">이전달</a>
-								<a href="#" class="next">다음달</a>
+								<a href="#" class="prev" style="cursor: default;">이전달</a>
+								<a href="#" class="next" style="cursor: default;">다음달</a>
 								<span class="_monthText">${currentYearMonth}</span>
 							</div>
 							<div class="sch_tbl">
@@ -51,7 +51,7 @@
 											<th>예매</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody data-has-games="${hasGames}">
 										<c:set var="prevDate" value="" />
 										<c:set var="gamesForDate" value="0" />
 

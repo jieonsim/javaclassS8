@@ -21,4 +21,9 @@ public class BaseballDAOImpl implements BaseballDAO {
 		return sqlSession.getMapper(BaseballDAO.class).getBaseballGamesFromToday(today, firstDayOfNextMonth);
 	}
 
+	// 구단별 오늘 날짜 ~ 다음달 마지막 날까지 홈경기 가져오기
+	@Override
+	public List<GameVO> getTeamHomeGames(String shortName, LocalDate startDate, LocalDate endDate) {
+		return sqlSession.getMapper(BaseballDAO.class).getTeamHomeGames(shortName, startDate, endDate);
+	}
 }

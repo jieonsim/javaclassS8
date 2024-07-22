@@ -49,7 +49,14 @@ public class BaseballController {
 
 	// 구단별 예매하기
 	@GetMapping("/{team}/reservation")
-	public String reservation(@PathVariable("team") String team) {
+	public String reservation(@PathVariable("team") String team, Model model) {
+		LocalDate today = LocalDate.now();
+		YearMonth nextMonth = YearMonth.from(today).plusMonths(1);
+		List<GameVO> games = baseballService.getTeamHomeGames(team, today, nextMonth.atEndOfMonth());
+
+		model.addAttribute("games", games);
+		model.addAttribute("team", team);
+		
 		return "sports/baseball/" + team + "/reservation";
 	}
 

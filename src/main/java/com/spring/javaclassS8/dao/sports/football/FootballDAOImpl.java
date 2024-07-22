@@ -20,4 +20,10 @@ public class FootballDAOImpl implements FootballDAO {
 	public List<GameVO> getFootballGamesFromToday(LocalDate today, LocalDate firstDayOfNextMonth) {
 		return sqlSession.getMapper(FootballDAO.class).getFootballGamesFromToday(today, firstDayOfNextMonth);
 	}
+
+	// 구단별 오늘 날짜 ~ 다음달 마지막 날까지 홈경기 가져오기
+	@Override
+	public List<GameVO> getTeamHomeGames(String shortName, LocalDate startDate, LocalDate endDate) {
+		return sqlSession.getMapper(FootballDAO.class).getTeamHomeGames(shortName, startDate, endDate);
+	}
 }

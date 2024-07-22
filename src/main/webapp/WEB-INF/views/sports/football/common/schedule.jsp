@@ -51,7 +51,7 @@
 											<th>예매</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody data-has-games="${hasGames}">
 										<c:set var="prevDate" value="" />
 										<c:set var="gamesForDate" value="0" />
 

@@ -43,8 +43,21 @@ public class FootballController {
 		List<GameVO> games = footballService.getFootballGamesFromToday(today, currentMonth);
 		model.addAttribute("games", games);
 		model.addAttribute("currentYearMonth", today.format(DateTimeFormatter.ofPattern("yyyy.MM")));
-		System.out.println("games : " + games);
+		model.addAttribute("hasGames", !games.isEmpty());
 		return "sports/football/common/schedule";
+	}
+	
+	// 구단별 예매하기
+	@GetMapping("/{team}/reservation")
+	public String reservation(@PathVariable("team") String team, Model model) {
+		LocalDate today = LocalDate.now();
+		YearMonth nextMonth = YearMonth.from(today).plusMonths(1);
+		List<GameVO> games = footballService.getTeamHomeGames(team, today, nextMonth.atEndOfMonth());
+
+		model.addAttribute("games", games);
+		model.addAttribute("team", team);
+		
+		return "sports/football/" + team + "/reservation";
 	}
 
 	// 구단별 경기일정

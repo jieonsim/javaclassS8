@@ -26,4 +26,24 @@
 	    ]]>
 	</select>
 	
+	<!-- 구단별 오늘 날짜 ~ 다음달 마지막 날까지 홈경기 가져오기 -->
+	<select id="getTeamHomeGames" resultType="com.spring.javaclassS8.vo.sports.GameVO">
+	    SELECT g.*, 
+	           ht.teamName as homeTeamName, 
+	           ht.shortName as homeTeamShortName,
+	           at.teamName as awayTeamName, 
+	           at.shortName as awayTeamShortName,
+	           v.venueName,
+	           p.bookingOpenDaysBefore,
+	           p.bookingOpenTime,
+	           p.bookingCloseMinutesAfterStart
+	    FROM games g
+	    JOIN teams ht ON g.homeTeamId = ht.id
+	    JOIN teams at ON g.awayTeamId = at.id
+	    JOIN venues v ON g.venueId = v.id
+	    JOIN sportBookingPolicies p ON g.sportId = p.sportId
+	    WHERE ht.shortName = #{shortName}
+	      AND g.gameDate BETWEEN #{startDate} AND #{endDate}
+	    ORDER BY g.gameDate, g.gameTime
+	</select>
 </mapper>

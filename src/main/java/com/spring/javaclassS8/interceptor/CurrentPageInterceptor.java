@@ -71,7 +71,7 @@ public class CurrentPageInterceptor implements HandlerInterceptor {
 				currentTeam = "hyundaimotorsfc";
 				teamName = "전북 현대모터스 ";
 			} else if (uri.contains("/sports/football/incheonutd")) {
-				currentTeam = "hyundaiMotorsfc";
+				currentTeam = "incheonutd";
 				teamName = "인천 유나이티드";
 			} else if (uri.contains("/sports/football/daegufc")) {
 				currentTeam = "daegufc";
