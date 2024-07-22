@@ -67,7 +67,7 @@
                                                     '포항': 'steelers',
                                                     '광주FC': 'gwangjufc',
                                                     '전북현대': 'hyundaimotorsfc',
-                                                    '인천': 'hyundaiMotorsfc',
+                                                    '인천': 'incheonutd',
                                                     '대구': 'daegufc',
                                                     'FC서울': 'fcseoul',
                                                     '김천': 'gimcheonfc',

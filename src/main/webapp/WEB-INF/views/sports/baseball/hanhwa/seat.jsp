@@ -4,7 +4,7 @@
 <div class="tab_content">
 	<h5 class="mgt20" style="font-size: 24px">한화생명 이글스 파크</h5>
 	<div class="seat_plan">
-		<img alt="한화생명 이글스 파크 야구장 좌석도" src="http://image.toast.com/aaaaab/ticketlink/TKL_9/hh_area_2023_map.png">
+		<img alt="한화생명 이글스 파크 야구장 좌석도" src="${ctp}/images/sports/baseball/seat/hanhwa.png">
 	</div>
 	<div class="seat_tit_area">
 		<h5 class="sp_tit seat">예매 가능한 좌석</h5>

@@ -3,21 +3,6 @@
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <div class="tab_content">
 	<h5 class="mgt20" style="font-size: 24px">잠실야구장</h5>
-	<div class="bx_dsc">
-		<p class="dsc type2">
-			<b>잠실 종합운동장(잠실야구장) 주차 안내</b>
-		</p>
-		<ul class="dsc type2">
-			<li>
-				올림픽 주경기장 공사 등으로 잠실 종합운동장 주차공간이 매우 부족합니다.
-				<br>
-				야구 관람을 계획하신 팬 여러분께서는 반드시 대중교통 이용을 부탁드리며,
-				<br>
-				평소보다 조금 빨리 경기장에 도착 하실 것을 권장 드립니다.
-			</li>
-
-		</ul>
-	</div>
 	<div class="seat_plan">
 		<img alt="잠실야구장 좌석도" src="${ctp}/images/sports/baseball/seat/lg.png">
 	</div>

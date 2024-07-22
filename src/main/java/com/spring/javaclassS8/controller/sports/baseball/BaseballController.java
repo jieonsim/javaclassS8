@@ -28,6 +28,12 @@ public class BaseballController {
 		return "sports/baseball/common/main";
 	}
 
+	// 야구 예매창
+	@GetMapping("/reserve")
+	public String baseballreserve() {
+		return "sports/baseball/common/reserve";
+	}
+
 	// 야구 페이지 구단별 team_tab class 처리
 	@GetMapping("/{team}/{tab}")
 	public String teamTab(@PathVariable String team, @PathVariable String tab, Model model) {
@@ -56,7 +62,7 @@ public class BaseballController {
 
 		model.addAttribute("games", games);
 		model.addAttribute("team", team);
-		
+
 		return "sports/baseball/" + team + "/reservation";
 	}
 
