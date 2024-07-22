@@ -34,6 +34,7 @@ public class GameVO {
 	// 새로 추가한 필드
 	private int bookingOpenDaysBefore;
 	private int bookingCloseMinutesAfterStart;
+	private String bookingOpenTime;
 
 	public enum Status {
 		판매예정, 판매중, 판매종료

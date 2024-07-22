@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.javaclassS8.dao.sports.baseball.BaseballDAO">
+	
+	<!-- 오늘 날짜 ~ 당월 마지막 경기까지 가져오기 -->
+	<select id="getBaseballGamesFromToday" resultType="com.spring.javaclassS8.vo.sports.GameVO">
+	    <![CDATA[
+	    SELECT g.*, 
+	           ht.teamName as homeTeamName, 
+	           at.teamName as awayTeamName,
+	           v.venueName,
+	           p.bookingOpenDaysBefore,
+	           p.bookingOpenTime,
+	           p.bookingCloseMinutesAfterStart,
+	           s.sportName
+	    FROM games g
+	    JOIN teams ht ON g.homeTeamId = ht.id
+	    JOIN teams at ON g.awayTeamId = at.id
+	    JOIN venues v ON g.venueId = v.id
+	    JOIN sportBookingPolicies p ON g.sportId = p.sportId
+	    JOIN sports s ON g.sportId = s.id
+	    WHERE g.gameDate >= #{today}
+	      AND g.gameDate < #{firstDayOfNextMonth}
+	      AND s.sportName = '야구'
+	    ORDER BY g.gameDate, g.gameTime
+	    ]]>
+	</select>
+	
+</mapper>
