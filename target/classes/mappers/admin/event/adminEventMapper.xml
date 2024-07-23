@@ -103,6 +103,11 @@
     	WHERE eventId = #{eventId} AND isAnnounced = true
     </select>
     
+    <!-- 이벤트 당첨자에게 당첨 안내 및 예매권 번호를 발송했는지 확인 -->
+    <select id="getAdvanceTicketEmailByAdvanceTicketId" resultType="com.spring.javaclassS8.vo.reserve.AdvanceTicketEmailVO">
+    	SELECT * FROM advance_ticket_emails WHERE advanceTicketId = #{advanceTicketId}
+    </select>
+    
 	<!-- 이벤트 업로드 -->
 	<insert id="insertEvent"
 		parameterType="com.spring.javaclassS8.vo.event.EventVO">
@@ -126,6 +131,17 @@
         INSERT INTO winner_posts (eventId, adminId, title, content)
         VALUES (#{eventId}, #{adminId}, #{title}, #{content})
 	</insert>
+	
+	<!-- 새로운 이메일 발송 시 advance_ticket_email 테이블에 레코드 생성 -->
+	<insert id="insertAdvanceTicketEmail" parameterType="com.spring.javaclassS8.vo.reserve.AdvanceTicketEmailVO">
+	    INSERT INTO advance_ticket_emails (
+	        advanceTicketId, recipientEmail, recipientMemberId, 
+	        status, sentAt, lastAttemptAt, emailContent
+	    ) VALUES (
+	        #{advanceTicketId}, #{recipientEmail}, #{recipientMemberId}, 
+	        #{status}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{emailContent}
+	    )
+	</insert>
 
 	<!-- 이벤트 내용 수정 -->
 	<update id="updateEvent"
@@ -148,6 +164,17 @@
 		UPDATE winners
 		SET isAnnounced = true
 		WHERE eventId = #{eventId}
+	</update>
+	
+	<!-- 이벤트 당첨자 대상으로 기존 이메일 발송 기록이 있는 경우 retryCount / lastAttemptAt / status 필드 업데이트 -->
+	<update id="updateAdvanceTicketEmail" parameterType="com.spring.javaclassS8.vo.reserve.AdvanceTicketEmailVO">
+	    UPDATE advance_ticket_emails
+	    SET status = #{status},
+	        retryCount = #{retryCount},
+	        sentAt = #{sentAt},
+	        lastAttemptAt = #{lastAttemptAt},
+	        emailContent = #{emailContent}
+	    WHERE id = #{id}
 	</update>
 	
 	<!-- 이벤트 당첨자 메일 발송 후 메일 발송여부 필드 업데이트 -->

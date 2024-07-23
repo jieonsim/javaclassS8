@@ -9,6 +9,7 @@ import com.spring.javaclassS8.vo.event.EventVO;
 import com.spring.javaclassS8.vo.event.WinnerDetailVO;
 import com.spring.javaclassS8.vo.event.WinnerPostVO;
 import com.spring.javaclassS8.vo.event.WinnerVO;
+import com.spring.javaclassS8.vo.reserve.AdvanceTicketEmailVO;
 
 public interface AdminEventDAO {
 
@@ -49,6 +50,16 @@ public interface AdminEventDAO {
 	// 이벤트 당첨자 발표 공지 여부
 	boolean isEventAnnounced(int eventId);
 
-	// 이벤트 당첨자 메일 발송 후 메일 발송여부 필드 업데이트
+	// 이벤트 당첨자에게 당첨 안내 및 예매권 번호를 발송했는지 확인
+	AdvanceTicketEmailVO getAdvanceTicketEmailByAdvanceTicketId(int advanceTicketId);
+
+	// 기존 이메일 발송 기록이 있는 경우 retryCount / lastAttemptAt / status 필드 업데이트
+	void updateAdvanceTicketEmail(AdvanceTicketEmailVO advanceTicketEmail);
+
+	// 새로운 이메일 발송 시 advance_ticket_email 테이블에 레코드 생성
+	void insertAdvanceTicketEmail(AdvanceTicketEmailVO advanceTicketEmail);
+
+	// 이벤트 당첨자 메일 발송 후 winners 테이블의 emailSentAt 필드 업데이트
 	void updateEmailSentAt(int winnerId);
+
 }

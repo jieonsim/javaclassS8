@@ -30,7 +30,7 @@
     	<property name="typeHandlers">
 	    	<array>
 	       		<bean class="org.apache.ibatis.type.EnumTypeHandler">
-	            	<constructor-arg value="com.spring.javaclassS8.vo.event.EventVO$Status" />
+	            	<constructor-arg value="com.spring.javaclassS8.vo.event.EventVO$EventStatus" />
 	        	</bean>
 	        	<bean class="com.spring.javaclassS8.typehandler.EventCategoryTypeHandler" />
 	    	</array>

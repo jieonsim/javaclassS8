@@ -4,7 +4,7 @@
 	<resultMap id="eventResultMap" type="com.spring.javaclassS8.vo.event.EventVO">
 		<result property="eventCategory" column="eventCategory" javaType="com.spring.javaclassS8.vo.event.EventVO$EventCategory" 
         typeHandler="com.spring.javaclassS8.typehandler.EventCategoryTypeHandler"/>
-    	<result property="status" column="status" javaType="com.spring.javaclassS8.vo.event.EventVO$Status" 
+    	<result property="eventStatus" column="status" javaType="com.spring.javaclassS8.vo.event.EventVO$EventStatus" 
             typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
 	</resultMap>
 

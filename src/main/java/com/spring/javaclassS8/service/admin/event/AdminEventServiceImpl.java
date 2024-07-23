@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
@@ -32,6 +33,7 @@ import com.spring.javaclassS8.vo.event.EventVO;
 import com.spring.javaclassS8.vo.event.WinnerDetailVO;
 import com.spring.javaclassS8.vo.event.WinnerPostVO;
 import com.spring.javaclassS8.vo.event.WinnerVO;
+import com.spring.javaclassS8.vo.reserve.AdvanceTicketEmailVO;
 import com.spring.javaclassS8.vo.reserve.AdvanceTicketVO;
 
 @Service
@@ -48,9 +50,9 @@ public class AdminEventServiceImpl implements AdminEventService {
 
 	@Autowired
 	private AdminReserveService adminReserveService;
-	
+
 	@Autowired
-	private EventAdvanceTicketEmailService eventEmailService;
+	private EventAdvanceTicketEmailService eventAdvanceTicketEmailService;
 
 	// 이벤트 업로드 처리
 	@Override
@@ -298,17 +300,43 @@ public class AdminEventServiceImpl implements AdminEventService {
 	// 이벤트 당첨자 대상으로 당첨 안내 및 예매권 번호 메일 발송
 	@Override
 	@Transactional
-	public boolean sendWinnerEmails(int eventId) throws MessagingException {
-	    EventVO event = eventDAO.getEventById(eventId);
-	    List<WinnerDetailVO> winners = adminEventDAO.getWinnerDetails(eventId);
-	    
-	    for (WinnerDetailVO winner : winners) {
-	        eventEmailService.sendAdvanceTicketEmail(winner.getEmail(), event.getTitle(), winner.getAdvanceTicketNumber(), winner.getExpiresAt());
-	        
-	        // 이메일 발송 후 emailSentAt 업데이트
-	        adminEventDAO.updateEmailSentAt(winner.getWinnerId());
-	    }
-	    
-	    return true;
+	public boolean sendOrResendWinnerEmails(int eventId) throws MessagingException {
+		EventVO event = eventDAO.getEventById(eventId);
+		List<WinnerDetailVO> winners = adminEventDAO.getWinnerDetails(eventId);
+
+		for (WinnerDetailVO winner : winners) {
+			// 이미 이메일을 발송했는지 확인
+			AdvanceTicketEmailVO existingEmail = adminEventDAO.getAdvanceTicketEmailByAdvanceTicketId(winner.getAdvanceTicketId());
+
+			if (existingEmail != null) {
+				// 기존 이메일 발송 기록이 있는 경우
+				existingEmail.setRetryCount(existingEmail.getRetryCount() + 1);
+				existingEmail.setLastAttemptAt(new Timestamp(System.currentTimeMillis()));
+				existingEmail.setStatus(AdvanceTicketEmailVO.AdvanceTicketEmailStatus.PENDING);
+				adminEventDAO.updateAdvanceTicketEmail(existingEmail);
+			} else {
+				// 새로운 이메일 발송 시 advance_ticket_email 테이블에 레코드 생성
+				existingEmail = new AdvanceTicketEmailVO();
+				existingEmail.setAdvanceTicketId(winner.getAdvanceTicketId());
+				existingEmail.setRecipientEmail(winner.getEmail());
+				existingEmail.setRecipientMemberId(winner.getMemberId());
+				existingEmail.setStatus(AdvanceTicketEmailVO.AdvanceTicketEmailStatus.PENDING);
+				adminEventDAO.insertAdvanceTicketEmail(existingEmail);
+			}
+
+			// 이메일 발송
+			String emailContent = eventAdvanceTicketEmailService.sendAdvanceTicketEmail(winner.getEmail(), event.getTitle(), winner.getAdvanceTicketNumber(),
+					winner.getExpiresAt());
+
+			// 발송 성공 시 상태 업데이트
+			existingEmail.setStatus(AdvanceTicketEmailVO.AdvanceTicketEmailStatus.SENT);
+			existingEmail.setEmailContent(emailContent);
+			existingEmail.setSentAt(new Timestamp(System.currentTimeMillis()));
+			adminEventDAO.updateAdvanceTicketEmail(existingEmail);
+
+			// winners 테이블의 emailSentAt 업데이트
+			adminEventDAO.updateEmailSentAt(winner.getWinnerId());
+		}
+		return true;
 	}
 }

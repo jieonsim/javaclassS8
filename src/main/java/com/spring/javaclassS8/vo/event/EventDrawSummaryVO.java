@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class EventDrawSummaryVO {
+	private int winnerId;
 	private int eventId;
 	private EventVO.EventCategory eventCategory;
 	private String title;

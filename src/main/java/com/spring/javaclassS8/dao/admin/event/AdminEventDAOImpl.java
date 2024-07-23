@@ -11,13 +11,13 @@ import com.spring.javaclassS8.vo.event.EventVO;
 import com.spring.javaclassS8.vo.event.WinnerDetailVO;
 import com.spring.javaclassS8.vo.event.WinnerPostVO;
 import com.spring.javaclassS8.vo.event.WinnerVO;
+import com.spring.javaclassS8.vo.reserve.AdvanceTicketEmailVO;
 
 @Repository
 public class AdminEventDAOImpl implements AdminEventDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
-
 
 	// 이벤트 업로드
 	@Override
@@ -91,10 +91,27 @@ public class AdminEventDAOImpl implements AdminEventDAO {
 		return sqlSession.getMapper(AdminEventDAO.class).isEventAnnounced(eventId);
 	}
 
-	// 이벤트 당첨자 메일 발송 후 메일 발송여부 필드 업데이트
+	// 이벤트 당첨자에게 당첨 안내 및 예매권 번호를 발송했는지 확인
+	@Override
+	public AdvanceTicketEmailVO getAdvanceTicketEmailByAdvanceTicketId(int advanceTicketId) {
+		return sqlSession.getMapper(AdminEventDAO.class).getAdvanceTicketEmailByAdvanceTicketId(advanceTicketId);
+	}
+
+	// 기존 이메일 발송 기록이 있는 경우 retryCount / lastAttemptAt / status 필드 업데이트
+	@Override
+	public void updateAdvanceTicketEmail(AdvanceTicketEmailVO advanceTicketEmail) {
+		sqlSession.getMapper(AdminEventDAO.class).updateAdvanceTicketEmail(advanceTicketEmail);
+	}
+
+	// 새로운 이메일 발송 시 advance_ticket_email 테이블에 레코드 생성
+	@Override
+	public void insertAdvanceTicketEmail(AdvanceTicketEmailVO advanceTicketEmail) {
+		sqlSession.getMapper(AdminEventDAO.class).insertAdvanceTicketEmail(advanceTicketEmail);
+	}
+
+	// 이벤트 당첨자 메일 발송 후 winners 테이블의 emailSentAt 필드 업데이트
 	@Override
 	public void updateEmailSentAt(int winnerId) {
 		sqlSession.getMapper(AdminEventDAO.class).updateEmailSentAt(winnerId);
 	}
-
 }

@@ -35,7 +35,7 @@ import com.spring.javaclassS8.vo.event.EventCommentVO;
 import com.spring.javaclassS8.vo.event.EventDrawSummaryVO;
 import com.spring.javaclassS8.vo.event.EventVO;
 import com.spring.javaclassS8.vo.event.EventVO.EventCategory;
-import com.spring.javaclassS8.vo.event.EventVO.Status;
+import com.spring.javaclassS8.vo.event.EventVO.EventStatus;
 import com.spring.javaclassS8.vo.event.WinnerDetailVO;
 import com.spring.javaclassS8.vo.event.WinnerPostVO;
 import com.spring.javaclassS8.vo.member.MemberVO;
@@ -56,7 +56,7 @@ public class AdminEventController {
 		List<EventVO> events = eventService.getAllEvents();
 		model.addAttribute("events", events);
 		model.addAttribute("categories", EventCategory.values());
-		model.addAttribute("statuses", Status.values());
+		model.addAttribute("statuses", EventStatus.values());
 		return "admin/event/list";
 	}
 
@@ -64,7 +64,7 @@ public class AdminEventController {
 	@GetMapping("/upload")
 	public String showUploadForm(Model model) {
 		model.addAttribute("categories", EventCategory.values());
-		model.addAttribute("statuses", Status.values());
+		model.addAttribute("statuses", EventStatus.values());
 		return "admin/event/upload";
 	}
 
@@ -160,7 +160,7 @@ public class AdminEventController {
 		}
 		model.addAttribute("event", event);
 		model.addAttribute("categories", EventCategory.values());
-		model.addAttribute("statuses", Status.values());
+		model.addAttribute("statuses", EventStatus.values());
 
 		return "admin/event/update";
 	}
@@ -201,7 +201,7 @@ public class AdminEventController {
 			@RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate, @RequestParam(required = false) String keyword, Model model) {
 
 		List<EventVO> filteredEvents = adminEventService.filterEvents(eventCategory, status, startDate, endDate, keyword);
-		model.addAttribute("statuses", Status.values());
+		model.addAttribute("statuses", EventStatus.values());
 		return ResponseEntity.ok(filteredEvents);
 	}
 
@@ -250,12 +250,12 @@ public class AdminEventController {
 		List<WinnerDetailVO> winnerDetails = adminEventService.getWinnerDetails(eventId);
 		EventVO event = adminEventService.getEventById(eventId);
 		boolean isAnnounced = adminEventService.isEventAnnounced(eventId);
-
+		
 		model.addAttribute("winnerDetails", winnerDetails);
 		model.addAttribute("eventTitle", event.getTitle());
 		model.addAttribute("eventId", eventId);
 		model.addAttribute("isAnnounced", isAnnounced);
-
+		
 		return "admin/event/winnerDetail";
 	}
 
@@ -288,28 +288,28 @@ public class AdminEventController {
 		}
 		return ResponseEntity.ok(response);
 	}
-	
+
 	// 이벤트 당첨자 대상으로 메일 발송
 	@PostMapping("/sendWinnerEmails")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> sendWinnerEmails(@RequestBody Map<String, Object> request) {
-	    int eventId = Integer.parseInt(request.get("eventId").toString());
-	    Map<String, Object> response = new HashMap<>();
-	    
-	    try {
-	        boolean result = adminEventService.sendWinnerEmails(eventId);
-	        if (result) {
-	            response.put("success", true);
-	            response.put("message", "메일 발송이 완료되었습니다.");
-	        } else {
-	            response.put("success", false);
-	            response.put("message", "메일 발송에 실패했습니다.");
-	        }
-	    } catch (Exception e) {
-	        response.put("success", false);
-	        response.put("message", "메일 발송 중 오류가 발생했습니다: " + e.getMessage());
-	    }
-	    
-	    return ResponseEntity.ok(response);
+		int eventId = Integer.parseInt(request.get("eventId").toString());
+		Map<String, Object> response = new HashMap<>();
+
+		try {
+			boolean result = adminEventService.sendOrResendWinnerEmails(eventId);
+			if (result) {
+				response.put("success", true);
+				response.put("message", "메일 발송이 완료되었습니다.");
+			} else {
+				response.put("success", false);
+				response.put("message", "메일 발송에 실패했습니다.");
+			}
+		} catch (Exception e) {
+			response.put("success", false);
+			response.put("message", "메일 발송 중 오류가 발생했습니다: " + e.getMessage());
+		}
+
+		return ResponseEntity.ok(response);
 	}
 }
