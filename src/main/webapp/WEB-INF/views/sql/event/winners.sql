@@ -1,6 +1,6 @@
 show tables;
 
-/* 이벤트 당첨자*/
+/* 이벤트 당첨자 */
 CREATE TABLE winners (
     id INT NOT NULL AUTO_INCREMENT COMMENT '이벤트 당첨 고유번호',
     eventId INT NOT NULL COMMENT '이벤트 고유번호',
@@ -18,3 +18,5 @@ CREATE TABLE winners (
     FOREIGN KEY (advanceTicketId) REFERENCES advance_tickets(id),
     INDEX idx_event_member (eventId, memberId)
 );
+
+DESC winners;

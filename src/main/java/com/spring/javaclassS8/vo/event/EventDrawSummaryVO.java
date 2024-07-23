@@ -6,7 +6,6 @@ import lombok.Data;
 
 @Data
 public class EventDrawSummaryVO {
-	private int winnerId;
 	private int eventId;
 	private EventVO.EventCategory eventCategory;
 	private String title;
@@ -15,4 +14,5 @@ public class EventDrawSummaryVO {
 	private boolean announced;
 	private WinnerVO.TicketSentStatus ticketSentStatus;
 	private Timestamp drawAt;
+	private int numberOfWinners; // 추가
 }

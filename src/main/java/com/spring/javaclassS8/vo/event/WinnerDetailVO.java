@@ -12,9 +12,4 @@ public class WinnerDetailVO {
 	private String advanceTicketNumber;
 	
 	private Timestamp expiresAt;
-	
-	// 추가
-	private int advanceTicketId;
-	private int memberId;
-	private int eventId;
 }

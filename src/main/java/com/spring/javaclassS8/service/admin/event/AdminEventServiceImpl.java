@@ -33,7 +33,6 @@ import com.spring.javaclassS8.vo.event.EventVO;
 import com.spring.javaclassS8.vo.event.WinnerDetailVO;
 import com.spring.javaclassS8.vo.event.WinnerPostVO;
 import com.spring.javaclassS8.vo.event.WinnerVO;
-import com.spring.javaclassS8.vo.reserve.AdvanceTicketEmailVO;
 import com.spring.javaclassS8.vo.reserve.AdvanceTicketVO;
 
 @Service
@@ -52,7 +51,7 @@ public class AdminEventServiceImpl implements AdminEventService {
 	private AdminReserveService adminReserveService;
 
 	@Autowired
-	private EventAdvanceTicketEmailService eventAdvanceTicketEmailService;
+	private EventAdvanceTicketEmailService eventEmailService;
 
 	// 이벤트 업로드 처리
 	@Override
@@ -226,7 +225,7 @@ public class AdminEventServiceImpl implements AdminEventService {
 	@Override
 	@Transactional
 	public boolean drawWinners(int eventId, int numOfWinners) {
-		List<Integer> participants = adminEventDAO.getActivceParticipants(eventId);
+		List<Integer> participants = adminEventDAO.getActiveParticipants(eventId);
 		if (participants.size() < numOfWinners) {
 			return false;
 		}
@@ -277,66 +276,97 @@ public class AdminEventServiceImpl implements AdminEventService {
 	@Override
 	@Transactional
 	public boolean createWinnerPost(WinnerPostVO winnerPost) {
-		try {
-			// 당첨자 발표 게시글 저장
-			adminEventDAO.insertWinnerPost(winnerPost);
-
-			// winners 테이블의 isAnnounced 업데이트
-			adminEventDAO.updateWinnerIsAnnounced(winnerPost.getEventId());
-
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
-	// 이벤트 당첨자 발표 공지 여부
-	@Override
-	public boolean isEventAnnounced(int eventId) {
-		return adminEventDAO.isEventAnnounced(eventId);
+	    try {
+	        System.out.println("Creating winner post for eventId: " + winnerPost.getEventId() + ", drawAt: " + winnerPost.getDrawAt());
+	        adminEventDAO.insertWinnerPost(winnerPost);
+	        
+	        // String을 Timestamp로 변환
+	        Timestamp drawAt = Timestamp.valueOf(winnerPost.getDrawAt().replace('T', ' '));
+	        
+	        System.out.println("Updating isAnnounced for eventId: " + winnerPost.getEventId() + ", drawAt: " + drawAt);
+	        int updatedRows = adminEventDAO.updateWinnerIsAnnounced(winnerPost.getEventId(), drawAt);
+	        System.out.println("Updated " + updatedRows + " rows");
+	        return updatedRows > 0;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return false;
+	    }
 	}
 
 	// 이벤트 당첨자 대상으로 당첨 안내 및 예매권 번호 메일 발송
+//	@Override
+//	@Transactional
+//	public boolean sendWinnerEmails(int eventId, String drawAt) throws MessagingException {
+//		EventVO event = eventDAO.getEventById(eventId);
+//		Timestamp drawAtTimestamp;
+//
+//		try {
+//			drawAtTimestamp = Timestamp.valueOf(drawAt.replace('T', ' '));
+//		} catch (IllegalArgumentException e) {
+//			throw new IllegalArgumentException("Invalid drawAt format: " + drawAt, e);
+//		}
+//		List<WinnerDetailVO> winners = adminEventDAO.getWinnerDetailsByDrawAt(eventId, drawAtTimestamp);
+//
+//		for (WinnerDetailVO winner : winners) {
+//			eventEmailService.sendAdvanceTicketEmail(winner.getEmail(), event.getTitle(), winner.getAdvanceTicketNumber(), winner.getExpiresAt());
+//			// 이메일 발송 후 emailSentAt 업데이트
+//			adminEventDAO.updateEmailSentAt(winner.getWinnerId());
+//		}
+//
+//		return true;
+//	}
 	@Override
 	@Transactional
-	public boolean sendOrResendWinnerEmails(int eventId) throws MessagingException {
-		EventVO event = eventDAO.getEventById(eventId);
-		List<WinnerDetailVO> winners = adminEventDAO.getWinnerDetails(eventId);
+	public boolean sendWinnerEmails(int eventId, String drawAt) throws MessagingException {
+	    System.out.println("Sending emails for eventId: " + eventId + ", drawAt: " + drawAt);
+	    
+	    if (drawAt == null || drawAt.isEmpty()) {
+	        throw new IllegalArgumentException("drawAt is null or empty");
+	    }
 
-		for (WinnerDetailVO winner : winners) {
-			// 이미 이메일을 발송했는지 확인
-			AdvanceTicketEmailVO existingEmail = adminEventDAO.getAdvanceTicketEmailByAdvanceTicketId(winner.getAdvanceTicketId());
+	    EventVO event = eventDAO.getEventById(eventId);
+	    if (event == null) {
+	        throw new IllegalArgumentException("Event not found for id: " + eventId);
+	    }
 
-			if (existingEmail != null) {
-				// 기존 이메일 발송 기록이 있는 경우
-				existingEmail.setRetryCount(existingEmail.getRetryCount() + 1);
-				existingEmail.setLastAttemptAt(new Timestamp(System.currentTimeMillis()));
-				existingEmail.setStatus(AdvanceTicketEmailVO.AdvanceTicketEmailStatus.PENDING);
-				adminEventDAO.updateAdvanceTicketEmail(existingEmail);
-			} else {
-				// 새로운 이메일 발송 시 advance_ticket_email 테이블에 레코드 생성
-				existingEmail = new AdvanceTicketEmailVO();
-				existingEmail.setAdvanceTicketId(winner.getAdvanceTicketId());
-				existingEmail.setRecipientEmail(winner.getEmail());
-				existingEmail.setRecipientMemberId(winner.getMemberId());
-				existingEmail.setStatus(AdvanceTicketEmailVO.AdvanceTicketEmailStatus.PENDING);
-				adminEventDAO.insertAdvanceTicketEmail(existingEmail);
-			}
+	    Timestamp drawAtTimestamp;
+	    try {
+	        drawAtTimestamp = Timestamp.valueOf(drawAt.replace('T', ' '));
+	    } catch (IllegalArgumentException e) {
+	        throw new IllegalArgumentException("Invalid drawAt format: " + drawAt, e);
+	    }
 
-			// 이메일 발송
-			String emailContent = eventAdvanceTicketEmailService.sendAdvanceTicketEmail(winner.getEmail(), event.getTitle(), winner.getAdvanceTicketNumber(),
-					winner.getExpiresAt());
+	    List<WinnerDetailVO> winners = adminEventDAO.getWinnerDetailsByDrawAt(eventId, drawAtTimestamp);
+	    System.out.println("Found " + winners.size() + " winners");
 
-			// 발송 성공 시 상태 업데이트
-			existingEmail.setStatus(AdvanceTicketEmailVO.AdvanceTicketEmailStatus.SENT);
-			existingEmail.setEmailContent(emailContent);
-			existingEmail.setSentAt(new Timestamp(System.currentTimeMillis()));
-			adminEventDAO.updateAdvanceTicketEmail(existingEmail);
+	    if (winners.isEmpty()) {
+	        throw new IllegalStateException("No winners found for eventId: " + eventId + " and drawAt: " + drawAt);
+	    }
 
-			// winners 테이블의 emailSentAt 업데이트
-			adminEventDAO.updateEmailSentAt(winner.getWinnerId());
-		}
-		return true;
+	    for (WinnerDetailVO winner : winners) {
+	        try {
+	            System.out.println("Sending email to: " + winner.getEmail());
+	            eventEmailService.sendAdvanceTicketEmail(winner.getEmail(), event.getTitle(), winner.getAdvanceTicketNumber(), winner.getExpiresAt());
+	            adminEventDAO.updateEmailSentAt(winner.getWinnerId());
+	        } catch (Exception e) {
+	            System.out.println("Error sending email to " + winner.getEmail() + ": " + e.getMessage());
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return true;
+	}
+
+	// 이벤트 고유번호와 이벤트 추첨일시로 이벤트 당첨자 디테일 가져오기
+	@Override
+	public List<WinnerDetailVO> getWinnerDetailsByDrawAt(int eventId, Timestamp drawAt) {
+		System.out.println("Querying with eventId: " + eventId + " and drawAt: " + drawAt);
+		return adminEventDAO.getWinnerDetailsByDrawAt(eventId, drawAt);
+	}
+
+	// 이벤트 고유번호와 이벤트 추첨일시로 이벤트 당첨 발표여부 확인
+	@Override
+	public boolean isEventAnnouncedByDrawAt(int eventId, Timestamp drawAt) {
+		return adminEventDAO.isEventAnnouncedByDrawAt(eventId, drawAt);
 	}
 }

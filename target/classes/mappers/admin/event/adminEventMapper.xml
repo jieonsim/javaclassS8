@@ -38,7 +38,7 @@
 	</select>
 
 	<!-- 이벤트 참여자의 memberId 가져오기 -->
-	<select id="getActivceParticipants" resultType="int">
+	<select id="getActiveParticipants" resultType="int">
 		SELECT memberId
 		FROM event_participants
 		WHERE eventId = #{eventId} AND status =
@@ -46,66 +46,31 @@
 	</select>
 
 	<!-- 이벤트 추첨 리스트 -->
-	<select id="getEventDrawSummaries"
-		resultType="com.spring.javaclassS8.vo.event.EventDrawSummaryVO">
-		SELECT
-			e.id as eventId,
-			e.eventCategory,
-			e.title,
-			e.startDate,
-			e.endDate,
-			CASE WHEN w.isAnnounced = 1 THEN true ELSE false END as isAnnounced,
-			w.ticketSentStatus,
-			w.drawAt
-		FROM
-			events e
-		LEFT JOIN
-			(SELECT
-				eventId,
-				MAX(isAnnounced) as isAnnounced,
-				MAX(ticketSentStatus) as ticketSentStatus,
-				MAX(drawAt) as drawAt
-			FROM
-				winners
-			GROUP BY
-				eventId) w ON e.id = w.eventId
-		WHERE
-			w.eventId IS NOT NULL
-		ORDER BY
-			w.drawAt DESC
-	</select>
-	
-	<!-- 이벤트 당첨자 디테일 -->
-	<select id="getWinnerDetails" resultType="com.spring.javaclassS8.vo.event.WinnerDetailVO">
-		SELECT
-			w.id as winnerId,
-			m.name as name,
-			m.email as email,
-			at.advanceTicketNumber as advanceTicketNumber,
-			at.expiresAt
-		FROM
-			winners w
-			JOIN members m ON w.memberId = m.id
-			JOIN advance_tickets at ON w.advanceTicketId = at.id
-		WHERE
-			w.eventId = #{eventId}
+	<select id="getEventDrawSummaries" resultType="com.spring.javaclassS8.vo.event.EventDrawSummaryVO">
+	    SELECT
+	        w.drawAt,
+	        e.id as eventId,
+	        e.eventCategory,
+	        e.title,
+	        e.startDate,
+	        e.endDate,
+	        CASE WHEN SUM(CASE WHEN w.isAnnounced = true THEN 1 ELSE 0 END) > 0 THEN true ELSE false END as announced,
+	        CASE 
+	            WHEN COUNT(w.id) = SUM(CASE WHEN w.ticketSentStatus = 'SENT' THEN 1 ELSE 0 END) THEN 'SENT'
+	            WHEN COUNT(w.id) = SUM(CASE WHEN w.ticketSentStatus = 'FAILED' THEN 1 ELSE 0 END) THEN 'FAILED'
+	            ELSE 'PENDING'
+	        END as ticketSentStatus,
+	        COUNT(w.id) as numberOfWinners
+	    FROM
+	        winners w
+	    JOIN events e ON w.eventId = e.id
+	    GROUP BY w.eventId, w.drawAt
+	    ORDER BY w.drawAt DESC
 	</select>
 	
 	<!-- 이벤트 아이디로 이벤트 정보 가져오기 -->
 	<select id="getEventById" resultType="com.spring.javaclassS8.vo.event.EventVO">
         SELECT * FROM events WHERE id = #{eventId}
-    </select>
-    
-    <!-- 이벤트 당첨자 발표 여부 -->
-    <select id="isEventAnnounced" resultType="boolean">
-    	SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END
-    	FROM winners
-    	WHERE eventId = #{eventId} AND isAnnounced = true
-    </select>
-    
-    <!-- 이벤트 당첨자에게 당첨 안내 및 예매권 번호를 발송했는지 확인 -->
-    <select id="getAdvanceTicketEmailByAdvanceTicketId" resultType="com.spring.javaclassS8.vo.reserve.AdvanceTicketEmailVO">
-    	SELECT * FROM advance_ticket_emails WHERE advanceTicketId = #{advanceTicketId}
     </select>
     
 	<!-- 이벤트 업로드 -->
@@ -128,19 +93,8 @@
 	
 	<!-- 당첨자 발표 게시글 저장 -->
 	<insert id="insertWinnerPost" parameterType="com.spring.javaclassS8.vo.event.WinnerPostVO">
-        INSERT INTO winner_posts (eventId, adminId, title, content)
-        VALUES (#{eventId}, #{adminId}, #{title}, #{content})
-	</insert>
-	
-	<!-- 새로운 이메일 발송 시 advance_ticket_email 테이블에 레코드 생성 -->
-	<insert id="insertAdvanceTicketEmail" parameterType="com.spring.javaclassS8.vo.reserve.AdvanceTicketEmailVO">
-	    INSERT INTO advance_ticket_emails (
-	        advanceTicketId, recipientEmail, recipientMemberId, 
-	        status, sentAt, lastAttemptAt, emailContent
-	    ) VALUES (
-	        #{advanceTicketId}, #{recipientEmail}, #{recipientMemberId}, 
-	        #{status}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{emailContent}
-	    )
+	    INSERT INTO winner_posts (eventId, adminId, title, content)
+	    VALUES (#{eventId}, #{adminId}, #{title}, #{content})
 	</insert>
 
 	<!-- 이벤트 내용 수정 -->
@@ -159,22 +113,11 @@
 		WHERE id = #{id}
 	</update>
 	
-	<!-- winners 테이블의 isAnnounced 업데이트 -->
+	<!-- 당첨자 발표 후 winners 테이블의 isAnnounced 업데이트 -->
 	<update id="updateWinnerIsAnnounced">
-		UPDATE winners
-		SET isAnnounced = true
-		WHERE eventId = #{eventId}
-	</update>
-	
-	<!-- 이벤트 당첨자 대상으로 기존 이메일 발송 기록이 있는 경우 retryCount / lastAttemptAt / status 필드 업데이트 -->
-	<update id="updateAdvanceTicketEmail" parameterType="com.spring.javaclassS8.vo.reserve.AdvanceTicketEmailVO">
-	    UPDATE advance_ticket_emails
-	    SET status = #{status},
-	        retryCount = #{retryCount},
-	        sentAt = #{sentAt},
-	        lastAttemptAt = #{lastAttemptAt},
-	        emailContent = #{emailContent}
-	    WHERE id = #{id}
+	    UPDATE winners
+	    SET isAnnounced = true
+	    WHERE eventId = #{eventId} AND drawAt = #{drawAt}
 	</update>
 	
 	<!-- 이벤트 당첨자 메일 발송 후 메일 발송여부 필드 업데이트 -->
@@ -184,4 +127,30 @@
 	        ticketSentStatus = 'SENT'
 	    WHERE id = #{winnerId}
 	</update>
+	
+	<!-- 이벤트 고유번호와 이벤트 추첨일시로 이벤트 당첨자 디테일 가져오기 -->
+	<select id="getWinnerDetailsByDrawAt" resultType="com.spring.javaclassS8.vo.event.WinnerDetailVO">
+	    SELECT
+	        w.id as winnerId,
+	        m.name as name,
+	        m.email as email,
+	        at.advanceTicketNumber as advanceTicketNumber,
+	        at.expiresAt
+	    FROM
+	        winners w
+	        JOIN members m ON w.memberId = m.id
+	        JOIN advance_tickets at ON w.advanceTicketId = at.id
+	    WHERE
+	        w.eventId = #{eventId}
+	        AND w.drawAt = #{drawAt}
+	</select>
+
+	<!-- 이벤트 고유번호와 이벤트 추첨일시로 이벤트 당첨 발표여부 확인 -->
+	<select id="isEventAnnouncedByDrawAt" resultType="boolean">
+	    SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END
+	    FROM winners
+	    WHERE eventId = #{eventId}
+	    AND DATE(drawAt) = DATE(#{drawAt})
+	    AND isAnnounced = true
+	</select>
 </mapper>

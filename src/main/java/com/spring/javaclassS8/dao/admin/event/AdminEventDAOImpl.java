@@ -1,6 +1,9 @@
 package com.spring.javaclassS8.dao.admin.event;
 
+import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,6 @@ import com.spring.javaclassS8.vo.event.EventVO;
 import com.spring.javaclassS8.vo.event.WinnerDetailVO;
 import com.spring.javaclassS8.vo.event.WinnerPostVO;
 import com.spring.javaclassS8.vo.event.WinnerVO;
-import com.spring.javaclassS8.vo.reserve.AdvanceTicketEmailVO;
 
 @Repository
 public class AdminEventDAOImpl implements AdminEventDAO {
@@ -45,8 +47,8 @@ public class AdminEventDAOImpl implements AdminEventDAO {
 
 	// 이벤트 참여자 memberId 가져오기
 	@Override
-	public List<Integer> getActivceParticipants(int eventId) {
-		return sqlSession.getMapper(AdminEventDAO.class).getActivceParticipants(eventId);
+	public List<Integer> getActiveParticipants(int eventId) {
+		return sqlSession.getMapper(AdminEventDAO.class).getActiveParticipants(eventId);
 	}
 
 	// 이벤트 당첨자 저장하기
@@ -79,39 +81,32 @@ public class AdminEventDAOImpl implements AdminEventDAO {
 		sqlSession.getMapper(AdminEventDAO.class).insertWinnerPost(winnerPost);
 	}
 
-	// winners 테이블의 isAnnounced 업데이트
-	@Override
-	public void updateWinnerIsAnnounced(int eventId) {
-		sqlSession.getMapper(AdminEventDAO.class).updateWinnerIsAnnounced(eventId);
-	}
-
-	// 이벤트 당첨자 발표 공지 여부
-	@Override
-	public boolean isEventAnnounced(int eventId) {
-		return sqlSession.getMapper(AdminEventDAO.class).isEventAnnounced(eventId);
-	}
-
-	// 이벤트 당첨자에게 당첨 안내 및 예매권 번호를 발송했는지 확인
-	@Override
-	public AdvanceTicketEmailVO getAdvanceTicketEmailByAdvanceTicketId(int advanceTicketId) {
-		return sqlSession.getMapper(AdminEventDAO.class).getAdvanceTicketEmailByAdvanceTicketId(advanceTicketId);
-	}
-
-	// 기존 이메일 발송 기록이 있는 경우 retryCount / lastAttemptAt / status 필드 업데이트
-	@Override
-	public void updateAdvanceTicketEmail(AdvanceTicketEmailVO advanceTicketEmail) {
-		sqlSession.getMapper(AdminEventDAO.class).updateAdvanceTicketEmail(advanceTicketEmail);
-	}
-
-	// 새로운 이메일 발송 시 advance_ticket_email 테이블에 레코드 생성
-	@Override
-	public void insertAdvanceTicketEmail(AdvanceTicketEmailVO advanceTicketEmail) {
-		sqlSession.getMapper(AdminEventDAO.class).insertAdvanceTicketEmail(advanceTicketEmail);
-	}
-
-	// 이벤트 당첨자 메일 발송 후 winners 테이블의 emailSentAt 필드 업데이트
+	// 이벤트 당첨자 메일 발송 후 메일 발송여부 필드 업데이트
 	@Override
 	public void updateEmailSentAt(int winnerId) {
 		sqlSession.getMapper(AdminEventDAO.class).updateEmailSentAt(winnerId);
+	}
+
+	// 이벤트 고유번호와 이벤트 추첨일시로 이벤트 당첨자 디테일 가져오기
+	@Override
+	public List<WinnerDetailVO> getWinnerDetailsByDrawAt(int eventId, Timestamp drawAt) {
+		return sqlSession.getMapper(AdminEventDAO.class).getWinnerDetailsByDrawAt(eventId, drawAt);
+	}
+
+	// 이벤트 고유번호와 이벤트 추첨일시로 이벤트 당첨 발표여부 확인
+	@Override
+	public boolean isEventAnnouncedByDrawAt(int eventId, Timestamp drawAt) {
+		return sqlSession.getMapper(AdminEventDAO.class).isEventAnnouncedByDrawAt(eventId, drawAt);
+	}
+	
+	// 당첨자 발표 후 winners 테이블의 isAnnounced 업데이트
+	@Override
+	public int updateWinnerIsAnnounced(int eventId, Timestamp drawAt) {
+	    Map<String, Object> paramMap = new HashMap<>();
+	    paramMap.put("eventId", eventId);
+	    paramMap.put("drawAt", drawAt);
+	    int updatedRows = sqlSession.update("com.spring.javaclassS8.dao.admin.event.AdminEventDAO.updateWinnerIsAnnounced", paramMap);
+	    System.out.println("Updated " + updatedRows + " rows for eventId: " + eventId + ", drawAt: " + drawAt);
+	    return updatedRows;
 	}
 }

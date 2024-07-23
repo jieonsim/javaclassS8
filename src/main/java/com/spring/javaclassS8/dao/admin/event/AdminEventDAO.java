@@ -1,5 +1,6 @@
 package com.spring.javaclassS8.dao.admin.event;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -9,7 +10,6 @@ import com.spring.javaclassS8.vo.event.EventVO;
 import com.spring.javaclassS8.vo.event.WinnerDetailVO;
 import com.spring.javaclassS8.vo.event.WinnerPostVO;
 import com.spring.javaclassS8.vo.event.WinnerVO;
-import com.spring.javaclassS8.vo.reserve.AdvanceTicketEmailVO;
 
 public interface AdminEventDAO {
 
@@ -27,7 +27,7 @@ public interface AdminEventDAO {
 	int getParticipantCount(int eventId);
 
 	// 이벤트 참여자의 memberId 가져오기
-	List<Integer> getActivceParticipants(int eventId);
+	List<Integer> getActiveParticipants(int eventId);
 
 	// 이벤트 당첨자 저장하기
 	void insertWinner(WinnerVO winner);
@@ -44,22 +44,15 @@ public interface AdminEventDAO {
 	// 당첨자 발표 게시글 저장
 	void insertWinnerPost(WinnerPostVO winnerPost);
 
-	// winners 테이블의 isAnnounced 업데이트
-	void updateWinnerIsAnnounced(int eventId);
-
-	// 이벤트 당첨자 발표 공지 여부
-	boolean isEventAnnounced(int eventId);
-
-	// 이벤트 당첨자에게 당첨 안내 및 예매권 번호를 발송했는지 확인
-	AdvanceTicketEmailVO getAdvanceTicketEmailByAdvanceTicketId(int advanceTicketId);
-
-	// 기존 이메일 발송 기록이 있는 경우 retryCount / lastAttemptAt / status 필드 업데이트
-	void updateAdvanceTicketEmail(AdvanceTicketEmailVO advanceTicketEmail);
-
-	// 새로운 이메일 발송 시 advance_ticket_email 테이블에 레코드 생성
-	void insertAdvanceTicketEmail(AdvanceTicketEmailVO advanceTicketEmail);
-
-	// 이벤트 당첨자 메일 발송 후 winners 테이블의 emailSentAt 필드 업데이트
+	// 이벤트 당첨자 메일 발송 후 메일 발송여부 필드 업데이트
 	void updateEmailSentAt(int winnerId);
 
+	// 이벤트 고유번호와 이벤트 추첨일시로 이벤트 당첨자 디테일 가져오기
+	List<WinnerDetailVO> getWinnerDetailsByDrawAt(@Param("eventId") int eventId, @Param("drawAt") Timestamp drawAt);
+
+	// 이벤트 고유번호와 이벤트 추첨일시로 이벤트 당첨 발표여부 확인
+	boolean isEventAnnouncedByDrawAt(@Param("eventId") int eventId, @Param("drawAt") Timestamp drawAt);
+
+	// winners 테이블의 isAnnounced 업데이트
+	int updateWinnerIsAnnounced(@Param("eventId") int eventId, @Param("drawAt") Timestamp drawAt);
 }

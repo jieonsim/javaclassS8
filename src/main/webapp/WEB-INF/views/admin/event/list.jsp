@@ -108,17 +108,17 @@
 														<td class="text-center">${event.endDate}</td>
 														<td class="text-center">
 															<c:choose>
-																<c:when test="${event.eventStatus == 'ONGOING'}">
-																	<label class="badge badge-danger">${event.eventStatus.displayName}</label>
+																<c:when test="${event.status == 'ONGOING'}">
+																	<label class="badge badge-danger">${event.status.displayName}</label>
 																</c:when>
-																<c:when test="${event.eventStatus == 'ENDED'}">
-																	<label class="badge badge-success">${event.eventStatus.displayName}</label>
+																<c:when test="${event.status == 'ENDED'}">
+																	<label class="badge badge-success">${event.status.displayName}</label>
 																</c:when>
-																<c:when test="${event.eventStatus == 'UPCOMING'}">
-																	<label class="badge badge-warning">${event.eventStatus.displayName}</label>
+																<c:when test="${event.status == 'UPCOMING'}">
+																	<label class="badge badge-warning">${event.status.displayName}</label>
 																</c:when>
 																<c:otherwise>
-																	<label class="badge badge-info">${event.eventStatus.displayName}</label>
+																	<label class="badge badge-info">${event.status.displayName}</label>
 																</c:otherwise>
 															</c:choose>
 														</td>

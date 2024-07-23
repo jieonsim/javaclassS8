@@ -18,7 +18,7 @@ public class EventAdvanceTicketEmailService {
 	@Autowired
 	private JavaMailSender mailSender;
 
-	public String sendAdvanceTicketEmail(String email, String eventTitle, String advanceTicketNumber, Timestamp expiresAt) throws MessagingException {
+	public void sendAdvanceTicketEmail(String email, String eventTitle, String advanceTicketNumber, Timestamp expiresAt) throws MessagingException {
 		// Timestamp를 LocalDateTime으로 변환
 		LocalDateTime localDateTime = expiresAt.toLocalDateTime();
 
@@ -29,9 +29,8 @@ public class EventAdvanceTicketEmailService {
         String formattedTicketNumber = formatTicketNumber(advanceTicketNumber);
         
 		String htmlContent = getHtmlTemplate(eventTitle, formattedTicketNumber, expiresDate);
+
 		sendHtmlEmail(email, "[티켓챔프] 이벤트 당첨을 축하드립니다.", htmlContent);
-		
-		return htmlContent;
 	}
 	
 	private String formatTicketNumber(String ticketNumber) {

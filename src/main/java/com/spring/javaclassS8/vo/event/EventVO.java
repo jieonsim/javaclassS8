@@ -20,7 +20,7 @@ public class EventVO {
 	private String thumbnail;
 	private String startDate;
 	private String endDate;
-	private EventStatus eventStatus;
+	private Status status;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
 	private MultipartFile thumbnailFile;
@@ -48,12 +48,12 @@ public class EventVO {
 		}
 	}
 
-	public enum EventStatus {
+	public enum Status {
 		ONGOING("진행 중"), ENDED("종료"), UPCOMING("예정");
 
 		private final String displayName;
 
-		EventStatus(String displayName) {
+		Status(String displayName) {
 			this.displayName = displayName;
 		}
 
@@ -61,8 +61,8 @@ public class EventVO {
 			return displayName;
 		}
 
-		public static EventStatus fromString(String text) {
-			for (EventStatus status : EventStatus.values()) {
+		public static Status fromString(String text) {
+			for (Status status : Status.values()) {
 				if (status.name().equalsIgnoreCase(text)) {
 					return status;
 				}

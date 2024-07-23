@@ -1,6 +1,7 @@
 package com.spring.javaclassS8.service.admin.event;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -57,10 +58,13 @@ public interface AdminEventService {
 	// 이벤트 당첨자 발표 포스팅하기
 	boolean createWinnerPost(WinnerPostVO winnerPost);
 
-	// 이벤트 당첨자 발표 공지 여부
-	boolean isEventAnnounced(int eventId);
-
 	// 이벤트 당첨자 대상으로 당첨 안내 및 예매권 번호 메일 발송
-	boolean sendOrResendWinnerEmails(int eventId) throws MessagingException;
+	boolean sendWinnerEmails(int eventId, String drawAt) throws MessagingException;
+
+	// 이벤트 고유번호와 이벤트 추첨일시로 이벤트 당첨자 디테일 가져오기
+	List<WinnerDetailVO> getWinnerDetailsByDrawAt(int eventId, Timestamp drawAt);
+
+	// 이벤트 고유번호와 이벤트 추첨일시로 이벤트 당첨 발표여부 확인
+	boolean isEventAnnouncedByDrawAt(int eventId, Timestamp drawAt);
 	
 }

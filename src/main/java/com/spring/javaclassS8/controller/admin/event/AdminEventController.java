@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
@@ -35,7 +36,7 @@ import com.spring.javaclassS8.vo.event.EventCommentVO;
 import com.spring.javaclassS8.vo.event.EventDrawSummaryVO;
 import com.spring.javaclassS8.vo.event.EventVO;
 import com.spring.javaclassS8.vo.event.EventVO.EventCategory;
-import com.spring.javaclassS8.vo.event.EventVO.EventStatus;
+import com.spring.javaclassS8.vo.event.EventVO.Status;
 import com.spring.javaclassS8.vo.event.WinnerDetailVO;
 import com.spring.javaclassS8.vo.event.WinnerPostVO;
 import com.spring.javaclassS8.vo.member.MemberVO;
@@ -56,7 +57,7 @@ public class AdminEventController {
 		List<EventVO> events = eventService.getAllEvents();
 		model.addAttribute("events", events);
 		model.addAttribute("categories", EventCategory.values());
-		model.addAttribute("statuses", EventStatus.values());
+		model.addAttribute("statuses", Status.values());
 		return "admin/event/list";
 	}
 
@@ -64,7 +65,7 @@ public class AdminEventController {
 	@GetMapping("/upload")
 	public String showUploadForm(Model model) {
 		model.addAttribute("categories", EventCategory.values());
-		model.addAttribute("statuses", EventStatus.values());
+		model.addAttribute("statuses", Status.values());
 		return "admin/event/upload";
 	}
 
@@ -160,7 +161,7 @@ public class AdminEventController {
 		}
 		model.addAttribute("event", event);
 		model.addAttribute("categories", EventCategory.values());
-		model.addAttribute("statuses", EventStatus.values());
+		model.addAttribute("statuses", Status.values());
 
 		return "admin/event/update";
 	}
@@ -201,7 +202,7 @@ public class AdminEventController {
 			@RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate, @RequestParam(required = false) String keyword, Model model) {
 
 		List<EventVO> filteredEvents = adminEventService.filterEvents(eventCategory, status, startDate, endDate, keyword);
-		model.addAttribute("statuses", EventStatus.values());
+		model.addAttribute("statuses", Status.values());
 		return ResponseEntity.ok(filteredEvents);
 	}
 
@@ -246,16 +247,21 @@ public class AdminEventController {
 
 	// 이벤트 당첨자 디테일
 	@GetMapping("/winnerDetail")
-	public String getWinnerDetail(@RequestParam("eventId") int eventId, Model model) {
-		List<WinnerDetailVO> winnerDetails = adminEventService.getWinnerDetails(eventId);
+	public String getWinnerDetail(@RequestParam("eventId") int eventId, @RequestParam("drawAt") String drawAtStr, Model model) {
+		Timestamp drawAt = Timestamp.valueOf(drawAtStr.replace('T', ' '));
+		List<WinnerDetailVO> winnerDetails = adminEventService.getWinnerDetailsByDrawAt(eventId, drawAt);
 		EventVO event = adminEventService.getEventById(eventId);
-		boolean isAnnounced = adminEventService.isEventAnnounced(eventId);
+		boolean isAnnounced = adminEventService.isEventAnnouncedByDrawAt(eventId, drawAt);
 		
+	    // 결과 확인을 위한 로그
+	    System.out.println("Number of winners: " + winnerDetails.size());
+
 		model.addAttribute("winnerDetails", winnerDetails);
 		model.addAttribute("eventTitle", event.getTitle());
 		model.addAttribute("eventId", eventId);
+		model.addAttribute("drawAt", drawAt);
 		model.addAttribute("isAnnounced", isAnnounced);
-		
+
 		return "admin/event/winnerDetail";
 	}
 
@@ -263,53 +269,65 @@ public class AdminEventController {
 	@PostMapping("/uploadWinnerAnnouoncement")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> uploadWinnerAnnouoncement(@RequestBody WinnerPostVO winnerPost, HttpSession session) {
-		Map<String, Object> response = new HashMap<>();
+	    Map<String, Object> response = new HashMap<>();
 
-		try {
-			MemberVO admin = (MemberVO) session.getAttribute("loginMember");
-			if (admin == null) {
-				throw new RuntimeException("관리자 로그인이 필요합니다.");
-			}
+	    try {
+	        MemberVO admin = (MemberVO) session.getAttribute("loginMember");
+	        if (admin == null) {
+	            throw new RuntimeException("관리자 로그인이 필요합니다.");
+	        }
 
-			winnerPost.setAdminId(admin.getId());
-			boolean result = adminEventService.createWinnerPost(winnerPost);
+	        winnerPost.setAdminId(admin.getId());
+	        
+	        System.out.println("Received drawAt: " + winnerPost.getDrawAt());
 
-			if (result) {
-				response.put("success", true);
-				response.put("message", "당첨자 발표가 정상적으로 완료되었습니다.");
-			} else {
-				response.put("success", false);
-				response.put("message", "당첨자 발표에 실패했습니다.");
-			}
-		} catch (Exception e) {
-			response.put("success", false);
-			response.put("message", "당첨자 발표 중 오류가 발생했습니다.");
-			e.printStackTrace();
-		}
-		return ResponseEntity.ok(response);
+	        boolean result = adminEventService.createWinnerPost(winnerPost);
+
+	        if (result) {
+	            response.put("success", true);
+	            response.put("message", "당첨자 발표가 정상적으로 완료되었습니다.");
+	        } else {
+	            response.put("success", false);
+	            response.put("message", "당첨자 발표에 실패했습니다.");
+	        }
+	    } catch (Exception e) {
+	        response.put("success", false);
+	        response.put("message", "당첨자 발표 중 오류가 발생했습니다: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	    return ResponseEntity.ok(response);
 	}
-
+	
 	// 이벤트 당첨자 대상으로 메일 발송
 	@PostMapping("/sendWinnerEmails")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> sendWinnerEmails(@RequestBody Map<String, Object> request) {
-		int eventId = Integer.parseInt(request.get("eventId").toString());
-		Map<String, Object> response = new HashMap<>();
-
-		try {
-			boolean result = adminEventService.sendOrResendWinnerEmails(eventId);
-			if (result) {
-				response.put("success", true);
-				response.put("message", "메일 발송이 완료되었습니다.");
-			} else {
-				response.put("success", false);
-				response.put("message", "메일 발송에 실패했습니다.");
-			}
-		} catch (Exception e) {
-			response.put("success", false);
-			response.put("message", "메일 발송 중 오류가 발생했습니다: " + e.getMessage());
-		}
-
-		return ResponseEntity.ok(response);
+	    int eventId = Integer.parseInt(request.get("eventId").toString());
+	    String drawAt = (String) request.get("drawAt");
+	    Map<String, Object> response = new HashMap<>();
+	    
+	    System.out.println("Received request for sendWinnerEmails - eventId: " + eventId + ", drawAt: " + drawAt);
+	    
+	    if (drawAt == null || drawAt.isEmpty()) {
+	        response.put("success", false);
+	        response.put("message", "drawAt 값이 없습니다.");
+	        return ResponseEntity.ok(response);
+	    }
+	    
+	    try {
+	        boolean result = adminEventService.sendWinnerEmails(eventId, drawAt);
+	        if (result) {
+	            response.put("success", true);
+	            response.put("message", "메일 발송이 완료되었습니다.");
+	        } else {
+	            response.put("success", false);
+	            response.put("message", "메일 발송에 실패했습니다.");
+	        }
+	    } catch (Exception e) {
+	        response.put("success", false);
+	        response.put("message", "메일 발송 중 오류가 발생했습니다: " + e.getMessage());
+	    }
+	    
+	    return ResponseEntity.ok(response);
 	}
 }

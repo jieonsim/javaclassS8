@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const winnerAnnouncementBox = document.getElementById('winnerAnnouncementBox');
 	const winnerAnnouncementForm = document.getElementById('winnerAnnouncementForm');
 	const sendMailBtn = document.getElementById('sendMailBtn');
-	
+
 	let editor;
 
 	// 당첨자 발표 업로드 버튼 클릭 시 폼 표시
@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			},
 			body: JSON.stringify({
 				eventId: document.getElementById('eventId').value,
+				drawAt: document.getElementById('drawAt').value,
 				title: document.getElementById('inputTitle').value,
 				content: editorContent,
 			})
@@ -81,37 +82,36 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 
 	if (sendMailBtn) {
-        sendMailBtn.addEventListener('click', function() {
-            this.textContent = '메일 발송 중';
-            this.disabled = true;
+		sendMailBtn.addEventListener('click', function() {
+			this.textContent = '메일 발송 중';
+			this.disabled = true;
 
-            fetch(`${ctp}/admin/event/sendWinnerEmails`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    eventId: document.getElementById('eventId').value
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('메일 발송이 완료되었습니다.');
-                    this.textContent = '당첨 안내 및 예매권 메일 발송';
-                    this.disabled = false;
-                } else {
-                    alert('메일 발송 중 오류가 발생했습니다: ' + data.message);
-                    this.textContent = '당첨 안내 및 예매권 메일 발송';
-                    this.disabled = false;
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('메일 발송 중 오류가 발생했습니다.');
-                this.textContent = '당첨 안내 및 예매권 메일 발송';
-                this.disabled = false;
-            });
-        });
-    }
+			fetch(`${ctp}/admin/event/sendWinnerEmails`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					eventId: document.getElementById('eventId').value,
+					drawAt: document.getElementById('drawAt').value
+				})
+			})
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						alert('메일 발송이 완료되었습니다.');
+					} else {
+						alert('메일 발송 중 오류가 발생했습니다: ' + data.message);
+					}
+					this.textContent = '당첨 안내 및 예매권 메일 발송';
+					this.disabled = false;
+				})
+				.catch(error => {
+					console.error('Error:', error);
+					alert('메일 발송 중 오류가 발생했습니다.');
+					this.textContent = '당첨 안내 및 예매권 메일 발송';
+					this.disabled = false;
+				});
+		});
+	}
 });

@@ -83,6 +83,7 @@
 								<div class="card-body">
 									<form class="forms-sample" id="winnerAnnouncementForm" method="post">
 										<input type="hidden" name="eventId" value="${eventId}" id="eventId" />
+										<input type="hidden" name="drawAt" value="${drawAt}" id="drawAt" />
 										<input type="hidden" name="title" value="${eventTitle}" id="inputTitle" />
 										<h4 class="card-title">당첨자 발표 업로드</h4>
 										<p class="card-description mb-0 ">

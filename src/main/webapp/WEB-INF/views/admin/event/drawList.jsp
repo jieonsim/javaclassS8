@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
@@ -103,12 +104,12 @@
 														<td class="text-center">${status.count}</td>
 														<td class="text-center">${drawSummary.eventCategory.displayName}</td>
 														<td>
-															<a href="${ctp}/admin/event/winnerDetail?eventId=${drawSummary.eventId}" style="text-decoration: none; color: #212529;">${drawSummary.title}</a>
+															<a href="${ctp}/admin/event/winnerDetail?eventId=${drawSummary.eventId}&drawAt=${fn:replace(drawSummary.drawAt, ' ', 'T')}" style="text-decoration: none; color: #212529;">${drawSummary.title}</a>
 														</td>
 														<td class="text-center">${drawSummary.startDate}&nbsp;~&nbsp;${drawSummary.endDate}</td>
 														<td class="text-center">
 															<c:choose>
-																<c:when test="${drawSummary.announced eq '1'}">
+																<c:when test="${drawSummary.announced}">
 																	<label class="badge badge-success">Y</label>
 																</c:when>
 																<c:otherwise>
