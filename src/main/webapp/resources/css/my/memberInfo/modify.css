@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+.blind, legend, caption span {
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	left: -9999px;
+	width: 1px;
+	height: 1px;
+	font-size: 1px;
+	line-height: 100px;
+	white-space: nowrap;
+}
+
+input {
+	font-family: 'NotoSans', 'Apple SD Gothic Neo', '돋움', dotum, sans-serif;
+	font-size: 12px;
+	font-weight: 300;
+	color: #222;
+	letter-spacing: -.03em;
+}
+
+.inp_bx {
+	display: block;
+	position: relative;
+	width: 100%;
+	margin-top: 8px;
+}
+
+.inp_bx.is_focus .inp_txt, .inp_bx.is_value .inp_txt {
+	padding-right: 42px;
+	border-color: #858585;
+	color: #222;
+}
+
+.inp_txt {
+	display: block;
+	position: relative;
+	padding: 12px 10px;
+	border: 1px solid #e6e6e6;
+	font-size: 0;
+	font-family: 'Pretendard-Light';
+}
+
+.inp {
+	display: inline-block;
+	position: relative;
+	z-index: 10;
+	width: 100%;
+	height: 18px;
+	border: 0;
+	background: transparent;
+	font-size: 14px;
+	color: #222;
+	line-height: 18px;
+	vertical-align: top;
+	outline: none;
+	border-radius: 0;
+}
+
+.inp_bx .btn_del, .inp_bx3 .btn_del {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 11px;
+	z-index: 10;
+}
+
+.error_txt {
+	margin-top: 6px;
+	font-size: 12px;
+	color: #fa2828;
+	font-family: 'Pretendard-Light';
+}
+
+.error .inp_txt {
+	border-color: #f77f81;
+}
+
+.inp_bx+.btn_area {
+	margin-top: 15px;
+}

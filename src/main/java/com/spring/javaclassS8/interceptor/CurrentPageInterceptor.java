@@ -12,8 +12,7 @@ import com.spring.javaclassS8.vo.member.MemberVO;
 public class CurrentPageInterceptor implements HandlerInterceptor {
 
 	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 		if (modelAndView != null) {
 			String uri = request.getRequestURI();
 			String contextPath = request.getContextPath();
@@ -91,6 +90,17 @@ public class CurrentPageInterceptor implements HandlerInterceptor {
 				currentSelected = "eventWinner";
 			}
 
+			// 마이페이지 처리
+			if (uri.startsWith(contextPath + "/my/reserve")) {
+				currentPage = "reserve";
+			} else if (uri.startsWith(contextPath + "/my/discount")) {
+				currentPage = "discount";
+			} else if (uri.startsWith(contextPath + "/my/activity")) {
+				currentPage = "activity";
+			} else if (uri.startsWith(contextPath + "/my/memberInfo")) {
+				currentPage = "memberInfo";
+			}
+
 			// 현재 로그인한 사용자의 역할 확인
 			boolean isAdmin = false;
 			HttpSession session = request.getSession(false);
@@ -110,14 +120,12 @@ public class CurrentPageInterceptor implements HandlerInterceptor {
 	}
 
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		return true;
 	}
 
 	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-			throws Exception {
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
 
 	}
 }

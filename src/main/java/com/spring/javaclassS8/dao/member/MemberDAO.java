@@ -38,4 +38,7 @@ public interface MemberDAO {
 
 	// 비밀번호 찾기 - 비밀번호 재설정 처리
 	public boolean updatePassword(MemberVO member);
+
+	// 회원정보수정 처리
+	public int updateMemberInfo(MemberVO member);
 }

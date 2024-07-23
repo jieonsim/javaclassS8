@@ -48,6 +48,13 @@
 		UPDATE members SET password = #{password} WHERE id = #{id}
 	</update>
 	
+	<!-- 회원정보 수정 처리 -->
+	<update id="updateMemberInfo" parameterType="com.spring.javaclassS8.vo.member.MemberVO">
+		UPDATE members
+		SET name = #{name}, phone = #{phone}
+		WHERE id = #{id}
+	</update>
+	
 	<!-- 자동 로그인 토큰 삭제 -->
 	<delete id="deleteAutoLoginToken">
 		DELETE FROM auto_login_tokens WHERE token = #{token}

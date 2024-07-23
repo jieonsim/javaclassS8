@@ -76,4 +76,9 @@ public class MemberDAOImpl implements MemberDAO {
 	public boolean updatePassword(MemberVO member) {
 		return sqlSession.getMapper(MemberDAO.class).updatePassword(member);
 	}
+
+	@Override
+	public int updateMemberInfo(MemberVO member) {
+		return sqlSession.getMapper(MemberDAO.class).updateMemberInfo(member);
+	}
 }

@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="${ctp}/css/common/common.css">
 <link rel="stylesheet" href="${ctp}/css/common/layout.css">
 <link rel="stylesheet" href="${ctp}/css/my/contents.css">
+<link rel="stylesheet" href="${ctp}/css/my/memberInfo/matchPassword.css">
 <link rel="icon" href="${ctp}/images/common/favicon.ico">
 </head>
 <body>
@@ -23,44 +24,41 @@
 				<div class="help_rcont">
 					<h3 class="blind">회원정보관리</h3>
 					<div class="h3">
-						<h4 class="tit_mber02">회원정보수정</h4>
+						<h4 class="tit_mber02">비밀번호 확인</h4>
 					</div>
 					<div class="mtmwrite_tbl mgt30">
-						<table>
-							<caption>회원 정보 수정 내용</caption>
-							<colgroup>
-								<col style="width: 160px">
-								<col>
-							</colgroup>
-							<tbody>
-								<tr class="table-border-bottom">
-									<th scope="row">아이디</th>
-									<td>${member.email}</td>
-								</tr>
-								<tr class="table-border-bottom">
-									<th scope="row">비밀번호</th>
-									<td>
-										<a href="${ctp}/my/memberInfo/changePassword" id="pwBtn" class="btn btn_blank">비밀번호 변경</a>
-									</td>
-								</tr>
-								<tr class="table-border-bottom">
-									<th scope="row">이름</th>
-									<td>${member.name}</td>
-								</tr>
-								<tr>
-									<th scope="row">휴대폰 번호</th>
-									<td>${member.phone}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="list_btn">
-						<a href="${ctp}/my/memberInfo/matchPassword" id="pwBtn2" class="btn btn_full">회원정보 수정</a>
+						<div id="container" class="my-4 py-3">
+							<h1 class="blind">회원 정보</h1>
+							<div class="content">
+								<div class="tit_area">
+									<h2 class="h_tit">
+										개인 정보를 안전하게 보호하기 위하여
+										<br>
+										비밀번호를 한번 더 입력해 주세요.
+									</h2>
+								</div>
+								<form id="matchPasswordForm" method="post">
+									<fieldset>
+										<legend>비밀번호 확인</legend>
+										<span class="inp_bx">
+											<span class="inp_txt">
+												<input type="password" class="inp" id="inputPassword" name="password" maxlength="15" value="" autocomplete="off" title="비밀번호" placeholder="비밀번호">
+											</span>
+											<p class="error_txt" id="errorBox" role="alert" style="display: none;"></p>
+										</span>
+										<div class="btn_area">
+											<button type="submit" class="btn btn_full btn_point">확인</button>
+										</div>
+									</fieldset>
+								</form>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</main>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
+	<script src="${ctp}/js/my/memberInfo/matchPassword.js"></script>
 </body>
 </html>

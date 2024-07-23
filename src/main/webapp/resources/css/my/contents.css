@@ -1,10 +1,5 @@
 @charset "UTF-8";
 
-@charset "utf-8";
-
-
-/* HIVELAB (http://www.hivelab.co.kr) */
-
 .controller span,.controller a{display:inline-block;overflow:hidden;font-size:1px;line-height:999px;background:url(../img/sp.png) no-repeat}
 
 /* 3depth 5개 항목 */
@@ -301,7 +296,8 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .help_lmenu li.has_sub li{margin-top:8px;border:none;padding:0}
 .help_lmenu li.has_sub li a{display:block;font-size:13px;;font-weight:500;line-height:18px;color:#878d95}
 .help_lmenu li.has_sub li.on a{color:#fa2828;position: relative;}
-.help_lmenu li.has_sub li.on a::after{content: '';position: absolute;display: block;width: auto;height: auto;top: 50%;right: 0;transform: translateY(-50%);}
+/* .help_lmenu li.has_sub li.on a::after{content: '';position: absolute;display: block;width: auto;height: auto;top: 50%;right: 0;transform: translateY(-50%);} */
+.help_lmenu li.has_sub li.on a::after{width: 16px;height: 16px;background-image: url(../../images/icon/arrow-right.svg);background-repeat: no-repeat}
 
 /* 고객센터 메인 */
 .help_rcont .search_help{background:#ecedf2;height:72px;margin-bottom:10px;font-size:0}
@@ -885,7 +881,7 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .mypage .quick_menu_wrap .quick_menu_list .quick_menu_item .qmenu_txt .txt:after{display:inline-block;font-size: 0;content:'';vertical-align: middle;margin-top: -2px;}
 
 /* 마이페이지 > 예매관리 */
-.mypage h4{display:block;margin-bottom:15px;font-size:26px;font-weight:500;line-height:26px}
+.mypage h4{display:block;margin-bottom:15px;font-size:26px;font-family:Pretendard-Medium;line-height:26px}
 .mypage h5 span{display:block;height:16px}
 .myreserve{overflow:hidden;margin-bottom:30px}
 .myreserve:after{display:block;clear:both;content:''}
@@ -1095,6 +1091,7 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .mypage .list_btn{margin-top:20px;font-size: 0;}
 .mypage .list_btn .btn + .btn{margin-left:6px}
 .mypage .list_btn .btn_full,.mypage .list_btn .btn_blank{min-width:124px;vertical-align:middle}
+.mypage .list_btn .btn_full,.mypage .list_btn .btn_blank:focus{box-shadow:none}
 .mypage .list_btn .callcenter{padding:4px 11px;border-color:#242428;line-height:16px}
 .mypage .list_btn .callcenter:hover{background:#fff}
 .mypage .mtmwrite_tbl th,.mypage .mtmwrite_tbl td{padding:30px 0 28px 20px;line-height:21px}
@@ -1120,6 +1117,7 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .gray_box dd span.color_point{letter-spacing:0}
 .gray_box p{font-size:16px;text-align:center}
 .mtmwrite_tbl .btn_blank{padding:4px 11px;font-size:13px;font-weight:400;line-height:18px}
+.mtmwrite_tbl .btn_blank:focus{box-shadow:none}
 .mberdsc{padding:20px 0 19px;background:#f5f6f9;text-align:center;font-size:16px;font-weight:bold;color:#242428;line-height:28px}
 .mberdsc.leave_members{margin-top: 44px;}
 .mberdsc em{color:#fa2828}
@@ -1901,3 +1899,7 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .trip_mypage_reserve .reservation_status dl dd{float:left}
 .trip_mypage_reserve .reservation_status dl dd .selectbox .select{box-sizing:border-box;width:116px;border:1px solid #242428}
 .trip_mypage_reserve .reservation_status dl dd .selectbox .select::before{background-position: -640px -82px;top:0%;transform: rotate(180deg)}
+
+/*추가*/
+.btn_full:hover {color: white !important}
+.table-border-bottom{border-bottom: 1px solid #ecedf2}
