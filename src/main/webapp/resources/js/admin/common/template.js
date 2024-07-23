@@ -47,7 +47,6 @@
     })
 
     //Close other submenu in sidebar on opening any
-
     sidebar.on('show.bs.collapse', '.collapse', function() {
       sidebar.find('.collapse.show').collapse('hide');
     });

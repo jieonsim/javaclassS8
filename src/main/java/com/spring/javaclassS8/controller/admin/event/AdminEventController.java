@@ -52,7 +52,7 @@ public class AdminEventController {
 	private EventService eventService;
 
 	// 이벤트 리스트
-	@GetMapping("/list")
+	@GetMapping("/eventList")
 	public String getEventList(Model model) {
 		List<EventVO> events = eventService.getAllEvents();
 		model.addAttribute("events", events);

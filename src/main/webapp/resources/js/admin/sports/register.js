@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			return;
 		}
 
-		sendRequest(`${ctp}/admin/sports/register`, { sportName }, '종목 등록 완료! 팀과 경기장을 이어서 등록해주세요.');
+		sendRequest(`${ctp}/admin/sports/sportRegister`, { sportName }, '종목 등록 완료! 팀과 경기장을 이어서 등록해주세요.');
 	});
 
 	// 팀 종목 등록
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			alert('팀 단축 이름은 필수 입력 항목입니다.');
 			return;
 		}
-		sendRequest(`${ctp}/admin/sports/team/register`, { sportName, teamName, shortName }, '팀 등록 완료! 경기장을 이어서 등록해주세요.');
+		sendRequest(`${ctp}/admin/sports/team/teamRegister`, { sportName, teamName, shortName }, '팀 등록 완료! 경기장을 이어서 등록해주세요.');
 	});
 
 	// 경기장 종목 등록
@@ -138,6 +138,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			alert('수용 인원은 필수 입력 항목입니다.');
 			return;
 		}
-		sendRequest(`${ctp}/admin/sports/venue/register`, { sportName, teamName, venueName, address, capacity }, '경기장 등록 완료!');
+		sendRequest(`${ctp}/admin/sports/venue/venueRegister`, { sportName, teamName, venueName, address, capacity }, '경기장 등록 완료!');
 	});
 });

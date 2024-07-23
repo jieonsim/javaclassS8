@@ -34,28 +34,28 @@
 			<div class="collapse" id="sports">
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item">
-						<a class="nav-link" href="${ctp}/admin/sports/register">종목 | 구단 | 경기장 등록</a>
+						<a class="nav-link" href="${ctp}/admin/sports/sportRegister">종목 | 구단 | 경기장 등록</a>
 					</li>
 				</ul>
 			</div>
 			<div class="collapse" id="sports">
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item">
-						<a class="nav-link" href="${ctp}/admin/sports/list">종목 | 구단 | 경기장 리스트</a>
+						<a class="nav-link" href="${ctp}/admin/sports/sportsList">종목 | 구단 | 경기장 리스트</a>
 					</li>
 				</ul>
 			</div>
 			<div class="collapse" id="sports">
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item">
-						<a class="nav-link" href="${ctp}/admin/sports/game/register">경기 등록</a>
+						<a class="nav-link" href="${ctp}/admin/sports/game/gameRegister">경기 등록</a>
 					</li>
 				</ul>
 			</div>
 			<div class="collapse" id="sports">
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item">
-						<a class="nav-link" href="${ctp}/admin/sports/game/list">경기 리스트</a>
+						<a class="nav-link" href="${ctp}/admin/sports/game/gameList">경기 리스트</a>
 					</li>
 				</ul>
 			</div>
@@ -120,7 +120,7 @@
 			<div class="collapse" id="event">
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item">
-						<a class="nav-link" href="${ctp}/admin/event/list">이벤트 리스트</a>
+						<a class="nav-link" href="${ctp}/admin/event/eventList">이벤트 리스트</a>
 					</li>
 				</ul>
 			</div>

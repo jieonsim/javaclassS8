@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		const formData = new FormData(form);
 
 		// 서버에 데이터 전송
-		fetch(`${ctp}/admin/sports/game/register`, {
+		fetch(`${ctp}/admin/sports/game/gameRegister`, {
 			method: 'POST',
 			body: formData
 		})

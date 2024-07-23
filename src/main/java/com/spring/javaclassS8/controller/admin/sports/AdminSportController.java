@@ -33,7 +33,7 @@ public class AdminSportController {
 	private AdminSportSerivce adminSportService;
 
 	// 스포츠 종목 + 팀 + 경기장 등록 폼
-	@GetMapping("/register")
+	@GetMapping("/sportRegister")
 	public String sportTeamVenueRegisterForm(Model model, @RequestParam(required = false) String selectedSport, @RequestParam(required = false) String selectedTeam) {
 		List<String> sports = adminSportService.getAllSports();
 		List<TeamVO> teams = adminSportService.getAllTeamsWithSports();
@@ -46,7 +46,7 @@ public class AdminSportController {
 	}
 
 	// 스포츠 종목 등록 처리
-	@PostMapping("/register")
+	@PostMapping("/sportRegister")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> registerSport(@RequestBody Map<String, String> payload) {
 		Map<String, Object> response = new HashMap<>();
@@ -69,7 +69,7 @@ public class AdminSportController {
 	}
 
 	// 스포츠 팀 등록 처리
-	@PostMapping("/team/register")
+	@PostMapping("/team/teamRegister")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> registerTeam(@RequestBody Map<String, String> payload) {
 		Map<String, Object> response = new HashMap<>();
@@ -94,7 +94,7 @@ public class AdminSportController {
 	}
 
 	// 스포츠 경기장 등록 처리
-	@PostMapping("/venue/register")
+	@PostMapping("/venue/venueRegister")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> registerVenue(@RequestBody Map<String, String> payload) {
 		Map<String, Object> response = new HashMap<>();
@@ -121,7 +121,7 @@ public class AdminSportController {
 	}
 
 	// 스포츠 종목 + 팀 + 경기장 리스트
-	@GetMapping("/list")
+	@GetMapping("/sportsList")
 	public String sportTeamVenueList(Model model) {
 		List<SportVO> sports = adminSportService.getAllSportsDetails();
 		List<TeamVO> teams = adminSportService.getAllTeamsDetails();
@@ -259,7 +259,7 @@ public class AdminSportController {
 	}
 
 	// 경기 등록 폼
-	@GetMapping("/game/register")
+	@GetMapping("/game/gameRegister")
 	public String gameRegisterForm(Model model) {
 		List<String> sports = adminSportService.getAllSports();
 		List<TeamVO> teams = adminSportService.getAllTeamsWithSports();
@@ -286,7 +286,7 @@ public class AdminSportController {
 	}
 
 	// 경기 등록 처리
-	@PostMapping("/game/register")
+	@PostMapping("/game/gameRegister")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> registerGame(@ModelAttribute GameVO game) {
 		Map<String, Object> response = new HashMap<>();
@@ -311,7 +311,7 @@ public class AdminSportController {
 	}
 
 	// 모든 경기 리스트
-	@GetMapping("/game/list")
+	@GetMapping("/game/gameList")
 	public String gameList(Model model) {
 		List<GameVO> games = adminSportService.getAllGamesDetails();
 
