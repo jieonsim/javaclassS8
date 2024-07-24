@@ -44,7 +44,7 @@
 	</update>
 	
 	<!-- 비밀번호 찾기 - 새로운 비밀번호로 재설정 -->
-	<update id="updatePassword">
+	<update id="resetPassword">
 		UPDATE members SET password = #{password} WHERE id = #{id}
 	</update>
 	
@@ -53,6 +53,13 @@
 		UPDATE members
 		SET name = #{name}, phone = #{phone}
 		WHERE id = #{id}
+	</update>
+	
+	<!-- 마이페이지 비밀번호 변경 처리 -->
+	<update id="updatePassword">
+		UPDATE members
+		SET password = #{newPassword}
+		WHERE id = #{memberId}
 	</update>
 	
 	<!-- 자동 로그인 토큰 삭제 -->

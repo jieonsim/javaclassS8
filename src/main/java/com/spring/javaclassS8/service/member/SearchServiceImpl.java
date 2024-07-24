@@ -169,7 +169,7 @@ public class SearchServiceImpl implements SearchService {
 		String econdedPassword = passwordEncoder.encode(newPassword);
 		member.setPassword(econdedPassword);
 
-		boolean updateSucess = memberDAO.updatePassword(member);
+		boolean updateSucess = memberDAO.resetPassword(member);
 
 		if (updateSucess) {
 			result.put("success", true);

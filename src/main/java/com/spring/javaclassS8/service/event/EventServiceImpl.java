@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.spring.javaclassS8.dao.event.EventDAO;
 import com.spring.javaclassS8.vo.event.EventCommentVO;
 import com.spring.javaclassS8.vo.event.EventParticipantVO;
+import com.spring.javaclassS8.vo.event.EventParticipationVO;
 import com.spring.javaclassS8.vo.event.EventVO;
 import com.spring.javaclassS8.vo.event.WinnerEventVO;
 import com.spring.javaclassS8.vo.event.WinnerPostDetailVO;
@@ -49,10 +50,10 @@ public class EventServiceImpl implements EventService {
 	@Override
 	@Transactional
 	public boolean insertEventCommentAndParticipate(int eventId, int memberId, String comment) {
-		if(hasParticipated(eventId, memberId)) {
+		if (hasParticipated(eventId, memberId)) {
 			return false;
 		}
-		
+
 		// 이벤트 컨텐츠 디테일에 댓글 달기
 		eventDAO.insertEventComment(eventId, memberId, comment);
 		// 이벤트 응모 처리
@@ -63,7 +64,7 @@ public class EventServiceImpl implements EventService {
 	// 이벤트 컨텐츠 디테일에 작성된 모든 댓글 가져오기
 	@Override
 	public List<EventCommentVO> getAllEventComments(int eventId) {
-		return  eventDAO.getAllEventComments(eventId);
+		return eventDAO.getAllEventComments(eventId);
 	}
 
 	// 이벤트 컨텐츠 디테일에 작성된 댓글 중 status가 active인것만 가져오기
@@ -87,28 +88,34 @@ public class EventServiceImpl implements EventService {
 		boolean commentUpdated = eventDAO.updateEventCommentStatus(commentId, EventCommentVO.Status.DELETED);
 		// 이벤트 참여 철회 -> event_participants 테이블의 status 필드 데이터 업데이트
 		boolean participationUpdated = eventDAO.updateEventParticipationStatus(commentId, EventParticipantVO.Status.CANCELLED);
-		return commentUpdated &&  participationUpdated;
+		return commentUpdated && participationUpdated;
 	}
 
 	// 이벤트 당첨자 발표 리스트
 	@Override
 	public List<WinnerEventVO> getWinnerEvents() {
-		 List<WinnerEventVO> events = eventDAO.getWinnerEvents();
-	        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
-	        
-	        for (WinnerEventVO event : events) {
-	            LocalDate startDate = LocalDate.parse(event.getStartDate(), inputFormatter);
-	            LocalDate endDate = LocalDate.parse(event.getEndDate(), inputFormatter);
-	            event.setStartDate(startDate.format(outputFormatter));
-	            event.setEndDate(endDate.format(outputFormatter));
-	        }
-	        return events;
+		List<WinnerEventVO> events = eventDAO.getWinnerEvents();
+		DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+
+		for (WinnerEventVO event : events) {
+			LocalDate startDate = LocalDate.parse(event.getStartDate(), inputFormatter);
+			LocalDate endDate = LocalDate.parse(event.getEndDate(), inputFormatter);
+			event.setStartDate(startDate.format(outputFormatter));
+			event.setEndDate(endDate.format(outputFormatter));
+		}
+		return events;
 	}
 
 	// 이벤트 당첨자 발표 디테일
 	@Override
 	public WinnerPostDetailVO getWinnerPostDetail(int winnerPostId) {
 		return eventDAO.getWinnerPostDetail(winnerPostId);
+	}
+
+	// 본인이 응모한 이벤트 리스트 가져오기
+	@Override
+	public List<EventParticipationVO> getEventParticipations(int memberId) {
+		return eventDAO.getEventParticipations(memberId);
 	}
 }

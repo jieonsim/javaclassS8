@@ -65,6 +65,29 @@
 	    WHERE wp.id = #{winnerPostId} AND wp.isPublished = true
 	</select>
 	
+	<!-- 본인이 응모한 이벤트 리스트 가져오기 -->
+	<select id="getEventParticipations" parameterType="int" resultType="com.spring.javaclassS8.vo.event.EventParticipationVO">
+        SELECT 
+            e.title AS eventTitle,
+            e.startDate,
+            e.endDate,
+            ep.participatedAt,
+            CASE WHEN w.id IS NOT NULL THEN TRUE ELSE FALSE END AS isWinner
+        FROM 
+            event_participants ep
+        JOIN 
+            events e ON ep.eventId = e.id
+        LEFT JOIN 
+            winners w ON ep.eventId = w.eventId AND ep.memberId = w.memberId
+        WHERE 
+            ep.memberId = #{memberId}
+        AND 
+            ep.status = 'ACTIVE'
+        ORDER BY 
+            ep.participatedAt DESC
+	</select>
+	
+	
 	<!-- 이벤트 컨텐츠 디테일에 댓글 달기 -->
 	<insert id="insertEventComment">
 		INSERT INTO event_comments (eventId, memberId, comment)

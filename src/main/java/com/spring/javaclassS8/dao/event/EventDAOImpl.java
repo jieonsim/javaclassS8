@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.spring.javaclassS8.vo.event.EventCommentVO;
 import com.spring.javaclassS8.vo.event.EventParticipantVO;
+import com.spring.javaclassS8.vo.event.EventParticipationVO;
 import com.spring.javaclassS8.vo.event.EventVO;
 import com.spring.javaclassS8.vo.event.WinnerEventVO;
 import com.spring.javaclassS8.vo.event.WinnerPostDetailVO;
@@ -95,5 +96,11 @@ public class EventDAOImpl implements EventDAO {
 	@Override
 	public WinnerPostDetailVO getWinnerPostDetail(int winnerPostId) {
 		return sqlSession.getMapper(EventDAO.class).getWinnerPostDetail(winnerPostId);
+	}
+
+	// 본인이 응모한 이벤트 리스트 가져오기
+	@Override
+	public List<EventParticipationVO> getEventParticipations(int memberId) {
+		return sqlSession.getMapper(EventDAO.class).getEventParticipations(memberId);
 	}
 }

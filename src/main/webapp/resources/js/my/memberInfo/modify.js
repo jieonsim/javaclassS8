@@ -20,11 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	function handleBlur(input) {
 		const inputBx = input.closest('.inp_bx');
 		inputBx.classList.remove('is_focus');
-		if (input.value.trim()) {
-			inputBx.classList.add('is_value');
-		} else {
-			inputBx.classList.remove('is_value');
-		}
 	}
 
 	function showError(input, message) {
@@ -60,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		input.addEventListener('focus', () => handleFocus(input));
 		input.addEventListener('blur', () => handleBlur(input));
 		input.addEventListener('input', () => {
-			input.closest('.inp_bx').classList.add('is_value');
 			if (input === inputName) {
 				validateInput(input, nameRegex, '한글과 영문 대,소문자를 사용해주세요.');
 			} else {

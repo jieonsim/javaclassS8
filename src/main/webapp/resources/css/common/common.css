@@ -24,10 +24,6 @@ hr{display:none}
 table{table-layout:fixed;padding:0;border-spacing:0px;border:0;border-collapse:collapse}
 th,td{padding:0px}
 caption{visibility:hidden;overflow:hidden;width:0;height:0;font-size:0;line-height:0}
-@media screen and (-webkit-min-device-pixel-ratio:0){
-  /* safari only */
-  ::i-block-chrome,caption{display:none}
-}
 button{cursor:pointer}
 
 .select_info .simple_grid .infinite_container::-webkit-scrollbar-thumb,

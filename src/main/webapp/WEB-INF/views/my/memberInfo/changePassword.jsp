@@ -41,25 +41,22 @@
 									<fieldset>
 										<legend>비밀번호 변경</legend>
 										<span class="inp_bx">
-											<!-- <span class="inp_bx is_focus"> -->
-											<!-- <span class="inp_bx is_value"> -->
-											<!-- <span class="inp_bx is_focus error"> -->
 											<span class="inp_txt">
-												<input type="password" class="inp" id="old_password" name="old_password" value="" maxlength="15" autocomplete="off" autocapitalize="none" title="비밀번호" placeholder="사용 중인 비밀번호">
+												<input type="password" class="inp" id="input_old_password" name="oldPassword" maxlength="15" autocomplete="off" title="비밀번호" placeholder="사용 중인 비밀번호">
 											</span>
-											<p class="error_txt" id="old_pw_msg" role="alert"></p>
+											<p class="error_txt" id="old_pw_msg" role="alert" style="display: none"></p>
 										</span>
 										<span class="inp_bx inp_bx2">
 											<span class="inp_txt">
-												<input type="password" class="inp" id="new_password" name="new_password" value="" maxlength="15" autocomplete="off" autocapitalize="none" title="신규 비밀번호" placeholder="신규 비밀번호">
+												<input type="password" class="inp" id="input_new_password" name="newPassword" maxlength="15" autocomplete="off" title="신규 비밀번호" placeholder="신규 비밀번호">
 											</span>
-											<p class="error_txt" id="pw_msg" role="alert"></p>
+											<p class="error_txt" id="pw_msg" role="alert" style="display: none"></p>
 										</span>
 										<span class="inp_bx">
 											<span class="inp_txt">
-												<input type="password" class="inp" id="confirm_password" name="confirm_password" value="" maxlength="15" onkeypress="showLayerByEnter(event);" autocomplete="off" autocapitalize="none" title="신규 비밀번호 재입력" placeholder="신규 비밀번호 재입력">
+												<input type="password" class="inp" id="input_confirm_password" maxlength="15" autocomplete="off" title="신규 비밀번호 재입력" placeholder="신규 비밀번호 재입력">
 											</span>
-											<p class="error_txt" id="pw_re_msg" role="alert"></p>
+											<p class="error_txt" id="pw_re_msg" role="alert" style="display: none"></p>
 										</span>
 										<div class="btn_area">
 											<button type="submit" class="btn btn_full btn_point">확인</button>
@@ -74,5 +71,6 @@
 		</div>
 	</main>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
+	<script src="${ctp}/js/my/memberInfo/changePassword.js"></script>
 </body>
 </html>

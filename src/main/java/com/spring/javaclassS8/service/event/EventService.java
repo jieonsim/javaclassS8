@@ -3,6 +3,7 @@ package com.spring.javaclassS8.service.event;
 import java.util.List;
 
 import com.spring.javaclassS8.vo.event.EventCommentVO;
+import com.spring.javaclassS8.vo.event.EventParticipationVO;
 import com.spring.javaclassS8.vo.event.EventVO;
 import com.spring.javaclassS8.vo.event.WinnerEventVO;
 import com.spring.javaclassS8.vo.event.WinnerPostDetailVO;
@@ -41,5 +42,8 @@ public interface EventService {
 
 	// 이벤트 당첨자 발표 디테일
 	public WinnerPostDetailVO getWinnerPostDetail(int winnerPostId);
+
+	// 본인이 응모한 이벤트 리스트 가져오기
+	public List<EventParticipationVO> getEventParticipations(int memberId);
 
 }

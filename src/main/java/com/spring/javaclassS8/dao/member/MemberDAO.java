@@ -37,8 +37,11 @@ public interface MemberDAO {
 	public MemberVO findByNameAndEmail(@Param("name") String name, @Param("email") String email);
 
 	// 비밀번호 찾기 - 비밀번호 재설정 처리
-	public boolean updatePassword(MemberVO member);
+	public boolean resetPassword(MemberVO member);
 
 	// 회원정보수정 처리
 	public int updateMemberInfo(MemberVO member);
+
+	// 마이페이지 비밀번호 변경 처리
+	public int updatePassword(@Param("memberId") int memberId, @Param("newPassword") String newPassword);
 }

@@ -1,6 +1,6 @@
 
 /* 좌석 등급 */
-CREATE TABLE seatCategories (
+CREATE TABLE seat_categories (
     id INT NOT NULL AUTO_INCREMENT COMMENT '좌석 등급 고유번호',
     venueId INT NOT NULL COMMENT '경기장 고유번호',
     categoryName INT NOT NULL COMMENT '등급 이름',

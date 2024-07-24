@@ -1,6 +1,6 @@
 
 /* 스포츠별 예매 정책 */
-CREATE TABLE sportBookingPolicies (
+CREATE TABLE sport_booking_policies (
     id INT NOT NULL AUTO_INCREMENT COMMENT '정책 고유번호',
     sportId INT NOT NULL COMMENT '스포츠 고유번호',
     bookingOpenDaysBefore INT NOT NULL DEFAULT 7 COMMENT '예매 오픈일',

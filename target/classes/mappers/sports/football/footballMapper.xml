@@ -16,7 +16,7 @@
 	    JOIN teams ht ON g.homeTeamId = ht.id
 	    JOIN teams at ON g.awayTeamId = at.id
 	    JOIN venues v ON g.venueId = v.id
-	    JOIN sportBookingPolicies p ON g.sportId = p.sportId
+	    JOIN sport_booking_policies p ON g.sportId = p.sportId
 	    JOIN sports s ON g.sportId = s.id
 	    WHERE g.gameDate >= #{today}
 	      AND g.gameDate < #{firstDayOfNextMonth}
@@ -40,7 +40,7 @@
     JOIN teams ht ON g.homeTeamId = ht.id
     JOIN teams at ON g.awayTeamId = at.id
     JOIN venues v ON g.venueId = v.id
-    JOIN sportBookingPolicies p ON g.sportId = p.sportId
+    JOIN sport_booking_policies p ON g.sportId = p.sportId
     WHERE ht.shortName = #{shortName}
       AND g.gameDate BETWEEN #{startDate} AND #{endDate}
     ORDER BY g.gameDate, g.gameTime

@@ -1,6 +1,6 @@
 
 /* 경기별 예매 정책 (팀 정책과 다를 경우에만 사용) */
-CREATE TABLE gameBookingPolicies (
+CREATE TABLE game_booking_policies (
     id INT NOT NULL AUTO_INCREMENT COMMENT '정책 고유번호',
     gameId INT NOT NULL COMMENT '게임 고유번호',
     bookingOpenDaysBefore INT NOT NULL COMMENT '예매 오픈일',

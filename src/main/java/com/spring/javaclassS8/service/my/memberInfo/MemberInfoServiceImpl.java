@@ -35,4 +35,24 @@ public class MemberInfoServiceImpl implements MemberInfoService {
 		return memberDAO.findById(memberId);
 	}
 
+	// 비밀번호 변경 처리
+	@Override
+	public String changePassword(int memberId, String oldPassword, String newPassword) {
+		MemberVO member = memberDAO.findById(memberId);
+		if (member == null) {
+			return "USER_NOT_FOUND";
+		}
+		if (!passwordEncoder.matches(oldPassword, member.getPassword())) {
+			return "INCORRECT_OLD_PASSWORD";
+		}
+		if (oldPassword.equals(newPassword)) {
+			return "SAME_PASSWORD";
+		}
+		String encodedNewPassword = passwordEncoder.encode(newPassword);
+		if(memberDAO.updatePassword(memberId, encodedNewPassword) > 0) {
+			return "SUCCESS";
+		}
+
+		return "UPDATE_FAILED";
+	}
 }

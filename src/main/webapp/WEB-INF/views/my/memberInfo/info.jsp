@@ -49,7 +49,7 @@
 								</tr>
 								<tr>
 									<th scope="row">휴대폰 번호</th>
-									<td>${member.phone}</td>
+									<td id="formattedPhoneNumber">${member.phone}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -62,5 +62,6 @@
 		</div>
 	</main>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
+	<script src="${ctp}/js/my/memberInfo/info.js"></script>
 </body>
 </html>

@@ -15,19 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	inputPassword.addEventListener('blur', function() {
 		inputBx.classList.remove('is_focus');
-		if (this.value) {
-			inputBx.classList.add('is_value');
-		} else {
-			inputBx.classList.remove('is_value');
-		}
-	});
-
-	inputPassword.addEventListener('input', function() {
-		if (this.value) {
-			inputBx.classList.add('is_value');
-		} else {
-			inputBx.classList.remove('is_value');
-		}
 	});
 
 	form.addEventListener('submit', function(e) {

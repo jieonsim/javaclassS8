@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.javaclassS8.service.my.memberInfo.MemberInfoService;
@@ -109,5 +110,35 @@ public class MemberInfoController {
 	@GetMapping("/changePassword")
 	public String getChangePassword() {
 		return "my/memberInfo/changePassword";
+	}
+
+	// 비밀번호 변경 처리
+	@PostMapping("/changePassword")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> ChangePassword(@RequestParam String oldPassword, @RequestParam String newPassword, HttpSession session) {
+
+		Map<String, Object> response = new HashMap<>();
+		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
+
+		if (loginMember == null) {
+			response.put("success", false);
+			response.put("message", "UNAUTHORIZED");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+		}
+
+		try {
+			String result = memberInfoService.changePassword(loginMember.getId(), oldPassword, newPassword);
+			if (result.equals("SUCCESS")) {
+				response.put("success", true);
+				response.put("message", "비밀번호가 성공적으로 변경되었습니다.");
+			} else {
+				response.put("success", false);
+				response.put("error", result);
+			}
+		} catch (Exception e) {
+			response.put("success", false);
+			response.put("error", "SERVER_ERROR");
+		}
+		return ResponseEntity.ok(response);
 	}
 }
