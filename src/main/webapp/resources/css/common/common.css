@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.blind {
+.blind, legend {
 	overflow: hidden;
     position: absolute;
     width: 1px;

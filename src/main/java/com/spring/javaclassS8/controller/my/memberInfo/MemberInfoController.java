@@ -28,7 +28,7 @@ public class MemberInfoController {
 	@Autowired
 	private MemberInfoService memberInfoService;
 
-	// 마이페이지 회원정보수정의 회원정보 뷰
+	// 마이페이지 >  회원정보관리 > 회원정보수정 뷰
 	@GetMapping("/info")
 	public String getMemberInfo(HttpSession session, Model model) {
 		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
@@ -39,13 +39,13 @@ public class MemberInfoController {
 		return "my/memberInfo/info";
 	}
 
-	// 회원정보수정 비밀번호 확인 폼
+	// 마이페이지 >  회원정보관리 > 회원정보수정 > 비밀번호 확인 폼
 	@GetMapping("/matchPassword")
 	public String getMatchPassword() {
 		return "my/memberInfo/matchPassword";
 	}
 
-	// 회원정보수정 비밀번호 확인 처리
+	// 마이페이지 >  회원정보관리 > 회원정보수정 > 비밀번호 확인 처리
 	@PostMapping("/matchPassword")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> matchPassword(@RequestBody Map<String, String> payload, HttpSession session) {
@@ -59,7 +59,7 @@ public class MemberInfoController {
 		return ResponseEntity.ok(response);
 	}
 
-	// 회원정보수정 폼
+	// 마이페이지 > 회원정보관리 > 회원정보수정 처리 폼
 	@GetMapping("/modify")
 	public String getModify(HttpSession session, Model model) {
 		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
@@ -70,7 +70,7 @@ public class MemberInfoController {
 		return "my/memberInfo/modify";
 	}
 
-	// 회원정보수정 처리
+	// 마이페이지 > 회원정보관리 > 회원정보수정 처리
 	@PostMapping("/modify")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> modifyMemberInfo(@ModelAttribute MemberVO member, HttpSession session) {
@@ -106,13 +106,13 @@ public class MemberInfoController {
 		return ResponseEntity.ok(response);
 	}
 
-	// 비밀번호 변경 폼
+	// 마이페이지 > 회원정보관리 > 회원정보수정 > 비밀번호 변경 폼
 	@GetMapping("/changePassword")
 	public String getChangePassword() {
 		return "my/memberInfo/changePassword";
 	}
 
-	// 비밀번호 변경 처리
+	// 마이페이지 > 회원정보관리 > 회원정보수정 > 비밀번호 변경 처리
 	@PostMapping("/changePassword")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> ChangePassword(@RequestParam String oldPassword, @RequestParam String newPassword, HttpSession session) {

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.javaclassS8.dao.discount.AdvanceTicketDAO">
+	
+	<!-- 예매권번호 유효성 검사 -->
+	<select id="isValidTicket" resultType="boolean">
+		SELECT COUNT(*) > 0
+		FROM advance_tickets
+		WHERE advanceTicketNumber = #{advanceTicketNumber}
+		AND used = false
+		AND expiresAt > NOW()
+	</select>
+	
+	<!-- 예매권번호 등록 여부 확인 -->
+	<select id="isTicketRegistered" resultType="boolean">
+		SELECT COUNT(*) > 0
+		FROM registered_advance_tickets
+		WHERE advanceTicketId = (SELECT id FROM advance_tickets WHERE advanceTicketNumber = #{advanceTicketNumber})
+	</select>
+	
+	<!-- 예매권 등록 처리 -->
+	<insert id="registerTicket">
+		INSERT INTO registered_advance_tickets (memberId, advanceTicketId)
+		SELECT #{memberId}, id
+		FROM advance_tickets
+		WHERE advanceTicketNumber = #{advanceTicketNumber}
+	</insert>
+</mapper>

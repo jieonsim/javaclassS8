@@ -14,7 +14,7 @@
 		<span class="help_submenu_tit">할인혜택</span>
 		<ul class="help_submenu">
 			<li class="${currentPage == 'discount' ? 'on' : '' }">
-				<a href="${ctp}/my/discount/advanceticket-new">예매권</a>
+				<a href="${ctp}/my/discount/advanceTicket">예매권</a>
 			</li>
 		</ul>
 	</li>

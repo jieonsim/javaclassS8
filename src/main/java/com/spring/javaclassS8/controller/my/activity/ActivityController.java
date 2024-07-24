@@ -22,7 +22,7 @@ public class ActivityController {
 	@Autowired
 	private EventService eventService;
 
-	// 활동관리 > 참여 이벤트 뷰
+	// 마이페이지 > 활동관리 > 참여 이벤트 뷰
 	@GetMapping("/event")
 	public String getEventPArticipations(HttpSession session, Model model) {
 		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
@@ -36,7 +36,7 @@ public class ActivityController {
 		return "my/activity/event";
 	}
 
-	// 마이페이지 quickMenuWrap > 응모한 이벤트 갯수 보여주기
+	// 마이페이지 > quickMenuWrap > 응모한 이벤트 갯수 보여주기
 	@GetMapping("/eventCount")
 	@ResponseBody
 	public int GetEventCount(HttpSession session) {
