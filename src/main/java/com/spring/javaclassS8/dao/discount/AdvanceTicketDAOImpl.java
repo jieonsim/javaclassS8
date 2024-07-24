@@ -1,5 +1,8 @@
 package com.spring.javaclassS8.dao.discount;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,4 +31,9 @@ public class AdvanceTicketDAOImpl implements AdvanceTicketDAO {
 		return sqlSession.getMapper(AdvanceTicketDAO.class).registerTicket(advanceTicketNumber, memberId);
 	}
 
+	// memberId로 해당 유저에 등록된 예매권 정보 가져오기
+	@Override
+	public List<Map<String, Object>> getAdvanceTicketsByMemberId(int memberId) {
+		return sqlSession.getMapper(AdvanceTicketDAO.class).getAdvanceTicketsByMemberId(memberId);
+	}
 }

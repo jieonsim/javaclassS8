@@ -1,6 +1,9 @@
 package com.spring.javaclassS8.service.my.discount;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -61,5 +64,32 @@ public class AdvanceTicketServiceImpl implements AdvanceTicketService {
 		}
 
 		return result;
+	}
+
+	// memberId로 해당 유저에 등록된 예매권 정보 가져오기
+	@Override
+	public List<Map<String, Object>> getAdvanceTicketsByMemberId(int memberId) {
+		List<Map<String, Object>> tickets = advanceTicketDAO.getAdvanceTicketsByMemberId(memberId);
+
+		for (Map<String, Object> ticket : tickets) {
+			// 유효기간 형식 변경
+			Timestamp expiresAt = (Timestamp) ticket.get("expiresAt");
+			String formattedDate = new SimpleDateFormat("yyyy.MM.dd").format(expiresAt) + "까지";
+			ticket.put("formattedExpiresAt", formattedDate);
+
+			// 예매권 상태 설정
+			boolean used = (boolean) ticket.get("used");
+			if (used) {
+				ticket.put("status", "사용완료");
+				ticket.put("statusClass", "color_black");
+			} else if (expiresAt.before(new Timestamp(System.currentTimeMillis()))) {
+				ticket.put("status", "사용불가");
+				ticket.put("statusClass", "color_black");
+			} else {
+				ticket.put("status", "사용가능");
+				ticket.put("statusClass", "color_point");
+			}
+		}
+		return tickets;
 	}
 }

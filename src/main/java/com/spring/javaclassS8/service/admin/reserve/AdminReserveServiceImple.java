@@ -1,6 +1,7 @@
 package com.spring.javaclassS8.service.admin.reserve;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,16 +36,20 @@ public class AdminReserveServiceImple implements AdminReserveService {
 		for (int i = 0; i < quantity; i++) {
 			AdvanceTicketVO ticket = new AdvanceTicketVO();
 			ticket.setAdvanceTicketNumber(generateTicketNumber());
-			ticket.setExpiresAt(Timestamp.valueOf(LocalDateTime.now().plusDays(30)));
+
+			// 현재 날짜로부터 30일 이후의 자정(23:59:59)으로 만료 시간 설정
+			LocalDateTime expirationDate = LocalDate.now().plusDays(30).atTime(23, 59, 59);
+			ticket.setExpiresAt(Timestamp.valueOf(expirationDate));
+			
 			ticket.setIssuedAt(Timestamp.valueOf(LocalDateTime.now()));
 			ticket.setUsed(false);
 			ticket.setAdminId(adminId);
 
 			adminReserveDAO.insertAdvanceTicket(ticket);
 			// 여기서 ticket 객체의 id가 자동으로 설정
-	        if (ticket.getId() == 0) {
-	            throw new RuntimeException("예매권 ID 생성 실패");
-	        }
+			if (ticket.getId() == 0) {
+				throw new RuntimeException("예매권 ID 생성 실패");
+			}
 			newTickets.add(ticket);
 		}
 		return newTickets;

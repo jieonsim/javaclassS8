@@ -1,5 +1,6 @@
 package com.spring.javaclassS8.controller.my.discount;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.javaclassS8.service.my.discount.AdvanceTicketService;
+import com.spring.javaclassS8.vo.member.MemberVO;
 
 @Controller
 @RequestMapping("/my/discount")
@@ -25,7 +27,14 @@ public class DiscountController {
 
 	// 마이페이지 > 할인혜택 > 예매권 뷰
 	@GetMapping("/advanceTicket")
-	public String getAdvanceTicket(HttpSession session, Model model) {
+	public String getAdvanceTicket(Model model, HttpSession session) {
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		if (member == null) {
+			return "redirect:/loing";
+		}
+
+		List<Map<String, Object>> advanceTickets = advanceTicketService.getAdvanceTicketsByMemberId(member.getId());
+		model.addAttribute("advanceTickets", advanceTickets);
 		return "my/discount/advanceTicket";
 	}
 

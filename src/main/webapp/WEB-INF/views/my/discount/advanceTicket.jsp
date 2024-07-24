@@ -35,7 +35,7 @@
 						<form id="advanceTicketRegisterForm">
 							<fieldset>
 								<legend>예매권 등록</legend>
-								<label for="ticketNoInput" class="register_txt mb-0">예매권 등록</label>
+								<label for="advanceTicketNoInput" class="register_txt mb-0">예매권 등록</label>
 								<input type="text" id="advanceTicketNoInput" name="advanceTicketNumber" placeholder="예매권 번호를 입력하세요." class="register_input" autocomplete="off">
 								<button type="submit" id="submitBtn" class="btn btn_full">등록</button>
 							</fieldset>
@@ -77,30 +77,26 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td class="number">1234567890101234</td>
-									<td>스포츠</td>
-									<td>1매</td>
-									<td class="color_black">2024.08.12 까지</td>
-									<!-- used : false일 때 -->
-									<td class="color_point">사용가능</td>
-									<!-- used : true일 때 -->
-									<!-- <td class="color_black">사용완료</td> -->
-									<!-- expiresAt 지났을 때 -->
-									<!-- <td class="color_black">사용불가</td> -->
-								</tr>
-								<%-- <tr>
-									<td class="number">${advanceTicketNumber}</td>
-									<td>스포츠</td>
-									<td>1매</td>
-									<td class="color_black">${expiresAt}까지</td>
-									<td class="color_black">${used}</td>
-								</tr> --%>
-								<!-- <tr>
-									<td class="no_data" colspan="5">
-										<div class="td">등록된 예매권이 없습니다.</div>
-									</td>
-								</tr> -->
+								<c:choose>
+									<c:when test="${empty advanceTickets}">
+										<tr>
+											<td class="no_data" colspan="5">
+												<div class="td">등록된 예매권이 없습니다.</div>
+											</td>
+										</tr>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${advanceTickets}" var="ticket">
+											<tr>
+												<td class="number">${ticket.advanceTicketNumber}</td>
+												<td>스포츠</td>
+												<td>1매</td>
+												<td class="color_black">${ticket.formattedExpiresAt}</td>
+												<td class="${ticket.statusClass}">${ticket.status}</td>
+											</tr>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 							</tbody>
 						</table>
 					</div>
