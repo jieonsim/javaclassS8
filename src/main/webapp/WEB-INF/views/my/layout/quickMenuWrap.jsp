@@ -13,7 +13,7 @@
 					<div class="qmemu_box">
 						<span class="qmenu_tit">나의 예매티켓</span>
 						<span class="qmenu_txt">
-							<span class="number" id="quickMenuReserve">0</span>
+							<span class="number" id="quickMenuReserve"></span>
 						</span>
 					</div>
 				</a>
@@ -26,7 +26,7 @@
 					<div class="qmemu_box">
 						<span class="qmenu_tit">나의 예매권</span>
 						<span class="qmenu_txt">
-							<span class="number" id="quickMenuAdvanceTicket">0</span>
+							<span class="number" id="quickMenuAdvanceTicket"></span>
 						</span>
 					</div>
 				</a>
@@ -39,7 +39,7 @@
 					<div class="qmemu_box">
 						<span class="qmenu_tit">나의 이벤트</span>
 						<span class="qmenu_txt">
-							<span class="number" id="quickMenuEvent">0</span>
+							<span class="number" id="quickMenuEvent"></span>
 						</span>
 					</div>
 				</a>

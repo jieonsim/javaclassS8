@@ -119,4 +119,10 @@ public class AdvanceTicketServiceImpl implements AdvanceTicketService {
 		}
 		return tickets;
 	}
+
+	// 마이페이지 > quickMenuWrap > 현재 이용 가능한 예매권 갯수 보여주기
+	@Override
+	public int getAvailableAdvanceTicketCount(int memberId) {
+		return advanceTicketDAO.getAvailableAdvanceTicketCount(memberId);
+	}
 }

@@ -66,4 +66,15 @@ public class DiscountController {
 		String advanceTicketNumber = payload.get("advanceTicketNumber");
 		return ResponseEntity.ok(advanceTicketService.registerAdvanceTicket(advanceTicketNumber));
 	}
+	
+	// 마이페이지 > quickMenuWrap > 현재 이용 가능한 예매권 갯수 보여주기
+	@GetMapping("/advanceTicketCount")
+	@ResponseBody
+	public int GetAdvanceTicketCount(HttpSession session) {
+		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
+		if (loginMember == null) {
+			return 0;
+		}
+		return advanceTicketService.getAvailableAdvanceTicketCount(loginMember.getId());
+	}
 }

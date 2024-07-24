@@ -42,4 +42,10 @@ public class AdvanceTicketDAOImpl implements AdvanceTicketDAO {
 	public List<Map<String, Object>> getAdvanceTicketsByMemberIdAndState(int memberId, String stateType) {
 		 return sqlSession.getMapper(AdvanceTicketDAO.class).getAdvanceTicketsByMemberIdAndState(memberId, stateType);
 	}
+
+	// 마이페이지 > quickMenuWrap > 현재 이용 가능한 예매권 갯수 보여주기
+	@Override
+	public int getAvailableAdvanceTicketCount(int memberId) {
+		return sqlSession.getMapper(AdvanceTicketDAO.class).getAvailableAdvanceTicketCount(memberId);
+	}
 }

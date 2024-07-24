@@ -22,4 +22,7 @@ public interface AdvanceTicketDAO {
 	// 마이페이지 > 할인혜택 > 예매권 > 사용가능/사용완료/유효기간만료 필터링
 	List<Map<String, Object>> getAdvanceTicketsByMemberIdAndState(@Param("memberId") int memberId, @Param("stateType") String stateType);
 
+	// 마이페이지 > quickMenuWrap > 현재 이용 가능한 예매권 갯수 보여주기
+	int getAvailableAdvanceTicketCount(int memberId);
+
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spring.javaclassS8.dao.sports.baseball.BaseballDAO">
+<mapper namespace="com.spring.javaclassS8.dao.sports.SportsDAO">
 	
 	<!-- 오늘 날짜 ~ 당월 마지막 경기까지 가져오기 -->
-	<select id="getBaseballGamesFromToday" resultType="com.spring.javaclassS8.vo.sports.GameVO">
+    <select id="getGamesFromToday" resultType="com.spring.javaclassS8.vo.sports.GameVO">
 	    <![CDATA[
 	    SELECT g.*, 
 	           ht.teamName as homeTeamName, 
@@ -21,14 +21,14 @@
 	    JOIN sports s ON g.sportId = s.id
 	    WHERE g.gameDate >= #{today}
 	      AND g.gameDate < #{firstDayOfNextMonth}
-	      AND s.sportName = '야구'
+	      AND s.sportName = #{sport}
 	    ORDER BY g.gameDate, g.gameTime
 	    ]]>
-	</select>
+    </select>
 	
 	<!-- 구단별 오늘 날짜 ~ 다음달 마지막 날까지 홈경기 가져오기 -->
-	<select id="getTeamHomeGames" resultType="com.spring.javaclassS8.vo.sports.GameVO">
-	    SELECT g.*, 
+    <select id="getTeamHomeGames" resultType="com.spring.javaclassS8.vo.sports.GameVO">
+	     SELECT g.*, 
 	           ht.teamName as homeTeamName, 
 	           ht.shortName as homeTeamShortName,
 	           at.teamName as awayTeamName, 
@@ -42,8 +42,10 @@
 	    JOIN teams at ON g.awayTeamId = at.id
 	    JOIN venues v ON g.venueId = v.id
 	    JOIN sport_booking_policies p ON g.sportId = p.sportId
+	    JOIN sports s ON g.sportId = s.id
 	    WHERE ht.shortName = #{shortName}
 	      AND g.gameDate BETWEEN #{startDate} AND #{endDate}
+	      AND s.sportName = #{sport}
 	    ORDER BY g.gameDate, g.gameTime
-	</select>
+    </select>
 </mapper>
