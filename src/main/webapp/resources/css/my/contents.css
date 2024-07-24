@@ -871,10 +871,12 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .mypage .quick_menu_wrap .quick_menu_list .quick_menu_item{float:left;width:206px;border-left:1px dotted #cfd0d7;text-align:center;box-sizing:border-box;}
 .mypage .quick_menu_wrap .quick_menu_list .quick_menu_item:first-child{border-left:0;margin-left: 0;}
 .mypage .quick_menu_wrap .quick_menu_list .quick_menu_item .quick_link{display:block;font-size:0}
+.mypage .quick_menu_wrap .quick_menu_list .quick_menu_item .quick_link:hover{color:#242428}
 .mypage .quick_menu_wrap .quick_menu_list .quick_menu_item .quick_link:hover .qmenu_txt{text-decoration:underline}
 .mypage .quick_menu_wrap .quick_menu_list .quick_menu_item .quick_link:before{display:inline-block;vertical-align:middle;content:''}
 .mypage .quick_menu_wrap .quick_menu_list .qmemu_box{display:inline-block;margin-left:10px;padding-top:2px;vertical-align:middle;}
 .mypage .quick_menu_wrap .quick_menu_list .quick_menu_item .qmenu_tit{display:block;font-size:12px;line-height:1;font-weight:700;letter-spacing:-0.5px}
+.mypage .quick_menu_wrap .quick_menu_list .quick_menu_item .qmenu_tit:hover{color:#242428}
 .mypage .quick_menu_wrap .quick_menu_list .quick_menu_item .qmenu_txt{display:block;margin-top:5px;line-height:1;font-weight:700;color:#fa2828;}
 .mypage .quick_menu_wrap .quick_menu_list .quick_menu_item .qmenu_txt .number{font-size:20px;font-weight:700}
 .mypage .quick_menu_wrap .quick_menu_list .quick_menu_item .qmenu_txt .txt{font-size:16px;letter-spacing:-0.5px;line-height:20px}
@@ -1903,3 +1905,5 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 /*추가*/
 .btn_full:hover {color: white !important}
 .table-border-bottom{border-bottom: 1px solid #ecedf2}
+/*추가 마이페이지 quickMenuIcon*/
+.mypage .quick_menu_wrap .quick_menu_list .quick_menu_item .quickMenuIcon {font-size: 46px; color: black}

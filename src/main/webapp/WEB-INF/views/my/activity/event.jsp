@@ -33,7 +33,6 @@
 								<span class="blind">참여 이벤트</span>
 							</caption>
 							<colgroup>
-								<col>
 								<col style="width: 190px">
 								<col style="width: 140px">
 								<col style="width: 110px">
@@ -43,7 +42,6 @@
 									<th scope="col">이벤트명</th>
 									<th scope="col">이벤트 기간</th>
 									<th scope="col">응모일</th>
-									<th scope="col">당첨여부</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -56,7 +54,6 @@
 										<td class="fs12 number">
 											<fmt:formatDate value="${paritipation.participatedAt}" pattern="yyyy.MM.dd HH:mm" />
 										</td>
-										<td class="fs12 number">${participation.isWinner ? 'Y' : 'N'}</td>
 									</tr>
 								</c:forEach>
 							</tbody>

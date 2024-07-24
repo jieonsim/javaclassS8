@@ -71,22 +71,27 @@
             e.title AS eventTitle,
             e.startDate,
             e.endDate,
-            ep.participatedAt,
-            CASE WHEN w.id IS NOT NULL THEN TRUE ELSE FALSE END AS isWinner
+            ep.participatedAt
         FROM 
-            event_participants ep
+            events e
         JOIN 
-            events e ON ep.eventId = e.id
-        LEFT JOIN 
-            winners w ON ep.eventId = w.eventId AND ep.memberId = w.memberId
-        WHERE 
-            ep.memberId = #{memberId}
-        AND 
-            ep.status = 'ACTIVE'
+            (SELECT eventId, MAX(participatedAt) as participatedAt
+             FROM event_participants
+             WHERE memberId = #{memberId} AND status = 'ACTIVE'
+             GROUP BY eventId) ep ON e.id = ep.eventId
         ORDER BY 
             ep.participatedAt DESC
 	</select>
 	
+	<!-- memberId로 해당 member가 응모한 이벤트 갯수 가져오기 -->
+	<select id="getActiveEventCount" parameterType="int" resultType="int">
+        SELECT COUNT(DISTINCT ep.eventId)
+        FROM event_participants ep
+        JOIN events e ON ep.eventId = e.id
+        WHERE ep.memberId = #{memberId}
+          AND ep.status = 'ACTIVE'
+          AND e.endDate >= CURDATE()
+	</select>
 	
 	<!-- 이벤트 컨텐츠 디테일에 댓글 달기 -->
 	<insert id="insertEventComment">

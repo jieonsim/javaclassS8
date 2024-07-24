@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.javaclassS8.service.event.EventService;
 import com.spring.javaclassS8.vo.event.EventParticipationVO;
@@ -33,5 +34,16 @@ public class ActivityController {
 		model.addAttribute("paritipations", paritipations);
 
 		return "my/activity/event";
+	}
+
+	// 마이페이지 quickMenuWrap > 응모한 이벤트 갯수 보여주기
+	@GetMapping("/eventCount")
+	@ResponseBody
+	public int GetEventCount(HttpSession session) {
+		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
+		if (loginMember == null) {
+			return 0;
+		}
+		return eventService.getActiveEventCount(loginMember.getId());
 	}
 }

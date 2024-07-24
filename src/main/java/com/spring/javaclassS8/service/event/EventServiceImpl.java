@@ -53,7 +53,6 @@ public class EventServiceImpl implements EventService {
 		if (hasParticipated(eventId, memberId)) {
 			return false;
 		}
-
 		// 이벤트 컨텐츠 디테일에 댓글 달기
 		eventDAO.insertEventComment(eventId, memberId, comment);
 		// 이벤트 응모 처리
@@ -117,5 +116,11 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public List<EventParticipationVO> getEventParticipations(int memberId) {
 		return eventDAO.getEventParticipations(memberId);
+	}
+
+	// memberId로 해당 member가 응모한 이벤트 갯수 가져오기
+	@Override
+	public int getActiveEventCount(int memberId) {
+		return eventDAO.getActiveEventCount(memberId);
 	}
 }

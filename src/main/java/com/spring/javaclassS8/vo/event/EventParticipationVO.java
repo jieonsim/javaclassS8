@@ -10,5 +10,4 @@ public class EventParticipationVO {
 	private String startDate;
 	private String endDate;
 	private Timestamp participatedAt;
-	private boolean isWinner;
 }

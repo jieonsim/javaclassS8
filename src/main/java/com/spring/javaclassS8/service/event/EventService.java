@@ -46,4 +46,7 @@ public interface EventService {
 	// 본인이 응모한 이벤트 리스트 가져오기
 	public List<EventParticipationVO> getEventParticipations(int memberId);
 
+	// memberId로 해당 member가 응모한 이벤트 갯수 가져오기
+	public int getActiveEventCount(int memberId);
+
 }

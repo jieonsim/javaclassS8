@@ -103,4 +103,10 @@ public class EventDAOImpl implements EventDAO {
 	public List<EventParticipationVO> getEventParticipations(int memberId) {
 		return sqlSession.getMapper(EventDAO.class).getEventParticipations(memberId);
 	}
+
+	// memberId로 해당 member가 응모한 이벤트 갯수 가져오기
+	@Override
+	public int getActiveEventCount(int memberId) {
+		return sqlSession.getMapper(EventDAO.class).getActiveEventCount(memberId);
+	}
 }
