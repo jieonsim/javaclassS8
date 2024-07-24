@@ -27,6 +27,30 @@
 	    ORDER BY at.expiresAt DESC
 	</select>
 	
+	<!-- 마이페이지 > 할인혜택 > 예매권 > 사용가능/사용완료/유효기간만료 필터링 -->
+	<select id="getAdvanceTicketsByMemberIdAndState" resultType="java.util.HashMap">
+	    SELECT at.advanceTicketNumber, at.expiresAt, at.used
+	    FROM advance_tickets at
+	    JOIN registered_advance_tickets rat ON at.id = rat.advanceTicketId
+	    WHERE rat.memberId = #{memberId}
+	    <choose>
+	        <when test="stateType == 'AVAIL'">
+	            <![CDATA[
+	            AND at.used = false AND at.expiresAt > NOW()
+	            ]]>
+	        </when>
+	        <when test="stateType == 'COMPLETED'">
+	            AND at.used = true
+	        </when>
+	        <when test="stateType == 'EXPIRATE'">
+	            <![CDATA[
+	            AND at.used = false AND at.expiresAt <= NOW()
+	            ]]>
+	        </when>
+	    </choose>
+	    ORDER BY at.expiresAt DESC
+	</select>
+	
 	<!-- 예매권 등록 처리 -->
 	<insert id="registerTicket">
 		INSERT INTO registered_advance_tickets (memberId, advanceTicketId)

@@ -36,4 +36,10 @@ public class AdvanceTicketDAOImpl implements AdvanceTicketDAO {
 	public List<Map<String, Object>> getAdvanceTicketsByMemberId(int memberId) {
 		return sqlSession.getMapper(AdvanceTicketDAO.class).getAdvanceTicketsByMemberId(memberId);
 	}
+
+	// 마이페이지 > 할인혜택 > 예매권 > 사용가능/사용완료/유효기간만료 필터링
+	@Override
+	public List<Map<String, Object>> getAdvanceTicketsByMemberIdAndState(int memberId, String stateType) {
+		 return sqlSession.getMapper(AdvanceTicketDAO.class).getAdvanceTicketsByMemberIdAndState(memberId, stateType);
+	}
 }

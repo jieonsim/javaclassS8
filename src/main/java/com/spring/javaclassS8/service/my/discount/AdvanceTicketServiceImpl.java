@@ -92,4 +92,31 @@ public class AdvanceTicketServiceImpl implements AdvanceTicketService {
 		}
 		return tickets;
 	}
+
+	// 마이페이지 > 할인혜택 > 예매권 > 사용가능/사용완료/유효기간만료 필터링
+	@Override
+	public List<Map<String, Object>> getFilteredAdvanceTickets(int memberId, String stateType) {
+		List<Map<String, Object>> tickets = advanceTicketDAO.getAdvanceTicketsByMemberIdAndState(memberId, stateType);
+
+		for (Map<String, Object> ticket : tickets) {
+			// 유효기간 형식 변경
+			Timestamp expiresAt = (Timestamp) ticket.get("expiresAt");
+			String formattedDate = new SimpleDateFormat("yyyy.MM.dd").format(expiresAt) + "까지";
+			ticket.put("formattedExpiresAt", formattedDate);
+
+			// 예매권 상태 설정
+			boolean used = (boolean) ticket.get("used");
+			if (used) {
+				ticket.put("status", "사용완료");
+				ticket.put("statusClass", "color_black");
+			} else if (expiresAt.before(new Timestamp(System.currentTimeMillis()))) {
+				ticket.put("status", "사용불가");
+				ticket.put("statusClass", "color_black");
+			} else {
+				ticket.put("status", "사용가능");
+				ticket.put("statusClass", "color_point");
+			}
+		}
+		return tickets;
+	}
 }
