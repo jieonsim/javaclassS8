@@ -41,7 +41,7 @@
 			<div class="collapse" id="sports">
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item">
-						<a class="nav-link" href="${ctp}/admin/sports/sportsList">종목 | 구단 | 경기장 리스트</a>
+						<a class="nav-link" href="${ctp}/admin/sports/sportList">종목 | 구단 | 경기장 리스트</a>
 					</li>
 				</ul>
 			</div>
@@ -56,6 +56,13 @@
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item">
 						<a class="nav-link" href="${ctp}/admin/sports/game/gameList">경기 리스트</a>
+					</li>
+				</ul>
+			</div>
+			<div class="collapse" id="sports">
+				<ul class="nav flex-column sub-menu">
+					<li class="nav-item">
+						<a class="nav-link" href="${ctp}/admin/sports/seat/seatRegister">좌석 등급 등록</a>
 					</li>
 				</ul>
 			</div>

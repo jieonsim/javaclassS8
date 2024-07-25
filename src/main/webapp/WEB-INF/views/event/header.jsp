@@ -13,7 +13,7 @@
 					<button type="button" role="tab" onclick="location.href='${ctp}/event/winner';" class="common_tab_btn" <c:if test="${currentSelected == 'eventWinner'}">aria-selected="true"</c:if>>당첨자 발표</button>
 				</li>
 				<li role="none" class="common_tab_item">
-					<button type="button" role="tab" onclick="location.href='${ctp}/my/activity/event');" class="common_tab_btn">참여 이벤트</button>
+					<button type="button" role="tab" onclick="location.href='${ctp}/my/activity/event';" class="common_tab_btn">참여 이벤트</button>
 				</li>
 			</ul>
 		</div>

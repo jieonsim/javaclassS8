@@ -108,18 +108,41 @@
 	    ORDER BY g.gameDate, ht.teamName
 	</select>
 	
+	<!-- 좌석 등록 폼 경기장별 현재 사용된 좌석 수 확인 -->
+	<select id="getUsedCapacityByVenueId" parameterType="int" resultType="int">
+		SELECT COALESCE(SUM(capacity), 0)
+		FROM seats
+		WHERE venueId = #{venueId}
+	</select>
+	
+	<!-- 경기장 총 수용인원 확인 -->
+	<select id="getVenueCapacity" parameterType="int" resultType="int">
+		SELECT capacity FROM venues WHERE id = #{venueId}
+	</select>
+	
+	<!-- 새로 등록된 좌석을 포함한 해당 경기장의 모든 좌석 정보 반환 -->
+	<select id="getSeatsForVenue" parameterType="int" resultType="com.spring.javaclassS8.vo.sports.SeatVO">
+        SELECT s.*, sp.sportName, t.teamName, v.venueName
+        FROM seats s
+        JOIN sports sp ON s.sportId = sp.id
+        JOIN teams t ON s.teamId = t.id
+        JOIN venues v ON s.venueId = v.id
+        WHERE s.venueId = #{venueId}
+        ORDER BY s.id DESC
+	</select>
+	
 	<!-- 스포츠 종목 등록 처리 -->
 	<insert id="insertSport" parameterType="String">
 		INSERT INTO sports (sportName) VALUES (#{sportName})
 	</insert>
 	
-	<!-- 스포츠 팀 등록 처리 -->
+	<!-- 팀 등록 처리 -->
 	<insert id="insertTeam">
 		INSERT INTO teams (sportId, teamName, shortName)
         VALUES (#{sportId}, #{teamName}, #{shortName})
 	</insert>
 	
-	<!-- 스포츠 경기장 등록 처리 -->
+	<!-- 경기장 등록 처리 -->
 	<insert id="insertVenue">
 		INSERT INTO venues (sportId, teamId, venueName, address, capacity)
         VALUES (#{sportId}, #{teamId}, #{venueName}, #{address}, #{capacity})
@@ -134,6 +157,12 @@
 	    JOIN teams at ON s.id = at.sportId AND at.teamName = #{awayTeamName}
 	    JOIN venues v ON v.sportId = s.id AND v.teamId = ht.id AND v.venueName = #{venueName}
 	    LIMIT 1
+	</insert>
+	
+	<!-- 좌석 등록 처리 -->
+	<insert id="insertSeat" parameterType="com.spring.javaclassS8.vo.sports.SeatVO">
+        INSERT INTO seats (sportId, teamId, venueId, seatName, capacity)
+        VALUES (#{sportId}, #{teamId}, #{venueId}, #{seatName}, #{capacity})
 	</insert>
 	
 	<!-- 스포츠 이름 수정 -->

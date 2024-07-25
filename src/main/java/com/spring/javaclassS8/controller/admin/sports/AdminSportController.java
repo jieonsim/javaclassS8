@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.spring.javaclassS8.service.admin.sports.AdminSportSerivce;
 import com.spring.javaclassS8.vo.sports.GameVO;
 import com.spring.javaclassS8.vo.sports.GameVO.Status;
+import com.spring.javaclassS8.vo.sports.SeatVO;
 import com.spring.javaclassS8.vo.sports.SportVO;
 import com.spring.javaclassS8.vo.sports.TeamVO;
 import com.spring.javaclassS8.vo.sports.VenueVO;
@@ -42,7 +43,7 @@ public class AdminSportController {
 		model.addAttribute("selectedSport", selectedSport);
 		model.addAttribute("teams", teams);
 		model.addAttribute("selectedTeam", selectedTeam);
-		return "admin/sports/register";
+		return "admin/sports/sportRegister";
 	}
 
 	// 스포츠 종목 등록 처리
@@ -121,7 +122,7 @@ public class AdminSportController {
 	}
 
 	// 스포츠 종목 + 팀 + 경기장 리스트
-	@GetMapping("/sportsList")
+	@GetMapping("/sportList")
 	public String sportTeamVenueList(Model model) {
 		List<SportVO> sports = adminSportService.getAllSportsDetails();
 		List<TeamVO> teams = adminSportService.getAllTeamsDetails();
@@ -131,7 +132,7 @@ public class AdminSportController {
 		model.addAttribute("teams", teams);
 		model.addAttribute("venues", venues);
 
-		return "admin/sports/list";
+		return "admin/sports/sportList";
 	}
 
 	// 종목 / 팀 / 경기장 정보 삭제
@@ -268,17 +269,17 @@ public class AdminSportController {
 		model.addAttribute("sports", sports);
 		model.addAttribute("teams", teams);
 		model.addAttribute("venues", venues);
-		return "admin/sports/game/register";
+		return "admin/sports/game/gameRegister";
 	}
 
-	// 경기 등록 폼 내 셀렉된 스포츠에 따른 팀 가져오기
+	// 등록 폼 내 셀렉된 스포츠에 따른 팀 가져오기
 	@GetMapping("/teams")
 	@ResponseBody
 	public List<TeamVO> getTeamsBySport(@RequestParam String sportName) {
 		return adminSportService.getTeamsBySport(sportName);
 	}
 
-	// 경기 등록 폼 내 셀렉된 팀에 따른 경기장 가져오기
+	// 등록 폼 내 셀렉된 팀에 따른 경기장 가져오기
 	@GetMapping("/venues")
 	@ResponseBody
 	public List<TeamVO> getVenuesByTeam(@RequestParam String teamName) {
@@ -317,7 +318,7 @@ public class AdminSportController {
 
 		model.addAttribute("games", games);
 		model.addAttribute("statuses", Status.values());
-		return "admin/sports/game/list";
+		return "admin/sports/game/gameList";
 	}
 
 	// 경기 정보 수정
@@ -347,22 +348,64 @@ public class AdminSportController {
 
 		return ResponseEntity.ok(response);
 	}
-	
+
 	// 경기 삭제
 	@PostMapping("/game/delete")
 	@ResponseBody
 	public ResponseEntity<?> deleteGame(@RequestBody Map<String, Integer> payload) {
-	    int id = payload.get("id");
-	    Map<String, Object> response = new HashMap<>();
+		int id = payload.get("id");
+		Map<String, Object> response = new HashMap<>();
 
+		try {
+			adminSportService.deleteGame(id);
+			response.put("success", true);
+			return ResponseEntity.ok(response);
+		} catch (Exception e) {
+			response.put("success", false);
+			response.put("message", e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+	}
+
+	// 좌석 등록 폼
+	@GetMapping("/seat/seatRegister")
+	public String seatRegisterForm(Model model) {
+		List<String> sports = adminSportService.getAllSports();
+		List<TeamVO> teams = adminSportService.getAllTeamsWithSports();
+		List<VenueVO> venues = adminSportService.getAllVenuesDetails();
+
+		model.addAttribute("sports", sports);
+		model.addAttribute("teams", teams);
+		model.addAttribute("venues", venues);
+		return "admin/sports/seat/seatRegister";
+	}
+
+	// 좌석 등록 폼 경기장별 현재 사용된 좌석 수 확인
+	@GetMapping("/seat/usedCapacity")
+	@ResponseBody
+	public Map<String, Integer> getUsedCapacity(@RequestParam int venueId) {
+		int usedCapacity = adminSportService.getUsedCapacityByVenueId(venueId);
+		System.out.println("venueId: " + venueId);
+		Map<String, Integer> response = new HashMap<>();
+		response.put("usedCapacity", usedCapacity);
+		return response;
+	}
+
+	// 좌석 등록 처리
+	@PostMapping("/seat/seatRegister")
+	@ResponseBody
+	public ResponseEntity<?> registerSeat(@ModelAttribute SeatVO seat) {
 	    try {
-	        adminSportService.deleteGame(id);
+	        List<SeatVO> newSeats = adminSportService.registerSeat(seat);
+	        Map<String, Object> response = new HashMap<>();
 	        response.put("success", true);
+	        response.put("seats", newSeats);
 	        return ResponseEntity.ok(response);
 	    } catch (Exception e) {
+	        Map<String, Object> response = new HashMap<>();
 	        response.put("success", false);
 	        response.put("message", e.getMessage());
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+	        return ResponseEntity.badRequest().body(response);
 	    }
 	}
 }

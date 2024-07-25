@@ -3,6 +3,7 @@ package com.spring.javaclassS8.service.admin.sports;
 import java.util.List;
 
 import com.spring.javaclassS8.vo.sports.GameVO;
+import com.spring.javaclassS8.vo.sports.SeatVO;
 import com.spring.javaclassS8.vo.sports.SportVO;
 import com.spring.javaclassS8.vo.sports.TeamVO;
 import com.spring.javaclassS8.vo.sports.VenueVO;
@@ -77,5 +78,11 @@ public interface AdminSportSerivce {
 
 	// 경기 삭제
 	void deleteGame(int id) throws Exception;
+
+	// 좌석 등록 폼 경기장별 현재 사용된 좌석 수 확인
+	int getUsedCapacityByVenueId(int venueId);
+
+	// 좌석 등록 처리
+	List<SeatVO> registerSeat(SeatVO seat) throws Exception;
 
 }

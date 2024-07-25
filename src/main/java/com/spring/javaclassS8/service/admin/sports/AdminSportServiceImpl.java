@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.javaclassS8.dao.admin.sports.AdminSportDAO;
 import com.spring.javaclassS8.vo.sports.GameVO;
+import com.spring.javaclassS8.vo.sports.SeatVO;
 import com.spring.javaclassS8.vo.sports.SportVO;
 import com.spring.javaclassS8.vo.sports.TeamVO;
 import com.spring.javaclassS8.vo.sports.VenueVO;
@@ -42,9 +43,7 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 		if (sportId == null) {
 			throw new IllegalArgumentException("해당 스포츠가 존재하지 않습니다." + sportName);
 		}
-
 		return adminSportDAO.insertTeam(sportId, teamName, shortName) > 0;
-
 	}
 
 	// 경기장 등록 처리
@@ -193,9 +192,53 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 	}
 
 	// 경기 삭제
-    @Override
-    @Transactional
-    public void deleteGame(int id) throws Exception {
-        adminSportDAO.deleteGame(id);
-    }
+	@Override
+	@Transactional
+	public void deleteGame(int id) throws Exception {
+		adminSportDAO.deleteGame(id);
+	}
+
+	// 좌석 등록 폼 경기장별 현재 사용된 좌석 수 확인
+	@Override
+	public int getUsedCapacityByVenueId(int venueId) {
+		return adminSportDAO.getUsedCapacityByVenueId(venueId);
+	}
+
+	// 좌석 등록 처리
+	@Override
+	@Transactional
+	public List<SeatVO> registerSeat(SeatVO seat) throws Exception {
+		// sportName, teamName으로 각각의 id 조회
+		Integer sportId = adminSportDAO.getSPortIdByName(seat.getSportName());
+		Integer teamId = adminSportDAO.getTeamIdByName(seat.getTeamName());
+
+		// null 체크 추가
+		if (sportId == null) {
+			throw new IllegalArgumentException("해당 스포츠를 찾을 수 없습니다.");
+		}
+		if (teamId == null) {
+			throw new IllegalArgumentException("해당 팀을 찾을 수 없습니다.");
+		}
+
+		// 조회한 sportId,teamId 값을 SeatVO에 설정
+	    seat.setSportId(sportId);
+	    seat.setTeamId(teamId);
+
+		// 경기장 총 수용인원 확인
+		int venueCapacity = adminSportDAO.getVenueCapacity(seat.getVenueId());
+
+		// 현재 사용 중인 좌석 수 확인
+		int usedCapacity = adminSportDAO.getUsedCapacityByVenueId(seat.getVenueId());
+
+		// 새로운 좌석 추가 시 총 수용인원을 초과하는지 확인
+		if (usedCapacity + seat.getCapacity() > venueCapacity) {
+			throw new Exception("좌석 추가 시 경기장의 총 수용인원을 초과합니다.");
+		}
+
+		// 좌석 등록 처리
+		adminSportDAO.insertSeat(seat);
+
+		// 새로 등록된 좌석을 포함한 해당 경기장의 모든 좌석 정보 반환
+		return adminSportDAO.getSeatsForVenue(seat.getVenueId());
+	}
 }

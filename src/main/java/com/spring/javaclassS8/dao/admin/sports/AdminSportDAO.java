@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.spring.javaclassS8.vo.sports.GameVO;
+import com.spring.javaclassS8.vo.sports.SeatVO;
 import com.spring.javaclassS8.vo.sports.SportVO;
 import com.spring.javaclassS8.vo.sports.TeamVO;
 import com.spring.javaclassS8.vo.sports.VenueVO;
@@ -85,4 +86,19 @@ public interface AdminSportDAO {
 	
 	// 경기 삭제
 	void deleteGame(int id);
+
+	// 좌석 등록 폼 경기장별 현재 사용된 좌석 수 확인
+	int getUsedCapacityByVenueId(int venueId);
+
+	// 경기장 총 수용인원 확인
+	int getVenueCapacity(int venueId);
+
+	// 좌석 등록 처리
+	void insertSeat(SeatVO seat);
+
+	// 새로 등록된 좌석을 포함한 해당 경기장의 모든 좌석 정보 반환
+	List<SeatVO> getSeatsForVenue(int venueId);
+
+	// 경기장 이름으로 경기장 고유번호 가져오기
+	Integer getVenueIdByName(String venueName);
 }

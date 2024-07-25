@@ -29,9 +29,9 @@
 						<div class="col-md-6 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">경기 일정 등록</h4>
-									<p class="card-description">홈팀과 원정팀은 같을 수 없습니다.</p>
-									<form class="forms-sample" id="insertGameForm">
+									<h4 class="card-title">좌석 등급 등록</h4>
+									<p class="card-description">스포츠 > 팀 > 경기장 선택 후 등록해주세요.</p>
+									<form class="forms-sample" id="insertSeatForm">
 										<div class="form-group">
 											<label for="inputSportName">스포츠 종목</label>
 											<select class="form-control form-control-lg bg-white text-dark" id="inputSportName" name="sportName">
@@ -41,16 +41,8 @@
 											</select>
 										</div>
 										<div class="form-group">
-											<label for="inputHomeTeamName">홈팀</label>
-											<select class="form-control form-control-lg bg-white text-dark" id="inputHomeTeamName" name="homeTeamName">
-												<c:forEach items="${teams}" var="team">
-													<option value="${team}">${team}</option>
-												</c:forEach>
-											</select>
-										</div>
-										<div class="form-group">
-											<label for="inputAwayTeamName">원정팀</label>
-											<select class="form-control form-control-lg bg-white text-dark" id="inputAwayTeamName" name="awayTeamName">
+											<label for="inputTeamName">팀</label>
+											<select class="form-control form-control-lg bg-white text-dark" id="inputTeamName" name="teamName">
 												<c:forEach items="${teams}" var="team">
 													<option value="${team}">${team}</option>
 												</c:forEach>
@@ -65,12 +57,12 @@
 											</select>
 										</div>
 										<div class="form-group">
-											<label for="inputGameDate">경기 날짜</label>
-											<input type="date" class="form-control form-control-lg" id="inputGameDate" name="gameDate" />
+											<label for="inputCategoryName">좌석 등급 이름</label>
+											<input type="text" class="form-control form-control-lg" id="inputSeatName" name="seatName" placeholder="좌석 등급 이름">
 										</div>
 										<div class="form-group">
-											<label for="inputGameTime">경기 시작 시간</label>
-											<input type="time" class="form-control form-control-lg" id="inputGameTime" name="gameTime" />
+											<label for="inputVenueName">좌석 수</label>
+											<input type="number" class="form-control form-control-lg" id="inputCapacity" name="capacity" placeholder="좌석 등급 수용 인원">
 										</div>
 										<button type="submit" class="btn btn-primary me-2">Submit</button>
 									</form>
@@ -80,8 +72,8 @@
 						<div class="col-md-6 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">신규 등록된 경기 목록</h4>
-									<ul id="gameList" class="list-group p-3">
+									<h4 class="card-title">신규 등록된 좌석 등급 목록</h4>
+									<ul id="seatList" class="list-group p-3">
 										<!-- 여기에 동적으로 경기 목록이 추가됨 -->
 									</ul>
 								</div>
@@ -93,7 +85,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="${ctp}/js/admin/sports/game/register.js"></script>
+	<script src="${ctp}/js/admin/sports/seat/seatRegister.js"></script>
 	<script src="${ctp}/js/admin/common/off-canvas.js"></script>
 	<script src="${ctp}/js/admin/common/hoverable-collapse.js"></script>
 	<script src="${ctp}/js/admin/common/template.js"></script>
