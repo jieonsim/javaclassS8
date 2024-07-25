@@ -266,12 +266,6 @@ public class AdminSportDAOImpl implements AdminSportDAO {
 	    return sqlSession.getMapper(AdminSportDAO.class).getLastInsertedPrice();
 	}
 
-	// 좌석 이름으로 seatId 가져오기
-	@Override
-	public Integer getSeatIdByName(String seatName) {
-	    return sqlSession.getMapper(AdminSportDAO.class).getSeatIdByName(seatName);
-	}
-
 	// 권종 이름으로 tickeTypeId 가져오기
 	@Override
 	public Integer getTicketTypeIdByName(String ticketTypeName) {

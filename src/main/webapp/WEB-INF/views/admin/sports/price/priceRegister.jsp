@@ -52,22 +52,8 @@
 												</c:forEach>
 											</select>
 										</div>
-										<%-- <div class="form-group">
-											<label for="inputVenueName">경기장</label>
-											<select class="form-control form-control-lg bg-white text-dark" id="inputVenueName" name="venueName">
-												<c:forEach items="${venues}" var="venue">
-													<option value="${venue}">${venue}</option>
-												</c:forEach>
-											</select>
-										</div>
 										<div class="form-group">
-											<label for="inputSeatName">좌석 등급</label>
-											<select class="form-control form-control-lg bg-white text-dark" id="inputSeatName" name="seatName">
-												<option value="">좌석 등급 선택</option>
-											</select>
-										</div> --%>
-										<div class="form-group">
-											<label for="inputSeatName">좌석 등급</label>
+											<label for="inputSeatName">경기장</label>
 											<select class="form-control form-control-lg bg-white text-dark" id="inputVenueName" name="venueName">
 												<option value="">경기장 선택</option>
 												<c:forEach items="${venues}" var="venue">

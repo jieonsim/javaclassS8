@@ -416,54 +416,57 @@ public class AdminSportController {
 		}
 	}
 
-    // 요금 등록 폼
+	// 요금 등록 폼
 	@GetMapping("/price/priceRegister")
 	public String priceRegisterForm(Model model) {
-	    List<String> sports = adminSportService.getAllSports();
-	    List<TeamVO> teams = adminSportService.getAllTeamsWithSports();
-	    List<VenueVO> venues = adminSportService.getAllVenuesDetails();
-	    List<SeatVO> seats = adminSportService.getAllSeats();
-	    List<String> ticketCategories = adminSportService.getAllTicketCategories();
+		List<String> sports = adminSportService.getAllSports();
+		List<TeamVO> teams = adminSportService.getAllTeamsWithSports();
+		List<VenueVO> venues = adminSportService.getAllVenuesDetails();
+		List<SeatVO> seats = adminSportService.getAllSeats();
+		List<String> ticketCategories = adminSportService.getAllTicketCategories();
 
-	    model.addAttribute("sports", sports);
-	    model.addAttribute("teams", teams);
-	    model.addAttribute("venues", venues);
-	    model.addAttribute("seats", seats);
-	    model.addAttribute("ticketCategories", ticketCategories);
-	    return "admin/sports/price/priceRegister";
+		model.addAttribute("sports", sports);
+		model.addAttribute("teams", teams);
+		model.addAttribute("venues", venues);
+		model.addAttribute("seats", seats);
+		model.addAttribute("ticketCategories", ticketCategories);
+		return "admin/sports/price/priceRegister";
 	}
-	
+
 	// 등록 폼 내 선택된 경기장에 따른 좌석 등급 가져오기
 	@GetMapping("/seats")
 	@ResponseBody
 	public List<SeatVO> getSeatsByVenueName(@RequestParam String venueName) {
-	    return adminSportService.getSeatsByVenueName(venueName);
+		return adminSportService.getSeatsByVenueName(venueName);
 	}
-//	@GetMapping("/seats")
-//	@ResponseBody
-//	public List<SeatVO> getSeatsByVenueId(@RequestParam int venueId) {
-//		return adminSportService.getSeatsByVenueId(venueId);
-//	}
-	
+
 	// 등록 폼 내 권종 카테고리 가져오기
 	@GetMapping("/ticketTypes")
 	@ResponseBody
 	public List<TicketTypeVO> getTicketTypesByCategory(@RequestParam String category) {
-	    return adminSportService.getTicketTypesByCategory(category);
+		return adminSportService.getTicketTypesByCategory(category);
 	}
 
 	// 요금 등록 처리
 	@PostMapping("/price/priceRegister")
 	@ResponseBody
 	public ResponseEntity<?> registerPrice(@ModelAttribute PriceVO price) {
-		System.out.println("Recevied PriceVO : " + price);
-	    try {
-	        PriceVO newPrice = adminSportService.registerPrice(price);
-	        return ResponseEntity.ok(Map.of("success", true, "price", newPrice));
-	    } catch (IllegalArgumentException e) {
-	        return ResponseEntity.badRequest().body(Map.of("success", false, "message", e.getMessage()));
-	    } catch (Exception e) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("success", false, "message", "요금 등록 중 오류가 발생했습니다."));
-	    }
+		try {
+			PriceVO newPrice = adminSportService.registerPrice(price);
+			Map<String, Object> response = new HashMap<>();
+			response.put("success", true);
+			response.put("price", newPrice);
+			return ResponseEntity.ok(response);
+		} catch (IllegalArgumentException | IllegalStateException e) {
+			Map<String, Object> response = new HashMap<>();
+			response.put("success", false);
+			response.put("message", e.getMessage());
+			return ResponseEntity.ok(response); // 200 OK로 변경
+		} catch (Exception e) {
+			Map<String, Object> response = new HashMap<>();
+			response.put("success", false);
+			response.put("message", "요금 등록 중 오류가 발생했습니다.");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
 	}
 }

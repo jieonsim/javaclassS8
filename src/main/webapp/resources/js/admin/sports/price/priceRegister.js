@@ -104,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		// 폼 데이터 생성
 		const formData = new FormData(form);
-		console.log(Object.fromEntries(formData));
 
 		// 서버에 데이터 전송
 		fetch(`${ctp}/admin/sports/price/priceRegister`, {
@@ -132,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				alert('요금 등록 중 오류가 발생했습니다.');
 			});
 	});
-	
+
 	function updatePriceList(newPrices) {
 		const priceList = document.getElementById('priceList');
 		if (!priceList) {

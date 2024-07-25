@@ -138,9 +138,6 @@ public interface AdminSportDAO {
 	// 최근 등록된 요금 가져오기
 	PriceVO getLastInsertedPrice();
 
-	// 좌석 이름으로 seatId 가져오기
-	Integer getSeatIdByName(String seatName);
-
 	// 권종 이름으로 tickeTypeId 가져오기
 	Integer getTicketTypeIdByName(String ticketTypeName);
 

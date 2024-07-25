@@ -281,72 +281,50 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 	@Override
 	@Transactional
 	public PriceVO registerPrice(PriceVO price) throws IllegalArgumentException {
-		try {
-			// 이름으로 각각의 id 조회
-			System.out.println("sportName : " + price.getSportName());
-			Integer sportId = adminSportDAO.getSportIdByName(price.getSportName());
-			System.out.println("sportId : " + sportId);
 
-			System.out.println("teamName : " + price.getTeamName());
-			Integer teamId = adminSportDAO.getTeamIdByName(price.getTeamName());
-			System.out.println("teamId : " + teamId);
+		// 이름으로 각각의 id 조회
+		Integer sportId = adminSportDAO.getSportIdByName(price.getSportName());
+		Integer teamId = adminSportDAO.getTeamIdByName(price.getTeamName());
+		Integer venueId = adminSportDAO.getVenueIdByName(price.getVenueName());
+		Integer seatId = adminSportDAO.getSeatIdByDetails(price.getSportName(), price.getTeamName(), price.getVenueName(), price.getSeatName());
+		Integer ticketTypeId = adminSportDAO.getTicketTypeIdByName(price.getTicketTypeName());
 
-			System.out.println("venueName : " + price.getVenueName());
-			Integer venueId = adminSportDAO.getVenueIdByName(price.getVenueName());
-			System.out.println("venueId : " + venueId);
+		// null 체크
+		if (sportId == null) {
+			throw new IllegalArgumentException("해당 스포츠를 찾을 수 없습니다.");
+		}
+		if (teamId == null) {
+			throw new IllegalArgumentException("해당 팀을 찾을 수 없습니다.");
+		}
+		if (venueId == null) {
+			throw new IllegalArgumentException("해당 경기장을 찾을 수 없습니다.");
+		}
+		if (seatId == null) {
+			throw new IllegalArgumentException("해당 좌석을 찾을 수 없습니다.");
+		}
+		if (ticketTypeId == null) {
+			throw new IllegalArgumentException("해당 권종을 찾을 수 없습니다.");
+		}
 
-			System.out.println("seatName : " + price.getSeatName());
-			/* Integer seatId = adminSportDAO.getSeatIdByName(price.getSeatName()); */
-			Integer seatId = adminSportDAO.getSeatIdByDetails(price.getSportName(), price.getTeamName(), price.getVenueName(), price.getSeatName());
-			System.out.println("seatId : " + seatId);
+		// 조회한 id 값을 PriceVO에 설정
+		price.setSportId(sportId);
+		price.setTeamId(teamId);
+		price.setVenueId(venueId);
+		price.setSeatId(seatId);
+		price.setTicketTypeId(ticketTypeId);
 
-			System.out.println("ticketTypeName : " + price.getTicketTypeName());
-			Integer ticketTypeId = adminSportDAO.getTicketTypeIdByName(price.getTicketTypeName());
-			System.out.println("ticketTypeId : " + ticketTypeId);
+		// 같은 정보로 이미 등록된 요금인지 확인
+		int priceExists = adminSportDAO.isPriceExists(price);
+		if (priceExists > 0) {
+			throw new IllegalArgumentException("해당 정보로 이미 등록된 요금이 있습니다.");
+		}
 
-			// null 체크
-			if (sportId == null) {
-				throw new IllegalArgumentException("해당 스포츠를 찾을 수 없습니다.");
-			}
-			if (teamId == null) {
-				throw new IllegalArgumentException("해당 팀을 찾을 수 없습니다.");
-			}
-			if (venueId == null) {
-				throw new IllegalArgumentException("해당 경기장을 찾을 수 없습니다.");
-			}
-			if (seatId == null) {
-				throw new IllegalArgumentException("해당 좌석을 찾을 수 없습니다.");
-			}
-			if (ticketTypeId == null) {
-				throw new IllegalArgumentException("해당 권종을 찾을 수 없습니다.");
-			}
+		int result = adminSportDAO.insertPrice(price);
 
-			// 조회한 id 값을 PriceVO에 설정
-			price.setSportId(sportId);
-			price.setTeamId(teamId);
-			price.setVenueId(venueId);
-			price.setSeatId(seatId);
-			price.setTicketTypeId(ticketTypeId);
-
-	        // 같은 정보로 이미 등록된 요금인지 확인
-	        int priceExists = adminSportDAO.isPriceExists(price);
-	        if (priceExists > 0) {
-	            throw new IllegalArgumentException("해당 정보로 이미 등록된 요금이 있습니다.");
-	        }
-
-			int result = adminSportDAO.insertPrice(price);
-
-			if (result > 0) {
-				return adminSportDAO.getLastInsertedPrice();
-			} else {
-				throw new IllegalStateException("요금 등록에 실패했습니다.");
-			}
-		} catch (IllegalArgumentException e) {
-			System.out.println("Validation Error: " + e.getMessage());
-			throw e;
-		} catch (Exception e) {
-			System.out.println("Unexpected Error: " + e.getMessage());
-			throw new RuntimeException("요금 등록 중 오류가 발생했습니다.");
+		if (result > 0) {
+			return adminSportDAO.getRecentlyAddedPrice();
+		} else {
+			throw new IllegalStateException("요금 등록에 실패했습니다.");
 		}
 	}
 
