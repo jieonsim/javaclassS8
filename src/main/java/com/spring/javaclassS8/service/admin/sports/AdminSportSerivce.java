@@ -3,9 +3,11 @@ package com.spring.javaclassS8.service.admin.sports;
 import java.util.List;
 
 import com.spring.javaclassS8.vo.sports.GameVO;
+import com.spring.javaclassS8.vo.sports.PriceVO;
 import com.spring.javaclassS8.vo.sports.SeatVO;
 import com.spring.javaclassS8.vo.sports.SportVO;
 import com.spring.javaclassS8.vo.sports.TeamVO;
+import com.spring.javaclassS8.vo.sports.TicketTypeVO;
 import com.spring.javaclassS8.vo.sports.VenueVO;
 
 public interface AdminSportSerivce {
@@ -84,4 +86,22 @@ public interface AdminSportSerivce {
 
 	// 좌석 등록 처리
 	SeatVO registerSeat(SeatVO seat) throws Exception;
+
+	// 모든 좌석 등급 가져오기
+	List<SeatVO> getAllSeats();
+
+	// 모든 권종 카테고리 가져오기
+	List<String> getAllTicketCategories();
+
+	// 등록 폼 내 선택된 경기장에 따른 좌석 등급 가져오기
+	List<SeatVO> getSeatsByVenueId(int venueId);
+
+	// 등록 폼 내 권종 카테고리 가져오기
+	List<TicketTypeVO> getTicketTypesByCategory(String category);
+
+	// 요금 등록 처리
+	PriceVO registerPrice(PriceVO price) throws IllegalArgumentException;
+
+	List<SeatVO> getSeatsByVenueName(String venueName);
+
 }

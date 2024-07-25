@@ -1,4 +1,4 @@
-/*js/admin/sports/game/register.js*/
+/*js/admin/sports/game/gameRegister.js*/
 document.addEventListener('DOMContentLoaded', function() {
 	const sportSelect = document.getElementById('inputSportName');
 	const homeTeamSelect = document.getElementById('inputHomeTeamName');

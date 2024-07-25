@@ -28,7 +28,7 @@
 				네이비석
 			</li>
 			<li>
-				<img src="http://image.toast.com/aaaaab/ticketlink/TKL_2/wc_black.png" style="margin-right: 6px;">
+				<img src="${ctp}/images/icon/wc_black.png" style="margin-right: 6px;">
 				휠체어석
 			</li>
 			<span class="bar"></span>

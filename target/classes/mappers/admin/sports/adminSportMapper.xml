@@ -16,7 +16,7 @@
 	</select>
 	
 	<!-- 스포츠 종목 이름으로 스포츠 고유번호 가져오기 -->
-	<select id="getSPortIdByName" resultType="java.lang.Integer">
+	<select id="getSportIdByName" resultType="java.lang.Integer">
 		SELECT id FROM sports WHERE sportName = #{sportName}
 	</select>
 	
@@ -148,6 +148,102 @@
 	    LIMIT 1
 	</select>
 	
+	<!-- 이미 등록된 좌석 등급인지 확인 -->
+	<select id="isSeatExists" parameterType="com.spring.javaclassS8.vo.sports.SeatVO" resultType="boolean">
+	    SELECT EXISTS (
+	        SELECT 1
+	        FROM seats
+	        WHERE sportId = #{sportId}
+	          AND teamId = #{teamId}
+	          AND venueId = #{venueId}
+	          AND seatName = #{seatName}
+	    )
+	</select>
+	
+	<!-- 종목 이름, 팀 이름, 경기장 이름, 좌석 이름으로 seatId 찾기 -->
+	<select id="getSeatIdByDetails" resultType="java.lang.Integer">
+	    SELECT s.id
+	    FROM seats s
+	    JOIN sports sp ON s.sportId = sp.id
+	    JOIN teams t ON s.teamId = t.id
+	    JOIN venues v ON s.venueId = v.id
+	    WHERE sp.sportName = #{sportName}
+	    AND t.teamName = #{teamName}
+	    AND v.venueName = #{venueName}
+	    AND s.seatName = #{seatName}
+	</select>
+	
+	<!-- 새로 등록된 요금 정보 반환 -->
+	<select id="getRecentlyAddedPrice" resultType="com.spring.javaclassS8.vo.sports.PriceVO">
+        SELECT p.*, s.sportName, t.teamName, v.venueName, st.seatName, tt.category as ticketTypeCategory, tt.name as ticketTypeName
+        FROM prices p
+        JOIN sports s ON p.sportId = s.id
+        JOIN teams t ON p.teamId = t.id
+        JOIN venues v ON p.venueId = v.id
+        JOIN seats st ON p.seatId = st.id
+        JOIN ticket_types tt ON p.ticketTypeId = tt.id
+        ORDER BY p.id DESC LIMIT 1
+	</select>
+    
+    <!-- 같은 정보로 이미 등록된 요금인지 확인 -->
+    <select id="isPriceExists" resultType="int">
+	    SELECT COUNT(*) > 0
+	    FROM prices
+	    WHERE sportId = #{sportId}
+	    AND teamId = #{teamId}
+	    AND venueId = #{venueId}
+	    AND seatId = #{seatId}
+	    AND ticketTypeId = #{ticketTypeId}
+    </select>
+	
+	<!-- 등록 폼 내 권종 카테고리 가져오기 -->
+	<select id="getTicketTypesByCategory" resultType="com.spring.javaclassS8.vo.sports.TicketTypeVO">
+	    SELECT * FROM ticket_types WHERE category = #{category}
+	</select>
+	
+	<!-- 등록 폼 내 선택된 경기장에 따른 좌석 등급 가져오기 -->
+	<select id="getSeatsByVenueId" resultType="com.spring.javaclassS8.vo.sports.SeatVO">
+	    SELECT * FROM seats WHERE venueId = #{venueId}
+	</select>
+	
+	<!-- 모든 좌석 등급 가져오기 -->
+	<select id="getAllSeats" resultType="com.spring.javaclassS8.vo.sports.SeatVO">
+	    SELECT * FROM seats
+	</select>
+	
+	<!-- 모든 권종 카테고리 가져오기 -->
+	<select id="getAllTicketCategories" resultType="String">
+	    SELECT DISTINCT category FROM ticket_types
+	</select>
+	
+	<!-- 최근 등록된 요금 가져오기 -->
+	<select id="getLastInsertedPrice" parameterType="int" resultType="com.spring.javaclassS8.vo.sports.PriceVO">
+	    SELECT p.*, s.sportName, t.teamName, v.venueName, se.seatName, tt.name as ticketTypeName
+	    FROM prices p
+	    JOIN sports s ON p.sportId = s.id
+	    JOIN teams t ON p.teamId = t.id
+	    JOIN venues v ON p.venueId = v.id
+	    JOIN seats se ON p.seatId = se.id
+	    JOIN ticket_types tt ON p.ticketTypeId = tt.id
+	    ORDER BY p.id DESC
+	    LIMIT 1
+	</select>
+	
+	<select id="getSeatIdByName" resultType="java.lang.Integer">
+	    SELECT id FROM seats WHERE seatName = #{seatName}
+	</select>
+	
+	<select id="getTicketTypeIdByName" resultType="java.lang.Integer">
+	    SELECT id FROM ticket_types WHERE name = #{ticketTypeName}
+	</select>
+	
+	<select id="getSeatsByVenueName" resultType="com.spring.javaclassS8.vo.sports.SeatVO">
+	    SELECT s.* 
+	    FROM seats s
+	    JOIN venues v ON s.venueId = v.id
+	    WHERE v.venueName = #{venueName}
+	</select>
+
 	<!-- 스포츠 종목 등록 처리 -->
 	<insert id="insertSport" parameterType="String">
 		INSERT INTO sports (sportName) VALUES (#{sportName})
@@ -181,6 +277,12 @@
         INSERT INTO seats (sportId, teamId, venueId, seatName, capacity)
         VALUES (#{sportId}, #{teamId}, #{venueId}, #{seatName}, #{capacity})
 	</insert>
+	
+	<!-- 요금 등록 처리 -->
+    <insert id="insertPrice" parameterType="com.spring.javaclassS8.vo.sports.PriceVO">
+	    INSERT INTO prices (sportId, teamId, venueId, seatId, ticketTypeId, price)
+	    VALUES (#{sportId}, #{teamId}, #{venueId}, #{seatId}, #{ticketTypeId}, #{price})
+    </insert>
 	
 	<!-- 스포츠 이름 수정 -->
 	<update id="updateSport">

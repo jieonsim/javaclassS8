@@ -1,5 +1,5 @@
 
-/* 스포츠 팀 */
+/* 팀 */
 CREATE TABLE teams (
     id INT NOT NULL AUTO_INCREMENT COMMENT '팀 고유번호',
     sportId INT NOT NULL COMMENT '스포츠 고유번호',

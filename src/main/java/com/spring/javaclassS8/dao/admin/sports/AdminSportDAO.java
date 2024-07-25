@@ -5,9 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.spring.javaclassS8.vo.sports.GameVO;
+import com.spring.javaclassS8.vo.sports.PriceVO;
 import com.spring.javaclassS8.vo.sports.SeatVO;
 import com.spring.javaclassS8.vo.sports.SportVO;
 import com.spring.javaclassS8.vo.sports.TeamVO;
+import com.spring.javaclassS8.vo.sports.TicketTypeVO;
 import com.spring.javaclassS8.vo.sports.VenueVO;
 
 public interface AdminSportDAO {
@@ -19,13 +21,14 @@ public interface AdminSportDAO {
 	List<String> getAllSports();
 
 	// 스포츠 종목 이름으로 스포츠 고유번호 가져오기
-	Integer getSPortIdByName(String sportName);
+	Integer getSportIdByName(String sportName);
 
 	// 스포츠 팀 등록 처리
 	int insertTeam(@Param("sportId") int sportId, @Param("teamName") String teamName, @Param("shortName") String shortName);
 
 	// 경기장 등록 처리
-	int insertVenue(@Param("sportId") int sportId, @Param("teamId") int teamId, @Param("venueName") String venueName, @Param("address") String address, @Param("capacity") String capacity);
+	int insertVenue(@Param("sportId") int sportId, @Param("teamId") int teamId, @Param("venueName") String venueName, @Param("address") String address,
+			@Param("capacity") String capacity);
 
 	// 팀 이름으로 팀 고유번호 가져오기
 	Integer getTeamIdByName(String teamName);
@@ -83,7 +86,7 @@ public interface AdminSportDAO {
 
 	// 경기 정보 수정
 	int updateGame(@Param("id") int id, @Param("gameDate") String gameDate, @Param("gameTime") String gameTime, @Param("status") String status);
-	
+
 	// 경기 삭제
 	void deleteGame(int id);
 
@@ -104,4 +107,43 @@ public interface AdminSportDAO {
 
 	// 새로 등록된 좌석 정보 반환
 	SeatVO getRecentlyAddedSeat(int venueId);
+
+	// 이미 등록된 좌석 등급인지 확인
+	boolean isSeatExists(SeatVO seat);
+
+	// 종목 이름, 팀 이름, 경기장 이름, 좌석 이름으로 seatId 찾기
+	Integer getSeatIdByDetails(@Param("sportName") String sportName, @Param("teamName") String teamName, @Param("venueName") String venueName, @Param("seatName") String seatName);
+	
+	// 새로 등록된 요금 정보 반환
+	PriceVO getRecentlyAddedPrice();
+	
+	// 모든 좌석 등급 가져오기
+	List<SeatVO> getAllSeats();
+
+	// 모든 권종 카테고리 가져오기
+	List<String> getAllTicketCategories();
+
+	// 등록 폼 내 선택된 경기장에 따른 좌석 등급 가져오기
+	List<SeatVO> getSeatsByVenueId(int venueId);
+
+	// 등록 폼 내 권종 카테고리 가져오기
+	List<TicketTypeVO> getTicketTypesByCategory(String category);
+
+	// 같은 정보로 이미 등록된 요금인지 확인
+	int isPriceExists(PriceVO price);
+	
+	// 요금 등록 처리
+	int insertPrice(PriceVO price);
+	
+	// 최근 등록된 요금 가져오기
+	PriceVO getLastInsertedPrice();
+
+	// 좌석 이름으로 seatId 가져오기
+	Integer getSeatIdByName(String seatName);
+
+	// 권종 이름으로 tickeTypeId 가져오기
+	Integer getTicketTypeIdByName(String ticketTypeName);
+
+	List<SeatVO> getSeatsByVenueName(String venueName);
+
 }

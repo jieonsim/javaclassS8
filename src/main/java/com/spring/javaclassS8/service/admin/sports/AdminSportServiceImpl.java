@@ -8,9 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.javaclassS8.dao.admin.sports.AdminSportDAO;
 import com.spring.javaclassS8.vo.sports.GameVO;
+import com.spring.javaclassS8.vo.sports.PriceVO;
 import com.spring.javaclassS8.vo.sports.SeatVO;
 import com.spring.javaclassS8.vo.sports.SportVO;
 import com.spring.javaclassS8.vo.sports.TeamVO;
+import com.spring.javaclassS8.vo.sports.TicketTypeVO;
 import com.spring.javaclassS8.vo.sports.VenueVO;
 
 @Service
@@ -39,7 +41,7 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 	@Transactional
 	public boolean registerTeam(String sportName, String teamName, String shortName) {
 		// 스포츠 종목 이름으로 스포츠 고유번호 가져오기
-		Integer sportId = adminSportDAO.getSPortIdByName(sportName);
+		Integer sportId = adminSportDAO.getSportIdByName(sportName);
 		if (sportId == null) {
 			throw new IllegalArgumentException("해당 스포츠가 존재하지 않습니다." + sportName);
 		}
@@ -51,7 +53,7 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 	@Transactional
 	public boolean registerVenue(String sportName, String teamName, String venueName, String address, String capacity) {
 		// 스포츠 종목 이름으로 스포츠 고유번호 가져오기
-		Integer sportId = adminSportDAO.getSPortIdByName(sportName);
+		Integer sportId = adminSportDAO.getSportIdByName(sportName);
 		if (sportId == null) {
 			throw new IllegalArgumentException("해당 스포츠가 존재하지 않습니다." + sportName);
 		}
@@ -209,7 +211,7 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 	@Transactional
 	public SeatVO registerSeat(SeatVO seat) throws Exception {
 		// sportName, teamName으로 각각의 id 조회
-		Integer sportId = adminSportDAO.getSPortIdByName(seat.getSportName());
+		Integer sportId = adminSportDAO.getSportIdByName(seat.getSportName());
 		Integer teamId = adminSportDAO.getTeamIdByName(seat.getTeamName());
 
 		// null 체크 추가
@@ -224,6 +226,11 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 		seat.setSportId(sportId);
 		seat.setTeamId(teamId);
 
+		// 중복 체크
+		if (adminSportDAO.isSeatExists(seat)) {
+			throw new IllegalStateException("이미 등록된 좌석 등급입니다.");
+		}
+
 		// 경기장 총 수용인원 확인
 		int venueCapacity = adminSportDAO.getVenueCapacity(seat.getVenueId());
 
@@ -232,12 +239,7 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 
 		// 새로운 좌석 추가 시 총 수용인원을 초과하는지 확인
 		if (usedCapacity + seat.getCapacity() > venueCapacity) {
-			throw new Exception("좌석 추가 시 경기장의 총 수용인원을 초과합니다.");
-		}
-
-		// 새로운 좌석 추가 시 총 수용인원을 초과하는지 확인
-		if (usedCapacity + seat.getCapacity() > venueCapacity) {
-			throw new Exception("좌석 추가 시 경기장의 총 수용인원을 초과합니다.");
+			throw new IllegalStateException("좌석 추가 시 경기장의 총 수용인원을 초과합니다.");
 		}
 
 		// 좌석 등록 처리
@@ -247,7 +249,109 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 			// 새로 등록된 좌석 정보 반환
 			return adminSportDAO.getRecentlyAddedSeat(seat.getVenueId());
 		} else {
-			throw new Exception("좌석 등록에 실패했습니다.");
+			throw new IllegalStateException("좌석 등록에 실패했습니다.");
 		}
+	}
+
+	// 모든 좌석 등급 가져오기
+	@Override
+	public List<SeatVO> getAllSeats() {
+		return adminSportDAO.getAllSeats();
+	}
+
+	// 모든 권종 카테고리 가져오기
+	@Override
+	public List<String> getAllTicketCategories() {
+		return adminSportDAO.getAllTicketCategories();
+	}
+
+	// 등록 폼 내 선택된 경기장에 따른 좌석 등급 가져오기
+	@Override
+	public List<SeatVO> getSeatsByVenueId(int venueId) {
+		return adminSportDAO.getSeatsByVenueId(venueId);
+	}
+
+	// 등록 폼 내 권종 카테고리 가져오기
+	@Override
+	public List<TicketTypeVO> getTicketTypesByCategory(String category) {
+		return adminSportDAO.getTicketTypesByCategory(category);
+	}
+
+	// 요금 등록 처리
+	@Override
+	@Transactional
+	public PriceVO registerPrice(PriceVO price) throws IllegalArgumentException {
+		try {
+			// 이름으로 각각의 id 조회
+			System.out.println("sportName : " + price.getSportName());
+			Integer sportId = adminSportDAO.getSportIdByName(price.getSportName());
+			System.out.println("sportId : " + sportId);
+
+			System.out.println("teamName : " + price.getTeamName());
+			Integer teamId = adminSportDAO.getTeamIdByName(price.getTeamName());
+			System.out.println("teamId : " + teamId);
+
+			System.out.println("venueName : " + price.getVenueName());
+			Integer venueId = adminSportDAO.getVenueIdByName(price.getVenueName());
+			System.out.println("venueId : " + venueId);
+
+			System.out.println("seatName : " + price.getSeatName());
+			/* Integer seatId = adminSportDAO.getSeatIdByName(price.getSeatName()); */
+			Integer seatId = adminSportDAO.getSeatIdByDetails(price.getSportName(), price.getTeamName(), price.getVenueName(), price.getSeatName());
+			System.out.println("seatId : " + seatId);
+
+			System.out.println("ticketTypeName : " + price.getTicketTypeName());
+			Integer ticketTypeId = adminSportDAO.getTicketTypeIdByName(price.getTicketTypeName());
+			System.out.println("ticketTypeId : " + ticketTypeId);
+
+			// null 체크
+			if (sportId == null) {
+				throw new IllegalArgumentException("해당 스포츠를 찾을 수 없습니다.");
+			}
+			if (teamId == null) {
+				throw new IllegalArgumentException("해당 팀을 찾을 수 없습니다.");
+			}
+			if (venueId == null) {
+				throw new IllegalArgumentException("해당 경기장을 찾을 수 없습니다.");
+			}
+			if (seatId == null) {
+				throw new IllegalArgumentException("해당 좌석을 찾을 수 없습니다.");
+			}
+			if (ticketTypeId == null) {
+				throw new IllegalArgumentException("해당 권종을 찾을 수 없습니다.");
+			}
+
+			// 조회한 id 값을 PriceVO에 설정
+			price.setSportId(sportId);
+			price.setTeamId(teamId);
+			price.setVenueId(venueId);
+			price.setSeatId(seatId);
+			price.setTicketTypeId(ticketTypeId);
+
+	        // 같은 정보로 이미 등록된 요금인지 확인
+	        int priceExists = adminSportDAO.isPriceExists(price);
+	        if (priceExists > 0) {
+	            throw new IllegalArgumentException("해당 정보로 이미 등록된 요금이 있습니다.");
+	        }
+
+			int result = adminSportDAO.insertPrice(price);
+
+			if (result > 0) {
+				return adminSportDAO.getLastInsertedPrice();
+			} else {
+				throw new IllegalStateException("요금 등록에 실패했습니다.");
+			}
+		} catch (IllegalArgumentException e) {
+			System.out.println("Validation Error: " + e.getMessage());
+			throw e;
+		} catch (Exception e) {
+			System.out.println("Unexpected Error: " + e.getMessage());
+			throw new RuntimeException("요금 등록 중 오류가 발생했습니다.");
+		}
+	}
+
+	@Override
+	public List<SeatVO> getSeatsByVenueName(String venueName) {
+		return adminSportDAO.getSeatsByVenueName(venueName);
 	}
 }

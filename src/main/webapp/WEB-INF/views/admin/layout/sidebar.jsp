@@ -66,6 +66,13 @@
 					</li>
 				</ul>
 			</div>
+			<div class="collapse" id="sports">
+				<ul class="nav flex-column sub-menu">
+					<li class="nav-item">
+						<a class="nav-link" href="${ctp}/admin/sports/price/priceRegister">권종 및 요금 등록</a>
+					</li>
+				</ul>
+			</div>
 		</li>
 		<li class="nav-item nav-category">RESERVATION</li>
 		<li class="nav-item">

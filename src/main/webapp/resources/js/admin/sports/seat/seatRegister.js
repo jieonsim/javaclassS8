@@ -1,4 +1,4 @@
-/*js/admin/sports/game/register.js*/
+/*js/admin/sports/seat/seatRegister.js*/
 document.addEventListener('DOMContentLoaded', function() {
 	const form = document.getElementById('insertSeatForm');
 	const sportSelect = document.getElementById('inputSportName');
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	let usedCapacity = 0; // 현재 경기장에 이미 등록된 좌석 수의 합
 
 	function updateTeamOptions(teamSelect, teams) {
-		teamSelect.innerHTML = '';
+		teamSelect.innerHTML = '<option value="">팀 선택</option>';
 		teams.forEach(team => {
 			const option = document.createElement('option');
 			option.value = team.teamName;
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	function updateVenueOptions(newVenues) {
 		venues = newVenues; // 전체 경기장 정보 저장
-		venueSelect.innerHTML = '';
+		venueSelect.innerHTML = '<option value="">경기장 선택</option>';
 		venues.forEach(venue => {
 			const option = document.createElement('option');
 			option.value = venue.id; // venueId를 value로 사용
@@ -67,9 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			.then(response => response.json())
 			.then(teams => {
 				updateTeamOptions(teamSelect, teams);
-				if (teams.length > 0) {
-					teamSelect.dispatchEvent(new Event('change'));
-				}
+				venueSelect.innerHTML = '<option value="">경기장 선택</option>';
 			});
 	});
 
@@ -90,15 +88,15 @@ document.addEventListener('DOMContentLoaded', function() {
 	form.addEventListener('submit', function(e) {
 		e.preventDefault();
 
-        // 모든 필드 입력 확인
-        const allFields = [sportSelect, teamSelect, venueSelect,
-            document.getElementById('inputSeatName'),
-            capacityInput];
+		// 모든 필드 입력 확인
+		const allFields = [sportSelect, teamSelect, venueSelect,
+			document.getElementById('inputSeatName'),
+			capacityInput];
 
-        if (allFields.some(field => !field.value)) {
-            alert('모든 필드를 입력해주세요.');
-            return;
-        }
+		if (allFields.some(field => !field.value)) {
+			alert('모든 필드를 입력해주세요.');
+			return;
+		}
 
 		// 수용 인원 초과 체크
 		const newCapacity = parseInt(capacityInput.value);
@@ -116,16 +114,19 @@ document.addEventListener('DOMContentLoaded', function() {
 			method: 'POST',
 			body: formData
 		})
-			.then(response => response.json())
+			.then(response => {
+				if (!response.ok && response.status !== 200) {
+					throw new Error('서버 오류');
+				}
+				return response.json();
+			})
 			.then(data => {
 				if (data.success) {
 					alert('좌석 등급이 성공적으로 등록되었습니다.');
 					updateSeatList(data.seats);
 					form.reset();
-					usedCapacity += newCapacity; // 사용된 좌석 수 업데이트
-					updateCapacityValidation(); // 남은 수용인원 재계산
 				} else {
-					alert('좌석 등록에 실패했습니다: ' + data.message);
+					alert(data.message || '좌석 등록에 실패했습니다.');
 				}
 			})
 			.catch(error => {
@@ -143,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		newSeats.forEach(seat => {
 			const li = document.createElement('li');
-			li.textContent = `신규 등록된 좌석 : ${seat.seatName} | 현재 ${seat.venueName}의 남은 수용 인원 : ${currentVenueCapacity - usedCapacity}명`;
+			li.textContent = `팀: ${seat.teamName} | 신규 등록된 좌석 : ${seat.seatName}`;
 			li.classList.add('list-group-item', 'new-seat');
 			seatList.appendChild(li);
 		});

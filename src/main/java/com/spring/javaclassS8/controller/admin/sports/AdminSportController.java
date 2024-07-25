@@ -22,9 +22,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.spring.javaclassS8.service.admin.sports.AdminSportSerivce;
 import com.spring.javaclassS8.vo.sports.GameVO;
 import com.spring.javaclassS8.vo.sports.GameVO.Status;
+import com.spring.javaclassS8.vo.sports.PriceVO;
 import com.spring.javaclassS8.vo.sports.SeatVO;
 import com.spring.javaclassS8.vo.sports.SportVO;
 import com.spring.javaclassS8.vo.sports.TeamVO;
+import com.spring.javaclassS8.vo.sports.TicketTypeVO;
 import com.spring.javaclassS8.vo.sports.VenueVO;
 
 @Controller
@@ -395,17 +397,73 @@ public class AdminSportController {
 	@PostMapping("/seat/seatRegister")
 	@ResponseBody
 	public ResponseEntity<?> registerSeat(@ModelAttribute SeatVO seat) {
+		try {
+			SeatVO newSeat = adminSportService.registerSeat(seat);
+			Map<String, Object> response = new HashMap<>();
+			response.put("success", true);
+			response.put("seats", Collections.singletonList(newSeat));
+			return ResponseEntity.ok(response);
+		} catch (IllegalArgumentException | IllegalStateException e) {
+			Map<String, Object> response = new HashMap<>();
+			response.put("success", false);
+			response.put("message", e.getMessage());
+			return ResponseEntity.ok(response); // 200 OK로 변경
+		} catch (Exception e) {
+			Map<String, Object> response = new HashMap<>();
+			response.put("success", false);
+			response.put("message", "좌석 등록 중 오류가 발생했습니다.");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+	}
+
+    // 요금 등록 폼
+	@GetMapping("/price/priceRegister")
+	public String priceRegisterForm(Model model) {
+	    List<String> sports = adminSportService.getAllSports();
+	    List<TeamVO> teams = adminSportService.getAllTeamsWithSports();
+	    List<VenueVO> venues = adminSportService.getAllVenuesDetails();
+	    List<SeatVO> seats = adminSportService.getAllSeats();
+	    List<String> ticketCategories = adminSportService.getAllTicketCategories();
+
+	    model.addAttribute("sports", sports);
+	    model.addAttribute("teams", teams);
+	    model.addAttribute("venues", venues);
+	    model.addAttribute("seats", seats);
+	    model.addAttribute("ticketCategories", ticketCategories);
+	    return "admin/sports/price/priceRegister";
+	}
+	
+	// 등록 폼 내 선택된 경기장에 따른 좌석 등급 가져오기
+	@GetMapping("/seats")
+	@ResponseBody
+	public List<SeatVO> getSeatsByVenueName(@RequestParam String venueName) {
+	    return adminSportService.getSeatsByVenueName(venueName);
+	}
+//	@GetMapping("/seats")
+//	@ResponseBody
+//	public List<SeatVO> getSeatsByVenueId(@RequestParam int venueId) {
+//		return adminSportService.getSeatsByVenueId(venueId);
+//	}
+	
+	// 등록 폼 내 권종 카테고리 가져오기
+	@GetMapping("/ticketTypes")
+	@ResponseBody
+	public List<TicketTypeVO> getTicketTypesByCategory(@RequestParam String category) {
+	    return adminSportService.getTicketTypesByCategory(category);
+	}
+
+	// 요금 등록 처리
+	@PostMapping("/price/priceRegister")
+	@ResponseBody
+	public ResponseEntity<?> registerPrice(@ModelAttribute PriceVO price) {
+		System.out.println("Recevied PriceVO : " + price);
 	    try {
-	        SeatVO newSeat = adminSportService.registerSeat(seat);
-	        Map<String, Object> response = new HashMap<>();
-	        response.put("success", true);
-	        response.put("seats", Collections.singletonList(newSeat));
-	        return ResponseEntity.ok(response);
+	        PriceVO newPrice = adminSportService.registerPrice(price);
+	        return ResponseEntity.ok(Map.of("success", true, "price", newPrice));
+	    } catch (IllegalArgumentException e) {
+	        return ResponseEntity.badRequest().body(Map.of("success", false, "message", e.getMessage()));
 	    } catch (Exception e) {
-	        Map<String, Object> response = new HashMap<>();
-	        response.put("success", false);
-	        response.put("message", e.getMessage());
-	        return ResponseEntity.badRequest().body(response);
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("success", false, "message", "요금 등록 중 오류가 발생했습니다."));
 	    }
 	}
 }

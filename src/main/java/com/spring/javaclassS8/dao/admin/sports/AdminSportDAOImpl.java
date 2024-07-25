@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.javaclassS8.vo.sports.GameVO;
+import com.spring.javaclassS8.vo.sports.PriceVO;
 import com.spring.javaclassS8.vo.sports.SeatVO;
 import com.spring.javaclassS8.vo.sports.SportVO;
 import com.spring.javaclassS8.vo.sports.TeamVO;
+import com.spring.javaclassS8.vo.sports.TicketTypeVO;
 import com.spring.javaclassS8.vo.sports.VenueVO;
 
 @Repository
@@ -32,8 +34,8 @@ public class AdminSportDAOImpl implements AdminSportDAO {
 
 	// 스포츠 종목 이름으로 스포츠 고유번호 가져오기
 	@Override
-	public Integer getSPortIdByName(String sportName) {
-		return sqlSession.getMapper(AdminSportDAO.class).getSPortIdByName(sportName);
+	public Integer getSportIdByName(String sportName) {
+		return sqlSession.getMapper(AdminSportDAO.class).getSportIdByName(sportName);
 	}
 
 	// 스포츠 팀 등록 처리
@@ -203,5 +205,83 @@ public class AdminSportDAOImpl implements AdminSportDAO {
 	public SeatVO getRecentlyAddedSeat(int venueId) {
 		return sqlSession.getMapper(AdminSportDAO.class).getRecentlyAddedSeat(venueId);
 	}
+
+	// 이미 등록된 좌석 등급인지 확인
+	@Override
+	public boolean isSeatExists(SeatVO seat) {
+		return sqlSession.getMapper(AdminSportDAO.class).isSeatExists(seat);
+	}
+
+	// 종목 이름, 팀 이름, 경기장 이름, 좌석 이름으로 seatId 찾기
+	@Override
+	public Integer getSeatIdByDetails(String sportName, String teamName, String venueName, String seatName) {
+		return sqlSession.getMapper(AdminSportDAO.class).getSeatIdByDetails(sportName, teamName, venueName, seatName);
+	}
+
+	// 새로 등록된 요금 정보 반환
+	@Override
+	public PriceVO getRecentlyAddedPrice() {
+		return sqlSession.getMapper(AdminSportDAO.class).getRecentlyAddedPrice();
+	}
+
+	// 모든 좌석 등급 가져오기
+	@Override
+	public List<SeatVO> getAllSeats() {
+		return sqlSession.getMapper(AdminSportDAO.class).getAllSeats();
+	}
+
+	// 등록 폼 내 선택된 경기장에 따른 좌석 등급 가져오기
+	@Override
+	public List<String> getAllTicketCategories() {
+		return sqlSession.getMapper(AdminSportDAO.class).getAllTicketCategories();
+	}
+
+	// 등록 폼 내 선택된 경기장에 따른 좌석 등급 가져오기
+	@Override
+	public List<SeatVO> getSeatsByVenueId(int venueId) {
+		return sqlSession.getMapper(AdminSportDAO.class).getSeatsByVenueId(venueId);
+	}
+
+	// 등록 폼 내 권종 카테고리 가져오기
+	@Override
+	public List<TicketTypeVO> getTicketTypesByCategory(String category) {
+		return sqlSession.getMapper(AdminSportDAO.class).getTicketTypesByCategory(category);
+	}
+	
+	// 같은 정보로 이미 등록된 요금인지 확인
+	@Override
+	public int isPriceExists(PriceVO price) {
+	    return sqlSession.getMapper(AdminSportDAO.class).isPriceExists(price);
+	}
+	
+	// 요금 등록 처리
+	@Override
+	public int insertPrice(PriceVO price) {
+	    return sqlSession.getMapper(AdminSportDAO.class).insertPrice(price);
+	}
+	
+	// 최근 등록된 요금 가져오기
+	@Override
+	public PriceVO getLastInsertedPrice() {
+	    return sqlSession.getMapper(AdminSportDAO.class).getLastInsertedPrice();
+	}
+
+	// 좌석 이름으로 seatId 가져오기
+	@Override
+	public Integer getSeatIdByName(String seatName) {
+	    return sqlSession.getMapper(AdminSportDAO.class).getSeatIdByName(seatName);
+	}
+
+	// 권종 이름으로 tickeTypeId 가져오기
+	@Override
+	public Integer getTicketTypeIdByName(String ticketTypeName) {
+	    return sqlSession.getMapper(AdminSportDAO.class).getTicketTypeIdByName(ticketTypeName);
+	}
+	
+	@Override
+	public List<SeatVO> getSeatsByVenueName(String venueName) {
+	    return sqlSession.getMapper(AdminSportDAO.class).getSeatsByVenueName(venueName);
+	}
+
 
 }
