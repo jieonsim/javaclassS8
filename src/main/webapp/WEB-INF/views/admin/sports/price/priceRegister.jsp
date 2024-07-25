@@ -29,11 +29,9 @@
 						<div class="col-md-6 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">요금 등급 등록</h4>
+									<h4 class="card-title">요금 등록</h4>
 									<p class="card-description">
 										스포츠 > 팀 > 경기장 > 좌석 선택 후 등록해주세요.
-										<br>
-										평일과 주말 가격이 나누어져있지 않는 종목은 일반 가격만 입력해 주세요.
 									</p>
 									<form class="forms-sample" id="insertPriceForm">
 										<div class="form-group">
