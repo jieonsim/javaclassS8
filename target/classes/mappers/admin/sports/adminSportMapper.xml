@@ -47,6 +47,11 @@
 		SELECT id FROM teams WHERE teamName = #{teamName}
 	</select>
 	
+	<!-- 경기장 이름으로 경기장 고유번호 가져오기 -->
+	<select id="getVenueIdByName" resultType="java.lang.Integer">
+		SELECT id FROM venues WHERE venueName = #{venueName}
+	</select>
+	
 	<!-- 스포츠 하위에 팀이나 경기장이 있는지 여부 확인 -->
 	<select id="countTeamsAndVenuesBySportId" resultType="int">
 		SELECT COUNT(*) FROM(
@@ -129,6 +134,18 @@
         JOIN venues v ON s.venueId = v.id
         WHERE s.venueId = #{venueId}
         ORDER BY s.id DESC
+	</select>
+	
+	<!-- 새로 등록된 좌석 정보 반환 -->
+	<select id="getRecentlyAddedSeat" parameterType="int" resultType="com.spring.javaclassS8.vo.sports.SeatVO">
+	    SELECT s.*, sp.sportName, t.teamName, v.venueName
+	    FROM seats s
+	    JOIN sports sp ON s.sportId = sp.id
+	    JOIN teams t ON s.teamId = t.id
+	    JOIN venues v ON s.venueId = v.id
+	    WHERE s.venueId = #{venueId}
+	    ORDER BY s.id DESC
+	    LIMIT 1
 	</select>
 	
 	<!-- 스포츠 종목 등록 처리 -->

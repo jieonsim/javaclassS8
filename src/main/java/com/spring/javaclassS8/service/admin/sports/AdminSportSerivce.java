@@ -83,6 +83,5 @@ public interface AdminSportSerivce {
 	int getUsedCapacityByVenueId(int venueId);
 
 	// 좌석 등록 처리
-	List<SeatVO> registerSeat(SeatVO seat) throws Exception;
-
+	SeatVO registerSeat(SeatVO seat) throws Exception;
 }

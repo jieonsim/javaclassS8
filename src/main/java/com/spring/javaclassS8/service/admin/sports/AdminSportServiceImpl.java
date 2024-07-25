@@ -207,7 +207,7 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 	// 좌석 등록 처리
 	@Override
 	@Transactional
-	public List<SeatVO> registerSeat(SeatVO seat) throws Exception {
+	public SeatVO registerSeat(SeatVO seat) throws Exception {
 		// sportName, teamName으로 각각의 id 조회
 		Integer sportId = adminSportDAO.getSPortIdByName(seat.getSportName());
 		Integer teamId = adminSportDAO.getTeamIdByName(seat.getTeamName());
@@ -221,8 +221,8 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 		}
 
 		// 조회한 sportId,teamId 값을 SeatVO에 설정
-	    seat.setSportId(sportId);
-	    seat.setTeamId(teamId);
+		seat.setSportId(sportId);
+		seat.setTeamId(teamId);
 
 		// 경기장 총 수용인원 확인
 		int venueCapacity = adminSportDAO.getVenueCapacity(seat.getVenueId());
@@ -235,10 +235,19 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 			throw new Exception("좌석 추가 시 경기장의 총 수용인원을 초과합니다.");
 		}
 
-		// 좌석 등록 처리
-		adminSportDAO.insertSeat(seat);
+		// 새로운 좌석 추가 시 총 수용인원을 초과하는지 확인
+		if (usedCapacity + seat.getCapacity() > venueCapacity) {
+			throw new Exception("좌석 추가 시 경기장의 총 수용인원을 초과합니다.");
+		}
 
-		// 새로 등록된 좌석을 포함한 해당 경기장의 모든 좌석 정보 반환
-		return adminSportDAO.getSeatsForVenue(seat.getVenueId());
+		// 좌석 등록 처리
+		int result = adminSportDAO.insertSeat(seat);
+
+		if (result > 0) {
+			// 새로 등록된 좌석 정보 반환
+			return adminSportDAO.getRecentlyAddedSeat(seat.getVenueId());
+		} else {
+			throw new Exception("좌석 등록에 실패했습니다.");
+		}
 	}
 }

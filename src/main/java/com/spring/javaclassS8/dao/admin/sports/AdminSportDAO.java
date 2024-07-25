@@ -94,11 +94,14 @@ public interface AdminSportDAO {
 	int getVenueCapacity(int venueId);
 
 	// 좌석 등록 처리
-	void insertSeat(SeatVO seat);
+	int insertSeat(SeatVO seat);
 
 	// 새로 등록된 좌석을 포함한 해당 경기장의 모든 좌석 정보 반환
 	List<SeatVO> getSeatsForVenue(int venueId);
 
 	// 경기장 이름으로 경기장 고유번호 가져오기
 	Integer getVenueIdByName(String venueName);
+
+	// 새로 등록된 좌석 정보 반환
+	SeatVO getRecentlyAddedSeat(int venueId);
 }

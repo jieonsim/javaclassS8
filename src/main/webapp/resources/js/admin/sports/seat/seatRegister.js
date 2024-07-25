@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		newSeats.forEach(seat => {
 			const li = document.createElement('li');
-			li.textContent = `${seat.teamName} | ${seat.categoryName}`;
+			li.textContent = `신규 등록된 좌석 : ${seat.seatName} | 현재 ${seat.venueName}의 남은 수용 인원 : ${currentVenueCapacity - usedCapacity}명`;
 			li.classList.add('list-group-item', 'new-seat');
 			seatList.appendChild(li);
 		});

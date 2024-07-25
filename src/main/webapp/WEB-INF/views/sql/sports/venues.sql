@@ -12,5 +12,5 @@ CREATE TABLE venues (
     PRIMARY KEY (id),
     FOREIGN KEY (sportId) REFERENCES sports(id),
     FOREIGN KEY (teamId) REFERENCES teams(id),
-    INDEX (venueName)
+    UNIQUE KEY (venueName)
 );

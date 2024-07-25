@@ -182,8 +182,8 @@ public class AdminSportDAOImpl implements AdminSportDAO {
 
 	// 좌석 등록 처리
 	@Override
-	public void insertSeat(SeatVO seat) {
-		sqlSession.getMapper(AdminSportDAO.class).insertSeat(seat);
+	public int insertSeat(SeatVO seat) {
+		return sqlSession.getMapper(AdminSportDAO.class).insertSeat(seat);
 	}
 
 	// 새로 등록된 좌석을 포함한 해당 경기장의 모든 좌석 정보 반환
@@ -197,4 +197,11 @@ public class AdminSportDAOImpl implements AdminSportDAO {
 	public Integer getVenueIdByName(String venueName) {
 		return sqlSession.getMapper(AdminSportDAO.class).getVenueIdByName(venueName);
 	}
+
+	// 새로 등록된 좌석 정보 반환
+	@Override
+	public SeatVO getRecentlyAddedSeat(int venueId) {
+		return sqlSession.getMapper(AdminSportDAO.class).getRecentlyAddedSeat(venueId);
+	}
+
 }

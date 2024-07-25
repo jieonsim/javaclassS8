@@ -1,5 +1,6 @@
 package com.spring.javaclassS8.controller.admin.sports;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -385,7 +386,6 @@ public class AdminSportController {
 	@ResponseBody
 	public Map<String, Integer> getUsedCapacity(@RequestParam int venueId) {
 		int usedCapacity = adminSportService.getUsedCapacityByVenueId(venueId);
-		System.out.println("venueId: " + venueId);
 		Map<String, Integer> response = new HashMap<>();
 		response.put("usedCapacity", usedCapacity);
 		return response;
@@ -396,10 +396,10 @@ public class AdminSportController {
 	@ResponseBody
 	public ResponseEntity<?> registerSeat(@ModelAttribute SeatVO seat) {
 	    try {
-	        List<SeatVO> newSeats = adminSportService.registerSeat(seat);
+	        SeatVO newSeat = adminSportService.registerSeat(seat);
 	        Map<String, Object> response = new HashMap<>();
 	        response.put("success", true);
-	        response.put("seats", newSeats);
+	        response.put("seats", Collections.singletonList(newSeat));
 	        return ResponseEntity.ok(response);
 	    } catch (Exception e) {
 	        Map<String, Object> response = new HashMap<>();
