@@ -48,4 +48,34 @@
 	      AND s.sportName = #{sport}
 	    ORDER BY g.gameDate, g.gameTime
     </select>
+    
+    <!-- gameId로 경기 정보 가져오기 -->
+	<select id="getGameById" resultType="com.spring.javaclassS8.vo.sports.GameVO">
+	    SELECT g.*, 
+	           ht.teamName as homeTeamName, 
+	           ht.shortName as homeTeamShortName,
+	           at.teamName as awayTeamName, 
+	           at.shortName as awayTeamShortName,
+	           v.venueName
+	    FROM games g
+	    JOIN teams ht ON g.homeTeamId = ht.id
+	    JOIN teams at ON g.awayTeamId = at.id
+	    JOIN venues v ON g.venueId = v.id
+	    WHERE g.id = #{gameId}
+	</select>
+
+	<!-- gameId로 잔여 좌석 수 가져오기 -->
+    <select id="getSeatInventoriesByGameId" resultType="com.spring.javaclassS8.vo.sports.SeatInventoryVO">
+        SELECT si.*, s.seatName, s.seatColor
+        FROM seat_inventory si
+        JOIN seats s ON si.seatId = s.id
+        WHERE si.gameId = #{gameId}
+    </select>
+    
+    <!-- sportId로 1회 예매 시 최대 구매 가능 티켓 수 가져오기 -->
+    <select id="getMaxTicketsPerBooking" resultType="int">
+	    SELECT maxTicketsPerBooking 
+	    FROM sport_booking_policies 
+	    WHERE sportId = #{sportId}
+	</select>
 </mapper>

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -46,17 +45,17 @@
 				<div class="reserve_left reserve_left_type1 ng-isolate-scope">
 					<div class="reserve_prdt_info">
 						<div class="tit tit_type1">
-							<h4 class="prdt ng-binding">${game.homeTeamName}&nbsp;vs&nbsp;${game.awayTeamName}</h4>
+							<h4 class="prdt ng-binding">KIA 타이거즈 vs NC 다이노스</h4>
 						</div>
 						<p class="etc_info etc_info_type1">
-							${game.gameDate} ${game.gameTime}
-							<span class="place ng-binding">${game.venueName}</span>
+							<span class="date ng-binding">2024.07.25(목) 18:30</span>
+							<span class="place ng-binding">KIA 챔피언스필드</span>
 						</p>
 					</div>
 					<div id="main_view_top" class="select_seat ng-isolate-scope">
 						<div id="main_view">
-							<img src="${ctp}/images/sports/seat/${game.homeTeamShortName}.png" alt="${game.homeTeamName} 좌석도">
-							<p>위 좌석배치도에서는 좌석을 선택할 수 없습니다. 우측 등급 선택에서 좌석 선점 후, 다음 단계를 선택해주세요.</p>
+							<img src="${ctp}/images/sports/seat/samsung.png">
+							<p>위 좌석배치도에서는 좌석을 선택할 수 없습니다. 우측 등급 선택에서 좌석 선점 후, 다음 단계를 선택해주세요."</p>
 						</div>
 					</div>
 				</div>
@@ -72,20 +71,74 @@
 							</div>
 						</div>
 						<ul id="select_seat_grade" class="seat_lst" style="height: 258px">
-							<c:forEach var="seatInventory" items="${seatInventories}">
-								<li id="seat_grade_${seatInventory.seatId}" class="ng-scope ng-isolate-scope">
-									<a href="#" style="cursor: pointer" class="${seatInventory.availableCapacity == 0 ? 'zero' : ''}">
-										<span class="seat_color ng-scope" style="background: ${seatInventory.seatColor};"></span>
-										<div class="seat_detail_info">
-											<span class="seat_grade ng-binding ng-scope">${seatInventory.seatName}</span>
-											<span class="seat ng-scope">
-												<span class="ng-binding">${seatInventory.availableCapacity}</span>
-												<span class="ng-binding">석</span>
-											</span>
-										</div>
-									</a>
-								</li>
-							</c:forEach>
+							<li>
+								<a href="#" style="cursor: pointer" class="select">
+									<span class="seat_color"></span>
+									<div class="seat_detail_info">
+										<span class="seat_level ng-binding">전체</span>
+									</div>
+								</a>
+							</li>
+							<li id="seat_grade_96023">
+								<!-- [D] 좌석 선택된 경우 클래스명 select 추가, 구역이 선택된 경우엔 클래스명 select2로 변경 -->
+								<a href="#" style="cursor: pointer" class="zero">
+									<!-- span class="seat_color ng-scope" style="background: #d15050"></span> -->
+									<div class="seat_detail_info">
+										<span class="seat_grade ng-binding ng-scope">챔피언석</span>
+										<span class="seat ng-scope">
+											<span class="ng-binding">0</span>
+											<span class="ng-binding">석</span>
+										</span>
+									</div>
+								</a>
+							<li id="seat_grade_96027" class="ng-scope ng-isolate-scope">
+								<a href="#" class="zero" style="cursor: pointer">
+									<!-- <span class="seat_color ng-scope" style="background: #284786"></span> -->
+									<div class="seat_detail_info">
+										<span class="seat_grade ng-binding ng-scope">중앙테이블석(2인)</span>
+										<span class="seat ng-scope">
+											<span class="ng-binding">0</span>
+											<span class="ng-binding">석</span>
+										</span>
+									</div>
+								</a>
+							</li>
+							<li id="seat_grade_96028" class="ng-scope ng-isolate-scope">
+								<a href="#" style="cursor: pointer" class="zero">
+									<!-- <span class="seat_color ng-scope" style="background: #284786"></span> -->
+									<div class="seat_detail_info">
+										<span class="seat_grade ng-binding ng-scope">중앙테이블석(3인)</span>
+										<span class="seat ng-scope">
+											<span class="ng-binding">0</span>
+											<span class="ng-binding">석</span>
+										</span>
+									</div>
+								</a>
+							</li>
+							<li id="seat_grade_96047" depth="1" grade="grade" zones="grade.zones" selected="selected" ng-if="!grade.restriction" ng-click="select.select($event, $index, grade)" ng-mouseover="select.showTooltipAction($event,grade)" ng-mouseleave="select.hideTooltipAction($event)" ng-init="select.selectedList[$index] = select.selectState.selectedGrade.gradeId === grade.gradeId|| false" ng-repeat="grade in select.grades" class="ng-scope ng-isolate-scope">
+								<a href="#" style="cursor: pointer">
+									<span class="seat_color ng-scope" style="background: #f0bc2e"></span>
+									<div class="seat_detail_info">
+										<span class="seat_grade ng-binding ng-scope">1루 K8</span>
+										<span class="seat ng-scope">
+											<span class="ng-binding">635</span>
+											<span class="ng-binding">석</span>
+										</span>
+									</div>
+								</a>
+							</li>
+							<li id="seat_grade_96050" depth="1" grade="grade" zones="grade.zones" selected="selected" class="ng-scope ng-isolate-scope">
+								<a href="#" style="cursor: pointer">
+									<!-- <span class="seat_color ng-scope" style="background: #93cb3b"></span> -->
+									<div class="seat_detail_info">
+										<span class="seat_grade ng-binding ng-scope" ng-if="grade.depth === 1">3루 K5</span>
+										<span class="seat ng-scope">
+											<span class="ng-binding">6</span>
+											<span class="ng-binding">석</span>
+										</span>
+									</div>
+								</a>
+							</li>
 						</ul>
 					</div>
 					<div class="reserve_artbx ng-isolate-scope">
@@ -116,26 +169,52 @@
 					</div>
 					<div class="layer select_count_auto ng-isolate-scope" style="left: 29px; bottom: 20px; width: 210px; display: none;">
 						<div class="box_top ng-scope">
-							<a href="#" class="close ng-binding">${seatName}</a>
+							<a href="#" class="close ng-binding">SKY상단지정석</a>
 							<div class="seat_box">
-								<p class="seat_name">${seatName}</p>
+								<p class="seat_name ng-binding">
+									<span class="seat_color" style="background: rgb(12, 48, 142);"></span>
+									SKY상단지정석
+								</p>
 								<p class="seat_dsc">
-									<span class="sheet ng-binding ng-scope">${availableCapacity}석</span>
+									<span class="sheet ng-binding ng-scope"> 23석</span>
 								</p>
 							</div>
 							<form class="ng-pristine ng-valid ng-scope">
 								<fieldset>
 									<legend class="ng-binding">매수선택</legend>
+									<!-- [D] 클래스명이 select_count_auto인 팝업만 select_count_input 클래스에 type2 붙여주세요 -->
 									<div class="select_count_input type2">
 										<a href="#" class="selt zero ng-binding ng-scope">0</a>
 										<!-- [D] selt 선택시 display:block -->
 										<ul class="selt_lst ng-scope" style="display: none;">
 											<li class="vs-repeat-before-content" style="width: 100%; min-height: 0px;"></li>
-											<c:forEach begin="0" end="${maxTicketsPerBooking}" var="i">
-												<li class="vs-repeat-repeated-element ng-scope">
-													<a href="#" class="ng-binding">${i}</a>
-												</li>
-											</c:forEach>
+											<li class="vs-repeat-repeated-element ng-scope">
+												<a href="#" class="ng-binding">0</a>
+											</li>
+											<li class="vs-repeat-repeated-element ng-scope">
+												<a href="#" class="ng-binding">1</a>
+											</li>
+											<li class="vs-repeat-repeated-element ng-scope">
+												<a href="#" class="ng-binding">2</a>
+											</li>
+											<li class="vs-repeat-repeated-element ng-scope">
+												<a href="#" class="ng-binding">3</a>
+											</li>
+											<li class="vs-repeat-repeated-element ng-scope">
+												<a href="#" class="ng-binding">4</a>
+											</li>
+											<li class="vs-repeat-repeated-element ng-scope">
+												<a href="#" class="ng-binding">5</a>
+											</li>
+											<li class="vs-repeat-repeated-element ng-scope">
+												<a href="#" class="ng-binding">6</a>
+											</li>
+											<li class="vs-repeat-repeated-element ng-scope">
+												<a href="#" class="ng-binding">7</a>
+											</li>
+											<li class="vs-repeat-repeated-element ng-scope">
+												<a href="#" class="ng-binding">8</a>
+											</li>
 										</ul>
 										<!-- [D] selt 선택시 버튼 비활성화(disabled 추가) -->
 										<button type="button" class="btn_minus">
@@ -195,7 +274,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- 클린예매 캡챠 레이어팝업 -->
 	</div>
-	<script src="${ctp}/js/sports/reserve/seat.js"></script>
 </body>
 </html>

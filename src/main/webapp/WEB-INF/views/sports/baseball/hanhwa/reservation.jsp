@@ -1,3 +1,4 @@
+<!-- views/sports/baseball/hanhwa/reservation.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -39,7 +40,7 @@
 								<div id="scheduleListDiv" class="reserve_lst_bx">
 									<ul>
 										<c:forEach var="game" items="${games}">
-											<li class="_game_list" gamedate="${game.gameDate}" gametime="${game.gameTime}" bookingopendaysbefore="${game.bookingOpenDaysBefore}" bookingopentime="${game.bookingOpenTime}" bookingcloseminutesafterstart="${game.bookingCloseMinutesAfterStart}">
+											<li class="_game_list" gamedate="${game.gameDate}" gametime="${game.gameTime}" bookingopendaysbefore="${game.bookingOpenDaysBefore}" bookingopentime="${game.bookingOpenTime}" bookingcloseminutesafterstart="${game.bookingCloseMinutesAfterStart}" data-game-id="${game.id}">
 												<span class="ico_todayopen">
 													<span class="text">오늘오픈</span>
 												</span>

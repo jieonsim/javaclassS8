@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.javaclassS8.vo.sports.GameVO;
+import com.spring.javaclassS8.vo.sports.SeatInventoryVO;
 
 @Repository
 public class SportsDAOImpl implements SportsDAO {
@@ -27,4 +28,21 @@ public class SportsDAOImpl implements SportsDAO {
 		return sqlSession.getMapper(SportsDAO.class).getTeamHomeGames(sport, shortName, startDate, endDate);
 	}
 
+	// gameId로 경기 정보 가져오기
+	@Override
+	public GameVO getGameById(int gameId) {
+		return sqlSession.getMapper(SportsDAO.class).getGameById(gameId);
+	}
+
+	// gameId로 잔여 좌석 수 가져오기
+	@Override
+	public List<SeatInventoryVO> getSeatInventoriesByGameId(int gameId) {
+		return sqlSession.getMapper(SportsDAO.class).getSeatInventoriesByGameId(gameId);
+	}
+
+	// sportId로 1회 예매 시 최대 구매 가능 티켓 수 가져오기
+	@Override
+	public int getMaxTicketsPerBooking(int sportId) {
+	    return sqlSession.getMapper(SportsDAO.class).getMaxTicketsPerBooking(sportId);
+	}
 }

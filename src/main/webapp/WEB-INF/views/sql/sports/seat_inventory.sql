@@ -9,3 +9,23 @@ CREATE TABLE seat_inventory (
     FOREIGN KEY (seatId) REFERENCES seats(id),
     UNIQUE KEY (gameId, seatId) COMMENT '한 경기의 특정 좌석 등급은 하나의 재고만 가질 수 있음'
 );
+
+
+INSERT INTO seat_inventory (gameId, seatId, totalCapacity, availableCapacity)
+SELECT 
+    g.id AS gameId, 
+    s.id AS seatId, 
+    s.capacity AS totalCapacity, 
+    s.capacity AS availableCapacity
+FROM 
+    games g
+JOIN 
+    venues v ON g.venueId = v.id
+JOIN 
+    seats s ON v.id = s.venueId
+WHERE 
+    NOT EXISTS (
+        SELECT 1 
+        FROM seat_inventory si 
+        WHERE si.gameId = g.id AND si.seatId = s.id
+    );

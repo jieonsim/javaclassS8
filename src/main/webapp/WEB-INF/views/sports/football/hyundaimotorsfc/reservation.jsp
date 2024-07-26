@@ -39,7 +39,7 @@
 								<div id="scheduleListDiv" class="reserve_lst_bx">
 									<ul>
 										<c:forEach var="game" items="${games}">
-											<li class="_game_list" gamedate="${game.gameDate}" gametime="${game.gameTime}" bookingopendaysbefore="${game.bookingOpenDaysBefore}" bookingopentime="${game.bookingOpenTime}" bookingcloseminutesafterstart="${game.bookingCloseMinutesAfterStart}">
+											<li class="_game_list" gamedate="${game.gameDate}" gametime="${game.gameTime}" bookingopendaysbefore="${game.bookingOpenDaysBefore}" bookingopentime="${game.bookingOpenTime}" bookingcloseminutesafterstart="${game.bookingCloseMinutesAfterStart}" data-game-id="${game.id}">
 												<span class="ico_todayopen">
 													<span class="text">오늘오픈</span>
 												</span>

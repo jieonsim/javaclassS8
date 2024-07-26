@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.javaclassS8.dao.sports.SportsDAO;
 import com.spring.javaclassS8.vo.sports.GameVO;
+import com.spring.javaclassS8.vo.sports.SeatInventoryVO;
 
 @Service
 public class SportsServiceImpl implements SportsService {
@@ -62,5 +63,23 @@ public class SportsServiceImpl implements SportsService {
 		String dbSportName = sportNameMap.get(sport);
 		String shortName = teamNameMap.get(dbSportName).get(team.toLowerCase());
 		return sportsDAO.getTeamHomeGames(dbSportName, shortName, startDate, endDate);
+	}
+
+	// gameId로 경기 정보 가져오기
+	@Override
+	public GameVO getGameById(int gameId) {
+		return sportsDAO.getGameById(gameId);
+	}
+
+	// gameId로 잔여 좌석 수 가져오기
+	@Override
+	public List<SeatInventoryVO> getSeatInventoriesByGameId(int gameId) {
+		return sportsDAO.getSeatInventoriesByGameId(gameId);
+	}
+
+	// sportId로 1회 예매 시 최대 구매 가능 티켓 수 가져오기
+	@Override
+	public int getMaxTicketsPerBooking(int sportId) {
+		return sportsDAO.getMaxTicketsPerBooking(sportId);
 	}
 }

@@ -77,11 +77,10 @@
 												</td>
 												<td>${game.venueName}</td>
 												<td class="_game_list" gamedate="${game.gameDate}" gametime="${game.gameTime}" bookingopendaysbefore="${game.bookingOpenDaysBefore}" bookingopentime="${game.bookingOpenTime}" bookingcloseminutesafterstart="${game.bookingCloseMinutesAfterStart}">
-													<a href="${ctp}/sports/reserve/seat/gameId=?${game.id}" class="btn btn_reserve">예매하기</a>
+													<a href="${ctp}/sports/reserve/seat?gameId=${game.id}" class="btn btn_reserve">예매하기</a>
 													<span class="_sale_time"></span>
 												</td>
 											</tr>
-
 											<c:set var="prevDate" value="${game.gameDate}" />
 											<c:set var="gamesForDate" value="${gamesForDate + 1}" />
 										</c:forEach>

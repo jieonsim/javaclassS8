@@ -13,7 +13,6 @@ public class GameVO {
 	private int venueId;
 	private String gameDate;
 	private String gameTime;
-	private Status status;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
 
@@ -30,10 +29,6 @@ public class GameVO {
 	private int bookingCloseMinutesAfterStart;
 	private String bookingOpenTime;
 	
-	public enum Status {
-		판매예정, 판매중, 판매종료
-	}
-
     // bookingOpenMinutesBefore를 계산하는 메서드
     public long getBookingOpenMinutesBefore() {
         return (long) bookingOpenDaysBefore * 24 * 60; // 일 단위를 분 단위로 변환
