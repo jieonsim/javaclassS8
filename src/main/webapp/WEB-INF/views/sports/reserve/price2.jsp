@@ -66,18 +66,16 @@
 								<tbody>
 									<tr>
 										<td colspan="4" class="th _selectGradeInfo">
-											<span class="color_green fbold _selectName">${seatName}</span>
-											을
-											<span class="color_green fbold _selectCnt">${quantity}매</span>
-											를 선택하셨습니다.
+											<span class="color_green fbold _selectName">외야그린석</span>을
+											<span class="color_green fbold _selectCnt">1매</span>를 선택하셨습니다.
 										</td>
 									</tr>
 									<tr>
-										<th scope="row" rowspan="8">${ticketTypeCategory}</th>
+										<th scope="row" rowspan="8">일반(정가)</th>
 										<td colspan="3">
 											<div class="tbl_inner">
 												<table>
-													<caption>${ticketTypeCategory}</caption>
+													<caption>일반(정가)</caption>
 													<colgroup>
 														<col>
 														<col style="width: 160px">
@@ -86,36 +84,29 @@
 													<tbody>
 														<tr>
 															<th scope="row" class="th">
-																<div class="in">${ticketTypeName}
-																	<c:if test="${ticketTypeDescription}">
-																		<div class="layer_mother">
-																			<a href="#" class="help">도움말보기</a>
-																			<span class="layer only_txt" style="width: 200px; top: 0px; left: 19px">
-																				<p class="layer_text">${ticketTypeDescription}</p>
-																			</span>
-																		</div>
-																	</c:if>
-																</div>
+																<div class="in">일반</div>
 															</th>
 															<td class="tr">
-																<span class="color_green fbold _price">${price}</span>
+																<span class="color_green fbold _price">8,000</span>
 																원
 															</td>
 															<td class="selectbox">
 																<div class="selectbox">
-																	<!-- a태그 클릭 시 위 div 태그에 class="selectbox is-active"로 처리 -->
+																	<!-- 클릭 시 div class="selectbox is-active"로 처리 -->
 																	<a href="#" class="select _price_cnt">0</a>
-																	<ul class="select_list" id="selectList${id}">
-																		<!-- depth1에서 선택한 quantity만큼 li 반복 | data-value="0에서 quantity까지 +1" -->
+																	<ul class="select_list" id="selectList96145285258">
 																		<li data-value="0" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="8000" data-product_grade_id="96145" data-product_denomination_id="285258" data-denomination_class_code="BASE" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
 																			<a href="#">0</a>
+																		</li>
+																		<li data-value="1" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="8000" data-product_grade_id="96145" data-product_denomination_id="285258" data-denomination_class_code="BASE" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
+																			<a href="#">1</a>
 																		</li>
 																	</ul>
 																</div>
 															</td>
 														</tr>
 														<tr>
-															<td colspan="3" class="td_ly" id="certify${id}" style="display: none;"></td>
+															<td colspan="3" class="td_ly" id="certify96145285258" style="display: none;"></td>
 														</tr>
 													</tbody>
 												</table>
@@ -126,7 +117,7 @@
 										<td colspan="3">
 											<div class="tbl_inner">
 												<table>
-													<caption>${ticketTypeCategory}</caption>
+													<caption>일반(정가)</caption>
 													<colgroup>
 														<col>
 														<col style="width: 160px">
@@ -137,14 +128,12 @@
 															<th scope="row" class="th">
 																<div class="in">
 																	청소년
-																	<c:if test="${ticketTypeDescription}">
-																		<div class="layer_mother">
-																			<a href="#" class="help">도움말보기</a>
-																			<span class="layer only_txt" style="width: 200px; top: 0px; left: 19px">
-																				<p class="layer_text">${ticketTypeDescription}</p>
-																			</span>
-																		</div>
-																	</c:if>
+																	<div class="layer_mother">
+																		<a href="#" class="help">도움말보기</a>
+																		<span class="layer only_txt" style="width: 200px; top: 0px; left: 19px">
+																			<p class="layer_text">-매표소에서만 증빙서류(학생증) 확인 후 티켓으로 발권 가능(무인발권기, 스마트티켓 발권 불가) -권종선택 실수로 인한 예매 건은 현장에서 교환/환불 불가합니다.(현장 재구매 필요)</p>
+																		</span>
+																	</div>
 																</div>
 															</th>
 															<td class="tr">
@@ -817,10 +806,18 @@
 							</table>
 						</div>
 					</div>
+					<div id="coupon"></div>
+					<div id="integratePoint"></div>
+					<div id="ktGift"></div>
+					<div id="benepiaPoint"></div>
+					<div id="useIntegratePoint" style="display: none"></div>
+					<div id="saveIntegratePoint" style="display: none"></div>
+					<div id="additionalProducts"></div>
 					<div id="notice" class="notice_area">
 						<strong class="title_notice">안내사항</strong>
 						<ul class="notice_list">
 							<li class="notice_item">
+								<!-- [D] pre태그여서 앞으로 붙여놓았습니다.	어드민 입력 그대로 나와야 함 -->
 								<pre class="pre_txt">* 일부 구역의 1열 및 마지막열 좌석은 시야방해로 인해 경기 당일 매표소에서 안내 후 판매.
 * 판매하는 도면의 일부 좌석의 앞,뒤 위치는 실제 야구장과 상이 할 수 있습니다.
 * 36개월 이상 어린이는 티켓 구매 후 입장(36개월 미만 유아는 무료입장 가능하나 보호자가 안고 관람 필요)
@@ -837,21 +834,21 @@
 					<dl class="sports_info right_lst3">
 						<dt class="img_title">
 							<!-- [D] 구단 이미지 받아올 때 대체텍스트 함께 변경 -->
-							<em class="img_bx"> <img src="${ctp}/images/sports/emblem/${homeTeamShortName}.png" alt="${homeTeamName}">
+							<em class="img_bx"> <img src="//image.toast.com/aaaaab/ticketlink/TKL_9/Property1=LG.png" alt="LG트윈스">
 							</em>
 							<span class="versus sp_sports">vs</span>
-							<em class="img_bx"> <img src="${ctp}/images/sports/emblem/${awayTeamShortName}.png" alt="${awayTeamName}">
+							<em class="img_bx"> <img src="//image.toast.com/aaaaab/ticketlink/TKL_8/Property1=Samsung.png" alt="삼성 라이온즈">
 							</em>
 						</dt>
-						<dd class="title product_title">${homeTeamShortName}&nbsp;vs&nbsp;${homeTeamShortName}</dd>
+						<dd class="title product_title">LG vs 삼성</dd>
 						<dt class="blind">경기장</dt>
-						<dd>${venueName}</dd>
+						<dd>잠실야구장</dd>
 						<dt class="blind">경기날짜</dt>
-						<dd class="lspacing0">${gameDate}&nbsp;${gameTime}</dd>
+						<dd class="lspacing0">2024.08.01(목) 18:30</dd>
 						<dt class="blind">타이틀 상세정보</dt>
 						<dd>
 							<div class="tit_tooltip" style="display: none;">
-								<h4>${homeTeamName}&nbsp;vs&nbsp;${awayTeamName}</h4>
+								<h4>LG vs 삼성</h4>
 							</div>
 						</dd>
 					</dl>
@@ -862,7 +859,7 @@
 						<ul class="seat_list" style="height: 72px;">
 
 							<li>
-								<span class="seat_level">${seatName}</span>
+								<span class="seat_level">외야그린석</span>
 								<span class="seat_price">자동배정</span>
 							</li>
 						</ul>
@@ -916,12 +913,12 @@
 							<tbody id="cancel_commission_table">
 								<tr>
 									<th>예매당일</th>
-									<td class="lspacing0">2024.07.26${오늘날짜}</td>
+									<td class="lspacing0">2024.07.26</td>
 									<td class="tr color_green">취소수수료 없음</td>
 								</tr>
 								<tr>
 									<th>예매익일~취소마감시간 전</th>
-									<td class="lspacing0">2024.07.27${오늘다음날날짜}~${gameDate}</td>
+									<td class="lspacing0">2024.07.27~2024.08.01</td>
 									<td class="tr color_green">티켓금액의10%</td>
 								</tr>
 							</tbody>
@@ -933,11 +930,20 @@
 								(단, 취소기한 내에 한함)
 							</p>
 							<p>- 예매 당일 취소의 경우만 예매수수료가 환불되며, 그 이후 취소 시 환불되지 않습니다.</p>
+							<p>- 신용카드 단일결제 시 부분취소가 가능합니다. (단, 일부 상품/권종/카드는 불가할 수 있음)</p>
+							<p>
+								<span class="color_point">- 당일 공연/전시 예매는 결제 이후 취소가 불가합니다.</span>
+							</p>
+							<p>
+								<span class="color_point">- 이미 배송이 시작된 티켓은 직접취소가 불가합니다.</span>
+								<br>
+								(취소마감시간 이전까지 티켓이 NHN LINK로 반품되어야 취소처리 가능)
+							</p>
 						</div>
 					</div>
 					<div class="reserve_btn">
 						<a class="btn btn_blank" href="#">이전단계</a>
-						<a class="btn btn_full" href="#">다음단계</a>
+						<a class="btn btn_full" href="#" id="reserveNext">다음단계</a>
 					</div>
 				</div>
 			</div>

@@ -128,7 +128,6 @@
 									<legend class="ng-binding">매수선택</legend>
 									<div class="select_count_input type2">
 										<a href="#" class="selt zero ng-binding ng-scope" id="quantityDisplay">0</a>
-										<input type="hidden" name="quantity" id="selectedQuantity">
 										<ul class="selt_lst ng-scope" style="display: none;">
 											<li class="vs-repeat-before-content" style="width: 100%; min-height: 0px;"></li>
 											<c:forEach begin="0" end="${maxTicketsPerBooking}" var="i">
@@ -150,17 +149,53 @@
 								<button type="submit" class="btn btn_full ng-binding">다음단계</button>
 							</div>
 						</div>
-						<input type="hidden" name="seatName" value="${seatName}">
 						<input type="hidden" name="gameId" value="${game.id}">
-						<input type="hidden" id="maxTicketsPerBooking" value="${maxTicketsPerBooking}">
+						<input type="hidden" name="seatName" value="">
+						<input type="hidden" name="quantity" id="selectedQuantity" value="0">
 					</form>
 				</div>
 			</div>
 			<!-- 매수 선택 시 dimmed 처리 -->
-			<div class="dimmed ng-isolate-scope" style="display: none;"></div>
+			<div class="dimmed ng-isolate-scope" id="seat_quantity_dimmed" style="display: none;"></div>
 		</div>
+		<!-- 캡챠 레이어 -->
+		<div class="ly_pop_wrap ly_captcha ng-isolate-scope" id="captcha_layer" style="display: none;">
+        <div class="dimmed" id="captcha_dimmed" style="display: none;"></div>
+        <div class="layer">
+            <div class="area_captcha">
+                <h3 class="tit">클린예매 서비스</h3>
+                <p class="tit_dsc">
+                    <em class="color">부정예매를 방지</em>하기 위해 <em class="color">보안문자</em> 입력 후 예매가 가능합니다.
+                </p>
+                <form class="captcha_info" id="captcha_form" method="post">
+                    <fieldset>
+                        <legend>보안문자 입력 폼</legend>
+                        <span class="bx_img">
+                            <img alt="캡챠이미지" width="390" height="150" id="captcha_img">
+                        </span>
+                        <span class="bx_input_txt" id="bx_input_txt">
+                            <input type="text" name="captcha" required id="ipt_captcha" maxlength="5" autocomplete="off">
+                            <span class="txt_error ng-hide" id="captcha_error"> 정확하게 입력해주세요. </span>
+                        </span>
+                        <p class="dsc">
+                            - 위 문자를 순서대로 입력해주세요.
+                            <br>
+                            - 3분 이내 미입력시, 보안문자가 자동 새로고침됩니다.
+                        </p>
+                        <button type="button" class="btn btn_refresh" id="captchaRefreshBtn">
+                            <span class="blind"> 새로고침 </span>
+                        </button>
+                        <div class="bx_btn">
+                            <a href="#" class="btn btn_blank" onclick="window.close();"> 날짜 다시 선택 </a>
+                            <button type="submit" class="btn btn_full">입력완료</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
 		<!-- 클린예매 캡챠 레이어팝업 -->
-		<div class="ly_pop_wrap ly_captcha ng-isolate-scope ng-hide" style="display: none">
+		<%-- <div class="ly_pop_wrap ly_captcha ng-isolate-scope ng-hide" style="display: none">
 			<div class="dimmed" style="display: none"></div>
 			<div class="layer">
 				<div class="area_captcha">
@@ -168,11 +203,11 @@
 					<p class="tit_dsc">
 						<em class="color">부정예매를 방지</em>하기 위해 <em class="color">보안문자</em> 입력 후 예매가 가능합니다.
 					</p>
-					<form class="captcha_info ng-valid-maxlength ng-dirty ng-valid ng-valid-required ng-submitted">
+					<form class="captcha_info ng-valid-maxlength ng-dirty ng-valid ng-valid-required ng-submitted" method="post" id="captcha_form" onsubmit="return verifyCaptcha(event)">
 						<fieldset>
 							<legend>보안문자 입력 폼</legend>
 							<span class="bx_img">
-								<img alt="캡챠이미지" width="390" height="150" id="captcha_img" src="">
+								<img alt="캡챠이미지" width="390" height="150" id="captcha_img" src="${ctp}/data/sports/captcha.jpg">
 							</span>
 							<!-- 에러케이스 : .bx_input_txt에 error 클래스 추가 / .txt_error에 ng-hide 클래스 제거-->
 							<span class="bx_input_txt">
@@ -185,18 +220,18 @@
 								<br>
 								- 3분 이내 미입력시, 보안문자가 자동 새로고침됩니다.
 							</p>
-							<button type="button" class="btn btn_refresh">
+							<button type="button" class="btn btn_refresh" onclick="refreshCaptcha()">
 								<span class="blind"> 새로고침 </span>
 							</button>
 							<div class="bx_btn">
-								<a href="#" class="btn btn_blank ng-scope"> 날짜 다시 선택 </a>
+								<a href="#" class="btn btn_blank ng-scope" onclick="history.back(); return false;"> 날짜 다시 선택 </a>
 								<button type="submit" class="btn btn_full">입력완료</button>
 							</div>
 						</fieldset>
 					</form>
 				</div>
 			</div>
-		</div>
+		</div> --%>
 	</div>
 	<script src="${ctp}/js/sports/reserve/seat.js"></script>
 </body>

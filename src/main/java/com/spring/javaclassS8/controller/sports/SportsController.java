@@ -1,13 +1,18 @@
 package com.spring.javaclassS8.controller.sports;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +23,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.javaclassS8.service.sports.SportsService;
+import com.spring.javaclassS8.utils.CaptchaGenerator;
 import com.spring.javaclassS8.vo.reserve.TempReservation;
 import com.spring.javaclassS8.vo.sports.GameVO;
 import com.spring.javaclassS8.vo.sports.SeatInventoryVO;
@@ -37,9 +44,42 @@ public class SportsController {
 		return "sports/" + sport + "/common/main";
 	}
 
+	// 캡챠 로딩
+	@GetMapping("/reserve/captcha")
+	@ResponseBody
+	public Map<String, Object> getCaptcha(HttpServletRequest request, HttpSession session) throws IOException {
+		String captchaText = CaptchaGenerator.generateCaptchaText();
+		session.setAttribute("captchaText", captchaText);
+
+		String realPath = request.getSession().getServletContext().getRealPath("/resources/data/sports/");
+		String fileName = UUID.randomUUID().toString() + ".jpg";
+		String filePath = realPath + "/" + fileName;
+		CaptchaGenerator.generateCaptchaImage(captchaText, filePath);
+
+		Map<String, Object> result = new HashMap<>();
+		result.put("captchaUrl", request.getContextPath() + "/resources/data/sports/" + fileName + "?timestamp=" + System.currentTimeMillis());
+		return result;
+	}
+
+	// 캡챠 인증
+	@PostMapping("/reserve/verifyCaptcha")
+	@ResponseBody
+	public Map<String, Object> verifyCaptcha(@RequestParam("captcha") String captcha, HttpSession session) {
+		String generatedCaptcha = (String) session.getAttribute("captchaText");
+
+		Map<String, Object> result = new HashMap<>();
+		if (generatedCaptcha != null && generatedCaptcha.equals(captcha.toUpperCase())) {
+			result.put("success", true);
+		} else {
+			result.put("success", false);
+		}
+
+		return result;
+	}
+
 	// 예매창 > 등급/좌석선택(depth1)
 	@GetMapping("/reserve/seat")
-	public String reserveSeatPopup(@RequestParam("gameId") int gameId, Model model) {
+	public String SeatPopup(@RequestParam("gameId") int gameId, Model model) {
 		GameVO game = sportsService.getGameById(gameId);
 		// 날짜 포맷팅
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd(E)");

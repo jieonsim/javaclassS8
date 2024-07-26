@@ -1,8 +1,10 @@
 package com.spring.javaclassS8.vo.reserve;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class TempReservation {
 	private int gameId;
 	private String seatName;
@@ -10,11 +12,4 @@ public class TempReservation {
 	private int currentDepth;
 	private long expirationTime;
 
-	public TempReservation(int gameId, String seatName, int quantity, int currentDepth, long expirationTime) {
-		this.gameId = gameId;
-		this.seatName = seatName;
-		this.quantity = quantity;
-		this.currentDepth = currentDepth;
-		this.expirationTime = expirationTime;
-	}
 }
