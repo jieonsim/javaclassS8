@@ -8,15 +8,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.javaclassS8.service.sports.SportsService;
+import com.spring.javaclassS8.vo.reserve.TempReservation;
 import com.spring.javaclassS8.vo.sports.GameVO;
 import com.spring.javaclassS8.vo.sports.SeatInventoryVO;
 
@@ -36,32 +40,45 @@ public class SportsController {
 	// 예매창 > 등급/좌석선택(depth1)
 	@GetMapping("/reserve/seat")
 	public String reserveSeatPopup(@RequestParam("gameId") int gameId, Model model) {
-	    GameVO game = sportsService.getGameById(gameId);
-	    // 날짜 포맷팅
-	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd(E)");
-	    String formattedDate = sdf.format(java.sql.Date.valueOf(game.getGameDate()));
-	    game.setGameDate(formattedDate);
-	    
-	    // 시간 포맷팅 (18:30:00 -> 18:30)
-	    SimpleDateFormat inputTimeSdf = new SimpleDateFormat("HH:mm:ss");
-	    SimpleDateFormat outputTimeSdf = new SimpleDateFormat("HH:mm");
-	    try {
-	        Date parsedTime = inputTimeSdf.parse(game.getGameTime());
-	        String formattedTime = outputTimeSdf.format(parsedTime);
-	        game.setGameTime(formattedTime);
-	    } catch (ParseException e) {
-	        // 에러 처리
-	        e.printStackTrace();
-	    }
-	    
-	    List<SeatInventoryVO> seatInventories = sportsService.getSeatInventoriesByGameId(gameId);
-	    int maxTicketsPerBooking = sportsService.getMaxTicketsPerBooking(game.getSportId());
-	    
-	    model.addAttribute("game", game);
-	    model.addAttribute("seatInventories", seatInventories);
-	    model.addAttribute("maxTicketsPerBooking", maxTicketsPerBooking);
-	    
-	    return "sports/reserve/seat";
+		GameVO game = sportsService.getGameById(gameId);
+		// 날짜 포맷팅
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd(E)");
+		String formattedDate = sdf.format(java.sql.Date.valueOf(game.getGameDate()));
+		game.setGameDate(formattedDate);
+
+		// 시간 포맷팅 (18:30:00 -> 18:30)
+		SimpleDateFormat inputTimeSdf = new SimpleDateFormat("HH:mm:ss");
+		SimpleDateFormat outputTimeSdf = new SimpleDateFormat("HH:mm");
+		try {
+			Date parsedTime = inputTimeSdf.parse(game.getGameTime());
+			String formattedTime = outputTimeSdf.format(parsedTime);
+			game.setGameTime(formattedTime);
+		} catch (ParseException e) {
+			// 에러 처리
+			e.printStackTrace();
+		}
+
+		List<SeatInventoryVO> seatInventories = sportsService.getSeatInventoriesByGameId(gameId);
+		int maxTicketsPerBooking = sportsService.getMaxTicketsPerBooking(game.getSportId());
+
+		model.addAttribute("game", game);
+		model.addAttribute("seatInventories", seatInventories);
+		model.addAttribute("maxTicketsPerBooking", maxTicketsPerBooking);
+
+		return "sports/reserve/seat";
+	}
+
+	@PostMapping("/reserve/saveTempReservation")
+	public String saveTempReservation(@RequestParam int gameId, @RequestParam String seatName, @RequestParam int quantity, HttpSession session) {
+		System.out.println("gameId: " + gameId + ", seatName: " + seatName + ", quantity: " + quantity);
+		TempReservation tempReservation = new TempReservation(gameId, seatName, quantity, 1, // currentDepth
+				System.currentTimeMillis() + 480000 // 현재 시간 + 8분
+		);
+
+		session.setAttribute("tempReservation", tempReservation);
+		System.out.println("tempReservation : " + tempReservation);
+
+		return "redirect:/sports/reserve/price";
 	}
 
 	// 예매창 > 권종/할인/매수선택(depth2)

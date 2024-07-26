@@ -68,7 +68,7 @@
 							</div>
 							<div class="bx_tit" style="padding-bottom: 20px;">
 								<h4 class="reserve_tit seat_select ng-binding">등급 선택</h4>
-								<a href="#" class="btn btn_blank ng-binding">새로고침</a>
+								<a href="#" class="btn btn_blank ng-binding" id="seatRefreshBtn">새로고침</a>
 							</div>
 						</div>
 						<ul id="select_seat_grade" class="seat_lst" style="height: 258px">
@@ -92,7 +92,7 @@
 						<div class="bx_tit">
 							<p class="reserve_notice_ly ng-binding ng-scope">좌석선점 및 자동배정 안내</p>
 						</div>
-						<div class="layer" style="right: 0px; bottom: -300px; width: 368px; display: none;">
+						<div class="layer" style="right: 0px; bottom: 35px; width: 368px; display: none;" id="reserveNoticePopup">
 							<strong class="ng-binding">좌석선점 및 자동배정 안내</strong>
 							<dl id="detail_info" class="detail_info">
 								<div>
@@ -108,27 +108,27 @@
 									<br>
 									<b>② 자동배정 시 주의사항</b>
 									<br>
-									자동배정은 결제시점에 잔여석 내 연속된 좌석이 있는 경우만 예매가 가능합니다. 잔여석이 적을 경우 직접 지정으로 예매가능 좌석을 확인한 후에 예매를 진행해 주세요.
+									본 경기는 자동배정으로 예매됩니다. 자동배정은 결제시점에 잔여석 내 연속된 좌석이 있는 경우만 예매가 가능합니다.
 								</div>
 							</dl>
 							<a href="#" class="close ng-binding">레이어 닫기</a>
 						</div>
 					</div>
-					<div class="layer select_count_auto ng-isolate-scope" style="left: 29px; bottom: 20px; width: 210px; display: none;">
-						<div class="box_top ng-scope">
-							<a href="#" class="close ng-binding">${seatName}</a>
-							<div class="seat_box">
-								<p class="seat_name">${seatName}</p>
-								<p class="seat_dsc">
-									<span class="sheet ng-binding ng-scope">${availableCapacity}석</span>
-								</p>
-							</div>
-							<form class="ng-pristine ng-valid ng-scope">
+					<form class="ng-pristine ng-valid ng-scope" id="seatAndQuantityForm" action="${ctp}/sports/reserve/saveTempReservation" method="post">
+						<div class="layer select_count_auto ng-isolate-scope" style="left: 29px; bottom: 20px; width: 210px; display: none;">
+							<div class="box_top ng-scope">
+								<a href="#" class="close ng-binding">${seatName}</a>
+								<div class="seat_box">
+									<p class="seat_name">${seatName}</p>
+									<p class="seat_dsc">
+										<span class="sheet ng-binding ng-scope">${availableCapacity}석</span>
+									</p>
+								</div>
 								<fieldset>
 									<legend class="ng-binding">매수선택</legend>
 									<div class="select_count_input type2">
-										<a href="#" class="selt zero ng-binding ng-scope">0</a>
-										<!-- [D] selt 선택시 display:block -->
+										<a href="#" class="selt zero ng-binding ng-scope" id="quantityDisplay">0</a>
+										<input type="hidden" name="quantity" id="selectedQuantity">
 										<ul class="selt_lst ng-scope" style="display: none;">
 											<li class="vs-repeat-before-content" style="width: 100%; min-height: 0px;"></li>
 											<c:forEach begin="0" end="${maxTicketsPerBooking}" var="i">
@@ -137,7 +137,6 @@
 												</li>
 											</c:forEach>
 										</ul>
-										<!-- [D] selt 선택시 버튼 비활성화(disabled 추가) -->
 										<button type="button" class="btn_minus">
 											<span class="blind ng-binding">매수 감소</span>
 										</button>
@@ -146,12 +145,15 @@
 										</button>
 									</div>
 								</fieldset>
-							</form>
+							</div>
+							<div class="select_count_btn reserve_btn">
+								<button type="submit" class="btn btn_full ng-binding">다음단계</button>
+							</div>
 						</div>
-						<div class="select_count_btn reserve_btn">
-							<a href="#" class="btn btn_full ng-binding">다음단계</a>
-						</div>
-					</div>
+						<input type="hidden" name="seatName" value="${seatName}">
+						<input type="hidden" name="gameId" value="${game.id}">
+						<input type="hidden" id="maxTicketsPerBooking" value="${maxTicketsPerBooking}">
+					</form>
 				</div>
 			</div>
 			<!-- 매수 선택 시 dimmed 처리 -->
