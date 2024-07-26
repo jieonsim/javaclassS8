@@ -85,3 +85,68 @@ CREATE TABLE prices (
     FOREIGN KEY (seatId) REFERENCES seats(id),
     UNIQUE KEY (sportId, teamId, venueId, seatId, ticketTypeId)
 );
+
+/*예매권*/
+CREATE TABLE advance_tickets (
+    id INT AUTO_INCREMENT PRIMARY KEY COMMENT '예매권 고유번호',
+    adminId INT NOT NULL COMMENT '예매권 생성한 관리자 고유번호',
+    advanceTicketNumber VARCHAR(16) NOT NULL COMMENT '예매권 번호',
+    used BOOLEAN DEFAULT FALSE COMMENT '예매권 사용 여부',
+    expiresAt TIMESTAMP NOT NULL COMMENT '예매권 만료일시',
+    issuedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '예매권 발행일시',
+    usedAt TIMESTAMP NULL COMMENT '예매권 사용일시',
+    usedByMemberId INT NULL COMMENT '예매권 사용한 회원 고유번호',
+    FOREIGN KEY (adminId) REFERENCES members(id),
+    FOREIGN KEY (usedByMemberId) REFERENCES members(id),
+    UNIQUE KEY (advanceTicketNumber)
+);
+
+/* 예매권 등록*/
+CREATE TABLE registered_advance_tickets (
+    id INT AUTO_INCREMENT PRIMARY KEY COMMENT '등록 고유번호',
+    memberId INT NOT NULL COMMENT '예매권 등록한 회원 고유번호',
+    advanceTicketId INT NOT NULL COMMENT '예매권 고유번호',
+    registeredAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '예매권 등록일시',
+    FOREIGN KEY (memberId) REFERENCES members(id),d
+    FOREIGN KEY (advanceTicketId) REFERENCES advance_tickets(id),
+    UNIQUE KEY (advanceTicketId)
+);
+
+/* 경기 */
+CREATE TABLE games (
+    id INT NOT NULL AUTO_INCREMENT COMMENT '경기 고유번호',
+    sportId INT NOT NULL COMMENT '스포츠 고유번호',
+    homeTeamId INT NOT NULL COMMENT '홈팀 고유번호',
+    awayTeamId INT NOT NULL COMMENT '원정팀 고유번호',
+    venueId INT NOT NULL COMMENT '경기장 고유번호',
+    gameDate DATE NOT NULL COMMENT '경기 날짜',
+    gameTime TIME NOT NULL COMMENT '경기 시작 시간',
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '경기 생성 일시',
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '경기 수정 일시',
+    PRIMARY KEY (id),
+    FOREIGN KEY (sportId) REFERENCES sports(id),
+    FOREIGN KEY (homeTeamId) REFERENCES teams(id),
+    FOREIGN KEY (awayTeamId) REFERENCES teams(id),
+    FOREIGN KEY (venueId) REFERENCES venues(id),
+    INDEX idx_game_date (gameDate, gameTime)
+);
+
+/* 스포츠별 예매 정책 */
+CREATE TABLE sport_booking_policies (
+    id INT NOT NULL AUTO_INCREMENT COMMENT '정책 고유번호',
+    sportId INT NOT NULL COMMENT '스포츠 고유번호',
+    bookingOpenDaysBefore INT NOT NULL DEFAULT 7 COMMENT '예매 오픈일',
+    bookingOpenTime TIME NOT NULL DEFAULT '11:00:00' COMMENT '예매 오픈 시간',
+    bookingCloseMinutesAfterStart INT NOT NULL DEFAULT 60 COMMENT '예매 마감 시간(경기 시작 후 분)',
+    cancellationDeadlineMinutesBeforeStart INT NOT NULL DEFAULT 120 COMMENT '취소 가능 시간(경기 시작 전 분)',
+    maxTicketsPerBooking INT NOT NULL DEFAULT 8 COMMENT '1회 예매 시 최대 구매 가능 티켓 수',
+    maxTotalTickets INT NOT NULL DEFAULT 16 COMMENT '경기당 총 구매 가능 티켓 수',
+    bookingFeePerTicket DECIMAL(10,2) NOT NULL DEFAULT 1000 COMMENT '예매수수료',
+    cancellationFeeRate DECIMAL(5,2) NOT NULL DEFAULT 10 COMMENT '취소수수료',
+    fullRefundUntilMidnight BOOLEAN NOT NULL DEFAULT TRUE COMMENT '예매 당일 자정까지 전액 환불 가능 여부',
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '정책 생성 일시',
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '정책 수정 일시',
+    PRIMARY KEY (id),
+    FOREIGN KEY (sportId) REFERENCES sports(id),
+    UNIQUE KEY (sportId)
+);

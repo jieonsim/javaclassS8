@@ -28,10 +28,28 @@ public class SportsController {
 		return "sports/" + sport + "/common/main";
 	}
 
-	// 스포츠별 예매창
-	@GetMapping("/{sport}/reserve")
-	public String baseballreserve(@PathVariable String sport) {
-		return "sports/" + sport + "/common/reserve";
+	// 예매창 > 등급/좌석선택
+	@GetMapping("/reserve/seat")
+	public String reserveSeatPopup() {
+		return "sports/reserve/seat";
+	}
+
+	// 예매창 > 권종/할인/매수선택
+	@GetMapping("/reserve/price")
+	public String reservePricePopup() {
+		return "sports/reserve/price";
+	}
+
+	// 예매창 > 예매확인
+	@GetMapping("/reserve/check")
+	public String reserveCheckPopup() {
+		return "sports/reserve/check";
+	}
+
+	// 예매창 > 예매권 결제
+	@GetMapping("/reserve/advanceTicket")
+	public String advanceTicket() {
+		return "sports/reserve/advanceTicket";
 	}
 
 	// 스포츠별 페이지 구단별 team_tab class 처리

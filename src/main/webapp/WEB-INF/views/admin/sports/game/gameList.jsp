@@ -39,7 +39,7 @@
 												<col style="width: 15%" />
 												<col style="width: 15%" />
 												<col style="width: 20%" />
-												<col style="width: 10%" />
+												<%-- <col style="width: 10%" /> --%>
 												<col style="width: 5%" />
 												<col style="width: 5%" />
 											</colgroup>
@@ -51,7 +51,7 @@
 													<th>홈</th>
 													<th>어웨이</th>
 													<th>경기장</th>
-													<th>상태</th>
+													<!-- <th>상태</th> -->
 													<th colspan="2">비고</th>
 												</tr>
 											</thead>
@@ -70,14 +70,14 @@
 														<td>${game.homeTeamName}</td>
 														<td>${game.awayTeamName}</td>
 														<td>${game.venueName}</td>
-														<td class="game-status">${game.status}</td>
+														<%-- <td class="game-status">${game.status}</td>
 														<td class="game-input" style="display: none;">
 															<select class="form-control bg-white text-dark" name="status">
 																<c:forEach items="${statuses}" var="status">
 																	<option value="${status}" ${game.status eq status ? 'selected' : ''}>${status}</option>
 																</c:forEach>
 															</select>
-														</td>
+														</td> --%>
 														<td>
 															<button class="badge badge-warning bg-white game-update-btn">수정</button>
 														</td>

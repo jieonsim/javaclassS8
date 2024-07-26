@@ -7,7 +7,6 @@ CREATE TABLE games (
     venueId INT NOT NULL COMMENT '경기장 고유번호',
     gameDate DATE NOT NULL COMMENT '경기 날짜',
     gameTime TIME NOT NULL COMMENT '경기 시작 시간',
-    status ENUM('판매예정', '판매중', '판매종료') NOT NULL DEFAULT '판매예정' COMMENT '경기 상태',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '경기 생성 일시',
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '경기 수정 일시',
     PRIMARY KEY (id),

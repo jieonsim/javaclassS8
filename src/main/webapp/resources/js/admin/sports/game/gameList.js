@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		button.addEventListener('click', function() {
 			const row = this.closest('tr');
 			const id = row.dataset.id;
-			const nameCells = row.querySelectorAll('.game-gameDate, .game-gameTime, .game-status');
+			const nameCells = row.querySelectorAll('.game-gameDate, .game-gameTime');
 			const inputCells = row.querySelectorAll('.game-input');
 
 			if (inputCells[0].style.display === 'none') {
@@ -18,8 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				// 수정 내용 저장
 				const newGameDate = inputCells[0].querySelector('input').value;
 				const newGameTime = inputCells[1].querySelector('input').value;
-				const newStatus = inputCells[2].querySelector('select').value;
-				updateGame(id, newGameDate, newGameTime, newStatus, row);
+				updateGame(id, newGameDate, newGameTime, row);
 			}
 		});
 	});
@@ -37,19 +36,18 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-function updateGame(id, newGameDate, newGameTime, newStatus, row) {
+function updateGame(id, newGameDate, newGameTime, row) {
 	fetch(`${ctp}/admin/sports/game/update`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ id: id, gameDate: newGameDate, gameTime: newGameTime, status: newStatus })
+		body: JSON.stringify({ id: id, gameDate: newGameDate, gameTime: newGameTime})
 	})
 		.then(response => response.json())
 		.then(data => {
 			if (data.success) {
 				row.querySelector('.game-gameDate').textContent = newGameDate;
 				row.querySelector('.game-gameTime').textContent = newGameTime;
-				row.querySelector('.game-status').textContent = newStatus;
-				row.querySelectorAll('.game-gameDate, .game-gameTime, .game-status').forEach(cell => cell.style.display = 'table-cell');
+				row.querySelectorAll('.game-gameDate, .game-gameTime').forEach(cell => cell.style.display = 'table-cell');
 				row.querySelectorAll('.game-input').forEach(cell => cell.style.display = 'none');
 				row.querySelector('.game-update-btn').textContent = '수정';
 				alert('경기가 성공적으로 업데이트되었습니다.');

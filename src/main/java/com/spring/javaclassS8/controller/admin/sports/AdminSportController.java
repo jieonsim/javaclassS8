@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.javaclassS8.service.admin.sports.AdminSportSerivce;
 import com.spring.javaclassS8.vo.sports.GameVO;
-import com.spring.javaclassS8.vo.sports.GameVO.Status;
 import com.spring.javaclassS8.vo.sports.PriceVO;
 import com.spring.javaclassS8.vo.sports.SeatVO;
 import com.spring.javaclassS8.vo.sports.SportVO;
@@ -320,7 +319,6 @@ public class AdminSportController {
 		List<GameVO> games = adminSportService.getAllGamesDetails();
 
 		model.addAttribute("games", games);
-		model.addAttribute("statuses", Status.values());
 		return "admin/sports/game/gameList";
 	}
 
@@ -331,12 +329,11 @@ public class AdminSportController {
 		int id = Integer.parseInt((String) payload.get("id"));
 		String gameDate = (String) payload.get("gameDate");
 		String gameTime = (String) payload.get("gameTime");
-		String status = (String) payload.get("status");
 
 		Map<String, Object> response = new HashMap<>();
 
 		try {
-			boolean result = adminSportService.updateGame(id, gameDate, gameTime, status);
+			boolean result = adminSportService.updateGame(id, gameDate, gameTime);
 			if (result) {
 				response.put("success", true);
 				response.put("message", "경기가 성공적으로 업데이트 되었습니다.");

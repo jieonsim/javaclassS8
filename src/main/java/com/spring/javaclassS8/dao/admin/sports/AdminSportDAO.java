@@ -85,7 +85,7 @@ public interface AdminSportDAO {
 	List<GameVO> getAllGamesDetails();
 
 	// 경기 정보 수정
-	int updateGame(@Param("id") int id, @Param("gameDate") String gameDate, @Param("gameTime") String gameTime, @Param("status") String status);
+	int updateGame(@Param("id") int id, @Param("gameDate") String gameDate, @Param("gameTime") String gameTime);
 
 	// 경기 삭제
 	void deleteGame(int id);

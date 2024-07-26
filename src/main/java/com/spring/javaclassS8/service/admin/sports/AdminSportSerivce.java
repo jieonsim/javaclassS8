@@ -76,7 +76,7 @@ public interface AdminSportSerivce {
 	List<GameVO> getAllGamesDetails();
 
 	// 경기 정보 수정
-	boolean updateGame(int id, String gameDate, String gameTime, String status);
+	boolean updateGame(int id, String gameDate, String gameTime);
 
 	// 경기 삭제
 	void deleteGame(int id) throws Exception;

@@ -303,7 +303,7 @@
 	
 	<update id="updateGame">
 		UPDATE games
-		SET gameDate = #{gameDate}, gameTime = #{gameTime}, status = #{status}
+		SET gameDate = #{gameDate}, gameTime = #{gameTime}
 		WHERE id = #{id}
 	</update>
 	
