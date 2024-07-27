@@ -49,7 +49,7 @@
 	    ORDER BY g.gameDate, g.gameTime
     </select>
     
-    <!-- gameId로 경기 정보 가져오기 -->
+    <!-- 경기 고유번호로 경기 정보 가져오기 -->
 	<select id="getGameById" resultType="com.spring.javaclassS8.vo.sports.GameVO">
 	    SELECT g.*, 
 	           ht.teamName as homeTeamName, 
@@ -64,7 +64,7 @@
 	    WHERE g.id = #{gameId}
 	</select>
 
-	<!-- gameId로 잔여 좌석 수 가져오기 -->
+	<!-- 경기 고유번호로 잔여 좌석 수 가져오기 -->
     <select id="getSeatInventoriesByGameId" resultType="com.spring.javaclassS8.vo.sports.SeatInventoryVO">
         SELECT si.*, s.seatName, s.seatColor
         FROM seat_inventory si
@@ -72,10 +72,37 @@
         WHERE si.gameId = #{gameId}
     </select>
     
-    <!-- sportId로 1회 예매 시 최대 구매 가능 티켓 수 가져오기 -->
+    <!-- 스포츠 고유번호로 1회 예매 시 최대 구매 가능 티켓 수 가져오기 -->
     <select id="getMaxTicketsPerBooking" resultType="int">
 	    SELECT maxTicketsPerBooking 
 	    FROM sport_booking_policies 
 	    WHERE sportId = #{sportId}
 	</select>
+	
+	<!-- 좌석 고유번호로 좌석 정보 가져오기 -->
+	<select id="getSeatById" resultType="com.spring.javaclassS8.vo.sports.SeatVO">
+        SELECT * FROM seats WHERE id = #{seatId}
+    </select>
+    
+    <!-- 좌석 고유번호로 권종리스트 가져오기 -->
+    <select id="getTicketTypesBySeatId" resultType="com.spring.javaclassS8.vo.sports.TicketTypeVO">
+	    SELECT tt.*
+	    FROM ticket_types tt
+	    JOIN prices p ON tt.id = p.ticketTypeId
+	    WHERE p.seatId = #{seatId}
+    </select>
+    
+    <!-- 좌석 고유번호로 요금 정보 가져오기 -->
+    <select id="getPricesBySeatId" resultType="com.spring.javaclassS8.vo.sports.PriceVO">
+        SELECT p.*, tt.category, tt.name as ticketTypeName, tt.description
+        FROM prices p
+        JOIN ticket_types tt ON p.ticketTypeId = tt.id
+        WHERE p.seatId = #{seatId}
+        ORDER BY tt.category, tt.id
+    </select>
+    
+    <!-- 스포츠 고유번호로 예매 정책 정보 가져오기 -->
+    <select id="getBookingPolicyBySportId" resultType="com.spring.javaclassS8.vo.sports.SportBookingPolicyVO">
+    	SELECT * FROM sport_booking_policies WHERE sportId = #{sportId}
+    </select>
 </mapper>

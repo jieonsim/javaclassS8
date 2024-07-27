@@ -16,11 +16,14 @@ public class PriceVO {
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
 	
-	// 추가
+	// 경기 관련 추가
 	private String sportName;
 	private String teamName;
 	private String venueName;
 	private String seatName;
-	/* private String ticketTypeCategory; */
+	
+	// 권종 관련 추가
+	private String category; // 권종 카테고리
 	private String ticketTypeName;
+	private String description;
 }

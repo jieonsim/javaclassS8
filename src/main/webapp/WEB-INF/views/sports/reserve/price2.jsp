@@ -895,7 +895,7 @@
 							</li>
 							<li>
 								취소수수료 :
-								<span id="cancelFee" class="color_point">티켓금액의 0~30%</span>
+								<span id="cancelFee" class="color_point">티켓금액의 0~10%</span>
 								<span id="cancelDisabledText" class="color_point_end" style="display: none;">취소/환불/변경 불가</span>
 								<a href="#" id="cancelCommisonNoticeBtn">[상세보기]</a>
 							</li>

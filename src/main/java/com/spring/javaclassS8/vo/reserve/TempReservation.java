@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class TempReservation {
 	private int gameId;
-	private String seatName;
+	private int seatId;
 	private int quantity;
 	private int currentDepth;
 	private long expirationTime;

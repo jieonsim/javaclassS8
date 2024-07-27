@@ -66,753 +66,54 @@
 								<tbody>
 									<tr>
 										<td colspan="4" class="th _selectGradeInfo">
-											<span class="color_green fbold _selectName">${seatName}</span>
+											<span class="color_green fbold _selectName">${seat.seatName}</span>
 											을
 											<span class="color_green fbold _selectCnt">${quantity}매</span>
 											를 선택하셨습니다.
 										</td>
 									</tr>
-									<tr>
-										<th scope="row" rowspan="8">${ticketTypeCategory}</th>
-										<td colspan="3">
-											<div class="tbl_inner">
-												<table>
-													<caption>${ticketTypeCategory}</caption>
-													<colgroup>
-														<col>
-														<col style="width: 160px">
-														<col style="width: 75px">
-													</colgroup>
-													<tbody>
-														<tr>
-															<th scope="row" class="th">
-																<div class="in">${ticketTypeName}
-																	<c:if test="${ticketTypeDescription}">
-																		<div class="layer_mother">
-																			<a href="#" class="help">도움말보기</a>
-																			<span class="layer only_txt" style="width: 200px; top: 0px; left: 19px">
-																				<p class="layer_text">${ticketTypeDescription}</p>
-																			</span>
-																		</div>
-																	</c:if>
+									<c:forEach var="category" items="${categoryList}">
+										<c:set var="firstCategoryRow" value="true" />
+										<c:forEach var="price" items="${prices}">
+											<c:if test="${price.category eq category.name}">
+												<tr>
+													<c:if test="${firstCategoryRow}">
+														<th scope="row" rowspan="${category.rowspan}">${category.name}</th>
+														<c:set var="firstCategoryRow" value="false" />
+													</c:if>
+													<td>
+														<div class="in">
+															${price.ticketTypeName}
+															<c:if test="${not empty price.description}">
+																<div class="layer_mother">
+																	<a href="#" class="help">도움말보기</a>
+																	<span class="layer only_txt" style="width: 200px; top: 0px; left: 19px">
+																		<p class="layer_text">${price.description}</p>
+																	</span>
 																</div>
-															</th>
-															<td class="tr">
-																<span class="color_green fbold _price">${price}</span>
-																원
-															</td>
-															<td class="selectbox">
-																<div class="selectbox">
-																	<!-- a태그 클릭 시 위 div 태그에 class="selectbox is-active"로 처리 -->
-																	<a href="#" class="select _price_cnt">0</a>
-																	<ul class="select_list" id="selectList${id}">
-																		<!-- depth1에서 선택한 quantity만큼 li 반복 | data-value="0에서 quantity까지 +1" -->
-																		<li data-value="0" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="8000" data-product_grade_id="96145" data-product_denomination_id="285258" data-denomination_class_code="BASE" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">0</a>
-																		</li>
-																	</ul>
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="3" class="td_ly" id="certify${id}" style="display: none;"></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td colspan="3">
-											<div class="tbl_inner">
-												<table>
-													<caption>${ticketTypeCategory}</caption>
-													<colgroup>
-														<col>
-														<col style="width: 160px">
-														<col style="width: 75px">
-													</colgroup>
-													<tbody>
-														<tr>
-															<th scope="row" class="th">
-																<div class="in">
-																	청소년
-																	<c:if test="${ticketTypeDescription}">
-																		<div class="layer_mother">
-																			<a href="#" class="help">도움말보기</a>
-																			<span class="layer only_txt" style="width: 200px; top: 0px; left: 19px">
-																				<p class="layer_text">${ticketTypeDescription}</p>
-																			</span>
-																		</div>
-																	</c:if>
-																</div>
-															</th>
-															<td class="tr">
-																<span class="color_green fbold _price">6,000</span>
-																원
-															</td>
-															<td class="selectbox">
-																<div class="selectbox">
-																	<a href="#" class="select _price_cnt">0</a>
-																	<ul class="select_list" id="selectList96145285268">
-																		<li data-value="0" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="6000" data-product_grade_id="96145" data-product_denomination_id="285268" data-denomination_class_code="BASE" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">0</a>
-																		</li>
-																		<li data-value="1" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="6000" data-product_grade_id="96145" data-product_denomination_id="285268" data-denomination_class_code="BASE" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">1</a>
-																		</li>
-																	</ul>
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="3" class="td_ly" id="certify96145285268" style="display: none;"></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td colspan="3">
-											<div class="tbl_inner">
-												<table>
-													<caption>일반(정가)</caption>
-													<colgroup>
-														<col>
-														<col style="width: 160px">
-														<col style="width: 75px">
-													</colgroup>
-													<tbody>
-														<tr>
-															<th scope="row" class="th">
-																<div class="in">
-																	군인(사병)
-																	<div class="layer_mother">
-																		<a href="#" class="help">도움말보기</a>
-																		<span class="layer only_txt" style="width: 200px; top: 0px; left: 19px">
-																			<p class="layer_text">* 매표소에서만 증빙서류 확인 후 티켓으로 발권 가능(무인발권기, 스마트티켓 발권 불가) * 군경할인은 휴가장병만 할인가능(직업군인,경찰 불가)</p>
-																		</span>
-																	</div>
-																</div>
-															</th>
-															<td class="tr">
-																<span class="color_green fbold _price">6,000</span>
-																원
-															</td>
-															<td class="selectbox">
-																<div class="selectbox">
-																	<a href="#" class="select _price_cnt">0</a>
-																	<ul class="select_list" id="selectList96145285272">
-																		<li data-value="0" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="6000" data-product_grade_id="96145" data-product_denomination_id="285272" data-denomination_class_code="BASE" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">0</a>
-																		</li>
-																		<li data-value="1" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="6000" data-product_grade_id="96145" data-product_denomination_id="285272" data-denomination_class_code="BASE" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">1</a>
-																		</li>
-																	</ul>
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="3" class="td_ly" id="certify96145285272" style="display: none;"></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td colspan="3">
-											<div class="tbl_inner">
-												<table>
-													<caption>일반(정가)</caption>
-													<colgroup>
-														<col>
-														<col style="width: 160px">
-														<col style="width: 75px">
-													</colgroup>
-													<tbody>
-														<tr>
-															<th scope="row" class="th">
-																<div class="in">
-																	어린이
-																	<div class="layer_mother">
-																		<a href="#" class="help">도움말보기</a>
-																		<span class="layer only_txt" style="width: 200px; top: 0px; left: 19px">
-																			<p class="layer_text">- 매표소에서만 티켓으로 교환 가능하며, 증빙서류(등본, 여권)등 확인 후 티켓으로 발권 가능(무인발권기, 스마트티켓 발권 불가) - 36개월 미만 무료입장(단,좌석 점유시 해당 권종으로 티켓 구매) -권종선택 실수로 인한 예매 건은 현장에서 교환/환불 불가합니다.(현장 재구매 필요)</p>
-																		</span>
-																	</div>
-																</div>
-															</th>
-															<td class="tr">
-																<span class="color_green fbold _price">4,000</span>
-																원
-															</td>
-															<td class="selectbox">
-																<div class="selectbox">
-																	<a href="#" class="select _price_cnt">0</a>
-																	<ul class="select_list" id="selectList96145285276">
-																		<li data-value="0" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="4000" data-product_grade_id="96145" data-product_denomination_id="285276" data-denomination_class_code="BASE" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">0</a>
-																		</li>
-																		<li data-value="1" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="4000" data-product_grade_id="96145" data-product_denomination_id="285276" data-denomination_class_code="BASE" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">1</a>
-																		</li>
-																	</ul>
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="3" class="td_ly" id="certify96145285276" style="display: none;"></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td colspan="3">
-											<div class="tbl_inner">
-												<table>
-													<caption>일반(정가)</caption>
-													<colgroup>
-														<col>
-														<col style="width: 160px">
-														<col style="width: 75px">
-													</colgroup>
-													<tbody>
-														<tr>
-															<th scope="row" class="th">
-																<div class="in">
-																	경로
-																	<div class="layer_mother">
-																		<a href="#" class="help">도움말보기</a>
-																		<span class="layer only_txt" style="width: 200px; top: 0px; left: 19px">
-																			<p class="layer_text">경로 할인(본인만) - 매표소에서만 티켓으로 교환 가능하며, 증빙서류 확인 후 티켓으로 발권 가능합니다.(무인발권기, 스마트티켓 발권 불가)</p>
-																		</span>
-																	</div>
-																</div>
-															</th>
-															<td class="tr">
-																<span class="color_green fbold _price">4,000</span>
-																원
-															</td>
-															<td class="selectbox">
-																<div class="selectbox">
-																	<a href="#" class="select _price_cnt">0</a>
-																	<ul class="select_list" id="selectList96145285280">
-																		<li data-value="0" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="4000" data-product_grade_id="96145" data-product_denomination_id="285280" data-denomination_class_code="BASE" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">0</a>
-																		</li>
-																		<li data-value="1" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="4000" data-product_grade_id="96145" data-product_denomination_id="285280" data-denomination_class_code="BASE" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">1</a>
-																		</li>
-																	</ul>
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="3" class="td_ly" id="certify96145285280" style="display: none;"></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td colspan="3">
-											<div class="tbl_inner">
-												<table>
-													<caption>일반(정가)</caption>
-													<colgroup>
-														<col>
-														<col style="width: 160px">
-														<col style="width: 75px">
-													</colgroup>
-													<tbody>
-														<tr>
-															<th scope="row" class="th">
-																<div class="in">
-																	장애인
-																	<div class="layer_mother">
-																		<a href="#" class="help">도움말보기</a>
-																		<span class="layer only_txt" style="width: 200px; top: 0px; left: 19px">
-																			<p class="layer_text">장애인 할인(본인만) - 매표소에서만 티켓으로 교환 가능하며, 증빙서류 확인 후 티켓으로 발권 가능합니다.(무인발권기, 스마트티켓 발권 불가)</p>
-																		</span>
-																	</div>
-																</div>
-															</th>
-															<td class="tr">
-																<span class="color_green fbold _price">4,000</span>
-																원
-															</td>
-															<td class="selectbox">
-																<div class="selectbox">
-																	<a href="#" class="select _price_cnt">0</a>
-																	<ul class="select_list" id="selectList96145285284">
-																		<li data-value="0" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="4000" data-product_grade_id="96145" data-product_denomination_id="285284" data-denomination_class_code="BASE" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">0</a>
-																		</li>
-																		<li data-value="1" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="4000" data-product_grade_id="96145" data-product_denomination_id="285284" data-denomination_class_code="BASE" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">1</a>
-																		</li>
-																	</ul>
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="3" class="td_ly" id="certify96145285284" style="display: none;"></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td colspan="3">
-											<div class="tbl_inner">
-												<table>
-													<caption>일반(정가)</caption>
-													<colgroup>
-														<col>
-														<col style="width: 160px">
-														<col style="width: 75px">
-													</colgroup>
-													<tbody>
-														<tr>
-															<th scope="row" class="th">
-																<div class="in">
-																	국가유공자
-																	<div class="layer_mother">
-																		<a href="#" class="help">도움말보기</a>
-																		<span class="layer only_txt" style="width: 200px; top: 0px; left: 19px">
-																			<p class="layer_text">국가유공자 할인(본인만) - 매표소에서만 티켓으로 교환 가능하며, 증빙서류 확인 후 티켓으로 발권 가능합니다.(무인발권기, 스마트티켓 발권 불가)</p>
-																		</span>
-																	</div>
-																</div>
-															</th>
-															<td class="tr">
-																<span class="color_green fbold _price">4,000</span>
-																원
-															</td>
-															<td class="selectbox">
-																<div class="selectbox">
-																	<a href="#" class="select _price_cnt">0</a>
-																	<ul class="select_list" id="selectList96145285288">
-																		<li data-value="0" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="4000" data-product_grade_id="96145" data-product_denomination_id="285288" data-denomination_class_code="BASE" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">0</a>
-																		</li>
-																		<li data-value="1" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="4000" data-product_grade_id="96145" data-product_denomination_id="285288" data-denomination_class_code="BASE" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">1</a>
-																		</li>
-																	</ul>
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="3" class="td_ly" id="certify96145285288" style="display: none;"></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td colspan="3">
-											<div class="tbl_inner">
-												<table>
-													<caption>일반(정가)</caption>
-													<colgroup>
-														<col>
-														<col style="width: 160px">
-														<col style="width: 75px">
-													</colgroup>
-													<tbody>
-														<tr>
-															<th scope="row" class="th">
-																<div class="in">
-																	이벤트할인(학생증)
-																	<div class="layer_mother">
-																		<a href="#" class="help">도움말보기</a>
-																		<span class="layer only_txt" style="width: 200px; top: 0px; left: 19px">
-																			<p class="layer_text">해당 권종은 본인에 한해 할인 가능합니다. 매표소에서만 티켓 교환이 가능하며, 증빙서류 확인 후 티켓 발권 가능합니다. * 무인발권기, 스마트티켓 사용 불가 * 중학생, 고등학생, 대학(원)생 대상으로 할인 구매 가능 (중고생 기준 출생연도 : 2006년~2011년생 / 대학(원)생 기준 : 2006년생 이전) * 증빙서류(학생증, 청소년증, 모바일학생증 등)가 확인 되지 않으면 티켓은 변경, 취소 불가.</p>
-																		</span>
-																	</div>
-																</div>
-															</th>
-															<td class="tr">
-																<span class="color_green fbold _price">4,000</span>
-																원
-															</td>
-															<td class="selectbox">
-																<div class="selectbox">
-																	<a href="#" class="select _price_cnt">0</a>
-																	<ul class="select_list" id="selectList96145305107">
-																		<li data-value="0" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="4000" data-product_grade_id="96145" data-product_denomination_id="305107" data-denomination_class_code="BASE" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">0</a>
-																		</li>
-																		<li data-value="1" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="4000" data-product_grade_id="96145" data-product_denomination_id="305107" data-denomination_class_code="BASE" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">1</a>
-																		</li>
-																	</ul>
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="3" class="td_ly" id="certify96145305107" style="display: none;"></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" rowspan="4">카드할인</th>
-										<td colspan="3">
-											<div class="tbl_inner">
-												<table>
-													<caption>카드할인</caption>
-													<colgroup>
-														<col>
-														<col style="width: 160px">
-														<col style="width: 75px">
-													</colgroup>
-													<tbody>
-														<tr>
-															<th scope="row" class="th">
-																<div class="in">
-																	LG트윈스 신한카드
-																	<div class="layer_mother">
-																		<a href="#" class="help">도움말보기</a>
-																		<span class="layer only_txt" style="width: 200px; top: 0px; left: 19px">
-																			<p class="layer_text">LG트윈스 신한카드로 결제 시 1일 1매에 대하여 3,000원 청구 할인 (선할인 신한카드는 신한카드 권종으로 결제 시에 할인)</p>
-																		</span>
-																	</div>
-																</div>
-															</th>
-															<td class="tr">
-																<span class="color_green fbold _price">8,000</span>
-																원
-															</td>
-															<td class="selectbox">
-																<div class="selectbox">
-																	<a href="#" class="select _price_cnt">0</a>
-																	<ul class="select_list" id="selectList96145285387">
-																		<li data-value="0" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="8000" data-product_grade_id="96145" data-product_denomination_id="285387" data-denomination_class_code="CARD" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">0</a>
-																		</li>
-																		<li data-value="1" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="8000" data-product_grade_id="96145" data-product_denomination_id="285387" data-denomination_class_code="CARD" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">1</a>
-																		</li>
-																	</ul>
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="3" class="td_ly" id="certify96145285387" style="display: none;"></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td colspan="3">
-											<div class="tbl_inner">
-												<table>
-													<caption>카드할인</caption>
-													<colgroup>
-														<col>
-														<col style="width: 160px">
-														<col style="width: 75px">
-													</colgroup>
-													<tbody>
-														<tr>
-															<th scope="row" class="th">
-																<div class="in">
-																	LG트윈스 신한카드 체크
-																	<div class="layer_mother">
-																		<a href="#" class="help">도움말보기</a>
-																		<span class="layer only_txt" style="width: 200px; top: 0px; left: 19px">
-																			<p class="layer_text">블루석 이하 경기당 1매, 3,000원 할인(LG트윈스 신한카드 체크 할인)</p>
-																		</span>
-																	</div>
-																</div>
-															</th>
-															<td class="tr">
-																<span class="color_green fbold _price">5,000</span>
-																원
-															</td>
-															<td class="selectbox">
-																<div class="selectbox">
-																	<a href="#" class="select _price_cnt">0</a>
-																	<ul class="select_list" id="selectList96145285391">
-																		<li data-value="0" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="5000" data-product_grade_id="96145" data-product_denomination_id="285391" data-denomination_class_code="CARD" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">0</a>
-																		</li>
-																		<li data-value="1" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="5000" data-product_grade_id="96145" data-product_denomination_id="285391" data-denomination_class_code="CARD" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">1</a>
-																		</li>
-																	</ul>
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="3" class="td_ly" id="certify96145285391" style="display: none;"></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td colspan="3">
-											<div class="tbl_inner">
-												<table>
-													<caption>카드할인</caption>
-													<colgroup>
-														<col>
-														<col style="width: 160px">
-														<col style="width: 75px">
-													</colgroup>
-													<tbody>
-														<tr>
-															<th scope="row" class="th">
-																<div class="in">
-																	신한카드
-																	<div class="layer_mother">
-																		<a href="#" class="help">도움말보기</a>
-																		<span class="layer only_txt" style="width: 200px; top: 0px; left: 19px">
-																			<p class="layer_text">블루석이하 경기당 1매 2,000원 할인(특정 27개 카드만 할인가능) 선할인 카드목록은 "티켓링크(WEB)내 LG트윈스 요금/할인카드" 에서 확인하세요!</p>
-																		</span>
-																	</div>
-																</div>
-															</th>
-															<td class="tr">
-																<span class="color_green fbold _price">6,000</span>
-																원
-															</td>
-															<td class="selectbox">
-																<div class="selectbox">
-																	<a href="#" class="select _price_cnt">0</a>
-																	<ul class="select_list" id="selectList96145285398">
-																		<li data-value="0" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="6000" data-product_grade_id="96145" data-product_denomination_id="285398" data-denomination_class_code="CARD" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">0</a>
-																		</li>
-																		<li data-value="1" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="6000" data-product_grade_id="96145" data-product_denomination_id="285398" data-denomination_class_code="CARD" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">1</a>
-																		</li>
-																	</ul>
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="3" class="td_ly" id="certify96145285398" style="display: none;"></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td colspan="3">
-											<div class="tbl_inner">
-												<table>
-													<caption>카드할인</caption>
-													<colgroup>
-														<col>
-														<col style="width: 160px">
-														<col style="width: 75px">
-													</colgroup>
-													<tbody>
-														<tr>
-															<th scope="row" class="th">
-																<div class="in">
-																	문화누리카드
-																	<div class="layer_mother">
-																		<a href="#" class="help">도움말보기</a>
-																		<span class="layer only_txt" style="width: 200px; top: 0px; left: 19px">
-																			<p class="layer_text">문화누리카드 권종 구매시 경기 당일 매표소에서만 티켓교환이 가능하며, 티켓 교환 시 결제 카드와 소유자 신분증 확인 후 티켓 발권가능합니다.(무인발권기, 스마트티켓 사용 불가)</p>
-																		</span>
-																	</div>
-																</div>
-															</th>
-															<td class="tr">
-																<span class="color_green fbold _price">4,800</span>
-																원
-															</td>
-															<td class="selectbox">
-																<div class="selectbox">
-																	<a href="#" class="select _price_cnt">0</a>
-																	<ul class="select_list" id="selectList96145285403">
-																		<li data-value="0" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="4800" data-product_grade_id="96145" data-product_denomination_id="285403" data-denomination_class_code="CARD" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">0</a>
-																		</li>
-																		<li data-value="1" data-denomination_certification_code="NONE" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="4800" data-product_grade_id="96145" data-product_denomination_id="285403" data-denomination_class_code="CARD" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">1</a>
-																		</li>
-																	</ul>
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="3" class="td_ly" id="certify96145285403" style="display: none;"></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row" rowspan="2">일반할인</th>
-										<td colspan="3">
-											<div class="tbl_inner">
-												<table>
-													<caption>일반할인</caption>
-													<colgroup>
-														<col>
-														<col style="width: 160px">
-														<col style="width: 75px">
-													</colgroup>
-													<tbody>
-														<tr>
-															<th scope="row" class="th">
-																<div class="in">
-																	LG U+ 일반
-																	<button type="button" class="btn_ly close _certifyDivButton" data-product_gradeid="96145" data-product_denomination_id="285376">
-																		<span class="blind">인증영역 닫기</span>
-																	</button>
-																</div>
-															</th>
-															<td class="tr">
-																<span class="color_green fbold _price">6,000</span>
-																원
-															</td>
-															<td class="selectbox">
-																<div class="selectbox">
-																	<a href="#" class="select _price_cnt">0</a>
-																	<ul class="select_list" id="selectList96145285376">
-																		<li data-value="0" data-denomination_certification_code="POINT_CERTIFY" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="6000" data-product_grade_id="96145" data-product_denomination_id="285376" data-denomination_class_code="NORMAL" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">0</a>
-																		</li>
-																		<li data-value="1" data-denomination_certification_code="POINT_CERTIFY" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="6000" data-product_grade_id="96145" data-product_denomination_id="285376" data-denomination_class_code="NORMAL" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">1</a>
-																		</li>
-																	</ul>
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="3" class="td_ly" id="certify96145285376" style="display: none;">
-																<div class="confirm_area _gsnp">
-																	<button type="button" class="btn btn_blank" data-point-type="LGU" data-product_grade_id="96145" data-product_denomination_id="285376" data-schedule_id="2089081482" data-denomination_certification_code="POINT_CERTIFY">
-																		<span>[LGU+ 일반할인]</span>
-																		<span>인증하기</span>
-																	</button>
-																</div>
-															</td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td colspan="3">
-											<div class="tbl_inner">
-												<table>
-													<caption>일반할인</caption>
-													<colgroup>
-														<col>
-														<col style="width: 160px">
-														<col style="width: 75px">
-													</colgroup>
-													<tbody>
-														<tr>
-															<th scope="row" class="th">
-																<div class="in">
-																	LG U+ VIP
-																	<button type="button" class="btn_ly close _certifyDivButton" data-product_gradeid="96145" data-product_denomination_id="285382">
-																		<span class="blind">인증영역 닫기</span>
-																	</button>
-																</div>
-															</th>
-															<td class="tr">
-																<span class="color_green fbold _price">5,000</span>
-																원
-															</td>
-															<td class="selectbox">
-																<div class="selectbox">
-																	<a href="#" class="select _price_cnt">0</a>
-																	<ul class="select_list" id="selectList96145285382">
-																		<li data-value="0" data-denomination_certification_code="POINT_CERTIFY" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="5000" data-product_grade_id="96145" data-product_denomination_id="285382" data-denomination_class_code="NORMAL" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">0</a>
-																		</li>
-																		<li data-value="1" data-denomination_certification_code="POINT_CERTIFY" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="5000" data-product_grade_id="96145" data-product_denomination_id="285382" data-denomination_class_code="NORMAL" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">1</a>
-																		</li>
-																	</ul>
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="3" class="td_ly" id="certify96145285382" style="display: none;">
-																<div class="confirm_area _gsnp">
-																	<button type="button" class="btn btn_blank" data-point-type="LGU" data-product_grade_id="96145" data-product_denomination_id="285382" data-schedule_id="2089081482" data-denomination_certification_code="POINT_CERTIFY">
-																		<span>[LGU+ VIP할인]</span>
-																		<span>인증하기</span>
-																	</button>
-																</div>
-															</td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row">인증할인</th>
-										<td colspan="3">
-											<div class="tbl_inner">
-												<table>
-													<caption>인증할인</caption>
-													<colgroup>
-														<col>
-														<col style="width: 160px">
-														<col style="width: 75px">
-													</colgroup>
-													<tbody>
-														<tr>
-															<th scope="row" class="th">
-																<div class="in">스포츠 예매권</div>
-															</th>
-															<td class="tr">
-																<span class="color_green fbold _price">8,000</span>
-																원
-															</td>
-															<td class="selectbox">
-																<div class="selectbox">
-																	<a href="#" class="select _price_cnt">0</a>
-																	<ul class="select_list" id="selectList96145285562">
-																		<li data-value="0" data-denomination_certification_code="SPORTS_PRETICKET" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="8000" data-product_grade_id="96145" data-product_denomination_id="285562" data-denomination_class_code="CERTIFY" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">0</a>
-																		</li>
-																		<li data-value="1" data-denomination_certification_code="SPORTS_PRETICKET" data-denominationlimit_count="1" data-grade_index="0" data-sale_price="8000" data-product_grade_id="96145" data-product_denomination_id="285562" data-denomination_class_code="CERTIFY" data-delivery_yn="N" data-site_receipt_yn="Y" data-member_limit_type_code="">
-																			<a href="#">1</a>
-																		</li>
-																	</ul>
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="3" class="td_ly" id="certify96145285562" style="display: none;"></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</td>
-									</tr>
+															</c:if>
+														</div>
+													</td>
+													<td class="tr">
+														<span class="color_green fbold _price">${price.price}</span>
+														원
+													</td>
+													<td class="selectbox">
+														<div class="selectbox">
+															<a href="#" class="select _price_cnt">0</a>
+															<ul class="select_list" id="selectList${price.ticketTypeId}" data-limit-count="${quantity}">
+																<c:forEach begin="0" end="${quantity}" var="i">
+																	<li data-value="${i}" data-certification-code="${price.ticketTypeName eq 'ADVANCE_TICKET' ? 'advanceTicket' : 'NONE'}" data-price="${price.price}" data-seat-id="${seat.id}" data-ticketType-id="${price.ticketTypeId}">
+																		<a href="#">${i}</a>
+																	</li>
+																</c:forEach>
+															</ul>
+														</div>
+													</td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>
@@ -833,25 +134,23 @@
 					</div>
 				</div>
 				<div class="reserve_right">
-					<!-- 스포츠 : teamMatchUseYn === 'Y' 대진정보 사용 -->
 					<dl class="sports_info right_lst3">
 						<dt class="img_title">
-							<!-- [D] 구단 이미지 받아올 때 대체텍스트 함께 변경 -->
-							<em class="img_bx"> <img src="${ctp}/images/sports/emblem/${homeTeamShortName}.png" alt="${homeTeamName}">
+							<em class="img_bx"> <img src="${ctp}/images/sports/emblem/${game.homeTeamShortName}.png" alt="${homeTeamName}">
 							</em>
 							<span class="versus sp_sports">vs</span>
-							<em class="img_bx"> <img src="${ctp}/images/sports/emblem/${awayTeamShortName}.png" alt="${awayTeamName}">
+							<em class="img_bx"> <img src="${ctp}/images/sports/emblem/${game.awayTeamShortName}.png" alt="${awayTeamName}">
 							</em>
 						</dt>
-						<dd class="title product_title">${homeTeamShortName}&nbsp;vs&nbsp;${homeTeamShortName}</dd>
+						<dd class="title product_title">${game.homeTeamShortName}&nbsp;vs&nbsp;${game.awayTeamShortName}</dd>
 						<dt class="blind">경기장</dt>
-						<dd>${venueName}</dd>
+						<dd>${game.venueName}</dd>
 						<dt class="blind">경기날짜</dt>
-						<dd class="lspacing0">${gameDate}&nbsp;${gameTime}</dd>
+						<dd class="lspacing0">${gameDateTime}</dd>
 						<dt class="blind">타이틀 상세정보</dt>
 						<dd>
 							<div class="tit_tooltip" style="display: none;">
-								<h4>${homeTeamName}&nbsp;vs&nbsp;${awayTeamName}</h4>
+								<h4>${game.homeTeamShortName}&nbsp;vs&nbsp;${game.awayTeamShortName}</h4>
 							</div>
 						</dd>
 					</dl>
@@ -862,7 +161,7 @@
 						<ul class="seat_list" style="height: 72px;">
 
 							<li>
-								<span class="seat_level">${seatName}</span>
+								<span class="seat_level">${seat.seatName}</span>
 								<span class="seat_price">자동배정</span>
 							</li>
 						</ul>
@@ -876,29 +175,32 @@
 								<tr>
 									<th>티켓금액</th>
 									<td id="_price_ticket">0</td>
+									<!-- 선택한 권종의 요금이 여기에 반영되도록 -->
 								</tr>
 								<tr>
 									<th>예매수수료</th>
 									<td id="_price_fee">0</td>
+									<!-- 선택한 매수만큼의 bookingFeePerTicket가 반영되도록 -->
 								</tr>
 							</tbody>
 							<tfoot>
 								<tr>
 									<th>총결제</th>
 									<td id="_price_amount">0</td>
+									<!-- _price_ticket + _price_fee -->
 								</tr>
 							</tfoot>
 						</table>
 						<ul class="notice_result">
 							<li>
 								취소기한 :
-								<span class="color_point" id="_cancel_time">2024.08.01 16:00</span>
+								<span class="color_point" id="_cancel_time">${cancelDeadline}</span>
 								&nbsp;
 								<span id="cancelDateEndText" class="color_point_end" style="display: none;">(기한 종료)</span>
 							</li>
 							<li>
 								취소수수료 :
-								<span id="cancelFee" class="color_point">티켓금액의 0~30%</span>
+								<span id="cancelFee" class="color_point">티켓금액의 0~10%</span>
 								<span id="cancelDisabledText" class="color_point_end" style="display: none;">취소/환불/변경 불가</span>
 								<a href="#" id="cancelCommisonNoticeBtn">[상세보기]</a>
 							</li>
@@ -916,13 +218,13 @@
 							<tbody id="cancel_commission_table">
 								<tr>
 									<th>예매당일</th>
-									<td class="lspacing0">2024.07.26${오늘날짜}</td>
+									<td class="lspacing0">${today}</td>
 									<td class="tr color_green">취소수수료 없음</td>
 								</tr>
 								<tr>
 									<th>예매익일~취소마감시간 전</th>
-									<td class="lspacing0">2024.07.27${오늘다음날날짜}~${gameDate}</td>
-									<td class="tr color_green">티켓금액의10%</td>
+									<td class="lspacing0">${tomorrow}~${cancelDeadlineDate}</td>
+									<td class="tr color_green">티켓금액의 10%</td>
 								</tr>
 							</tbody>
 						</table>
@@ -943,5 +245,6 @@
 			</div>
 		</div>
 	</div>
+	<script src="${ctp}/js/sports/reserve/price.js"></script>
 </body>
 </html>

@@ -10,6 +10,9 @@ CREATE TABLE ticket_types (
     UNIQUE KEY (name)
 );
 
+select * from ticket_types;
+
+desc ticket_types;
 SELECT DISTINCT category FROM ticket_types;
 
 INSERT INTO ticket_types (category, name, description) VALUES

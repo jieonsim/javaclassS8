@@ -1,3 +1,4 @@
+/*좌석 재고*/
 CREATE TABLE seat_inventory (
     id INT AUTO_INCREMENT PRIMARY KEY COMMENT '좌석 재고 고유번호',
     gameId INT NOT NULL COMMENT '경기 고유번호',

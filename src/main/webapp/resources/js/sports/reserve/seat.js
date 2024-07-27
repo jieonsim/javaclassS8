@@ -97,12 +97,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 				const seatName = this.querySelector('.seat_grade').textContent;
 				const availableSeats = this.querySelector('.seat .ng-binding').textContent;
-
+				const seatId = this.getAttribute('data-seat-id'); // seatId 가져오기
+				
 				document.querySelector('.select_count_auto .seat_name').textContent = seatName;
 				document.querySelector('.select_count_auto .sheet').textContent = availableSeats + '석';
 
-				// 좌석 이름 input hidden 필드에 설정
-				document.querySelector('input[name="seatName"]').value = seatName;
+				// 좌석 ID input hidden 필드에 설정
+				document.querySelector('input[name="seatId"]').value = seatId;
+				// 브라우저 콘솔에 seatId 출력해보기
+				console.log('Selected Seat ID:', seatId);
 			}
 		});
 	});
@@ -216,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			alert('매수를 선택해주세요.');
 			return;
 		}
-
+		
 		this.submit();
 	});
 

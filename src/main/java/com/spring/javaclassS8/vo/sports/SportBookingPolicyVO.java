@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class sportBookingPolicyVO {
+public class SportBookingPolicyVO {
 	private int id;
 	private int sportId;
 	private int bookingOpenDaysBefore;
