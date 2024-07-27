@@ -155,19 +155,20 @@ public class SportsController {
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm");
 		DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd(E) HH:mm");
 
+		// 좌석 / 요금 / 권종
 		SeatVO seat = sportsService.getSeatById(seatId);
 		List<PriceVO> prices = sportsService.getPricesBySeatId(seatId);
 		List<CategoryVO> categoryList = sportsService.getCategoriesWithRowspan(seatId);
 
 	    // 스포츠 예매권
 	    List<Map<String, Object>> advanceTickets = sportsService.getValidAdvanceTicketsByMemberId(member.getId());
-		model.addAttribute("advanceTickets", advanceTickets);
 		
 		model.addAttribute("game", game);
 		model.addAttribute("seat", seat);
 		model.addAttribute("quantity", quantity);
 		model.addAttribute("prices", prices);
 		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("advanceTickets", advanceTickets);
 		model.addAttribute("bookingPolicy", bookingPolicy);
 		model.addAttribute("gameDateTime", gameDateTime.format(displayFormatter));
 		model.addAttribute("cancelDeadline", cancelDeadline.format(dateTimeFormatter));
@@ -178,7 +179,7 @@ public class SportsController {
 		return "sports/reserve/price";
 	}
 
-	// 예매권 유효성 검사
+	// depth2 > 스포츠 예매권 등록 시 예매권 유효성 검사
 	@PostMapping("/reserve/validateAdvanceTicket")
 	@ResponseBody
 	public ResponseEntity<?> validateAdvanceTicket(@RequestBody Map<String, String> payload) {
@@ -186,7 +187,7 @@ public class SportsController {
 		return ResponseEntity.ok(advanceTicketService.validateAdvanceTicket(advanceTicketNumber));
 	}
 
-	// 예매권 등록
+	// depth2 > 스포츠 예매권 신규 등록
 	@PostMapping("/reserve/registerAdvanceTicket")
 	@ResponseBody
 	public ResponseEntity<?> registerAdvanceTicket(@RequestBody Map<String, String> payload) {

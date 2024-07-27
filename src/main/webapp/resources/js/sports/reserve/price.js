@@ -1,11 +1,6 @@
-/**
- * js/sports/reserve/price.js
- */
 document.addEventListener('DOMContentLoaded', function() {
-	// 전역 변수
 	const bookingFeePerTicket = parseFloat(document.getElementById('bookingFeePerTicket').getAttribute('data-booking-fee'));
 
-	// 유틸리티 함수
 	function calculateTotalSelected() {
 		return Array.from(document.querySelectorAll('.select._price_cnt'))
 			.reduce((total, element) => total + parseInt(element.textContent, 10), 0);
@@ -25,44 +20,41 @@ document.addEventListener('DOMContentLoaded', function() {
 			totalQuantity += quantity;
 
 			if (certificationCode === 'ADVANCE_TICKET') {
-				// 스포츠 예매권 선택 시 총 수량에 추가
 				advanceTicketQuantity += quantity;
 			}
 		});
 
-		// 체크된 스포츠 예매권 계산
 		let checkedAdvanceTicketQuantity = 0;
 		document.querySelectorAll('input[name="ticket_checkbox"]:checked').forEach(function(checkbox) {
 			checkedAdvanceTicketQuantity++;
 		});
 
-		// 체크된 스포츠 예매권 수만큼 티켓 금액과 수량에서 제외
 		const advanceTicketPrice = parseInt(document.querySelector('.select_list li[data-certification-code="ADVANCE_TICKET"]').getAttribute('data-price'), 10);
 		totalTicketPrice -= advanceTicketPrice * checkedAdvanceTicketQuantity;
 
-		// 예매 수수료 계산
 		const totalBookingFee = bookingFeePerTicket * (totalQuantity - checkedAdvanceTicketQuantity);
 
-		// 총 결제 금액 계산
 		const totalAmount = totalTicketPrice + totalBookingFee;
 
-		// 화면 업데이트
 		document.getElementById('_price_ticket').textContent = totalTicketPrice.toLocaleString() + '원';
 		document.getElementById('_price_fee').textContent = totalBookingFee.toLocaleString() + '원';
 		document.getElementById('_price_amount').textContent = totalAmount.toLocaleString() + '원';
 	}
 
-	// 체크박스 이벤트 리스너 수정
-	function addCheckboxEventListener(checkbox) {
+	function addCheckboxEventListener(checkbox, maxSelectable) {
 		checkbox.addEventListener('change', function() {
-			const span = this.closest('.checkbox');
-			span.classList.toggle('checked', this.checked);
-			updateBookingInfo();
+			const checkedCount = document.querySelectorAll('input[name="ticket_checkbox"]:checked').length;
+			if (checkedCount > maxSelectable) {
+				alert('선택한 매수 이상의 예매권을 사용할 수 없습니다.');
+				this.checked = false;
+			} else {
+				const span = this.closest('.checkbox');
+				span.classList.toggle('checked', this.checked);
+				updateBookingInfo();
+			}
 		});
 	}
 
-
-	// 초기화 함수
 	function initializeSelectBoxes() {
 		document.querySelectorAll('.select._price_cnt').forEach(function(selectElement) {
 			selectElement.addEventListener('click', function(e) {
@@ -90,6 +82,12 @@ document.addEventListener('DOMContentLoaded', function() {
 				selectBox.querySelectorAll('.select_list li').forEach(item => item.classList.remove('_selected'));
 				this.classList.add('_selected');
 				updateBookingInfo();
+
+				const certifyButton = selectBox.closest('tr').querySelector('.btn_ly._certifyDivButton');
+				const ticketTypeId = this.getAttribute('data-ticketType-id');
+				if (certifyButton) {
+					certifyButton.setAttribute('data-ticketType-id', ticketTypeId);
+				}
 			});
 		});
 	}
@@ -98,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		document.querySelectorAll('.btn_ly._certifyDivButton').forEach(button => {
 			button.addEventListener('click', function() {
 				const ticketTypeId = this.getAttribute('data-ticketType-id');
+				console.log('Certify Button Ticket Type ID:', ticketTypeId); // 디버깅을 위해 추가
 				const selectedQuantity = parseInt(this.closest('tr').querySelector('.select._price_cnt').textContent, 10);
 
 				if (selectedQuantity === 0) {
@@ -110,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				const blindSpan = this.querySelector('.blind');
 				if (this.classList.contains('open')) {
 					blindSpan.textContent = '인증영역 닫기';
-					showCertificationArea(this, ticketTypeId);
+					showCertificationArea(this, ticketTypeId, selectedQuantity);
 				} else {
 					blindSpan.textContent = '인증영역 열기';
 					hideCertificationArea(ticketTypeId);
@@ -119,9 +118,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	}
 
-	// 인증 영역 관련 함수
-	function showCertificationArea(button, ticketTypeId) {
-		console.log('showCertificationArea Ticket Type ID:', ticketTypeId); 
+	function showCertificationArea(button, ticketTypeId, selectedQuantity) {
+		console.log('showCertificationArea Ticket Type ID:', ticketTypeId); // 디버깅을 위해 추가
 		const certificationHTML = `
             <tr>
                 <td colspan="4" class="td_ly" id="certify${ticketTypeId}" style="display: table-cell;">
@@ -159,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
 
 		button.closest('tr').insertAdjacentHTML('afterend', certificationHTML);
-		renderAdvanceTickets(ticketTypeId);
+		renderAdvanceTickets(ticketTypeId, selectedQuantity);
 		initializeTicketInput(ticketTypeId);
 	}
 
@@ -246,10 +244,24 @@ document.addEventListener('DOMContentLoaded', function() {
 		const noDataRow = couponBody.querySelector('._noData');
 		if (noDataRow) noDataRow.remove();
 
-		addCheckboxEventListener(newRow.querySelector('input[type="checkbox"]'));
+		// 새로 추가된 체크박스에 이벤트 리스너 추가
+		const checkbox = newRow.querySelector('.checkbox');
+		checkbox.addEventListener('click', function(e) {
+			const input = this.querySelector('input[type="checkbox"]');
+			input.checked = !input.checked;
+			const selectedQuantity = parseInt(document.querySelector('.select._price_cnt').textContent, 10);
+			const checkedCount = document.querySelectorAll(`#coupon${ticketTypeId} input[name="ticket_checkbox"]:checked`).length;
+			if (checkedCount > selectedQuantity) {
+				alert('선택한 매수 이상의 예매권을 사용할 수 없습니다.');
+				input.checked = false;
+			}
+			this.classList.toggle('checked', input.checked);
+			updateBookingInfo();
+			e.preventDefault(); // 이벤트 전파 방지
+		});
 	}
 
-	function renderAdvanceTickets(ticketTypeId) {
+	function renderAdvanceTickets(ticketTypeId, selectedQuantity) {
 		const couponBody = document.getElementById(`coupon${ticketTypeId}`);
 		const advanceTickets = window.advanceTicketsData || [];
 
@@ -270,16 +282,20 @@ document.addEventListener('DOMContentLoaded', function() {
             `).join('');
 		}
 
-		couponBody.addEventListener('click', function(event) {
-			const span = event.target.closest('.checkbox');
-			if (span) {
-				const checkbox = span.querySelector('input[type="checkbox"]');
-				if (checkbox) {
-					checkbox.checked = !checkbox.checked;
-					span.classList.toggle('checked', checkbox.checked);
-					updateBookingInfo();
+		// 체크박스 이벤트 리스너 추가
+		document.querySelectorAll(`#coupon${ticketTypeId} .checkbox`).forEach(function(checkbox) {
+			checkbox.addEventListener('click', function(e) {
+				const input = this.querySelector('input[type="checkbox"]');
+				input.checked = !input.checked;
+				const checkedCount = document.querySelectorAll(`#coupon${ticketTypeId} input[name="ticket_checkbox"]:checked`).length;
+				if (checkedCount > selectedQuantity) {
+					alert('선택한 매수 이상의 예매권을 사용할 수 없습니다.');
+					input.checked = false;
 				}
-			}
+				this.classList.toggle('checked', input.checked);
+				updateBookingInfo();
+				e.preventDefault(); // 이벤트 전파 방지
+			});
 		});
 	}
 
@@ -288,7 +304,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		if (certificationArea) certificationArea.closest('tr').remove();
 	}
 
-	// 초기화
 	initializeSelectBoxes();
 	initializeCertifyButtons();
 	updateBookingInfo();

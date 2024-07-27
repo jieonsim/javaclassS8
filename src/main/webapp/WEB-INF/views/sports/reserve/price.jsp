@@ -261,6 +261,6 @@
 	        </c:forEach>
 	    ];
 	</script>
-	<script src="${ctp}/js/sports/reserve/price_retry.js"></script>
+	<script src="${ctp}/js/sports/reserve/price.js"></script>
 </body>
 </html>
