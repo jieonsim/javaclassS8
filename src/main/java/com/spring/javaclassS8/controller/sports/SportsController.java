@@ -15,18 +15,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring.javaclassS8.service.my.discount.AdvanceTicketService;
 import com.spring.javaclassS8.service.sports.SportsService;
 import com.spring.javaclassS8.utils.CaptchaGenerator;
 import com.spring.javaclassS8.utils.DateTimeFormatUtils;
+import com.spring.javaclassS8.vo.member.MemberVO;
 import com.spring.javaclassS8.vo.reserve.TempReservation;
 import com.spring.javaclassS8.vo.sports.CategoryVO;
 import com.spring.javaclassS8.vo.sports.GameVO;
@@ -41,6 +45,9 @@ public class SportsController {
 
 	@Autowired
 	private SportsService sportsService;
+
+	@Autowired
+	private AdvanceTicketService advanceTicketService;
 
 	// 스포츠별 메인
 	@GetMapping("/{sport}/main")
@@ -100,6 +107,7 @@ public class SportsController {
 		return "sports/reserve/seat";
 	}
 
+	// 세션 저장
 	@PostMapping("/reserve/saveTempReservation")
 	public String saveTempReservation(@RequestParam int gameId, @RequestParam int seatId, @RequestParam int quantity, HttpSession session) {
 		TempReservation tempReservation = new TempReservation(gameId, seatId, quantity, 1, // currentDepth
@@ -114,6 +122,11 @@ public class SportsController {
 	// 예매창 > 권종/할인/매수선택(depth2)
 	@GetMapping("/reserve/price")
 	public String reserveDepth2(HttpSession session, Model model) {
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		if (member == null) {
+			return "redirect:/loing";
+		}
+
 		TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
 		if (tempReservation == null) {
 			return "redirect:/sports/reserve/seat";
@@ -143,14 +156,16 @@ public class SportsController {
 		DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd(E) HH:mm");
 
 		SeatVO seat = sportsService.getSeatById(seatId);
-		//List<TicketTypeVO> ticketTypes = sportsService.getTicketTypesBySeatId(seatId);
 		List<PriceVO> prices = sportsService.getPricesBySeatId(seatId);
 		List<CategoryVO> categoryList = sportsService.getCategoriesWithRowspan(seatId);
 
+	    // 스포츠 예매권
+	    List<Map<String, Object>> advanceTickets = sportsService.getValidAdvanceTicketsByMemberId(member.getId());
+		model.addAttribute("advanceTickets", advanceTickets);
+		
 		model.addAttribute("game", game);
 		model.addAttribute("seat", seat);
 		model.addAttribute("quantity", quantity);
-		//model.addAttribute("ticketTypes", ticketTypes);
 		model.addAttribute("prices", prices);
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("bookingPolicy", bookingPolicy);
@@ -161,6 +176,29 @@ public class SportsController {
 		model.addAttribute("cancelDeadlineDate", cancelDeadline.format(dateFormatter));
 
 		return "sports/reserve/price";
+	}
+
+	// 예매권 유효성 검사
+	@PostMapping("/reserve/validateAdvanceTicket")
+	@ResponseBody
+	public ResponseEntity<?> validateAdvanceTicket(@RequestBody Map<String, String> payload) {
+		String advanceTicketNumber = payload.get("advanceTicketNumber");
+		return ResponseEntity.ok(advanceTicketService.validateAdvanceTicket(advanceTicketNumber));
+	}
+
+	// 예매권 등록
+	@PostMapping("/reserve/registerAdvanceTicket")
+	@ResponseBody
+	public ResponseEntity<?> registerAdvanceTicket(@RequestBody Map<String, String> payload) {
+		String advanceTicketNumber = payload.get("advanceTicketNumber");
+		Map<String, Object> result = advanceTicketService.registerAdvanceTicket(advanceTicketNumber);
+
+		if ((Boolean) result.get("success")) {
+			// 새로 등록된 티켓 정보를 포함
+			Map<String, Object> ticket = advanceTicketService.getAdvanceTicketInfo(advanceTicketNumber);
+			result.put("ticket", ticket);
+		}
+		return ResponseEntity.ok(result);
 	}
 
 	// 예매창 > 예매확인(depth3)

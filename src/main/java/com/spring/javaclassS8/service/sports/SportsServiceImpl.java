@@ -1,5 +1,7 @@
 package com.spring.javaclassS8.service.sports;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
@@ -17,7 +19,6 @@ import com.spring.javaclassS8.vo.sports.PriceVO;
 import com.spring.javaclassS8.vo.sports.SeatInventoryVO;
 import com.spring.javaclassS8.vo.sports.SeatVO;
 import com.spring.javaclassS8.vo.sports.SportBookingPolicyVO;
-import com.spring.javaclassS8.vo.sports.TicketTypeVO;
 
 @Service
 public class SportsServiceImpl implements SportsService {
@@ -95,12 +96,6 @@ public class SportsServiceImpl implements SportsService {
 		return sportsDAO.getSeatById(seatId);
 	}
 
-	// 좌석 고유번호로 권종리스트 가져오기
-	@Override
-	public List<TicketTypeVO> getTicketTypesBySeatId(int seatId) {
-		return sportsDAO.getTicketTypesBySeatId(seatId);
-	}
-
 	// 좌석 고유번호로 요금 정보 가져오기
 	@Override
 	public List<PriceVO> getPricesBySeatId(int seatId) {
@@ -114,20 +109,35 @@ public class SportsServiceImpl implements SportsService {
 	}
 
 	// 좌석 고유번호로 권종 카테고리별 필요한 rowspan 가져오기
-    @Override
-    public List<CategoryVO> getCategoriesWithRowspan(int seatId) {
-        List<PriceVO> prices = sportsDAO.getPricesBySeatId(seatId);
-        Map<String, Integer> categoryCount = new HashMap<>();
+	@Override
+	public List<CategoryVO> getCategoriesWithRowspan(int seatId) {
+		List<PriceVO> prices = sportsDAO.getPricesBySeatId(seatId);
+		Map<String, Integer> categoryCount = new HashMap<>();
 
-        for (PriceVO price : prices) {
-            categoryCount.put(price.getCategory(), categoryCount.getOrDefault(price.getCategory(), 0) + 1);
-        }
+		for (PriceVO price : prices) {
+			categoryCount.put(price.getCategory(), categoryCount.getOrDefault(price.getCategory(), 0) + 1);
+		}
 
-        List<CategoryVO> categoryList = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : categoryCount.entrySet()) {
-            categoryList.add(new CategoryVO(entry.getKey(), entry.getValue()));
-        }
+		List<CategoryVO> categoryList = new ArrayList<>();
+		for (Map.Entry<String, Integer> entry : categoryCount.entrySet()) {
+			categoryList.add(new CategoryVO(entry.getKey(), entry.getValue()));
+		}
 
-        return categoryList;
-    }
+		return categoryList;
+	}
+
+	// memberId로 해당 유저에 등록된 유효한 예매권 정보 가져오기
+	@Override
+	public List<Map<String, Object>> getValidAdvanceTicketsByMemberId(int memberId) {
+		List<Map<String, Object>> tickets = sportsDAO.getValidAdvanceTicketsByMemberId(memberId);
+		
+		for (Map<String, Object> ticket : tickets) {
+			// 유효기간 형식 변경
+			Timestamp expiresAt = (Timestamp) ticket.get("expiresAt");
+			String formattedDate = new SimpleDateFormat("yyyy.MM.dd").format(expiresAt) + "까지";
+			ticket.put("formattedExpiresAt", formattedDate);
+
+		}
+		return tickets;
+	}
 }

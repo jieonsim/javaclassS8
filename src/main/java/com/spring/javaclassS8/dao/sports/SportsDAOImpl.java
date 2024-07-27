@@ -2,6 +2,7 @@ package com.spring.javaclassS8.dao.sports;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import com.spring.javaclassS8.vo.sports.PriceVO;
 import com.spring.javaclassS8.vo.sports.SeatInventoryVO;
 import com.spring.javaclassS8.vo.sports.SeatVO;
 import com.spring.javaclassS8.vo.sports.SportBookingPolicyVO;
-import com.spring.javaclassS8.vo.sports.TicketTypeVO;
 
 @Repository
 public class SportsDAOImpl implements SportsDAO {
@@ -56,12 +56,6 @@ public class SportsDAOImpl implements SportsDAO {
 		return sqlSession.getMapper(SportsDAO.class).getSeatById(seatId);
 	}
 
-	// 좌석 고유번호로 권종리스트 가져오기
-	@Override
-	public List<TicketTypeVO> getTicketTypesBySeatId(int seatId) {
-		return sqlSession.getMapper(SportsDAO.class).getTicketTypesBySeatId(seatId);
-	}
-
 	// 좌석 고유번호로 요금 정보 가져오기
 	@Override
 	public List<PriceVO> getPricesBySeatId(int seatId) {
@@ -72,6 +66,12 @@ public class SportsDAOImpl implements SportsDAO {
 	@Override
 	public SportBookingPolicyVO getBookingPolicyBySportId(int sportId) {
 		return sqlSession.getMapper(SportsDAO.class).getBookingPolicyBySportId(sportId);
+	}
+
+	// memberId로 해당 유저에 등록된 유효한 예매권 정보 가져오기
+	@Override
+	public List<Map<String, Object>> getValidAdvanceTicketsByMemberId(int memberId) {
+		return sqlSession.getMapper(SportsDAO.class).getValidAdvanceTicketsByMemberId(memberId);
 	}
 
 }

@@ -125,4 +125,14 @@ public class AdvanceTicketServiceImpl implements AdvanceTicketService {
 	public int getAvailableAdvanceTicketCount(int memberId) {
 		return advanceTicketDAO.getAvailableAdvanceTicketCount(memberId);
 	}
+
+	// 예매권번호로 예매권 정보 가져오기
+	@Override
+	public Map<String, Object> getAdvanceTicketInfo(String advanceTicketNumber) {
+	    Map<String, Object> ticket = advanceTicketDAO.findByAdvanceTicketNumber(advanceTicketNumber);
+	    if (ticket != null) {
+	        return ticket;
+	    }
+	    return null;
+	}
 }

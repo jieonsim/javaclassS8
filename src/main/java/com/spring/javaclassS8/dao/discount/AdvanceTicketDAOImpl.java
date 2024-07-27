@@ -40,12 +40,18 @@ public class AdvanceTicketDAOImpl implements AdvanceTicketDAO {
 	// 마이페이지 > 할인혜택 > 예매권 > 사용가능/사용완료/유효기간만료 필터링
 	@Override
 	public List<Map<String, Object>> getAdvanceTicketsByMemberIdAndState(int memberId, String stateType) {
-		 return sqlSession.getMapper(AdvanceTicketDAO.class).getAdvanceTicketsByMemberIdAndState(memberId, stateType);
+		return sqlSession.getMapper(AdvanceTicketDAO.class).getAdvanceTicketsByMemberIdAndState(memberId, stateType);
 	}
 
 	// 마이페이지 > quickMenuWrap > 현재 이용 가능한 예매권 갯수 보여주기
 	@Override
 	public int getAvailableAdvanceTicketCount(int memberId) {
 		return sqlSession.getMapper(AdvanceTicketDAO.class).getAvailableAdvanceTicketCount(memberId);
+	}
+
+	// 예매권번호로 예매권 정보 가져오기
+	@Override
+	public Map<String, Object> findByAdvanceTicketNumber(String advanceTicketNumber) {
+		return sqlSession.getMapper(AdvanceTicketDAO.class).findByAdvanceTicketNumber(advanceTicketNumber);
 	}
 }

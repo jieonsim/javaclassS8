@@ -20,4 +20,7 @@ public interface AdvanceTicketService {
 	// 마이페이지 > quickMenuWrap > 현재 이용 가능한 예매권 갯수 보여주기
 	int getAvailableAdvanceTicketCount(int memberId);
 
+	// 예매권번호로 예매권 정보 가져오기
+	Map<String, Object> getAdvanceTicketInfo(String advanceTicketNumber);
+
 }

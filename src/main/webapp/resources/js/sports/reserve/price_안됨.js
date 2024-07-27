@@ -85,6 +85,12 @@ document.addEventListener('DOMContentLoaded', function() {
 					return;
 				}
 
+				// 스포츠 예매권인 경우 예매권 리스트 업데이트
+				if (this.getAttribute('data-certification-code') === 'ADVANCE_TICKET') {
+					const ticketTypeId = this.closest('.select_list').id.replace('selectList', '');
+					renderAdvanceTickets(ticketTypeId);
+				}
+
 				priceCnt.textContent = selectedValue;
 				selectBox.classList.remove('is-active');
 				selectBox.querySelectorAll('.select_list li').forEach(item => item.classList.remove('_selected'));
@@ -121,7 +127,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// 인증 영역 관련 함수
 	function showCertificationArea(button, ticketTypeId) {
-		console.log('showCertificationArea Ticket Type ID:', ticketTypeId); 
 		const certificationHTML = `
             <tr>
                 <td colspan="4" class="td_ly" id="certify${ticketTypeId}" style="display: table-cell;">
@@ -159,8 +164,17 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
 
 		button.closest('tr').insertAdjacentHTML('afterend', certificationHTML);
-		renderAdvanceTickets(ticketTypeId);
-		initializeTicketInput(ticketTypeId);
+		//renderAdvanceTickets(ticketTypeId);
+		//initializeTicketInput(ticketTypeId);
+		// certify 요소가 생성되었는지 확인
+		const certifyElement = document.getElementById(`certify${ticketTypeId}`);
+		if (certifyElement) {
+			console.log('Certify element created successfully');
+			renderAdvanceTickets(ticketTypeId);
+			initializeTicketInput(ticketTypeId);
+		} else {
+			console.error('Failed to create certify element');
+		}
 	}
 
 	function initializeTicketInput(ticketTypeId) {
@@ -250,37 +264,70 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 	function renderAdvanceTickets(ticketTypeId) {
-		const couponBody = document.getElementById(`coupon${ticketTypeId}`);
+		console.log('Rendering advance tickets for ticketTypeId:', ticketTypeId);
+		let couponBody = document.getElementById(`coupon${ticketTypeId}`);
+
+		if (!couponBody) {
+			console.log('Coupon body not found, creating one');
+			const certifyArea = document.getElementById(`certify${ticketTypeId}`);
+			if (certifyArea) {
+				const table = certifyArea.querySelector('table');
+				if (table) {
+					couponBody = document.createElement('tbody');
+					couponBody.id = `coupon${ticketTypeId}`;
+					table.appendChild(couponBody);
+				} else {
+					console.error('Table not found in certify area');
+					return;
+				}
+			} else {
+				console.error('Certify area not found');
+				return;
+			}
+		}
+
 		const advanceTickets = window.advanceTicketsData || [];
+		const selectedQuantity = getSelectedQuantity(ticketTypeId);
+
+		console.log('Advance tickets:', advanceTickets);
+		console.log('Selected quantity:', selectedQuantity);
 
 		if (advanceTickets.length === 0) {
 			couponBody.innerHTML = '<tr class="_noData"><td colspan="4">예매권을 등록해주세요.</td></tr>';
 		} else {
 			couponBody.innerHTML = advanceTickets.map(ticket => `
-                <tr>
-                    <td>
-                        <span class="checkbox">
-                            <input type="checkbox" id="ticket_${ticket.advanceTicketNumber}" name="ticket_checkbox" data-ticket-number="${ticket.advanceTicketNumber}">
-                        </span>
-                    </td>
-                    <td class="number">${ticket.advanceTicketNumber}</td>
-                    <td>1매</td>
-                    <td>${ticket.formattedExpiresAt}</td>
-                </tr>
-            `).join('');
+            <tr>
+                <td>
+                    <span class="checkbox">
+                        <input type="checkbox" id="ticket_${ticket.advanceTicketNumber}" name="ticket_checkbox" data-ticket-number="${ticket.advanceTicketNumber}">
+                    </span>
+                </td>
+                <td class="number">${ticket.advanceTicketNumber}</td>
+                <td>1매</td>
+                <td>${ticket.formattedExpiresAt}</td>
+            </tr>
+        `).join('');
 		}
 
-		couponBody.addEventListener('click', function(event) {
-			const span = event.target.closest('.checkbox');
-			if (span) {
-				const checkbox = span.querySelector('input[type="checkbox"]');
-				if (checkbox) {
-					checkbox.checked = !checkbox.checked;
-					span.classList.toggle('checked', checkbox.checked);
-					updateBookingInfo();
+		couponBody.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+			checkbox.addEventListener('change', function(event) {
+				const checkedCount = couponBody.querySelectorAll('input[type="checkbox"]:checked').length;
+				if (checkedCount > selectedQuantity) {
+					alert('선택한 예매권 매수를 초과하여 선택할 수 없습니다.');
+					this.checked = false;
+					return;
 				}
-			}
+				const span = this.closest('.checkbox');
+				span.classList.toggle('checked', this.checked);
+				updateBookingInfo();
+			});
 		});
+	}
+
+	// 추가
+	function getSelectedQuantity(ticketTypeId) {
+		const selectElement = document.querySelector(`#selectList${ticketTypeId} .select._price_cnt`);
+		return selectElement ? parseInt(selectElement.textContent, 10) : 0;
 	}
 
 	function hideCertificationArea(ticketTypeId) {

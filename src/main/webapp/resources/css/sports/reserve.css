@@ -2154,3 +2154,11 @@ input[type=range]::-ms-tooltip{display:none}
 .checkbox.checked {
     background: url(../../images/icon/check-circle-fill.svg) center / 20px 20px no-repeat;
 }
+.btn_ly::before {
+	width: 16px !important;
+    height: 16px !important;
+    background-image: url(../../images/icon/old-svg.svg) !important;
+    background-size: 660px 629px !important;
+    background-position: -552px -581px !important;
+    background-repeat: no-repeat !important;
+}

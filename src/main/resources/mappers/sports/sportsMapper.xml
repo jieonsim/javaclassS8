@@ -84,14 +84,6 @@
         SELECT * FROM seats WHERE id = #{seatId}
     </select>
     
-    <!-- 좌석 고유번호로 권종리스트 가져오기 -->
-    <select id="getTicketTypesBySeatId" resultType="com.spring.javaclassS8.vo.sports.TicketTypeVO">
-	    SELECT tt.*
-	    FROM ticket_types tt
-	    JOIN prices p ON tt.id = p.ticketTypeId
-	    WHERE p.seatId = #{seatId}
-    </select>
-    
     <!-- 좌석 고유번호로 요금 정보 가져오기 -->
     <select id="getPricesBySeatId" resultType="com.spring.javaclassS8.vo.sports.PriceVO">
         SELECT p.*, tt.category, tt.name as ticketTypeName, tt.description
@@ -105,4 +97,15 @@
     <select id="getBookingPolicyBySportId" resultType="com.spring.javaclassS8.vo.sports.SportBookingPolicyVO">
     	SELECT * FROM sport_booking_policies WHERE sportId = #{sportId}
     </select>
+    
+	<!-- memberId로 해당 유저에 등록된 유효한 예매권 정보 가져오기 -->
+	<select id="getValidAdvanceTicketsByMemberId" resultType="java.util.HashMap">
+	    SELECT at.advanceTicketNumber, at.expiresAt, at.used
+	    FROM advance_tickets at
+	    JOIN registered_advance_tickets rat ON at.id = rat.advanceTicketId
+	    WHERE rat.memberId = #{memberId}
+	    AND at.expiresAt > NOW()
+	    AND at.used = FALSE
+	    ORDER BY at.expiresAt ASC
+	</select>
 </mapper>

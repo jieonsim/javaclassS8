@@ -51,6 +51,17 @@
 	    ORDER BY at.expiresAt DESC
 	</select>
 	
+	<!-- 예매권번호로 예매권 정보 가져오기 -->
+	<select id="findByAdvanceTicketNumber" resultType="java.util.HashMap">
+	    SELECT 
+	        advanceTicketNumber, 
+	        DATE_FORMAT(expiresAt, '%Y.%m.%d까지') AS formattedExpiresAt
+	    FROM 
+	        advance_tickets
+	    WHERE 
+	        advanceTicketNumber = #{advanceTicketNumber}
+	</select>
+	
 	<!-- 마이페이지 > quickMenuWrap > 현재 이용 가능한 예매권 갯수 보여주기 -->
 	<select id="getAvailableAdvanceTicketCount" parameterType="int" resultType="int">
 		SELECT COUNT(*)

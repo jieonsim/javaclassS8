@@ -2,6 +2,7 @@ package com.spring.javaclassS8.dao.sports;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -10,7 +11,6 @@ import com.spring.javaclassS8.vo.sports.PriceVO;
 import com.spring.javaclassS8.vo.sports.SeatInventoryVO;
 import com.spring.javaclassS8.vo.sports.SeatVO;
 import com.spring.javaclassS8.vo.sports.SportBookingPolicyVO;
-import com.spring.javaclassS8.vo.sports.TicketTypeVO;
 
 public interface SportsDAO {
 
@@ -32,12 +32,12 @@ public interface SportsDAO {
 	// 좌석 고유번호로 좌석 정보 가져오기
 	SeatVO getSeatById(int seatId);
 
-	// 좌석 고유번호로 권종리스트 가져오기
-	List<TicketTypeVO> getTicketTypesBySeatId(int seatId);
-
 	// 좌석 고유번호로 요금 정보 가져오기
 	List<PriceVO> getPricesBySeatId(int seatId);
 
 	// 스포츠 고유번호로 예매 정책 정보 가져오기
 	SportBookingPolicyVO getBookingPolicyBySportId(int sportId);
+
+	// memberId로 해당 유저에 등록된 유효한 예매권 정보 가져오기
+	List<Map<String, Object>> getValidAdvanceTicketsByMemberId(int memberId);
 }

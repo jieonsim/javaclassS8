@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -92,6 +93,11 @@
 																	</span>
 																</div>
 															</c:if>
+															<c:if test="${price.ticketTypeName eq '스포츠 예매권'}">
+																<button type="button" class="btn_ly _certifyDivButton close" data-seat-id="${seat.id}" data-game-id="${game.id}">
+																	<span class="blind"></span>
+																</button>
+															</c:if>
 														</div>
 													</td>
 													<td class="tr">
@@ -103,7 +109,7 @@
 															<a href="#" class="select _price_cnt">0</a>
 															<ul class="select_list" id="selectList${price.ticketTypeId}" data-limit-count="${quantity}">
 																<c:forEach begin="0" end="${quantity}" var="i">
-																	<li data-value="${i}" data-certification-code="${price.ticketTypeName eq 'ADVANCE_TICKET' ? 'advanceTicket' : 'NONE'}" data-price="${price.price}" data-seat-id="${seat.id}" data-ticketType-id="${price.ticketTypeId}">
+																	<li data-value="${i}" data-certification-code="${price.ticketTypeName eq '스포츠 예매권' ? 'ADVANCE_TICKET' : 'NONE'}" data-price="${price.price}" data-seat-id="${seat.id}" data-ticketType-id="${price.ticketTypeId}">
 																		<a href="#">${i}</a>
 																	</li>
 																</c:forEach>
@@ -159,7 +165,6 @@
 						<strong> <span>예매정보</span>
 						</strong>
 						<ul class="seat_list" style="height: 72px;">
-
 							<li>
 								<span class="seat_level">${seat.seatName}</span>
 								<span class="seat_price">자동배정</span>
@@ -175,12 +180,13 @@
 								<tr>
 									<th>티켓금액</th>
 									<td id="_price_ticket">0</td>
-									<!-- 선택한 권종의 요금이 여기에 반영되도록 -->
+									<!-- 선택한 권종의 요금이 여기에 누적되어 반영되도록 -->
 								</tr>
 								<tr>
 									<th>예매수수료</th>
 									<td id="_price_fee">0</td>
-									<!-- 선택한 매수만큼의 bookingFeePerTicket가 반영되도록 -->
+									<!-- 선택한 매수만큼의 bookingPolicy의 bookingFeePerTicket가 누적 반영되도록 -->
+									<input type="hidden" id="bookingFeePerTicket" data-booking-fee="${bookingPolicy.bookingFeePerTicket}">
 								</tr>
 							</tbody>
 							<tfoot>
@@ -245,6 +251,16 @@
 			</div>
 		</div>
 	</div>
-	<script src="${ctp}/js/sports/reserve/price.js"></script>
+	<script>
+	    var advanceTicketsData = [
+	        <c:forEach items="${advanceTickets}" var="ticket" varStatus="status">
+	            {
+	                advanceTicketNumber: "${ticket.advanceTicketNumber}",
+	                formattedExpiresAt: "${ticket.formattedExpiresAt}"
+	            }<c:if test="${!status.last}">,</c:if>
+	        </c:forEach>
+	    ];
+	</script>
+	<script src="${ctp}/js/sports/reserve/price_retry.js"></script>
 </body>
 </html>
