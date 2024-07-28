@@ -8,14 +8,14 @@ import lombok.Data;
 public class TempReservation {
 	private int gameId;
 	private int seatId;
-	private int quantity;
+	private int ticketAmount;
 	private int currentDepth;
 	private long expirationTime;
 
-	public TempReservation(int gameId, int seatId, int quantity, int currentDepth, long expirationTime) {
+	public TempReservation(int gameId, int seatId, int ticketAmount, int currentDepth, long expirationTime) {
 		this.gameId = gameId;
 		this.seatId = seatId;
-		this.quantity = quantity;
+		this.ticketAmount = ticketAmount;
 		this.currentDepth = currentDepth;
 		this.expirationTime = expirationTime;
 	}

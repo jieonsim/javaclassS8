@@ -1,3 +1,4 @@
+/*js/reserve/prcie.js */
 document.addEventListener('DOMContentLoaded', function() {
 	const bookingFeePerTicketElement = document.getElementById('bookingFeePerTicket');
 	const bookingFeePerTicket = bookingFeePerTicketElement ? parseFloat(bookingFeePerTicketElement.getAttribute('data-booking-fee')) : 0;
@@ -45,19 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		document.getElementById('_price_amount').textContent = totalAmount.toLocaleString() + '원';
 	}
 
-	/*function addCheckboxEventListener(checkbox, maxSelectable) {
-		checkbox.addEventListener('change', function() {
-			const checkedCount = document.querySelectorAll('input[name="ticket_checkbox"]:checked').length;
-			if (checkedCount > maxSelectable) {
-				alert('선택한 매수 이상의 예매권을 사용할 수 없습니다.');
-				this.checked = false;
-			} else {
-				const span = this.closest('.checkbox');
-				span.classList.toggle('checked', this.checked);
-				updateBookingInfo();
-			}
-		});
-	}*/
 
 	function initializeSelectBoxes() {
 		document.querySelectorAll('.select._price_cnt').forEach(function(selectElement) {
@@ -385,7 +373,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			return;
 		}
 
-		if (totalSelectedQuantity !== initialQuantity) {
+		if (totalSelectedQuantity !== initialticketAmount) {
 			alert('선택하신 좌석수와 예매하실 티켓매수가 일치하지 않습니다.');
 			return;
 		}

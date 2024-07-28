@@ -20,17 +20,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.javaclassS8.service.my.discount.AdvanceTicketService;
 import com.spring.javaclassS8.service.reserve.ReservationService;
 import com.spring.javaclassS8.utils.CaptchaGenerator;
 import com.spring.javaclassS8.utils.DateTimeFormatUtils;
 import com.spring.javaclassS8.vo.member.MemberVO;
+import com.spring.javaclassS8.vo.reserve.ReservationRequest;
+import com.spring.javaclassS8.vo.reserve.ReservationResponse;
 import com.spring.javaclassS8.vo.reserve.TempReservation;
 import com.spring.javaclassS8.vo.reserve.TicketVO;
 import com.spring.javaclassS8.vo.sports.CategoryVO;
@@ -114,8 +118,8 @@ public class ReservationController {
 
 	// depth1에서 다음단계 넘어갈 때 세션 저장
 	@PostMapping("/saveTempReservation")
-	public String saveTempReservation(@RequestParam int gameId, @RequestParam int seatId, @RequestParam int quantity, HttpSession session) {
-		TempReservation tempReservation = new TempReservation(gameId, seatId, quantity, 1, // currentDepth
+	public String saveTempReservation(@RequestParam int gameId, @RequestParam int seatId, @RequestParam int ticketAmount, HttpSession session) {
+		TempReservation tempReservation = new TempReservation(gameId, seatId, ticketAmount, 1, // currentDepth
 				System.currentTimeMillis() + 480000 // 현재 시간 + 8분
 		);
 
@@ -139,7 +143,7 @@ public class ReservationController {
 
 		int gameId = tempReservation.getGameId();
 		int seatId = tempReservation.getSeatId();
-		int quantity = tempReservation.getQuantity();
+		int ticketAmount = tempReservation.getTicketAmount();
 
 		GameVO game = reservationService.getGameById(gameId);
 		SportBookingPolicyVO bookingPolicy = reservationService.getBookingPolicyBySportId(game.getSportId());
@@ -171,7 +175,7 @@ public class ReservationController {
 		model.addAttribute("tempReservation", tempReservation);
 		model.addAttribute("game", game);
 		model.addAttribute("seat", seat);
-		model.addAttribute("quantity", quantity);
+		model.addAttribute("ticketAmount", ticketAmount);
 		model.addAttribute("prices", prices);
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("advanceTickets", advanceTickets);
@@ -227,6 +231,7 @@ public class ReservationController {
 				ticket.setType((String) ticketData.get("type"));
 				ticket.setQuantity((Integer) ticketData.get("quantity"));
 				ticket.setPrice((Integer) ticketData.get("price"));
+				ticket.setTicketTypeId((String)ticketData.get("ticketTypeId"));
 				selectedTickets.add(ticket);
 				totalSelectedTickets += ticket.getQuantity();
 			}
@@ -255,6 +260,7 @@ public class ReservationController {
 		}
 	}
 
+	// depth3 최종 확인 및 취소 정책 동의
 	@GetMapping("/confirm")
 	public String reserveConfirm(Model model, HttpSession session) {
 		TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
@@ -269,7 +275,7 @@ public class ReservationController {
 
 		int gameId = tempReservation.getGameId();
 		int seatId = tempReservation.getSeatId();
-		int quantity = tempReservation.getQuantity();
+		int ticketAmount = tempReservation.getTicketAmount();
 
 		GameVO game = reservationService.getGameById(gameId);
 		SportBookingPolicyVO bookingPolicy = reservationService.getBookingPolicyBySportId(game.getSportId());
@@ -292,17 +298,18 @@ public class ReservationController {
 
 		// 좌석
 		SeatVO seat = reservationService.getSeatById(seatId);
-
+		
 		// 티켓 정보 추가
 		int ticketPrice = calculateTicketPrice(tempReservation.getSelectedTickets());
 		int bookingFee = calculateBookingFee(tempReservation.getSelectedTickets(), bookingPolicy);
 		int totalAmount = ticketPrice + bookingFee;
 
 		model.addAttribute("reservation", tempReservation);
+		System.out.println("reservation : " + tempReservation);
 		model.addAttribute("member", member);
 		model.addAttribute("game", game);
 		model.addAttribute("seat", seat);
-		model.addAttribute("quantity", quantity);
+		model.addAttribute("ticketAmount", ticketAmount);
 		model.addAttribute("bookingPolicy", bookingPolicy);
 		model.addAttribute("gameDateTime", gameDateTime.format(displayFormatter));
 		model.addAttribute("cancelDeadline", cancelDeadline.format(dateTimeFormatter));
@@ -332,10 +339,48 @@ public class ReservationController {
 	            .sum();
 	        return bookingPolicy.getBookingFeePerTicket() * totalQuantity;
 	}
+	
+	
+	// 결제 요청 및 예매 처리
+	@PostMapping("/paymentAndReserve")
+	public String paymentAndReserve(@ModelAttribute ReservationRequest request, RedirectAttributes redirectAttributes) {
+		System.out.println("Received request: " + request); 
+	    try {
+	        // gameId를 사용하여 game 정보를 조회
+	        GameVO game = reservationService.getGameById(request.getGameId());
+	        
+	        // game 정보를 사용하여 sportId, teamId, venueId 설정
+	        request.setSportId(game.getSportId());
+	        request.setTeamId(game.getHomeTeamId());
+	        request.setVenueId(game.getVenueId());
+	        
+	        ReservationResponse response = reservationService.processReservation(request);
+	        
+	        if (response.isSuccess()) {
+	            // 성공 시 완료 페이지로 리다이렉트
+	            redirectAttributes.addFlashAttribute("reservationNumber", response.getReservationNumber());
+	            return "redirect:/reserve/completed";
+	        } else {
+	            // 실패 시 에러 페이지로 리다이렉트
+	            redirectAttributes.addFlashAttribute("error", response.getMessage());
+	            return "redirect:/reserve/error";
+	        }
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	        // 예외 발생 시 에러 페이지로 리다이렉트
+	        redirectAttributes.addFlashAttribute("error", "예약 처리 중 오류가 발생했습니다: " + e.getMessage());
+	        return "redirect:/reserve/error";
+	    }
+	}
 
-	// 예매창 > 결제완료(depth4)
+	// 예매완료 안내 뷰
 	@GetMapping("/completed")
 	public String reserveCompleted() {
 		return "reserve/completed";
+	}
+	
+	@GetMapping("/error")
+	public String error() {
+		return "reserve/error";
 	}
 }

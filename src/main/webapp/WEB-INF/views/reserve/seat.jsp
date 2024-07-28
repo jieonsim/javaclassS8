@@ -151,7 +151,7 @@
 						</div>
 						<input type="hidden" name="gameId" value="${game.id}">
 						<input type="hidden" name="seatId" value="">
-						<input type="hidden" name="quantity" id="selectedQuantity" value="0">
+						<input type="hidden" name="ticketAmount" id="selectedQuantity" value="0">
 					</form>
 				</div>
 			</div>

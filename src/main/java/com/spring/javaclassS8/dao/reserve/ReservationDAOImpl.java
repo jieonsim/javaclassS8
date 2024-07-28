@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.spring.javaclassS8.vo.reserve.ReservationDetailVO;
+import com.spring.javaclassS8.vo.reserve.ReservationVO;
 import com.spring.javaclassS8.vo.sports.GameVO;
 import com.spring.javaclassS8.vo.sports.PriceVO;
 import com.spring.javaclassS8.vo.sports.SeatInventoryVO;
@@ -59,5 +61,41 @@ public class ReservationDAOImpl implements ReservationDAO {
 	@Override
 	public List<Map<String, Object>> getValidAdvanceTicketsByMemberId(int memberId) {
 		return sqlSession.getMapper(ReservationDAO.class).getValidAdvanceTicketsByMemberId(memberId);
+	}
+
+	// reservations 테이블 레코드 생성
+	@Override
+	public int insertReservation(ReservationVO reservation) {
+		return sqlSession.getMapper(ReservationDAO.class).insertReservation(reservation);
+	}
+
+	// reservation_details 테이블 레코드 생성
+	@Override
+	public void insertReservationDetails(List<ReservationDetailVO> reservationDetails) {
+		sqlSession.getMapper(ReservationDAO.class).insertReservationDetails(reservationDetails);
+	}
+
+	// seat_inventory 테이블 availableCapacity 필드 업데이트
+	@Override
+	public void updateSeatInventory(int gameId, int seatId, int ticketAmount) {
+		sqlSession.getMapper(ReservationDAO.class).updateSeatInventory(gameId, seatId, ticketAmount);
+	}
+
+	// advance_tickets 테이블 used, usedAt, usedByMemberId 필드 업데이트
+	@Override
+	public void updateAdvanceTickets(List<Integer> advanceTicketIds, int memberId) {
+		sqlSession.getMapper(ReservationDAO.class).updateAdvanceTickets(advanceTicketIds, memberId);
+	}
+
+	// advance_ticket_usage 테이블 레코드 생성
+	@Override
+	public void insertAdvanceTicketUsage(int reservationId, List<Integer> advanceTicketIds) {
+		 sqlSession.getMapper(ReservationDAO.class).insertAdvanceTicketUsage(reservationId, advanceTicketIds);
+	}
+
+	// 좌석 등급에 따른 권종별 요금 가져오기
+	@Override
+	public int getPriceForTicketType(int sportId, int teamId, int venueId, int seatId, int ticketTypeId) {
+		return sqlSession.getMapper(ReservationDAO.class).getPriceForTicketType(sportId, teamId, venueId, seatId, ticketTypeId);
 	}
 }

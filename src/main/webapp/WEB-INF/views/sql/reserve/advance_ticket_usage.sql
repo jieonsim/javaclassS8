@@ -1,3 +1,4 @@
+
 /* 예매권 사용하여 예매된 티켓 */
 CREATE TABLE advance_ticket_usage (
     id INT AUTO_INCREMENT PRIMARY KEY COMMENT '예매권 사용 고유번호',

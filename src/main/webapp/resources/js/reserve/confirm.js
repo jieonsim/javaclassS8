@@ -1,3 +1,4 @@
+/*js/reserve/confirm.js */
 document.addEventListener('DOMContentLoaded', function() {
 	// 예매자 확인 및 취소수수료 동의 체크박스
 	document.querySelectorAll('.checkbox').forEach(span => {
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		const label = document.querySelector(`label[for="${checkbox.id}"]`);
 		if (label) {
 			label.addEventListener('click', (event) => {
-				event.preventDefault(); // Prevent default label behavior
+				event.preventDefault();
 				toggleCheckbox();
 			});
 		}
@@ -44,35 +45,21 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 
 	// 결제하기 버튼 클릭 이벤트
-	const paymentButton = document.querySelector('.btn.btn_full_point');
+	const paymentButton = document.getElementById('paymentButton');
+	const paymentForm = document.getElementById('paymentForm');
+
 	paymentButton.addEventListener('click', function(e) {
 		e.preventDefault();
 
 		// 체크박스 유효성 검사
-		const checkboxIds = ['agree1', 'agree2', 'agree3', 'agree4', 'agree5'];
-		const checkboxMessages = {
-			'agree1': '주문자 확인 및 휴대폰번호 수집을 확인하셔야 결제가 가능합니다.',
-			'agree2': '제 3자 정보 제공에 동의하셔야만 결제가 가능합니다.',
-			'agree3': 'KBO리그 SAFE 캠페인에 동의하셔야만 결제가 가능합니다.',
-			'agree4': '프로스포츠 암표 근절 및 암표 매매에 따른 제재사항 안내에 동의하셔야만 결제가 가능합니다.',
-			'agree5': '취소수수료 및 취소기한 내용에 동의하셔야만 결제가 가능합니다.'
-		};
-
+		const checkboxIds = ['reserve_agree1', 'reserve_agree2', 'reserve_agree3', 'reserve_agree4', 'reserve_agree5'];
 		for (let id of checkboxIds) {
-			const checkbox = document.getElementById(id);
-			if (!checkbox.checked) {
+			const checkboxSpan = document.querySelector(`#${id}`).closest('.checkbox');
+			if (checkboxSpan && !checkboxSpan.classList.contains('checked')) {
 				alert(checkboxMessages[id]);
 				return;
 			}
 		}
-
-		// 결제 정보 가져오기
-		const homeTeam = document.getElementById('homeTeam').value;
-		const awayTeam = document.getElementById('awayTeam').value;
-		const totalAmount = parseInt(document.getElementById('totalAmount').value);
-		const buyerEmail = document.getElementById('buyerEmail').value;
-		const buyerName = document.getElementById('buyerName').value;
-		const buyerTel = document.getElementById('buyerTel').value;
 
 		// 결제 API 호출
 		const IMP = window.IMP;
@@ -89,39 +76,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			buyer_tel: buyerTel,
 		}, function(rsp) {
 			if (rsp.success) {
-				// 결제 성공 시 서버에 결제 정보 전송
-				fetch(`${ctp}/reserve/complete`, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({
-						imp_uid: rsp.imp_uid,
-						merchant_uid: rsp.merchant_uid,
-						member_id: memberId,
-						game_id: gameId,
-						total_amount: totalAmount,
-						ticket_amount: ticketAmount,
-						booking_fee: bookingFee,
-						seats: selectedSeats.map(seat => ({
-							seat_id: seat.id,
-							ticket_type_id: seat.ticketTypeId,
-							price: seat.price
-						}))
-					}),
-				})
-					.then(response => response.json())
-					.then(data => {
-						if (data.success) {
-							window.location.href = `${ctp}/reserve/completed`;
-						} else {
-							alert('결제는 성공했으나 서버 처리 중 오류가 발생했습니다.');
-						}
-					})
-					.catch(error => {
-						console.error('Error:', error);
-						alert('결제는 성공했으나 서버 처리 중 오류가 발생했습니다.');
-					});
+				// 결제 성공 시 폼 제출
+				paymentForm.submit();
 			} else {
 				alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
 			}

@@ -6,11 +6,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.javaclassS8.dao.reserve.ReservationDAO;
+import com.spring.javaclassS8.vo.reserve.ReservationDetailVO;
+import com.spring.javaclassS8.vo.reserve.ReservationRequest;
+import com.spring.javaclassS8.vo.reserve.ReservationResponse;
+import com.spring.javaclassS8.vo.reserve.ReservationVO;
+import com.spring.javaclassS8.vo.reserve.SeatDetailVO;
+import com.spring.javaclassS8.vo.reserve.TicketTypeRequest;
 import com.spring.javaclassS8.vo.sports.CategoryVO;
 import com.spring.javaclassS8.vo.sports.GameVO;
 import com.spring.javaclassS8.vo.sports.PriceVO;
@@ -23,6 +31,9 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Autowired
 	private ReservationDAO reservationDAO;
+	
+	//@Autowired
+	//private ReservationCompletedEmailService emailService;
 
 	// 경기 고유번호로 경기 정보 가져오기
 	@Override
@@ -92,4 +103,118 @@ public class ReservationServiceImpl implements ReservationService {
 		}
 		return tickets;
 	}
+
+	// 예매 처리
+	@Override
+	@Transactional
+	public ReservationResponse processReservation(ReservationRequest request) throws Exception {
+		// 1. 예매번호 생성
+        String reservationNumber = generateReservationNumber();
+        System.out.println("reservationNumber : " + reservationNumber);
+        
+        // 2. 좌석번호 생성
+        List<SeatDetailVO> seatDetails = generateSeatNumbers(request.getTicketAmount());
+        System.out.println("seatDetails : " + seatDetails);
+        
+        // 3. reservations 테이블 레코드 생성
+        ReservationVO reservation = createReservation(request, reservationNumber);
+        int reservationId = reservationDAO.insertReservation(reservation);
+        System.out.println("reservationId : " + reservationId);
+        
+        // 4. reservation_details 테이블 레코드 생성
+        List<ReservationDetailVO> reservationDetails = createReservationDetails(reservationId, request, seatDetails);
+        reservationDAO.insertReservationDetails(reservationDetails);
+        System.out.println("reservationDetails");
+        
+        // 5. seat_inventory 테이블 업데이트
+        reservationDAO.updateSeatInventory(request.getGameId(), request.getSeatId(), request.getTicketAmount());
+        
+        // 6. 예매권 사용 처리
+        if (request.getAdvanceTicketIds() != null && !request.getAdvanceTicketIds().isEmpty()) {
+            reservationDAO.updateAdvanceTickets(request.getAdvanceTicketIds(), request.getMemberId());
+            reservationDAO.insertAdvanceTicketUsage(reservationId, request.getAdvanceTicketIds());
+        }
+        
+        // 7. 예매완료 메일 발송
+        
+		return new ReservationResponse(reservationNumber, "예매가 완료되었습니다.");
+	}
+	
+    // 10자리 숫자로 된 예매번호 생성
+    private String generateReservationNumber() {
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder(10);
+        for (int i = 0; i < 10; i++) {
+            sb.append(random.nextInt(10));
+        }
+        return sb.toString();
+    }
+    
+    // 좌석번호 생성
+    private List<SeatDetailVO> generateSeatNumbers(int ticketAmount) {
+        List<SeatDetailVO> seatDetails = new ArrayList<>();
+        Random random = new Random();
+        
+        int seatBlock = 101 + random.nextInt(9); // 101~109
+        int seatRow = 1 + random.nextInt(10);    // 1~10
+        int seatNumber = 1 + random.nextInt(99); // 1~99
+
+        for (int i = 0; i < ticketAmount; i++) {
+            SeatDetailVO seatDetail = new SeatDetailVO();
+            seatDetail.setSeatBlock(seatBlock);
+            seatDetail.setSeatRow(seatRow);
+            seatDetail.setSeatNumber(seatNumber + i);
+            seatDetails.add(seatDetail);
+        }
+        return seatDetails;
+    }
+    
+    // Reservation 객체 생성
+    private ReservationVO createReservation(ReservationRequest request, String reservationNumber) {
+        ReservationVO reservation = new ReservationVO();
+        reservation.setReservationNumber(reservationNumber);
+        reservation.setMemberId(request.getMemberId());
+        reservation.setGameId(request.getGameId());
+        reservation.setTotalAmount(request.getTotalAmount());
+        reservation.setTicketAmount(request.getTicketAmount());
+        reservation.setBookingFee(request.getBookingFee());
+        reservation.setStatus("예매완료");
+        return reservation;
+    }
+    
+    // ReservationDetail 객체 리스트 생성
+    private List<ReservationDetailVO> createReservationDetails(int reservationId, ReservationRequest request, List<SeatDetailVO> seatDetails) {
+        List<ReservationDetailVO> reservationDetails = new ArrayList<>();
+        int seatIndex = 0;
+        for (TicketTypeRequest ticketType : request.getTicketTypes()) {
+            for (int i = 0; i < ticketType.getTicketQuantity(); i++) {
+                if (seatIndex >= seatDetails.size()) {
+                    throw new IllegalStateException("좌석 수가 티켓 수와 일치하지 않습니다.");
+                }
+                SeatDetailVO seatDetail = seatDetails.get(seatIndex);
+                ReservationDetailVO detail = new ReservationDetailVO();
+                detail.setReservationId(reservationId);
+                detail.setSeatId(request.getSeatId());
+                detail.setTicketTypeId(ticketType.getTicketTypeId());
+                detail.setSeatBlock(seatDetail.getSeatBlock());
+                detail.setSeatRow(seatDetail.getSeatRow());
+                detail.setSeatNumber(seatDetail.getSeatNumber());
+                detail.setTicketPrice(getPriceForTicketType(
+                    request.getSportId(),
+                    request.getTeamId(),
+                    request.getVenueId(),
+                    request.getSeatId(),
+                    ticketType.getTicketTypeId()
+                ));
+                reservationDetails.add(detail);
+                seatIndex++;
+            }
+        }
+        return reservationDetails;
+    }
+    
+    // 권종별 요금 가져오기
+    private int getPriceForTicketType(int sportId, int teamId, int venueId, int seatId, int ticketTypeId) {
+        return reservationDAO.getPriceForTicketType(sportId, teamId, venueId, seatId, ticketTypeId);
+    }
 }

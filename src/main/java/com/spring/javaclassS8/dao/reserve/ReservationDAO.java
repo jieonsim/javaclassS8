@@ -3,6 +3,10 @@ package com.spring.javaclassS8.dao.reserve;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.spring.javaclassS8.vo.reserve.ReservationDetailVO;
+import com.spring.javaclassS8.vo.reserve.ReservationVO;
 import com.spring.javaclassS8.vo.sports.GameVO;
 import com.spring.javaclassS8.vo.sports.PriceVO;
 import com.spring.javaclassS8.vo.sports.SeatInventoryVO;
@@ -31,4 +35,23 @@ public interface ReservationDAO {
 
 	// memberId로 해당 유저에 등록된 유효한 예매권 정보 가져오기
 	List<Map<String, Object>> getValidAdvanceTicketsByMemberId(int memberId);
+
+	// reservations 테이블 레코드 생성
+	int insertReservation(ReservationVO reservation);
+
+	// reservation_details 테이블 레코드 생성
+	void insertReservationDetails(List<ReservationDetailVO> reservationDetails);
+
+	// seat_inventory 테이블 availableCapacity 필드 업데이트
+	void updateSeatInventory(@Param("gameId") int gameId, @Param("seatId") int seatId, @Param("ticketAmount") int ticketAmount);
+
+	// advance_tickets 테이블 used, usedAt, usedByMemberId 필드 업데이트
+	void updateAdvanceTickets(@Param("advanceTicketIds") List<Integer> advanceTicketIds, @Param("memberId") int memberId);
+
+	// advance_ticket_usage 테이블 레코드 생성
+	void insertAdvanceTicketUsage(@Param("reservationId") int reservationId, @Param("advanceTicketIds") List<Integer> advanceTicketIds);
+
+	// 권종별 요금 가져오기
+	int getPriceForTicketType(@Param("sportId") int sportId, @Param("teamId") int teamId, @Param("venueId") int venueId, @Param("seatId") int seatId, @Param("ticketTypeId") int ticketTypeId);
+
 }

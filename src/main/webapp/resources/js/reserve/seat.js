@@ -1,7 +1,4 @@
-/**
- * js/reserve/seat.js
- */
-
+/*js/reserve/seat.js*/
 document.addEventListener('DOMContentLoaded', function() {
 	// 캡챠 3분 타이머 설정
 	let captchaTimer = setTimeout(refreshCaptcha, 180000);

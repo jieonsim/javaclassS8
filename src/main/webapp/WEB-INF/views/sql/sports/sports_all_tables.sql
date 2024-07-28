@@ -163,3 +163,44 @@ CREATE TABLE seat_inventory (
     FOREIGN KEY (seatId) REFERENCES seats(id),
     UNIQUE KEY (gameId, seatId) COMMENT '한 경기의 특정 좌석 등급은 하나의 재고만 가질 수 있음'
 );
+
+CREATE TABLE reservations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    reservationNumber CHAR(10) NOT NULL,  -- 10자리 고정 길이 숫자
+    memberId INT NOT NULL,
+    gameId INT NOT NULL,
+    totalAmount INT NOT NULL,
+    ticketAmount INT NOT NULL,
+    bookingFee INT NOT NULL,
+    status ENUM('예매완료', '취소완료') NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    canceledAt TIMESTAMP NULL,
+    FOREIGN KEY (memberId) REFERENCES members(id),
+    FOREIGN KEY (gameId) REFERENCES games(id),
+    UNIQUE KEY (reservationNumber)
+);
+
+
+CREATE TABLE reservation_details (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    reservationId INT NOT NULL,
+    seatId INT NOT NULL,
+    ticketTypeId INT NOT NULL,
+    seatBlock INT NOT NULL,  -- 101~109 사이의 블록 번호
+    seatRow INT NOT NULL,    -- 1~10 사이의 열 번호
+    seatNumber INT NOT NULL, -- 1~99 사이의 좌석 번호
+    ticketPrice INT NOT NULL,
+    FOREIGN KEY (reservationId) REFERENCES reservations(id),
+    FOREIGN KEY (seatId) REFERENCES seats(id),
+    FOREIGN KEY (ticketTypeId) REFERENCES ticket_types(id)
+);
+
+
+CREATE TABLE advance_ticket_usage (
+    id INT AUTO_INCREMENT PRIMARY KEY COMMENT '예매권 사용 고유번호',
+    reservationId INT NOT NULL COMMENT '예매 고유번호',
+    advanceTicketId INT NOT NULL COMMENT '예매권 고유번호',
+    usedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '사용 일시',
+    FOREIGN KEY (reservationId) REFERENCES reservations(id),
+    FOREIGN KEY (advanceTicketId) REFERENCES advance_tickets(id)
+);

@@ -69,7 +69,7 @@
 										<td colspan="4" class="th _selectGradeInfo">
 											<span class="color_green fbold _selectName">${seat.seatName}</span>
 											을
-											<span class="color_green fbold _selectCnt">${quantity}매</span>
+											<span class="color_green fbold _selectCnt">${ticketAmount}매</span>
 											를 선택하셨습니다.
 										</td>
 									</tr>
@@ -101,7 +101,6 @@
 														</div>
 													</td>
 													<td class="tr">
-														<%-- <span class="color_green fbold _price">${price.price}</span>원 --%>
 														<span class="color_green fbold _price">
 															<fmt:formatNumber value="${price.price}" type="number" />
 														</span>원
@@ -109,8 +108,8 @@
 													<td class="selectbox">
 														<div class="selectbox">
 															<a href="#" class="select _price_cnt">0</a>
-															<ul class="select_list" id="selectList${price.ticketTypeId}" data-limit-count="${quantity}">
-																<c:forEach begin="0" end="${quantity}" var="i">
+															<ul class="select_list" id="selectList${price.ticketTypeId}" data-limit-count="${ticketAmount}">
+																<c:forEach begin="0" end="${ticketAmount}" var="i">
 																	<li data-value="${i}" data-certification-code="${price.ticketTypeName eq '스포츠 예매권' ? 'ADVANCE_TICKET' : 'NONE'}" data-price="${price.price}" data-seat-id="${seat.id}" data-ticketType-id="${price.ticketTypeId}">
 																		<a href="#">${i}</a>
 																	</li>
@@ -167,7 +166,7 @@
 						<strong> <span>예매정보</span>
 						</strong>
 						<ul class="seat_list" style="height: 72px;">
-							<c:forEach begin="1" end="${quantity}">
+							<c:forEach begin="1" end="${ticketAmount}">
 								<li>
 									<span class="seat_level"> ${seat.seatName} </span>
 									<span class="seat_price">자동배정</span>
@@ -262,7 +261,7 @@
 	            }<c:if test="${!status.last}">,</c:if>
 	        </c:forEach>
 	    ];
-	    var initialQuantity = ${quantity};
+	    var initialticketAmount = ${ticketAmount};
 	</script>
 	<script src="${ctp}/js/reserve/price.js"></script>
 </body>

@@ -3,6 +3,8 @@ package com.spring.javaclassS8.service.reserve;
 import java.util.List;
 import java.util.Map;
 
+import com.spring.javaclassS8.vo.reserve.ReservationRequest;
+import com.spring.javaclassS8.vo.reserve.ReservationResponse;
 import com.spring.javaclassS8.vo.sports.CategoryVO;
 import com.spring.javaclassS8.vo.sports.GameVO;
 import com.spring.javaclassS8.vo.sports.PriceVO;
@@ -34,5 +36,8 @@ public interface ReservationService {
 	
 	// memberId로 해당 유저에 등록된 유효한 예매권 정보 가져오기
 	List<Map<String, Object>> getValidAdvanceTicketsByMemberId(int memberId);
+
+	// 예매 처리
+	ReservationResponse processReservation(ReservationRequest request) throws Exception;
 
 }

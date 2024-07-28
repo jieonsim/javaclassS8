@@ -7,5 +7,5 @@ public class TicketVO {
     private String type;
     private int quantity;
     private int price;
-    
+    private String ticketTypeId;
 }

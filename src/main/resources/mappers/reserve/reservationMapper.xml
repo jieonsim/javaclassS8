@@ -61,4 +61,57 @@
 	    AND at.used = FALSE
 	    ORDER BY at.expiresAt ASC
 	</select>
+	
+   <!-- 권종별 요금 가져오기 -->
+   <select id="getPriceForTicketType" resultType="int">
+	    SELECT price
+	    FROM prices
+	    WHERE sportId = #{sportId}
+	    AND teamId = #{teamId}
+	    AND venueId = #{venueId}
+	    AND seatId = #{seatId}
+	    AND ticketTypeId = #{ticketTypeId}
+    </select>
+	
+	<!-- 예매 처리 : reservations 테이블 레코드 생성 -->
+	<insert id="insertReservation" parameterType="com.spring.javaclassS8.vo.reserve.ReservationVO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO reservations (reservationNumber, memberId, gameId, totalAmount, ticketAmount, bookingFee, status)
+        VALUES (#{reservationNumber}, #{memberId}, #{gameId}, #{totalAmount}, #{ticketAmount}, #{bookingFee}, #{status})
+    </insert>
+    
+    <!-- 예매 처리 : reservation_details 테이블 레코드 생성 -->
+    <insert id="insertReservationDetails" parameterType="java.util.List">
+	    INSERT INTO reservation_details (reservationId, seatId, ticketTypeId, seatBlock, seatRow, seatNumber, ticketPrice)
+	    VALUES 
+	    <foreach collection="list" item="detail" separator=",">
+	        (#{detail.reservationId}, #{detail.seatId}, #{detail.ticketTypeId}, #{detail.seatBlock}, #{detail.seatRow}, #{detail.seatNumber}, #{detail.ticketPrice})
+	    </foreach>
+   	</insert>
+	
+	<!-- 예매 처리 : 예매권 사용 시 사용한 예매권 테이블에 레코드 생성 -->
+   	<insert id="insertAdvanceTicketUsage">
+	    INSERT INTO advance_ticket_usage (reservationId, advanceTicketId)
+	    VALUES 
+	    <foreach collection="advanceTicketIds" item="ticketId" separator=",">
+	        (#{reservationId}, #{ticketId})
+	    </foreach>
+    </insert>
+    
+    <!-- 예매 처리 : 잔여 좌석 수 업데이트  -->
+    <update id="updateSeatInventory">
+    	UPDATE seat_inventory 
+    	SET availableCapacity = availableCapacity - #{ticketAmount}
+    	WHERE gameId = #{gameId} AND seatId = #{seatId}
+    </update>
+    
+    <!-- 예매 처리 : 예매권 사용 시 예매권 사용으로 업데이트 -->
+    <update id="updateAdvanceTickets">
+	    UPDATE advance_tickets
+	    SET used = TRUE, usedAt = CURRENT_TIMESTAMP, usedByMemberId = #{memberId}
+	    WHERE id IN 
+	    <foreach collection="advanceTicketIds" item="ticketId" open="(" separator="," close=")">
+	        #{ticketId}
+	    </foreach>
+    </update>
+    
 </mapper>
