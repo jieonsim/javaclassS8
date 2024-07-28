@@ -1,6 +1,7 @@
 package com.spring.javaclassS8.vo.reserve;
 
 import java.util.List;
+import java.util.Map;
 
 import lombok.Data;
 
@@ -22,4 +23,8 @@ public class TempReservation {
 	
     private List<TicketVO> selectedTickets;
     private List<String> selectedAdvanceTickets;
+    
+    private int totalAmount;
+    private int bookingFee;
+    private List<Map<String, Object>> seatDetails;
 }

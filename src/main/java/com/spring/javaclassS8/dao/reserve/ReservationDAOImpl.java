@@ -71,8 +71,8 @@ public class ReservationDAOImpl implements ReservationDAO {
 
 	// reservation_details 테이블 레코드 생성
 	@Override
-	public void insertReservationDetails(List<ReservationDetailVO> reservationDetails) {
-		sqlSession.getMapper(ReservationDAO.class).insertReservationDetails(reservationDetails);
+	public void insertReservationDetails(List<ReservationDetailVO> details) {
+		sqlSession.getMapper(ReservationDAO.class).insertReservationDetails(details);
 	}
 
 	// seat_inventory 테이블 availableCapacity 필드 업데이트
@@ -97,5 +97,10 @@ public class ReservationDAOImpl implements ReservationDAO {
 	@Override
 	public int getPriceForTicketType(int sportId, int teamId, int venueId, int seatId, int ticketTypeId) {
 		return sqlSession.getMapper(ReservationDAO.class).getPriceForTicketType(sportId, teamId, venueId, seatId, ticketTypeId);
+	}
+
+	@Override
+	public ReservationVO getReservationById(int reservationId) {
+		return sqlSession.getMapper(ReservationDAO.class).getReservationById(reservationId);
 	}
 }

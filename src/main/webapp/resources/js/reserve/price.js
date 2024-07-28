@@ -353,6 +353,16 @@ document.addEventListener('DOMContentLoaded', function() {
 				const selectedOption = selectList.querySelector(`li[data-value="${quantity}"]`);
 
 				if (selectedOption) {
+					selectedTickets.push({
+						type: selectedOption.getAttribute('data-certification-code'),
+						quantity: quantity,
+						price: parseInt(selectedOption.getAttribute('data-price')),
+						ticketTypeId: parseInt(selectedOption.getAttribute('data-ticketType-id'))
+					});
+					totalSelectedQuantity += quantity;
+				}
+				/*if (selectedOption) {
+
 					const type = selectedOption.getAttribute('data-certification-code');
 					const price = parseInt(selectedOption.getAttribute('data-price'));
 					const ticketTypeId = selectedOption.getAttribute('data-ticketType-id');
@@ -361,7 +371,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					totalSelectedQuantity += quantity;
 
 					console.log('Added ticket:', { type, quantity, price, ticketTypeId }); // 디버깅용
-				}
+				}*/
 			}
 		});
 

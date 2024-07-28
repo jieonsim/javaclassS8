@@ -61,6 +61,33 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 		}
 
+		// 티켓 타입 데이터 수집
+		let ticketTypes = [];
+		document.querySelectorAll('input[name="ticketType"]').forEach((input, index) => {
+			ticketTypes.push({
+				ticketTypeId: parseInt(document.querySelectorAll('input[name="ticketTypeId"]')[index].value),
+				ticketQuantity: parseInt(document.querySelectorAll('input[name="ticketQuantity"]')[index].value)
+			});
+		});
+
+		// 예매권 번호 수집
+		let advanceTicketNumbers = Array.from(document.querySelectorAll('input[name="advanceTicketNumber"]')).map(input => input.value);
+
+		// 요청 데이터 객체 생성
+		const requestData = {
+			memberId: parseInt(document.querySelector('input[name="memberId"]').value),
+			gameId: parseInt(document.querySelector('input[name="gameId"]').value),
+			seatId: parseInt(document.querySelector('input[name="seatId"]').value),
+			totalAmount: parseInt(document.querySelector('input[name="totalAmount"]').value),
+			ticketAmount: parseInt(document.querySelector('input[name="ticketAmount"]').value),
+			bookingFee: parseInt(document.querySelector('input[name="bookingFee"]').value),
+			ticketTypes: Array.from(document.querySelectorAll('input[name="ticketType"]')).map((input, index) => ({
+				ticketTypeId: parseInt(document.querySelectorAll('input[name="ticketTypeId"]')[index].value),
+				ticketQuantity: parseInt(document.querySelectorAll('input[name="ticketQuantity"]')[index].value)
+			})),
+			advanceTicketNumbers: Array.from(document.querySelectorAll('input[name="advanceTicketNumber"]')).map(input => input.value)
+		};
+
 		// 결제 API 호출
 		const IMP = window.IMP;
 		IMP.init("imp81328707");
@@ -76,8 +103,26 @@ document.addEventListener('DOMContentLoaded', function() {
 			buyer_tel: buyerTel,
 		}, function(rsp) {
 			if (rsp.success) {
-				// 결제 성공 시 폼 제출
-				paymentForm.submit();
+				// 결제 성공 시 서버에 데이터 전송
+				fetch(`${ctp}/reserve/paymentAndReserve`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(requestData)
+				})
+					.then(response => response.json())
+					.then(data => {
+						if (data.success) {
+							window.location.href = `${ctp}/reserve/completed?reservationNumber=${data.reservationNumber}`;
+						} else {
+							alert('예약 처리 중 오류가 발생했습니다: ' + data.message);
+						}
+					})
+					.catch(error => {
+						console.error('Error:', error);
+						alert('서버 통신 중 오류가 발생했습니다.');
+					});
 			} else {
 				alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
 			}

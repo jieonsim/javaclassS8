@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +33,8 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Autowired
 	private ReservationDAO reservationDAO;
+	
+	private static final Logger logger = LoggerFactory.getLogger(ReservationServiceImpl.class);
 	
 	//@Autowired
 	//private ReservationCompletedEmailService emailService;
@@ -114,17 +118,17 @@ public class ReservationServiceImpl implements ReservationService {
         
         // 2. 좌석번호 생성
         List<SeatDetailVO> seatDetails = generateSeatNumbers(request.getTicketAmount());
-        System.out.println("seatDetails : " + seatDetails);
         
         // 3. reservations 테이블 레코드 생성
         ReservationVO reservation = createReservation(request, reservationNumber);
-        int reservationId = reservationDAO.insertReservation(reservation);
-        System.out.println("reservationId : " + reservationId);
+        reservationDAO.insertReservation(reservation);
+        int reservationId = reservation.getId();
+        System.out.println("Inserted reservation ID: " + reservationId);
         
         // 4. reservation_details 테이블 레코드 생성
         List<ReservationDetailVO> reservationDetails = createReservationDetails(reservationId, request, seatDetails);
+        logger.debug("Inserting reservation details : " + reservationDetails);
         reservationDAO.insertReservationDetails(reservationDetails);
-        System.out.println("reservationDetails");
         
         // 5. seat_inventory 테이블 업데이트
         reservationDAO.updateSeatInventory(request.getGameId(), request.getSeatId(), request.getTicketAmount());
@@ -138,6 +142,7 @@ public class ReservationServiceImpl implements ReservationService {
         // 7. 예매완료 메일 발송
         
 		return new ReservationResponse(reservationNumber, "예매가 완료되었습니다.");
+        //return new ReservationResponse(true, reservationNumber, "예매가 완료되었습니다.", seatDetails, totalAmount, bookingFee);
 	}
 	
     // 10자리 숫자로 된 예매번호 생성
@@ -172,6 +177,7 @@ public class ReservationServiceImpl implements ReservationService {
     // Reservation 객체 생성
     private ReservationVO createReservation(ReservationRequest request, String reservationNumber) {
         ReservationVO reservation = new ReservationVO();
+        reservation.setId(0);  // 명시적으로 0으로 설정
         reservation.setReservationNumber(reservationNumber);
         reservation.setMemberId(request.getMemberId());
         reservation.setGameId(request.getGameId());
@@ -206,7 +212,9 @@ public class ReservationServiceImpl implements ReservationService {
                     request.getSeatId(),
                     ticketType.getTicketTypeId()
                 ));
+                System.out.println("detail : " + detail);
                 reservationDetails.add(detail);
+                System.out.println("reservationDetails : " + reservationDetails);
                 seatIndex++;
             }
         }

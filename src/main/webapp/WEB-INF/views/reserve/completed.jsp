@@ -50,39 +50,43 @@
 						<div class="bx">
 							<dt class="blind">대표이미지</dt>
 							<dt class="img_title ng-scope">
-								<em> <img src="${ctp}/images/sports/emblem/SSG.png">
+								<em> <img src="${ctp}/images/sports/emblem/${homeTeamShortName}.png">
 								</em>
 								<span class="versus sp_sports">vs</span>
-								<em> <img src="${ctp}/images/sports/emblem/롯데.png">
+								<em> <img src="${ctp}/images/sports/emblem/${awayTeamShortName}.png">
 								</em>
 							</dt>
 						</div>
 						<div class="bx">
 							<dt>예매번호</dt>
-							<dd class="ng-binding">1468853619 (총 3매)</dd>
+							<dd class="ng-binding">${reservationNumber} (총 ${ticketAmount}매)</dd>
 						</div>
 						<div class="bx">
 							<dt>티켓명</dt>
 							<dd class="ng-binding">
-								<span class="ng-binding ng-scope"> SSG 랜더스 vs 롯데자이언츠 </span>
+								<span class="ng-binding ng-scope"> ${homeTeamName}&nbsp;vs&nbsp;${awayTeamName} </span>
 							</dd>
 						</div>
 						<div class="bx">
 							<dt>장소</dt>
-							<dd class="ng-binding">인천 SSG 랜더스 필드</dd>
+							<dd class="ng-binding">${venueName}</dd>
 						</div>
 						<div class="bx">
 							<dt>일시</dt>
-							<dd class="ng-binding">2024.07.30(화) 18:30</dd>
+							<dd class="ng-binding">${gameDateTime}</dd>
 						</div>
 						<div class="bx seat_bx ng-scope">
 							<dt>
 								<button type="button" class="btn_seat">좌석</button>
 							</dt>
 							<dd>
-								<p class="ng-binding ng-scope">[4층 일반석] 301블록 B열 6번</p>
-								<p class="ng-binding ng-scope">[4층 일반석] 301블록 B열 7번</p>
-								<p class="ng-binding ng-scope">[4층 일반석] 301블록 B열 8번</p>
+								<p class="ng-binding ng-scope">[${seatName}]&nbsp;
+								<%-- <c:forEach items="${seatDetails}" var="seat">
+									${seat.seatBlock}블록&nbsp;${seat.seatRow}열&nbsp;${seat.seatNumber}번
+								</c:forEach> --%>
+								</p>
+								<%-- <p class="ng-binding ng-scope">[${seatName}] 301블록 B열 7번</p>
+								<p class="ng-binding ng-scope">[${seatName}] 301블록 B열 8번</p> --%>
 							</dd>
 						</div>
 					</dl>
@@ -90,9 +94,9 @@
 				<div class="white_box fin_box_left">
 					<dl class="reserve_info">
 						<dt>예매자</dt>
-						<dd class="ng-binding">심지언</dd>
+						<dd class="ng-binding">${memberName}</dd>
 						<dt>연락처</dt>
-						<dd class="ng-binding">010-8549-5209</dd>
+						<dd class="ng-binding">${memberPhone}</dd>
 						<dt>티켓수령</dt>
 						<dd class="ng-binding ng-scope">현장수령</dd>
 					</dl>
@@ -107,24 +111,24 @@
 						<thead>
 							<tr>
 								<th>총 결제금액</th>
-								<td class="ng-binding">36,000</td>
+								<td class="ng-binding">$[totalAmount}</td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<th>티켓금액</th>
-								<td class="ng-binding">33,000</td>
+								<td class="ng-binding">${ticketPrice}</td>
 							</tr>
 							<tr>
 								<th>예매수수료</th>
-								<td class="ng-binding">3,000</td>
+								<td class="ng-binding">${bookingFee}</td>
 							</tr>
 							<tr>
 								<th>결제정보</th>
 								<td class="ng-scope">
 									<p class="ng-binding ng-scope">
 										신용카드 간편결제
-										<span class="color_point ng-binding">36,000</span>
+										<span class="color_point ng-binding">${totalAmount}</span>
 									</p>
 								</td>
 							</tr>

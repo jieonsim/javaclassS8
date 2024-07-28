@@ -40,7 +40,7 @@ public interface ReservationDAO {
 	int insertReservation(ReservationVO reservation);
 
 	// reservation_details 테이블 레코드 생성
-	void insertReservationDetails(List<ReservationDetailVO> reservationDetails);
+	void insertReservationDetails(List<ReservationDetailVO> details);
 
 	// seat_inventory 테이블 availableCapacity 필드 업데이트
 	void updateSeatInventory(@Param("gameId") int gameId, @Param("seatId") int seatId, @Param("ticketAmount") int ticketAmount);
@@ -53,5 +53,7 @@ public interface ReservationDAO {
 
 	// 권종별 요금 가져오기
 	int getPriceForTicketType(@Param("sportId") int sportId, @Param("teamId") int teamId, @Param("venueId") int venueId, @Param("seatId") int seatId, @Param("ticketTypeId") int ticketTypeId);
+
+	ReservationVO getReservationById(int reservationId);
 
 }

@@ -72,12 +72,16 @@
 	    AND seatId = #{seatId}
 	    AND ticketTypeId = #{ticketTypeId}
     </select>
+    
+   	<select id="getReservationById" parameterType="int" resultType="com.spring.javaclassS8.vo.reserve.ReservationVO">
+        SELECT * FROM reservations WHERE id = #{reservationId}
+    </select>
 	
 	<!-- 예매 처리 : reservations 테이블 레코드 생성 -->
 	<insert id="insertReservation" parameterType="com.spring.javaclassS8.vo.reserve.ReservationVO" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO reservations (reservationNumber, memberId, gameId, totalAmount, ticketAmount, bookingFee, status)
-        VALUES (#{reservationNumber}, #{memberId}, #{gameId}, #{totalAmount}, #{ticketAmount}, #{bookingFee}, #{status})
-    </insert>
+	    INSERT INTO reservations (reservationNumber, memberId, gameId, totalAmount, ticketAmount, bookingFee, status)
+	    VALUES (#{reservationNumber}, #{memberId}, #{gameId}, #{totalAmount}, #{ticketAmount}, #{bookingFee}, #{status})
+	</insert>
     
     <!-- 예매 처리 : reservation_details 테이블 레코드 생성 -->
     <insert id="insertReservationDetails" parameterType="java.util.List">
@@ -87,6 +91,10 @@
 	        (#{detail.reservationId}, #{detail.seatId}, #{detail.ticketTypeId}, #{detail.seatBlock}, #{detail.seatRow}, #{detail.seatNumber}, #{detail.ticketPrice})
 	    </foreach>
    	</insert>
+   	<!-- <insert id="insertReservationDetail" parameterType="com.spring.javaclassS8.vo.reserve.ReservationDetailVO">
+    	INSERT INTO reservation_details (reservationId, seatId, ticketTypeId, seatBlock, seatRow, seatNumber, ticketPrice)
+    	VALUES (#{reservationId}, #{seatId}, #{ticketTypeId}, #{seatBlock}, #{seatRow}, #{seatNumber}, #{ticketPrice})
+	</insert> -->
 	
 	<!-- 예매 처리 : 예매권 사용 시 사용한 예매권 테이블에 레코드 생성 -->
    	<insert id="insertAdvanceTicketUsage">
