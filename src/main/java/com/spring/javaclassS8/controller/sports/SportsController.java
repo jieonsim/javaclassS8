@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +34,7 @@ import com.spring.javaclassS8.utils.CaptchaGenerator;
 import com.spring.javaclassS8.utils.DateTimeFormatUtils;
 import com.spring.javaclassS8.vo.member.MemberVO;
 import com.spring.javaclassS8.vo.reserve.TempReservation;
+import com.spring.javaclassS8.vo.reserve.TicketVO;
 import com.spring.javaclassS8.vo.sports.CategoryVO;
 import com.spring.javaclassS8.vo.sports.GameVO;
 import com.spring.javaclassS8.vo.sports.PriceVO;
@@ -92,7 +95,7 @@ public class SportsController {
 
 	// 예매창 > 등급/좌석선택(depth1)
 	@GetMapping("/reserve/seat")
-	public String reserveDepth1(@RequestParam("gameId") int gameId, Model model, HttpSession session) {
+	public String reserveSeat(@RequestParam("gameId") int gameId, Model model, HttpSession session) {
 		GameVO game = sportsService.getGameById(gameId);
 
 		// 날짜와 시간 포맷팅
@@ -107,17 +110,17 @@ public class SportsController {
 		model.addAttribute("seatInventories", seatInventories);
 		model.addAttribute("maxTicketsPerBooking", maxTicketsPerBooking);
 
-	    // 캡챠 인증 여부 확인
-	    Boolean captchaVerified = (Boolean) session.getAttribute("captchaVerified_" + gameId);
-	    model.addAttribute("captchaVerified", captchaVerified != null && captchaVerified);
+		// 캡챠 인증 여부 확인
+		Boolean captchaVerified = (Boolean) session.getAttribute("captchaVerified_" + gameId);
+		model.addAttribute("captchaVerified", captchaVerified != null && captchaVerified);
 
-	    // 세션에서 캡챠 인증 상태 제거
-	    session.removeAttribute("captchaVerified_" + gameId);
+		// 세션에서 캡챠 인증 상태 제거
+		session.removeAttribute("captchaVerified_" + gameId);
 
 		return "sports/reserve/seat";
 	}
 
-	// 세션 저장
+	// depth1에서 다음단계 넘어갈 때 세션 저장
 	@PostMapping("/reserve/saveTempReservation")
 	public String saveTempReservation(@RequestParam int gameId, @RequestParam int seatId, @RequestParam int quantity, HttpSession session) {
 		TempReservation tempReservation = new TempReservation(gameId, seatId, quantity, 1, // currentDepth
@@ -131,7 +134,7 @@ public class SportsController {
 
 	// 예매창 > 권종/할인/매수선택(depth2)
 	@GetMapping("/reserve/price")
-	public String reserveDepth2(HttpSession session, Model model) {
+	public String reservePrice(HttpSession session, Model model) {
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		if (member == null) {
 			return "redirect:/login";
@@ -213,10 +216,129 @@ public class SportsController {
 		return ResponseEntity.ok(result);
 	}
 
-	// 예매창 > 예매확인(depth3)
-	@GetMapping("/reserve/check")
-	public String reserveDepth3() {
-		return "sports/reserve/check";
+	// depth2 예매 정보 세션 저장
+	@PostMapping("/reserve/saveTicketSelection")
+	@ResponseBody
+	public ResponseEntity<?> saveTicketSelection(@RequestBody Map<String, Object> ticketSelectionData, HttpSession session) {
+		try {
+			TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
+			if (tempReservation == null) {
+				return ResponseEntity.badRequest().body("{\"error\": \"예약 정보가 없습니다.\"}");
+			}
+
+			List<Map<String, Object>> ticketsData = (List<Map<String, Object>>) ticketSelectionData.get("tickets");
+			List<TicketVO> selectedTickets = new ArrayList<>();
+
+			int totalSelectedTickets = 0;
+			for (Map<String, Object> ticketData : ticketsData) {
+				TicketVO ticket = new TicketVO();
+				ticket.setType((String) ticketData.get("type"));
+				ticket.setQuantity((Integer) ticketData.get("quantity"));
+				ticket.setPrice((Integer) ticketData.get("price"));
+				selectedTickets.add(ticket);
+				totalSelectedTickets += ticket.getQuantity();
+			}
+
+			if (totalSelectedTickets == 0) {
+				return ResponseEntity.badRequest().body("{\"error\": \"티켓종류 및 매수를 선택해주세요.\"}");
+			}
+
+			List<String> selectedAdvanceTickets = (List<String>) ticketSelectionData.get("selectedAdvanceTickets");
+			boolean hasAdvanceTicket = selectedTickets.stream().anyMatch(ticket -> "ADVANCE_TICKET".equals(ticket.getType()));
+			int totalAdvanceTicketQuantity = selectedTickets.stream().filter(ticket -> "ADVANCE_TICKET".equals(ticket.getType())).mapToInt(TicketVO::getQuantity).sum();
+			if (hasAdvanceTicket && selectedAdvanceTickets.size() != totalAdvanceTicketQuantity) {
+				return ResponseEntity.badRequest().body("{\"error\": \"스포츠 예매권 등록 및 선택 후 예매가 가능합니다.\"}");
+			}
+
+			// 세션 업데이트
+			tempReservation.setSelectedTickets(selectedTickets);
+			tempReservation.setSelectedAdvanceTickets(selectedAdvanceTickets);
+			tempReservation.setCurrentDepth(2);
+			session.setAttribute("tempReservation", tempReservation);
+
+			return ResponseEntity.ok().body("{\"success\": true, \"message\": \"티켓 선택이 저장되었습니다.\"}");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\": \"" + e.getMessage() + "\"}");
+		}
+	}
+
+	@GetMapping("/reserve/confirm")
+	public String reserveConfirm(Model model, HttpSession session) {
+		TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
+		if (tempReservation == null || tempReservation.getCurrentDepth() != 2) {
+			return "redirect:/sports/reserve/seat?gameId=" + tempReservation.getGameId();
+		}
+
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		if (member == null) {
+			return "redirect:/login";
+		}
+
+		int gameId = tempReservation.getGameId();
+		int seatId = tempReservation.getSeatId();
+		int quantity = tempReservation.getQuantity();
+
+		GameVO game = sportsService.getGameById(gameId);
+		SportBookingPolicyVO bookingPolicy = sportsService.getBookingPolicyBySportId(game.getSportId());
+
+		// gameDate와 gameTime을 LocalDateTime으로 변환
+		LocalDate gameDateLocal = LocalDate.parse(game.getGameDate());
+		LocalTime gameTimeLocal = LocalTime.parse(game.getGameTime());
+		LocalDateTime gameDateTime = LocalDateTime.of(gameDateLocal, gameTimeLocal);
+
+		// 취소 기한 계산
+		LocalDateTime cancelDeadline = gameDateTime.minusMinutes(bookingPolicy.getCancellationDeadlineMinutesBeforeStart());
+
+		// 현재 날짜 (예매일)
+		LocalDate today = LocalDate.now();
+
+		// 날짜 포맷터
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm");
+		DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd(E) HH:mm");
+
+		// 좌석
+		SeatVO seat = sportsService.getSeatById(seatId);
+
+		// 티켓 정보 추가
+		int ticketPrice = calculateTicketPrice(tempReservation.getSelectedTickets());
+		int bookingFee = calculateBookingFee(tempReservation.getSelectedTickets(), bookingPolicy);
+		int totalAmount = ticketPrice + bookingFee;
+
+		model.addAttribute("reservation", tempReservation);
+		model.addAttribute("member", member);
+		model.addAttribute("game", game);
+		model.addAttribute("seat", seat);
+		model.addAttribute("quantity", quantity);
+		model.addAttribute("bookingPolicy", bookingPolicy);
+		model.addAttribute("gameDateTime", gameDateTime.format(displayFormatter));
+		model.addAttribute("cancelDeadline", cancelDeadline.format(dateTimeFormatter));
+		model.addAttribute("today", today.format(dateFormatter));
+		model.addAttribute("tomorrow", today.plusDays(1).format(dateFormatter));
+		model.addAttribute("cancelDeadlineDate", cancelDeadline.format(dateFormatter));
+		model.addAttribute("ticketPrice", ticketPrice);
+		model.addAttribute("bookingFee", bookingFee);
+		model.addAttribute("totalAmount", totalAmount);
+
+		return "sports/reserve/confirm";
+	}
+
+	// 티켓 요금 계산
+	private int calculateTicketPrice(List<TicketVO> selectedTickets) {
+		return selectedTickets.stream()
+		        .filter(ticket -> !"ADVANCE_TICKET".equals(ticket.getType()))
+		        .mapToInt(ticket -> ticket.getPrice() * ticket.getQuantity())
+		        .sum();
+	}
+
+	// 예매 수수료 계산
+	private int calculateBookingFee(List<TicketVO> selectedTickets, SportBookingPolicyVO bookingPolicy) {
+	    int totalQuantity = selectedTickets.stream()
+	            .filter(ticket -> !"ADVANCE_TICKET".equals(ticket.getType()))
+	            .mapToInt(TicketVO::getQuantity)
+	            .sum();
+	        return bookingPolicy.getBookingFeePerTicket() * totalQuantity;
 	}
 
 	// 예매창 > 스포츠 예매권(depth4)

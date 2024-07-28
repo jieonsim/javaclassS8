@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -101,8 +101,10 @@
 														</div>
 													</td>
 													<td class="tr">
-														<span class="color_green fbold _price">${price.price}</span>
-														원
+														<%-- <span class="color_green fbold _price">${price.price}</span>원 --%>
+														<span class="color_green fbold _price">
+															<fmt:formatNumber value="${price.price}" type="number" />
+														</span>원
 													</td>
 													<td class="selectbox">
 														<div class="selectbox">
@@ -165,10 +167,12 @@
 						<strong> <span>예매정보</span>
 						</strong>
 						<ul class="seat_list" style="height: 72px;">
-							<li>
-								<span class="seat_level">${seat.seatName}</span>
-								<span class="seat_price">자동배정</span>
-							</li>
+							<c:forEach begin="1" end="${quantity}">
+								<li>
+									<span class="seat_level"> ${seat.seatName} </span>
+									<span class="seat_price">자동배정</span>
+								</li>
+							</c:forEach>
 						</ul>
 						<table>
 							<caption>예매정보</caption>
@@ -258,6 +262,7 @@
 	            }<c:if test="${!status.last}">,</c:if>
 	        </c:forEach>
 	    ];
+	    var initialQuantity = ${quantity};
 	</script>
 	<script src="${ctp}/js/sports/reserve/price.js"></script>
 </body>

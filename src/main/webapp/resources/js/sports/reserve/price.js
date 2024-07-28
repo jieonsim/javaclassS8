@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-	//const bookingFeePerTicket = parseFloat(document.getElementById('bookingFeePerTicket').getAttribute('data-booking-fee'));
 	const bookingFeePerTicketElement = document.getElementById('bookingFeePerTicket');
 	const bookingFeePerTicket = bookingFeePerTicketElement ? parseFloat(bookingFeePerTicketElement.getAttribute('data-booking-fee')) : 0;
 
@@ -31,8 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			checkedAdvanceTicketQuantity++;
 		});
 
-		//const advanceTicketPrice = parseInt(document.querySelector('.select_list li[data-certification-code="ADVANCE_TICKET"]').getAttribute('data-price'), 10);
-		//totalTicketPrice -= advanceTicketPrice * checkedAdvanceTicketQuantity;
 		const advanceTicketElement = document.querySelector('.select_list li[data-certification-code="ADVANCE_TICKET"]');
 		if (advanceTicketElement) {
 			const advanceTicketPrice = parseInt(advanceTicketElement.getAttribute('data-price'), 10);
@@ -349,6 +346,100 @@ document.addEventListener('DOMContentLoaded', function() {
 			// depth1으로 이동
 			window.location.href = `${ctp}/sports/reserve/seat?gameId=${gameId}`;
 		}
+	});
+
+	// 다음 단계 버튼 처리
+	const nextStepBtn = document.querySelector('.reserve_btn .btn_full');
+	nextStepBtn.addEventListener('click', function(e) {
+		e.preventDefault();
+
+		const selectedTickets = [];
+		let totalSelectedQuantity = 0;
+
+		document.querySelectorAll('.select._price_cnt').forEach(function(select) {
+			const quantity = parseInt(select.textContent);
+			console.log('Selected quantity:', quantity); // 디버깅용
+
+			if (quantity > 0) {
+				const selectList = select.nextElementSibling;
+				const selectedOption = selectList.querySelector(`li[data-value="${quantity}"]`);
+
+				if (selectedOption) {
+					const type = selectedOption.getAttribute('data-certification-code');
+					const price = parseInt(selectedOption.getAttribute('data-price'));
+					const ticketTypeId = selectedOption.getAttribute('data-ticketType-id');
+
+					selectedTickets.push({ type, quantity, price, ticketTypeId });
+					totalSelectedQuantity += quantity;
+
+					console.log('Added ticket:', { type, quantity, price, ticketTypeId }); // 디버깅용
+				}
+			}
+		});
+
+		console.log('Total selected tickets:', selectedTickets.length); // 디버깅용
+		console.log('Total selected quantity:', totalSelectedQuantity); // 디버깅용
+
+		if (selectedTickets.length === 0) {
+			alert('티켓종류 및 매수를 선택해주세요.');
+			return;
+		}
+
+		if (totalSelectedQuantity !== initialQuantity) {
+			alert('선택하신 좌석수와 예매하실 티켓매수가 일치하지 않습니다.');
+			return;
+		}
+
+		const selectedAdvanceTickets = [];
+		document.querySelectorAll('input[name="ticket_checkbox"]:checked').forEach(function(checkbox) {
+			selectedAdvanceTickets.push(checkbox.getAttribute('data-ticket-number'));
+		});
+
+		const totalAdvanceTicketQuantity = selectedTickets.reduce((total, ticket) => {
+			return ticket.type === 'ADVANCE_TICKET' ? total + ticket.quantity : total;
+		}, 0);
+
+		if (selectedAdvanceTickets.length !== totalAdvanceTicketQuantity) {
+			alert('스포츠 예매권 등록 및 선택 후 예매가 가능합니다.');
+			return;
+		}
+
+		const ticketSelectionData = {
+			tickets: selectedTickets,
+			selectedAdvanceTickets: selectedAdvanceTickets
+		};
+
+		console.log('Ticket selection data:', ticketSelectionData); // 디버깅용
+
+		fetch(`${ctp}/sports/reserve/saveTicketSelection`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(ticketSelectionData)
+		})
+			.then(response => {
+				console.log('Response status:', response.status);
+				console.log('Response headers:', response.headers);
+				return response.text(); // 텍스트로 받아옵니다.
+			})
+			.then(text => {
+				console.log('Response text:', text);
+				try {
+					const data = JSON.parse(text);
+					console.log('Parsed data:', data);
+					if (data.error) {
+						throw new Error(data.error);
+					}
+					window.location.href = `${ctp}/sports/reserve/confirm`;
+				} catch (e) {
+					throw new Error(text || '알 수 없는 오류가 발생했습니다.');
+				}
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				alert(error.message);
+			});
 	});
 
 	initializeSelectBoxes();
