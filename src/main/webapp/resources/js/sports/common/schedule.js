@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		button.addEventListener('click', function(e) {
 			e.preventDefault();
 			const gameId = this.getAttribute('href').split('=')[1];
-			window.open(`${ctp}/sports/reserve/seat?gameId=` + gameId, '티켓챔프', 'width=990,height=820');
+			window.open(`${ctp}/reserve/seat?gameId=` + gameId, '티켓챔프', 'width=990,height=820');
 		});
 	});
 

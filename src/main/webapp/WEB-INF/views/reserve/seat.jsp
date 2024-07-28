@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>티켓챔프</title>
-<jsp:include page="/WEB-INF/views/sports/reserve/utility.jsp" />
+<jsp:include page="/WEB-INF/views/reserve/utility.jsp" />
 <link rel="stylesheet" href="${ctp}/css/sports/reserve.css">
 <link rel="stylesheet" href="${ctp}/css/common/common.css">
 <link rel="icon" href="${ctp}/images/common/favicon.ico">
@@ -114,7 +114,7 @@
 							<a href="#" class="close ng-binding">레이어 닫기</a>
 						</div>
 					</div>
-					<form class="ng-pristine ng-valid ng-scope" id="seatAndQuantityForm" action="${ctp}/sports/reserve/saveTempReservation" method="post">
+					<form class="ng-pristine ng-valid ng-scope" id="seatAndQuantityForm" action="${ctp}/reserve/saveTempReservation" method="post">
 						<div class="layer select_count_auto ng-isolate-scope" style="left: 29px; bottom: 20px; width: 210px; display: none;">
 							<div class="box_top ng-scope">
 								<a href="#" class="close ng-binding">${seatName}</a>
@@ -199,6 +199,6 @@
    		var gameId = ${gameId};
    		var captchaVerified = ${captchaVerified};
 	</script>
-	<script src="${ctp}/js/sports/reserve/seat.js"></script>
+	<script src="${ctp}/js/reserve/seat.js"></script>
 </body>
 </html>

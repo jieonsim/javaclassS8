@@ -106,7 +106,7 @@
 									<tr>
 										<td style="width: 100%; Margin: 0; padding: 0 3.3%; background-color: #f4f4f4; text-align: center; font-size: 11px; color: #707070; line-height: 18px;">
 											본 메일은 발신전용입니다. 궁금한 사항은 티켓챔프 고객센터를 이용해 주십시오.
-											<a href="http://localhost:9090/javaclassS8/home" title="고객센터 연결하기" style="text-decoration: none; color: #707070" rel="noreferrer noopener" target="_blank">고객센터 : 1234-1234</a>
+											<a href="http://localhost:9090/javaclassS8" title="고객센터 연결하기" style="text-decoration: none; color: #707070" rel="noreferrer noopener" target="_blank">고객센터 : 1234-1234</a>
 											<br>
 											Copyright ⓒ TicketChamp Corporation. All Rights Reserved.
 										</td>

@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 
 		if (today >= saleOnTime && today < bookingCloseTime) {
-			matchBtn.innerHTML = `<a href="${ctp}/sports/reserve/seat?gameId=${gameId}" class="btn btn_reserve">예매하기</a>`;
+			matchBtn.innerHTML = `<a href="${ctp}/reserve/seat?gameId=${gameId}" class="btn btn_reserve">예매하기</a>`;
 		} else if (today < saleOnTime) {
 			matchBtn.innerHTML = `
                 <a href="#" class="btn btn_reserve_scdl">
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		button.addEventListener('click', function(e) {
 			e.preventDefault();
 			const gameId = this.getAttribute('href').split('gameId=')[1];
-			window.open(`${ctp}/sports/reserve/seat?gameId=${gameId}`, '티켓챔프', 'width=990,height=820');
+			window.open(`${ctp}/reserve/seat?gameId=${gameId}`, '티켓챔프', 'width=990,height=820');
 		});
 	});
 });

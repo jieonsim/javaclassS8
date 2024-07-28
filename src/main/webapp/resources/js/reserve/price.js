@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			return;
 		}
 
-		fetch(`${ctp}/sports/reserve/validateAdvanceTicket`, {
+		fetch(`${ctp}/reserve/validateAdvanceTicket`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ advanceTicketNumber })
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 	function registerAdvanceTicket(advanceTicketNumber, ticketTypeId) {
-		fetch(`${ctp}/sports/reserve/registerAdvanceTicket`, {
+		fetch(`${ctp}/reserve/registerAdvanceTicket`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ advanceTicketNumber })
@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			sessionStorage.setItem('captchaVerified', 'true');
 
 			// depth1으로 이동
-			window.location.href = `${ctp}/sports/reserve/seat?gameId=${gameId}`;
+			window.location.href = `${ctp}/reserve/seat?gameId=${gameId}`;
 		}
 	});
 
@@ -411,7 +411,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		console.log('Ticket selection data:', ticketSelectionData); // 디버깅용
 
-		fetch(`${ctp}/sports/reserve/saveTicketSelection`, {
+		fetch(`${ctp}/reserve/saveTicketSelection`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -431,7 +431,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					if (data.error) {
 						throw new Error(data.error);
 					}
-					window.location.href = `${ctp}/sports/reserve/confirm`;
+					window.location.href = `${ctp}/reserve/confirm`;
 				} catch (e) {
 					throw new Error(text || '알 수 없는 오류가 발생했습니다.');
 				}

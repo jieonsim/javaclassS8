@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -8,10 +8,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>티켓챔프</title>
-<jsp:include page="/WEB-INF/views/sports/reserve/utility.jsp" />
+<jsp:include page="/WEB-INF/views/reserve/utility.jsp" />
 <link rel="stylesheet" href="${ctp}/css/sports/reserve.css">
 <link rel="stylesheet" href="${ctp}/css/common/common.css">
 <link rel="icon" href="${ctp}/images/common/favicon.ico">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 </head>
 <body class="ng-scope">
 	<div id="wrap_reserve">
@@ -144,7 +146,6 @@
 						</div>
 						<ul class="input_block_lst">
 							<li>
-								<!-- 체크박스 시 class="checkbox checked"로 처리 -->
 								<span class="checkbox">
 									<input type="checkbox" id="reserve_agree1">
 								</span>
@@ -236,17 +237,26 @@
 							<tfoot>
 								<tr>
 									<th>총결제</th>
-									<td class="ng-binding"><fmt:formatNumber value="${totalAmount}" type="number"/>원</td>
+									<td class="ng-binding">
+										<fmt:formatNumber value="${totalAmount}" type="number" />
+										원
+									</td>
 								</tr>
 							</tfoot>
 							<tbody>
 								<tr>
 									<th scope="row">티켓금액</th>
-									<td class="ng-binding"><fmt:formatNumber value="${ticketPrice}" type="number"/>원</td>
+									<td class="ng-binding">
+										<fmt:formatNumber value="${ticketPrice}" type="number" />
+										원
+									</td>
 								</tr>
 								<tr>
 									<th scope="row">예매수수료</th>
-									<td class="ng-binding"><fmt:formatNumber value="${bookingFee}" type="number"/>원</td>
+									<td class="ng-binding">
+										<fmt:formatNumber value="${bookingFee}" type="number" />
+										원
+									</td>
 								</tr>
 							</tbody>
 						</table>
@@ -305,13 +315,43 @@
 						</p>
 					</div>
 					<div class="reserve_btn ng-scope">
-						<a class="btn btn_blank" id="goToPreviousDepthBtn">이전단계</a>
+						<a class="btn btn_blank">이전단계</a>
 						<a class="btn btn_full_point">결제하기</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script src="${ctp}/js/sports/reserve/confirm.js"></script>
+	<form id="paymentForm">
+		<input type="hidden" id="homeTeam" value="${game.homeTeamName}">
+		<input type="hidden" id="awayTeam" value="${game.awayTeamName}">
+		<input type="hidden" id="totalAmount" value="${totalAmount}">
+		<input type="hidden" id="buyerEmail" value="${member.email}">
+		<input type="hidden" id="buyerName" value="${member.name}">
+		<input type="hidden" id="buyerTel" value="${member.phone}">
+	</form>
+	<script>
+	    var memberId = ${member.id};  // 세션에서 가져온 회원 ID
+	    var gameId = ${game.id};      // 세션에서 가져온 경기 ID
+	    var homeTeam = "${game.homeTeamShortName}";
+	    var awayTeam = "${game.awayTeamShortName}";
+	    var totalAmount = ${totalAmount};
+	    var ticketAmount = ${quantity};
+	    var bookingFee = ${bookingFee};
+	    var buyerEmail = "${member.email}";
+	    var buyerName = "${member.name}";
+	    var buyerTel = "${member.phone}";
+	    console.log('memberId: ' + memberId);
+	    console.log('gameId: ' + gameId);
+	    console.log('homeTeam: ' + homeTeam);
+	    console.log('awayTeam: ' + awayTeam);
+	    console.log('totalAmount: ' + totalAmount);
+	    console.log('ticketAmount: ' + ticketAmount);
+	    console.log('bookingFee: ' + bookingFee);
+	    console.log('buyerEmail: ' + buyerEmail);
+	    console.log('buyerName: ' + buyerName);
+	    console.log('buyerTel: ' + buyerTel);
+</script>
+	<script src="${ctp}/js/reserve/confirm.js"></script>
 </body>
 </html>

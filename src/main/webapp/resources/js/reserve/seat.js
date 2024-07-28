@@ -1,5 +1,5 @@
 /**
- * js/sports/reserve/seat.js
+ * js/reserve/seat.js
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 
 	function loadCaptcha() {
-		fetch(`${ctp}/sports/reserve/captcha`)
+		fetch(`${ctp}/reserve/captcha`)
 			.then(response => response.json())
 			.then(data => {
 				document.getElementById('captcha_img').src = data.captchaUrl;
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// 캡챠 이미지 새로고침 함수
 	function refreshCaptcha() {
-		fetch(`${ctp}/sports/reserve/captcha`)
+		fetch(`${ctp}/reserve/captcha`)
 			.then(response => response.json())
 			.then(data => {
 				document.getElementById('captcha_img').src = data.captchaUrl;
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		const bxInputTxt = document.getElementById('bx_input_txt');
 		const captchaError = document.getElementById('captcha_error');
 
-		fetch(`${ctp}/sports/reserve/verifyCaptcha`, {
+		fetch(`${ctp}/reserve/verifyCaptcha`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded'

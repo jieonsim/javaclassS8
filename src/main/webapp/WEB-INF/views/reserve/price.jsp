@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>티켓챔프</title>
-<jsp:include page="/WEB-INF/views/sports/reserve/utility.jsp" />
+<jsp:include page="/WEB-INF/views/reserve/utility.jsp" />
 <link rel="stylesheet" href="${ctp}/css/sports/reserve.css">
 <link rel="stylesheet" href="${ctp}/css/common/common.css">
 <link rel="icon" href="${ctp}/images/common/favicon.ico">
@@ -264,6 +264,6 @@
 	    ];
 	    var initialQuantity = ${quantity};
 	</script>
-	<script src="${ctp}/js/sports/reserve/price.js"></script>
+	<script src="${ctp}/js/reserve/price.js"></script>
 </body>
 </html>

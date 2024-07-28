@@ -18,15 +18,21 @@ public class HomeController {
 		return "admin/main";
 	}
 
-	// 메일 테스트
+	// 예매권 메일 테스트
 	@GetMapping("/advanceTicketMail")
 	public String advanceTicketMail() {
 		return "mail/advanceTicketMail";
 	}
-	
-	// 메일 테스트
+
+	// 인증번호 메일 테스트
 	@GetMapping("/certificationMail")
 	public String certificationMail() {
 		return "mail/certificationMail";
+	}
+
+	// 예매내역 메일 테스트
+	@GetMapping("/ReservationMail")
+	public String ReservationMail() {
+		return "mail/ReservationMail";
 	}
 }
