@@ -75,12 +75,14 @@ public class SportsController {
 	// 캡챠 인증
 	@PostMapping("/reserve/verifyCaptcha")
 	@ResponseBody
-	public Map<String, Object> verifyCaptcha(@RequestParam("captcha") String captcha, HttpSession session) {
+	public Map<String, Object> verifyCaptcha(@RequestParam("captcha") String captcha, @RequestParam("gameId") int gameId, HttpSession session) {
 		String generatedCaptcha = (String) session.getAttribute("captchaText");
 
 		Map<String, Object> result = new HashMap<>();
 		if (generatedCaptcha != null && generatedCaptcha.equals(captcha.toUpperCase())) {
 			result.put("success", true);
+			// 캡챠 인증 성공 시 해당 게임에 대한 인증 상태를 세션에 저장
+			session.setAttribute("captchaVerified_" + gameId, true);
 		} else {
 			result.put("success", false);
 		}
@@ -90,7 +92,7 @@ public class SportsController {
 
 	// 예매창 > 등급/좌석선택(depth1)
 	@GetMapping("/reserve/seat")
-	public String reserveDepth1(@RequestParam("gameId") int gameId, Model model) {
+	public String reserveDepth1(@RequestParam("gameId") int gameId, Model model, HttpSession session) {
 		GameVO game = sportsService.getGameById(gameId);
 
 		// 날짜와 시간 포맷팅
@@ -100,9 +102,17 @@ public class SportsController {
 		List<SeatInventoryVO> seatInventories = sportsService.getSeatInventoriesByGameId(gameId);
 		int maxTicketsPerBooking = sportsService.getMaxTicketsPerBooking(game.getSportId());
 
+		model.addAttribute("gameId", gameId);
 		model.addAttribute("game", game);
 		model.addAttribute("seatInventories", seatInventories);
 		model.addAttribute("maxTicketsPerBooking", maxTicketsPerBooking);
+
+	    // 캡챠 인증 여부 확인
+	    Boolean captchaVerified = (Boolean) session.getAttribute("captchaVerified_" + gameId);
+	    model.addAttribute("captchaVerified", captchaVerified != null && captchaVerified);
+
+	    // 세션에서 캡챠 인증 상태 제거
+	    session.removeAttribute("captchaVerified_" + gameId);
 
 		return "sports/reserve/seat";
 	}
@@ -124,7 +134,7 @@ public class SportsController {
 	public String reserveDepth2(HttpSession session, Model model) {
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		if (member == null) {
-			return "redirect:/loing";
+			return "redirect:/login";
 		}
 
 		TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
@@ -160,9 +170,10 @@ public class SportsController {
 		List<PriceVO> prices = sportsService.getPricesBySeatId(seatId);
 		List<CategoryVO> categoryList = sportsService.getCategoriesWithRowspan(seatId);
 
-	    // 스포츠 예매권
-	    List<Map<String, Object>> advanceTickets = sportsService.getValidAdvanceTicketsByMemberId(member.getId());
-		
+		// 스포츠 예매권
+		List<Map<String, Object>> advanceTickets = sportsService.getValidAdvanceTicketsByMemberId(member.getId());
+
+		model.addAttribute("tempReservation", tempReservation);
 		model.addAttribute("game", game);
 		model.addAttribute("seat", seat);
 		model.addAttribute("quantity", quantity);

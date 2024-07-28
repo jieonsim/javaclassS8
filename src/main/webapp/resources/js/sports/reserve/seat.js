@@ -3,12 +3,10 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-	// 캡챠 로딩
-	loadCaptcha();
-
 	// 캡챠 3분 타이머 설정
 	let captchaTimer = setTimeout(refreshCaptcha, 180000);
 
+	const captcha_layer = document.getElementById('captcha_layer');
 	const captcha_dimmed = document.getElementById('captcha_dimmed');
 	const captchaRefreshBtn = document.getElementById('captchaRefreshBtn');
 	const captcha_form = document.getElementById('captcha_form');
@@ -23,13 +21,25 @@ document.addEventListener('DOMContentLoaded', function() {
 			.then(response => response.json())
 			.then(data => {
 				document.getElementById('captcha_img').src = data.captchaUrl;
-				document.getElementById('captcha_layer').style.display = 'block';
-				document.getElementById('captcha_dimmed').style.display = 'block';
+				captcha_layer.style.display = 'block';
+				captcha_dimmed.style.display = 'block';
 				document.getElementById('ipt_captcha').value = '';
 				clearTimeout(captchaTimer);
 				captchaTimer = setTimeout(refreshCaptcha, 180000);
 			})
 			.catch(error => console.error('캡챠 로딩 에러:', error));
+	}
+
+	function hideCaptcha() {
+		captcha_layer.style.display = 'none';
+		captcha_dimmed.style.display = 'none';
+	}
+
+	// 서버에서 전달받은 captchaVerified 값 확인
+	if (captchaVerified) {
+		hideCaptcha();
+	} else {
+		loadCaptcha();
 	}
 
 	// 캡챠 이미지 새로고침 함수
@@ -55,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		this.value = this.value.toUpperCase();
 	});
 
+
 	// 캡챠 폼 제출
 	captcha_form.addEventListener('submit', function(e) {
 		e.preventDefault();
@@ -67,13 +78,16 @@ document.addEventListener('DOMContentLoaded', function() {
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded'
 			},
-			body: new URLSearchParams({ captcha: captcha })
+			body: new URLSearchParams({
+				captcha: captcha,
+				gameId: gameId
+			})
 		})
 			.then(response => response.json())
 			.then(data => {
 				if (data.success) {
-					document.getElementById('captcha_layer').style.display = 'none';
-					document.getElementById('captcha_dimmed').style.display = 'none';
+					hideCaptcha();
+					captchaVerified = true;  // 로컬 변수 업데이트
 				} else {
 					bxInputTxt.classList.add('error');
 					captchaError.classList.remove('ng-hide');
@@ -98,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				const seatName = this.querySelector('.seat_grade').textContent;
 				const availableSeats = this.querySelector('.seat .ng-binding').textContent;
 				const seatId = this.getAttribute('data-seat-id'); // seatId 가져오기
-				
+
 				document.querySelector('.select_count_auto .seat_name').textContent = seatName;
 				document.querySelector('.select_count_auto .sheet').textContent = availableSeats + '석';
 
@@ -208,6 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	// 매수 초기 상태 설정
 	updateCount();
 
+
 	//////////////////////////////////////////////////////
 	// depth1 폼 제출 이벤트
 	form.addEventListener('submit', function(e) {
@@ -219,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			alert('매수를 선택해주세요.');
 			return;
 		}
-		
+
 		this.submit();
 	});
 

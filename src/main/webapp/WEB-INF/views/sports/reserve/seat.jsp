@@ -195,6 +195,10 @@
 			</div>
 		</div>
 	</div>
+	<script>
+   		var gameId = ${gameId};
+   		var captchaVerified = ${captchaVerified};
+	</script>
 	<script src="${ctp}/js/sports/reserve/seat.js"></script>
 </body>
 </html>

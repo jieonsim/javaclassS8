@@ -180,12 +180,10 @@
 								<tr>
 									<th>티켓금액</th>
 									<td id="_price_ticket">0</td>
-									<!-- 선택한 권종의 요금이 여기에 누적되어 반영되도록 -->
 								</tr>
 								<tr>
 									<th>예매수수료</th>
 									<td id="_price_fee">0</td>
-									<!-- 선택한 매수만큼의 bookingPolicy의 bookingFeePerTicket가 누적 반영되도록 -->
 									<input type="hidden" id="bookingFeePerTicket" data-booking-fee="${bookingPolicy.bookingFeePerTicket}">
 								</tr>
 							</tbody>
@@ -193,7 +191,6 @@
 								<tr>
 									<th>총결제</th>
 									<td id="_price_amount">0</td>
-									<!-- _price_ticket + _price_fee -->
 								</tr>
 							</tfoot>
 						</table>
@@ -252,6 +249,7 @@
 		</div>
 	</div>
 	<script>
+    	var gameId = ${tempReservation.gameId};
 	    var advanceTicketsData = [
 	        <c:forEach items="${advanceTickets}" var="ticket" varStatus="status">
 	            {

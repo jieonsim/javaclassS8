@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-	const bookingFeePerTicket = parseFloat(document.getElementById('bookingFeePerTicket').getAttribute('data-booking-fee'));
+	//const bookingFeePerTicket = parseFloat(document.getElementById('bookingFeePerTicket').getAttribute('data-booking-fee'));
+	const bookingFeePerTicketElement = document.getElementById('bookingFeePerTicket');
+	const bookingFeePerTicket = bookingFeePerTicketElement ? parseFloat(bookingFeePerTicketElement.getAttribute('data-booking-fee')) : 0;
 
 	function calculateTotalSelected() {
 		return Array.from(document.querySelectorAll('.select._price_cnt'))
@@ -29,8 +31,13 @@ document.addEventListener('DOMContentLoaded', function() {
 			checkedAdvanceTicketQuantity++;
 		});
 
-		const advanceTicketPrice = parseInt(document.querySelector('.select_list li[data-certification-code="ADVANCE_TICKET"]').getAttribute('data-price'), 10);
-		totalTicketPrice -= advanceTicketPrice * checkedAdvanceTicketQuantity;
+		//const advanceTicketPrice = parseInt(document.querySelector('.select_list li[data-certification-code="ADVANCE_TICKET"]').getAttribute('data-price'), 10);
+		//totalTicketPrice -= advanceTicketPrice * checkedAdvanceTicketQuantity;
+		const advanceTicketElement = document.querySelector('.select_list li[data-certification-code="ADVANCE_TICKET"]');
+		if (advanceTicketElement) {
+			const advanceTicketPrice = parseInt(advanceTicketElement.getAttribute('data-price'), 10);
+			totalTicketPrice -= advanceTicketPrice * checkedAdvanceTicketQuantity;
+		}
 
 		const totalBookingFee = bookingFeePerTicket * (totalQuantity - checkedAdvanceTicketQuantity);
 
@@ -41,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		document.getElementById('_price_amount').textContent = totalAmount.toLocaleString() + '원';
 	}
 
-	function addCheckboxEventListener(checkbox, maxSelectable) {
+	/*function addCheckboxEventListener(checkbox, maxSelectable) {
 		checkbox.addEventListener('change', function() {
 			const checkedCount = document.querySelectorAll('input[name="ticket_checkbox"]:checked').length;
 			if (checkedCount > maxSelectable) {
@@ -53,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				updateBookingInfo();
 			}
 		});
-	}
+	}*/
 
 	function initializeSelectBoxes() {
 		document.querySelectorAll('.select._price_cnt').forEach(function(selectElement) {
@@ -303,6 +310,46 @@ document.addEventListener('DOMContentLoaded', function() {
 		const certificationArea = document.getElementById(`certify${ticketTypeId}`);
 		if (certificationArea) certificationArea.closest('tr').remove();
 	}
+
+
+	// 취소 수수료 상세보기
+	const cancelCommisonNoticeBtn = document.getElementById('cancelCommisonNoticeBtn');
+	const cancelCommisonNotice = document.getElementById('cancelCommisonNotice');
+	const closeBtn = cancelCommisonNotice.querySelector('.close');
+
+	// 상세보기 버튼 클릭 시 레이어 표시
+	cancelCommisonNoticeBtn.addEventListener('click', function(e) {
+		e.preventDefault(); // 기본 동작 방지
+		cancelCommisonNotice.style.display = 'block';
+	});
+
+	// 닫기 버튼 클릭 시 레이어 숨김
+	closeBtn.addEventListener('click', function(e) {
+		e.preventDefault(); // 기본 동작 방지
+		cancelCommisonNotice.style.display = 'none';
+	});
+
+	// 레이어 외부 클릭 시 레이어 숨김 (선택적)
+	document.addEventListener('click', function(e) {
+		if (!cancelCommisonNotice.contains(e.target) && e.target !== cancelCommisonNoticeBtn) {
+			cancelCommisonNotice.style.display = 'none';
+		}
+	});
+
+
+	// 이전 단계 버튼 처리
+	const prevStepBtn = document.querySelector('.reserve_btn .btn_blank');
+	prevStepBtn.addEventListener('click', function(e) {
+		e.preventDefault();
+
+		if (confirm('이전 단계로 돌아가면 현재의 예매 정보를 잃게 됩니다. 계속하시겠습니까?')) {
+			// 세션 스토리지에 캡챠 인증 완료 상태 저장
+			sessionStorage.setItem('captchaVerified', 'true');
+
+			// depth1으로 이동
+			window.location.href = `${ctp}/sports/reserve/seat?gameId=${gameId}`;
+		}
+	});
 
 	initializeSelectBoxes();
 	initializeCertifyButtons();
