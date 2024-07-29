@@ -1,7 +1,6 @@
 package com.spring.javaclassS8.vo.reserve;
 
 import java.util.List;
-import java.util.Map;
 
 import lombok.Data;
 
@@ -12,6 +11,12 @@ public class TempReservation {
 	private int ticketAmount;
 	private int currentDepth;
 	private long expirationTime;
+    private List<TicketVO> selectedTickets;
+    private List<String> selectedAdvanceTickets;
+    private int totalAmount;
+    private int bookingFee;
+    private List<SeatDetailVO> seatDetails;
+    private List<Integer> advanceTicketIds;
 
 	public TempReservation(int gameId, int seatId, int ticketAmount, int currentDepth, long expirationTime) {
 		this.gameId = gameId;
@@ -20,11 +25,4 @@ public class TempReservation {
 		this.currentDepth = currentDepth;
 		this.expirationTime = expirationTime;
 	}
-	
-    private List<TicketVO> selectedTickets;
-    private List<String> selectedAdvanceTickets;
-    
-    private int totalAmount;
-    private int bookingFee;
-    private List<Map<String, Object>> seatDetails;
 }

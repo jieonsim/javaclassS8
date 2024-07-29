@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -256,6 +256,7 @@
 	    var advanceTicketsData = [
 	        <c:forEach items="${advanceTickets}" var="ticket" varStatus="status">
 	            {
+	                id: "${ticket.id}",
 	                advanceTicketNumber: "${ticket.advanceTicketNumber}",
 	                formattedExpiresAt: "${ticket.formattedExpiresAt}"
 	            }<c:if test="${!status.last}">,</c:if>

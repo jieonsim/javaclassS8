@@ -53,7 +53,7 @@
     
 	<!-- memberId로 해당 유저에 등록된 유효한 예매권 정보 가져오기 -->
 	<select id="getValidAdvanceTicketsByMemberId" resultType="java.util.HashMap">
-	    SELECT at.advanceTicketNumber, at.expiresAt, at.used
+	    SELECT at.id, at.advanceTicketNumber, at.expiresAt, at.used
 	    FROM advance_tickets at
 	    JOIN registered_advance_tickets rat ON at.id = rat.advanceTicketId
 	    WHERE rat.memberId = #{memberId}
@@ -91,10 +91,6 @@
 	        (#{detail.reservationId}, #{detail.seatId}, #{detail.ticketTypeId}, #{detail.seatBlock}, #{detail.seatRow}, #{detail.seatNumber}, #{detail.ticketPrice})
 	    </foreach>
    	</insert>
-   	<!-- <insert id="insertReservationDetail" parameterType="com.spring.javaclassS8.vo.reserve.ReservationDetailVO">
-    	INSERT INTO reservation_details (reservationId, seatId, ticketTypeId, seatBlock, seatRow, seatNumber, ticketPrice)
-    	VALUES (#{reservationId}, #{seatId}, #{ticketTypeId}, #{seatBlock}, #{seatRow}, #{seatNumber}, #{ticketPrice})
-	</insert> -->
 	
 	<!-- 예매 처리 : 예매권 사용 시 사용한 예매권 테이블에 레코드 생성 -->
    	<insert id="insertAdvanceTicketUsage">
@@ -115,11 +111,13 @@
     <!-- 예매 처리 : 예매권 사용 시 예매권 사용으로 업데이트 -->
     <update id="updateAdvanceTickets">
 	    UPDATE advance_tickets
-	    SET used = TRUE, usedAt = CURRENT_TIMESTAMP, usedByMemberId = #{memberId}
+	    SET used = TRUE, 
+	        usedAt = CURRENT_TIMESTAMP, 
+	        usedByMemberId = #{memberId}
 	    WHERE id IN 
 	    <foreach collection="advanceTicketIds" item="ticketId" open="(" separator="," close=")">
 	        #{ticketId}
 	    </foreach>
-    </update>
+	</update>
     
 </mapper>

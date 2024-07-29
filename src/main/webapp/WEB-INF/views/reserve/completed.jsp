@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -50,26 +51,26 @@
 						<div class="bx">
 							<dt class="blind">대표이미지</dt>
 							<dt class="img_title ng-scope">
-								<em> <img src="${ctp}/images/sports/emblem/${homeTeamShortName}.png">
+								<em> <img src="${ctp}/images/sports/emblem/${game.homeTeamShortName}.png">
 								</em>
 								<span class="versus sp_sports">vs</span>
-								<em> <img src="${ctp}/images/sports/emblem/${awayTeamShortName}.png">
+								<em> <img src="${ctp}/images/sports/emblem/${game.awayTeamShortName}.png">
 								</em>
 							</dt>
 						</div>
 						<div class="bx">
 							<dt>예매번호</dt>
-							<dd class="ng-binding">${reservationNumber} (총 ${ticketAmount}매)</dd>
+							<dd class="ng-binding">${reservationNumber}&nbsp;(총${ticketAmount}매)</dd>
 						</div>
 						<div class="bx">
 							<dt>티켓명</dt>
 							<dd class="ng-binding">
-								<span class="ng-binding ng-scope"> ${homeTeamName}&nbsp;vs&nbsp;${awayTeamName} </span>
+								<span class="ng-binding ng-scope"> ${game.homeTeamName}&nbsp;vs&nbsp;${game.awayTeamName} </span>
 							</dd>
 						</div>
 						<div class="bx">
 							<dt>장소</dt>
-							<dd class="ng-binding">${venueName}</dd>
+							<dd class="ng-binding">${game.venueName}</dd>
 						</div>
 						<div class="bx">
 							<dt>일시</dt>
@@ -80,13 +81,9 @@
 								<button type="button" class="btn_seat">좌석</button>
 							</dt>
 							<dd>
-								<p class="ng-binding ng-scope">[${seatName}]&nbsp;
-								<%-- <c:forEach items="${seatDetails}" var="seat">
-									${seat.seatBlock}블록&nbsp;${seat.seatRow}열&nbsp;${seat.seatNumber}번
-								</c:forEach> --%>
-								</p>
-								<%-- <p class="ng-binding ng-scope">[${seatName}] 301블록 B열 7번</p>
-								<p class="ng-binding ng-scope">[${seatName}] 301블록 B열 8번</p> --%>
+								<c:forEach var="seatDetail" items="${seatDetails}">
+									<p class="ng-binding ng-scope">[${seat.seatName}] ${seatDetail.seatBlock}블록 ${seatDetail.seatRow}열 ${seatDetail.seatNumber}번</p>
+								</c:forEach>
 							</dd>
 						</div>
 					</dl>
@@ -94,9 +91,9 @@
 				<div class="white_box fin_box_left">
 					<dl class="reserve_info">
 						<dt>예매자</dt>
-						<dd class="ng-binding">${memberName}</dd>
+						<dd class="ng-binding">${member.name}</dd>
 						<dt>연락처</dt>
-						<dd class="ng-binding">${memberPhone}</dd>
+						<dd class="ng-binding">${member.phone}</dd>
 						<dt>티켓수령</dt>
 						<dd class="ng-binding ng-scope">현장수령</dd>
 					</dl>
@@ -111,27 +108,39 @@
 						<thead>
 							<tr>
 								<th>총 결제금액</th>
-								<td class="ng-binding">$[totalAmount}</td>
+								<td class="ng-binding">
+									<fmt:formatNumber value="${totalAmount}" type="number" />
+									원
+								</td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<th>티켓금액</th>
-								<td class="ng-binding">${ticketPrice}</td>
+								<td class="ng-binding">
+									<fmt:formatNumber value="${ticketPrice}" type="number" />
+									원
+								</td>
 							</tr>
 							<tr>
 								<th>예매수수료</th>
-								<td class="ng-binding">${bookingFee}</td>
+								<td class="ng-binding">
+									<fmt:formatNumber value="${bookingFee}" type="number" />
+									원
+								</td>
 							</tr>
-							<tr>
+							<%-- <tr>
 								<th>결제정보</th>
 								<td class="ng-scope">
 									<p class="ng-binding ng-scope">
-										신용카드 간편결제
-										<span class="color_point ng-binding">${totalAmount}</span>
+										신용카드
+										<span class="color_point ng-binding">
+											<fmt:formatNumber value="${ticketPrice}" type="number" />
+											원
+										</span>
 									</p>
 								</td>
-							</tr>
+							</tr> --%>
 						</tbody>
 					</table>
 				</div>

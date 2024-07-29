@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		newRow.innerHTML = `
             <td>
                 <span class="checkbox">
-                    <input type="checkbox" id="ticket_${newTicket.advanceTicketNumber}" name="ticket_checkbox">
+                    <input type="checkbox" id="ticket_${newTicket.advanceTicketNumber}" name="ticket_checkbox" data-ticket-number="${newTicket.advanceTicketNumber}" data-ticket-id="${newTicket.id}">
                 </span>
             </td>
             <td class="number">${newTicket.advanceTicketNumber}</td>
@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <tr>
                     <td>
                         <span class="checkbox">
-                            <input type="checkbox" id="ticket_${ticket.advanceTicketNumber}" name="ticket_checkbox" data-ticket-number="${ticket.advanceTicketNumber}">
+                            <input type="checkbox" id="ticket_${ticket.advanceTicketNumber}" name="ticket_checkbox" data-ticket-number="${ticket.advanceTicketNumber}" data-ticket-id="${ticket.id}">
                         </span>
                     </td>
                     <td class="number">${ticket.advanceTicketNumber}</td>
@@ -361,17 +361,6 @@ document.addEventListener('DOMContentLoaded', function() {
 					});
 					totalSelectedQuantity += quantity;
 				}
-				/*if (selectedOption) {
-
-					const type = selectedOption.getAttribute('data-certification-code');
-					const price = parseInt(selectedOption.getAttribute('data-price'));
-					const ticketTypeId = selectedOption.getAttribute('data-ticketType-id');
-
-					selectedTickets.push({ type, quantity, price, ticketTypeId });
-					totalSelectedQuantity += quantity;
-
-					console.log('Added ticket:', { type, quantity, price, ticketTypeId }); // 디버깅용
-				}*/
 			}
 		});
 
@@ -390,7 +379,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		const selectedAdvanceTickets = [];
 		document.querySelectorAll('input[name="ticket_checkbox"]:checked').forEach(function(checkbox) {
-			selectedAdvanceTickets.push(checkbox.getAttribute('data-ticket-number'));
+			// 수정
+			selectedAdvanceTickets.push({
+		        id: checkbox.getAttribute('data-ticket-id'),
+		        number: checkbox.getAttribute('data-ticket-number')
+		    });
 		});
 
 		const totalAdvanceTicketQuantity = selectedTickets.reduce((total, ticket) => {
@@ -419,7 +412,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			.then(response => {
 				console.log('Response status:', response.status);
 				console.log('Response headers:', response.headers);
-				return response.text(); // 텍스트로 받아옵니다.
+				return response.text(); // 텍스트로 받아오기
 			})
 			.then(text => {
 				console.log('Response text:', text);

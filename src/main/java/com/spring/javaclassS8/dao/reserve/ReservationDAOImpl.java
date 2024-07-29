@@ -90,7 +90,7 @@ public class ReservationDAOImpl implements ReservationDAO {
 	// advance_ticket_usage 테이블 레코드 생성
 	@Override
 	public void insertAdvanceTicketUsage(int reservationId, List<Integer> advanceTicketIds) {
-		 sqlSession.getMapper(ReservationDAO.class).insertAdvanceTicketUsage(reservationId, advanceTicketIds);
+		sqlSession.getMapper(ReservationDAO.class).insertAdvanceTicketUsage(reservationId, advanceTicketIds);
 	}
 
 	// 좌석 등급에 따른 권종별 요금 가져오기

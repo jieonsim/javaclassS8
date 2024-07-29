@@ -50,7 +50,10 @@ public interface ReservationDAO {
 
 	// advance_ticket_usage 테이블 레코드 생성
 	void insertAdvanceTicketUsage(@Param("reservationId") int reservationId, @Param("advanceTicketIds") List<Integer> advanceTicketIds);
-
+	
+	// updateAdvanceTickets + insertAdvanceTicketUsage
+	// void updateAdvanceTicketsAndUsage(@Param("reservationId") int reservationId, @Param("advanceTicketIds") List<Integer> advanceTicketIds, @Param("memberId") int memberId);
+	
 	// 권종별 요금 가져오기
 	int getPriceForTicketType(@Param("sportId") int sportId, @Param("teamId") int teamId, @Param("venueId") int venueId, @Param("seatId") int seatId, @Param("ticketTypeId") int ticketTypeId);
 

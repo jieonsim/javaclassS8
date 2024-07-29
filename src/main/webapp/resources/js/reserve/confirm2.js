@@ -88,53 +88,44 @@ document.addEventListener('DOMContentLoaded', function() {
 			advanceTicketIds: Array.from(document.querySelectorAll('input[name="advanceTicketId"]')).map(input => parseInt(input.value))
 		};
 
-		if (requestData.totalAmount === 0) {
-			// 결제 금액이 0원일 경우 결제없이 바로 예매 처리
-			processReservation(requestData);
-		} else {
-			// 결제 API 호출
-			const IMP = window.IMP;
-			IMP.init("imp81328707");
+		// 결제 API 호출
+		const IMP = window.IMP;
+		IMP.init("imp81328707");
 
-			IMP.request_pay({
-				pg: "html5_inicis.INIpayTest",
-				pay_method: "card",
-				merchant_uid: "javaclassS8_" + new Date().getTime(),
-				name: `${homeTeam} vs ${awayTeam}`,
-				amount: requestData.totalAmount,
-				buyer_email: buyerEmail,
-				buyer_name: buyerName,
-				buyer_tel: buyerTel,
-			}, function(rsp) {
-				if (rsp.success) {
-					// 결제 성공 시 서버에 데이터 전송
-					processReservation(requestData);
-				} else {
-					alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
-				}
-			});
-		}
+		IMP.request_pay({
+			pg: "html5_inicis.INIpayTest",
+			pay_method: "card",
+			merchant_uid: "javaclassS8_" + new Date().getTime(),
+			name: `${homeTeam} vs ${awayTeam}`,
+			amount: totalAmount,
+			buyer_email: buyerEmail,
+			buyer_name: buyerName,
+			buyer_tel: buyerTel,
+		}, function(rsp) {
+			if (rsp.success) {
+				// 결제 성공 시 서버에 데이터 전송
+				fetch(`${ctp}/reserve/paymentAndReserve`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(requestData)
+				})
+					.then(response => response.json())
+					.then(data => {
+						if (data.success) {
+							window.location.href = `${ctp}/reserve/completed?reservationNumber=${data.reservationNumber}`;
+						} else {
+							alert('예약 처리 중 오류가 발생했습니다: ' + data.message);
+						}
+					})
+					.catch(error => {
+						console.error('Error:', error);
+						alert('서버 통신 중 오류가 발생했습니다.');
+					});
+			} else {
+				alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
+			}
+		});
 	});
-
-	function processReservation(requestData) {
-		fetch(`${ctp}/reserve/paymentAndReserve`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(requestData)
-		})
-			.then(response => response.json())
-			.then(data => {
-				if (data.success) {
-					window.location.href = `${ctp}/reserve/completed?reservationNumber=${data.reservationNumber}`;
-				} else {
-					alert('예약 처리 중 오류가 발생했습니다: ' + data.message);
-				}
-			})
-			.catch(error => {
-				console.error('Error:', error);
-				alert('서버 통신 중 오류가 발생했습니다.');
-			});
-	}
 });

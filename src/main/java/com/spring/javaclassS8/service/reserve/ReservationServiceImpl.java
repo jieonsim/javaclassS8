@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import com.spring.javaclassS8.vo.reserve.ReservationRequest;
 import com.spring.javaclassS8.vo.reserve.ReservationResponse;
 import com.spring.javaclassS8.vo.reserve.ReservationVO;
 import com.spring.javaclassS8.vo.reserve.SeatDetailVO;
+import com.spring.javaclassS8.vo.reserve.TempReservation;
 import com.spring.javaclassS8.vo.reserve.TicketTypeRequest;
 import com.spring.javaclassS8.vo.sports.CategoryVO;
 import com.spring.javaclassS8.vo.sports.GameVO;
@@ -34,10 +37,13 @@ public class ReservationServiceImpl implements ReservationService {
 	@Autowired
 	private ReservationDAO reservationDAO;
 	
-	private static final Logger logger = LoggerFactory.getLogger(ReservationServiceImpl.class);
+	@Autowired
+	private HttpSession session;
 	
 	//@Autowired
 	//private ReservationCompletedEmailService emailService;
+	
+	private static final Logger logger = LoggerFactory.getLogger(ReservationServiceImpl.class);
 
 	// 경기 고유번호로 경기 정보 가져오기
 	@Override
@@ -114,26 +120,30 @@ public class ReservationServiceImpl implements ReservationService {
 	public ReservationResponse processReservation(ReservationRequest request) throws Exception {
 		// 1. 예매번호 생성
         String reservationNumber = generateReservationNumber();
-        System.out.println("reservationNumber : " + reservationNumber);
         
-        // 2. 좌석번호 생성
+        // 2. 상세 좌석번호 생성
         List<SeatDetailVO> seatDetails = generateSeatNumbers(request.getTicketAmount());
         
-        // 3. reservations 테이블 레코드 생성
+        // 3. completed.jsp에 상세 좌석번호 보여주기 위해 TempReservation 업데이트
+        TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
+        if (tempReservation != null) {
+            tempReservation.setSeatDetails(seatDetails);
+            session.setAttribute("tempReservation", tempReservation);
+        }
+        
+        // 4. reservations 테이블 레코드 생성
         ReservationVO reservation = createReservation(request, reservationNumber);
         reservationDAO.insertReservation(reservation);
         int reservationId = reservation.getId();
-        System.out.println("Inserted reservation ID: " + reservationId);
         
-        // 4. reservation_details 테이블 레코드 생성
+        // 5. reservation_details 테이블 레코드 생성
         List<ReservationDetailVO> reservationDetails = createReservationDetails(reservationId, request, seatDetails);
-        logger.debug("Inserting reservation details : " + reservationDetails);
         reservationDAO.insertReservationDetails(reservationDetails);
         
-        // 5. seat_inventory 테이블 업데이트
+        // 6. seat_inventory 테이블 업데이트
         reservationDAO.updateSeatInventory(request.getGameId(), request.getSeatId(), request.getTicketAmount());
         
-        // 6. 예매권 사용 처리
+        // 7. 예매권 사용 처리
         if (request.getAdvanceTicketIds() != null && !request.getAdvanceTicketIds().isEmpty()) {
             reservationDAO.updateAdvanceTickets(request.getAdvanceTicketIds(), request.getMemberId());
             reservationDAO.insertAdvanceTicketUsage(reservationId, request.getAdvanceTicketIds());
@@ -145,8 +155,6 @@ public class ReservationServiceImpl implements ReservationService {
         response.setBookingFee(request.getBookingFee());
 
         return response;
-		//return new ReservationResponse(reservationNumber, "예매가 완료되었습니다.");
-        //return new ReservationResponse(true, reservationNumber, "예매가 완료되었습니다.", seatDetails, totalAmount, bookingFee);
 	}
 	
     // 10자리 숫자로 된 예매번호 생성
@@ -216,9 +224,7 @@ public class ReservationServiceImpl implements ReservationService {
                     request.getSeatId(),
                     ticketType.getTicketTypeId()
                 ));
-                System.out.println("detail : " + detail);
                 reservationDetails.add(detail);
-                System.out.println("reservationDetails : " + reservationDetails);
                 seatIndex++;
             }
         }

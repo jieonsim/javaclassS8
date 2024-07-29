@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -308,8 +308,8 @@
 							<input type="hidden" name="ticketPrice" value="${ticket.price}">
 							<input type="hidden" name="ticketTypeId" value="${ticket.ticketTypeId}">
 						</c:forEach>
-						<c:forEach var="advanceTicketNumber" items="${reservation.selectedAdvanceTickets}">
-							<input type="hidden" name="advanceTicketNumber" value="${advanceTicketNumber}">
+						<c:forEach var="advanceTicketId" items="${reservation.advanceTicketIds}">
+							<input type="hidden" name="advanceTicketId" value="${advanceTicketId}">
 						</c:forEach>
 						<div class="reserve_btn ng-scope">
 							<a class="btn btn_blank">이전단계</a>

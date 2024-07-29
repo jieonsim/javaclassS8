@@ -13,6 +13,7 @@ public class ReservationRequest {
 	private int ticketAmount;
 	private int bookingFee;
 	private List<Integer> advanceTicketIds;
+	private List<String> advanceTicketNumbers;
 	private List<TicketTypeRequest> ticketTypes;
 	private List<SeatInfo> seats;
 	
