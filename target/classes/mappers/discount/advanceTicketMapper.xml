@@ -54,6 +54,7 @@
 	<!-- 예매권번호로 예매권 정보 가져오기 -->
 	<select id="findByAdvanceTicketNumber" resultType="java.util.HashMap">
 	    SELECT 
+	    	id,
 	        advanceTicketNumber, 
 	        DATE_FORMAT(expiresAt, '%Y.%m.%d까지') AS formattedExpiresAt
 	    FROM 

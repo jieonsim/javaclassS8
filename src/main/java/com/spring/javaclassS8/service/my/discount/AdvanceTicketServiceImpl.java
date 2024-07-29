@@ -58,6 +58,10 @@ public class AdvanceTicketServiceImpl implements AdvanceTicketService {
 		if (advanceTicketDAO.registerTicket(advanceTicketNumber, member.getId())) {
 			result.put("success", true);
 			result.put("message", "예매권이 성공적으로 등록되었습니다.");
+			
+			// 새로 등록된 티켓 정보를 포함 - 예매화면에서 예매권번호 신규 등록 후 바로 사용할 수 있도록 하기위함
+			Map<String, Object> ticketInfo = getAdvanceTicketInfo(advanceTicketNumber);
+			result.put("ticket", ticketInfo);
 		} else {
 			result.put("success", false);
 			result.put("message", "예매권 등록에 실패했습니다.");
@@ -129,10 +133,10 @@ public class AdvanceTicketServiceImpl implements AdvanceTicketService {
 	// 예매권번호로 예매권 정보 가져오기
 	@Override
 	public Map<String, Object> getAdvanceTicketInfo(String advanceTicketNumber) {
-	    Map<String, Object> ticket = advanceTicketDAO.findByAdvanceTicketNumber(advanceTicketNumber);
-	    if (ticket != null) {
-	        return ticket;
-	    }
-	    return null;
+		Map<String, Object> ticket = advanceTicketDAO.findByAdvanceTicketNumber(advanceTicketNumber);
+		if (ticket != null) {
+			return ticket;
+		}
+		return null;
 	}
 }

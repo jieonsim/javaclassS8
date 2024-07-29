@@ -47,7 +47,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 
-	// 초기화 함수 수정
 	function initializeSelectBoxes() {
 		document.querySelectorAll('.select._price_cnt').forEach(function(selectElement) {
 			selectElement.addEventListener('click', function(e) {
@@ -80,12 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
 				const ticketTypeId = this.getAttribute('data-ticketType-id');
 				if (certifyButton) {
 					certifyButton.setAttribute('data-ticketType-id', ticketTypeId);
-					// 선택된 매수가 변경되면 예매권 체크박스 상태 초기화
-					document.querySelectorAll(`#coupon${ticketTypeId} input[name="ticket_checkbox"]`).forEach(checkbox => {
-						checkbox.checked = false;
-						checkbox.closest('.checkbox').classList.remove('checked');
-					});
-					updateBookingInfo();
 				}
 			});
 		});
@@ -118,42 +111,42 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 	function showCertificationArea(button, ticketTypeId, selectedQuantity) {
-		console.log('showCertificationArea Ticket Type ID:', ticketTypeId);
+		console.log('showCertificationArea Ticket Type ID:', ticketTypeId); // 디버깅을 위해 추가
 		const certificationHTML = `
-        <tr>
-            <td colspan="4" class="td_ly" id="certify${ticketTypeId}" style="display: table-cell;">
-                <div class="confirm_area _coupon">
-                    <div class="cnfbx">
-                        <div class="cell">
-                            <span class="inp_tx">
-                                <label for="ticket_num">예매권번호</label>
-                                <input type="text" id="ticket_num" value="">
-                            </span>
+            <tr>
+                <td colspan="4" class="td_ly" id="certify${ticketTypeId}" style="display: table-cell;">
+                    <div class="confirm_area _coupon">
+                        <div class="cnfbx">
+                            <div class="cell">
+                                <span class="inp_tx">
+                                    <label for="ticket_num">예매권번호</label>
+                                    <input type="text" id="ticket_num" value="">
+                                </span>
+                            </div>
+                            <div class="cell" style="width: 62px">
+                                <button type="button" class="btn btn_blank" data-certification-code="ADVANCE_TICKET">
+                                    <span>등록하기</span>
+                                </button>
+                            </div>
                         </div>
-                        <div class="cell" style="width: 62px">
-                            <button type="button" class="btn btn_blank" data-certification-code="ADVANCE_TICKET">
-                                <span>등록하기</span>
-                            </button>
-                        </div>
+                        <table class="table3">
+                            <caption><span>권종인증 리스트</span></caption>
+                            <colgroup>
+                                <col style="width: 15%"><col style="width: 45%">
+                                <col style="width: 20%"><col style="width: 20%">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th scope="col">선택</th><th scope="col">예매권번호</th>
+                                    <th scope="col">사용가능매수</th><th scope="col">유효기간</th>
+                                </tr>
+                            </thead>
+                            <tbody id="coupon${ticketTypeId}"></tbody>
+                        </table>
                     </div>
-                    <table class="table3">
-                        <caption><span>권종인증 리스트</span></caption>
-                        <colgroup>
-                            <col style="width: 15%"><col style="width: 45%">
-                            <col style="width: 20%"><col style="width: 20%">
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th scope="col">선택</th><th scope="col">예매권번호</th>
-                                <th scope="col">사용가능매수</th><th scope="col">유효기간</th>
-                            </tr>
-                        </thead>
-                        <tbody id="coupon${ticketTypeId}"></tbody>
-                    </table>
-                </div>
-            </td>
-        </tr>
-    `;
+                </td>
+            </tr>
+        `;
 
 		button.closest('tr').insertAdjacentHTML('afterend', certificationHTML);
 		renderAdvanceTickets(ticketTypeId, selectedQuantity);
@@ -227,15 +220,15 @@ document.addEventListener('DOMContentLoaded', function() {
 		const couponBody = document.getElementById(`coupon${ticketTypeId}`);
 		const newRow = document.createElement('tr');
 		newRow.innerHTML = `
-        <td>
-            <span class="checkbox">
-                <input type="checkbox" id="ticket_${newTicket.advanceTicketNumber}" name="ticket_checkbox" data-ticket-number="${newTicket.advanceTicketNumber}" data-ticket-id="${newTicket.id}">
-            </span>
-        </td>
-        <td class="number">${newTicket.advanceTicketNumber}</td>
-        <td>1매</td>
-        <td>${newTicket.formattedExpiresAt}</td>
-    `;
+            <td>
+                <span class="checkbox">
+                    <input type="checkbox" id="ticket_${newTicket.advanceTicketNumber}" name="ticket_checkbox" data-ticket-number="${newTicket.advanceTicketNumber}" data-ticket-id="${newTicket.id}">
+                </span>
+            </td>
+            <td class="number">${newTicket.advanceTicketNumber}</td>
+            <td>1매</td>
+            <td>${newTicket.formattedExpiresAt}</td>
+        `;
 
 		couponBody.insertBefore(newRow, couponBody.firstChild);
 		document.getElementById('ticket_num').value = '';
@@ -248,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		checkbox.addEventListener('click', function(e) {
 			const input = this.querySelector('input[type="checkbox"]');
 			input.checked = !input.checked;
-			const selectedQuantity = parseInt(document.querySelector(`#selectList${ticketTypeId} li._selected`).getAttribute('data-value'), 10);
+			const selectedQuantity = parseInt(document.querySelector('.select._price_cnt').textContent, 10);
 			const checkedCount = document.querySelectorAll(`#coupon${ticketTypeId} input[name="ticket_checkbox"]:checked`).length;
 
 			// 매수 체크 로직
@@ -260,14 +253,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			updateBookingInfo();
 			e.preventDefault(); // 이벤트 전파 방지
 		});
-
-		// 전역 advanceTicketsData 업데이트
-		if (!window.advanceTicketsData) {
-			window.advanceTicketsData = [];
-		}
-		window.advanceTicketsData.push(newTicket);
-
-		updateBookingInfo();
 	}
 
 	function renderAdvanceTickets(ticketTypeId, selectedQuantity) {
@@ -278,17 +263,17 @@ document.addEventListener('DOMContentLoaded', function() {
 			couponBody.innerHTML = '<tr class="_noData"><td colspan="4">예매권을 등록해주세요.</td></tr>';
 		} else {
 			couponBody.innerHTML = advanceTickets.map(ticket => `
-            <tr>
-                <td>
-                    <span class="checkbox">
-                        <input type="checkbox" id="ticket_${ticket.advanceTicketNumber}" name="ticket_checkbox" data-ticket-number="${ticket.advanceTicketNumber}" data-ticket-id="${ticket.id}">
-                    </span>
-                </td>
-                <td class="number">${ticket.advanceTicketNumber}</td>
-                <td>1매</td>
-                <td>${ticket.formattedExpiresAt}</td>
-            </tr>
-        `).join('');
+                <tr>
+                    <td>
+                        <span class="checkbox">
+                            <input type="checkbox" id="ticket_${ticket.advanceTicketNumber}" name="ticket_checkbox" data-ticket-number="${ticket.advanceTicketNumber}" data-ticket-id="${ticket.id}">
+                        </span>
+                    </td>
+                    <td class="number">${ticket.advanceTicketNumber}</td>
+                    <td>1매</td>
+                    <td>${ticket.formattedExpiresAt}</td>
+                </tr>
+            `).join('');
 		}
 
 		// 체크박스 이벤트 리스너 추가
@@ -296,7 +281,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			checkbox.addEventListener('click', function(e) {
 				const input = this.querySelector('input[type="checkbox"]');
 				input.checked = !input.checked;
-				const selectedQuantity = parseInt(document.querySelector(`#selectList${ticketTypeId} li._selected`).getAttribute('data-value'), 10);
 				const checkedCount = document.querySelectorAll(`#coupon${ticketTypeId} input[name="ticket_checkbox"]:checked`).length;
 				if (checkedCount > selectedQuantity) {
 					alert('선택한 매수 이상의 예매권을 사용할 수 없습니다.');
@@ -395,17 +379,13 @@ document.addEventListener('DOMContentLoaded', function() {
 			return;
 		}
 
-		// 수정
 		const selectedAdvanceTickets = [];
 		document.querySelectorAll('input[name="ticket_checkbox"]:checked').forEach(function(checkbox) {
-			const id = checkbox.getAttribute('data-ticket-id');
-			const number = checkbox.getAttribute('data-ticket-number');
-			if (id && number) {  // id와 number가 모두 존재할 때만 추가
-				selectedAdvanceTickets.push({
-					id: id,
-					number: number
-				});
-			}
+			// 수정
+			selectedAdvanceTickets.push({
+				id: checkbox.getAttribute('data-ticket-id'),
+				number: checkbox.getAttribute('data-ticket-number')
+			});
 		});
 
 		const totalAdvanceTicketQuantity = selectedTickets.reduce((total, ticket) => {
@@ -434,18 +414,24 @@ document.addEventListener('DOMContentLoaded', function() {
 			.then(response => {
 				console.log('Response status:', response.status);
 				console.log('Response headers:', response.headers);
-				return response.json();
+				return response.text(); // 텍스트로 받아오기
 			})
-			.then(data => {
-				console.log('Parsed data:', data);
-				if (data.error) {
-					throw new Error(data.error);
+			.then(text => {
+				console.log('Response text:', text);
+				try {
+					const data = JSON.parse(text);
+					console.log('Parsed data:', data);
+					if (data.error) {
+						throw new Error(data.error);
+					}
+					window.location.href = `${ctp}/reserve/confirm`;
+				} catch (e) {
+					throw new Error(text || '알 수 없는 오류가 발생했습니다.');
 				}
-				window.location.href = `${ctp}/reserve/confirm`;
 			})
 			.catch(error => {
 				console.error('Error:', error);
-				alert(error.message || '알 수 없는 오류가 발생했습니다.');
+				alert(error.message);
 			});
 	});
 

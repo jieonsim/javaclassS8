@@ -1,6 +1,7 @@
 package com.spring.javaclassS8.controller.reserve;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -10,13 +11,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -202,19 +203,13 @@ public class ReservationController {
 		return ResponseEntity.ok(advanceTicketService.validateAdvanceTicket(advanceTicketNumber));
 	}
 
-	// depth2 > 스포츠 예매권 신규 등록
 	@PostMapping("/registerAdvanceTicket")
 	@ResponseBody
 	public ResponseEntity<?> registerAdvanceTicket(@RequestBody Map<String, String> payload) {
-		String advanceTicketNumber = payload.get("advanceTicketNumber");
-		Map<String, Object> result = advanceTicketService.registerAdvanceTicket(advanceTicketNumber);
-
-		if ((Boolean) result.get("success")) {
-			// 새로 등록된 티켓 정보를 포함
-			Map<String, Object> ticket = advanceTicketService.getAdvanceTicketInfo(advanceTicketNumber);
-			result.put("ticket", ticket);
-		}
-		return ResponseEntity.ok(result);
+	    String advanceTicketNumber = payload.get("advanceTicketNumber");
+	    Map<String, Object> result = advanceTicketService.registerAdvanceTicket(advanceTicketNumber);
+	    
+	    return ResponseEntity.ok(result);
 	}
 
 	@PostMapping("/saveTicketSelection")
@@ -251,11 +246,21 @@ public class ReservationController {
 	        if (selectedAdvanceTicketsData != null) {
 	            for (Map<String, Object> ticket : selectedAdvanceTicketsData) {
 	                String number = (String) ticket.get("number");
-	                // 문자열을 정수로 변환
-	                Integer id = ticket.get("id") != null ? Integer.parseInt(ticket.get("id").toString()) : null;
-	                if (number != null && id != null) {
-	                    selectedAdvanceTickets.add(number);
-	                    advanceTicketIds.add(id);
+	                Object idObj = ticket.get("id");
+	                
+	                if (number != null && idObj != null) {
+	                    try {
+	                        Integer id = Integer.parseInt(idObj.toString());
+	                        selectedAdvanceTickets.add(number);
+	                        advanceTicketIds.add(id);
+	                    } catch (NumberFormatException e) {
+	                        // 로그 출력
+	                        System.out.println("Invalid id format for ticket: " + number);
+	                        // 오류 발생 시 해당 티켓은 건너뛰기
+	                    }
+	                } else {
+	                    // number나 id가 null인 경우 로그 출력
+	                    System.out.println("Incomplete ticket data: " + ticket);
 	                }
 	            }
 	        }
@@ -277,10 +282,16 @@ public class ReservationController {
 	        tempReservation.setCurrentDepth(2);
 	        session.setAttribute("tempReservation", tempReservation);
 
-	        return ResponseEntity.ok().body("{\"success\": true, \"message\": \"티켓 선택이 저장되었습니다.\"}");
+	        //return ResponseEntity.ok().body("{\"success\": true, \"message\": \"티켓 선택이 저장되었습니다.\"}");
+	        return ResponseEntity.ok()
+	                .contentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8))
+	                .body(Map.of("success", true, "message", "티켓 선택이 저장되었습니다."));
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\": \"" + e.getMessage() + "\"}");
+	        //return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\": \"" + e.getMessage() + "\"}");
+	        return ResponseEntity.badRequest()
+	                .contentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8))
+	                .body(Map.of("error", "티켓 선택을 저장하는 중 오류가 발생했습니다."));
 	    }
 	}
 

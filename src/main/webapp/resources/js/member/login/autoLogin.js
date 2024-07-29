@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			})
 			.catch(error => {
 				console.error('Error checking login status:', error);
+				alert('Error checking login status' + error);
 				clearLoginSession();
 			});
 	}
