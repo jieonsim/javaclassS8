@@ -122,7 +122,7 @@ public class ReservationController {
 		return "reserve/seat";
 	}
 
-	// depth1에서 다음단계 넘어갈 때 세션 저장
+	// depth1의 세션 저장
 	@PostMapping("/saveTempReservation")
 	public String saveTempReservation(@RequestParam int gameId, @RequestParam int seatId, @RequestParam int ticketAmount, HttpSession session) {
 		TempReservation tempReservation = new TempReservation(gameId, seatId, ticketAmount, 1, // currentDepth
@@ -202,7 +202,9 @@ public class ReservationController {
 		String advanceTicketNumber = payload.get("advanceTicketNumber");
 		return ResponseEntity.ok(advanceTicketService.validateAdvanceTicket(advanceTicketNumber));
 	}
-
+	
+	
+	// depth2 > 스포츠 예매권 신규 등록
 	@PostMapping("/registerAdvanceTicket")
 	@ResponseBody
 	public ResponseEntity<?> registerAdvanceTicket(@RequestBody Map<String, String> payload) {
@@ -212,6 +214,7 @@ public class ReservationController {
 	    return ResponseEntity.ok(result);
 	}
 
+	// depth2의 세션 저장
 	@PostMapping("/saveTicketSelection")
 	@ResponseBody
 	public ResponseEntity<?> saveTicketSelection(@RequestBody Map<String, Object> ticketSelectionData, HttpSession session) {
@@ -221,7 +224,8 @@ public class ReservationController {
 	            return ResponseEntity.badRequest().body("{\"error\": \"예약 정보가 없습니다.\"}");
 	        }
 
-	        List<Map<String, Object>> ticketsData = (List<Map<String, Object>>) ticketSelectionData.get("tickets");
+	        @SuppressWarnings("unchecked")
+			List<Map<String, Object>> ticketsData = (List<Map<String, Object>>) ticketSelectionData.get("tickets");
 	        List<TicketVO> selectedTickets = new ArrayList<>();
 
 	        int totalSelectedTickets = 0;
@@ -239,7 +243,8 @@ public class ReservationController {
 	            return ResponseEntity.badRequest().body("{\"error\": \"티켓종류 및 매수를 선택해주세요.\"}");
 	        }
 
-	        List<Map<String, Object>> selectedAdvanceTicketsData = (List<Map<String, Object>>) ticketSelectionData.get("selectedAdvanceTickets");
+	        @SuppressWarnings("unchecked")
+			List<Map<String, Object>> selectedAdvanceTicketsData = (List<Map<String, Object>>) ticketSelectionData.get("selectedAdvanceTickets");
 	        List<String> selectedAdvanceTickets = new ArrayList<>();
 	        List<Integer> advanceTicketIds = new ArrayList<>();
 	        
@@ -282,13 +287,11 @@ public class ReservationController {
 	        tempReservation.setCurrentDepth(2);
 	        session.setAttribute("tempReservation", tempReservation);
 
-	        //return ResponseEntity.ok().body("{\"success\": true, \"message\": \"티켓 선택이 저장되었습니다.\"}");
 	        return ResponseEntity.ok()
 	                .contentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8))
 	                .body(Map.of("success", true, "message", "티켓 선택이 저장되었습니다."));
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        //return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\": \"" + e.getMessage() + "\"}");
 	        return ResponseEntity.badRequest()
 	                .contentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8))
 	                .body(Map.of("error", "티켓 선택을 저장하는 중 오류가 발생했습니다."));
@@ -353,10 +356,14 @@ public class ReservationController {
 		model.addAttribute("ticketPrice", ticketPrice);
 		model.addAttribute("bookingFee", bookingFee);
 		model.addAttribute("totalAmount", totalAmount);
+		
+		// 현재 depth 세션 저장
+		tempReservation.setCurrentDepth(3);
 
 		return "reserve/confirm";
 	}
-
+	
+	// 결제 및 예매 요청
 	@PostMapping("/paymentAndReserve")
 	@ResponseBody
 	public ResponseEntity<?> paymentAndReserve(@RequestBody ReservationRequest request, HttpSession session) {
@@ -382,6 +389,7 @@ public class ReservationController {
 		}
 	}
 
+	// 예매 완료 뷰
 	@GetMapping("/completed")
 	public String reserveCompleted(@RequestParam String reservationNumber, Model model, HttpSession session) {
 		TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");

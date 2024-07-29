@@ -275,5 +275,4 @@ document.addEventListener('DOMContentLoaded', function() {
 		e.preventDefault();
 		location.reload();
 	});
-
 });

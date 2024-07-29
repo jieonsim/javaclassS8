@@ -175,10 +175,10 @@ filter:alpha(opacity=60);
 .reserve_btn .btn_full{width:208px;font-weight:700}
 .reserve_btn .btn_full_point{font-weight:700}
 .reserve_btn .btn_full_point2{font-weight:700}
-.reserve_btn .btn_blank{width:101px;font-weight:500;vertical-align:bottom}
+.reserve_btn .btn_blank{width:101px;font-weight:500;vertical-align:bottom;cursor:pointer;font-family:Pretendard-SemiBold}
 .reserve_btn .btn_blank + .btn_full,
 .reserve_btn .btn_blank + .btn_full_point,
-.reserve_btn .btn_blank + .btn_full_point2{width:101px;vertical-align:bottom}
+.reserve_btn .btn_blank + .btn_full_point2{width:101px;vertical-align:bottom;cursor:pointer}
 .reserve_btn .btn_blank.small_width + .btn_full,
 .reserve_btn .btn_blank.small_width + .btn_full_point,
 .reserve_btn .btn_blank.small_width + .btn_full_point2,
