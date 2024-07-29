@@ -98,6 +98,12 @@ public class ReservationController {
 			return "redirect:/login";
 		}
 
+		TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
+		if (tempReservation != null && System.currentTimeMillis() > tempReservation.getExpirationTime()) {
+			session.removeAttribute("tempReservation");
+			return "redirect:/reserve/error";
+		}
+
 		GameVO game = reservationService.getGameById(gameId);
 
 		// 날짜와 시간 포맷팅
@@ -143,8 +149,9 @@ public class ReservationController {
 		}
 
 		TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
-		if (tempReservation == null) {
-			return "redirect:/reserve/seat";
+		if (tempReservation == null || System.currentTimeMillis() > tempReservation.getExpirationTime()) {
+			session.removeAttribute("tempReservation");
+			return "redirect:/reserve/error";
 		}
 
 		int gameId = tempReservation.getGameId();
@@ -202,108 +209,104 @@ public class ReservationController {
 		String advanceTicketNumber = payload.get("advanceTicketNumber");
 		return ResponseEntity.ok(advanceTicketService.validateAdvanceTicket(advanceTicketNumber));
 	}
-	
-	
+
 	// depth2 > 스포츠 예매권 신규 등록
 	@PostMapping("/registerAdvanceTicket")
 	@ResponseBody
 	public ResponseEntity<?> registerAdvanceTicket(@RequestBody Map<String, String> payload) {
-	    String advanceTicketNumber = payload.get("advanceTicketNumber");
-	    Map<String, Object> result = advanceTicketService.registerAdvanceTicket(advanceTicketNumber);
-	    
-	    return ResponseEntity.ok(result);
+		String advanceTicketNumber = payload.get("advanceTicketNumber");
+		Map<String, Object> result = advanceTicketService.registerAdvanceTicket(advanceTicketNumber);
+
+		return ResponseEntity.ok(result);
 	}
 
 	// depth2의 세션 저장
 	@PostMapping("/saveTicketSelection")
 	@ResponseBody
 	public ResponseEntity<?> saveTicketSelection(@RequestBody Map<String, Object> ticketSelectionData, HttpSession session) {
-	    try {
-	        TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
-	        if (tempReservation == null) {
-	            return ResponseEntity.badRequest().body("{\"error\": \"예약 정보가 없습니다.\"}");
+		try {
+			TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
+	        if (tempReservation == null || System.currentTimeMillis() > tempReservation.getExpirationTime()) {
+	            session.removeAttribute("tempReservation");
+	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+	                    .body(Map.of("error", "세션이 만료되었습니다. 다시 예매를 진행해 주세요.", "sessionExpired", true));
 	        }
-
-	        @SuppressWarnings("unchecked")
+			
+			@SuppressWarnings("unchecked")
 			List<Map<String, Object>> ticketsData = (List<Map<String, Object>>) ticketSelectionData.get("tickets");
-	        List<TicketVO> selectedTickets = new ArrayList<>();
+			List<TicketVO> selectedTickets = new ArrayList<>();
 
-	        int totalSelectedTickets = 0;
-	        for (Map<String, Object> ticketData : ticketsData) {
-	            TicketVO ticket = new TicketVO();
-	            ticket.setType((String) ticketData.get("type"));
-	            ticket.setQuantity((Integer) ticketData.get("quantity"));
-	            ticket.setPrice((Integer) ticketData.get("price"));
-	            ticket.setTicketTypeId((Integer) ticketData.get("ticketTypeId"));
-	            selectedTickets.add(ticket);
-	            totalSelectedTickets += ticket.getQuantity();
-	        }
+			int totalSelectedTickets = 0;
+			for (Map<String, Object> ticketData : ticketsData) {
+				TicketVO ticket = new TicketVO();
+				ticket.setType((String) ticketData.get("type"));
+				ticket.setQuantity((Integer) ticketData.get("quantity"));
+				ticket.setPrice((Integer) ticketData.get("price"));
+				ticket.setTicketTypeId((Integer) ticketData.get("ticketTypeId"));
+				selectedTickets.add(ticket);
+				totalSelectedTickets += ticket.getQuantity();
+			}
 
-	        if (totalSelectedTickets == 0) {
-	            return ResponseEntity.badRequest().body("{\"error\": \"티켓종류 및 매수를 선택해주세요.\"}");
-	        }
+			if (totalSelectedTickets == 0) {
+				return ResponseEntity.badRequest().body("{\"error\": \"티켓종류 및 매수를 선택해주세요.\"}");
+			}
 
-	        @SuppressWarnings("unchecked")
+			@SuppressWarnings("unchecked")
 			List<Map<String, Object>> selectedAdvanceTicketsData = (List<Map<String, Object>>) ticketSelectionData.get("selectedAdvanceTickets");
-	        List<String> selectedAdvanceTickets = new ArrayList<>();
-	        List<Integer> advanceTicketIds = new ArrayList<>();
-	        
-	        if (selectedAdvanceTicketsData != null) {
-	            for (Map<String, Object> ticket : selectedAdvanceTicketsData) {
-	                String number = (String) ticket.get("number");
-	                Object idObj = ticket.get("id");
-	                
-	                if (number != null && idObj != null) {
-	                    try {
-	                        Integer id = Integer.parseInt(idObj.toString());
-	                        selectedAdvanceTickets.add(number);
-	                        advanceTicketIds.add(id);
-	                    } catch (NumberFormatException e) {
-	                        // 로그 출력
-	                        System.out.println("Invalid id format for ticket: " + number);
-	                        // 오류 발생 시 해당 티켓은 건너뛰기
-	                    }
-	                } else {
-	                    // number나 id가 null인 경우 로그 출력
-	                    System.out.println("Incomplete ticket data: " + ticket);
-	                }
-	            }
-	        }
+			List<String> selectedAdvanceTickets = new ArrayList<>();
+			List<Integer> advanceTicketIds = new ArrayList<>();
 
-	        boolean hasAdvanceTicket = selectedTickets.stream().anyMatch(ticket -> "ADVANCE_TICKET".equals(ticket.getType()));
-	        int totalAdvanceTicketQuantity = selectedTickets.stream()
-	            .filter(ticket -> "ADVANCE_TICKET".equals(ticket.getType()))
-	            .mapToInt(TicketVO::getQuantity)
-	            .sum();
+			if (selectedAdvanceTicketsData != null) {
+				for (Map<String, Object> ticket : selectedAdvanceTicketsData) {
+					String number = (String) ticket.get("number");
+					Object idObj = ticket.get("id");
 
-	        if (hasAdvanceTicket && selectedAdvanceTickets.size() != totalAdvanceTicketQuantity) {
-	            return ResponseEntity.badRequest().body("{\"error\": \"스포츠 예매권 등록 및 선택 후 예매가 가능합니다.\"}");
-	        }
+					if (number != null && idObj != null) {
+						try {
+							Integer id = Integer.parseInt(idObj.toString());
+							selectedAdvanceTickets.add(number);
+							advanceTicketIds.add(id);
+						} catch (NumberFormatException e) {
+							// 로그 출력
+							System.out.println("Invalid id format for ticket: " + number);
+							// 오류 발생 시 해당 티켓은 건너뛰기
+						}
+					} else {
+						// number나 id가 null인 경우 로그 출력
+						System.out.println("Incomplete ticket data: " + ticket);
+					}
+				}
+			}
 
-	        // 세션 업데이트
-	        tempReservation.setSelectedTickets(selectedTickets);
-	        tempReservation.setSelectedAdvanceTickets(selectedAdvanceTickets);
-	        tempReservation.setAdvanceTicketIds(advanceTicketIds);
-	        tempReservation.setCurrentDepth(2);
-	        session.setAttribute("tempReservation", tempReservation);
+			boolean hasAdvanceTicket = selectedTickets.stream().anyMatch(ticket -> "ADVANCE_TICKET".equals(ticket.getType()));
+			int totalAdvanceTicketQuantity = selectedTickets.stream().filter(ticket -> "ADVANCE_TICKET".equals(ticket.getType())).mapToInt(TicketVO::getQuantity).sum();
 
-	        return ResponseEntity.ok()
-	                .contentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8))
-	                .body(Map.of("success", true, "message", "티켓 선택이 저장되었습니다."));
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return ResponseEntity.badRequest()
-	                .contentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8))
-	                .body(Map.of("error", "티켓 선택을 저장하는 중 오류가 발생했습니다."));
-	    }
+			if (hasAdvanceTicket && selectedAdvanceTickets.size() != totalAdvanceTicketQuantity) {
+				return ResponseEntity.badRequest().body("{\"error\": \"스포츠 예매권 등록 및 선택 후 예매가 가능합니다.\"}");
+			}
+
+			// 세션 업데이트
+			tempReservation.setSelectedTickets(selectedTickets);
+			tempReservation.setSelectedAdvanceTickets(selectedAdvanceTickets);
+			tempReservation.setAdvanceTicketIds(advanceTicketIds);
+			tempReservation.setCurrentDepth(2);
+			session.setAttribute("tempReservation", tempReservation);
+
+			return ResponseEntity.ok().contentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8)).body(Map.of("success", true, "message", "티켓 선택이 저장되었습니다."));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.badRequest().contentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8)).body(Map.of("error", "티켓 선택을 저장하는 중 오류가 발생했습니다."));
+		}
 	}
 
 	// depth3 최종 확인 및 취소 정책 동의
 	@GetMapping("/confirm")
 	public String reserveConfirm(Model model, HttpSession session) {
 		TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
-		if (tempReservation == null || tempReservation.getCurrentDepth() != 2) {
-			return "redirect:/reserve/seat?gameId=" + tempReservation.getGameId();
+
+		if (tempReservation == null || tempReservation.getCurrentDepth() != 2 || System.currentTimeMillis() > tempReservation.getExpirationTime()) {
+			session.removeAttribute("tempReservation");
+			return "redirect:/reserve/error";
 		}
 
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
@@ -342,7 +345,7 @@ public class ReservationController {
 		int bookingFee = calculateBookingFee(tempReservation.getSelectedTickets(), bookingPolicy);
 		int totalAmount = ticketPrice + bookingFee;
 
-		model.addAttribute("reservation", tempReservation);
+		model.addAttribute("tempReservation", tempReservation);
 		model.addAttribute("member", member);
 		model.addAttribute("game", game);
 		model.addAttribute("seat", seat);
@@ -356,13 +359,13 @@ public class ReservationController {
 		model.addAttribute("ticketPrice", ticketPrice);
 		model.addAttribute("bookingFee", bookingFee);
 		model.addAttribute("totalAmount", totalAmount);
-		
+
 		// 현재 depth 세션 저장
 		tempReservation.setCurrentDepth(3);
 
 		return "reserve/confirm";
 	}
-	
+
 	// 결제 및 예매 요청
 	@PostMapping("/paymentAndReserve")
 	@ResponseBody
@@ -389,38 +392,39 @@ public class ReservationController {
 		}
 	}
 
-	// 예매 완료 뷰
+	// 예매 완료 안내 뷰
 	@GetMapping("/completed")
 	public String reserveCompleted(@RequestParam String reservationNumber, Model model, HttpSession session) {
 		TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
-		
-		if (tempReservation == null || member == null) {
-			return "redirect:/reserve/error";
-		}
-		
+
+	    if (tempReservation == null || member == null || System.currentTimeMillis() > tempReservation.getExpirationTime()) {
+	        session.removeAttribute("tempReservation");
+	        return "redirect:/reserve/error";
+	    }
+
 		int gameId = tempReservation.getGameId();
 		int seatId = tempReservation.getSeatId();
 		int ticketAmount = tempReservation.getTicketAmount();
-		
+
 		GameVO game = reservationService.getGameById(gameId);
 		SportBookingPolicyVO bookingPolicy = reservationService.getBookingPolicyBySportId(game.getSportId());
-		
+
 		// 경기일시
 		LocalDate gameDateLocal = LocalDate.parse(game.getGameDate());
 		LocalTime gameTimeLocal = LocalTime.parse(game.getGameTime());
 		LocalDateTime gameDateTime = LocalDateTime.of(gameDateLocal, gameTimeLocal);
 		DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd(E) HH:mm");
-		
+
 		// 좌석
 		SeatVO seat = reservationService.getSeatById(seatId);
 		List<SeatDetailVO> seatDetails = tempReservation.getSeatDetails();
-		
+
 		// 요금
 		int ticketPrice = calculateTicketPrice(tempReservation.getSelectedTickets());
 		int bookingFee = calculateBookingFee(tempReservation.getSelectedTickets(), bookingPolicy);
 		int totalAmount = ticketPrice + bookingFee;
-		
+
 		model.addAttribute("reservationNumber", reservationNumber);
 		model.addAttribute("member", member);
 		model.addAttribute("game", game);
@@ -453,5 +457,16 @@ public class ReservationController {
 	@GetMapping("/error")
 	public String error() {
 		return "reserve/error";
+	}
+	
+	@GetMapping("/checkSession")
+	@ResponseBody
+	public ResponseEntity<?> checkSession(HttpSession session) {
+	    TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
+	    if (tempReservation == null || System.currentTimeMillis() > tempReservation.getExpirationTime()) {
+	        session.removeAttribute("tempReservation");
+	        return ResponseEntity.ok(Map.of("sessionExpired", true));
+	    }
+	    return ResponseEntity.ok(Map.of("sessionExpired", false));
 	}
 }

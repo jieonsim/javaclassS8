@@ -72,10 +72,6 @@
 	    AND seatId = #{seatId}
 	    AND ticketTypeId = #{ticketTypeId}
     </select>
-    
-   	<select id="getReservationById" parameterType="int" resultType="com.spring.javaclassS8.vo.reserve.ReservationVO">
-        SELECT * FROM reservations WHERE id = #{reservationId}
-    </select>
 	
 	<!-- 예매 처리 : reservations 테이블 레코드 생성 -->
 	<insert id="insertReservation" parameterType="com.spring.javaclassS8.vo.reserve.ReservationVO" useGeneratedKeys="true" keyProperty="id">

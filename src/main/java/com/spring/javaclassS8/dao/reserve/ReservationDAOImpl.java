@@ -98,9 +98,4 @@ public class ReservationDAOImpl implements ReservationDAO {
 	public int getPriceForTicketType(int sportId, int teamId, int venueId, int seatId, int ticketTypeId) {
 		return sqlSession.getMapper(ReservationDAO.class).getPriceForTicketType(sportId, teamId, venueId, seatId, ticketTypeId);
 	}
-
-	@Override
-	public ReservationVO getReservationById(int reservationId) {
-		return sqlSession.getMapper(ReservationDAO.class).getReservationById(reservationId);
-	}
 }

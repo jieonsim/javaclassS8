@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	});
 
+	// 예매 처리 함수
 	function processReservation(requestData) {
 		fetch(`${ctp}/reserve/paymentAndReserve`, {
 			method: 'POST',
@@ -137,4 +138,14 @@ document.addEventListener('DOMContentLoaded', function() {
 				alert('서버 통신 중 오류가 발생했습니다.');
 			});
 	}
+
+	// 이전 단계 버튼 처리
+	const prevStepBtn = document.querySelector('.reserve_btn .btn_blank');
+	prevStepBtn.addEventListener('click', function(e) {
+		e.preventDefault();
+
+		if (confirm('이전 단계로 돌아가면 현재의 예매 정보를 잃게 됩니다. 계속하시겠습니까?')) {
+			window.location.href = `${ctp}/reserve/price`;
+		}
+	});
 });

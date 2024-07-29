@@ -555,7 +555,7 @@ filter:alpha(opacity=60);
 .reserve_left .notice_area .title_notice{display:block;height:auto;margin:0;color:#242428;font-size:16px;line-height:24px}
 .reserve_left .notice_area .notice_list{margin-top:5px;padding:12px 20px;border:1px solid #ecedf2;line-height:22px;background:#fff;box-sizing:border-box}
 .reserve_left .notice_area .notice_item{display:inline-block;width:100%;margin:0;vertical-align:middle;letter-spacing:0;box-sizing:border-box}
-.reserve_left .notice_area .notice_item .pre_txt{margin:0;font-size:14px;line-height:22px;white-space:pre-wrap}
+.reserve_left .notice_area .notice_item .pre_txt{margin:0;font-size:14px;line-height:22px;white-space:pre-wrap;font-family:'Pretendard-Regular'}
 .reserve_left .additional_benefits .notice_item{padding-left:9px;text-indent:-9px} /* 추가혜택 안내 */
 
 .reserve_left .reserve_step3{margin-top:10px}

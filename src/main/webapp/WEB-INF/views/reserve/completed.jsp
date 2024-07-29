@@ -60,7 +60,7 @@
 						</div>
 						<div class="bx">
 							<dt>예매번호</dt>
-							<dd class="ng-binding">${reservationNumber}&nbsp;(총${ticketAmount}매)</dd>
+							<dd class="ng-binding">${reservationNumber}&nbsp;(총&nbsp;${ticketAmount}매)</dd>
 						</div>
 						<div class="bx">
 							<dt>티켓명</dt>

@@ -142,6 +142,12 @@ public class ReservationServiceImpl implements ReservationService {
         
         // 6. seat_inventory 테이블 업데이트
         reservationDAO.updateSeatInventory(request.getGameId(), request.getSeatId(), request.getTicketAmount());
+        int gameId = request.getGameId();
+        int seatId = request.getSeatId();
+        int ticketAmount = request.getTicketAmount();
+        System.out.println("gameId : " + gameId);
+        System.out.println("seatId : " + seatId);
+        System.out.println("ticketAmount : " + ticketAmount);
         
         // 7. 예매권 사용 처리
         if (request.getAdvanceTicketIds() != null && !request.getAdvanceTicketIds().isEmpty()) {

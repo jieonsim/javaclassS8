@@ -395,7 +395,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			return;
 		}
 
-		// 수정
 		const selectedAdvanceTickets = [];
 		document.querySelectorAll('input[name="ticket_checkbox"]:checked').forEach(function(checkbox) {
 			const id = checkbox.getAttribute('data-ticket-id');
@@ -438,17 +437,35 @@ document.addEventListener('DOMContentLoaded', function() {
 			})
 			.then(data => {
 				console.log('Parsed data:', data);
-				if (data.error) {
-					throw new Error(data.error);
+				if (data.sessionExpired) {
+					window.location.href = `${ctp}/reserve/error`;
+					return;
 				}
-				window.location.href = `${ctp}/reserve/confirm`;
+				if (data.success) {
+					window.location.href = `${ctp}/reserve/confirm`;
+				} else {
+					alert(data.error || '티켓 선택 저장에 실패했습니다.');
+				}
 			})
 			.catch(error => {
 				console.error('Error:', error);
-				alert(error.message || '알 수 없는 오류가 발생했습니다.');
+				alert('서버 통신 중 오류가 발생했습니다.');
 			});
 	});
 
+	function checkSessionExpiration() {
+		fetch(`${ctp}/reserve/checkSession`)
+			.then(response => response.json())
+			.then(data => {
+				if (data.sessionExpired) {
+					window.location.href = `${ctp}/reserve/error`;
+				}
+			})
+			.catch(error => console.error('Session check error:', error));
+	}
+
+	// 페이지 로드 시 세션 체크
+	checkSessionExpiration();
 	initializeSelectBoxes();
 	initializeCertifyButtons();
 	updateBookingInfo();

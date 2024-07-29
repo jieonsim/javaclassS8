@@ -31,13 +31,8 @@
 						<img alt="에러메시지아이콘" src="${ctp}/images/icon/error.png">
 					</div>
 					<div class="complete-text">
-						<p id="completeText1">불편을 드려 대단히 죄송합니다.</p>
-						<p id="completeText2" class="mt-3">
-							다수의 브라우저로 접근하셨거나,
-							<br>
-							좌석 선점 시간이 초과하여 다음 단계 진행이 불가합니다.
-						</p>
-						<p id="completeText2" class="mt-3">예매 창을 닫고, 예매를 다시 시도해 주시기 바랍니다.</p>
+						<p id="completeText1">다수의 브라우저로 접근하셨거나<br>좌석 선점 시간이 초과화여 다음 단계 진행이 불가합니다.</p>
+						<p id="completeText2" class="mt-5">예매 창을 닫고, 예매를 다시 시도해 주시기 바랍니다.</p>
 					</div>
 				</div>
 				<div>

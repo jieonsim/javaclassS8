@@ -302,13 +302,13 @@
 					    <input type="hidden" name="buyerName" value="${member.name}">
 					    <input type="hidden" name="buyerTel" value="${member.phone}">
 					    <input type="hidden" name="seatId" value="${seat.id}">
-					    <c:forEach var="ticket" items="${reservation.selectedTickets}">
+					    <c:forEach var="ticket" items="${tempReservation.selectedTickets}">
 							<input type="hidden" name="ticketType" value="${ticket.type}">
 							<input type="hidden" name="ticketQuantity" value="${ticket.quantity}">
 							<input type="hidden" name="ticketPrice" value="${ticket.price}">
 							<input type="hidden" name="ticketTypeId" value="${ticket.ticketTypeId}">
 						</c:forEach>
-						<c:forEach var="advanceTicketId" items="${reservation.advanceTicketIds}">
+						<c:forEach var="advanceTicketId" items="${tempReservation.advanceTicketIds}">
 							<input type="hidden" name="advanceTicketId" value="${advanceTicketId}">
 						</c:forEach>
 						<div class="reserve_btn ng-scope">
