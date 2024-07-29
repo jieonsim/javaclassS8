@@ -139,9 +139,13 @@ public class ReservationServiceImpl implements ReservationService {
             reservationDAO.insertAdvanceTicketUsage(reservationId, request.getAdvanceTicketIds());
         }
         
-        // 7. 예매완료 메일 발송
-        
-		return new ReservationResponse(reservationNumber, "예매가 완료되었습니다.");
+        ReservationResponse response = new ReservationResponse(true, reservationNumber, "예매가 완료되었습니다.");
+        response.setSeatDetails(seatDetails);
+        response.setTotalAmount(request.getTotalAmount());
+        response.setBookingFee(request.getBookingFee());
+
+        return response;
+		//return new ReservationResponse(reservationNumber, "예매가 완료되었습니다.");
         //return new ReservationResponse(true, reservationNumber, "예매가 완료되었습니다.", seatDetails, totalAmount, bookingFee);
 	}
 	
