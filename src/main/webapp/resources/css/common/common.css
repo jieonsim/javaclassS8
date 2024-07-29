@@ -197,7 +197,7 @@ td .input_block .hyphen{color:#878d95}
 /* table */
 .tbl table{width:100%}
 .tbl table th,.tbl table td{line-height:18px;padding:8px 0 6px}
-.basic_tbl{border-bottom:1px solid #ecedf2}
+/* .basic_tbl{border-bottom:1px solid #ecedf2} */
 .basic_tbl table{width:100%}
 .basic_tbl table thead th{padding:17px 18px 14px;background:#f8f9fa;color:#62676c;font-size:14px;line-height:14px;letter-spacing:-1px}
 .basic_tbl table tbody td{padding:8px 18px;border-top:1px solid #ecedf2;color:#62676c;font-size:14px;text-align:center;line-height:22px}

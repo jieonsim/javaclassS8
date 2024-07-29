@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const API = {
 		logout: `${ctp}/logout`,
 		myInfo: `${ctp}/my/memberInfo/info`,
-		myReserve: `${ctp}/my/reserve`,
+		myReserve: `${ctp}/my/reserve/list`,
 		login: `${ctp}/login`,
 		signup: `${ctp}/signup/agreement`,
 		helpMain: `${ctp}/help/main`,
@@ -70,8 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
 	}
 
-	checkLoginStatus();
-
 	document.addEventListener('click', function(e) {
 		if (e.target && e.target.matches('a[href$="/logout"]')) {
 			e.preventDefault();
@@ -84,4 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			}).catch(error => console.error('Logout error:', error));
 		}
 	});
+	
+	checkLoginStatus();
 });

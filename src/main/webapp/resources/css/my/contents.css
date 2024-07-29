@@ -2,6 +2,9 @@
 
 .controller span,.controller a{display:inline-block;overflow:hidden;font-size:1px;line-height:999px;background:url(../img/sp.png) no-repeat}
 
+.ng-hide:not(.ng-hide-animate) {display:none !important}
+
+
 /* 3depth 5개 항목 */
 .depth3{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;overflow:hidden;position:relative;width:1120px;margin:0 auto;border:1px solid #ecedf2;background:#fff}
 .depth3 li{width:20%;border-right:1px solid #ecedf2;box-sizing:border-box}
@@ -110,33 +113,6 @@
 
 h3.malgun{font-family:Noto-R,Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spacing:-1px;font-size:20px;color:#242428;margin-bottom:18px}
 
-/* e스포츠 */
-#container.esports.evt{min-height:auto;padding:193px 0 203px;background-color:#242428}
-.esports{padding:240px 0 203px}
-.esports .evt_area{overflow:hidden;height:790px;background:url(../img/temp/@temp58.jpg) no-repeat 50% 0;font-size:0}
-.esports .evt_area.v2{background:url(../img/temp/@temp59.jpg) no-repeat 50% 0}
-.esports .sec{position:relative;float:left;width:50%;height:100%}
-.esports .sec a{overflow:hidden;position:absolute;bottom:175px;left:91px;width:300px;height:73px}
-.esports .sec:first-child a{right:88px;left:auto}
-#container.esports.evt2{position:relative;padding:0;background-color:#242428}
-.esports .evt_area.v3,.esports .evt_area.v4,.esports .evt_area.v5,.esports .evt_area.v6{position:absolute;top:193px;left:0;right:0;bottom:203px;height:auto;background:url(../img/temp/@temp60.jpg) no-repeat 50%}
-.sec_wrap{position:relative;top:460px;width:916px;height:64px;margin:0 auto}
-.sec_wrap li{display:inline-block;width:278px;margin-left:51px}
-.sec_wrap li:first-child{width:258px;margin-left:0}
-.sec_wrap a{display:block;height:66px}
-
-.esports .evt_area .evt_img{position:absolute;top:50%;left:50%;width:1900px;height:684px;margin:-342px 0 0 -950px}
-.esports .evt_area.v3 .sec_wrap,.esports .evt_area.v4 .sec_wrap,.esports .evt_area.v5 .sec_wrap{position:absolute;top:67.5%;left:50%;width:924px;height:62px;margin-left:-459px;font-size:0}
-.esports .evt_area.v4{background:url(../img/temp/@temp61.jpg) no-repeat 50%}
-.esports .evt_area.v5{background:url(../img/temp/@temp62.jpg) no-repeat 50%}
-.esports .evt_area.v5 .sec_wrap{top:68.5%;height:55px;margin-left:-446px}
-.esports .evt_area.v5 .sec_wrap li{width:240px;margin-left:85px}
-.esports .evt_area.v5 .sec_wrap li:first-child{margin-left:0}
-.esports .evt_area.v5 .sec_wrap a{height:55px}
-.esports .evt_area.v6{background:url(../img/temp/@temp63.jpg) no-repeat 50%}
-.esports .evt_area.v6 .sec_wrap{top:70%;width:753px}
-.esports .evt_area.v6 .sec_wrap li{width:300px;margin-left:149px}
-.esports .evt_area.v6 .sec_wrap li:first-child{margin-left:0}
 
 /* 이벤트 / 쿠폰 */
 /* 이벤트리스트 */
@@ -210,61 +186,10 @@ h3.malgun{font-family:Noto-R,Malgun Gothic,'맑은 고딕';font-weight:bold;lett
 
 .event_cont .list_view .list_cont{min-height:403px !important}
 .common_container.event_cont .inner{padding-top: 0;}
-/* 이벤트 리스트 내 sns */
-.event_cont_box .social li{width:auto;margin:0;padding:0;position:static;min-height:auto;box-sizing: border-box;}
-.event_cont_box .social li:first-of-type{margin-right: -1px;}
-/* 링크티티 진입 */
-.event_cont_box.linktt_intro_bx{position:relative;padding:0;border:0;background:none}
-.event_cont_box.linktt_intro_bx .img_intro{display:block;margin:0 auto;width: 100%;}
-.event_cont_box.linktt_intro_bx .btn_link{position:absolute;top:1053px;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%);width:376px;height:108px}
-.event_cont_box.linktt_intro_bx .event_end_box{position:absolute;left:0;top:0;width:100%;height:100%}
-.event_cont_box.linktt_intro_bx .event_end_box .txt_box{position:absolute;left:50%;top:346px;z-index:1;transform:translateX(-50%);padding:25px 60px 45px;background-color:#fff;border-radius:18px}
-.event_cont_box.linktt_intro_bx .event_end_box .txt_box img{display:block;margin:0 auto}
-.event_cont_box.linktt_intro_bx .event_end_box .txt_box .end_txt{color:#2e2535;font-size:16px;text-align:center;line-height:24px;letter-spacing:-0.5px}
-.event_cont_box.linktt_intro_bx .event_end_box .txt_box .end_txt .txt_tit{display:block;margin:14px auto;font-size:26px}
-.event_cont_box.linktt_intro_bx .event_end_dimmed{position:absolute;left:0;top:0;width:100%;height:100%;background-color:#242428;opacity:0.5}
-
-/* 쿠폰존 coupon zone */
-.event_cont .coupon_zone{position:relative;}
-.common_container.event_cont .bx_main_banner + .inner{padding-top: 40px;}
-.common_container.event_cont .bx_main_banner + .inner .bx_coupon_banner:first-of-type{margin: 0 auto 24px;}
-.coupon_zone .bx_main_banner{position:relative;height:470px;background-color:#ffd7d7}
-.coupon_zone .bx_main_banner img{position:absolute;top:0;bottom:0;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%)}
-.coupon_zone .bx_coupon_banner{overflow:hidden;height:220px;margin:49px auto 24px;border-radius:20px}
-.coupon_zone .bx_coupon_banner img{display:block;width:100%;height:100%}
-.coupon_cont_box{position:relative;}
-.coupon_cont_box .event_list:after{display:block;clear:both;content:''}
-.coupon_cont_box .event_item{position:relative;float:left;width:550px;height:237px;margin:0 20px 20px 0;background:url(../img/bg_coupon.png) no-repeat;background-size:100% 100%;box-sizing:border-box}
-.coupon_cont_box .event_item:nth-child(2n){margin-right:0}
-.coupon_cont_box .event_item:nth-last-child(-n+2){margin-bottom: 0;}
-.coupon_cont_box .event_item .ico_down{position:absolute;top:12px;right:-22px;width:120px;height:120px;background:url(../img/sp.png) no-repeat;background-size:424px auto;background-position:0 -703px}
-.coupon_cont_box .event_item_link{display:block;padding:45px 31px;font-size:0}
-.coupon_cont_box .event_img_area{display:inline-block;overflow:hidden;width:122px;height:149px;border:1px solid #cfd0d7;vertical-align:middle;box-sizing:border-box}
-.coupon_cont_box .event_img_area img{width:100%;height:100%}
-.coupon_cont_box .event_info_area{display:inline-block;width:260px;padding:0 0 0 25px;vertical-align:middle;box-sizing:border-box;min-height: 105px;}
-.coupon_cont_box .event_info_area .event_title{overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;width:100%;max-height:40px;font-size:16px;line-height:20px;text-overflow:ellipsis;margin:0}
-.coupon_cont_box .event_info_area .discount{height:40px;margin-top:19px;font-size:0;line-height:1;font-weight:700;color:#fa2828}
-.coupon_cont_box .event_info_area .discount .txt{display:inline-block;margin-top:-4px;font-size:30px;line-height:30px;letter-spacing:-0.25px;vertical-align:middle}
-.coupon_cont_box .event_info_area .discount .number{display:inline-block;font-size:36px;letter-spacing:-0.5px;vertical-align:middle}
-.coupon_cont_box .event_info_area .terms_txt{margin-top:12px;font-size:14px;line-height:1;color:#62676c}
-
-/* 쿠폰존 - 리스트 없을 경우 */
-.coupon_cont_box.nodata{height:372px;padding:0;text-align:center}
-.coupon_cont_box.nodata:before{display:inline-block;height:100%;vertical-align:middle;content:''}
-.coupon_cont_box.nodata .event_list_inner,
-.coupon_cont_box.nodata .paging{display:none}
-.coupon_cont_box.nodata .nodata_txt{display:inline-block;position:relative;padding-top:71px;color:#a7acb6}
-.coupon_cont_box.nodata .nodata_txt:before{position:absolute;top:0;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%);content:''}
-.coupon_cont_box .nodata_txt{display:none;font-size:30px;line-height:1;color:#a7acb6;vertical-align:middle} /* 리스트 없을 때 comming soon 텍스트 */
-.coupon_cont_box .event_item.nodata{text-align:center}
-.coupon_cont_box .event_item.nodata:before{display:inline-block;height:100%;vertical-align:middle;content:''}
-.coupon_cont_box .event_item.nodata .nodata_txt{display:inline-block} /* 쿠폰 안 comming soon 텍스트 */
 
 /** 고객센터 **/
 .help_rcont .btn_view,.help_rcont .basic_tbl tbody td .num,.help_rcont .num_lst .num,.help_rcont .help_info .ico_help,.info_mobile_rsrv h5 span,.info_mobile_rsrv h5 strong,.info_mobile_rsrv.noti h5{display:inline-block;overflow:hidden;font-size:1px;line-height:999px !important;background:url(../img/sp_help.png) no-repeat}
 a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hidden;font-size:1px;line-height:999px !important;background:url(../img/sp_help_img.png) no-repeat}
-
-
 
 /* 고객센터 quick menu */
 .common_container.cs_center{background: #f8f9fa;}
@@ -277,7 +202,6 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .quick_menu li:first-child{border:none}
 .quick_menu li a{display:block;position:relative;height:80px;padding-top:50px;text-align:center;color:#878d95;font-size:13px;line-height:15px;box-sizing:border-box}
 .quick_menu li a::before{display:inline-block;position:absolute;top:0;left:50%;transform:translateX(-50%);content: ''}
-
 
 /* 고객센터 cont layout */
 .help_cont{position:relative;border:1px solid #ecedf2;background:#fff;width:1120px;border-radius:2px;box-sizing:border-box}

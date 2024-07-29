@@ -4,35 +4,50 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" href="${ctp}/images/common/favicon.ico" type="image/x-icon">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title></title>
+<title>티켓챔프</title>
 <jsp:include page="/WEB-INF/views/common/utility.jsp" />
-<link rel="stylesheet" href="${ctp}/css/my/contents.css">
-<link rel="icon" href="${ctp}/images/common/favicon.ico">
+<link rel="stylesheet" href="${ctp}/css/member/signup/common.css">
+<link rel="stylesheet" href="${ctp}/css/member/signup/signup.css">
+<link rel="stylesheet" href="${ctp}/css/member/signup/complete.css">
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/layout/header.jsp" />
-	<main id="content" class="common_container etc_cont" role="main">
-		<div class="inner">
-			<div class="wrap_error">
-				<div class="error_box">
-					<strong>서버 접속이 지연되고 있습니다.</strong>
-					<p>
-						서비스 이용에 불편을 드려 죄송합니다.
-						<br>
-						일시적인 서버 장애로 인하여 요청하신 페이지에 접속이 지연되고 있습니다.
-						<br>
-						접속 지연이 지속될 경우
-						<a href="#">고객센터</a>
-						에 문의 부탁 드립니다.
-					</p>
-					<a href="#" class="btn btn_blank" id="history_back">이전 페이지</a>
-					<a href="#" class="btn btn_full" id="ticketlink_home">티켓링크 홈</a>
+	<div class="memberContainer">
+		<div class="header">
+			<div class="headerInner">
+				<a class="header_title_link" href="${ctp}/">
+					<i class="ph-bold ph-person-simple-throw" id="header_title_logo"></i>
+					<span class="logo-text">ticket</span>
+					<span class="logo-text champ">champ</span>
+				</a>
+			</div>
+		</div>
+		<div class="contents">
+			<div class="contentWrapper registContent">
+				<div class="text-center">
+					<div class="celebration-icon">
+						<img alt="에러메시지아이콘" src="${ctp}/images/icon/error.png">
+					</div>
+					<div class="complete-text">
+						<p id="completeText1">서비스 이용에 불편을 드려 죄송합니다.</p>
+						<p id="completeText2" class="mt-5">일시적인 서버 장애로 인하여 요청하신 페이지에 접속이 지연되고 있습니다.</p>
+					</div>
+				</div>
+				<div>
+					<div class="ubtnArea">
+						<div class="col">
+							<a href="javascript:history.back();" class="uBtn">이전 페이지</a>
+							<a href="${ctp}/" class="uBtn point">티켓챔프 홈</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</main>
-	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
+		<div class="footer">
+			<div class="copyright">Copyright © TicketChamp Corp. All rights reserved.</div>
+		</div>
+	</div>
 </body>
 </html>

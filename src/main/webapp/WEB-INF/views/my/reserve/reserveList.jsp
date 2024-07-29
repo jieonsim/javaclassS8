@@ -33,10 +33,10 @@
 						공연/전시 예매 내역은 하단의 공연/전시 탭을 선택하면 확인할 수 있습니다.
 					</p>
 					<ul class="mypage_tab">
-						<li ng-class="{'on': search.state.name === stateType['PARTIALLY_COMPLETE'] }" ng-click="fn.toggleReserveType(stateType['PARTIALLY_COMPLETE'])" class="on">
+						<li class="on">
 							<a href="#">예매확인</a>
 						</li>
-						<li ng-class="{'on': search.state.name === stateType['ALL_CANCEL'] }" ng-click="fn.toggleReserveType(stateType['ALL_CANCEL'])">
+						<li>
 							<a href="#">예매취소</a>
 						</li>
 					</ul>
@@ -45,124 +45,22 @@
 							<dt>기간별 조회</dt>
 							<dd>
 								<ul class="daysort">
-									<!-- ngRepeat: period in periodList -->
-									<li ng-repeat="period in periodList" ng-class="{'on' : period.name == search.period.name}" class="ng-scope">
-										<a href="javascript:;" ng-click="periodSelection.select(period)" class="ng-binding">15일</a>
+									<li class="ng-scope">
+										<a href="javascript:;" class="ng-binding">15일</a>
 									</li>
-									<!-- end ngRepeat: period in periodList -->
-									<li ng-repeat="period in periodList" ng-class="{'on' : period.name == search.period.name}" class="ng-scope on">
-										<a href="javascript:;" ng-click="periodSelection.select(period)" class="ng-binding">1개월</a>
+									<li class="ng-scope on">
+										<a href="javascript:;" class="ng-binding">1개월</a>
 									</li>
-									<!-- end ngRepeat: period in periodList -->
-									<li ng-repeat="period in periodList" ng-class="{'on' : period.name == search.period.name}" class="ng-scope">
-										<a href="javascript:;" ng-click="periodSelection.select(period)" class="ng-binding">2개월</a>
+									<li class="ng-scope">
+										<a href="javascript:;" class="ng-binding">2개월</a>
 									</li>
-									<!-- end ngRepeat: period in periodList -->
-									<li ng-repeat="period in periodList" ng-class="{'on' : period.name == search.period.name}" class="ng-scope">
-										<a href="javascript:;" ng-click="periodSelection.select(period)" class="ng-binding">3개월</a>
+									<li class="ng-scope">
+										<a href="javascript:;" class="ng-binding">3개월</a>
 									</li>
-									<!-- end ngRepeat: period in periodList -->
 								</ul>
 							</dd>
 						</dl>
-						<dl class="monthsortbx fr">
-							<dt>월 별 조회</dt>
-							<dd>
-								<!-- [D] 셀렉트박스 -->
-								<div class="selectbox" ng-init="targetDaySelection.close()" ng-class="{'is-active': targetDaySelection.isOpened()}">
-									<a href="javascript:;" class="select ng-binding" ng-click="targetDaySelection.open()">예매일</a>
-									<ul class="select_list ng-hide" style="display: block" ng-show="targetDaySelection.isOpened()">
-										<!-- ngRepeat: targetDay in targetDayList -->
-										<li ng-repeat="targetDay in targetDayList" class="ng-scope">
-											<a href="javascript:;" ng-click="targetDaySelection.select(targetDay)" class="ng-binding">예매일</a>
-										</li>
-										<!-- end ngRepeat: targetDay in targetDayList -->
-										<li ng-repeat="targetDay in targetDayList" class="ng-scope">
-											<a href="javascript:;" ng-click="targetDaySelection.select(targetDay)" class="ng-binding">관람일</a>
-										</li>
-										<!-- end ngRepeat: targetDay in targetDayList -->
-									</ul>
-								</div>
-								<!-- [D] 셀렉트박스 -->
-								<div class="selectbox" ng-init="yearSelection.close()" ng-class="{'is-active': yearSelection.isOpened()}">
-									<a href="javascript:;" class="select" ng-show="search.year == null" ng-click="yearSelection.open()">연도</a>
-									<a href="javascript:;" class="select ng-binding ng-hide" ng-show="search.year != null" ng-click="yearSelection.open()">년</a>
-									<ul class="select_list ng-hide" style="display: block" ng-show="yearSelection.isOpened()">
-										<!-- ngRepeat: year in fn.common.before3Years() -->
-										<li ng-repeat="year in fn.common.before3Years()" class="ng-scope">
-											<a href="javascript:;" ng-click="yearSelection.select(year)" class="ng-binding">2024년</a>
-										</li>
-										<!-- end ngRepeat: year in fn.common.before3Years() -->
-										<li ng-repeat="year in fn.common.before3Years()" class="ng-scope">
-											<a href="javascript:;" ng-click="yearSelection.select(year)" class="ng-binding">2023년</a>
-										</li>
-										<!-- end ngRepeat: year in fn.common.before3Years() -->
-										<li ng-repeat="year in fn.common.before3Years()" class="ng-scope">
-											<a href="javascript:;" ng-click="yearSelection.select(year)" class="ng-binding">2022년</a>
-										</li>
-										<!-- end ngRepeat: year in fn.common.before3Years() -->
-									</ul>
-								</div>
-								<!-- [D] 셀렉트박스 -->
-								<div class="selectbox" id="month" ng-init="monthSelection.close()" ng-class="{'is-active': monthSelection.isOpened()}">
-									<a href="javascript:;" class="select ng-binding" ng-click="monthSelection.open()">월</a>
-									<ul class="select_list ng-hide" style="display: block" ng-show="monthSelection.isOpened()">
-										<!-- ngRepeat: month in fn.common.range(1, 12) -->
-										<li ng-repeat="month in fn.common.range(1, 12)" class="ng-scope">
-											<a href="javascript:;" ng-click="monthSelection.select(month)" class="ng-binding">1월</a>
-										</li>
-										<!-- end ngRepeat: month in fn.common.range(1, 12) -->
-										<li ng-repeat="month in fn.common.range(1, 12)" class="ng-scope">
-											<a href="javascript:;" ng-click="monthSelection.select(month)" class="ng-binding">2월</a>
-										</li>
-										<!-- end ngRepeat: month in fn.common.range(1, 12) -->
-										<li ng-repeat="month in fn.common.range(1, 12)" class="ng-scope">
-											<a href="javascript:;" ng-click="monthSelection.select(month)" class="ng-binding">3월</a>
-										</li>
-										<!-- end ngRepeat: month in fn.common.range(1, 12) -->
-										<li ng-repeat="month in fn.common.range(1, 12)" class="ng-scope">
-											<a href="javascript:;" ng-click="monthSelection.select(month)" class="ng-binding">4월</a>
-										</li>
-										<!-- end ngRepeat: month in fn.common.range(1, 12) -->
-										<li ng-repeat="month in fn.common.range(1, 12)" class="ng-scope">
-											<a href="javascript:;" ng-click="monthSelection.select(month)" class="ng-binding">5월</a>
-										</li>
-										<!-- end ngRepeat: month in fn.common.range(1, 12) -->
-										<li ng-repeat="month in fn.common.range(1, 12)" class="ng-scope">
-											<a href="javascript:;" ng-click="monthSelection.select(month)" class="ng-binding">6월</a>
-										</li>
-										<!-- end ngRepeat: month in fn.common.range(1, 12) -->
-										<li ng-repeat="month in fn.common.range(1, 12)" class="ng-scope">
-											<a href="javascript:;" ng-click="monthSelection.select(month)" class="ng-binding">7월</a>
-										</li>
-										<!-- end ngRepeat: month in fn.common.range(1, 12) -->
-										<li ng-repeat="month in fn.common.range(1, 12)" class="ng-scope">
-											<a href="javascript:;" ng-click="monthSelection.select(month)" class="ng-binding">8월</a>
-										</li>
-										<!-- end ngRepeat: month in fn.common.range(1, 12) -->
-										<li ng-repeat="month in fn.common.range(1, 12)" class="ng-scope">
-											<a href="javascript:;" ng-click="monthSelection.select(month)" class="ng-binding">9월</a>
-										</li>
-										<!-- end ngRepeat: month in fn.common.range(1, 12) -->
-										<li ng-repeat="month in fn.common.range(1, 12)" class="ng-scope">
-											<a href="javascript:;" ng-click="monthSelection.select(month)" class="ng-binding">10월</a>
-										</li>
-										<!-- end ngRepeat: month in fn.common.range(1, 12) -->
-										<li ng-repeat="month in fn.common.range(1, 12)" class="ng-scope">
-											<a href="javascript:;" ng-click="monthSelection.select(month)" class="ng-binding">11월</a>
-										</li>
-										<!-- end ngRepeat: month in fn.common.range(1, 12) -->
-										<li ng-repeat="month in fn.common.range(1, 12)" class="ng-scope">
-											<a href="javascript:;" ng-click="monthSelection.select(month)" class="ng-binding">12월</a>
-										</li>
-										<!-- end ngRepeat: month in fn.common.range(1, 12) -->
-									</ul>
-								</div>
-								<a href="javascript:;" class="btn btn_blank" ng-click="fn.search(1, 'MONTHLY')">조회</a>
-							</dd>
-						</dl>
 					</div>
-
 					<p class="guide_txt v2">
 						예매한 내역이 확인이 안되실 경우
 						<a href="/cs/inquiry" onclick="window.open(this.href, '', 'left=100, top=100, width=880, height=900'); return false;">1:1 상담 문의</a>
@@ -180,7 +78,7 @@
 								<col style="width: 100px">
 								<col style="width: 155px">
 							</colgroup>
-							<thead>
+							<thead class="text-center">
 								<tr>
 									<th scope="col">예매번호</th>
 									<th scope="col">티켓명</th>
@@ -190,56 +88,105 @@
 									<th scope="col">상태</th>
 								</tr>
 							</thead>
-							<tbody>
-								<!-- ngRepeat: reserve in reserveList -->
-								<tr ng-show="reserveList.length === 0">
+							<tbody class="text-center">
+								<tr ng-repeat="reserve in reserveList" ng-show="reserveList.length > 0" class="ng-scope">
+									<td class="fs12 number">
+										<a href="/my/reserve/1469024617" class="point_number ng-binding"> 1469024617 </a>
+									</td>
+									<td class="tl ng-scope" ng-if="reserve.productDetailInfoExposureYn == 'N'">
+										<span class="elp ng-scope" ng-if="reserve.displayProductType === 'SPORTS_TEAM_MATCH'">
+											<span ng-if="reserve.teamMatchUseYn === 'Y'" class="ng-binding ng-scope">LG트윈스 vs 삼성 라이온즈</span>
+										</span>
+									</td>
+									<td class="fs12 number ng-binding">2024.07.30(화) 18:30</td>
+									<td class="ng-binding">1장</td>
+									<td class="fs12 number color_point ng-binding">2024.07.30 16:00</td>
+									<td>
+										<div class="reserve_condition1 ng-binding">
+											예매완료
+											<span ng-show="reserve.cancelReason != null &amp;&amp; reserve.cancelReason.isFrontExposable" class="ng-binding ng-hide"> () </span>
+										</div>
+										<div class="reserve_condition2 ng-binding ng-hide" ng-show="reserve.cancelDatetime != null"></div>
+										<div class="reserve_condition2" ng-show="reserve.cancelDatetime == null">
+											<a href="javascript:;" class="btn btn_blank ng-hide" ng-show="reserve.reserveStateCode.name == 'WAIT'" ng-click="fn.common.openAccount(reserve.reserveNo)">입금안내</a>
+											<a href="javascript:;" class="btn btn_blank ng-hide" ng-show="reserve.reserveStateCode.name == 'RAIN_CANCEL'">환불계좌</a>
+										</div>
+									</td>
+								</tr>
+								<!-- end ngRepeat: reserve in reserveList -->
+								<tr ng-repeat="reserve in reserveList" ng-show="reserveList.length > 0" class="ng-scope">
+									<td class="fs12 number">
+										<a href="/my/reserve/1469014738" class="point_number ng-binding"> 1469014738 </a>
+									</td>
+									<td class="tl ng-scope" ng-if="reserve.productDetailInfoExposureYn == 'N'">
+										<span class="elp ng-scope" style="text-align: center;" ng-if="reserve.displayProductType === 'SPORTS_TEAM_MATCH'">
+											<span ng-if="reserve.teamMatchUseYn === 'Y'" class="ng-binding ng-scope">LG트윈스 vs 삼성 라이온즈</span>
+										</span>
+									</td>
+									<td class="fs12 number ng-binding">2024.07.30(화) 18:30</td>
+									<td class="ng-binding">1장</td>
+									<td class="fs12 number color_point ng-binding">2024.07.30 16:00</td>
+									<td>
+										<div class="reserve_condition1 ng-binding">
+											예매완료
+											<span ng-show="reserve.cancelReason != null &amp;&amp; reserve.cancelReason.isFrontExposable" class="ng-binding ng-hide"> () </span>
+										</div>
+										<div class="reserve_condition2 ng-binding ng-hide" ng-show="reserve.cancelDatetime != null"></div>
+										<div class="reserve_condition2" ng-show="reserve.cancelDatetime == null">
+											<a href="javascript:;" class="btn btn_blank ng-hide" ng-show="reserve.reserveStateCode.name == 'WAIT'" ng-click="fn.common.openAccount(reserve.reserveNo)">입금안내</a>
+											<a href="javascript:;" class="btn btn_blank ng-hide" ng-show="reserve.reserveStateCode.name == 'RAIN_CANCEL'">환불계좌</a>
+										</div>
+									</td>
+								</tr>
+								<tr ng-repeat="reserve in reserveList" ng-show="reserveList.length > 0" class="ng-scope">
+									<td class="fs12 number">
+										<a href="/my/reserve/1468953432" class="point_number ng-binding"> 1468953432 </a>
+									</td>
+									<td class="tl ng-scope" ng-if="reserve.productDetailInfoExposureYn == 'N'">
+										<span class="elp ng-scope" ng-if="reserve.displayProductType === 'SPORTS_TEAM_MATCH'">
+											<span ng-if="reserve.teamMatchUseYn === 'Y'" class="ng-binding ng-scope">SSG 랜더스 vs 롯데자이언츠</span>
+										</span>
+									</td>
+									<td class="fs12 number ng-binding">2024.08.01(목) 18:30</td>
+									<td class="ng-binding">2장</td>
+									<td class="fs12 number color_point ng-binding">2024.08.01 14:30</td>
+									<td>
+										<div class="reserve_condition1 ng-binding">
+											예매완료
+											<span ng-show="reserve.cancelReason != null &amp;&amp; reserve.cancelReason.isFrontExposable" class="ng-binding ng-hide"> () </span>
+										</div>
+										<div class="reserve_condition2 ng-binding ng-hide" ng-show="reserve.cancelDatetime != null"></div>
+										<div class="reserve_condition2" ng-show="reserve.cancelDatetime == null">
+											<a href="javascript:;" class="btn btn_blank ng-hide" ng-show="reserve.reserveStateCode.name == 'WAIT'" ng-click="fn.common.openAccount(reserve.reserveNo)">입금안내</a>
+											<a href="javascript:;" class="btn btn_blank ng-hide" ng-show="reserve.reserveStateCode.name == 'RAIN_CANCEL'">환불계좌</a>
+										</div>
+									</td>
+								</tr>
+								<!-- 예매내역 없을 때 -->
+								<tr ng-show="reserveList.length === 0" class="ng-hide">
 									<td colspan="6" class="no_data">예매한 내역이 없습니다.</td>
 								</tr>
+								<tr><td colspan="6" class="m-0 p-0"></td></tr>
 							</tbody>
 						</table>
 					</div>
-
-					<div>
-						<div class="paging ng-isolate-scope" paging="paging" search="fn.search">
-							<a href="javascript:;" class="first" ng-click="search(pagingService.initialPage)">맨앞</a>
-							<a href="javascript:;" class="prev" ng-click="search(pagingService.getPreviousPage(paging))">이전</a>
-							<!-- ngRepeat: index in pagingService.getPreIndexList(paging) -->
-							<strong class="ng-binding">1</strong>
-							<!-- ngRepeat: index in pagingService.getPostIndexList(paging) -->
-							<a href="javascript:;" class="next" ng-click="search(pagingService.getNextPage(paging))">다음</a>
-							<a href="javascript:;" class="end" ng-click="search(pagingService.getPageCount(paging))">맨뒤</a>
-						</div>
-					</div>
-
-					<div class="mypage_banner">
-						<script type="text/javascript" src="//ads.netinsight.co.kr/NetInsight/js/ticketlink/mypage/742@120"></script>
-					</div>
-
-					<!-- nottes -->
+					<jsp:include page="/WEB-INF/views/layout/paginate.jsp" />
 					<div class="notes2">
 						<h6>
 							<span></span>
 							티켓취소 안내
 						</h6>
 						<ol>
-							<li>
-								예매한 티켓 전체 취소, 혹은 신용카드 결제 시 부분 취소가 가능합니다.
-								<br>
-								단, 일부 상품 및 스마트티켓 발권 시 부분취소가 불가합니다.
-							</li>
-							<li>티켓이 배송된 이후에는 인터넷이나 고객센터를 통한 취소가 불가하며, 받으신 티켓을 취소일 전까지 NHN LINK 본사로 반송을 해주셔야 취소 가능합니다. (등기우편을 이용해주세요!)</li>
 							<li>예매 당일 자정까지 취소하실 경우는 예매수수료도 환불되며, 취소수수료가 부과되지 않습니다. 그 이후에 취소하실 경우는 예매수수료가 환불되지 않으며, 취소수수료는 정책에 따라 부과됩니다.</li>
 							<li>일부 경기의 경우 상황에 따라 일괄 취소 건이 발생할 수있으며, 일괄 취소 시에는 취소 수수료가 부과되지 않습니다.</li>
 							<li>티켓의 날짜/시간/좌석 등급/좌석 위치 변경은 불가합니다. 자세한 안내가 필요할 경우 고객센터를 이용해주세요.</li>
 							<li>구단 홈페이지에서 예매한 내역은 구단 홈페이지에서만 확인이 가능합니다.</li>
 						</ol>
 					</div>
-					<!-- //nottes -->
 				</div>
 			</div>
 		</div>
 	</main>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
-	<script src="${ctp}/js/my/memberInfo/changePassword.js"></script>
 </body>
 </html>

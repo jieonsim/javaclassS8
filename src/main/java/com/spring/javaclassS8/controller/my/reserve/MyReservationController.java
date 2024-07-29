@@ -11,7 +11,7 @@ public class MyReservationController {
 	// 마이페이지 >  회원정보관리 > 회원정보수정 뷰
 	@GetMapping("/list")
 	public String getMyReservationList() {
-		return "my/reserve/list";
+		return "my/reserve/reserveList";
 	}
 
 }

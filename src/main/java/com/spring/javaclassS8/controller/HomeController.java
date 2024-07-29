@@ -35,4 +35,10 @@ public class HomeController {
 	public String ReservationMail() {
 		return "mail/ReservationMail";
 	}
+	
+	// 에러 페이지
+	@GetMapping("/error")
+	public String commonError() {
+		return "common/error";
+	}
 }

@@ -49,9 +49,6 @@
 										<th scope="row">이름</th>
 										<td>
 											<span class="inp_bx">
-												<!-- <span class="inp_bx is_focus"> -->
-												<!-- <span class="inp_bx is_value"> -->
-												<!-- <span class="inp_bx is_focus error"> -->
 												<span class="inp_txt">
 													<input type="text" class="inp" id="inputName" name="name" title="이름" value="${member.name}">
 												</span>
@@ -70,6 +67,7 @@
 											<p class="error_txt" id="errorBox2" role="alert" style="display: block;"></p>
 										</td>
 									</tr>
+									<tr><td colspan="2" class="m-0 p-0"></td></tr>
 								</tbody>
 							</table>
 						</div>

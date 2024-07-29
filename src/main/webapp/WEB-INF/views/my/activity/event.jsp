@@ -56,6 +56,7 @@
 										</td>
 									</tr>
 								</c:forEach>
+								<tr><td colspan="3" class="m-0 p-0"></td></tr>
 							</tbody>
 						</table>
 					</div>

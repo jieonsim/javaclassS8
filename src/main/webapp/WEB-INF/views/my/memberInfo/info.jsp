@@ -51,6 +51,7 @@
 									<th scope="row">휴대폰 번호</th>
 									<td id="formattedPhoneNumber">${member.phone}</td>
 								</tr>
+								<tr><td colspan="2" class="m-0 p-0"></td></tr>
 							</tbody>
 						</table>
 					</div>

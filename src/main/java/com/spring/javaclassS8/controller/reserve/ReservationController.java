@@ -226,12 +226,11 @@ public class ReservationController {
 	public ResponseEntity<?> saveTicketSelection(@RequestBody Map<String, Object> ticketSelectionData, HttpSession session) {
 		try {
 			TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
-	        if (tempReservation == null || System.currentTimeMillis() > tempReservation.getExpirationTime()) {
-	            session.removeAttribute("tempReservation");
-	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-	                    .body(Map.of("error", "세션이 만료되었습니다. 다시 예매를 진행해 주세요.", "sessionExpired", true));
-	        }
-			
+			if (tempReservation == null || System.currentTimeMillis() > tempReservation.getExpirationTime()) {
+				session.removeAttribute("tempReservation");
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "세션이 만료되었습니다. 다시 예매를 진행해 주세요.", "sessionExpired", true));
+			}
+
 			@SuppressWarnings("unchecked")
 			List<Map<String, Object>> ticketsData = (List<Map<String, Object>>) ticketSelectionData.get("tickets");
 			List<TicketVO> selectedTickets = new ArrayList<>();
@@ -398,10 +397,10 @@ public class ReservationController {
 		TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 
-	    if (tempReservation == null || member == null || System.currentTimeMillis() > tempReservation.getExpirationTime()) {
-	        session.removeAttribute("tempReservation");
-	        return "redirect:/reserve/error";
-	    }
+		if (tempReservation == null || member == null || System.currentTimeMillis() > tempReservation.getExpirationTime()) {
+			session.removeAttribute("tempReservation");
+			return "redirect:/reserve/error";
+		}
 
 		int gameId = tempReservation.getGameId();
 		int seatId = tempReservation.getSeatId();
@@ -458,15 +457,15 @@ public class ReservationController {
 	public String error() {
 		return "reserve/error";
 	}
-	
+
 	@GetMapping("/checkSession")
 	@ResponseBody
 	public ResponseEntity<?> checkSession(HttpSession session) {
-	    TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
-	    if (tempReservation == null || System.currentTimeMillis() > tempReservation.getExpirationTime()) {
-	        session.removeAttribute("tempReservation");
-	        return ResponseEntity.ok(Map.of("sessionExpired", true));
-	    }
-	    return ResponseEntity.ok(Map.of("sessionExpired", false));
+		TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
+		if (tempReservation == null || System.currentTimeMillis() > tempReservation.getExpirationTime()) {
+			session.removeAttribute("tempReservation");
+			return ResponseEntity.ok(Map.of("sessionExpired", true));
+		}
+		return ResponseEntity.ok(Map.of("sessionExpired", false));
 	}
 }

@@ -110,8 +110,8 @@
 	display: none;
 }
 
-@media screen and (max-width: 991px) {
-	/* 데스크톱용 푸터를 모바일에서 숨기기 */
+/* 데스크톱용 푸터를 모바일에서 숨기기 */
+/* @media screen and (max-width: 991px) {
 	.common_footer {
 		display: none;
 	}
@@ -227,4 +227,4 @@
 		color: #cccccc;
 		text-align: right;
 	}
-}
+} */
