@@ -31,9 +31,9 @@ public class HomeController {
 	}
 
 	// 예매내역 메일 테스트
-	@GetMapping("/ReservationMail")
-	public String ReservationMail() {
-		return "mail/ReservationMail";
+	@GetMapping("/reservationCompletedMail")
+	public String reservationCompletedMail() {
+		return "mail/reservationCompletedMail";
 	}
 	
 	// 에러 페이지

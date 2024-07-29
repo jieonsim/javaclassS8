@@ -364,32 +364,32 @@ public class ReservationController {
 
 		return "reserve/confirm";
 	}
-
+	
 	// 결제 및 예매 요청
-	@PostMapping("/paymentAndReserve")
-	@ResponseBody
-	public ResponseEntity<?> paymentAndReserve(@RequestBody ReservationRequest request, HttpSession session) {
-		try {
-			GameVO game = reservationService.getGameById(request.getGameId());
-			request.setSportId(game.getSportId());
-			request.setTeamId(game.getHomeTeamId());
-			request.setVenueId(game.getVenueId());
+    @PostMapping("/paymentAndReserve")
+    @ResponseBody
+    public ResponseEntity<?> paymentAndReserve(@RequestBody ReservationRequest request, HttpSession session) {
+        try {
+            GameVO game = reservationService.getGameById(request.getGameId());
+            request.setSportId(game.getSportId());
+            request.setTeamId(game.getHomeTeamId());
+            request.setVenueId(game.getVenueId());
 
-			ReservationResponse response = reservationService.processReservation(request);
+            ReservationResponse response = reservationService.processReservation(request);
 
-			TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
-			if (tempReservation != null) {
-				tempReservation.setTotalAmount(response.getTotalAmount());
-				tempReservation.setBookingFee(response.getBookingFee());
-				session.setAttribute("tempReservation", tempReservation);
-			}
+            TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
+            if (tempReservation != null) {
+                tempReservation.setTotalAmount(response.getTotalAmount());
+                tempReservation.setBookingFee(response.getBookingFee());
+                session.setAttribute("tempReservation", tempReservation);
+            }
 
-			return ResponseEntity.ok(Map.of("success", response.isSuccess(), "reservationNumber", response.getReservationNumber(), "message", response.getMessage()));
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("success", false, "message", "예약 처리 중 오류가 발생했습니다: " + e.getMessage()));
-		}
-	}
+            return ResponseEntity.ok(Map.of("success", response.isSuccess(), "reservationNumber", response.getReservationNumber(), "message", response.getMessage()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("success", false, "message", "예약 처리 중 오류가 발생했습니다: " + e.getMessage()));
+        }
+    }
 
 	// 예매 완료 안내 뷰
 	@GetMapping("/completed")

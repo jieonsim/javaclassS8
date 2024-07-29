@@ -89,43 +89,79 @@
 								</tr>
 							</thead>
 							<tbody class="text-center">
-								<c:choose>
-									<c:when test="${not empty reservations}">
-										<c:forEach items="${reservations}" var="reservation">
-											<tr class="ng-scope">
-												<td class="fs12 number">
-													<a href="${ctp}/my/reserve/detail?reservationId=${reservation.reservationId}" class="point_number ng-binding">${reservation.reservationNumber}</a>
-												</td>
-												<td class="tl ng-scope">
-													<span class="elp ng-scope" style="text-align: center;">
-														<span class="ng-binding ng-scope">${reservation.homeTeamName} vs ${reservation.awayTeamName}</span>
-													</span>
-												</td>
-												<td class="fs12 number ng-binding">
-													${reservation.gameDate} ${reservation.gameTime}
-												</td>
-												<td class="ng-binding">${reservation.ticketAmount}장</td>
-												<td class="fs12 number color_point ng-binding">${reservation.cancelDeadline}</td>
-												<td>
-													<div class="reserve_condition1 ng-binding">
-														${reservation.status}
-														<span class="ng-binding ng-hide"> () </span>
-													</div>
-													<div class="reserve_condition2 ng-binding ng-hide"></div>
-												</td>
-											</tr>
-										</c:forEach>
-									</c:when>
-									<c:otherwise>
-										<!-- 예매내역 없을 때 -->
-										<tr>
-											<td colspan="6" class="no_data">예매한 내역이 없습니다.</td>
-										</tr>
-									</c:otherwise>
-								</c:choose>
-								<tr>
-									<td colspan="6" class="m-0 p-0"></td>
+								<tr class="ng-scope">
+									<td class="fs12 number">
+										<a class="point_number ng-binding"> 1469024617 </a>
+									</td>
+									<td class="tl ng-scope">
+										<span class="elp ng-scope">
+											<span class="ng-binding ng-scope">LG트윈스 vs 삼성 라이온즈</span>
+										</span>
+									</td>
+									<td class="fs12 number ng-binding">2024.07.30(화) 18:30</td>
+									<td class="ng-binding">1장</td>
+									<td class="fs12 number color_point ng-binding">2024.07.30 16:00</td>
+									<td>
+										<div class="reserve_condition1 ng-binding">
+											예매완료
+											<span class="ng-binding ng-hide"> () </span>
+										</div>
+										<div class="reserve_condition2 ng-binding ng-hide" ng-show="reserve.cancelDatetime != null"></div>
+									</td>
 								</tr>
+								<tr =class="ng-scope">
+									<td class="fs12 number">
+										<a href="/my/reserve/1469014738" class="point_number ng-binding"> 1469014738 </a>
+									</td>
+									<td class="tl ng-scope" ng-if="reserve.productDetailInfoExposureYn == 'N'">
+										<span class="elp ng-scope" style="text-align: center;" ng-if="reserve.displayProductType === 'SPORTS_TEAM_MATCH'">
+											<span ng-if="reserve.teamMatchUseYn === 'Y'" class="ng-binding ng-scope">LG트윈스 vs 삼성 라이온즈</span>
+										</span>
+									</td>
+									<td class="fs12 number ng-binding">2024.07.30(화) 18:30</td>
+									<td class="ng-binding">1장</td>
+									<td class="fs12 number color_point ng-binding">2024.07.30 16:00</td>
+									<td>
+										<div class="reserve_condition1 ng-binding">
+											예매완료
+											<span ng-show="reserve.cancelReason != null &amp;&amp; reserve.cancelReason.isFrontExposable" class="ng-binding ng-hide"> () </span>
+										</div>
+										<div class="reserve_condition2 ng-binding ng-hide" ng-show="reserve.cancelDatetime != null"></div>
+										<div class="reserve_condition2" ng-show="reserve.cancelDatetime == null">
+											<a href="javascript:;" class="btn btn_blank ng-hide" ng-show="reserve.reserveStateCode.name == 'WAIT'" ng-click="fn.common.openAccount(reserve.reserveNo)">입금안내</a>
+											<a href="javascript:;" class="btn btn_blank ng-hide" ng-show="reserve.reserveStateCode.name == 'RAIN_CANCEL'">환불계좌</a>
+										</div>
+									</td>
+								</tr>
+								<tr ng-repeat="reserve in reserveList" ng-show="reserveList.length > 0" class="ng-scope">
+									<td class="fs12 number">
+										<a href="/my/reserve/1468953432" class="point_number ng-binding"> 1468953432 </a>
+									</td>
+									<td class="tl ng-scope" ng-if="reserve.productDetailInfoExposureYn == 'N'">
+										<span class="elp ng-scope" ng-if="reserve.displayProductType === 'SPORTS_TEAM_MATCH'">
+											<span ng-if="reserve.teamMatchUseYn === 'Y'" class="ng-binding ng-scope">SSG 랜더스 vs 롯데자이언츠</span>
+										</span>
+									</td>
+									<td class="fs12 number ng-binding">2024.08.01(목) 18:30</td>
+									<td class="ng-binding">2장</td>
+									<td class="fs12 number color_point ng-binding">2024.08.01 14:30</td>
+									<td>
+										<div class="reserve_condition1 ng-binding">
+											예매완료
+											<span ng-show="reserve.cancelReason != null &amp;&amp; reserve.cancelReason.isFrontExposable" class="ng-binding ng-hide"> () </span>
+										</div>
+										<div class="reserve_condition2 ng-binding ng-hide" ng-show="reserve.cancelDatetime != null"></div>
+										<div class="reserve_condition2" ng-show="reserve.cancelDatetime == null">
+											<a href="javascript:;" class="btn btn_blank ng-hide" ng-show="reserve.reserveStateCode.name == 'WAIT'" ng-click="fn.common.openAccount(reserve.reserveNo)">입금안내</a>
+											<a href="javascript:;" class="btn btn_blank ng-hide" ng-show="reserve.reserveStateCode.name == 'RAIN_CANCEL'">환불계좌</a>
+										</div>
+									</td>
+								</tr>
+								<!-- 예매내역 없을 때 -->
+								<tr ng-show="reserveList.length === 0" class="ng-hide">
+									<td colspan="6" class="no_data">예매한 내역이 없습니다.</td>
+								</tr>
+								<tr><td colspan="6" class="m-0 p-0"></td></tr>
 							</tbody>
 						</table>
 					</div>

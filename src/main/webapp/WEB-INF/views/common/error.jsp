@@ -38,8 +38,7 @@
 				<div>
 					<div class="ubtnArea">
 						<div class="col">
-							<a href="javascript:history.back();" class="uBtn">이전 페이지</a>
-							<a href="${ctp}/" class="uBtn point">티켓챔프 홈</a>
+							<button type="button" class="uBtn point" onclick="location.href='${ctp}/'">티켓챔프 홈으로</button>
 						</div>
 					</div>
 				</div>

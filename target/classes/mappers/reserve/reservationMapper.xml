@@ -72,6 +72,38 @@
 	    AND seatId = #{seatId}
 	    AND ticketTypeId = #{ticketTypeId}
     </select>
+    
+    <!-- memberId로 해당 유저의 예매완료 건 가져오기 -->
+	<select id="getReservationListByMemberId" resultType="com.spring.javaclassS8.vo.reserve.ReservationVO">
+	    SELECT 
+	        r.id AS reservationId,
+	        r.reservationNumber,
+	        g.homeTeamId,
+	        ht.teamName AS homeTeamName,
+	        g.awayTeamId,
+	        at.teamName AS awayTeamName,
+	        g.gameDate,
+	        g.gameTime,
+	        r.ticketAmount,
+	        DATE_FORMAT(DATE_SUB(CONCAT(g.gameDate, ' ', g.gameTime), INTERVAL sbp.cancellationDeadlineMinutesBeforeStart MINUTE), '%Y.%m.%d %H:%i') AS cancelDeadline,
+	        r.status,
+	        r.createdAt
+	    FROM 
+	        reservations r
+	    JOIN 
+	        games g ON r.gameId = g.id
+	    JOIN 
+	        teams ht ON g.homeTeamId = ht.id
+	    JOIN 
+	        teams at ON g.awayTeamId = at.id
+	    JOIN 
+	        sport_booking_policies sbp ON g.sportId = sbp.sportId
+	    WHERE 
+	        r.memberId = #{memberId}
+	        AND r.status = '예매완료'
+	    ORDER BY 
+	        r.createdAt DESC
+	</select>
 	
 	<!-- 예매 처리 : reservations 테이블 레코드 생성 -->
 	<insert id="insertReservation" parameterType="com.spring.javaclassS8.vo.reserve.ReservationVO" useGeneratedKeys="true" keyProperty="id">

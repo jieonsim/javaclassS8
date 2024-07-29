@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="${ctp}/css/sports/reserve.css">
 <link rel="stylesheet" href="${ctp}/css/common/common.css">
 <link rel="icon" href="${ctp}/images/common/favicon.ico">
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 </head>
 <body class="ng-scope">

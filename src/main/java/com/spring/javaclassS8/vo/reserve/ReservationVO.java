@@ -16,4 +16,12 @@ public class ReservationVO {
     private String status;
     private Timestamp createdAt;
     private Timestamp canceledAt;
+    
+    // 추가
+    private int reservationId;
+    private String homeTeamName;
+    private String awayTeamName;
+    private String gameDate;
+    private String gameTime;
+    private String cancelDeadline;
 }

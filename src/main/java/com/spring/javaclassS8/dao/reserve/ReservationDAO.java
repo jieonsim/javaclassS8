@@ -54,4 +54,7 @@ public interface ReservationDAO {
 	// 권종별 요금 가져오기
 	int getPriceForTicketType(@Param("sportId") int sportId, @Param("teamId") int teamId, @Param("venueId") int venueId, @Param("seatId") int seatId, @Param("ticketTypeId") int ticketTypeId);
 
+	// memberId로 해당 유저의 예매완료 건 가져오기
+	List<ReservationVO> getReservationListByMemberId(int memberId);
+
 }

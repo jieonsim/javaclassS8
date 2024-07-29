@@ -12,6 +12,10 @@ CREATE TABLE seat_inventory (
 );
 
 
+select * from seat_inventory where gameId = 45 and seatId = 82;
+
+
+
 INSERT INTO seat_inventory (gameId, seatId, totalCapacity, availableCapacity)
 SELECT 
     g.id AS gameId, 

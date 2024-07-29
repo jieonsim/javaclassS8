@@ -129,18 +129,6 @@
 									원
 								</td>
 							</tr>
-							<%-- <tr>
-								<th>결제정보</th>
-								<td class="ng-scope">
-									<p class="ng-binding ng-scope">
-										신용카드
-										<span class="color_point ng-binding">
-											<fmt:formatNumber value="${ticketPrice}" type="number" />
-											원
-										</span>
-									</p>
-								</td>
-							</tr> --%>
 						</tbody>
 					</table>
 				</div>
@@ -185,7 +173,7 @@
 				</div>
 				<div class="reserve_btn">
 					<a class="btn btn_blank ng-scope">내역 프린트</a>
-					<a class="btn btn_full">예매확인</a>
+					<a href="${ctp}/my/reserve/list" class="btn btn_full">예매확인</a>
 				</div>
 			</div>
 		</div>

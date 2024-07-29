@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// 결제하기 버튼 클릭 이벤트
 	const paymentButton = document.getElementById('paymentButton');
-
 	paymentButton.addEventListener('click', function(e) {
 		e.preventDefault();
 
@@ -87,6 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			advanceTicketNumbers: Array.from(document.querySelectorAll('input[name="advanceTicketNumber"]')).map(input => input.value),
 			advanceTicketIds: Array.from(document.querySelectorAll('input[name="advanceTicketId"]')).map(input => parseInt(input.value))
 		};
+
 
 		if (requestData.totalAmount === 0) {
 			// 결제 금액이 0원일 경우 결제없이 바로 예매 처리
