@@ -32,4 +32,12 @@ public class ReservationVO {
     private String cancelPeriod; // 취소 가능 기간
     private String formattedCreatedAt;
     private String formattedCancelDeadline;
+    private boolean hasAdvanceTicket;
+    public boolean isHasAdvanceTicket() {
+        return hasAdvanceTicket;
+    }
+
+    public void setHasAdvanceTicket(boolean hasAdvanceTicket) {
+        this.hasAdvanceTicket = hasAdvanceTicket;
+    }
 }

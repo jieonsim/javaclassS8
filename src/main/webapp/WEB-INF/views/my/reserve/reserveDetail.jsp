@@ -158,8 +158,7 @@
 						<a class="btn btn_full ng-scope">취소하기</a>
 					</div>
 
-					<!-- 스포츠 예매권 사용했을 때만 -->
-					<c:if test="${not empty advanceTickets}">
+					<c:if test="${reservation.hasAdvanceTicket}">
 						<h5 class="mgt40 text_tit">스포츠 예매권 정보</h5>
 						<div class="basic_tbl_v4">
 							<table>
@@ -185,7 +184,6 @@
 							</table>
 						</div>
 					</c:if>
-					<!-- 스포츠 예매권 사용했을 때만 -->
 
 					<h5 class="mgt40 text_tit">결제정보</h5>
 					<div class="basic_tbl_v4">
@@ -229,7 +227,7 @@
 									<th scope="row" class="lspacingm1">예매권 할인</th>
 									<td class="tr ng-scope">
 										<c:choose>
-											<c:when test="${reservation.advanceTicketDiscount > 0}">
+											<c:when test="${reservation.hasAdvanceTicket}">
 											-<fmt:formatNumber value="${reservation.advanceTicketDiscount}" type="number" />
 											원
 											</c:when>
@@ -239,6 +237,20 @@
 									<th scope="row" class="lspacingm1">부가상품</th>
 									<td class="tr ng-binding">0원</td>
 								</tr>
+ 								<%-- <tr>
+									<th scope="row" class="lspacingm1">예매권 할인</th>
+									<td class="tr ng-scope">
+										<c:choose>
+											<c:when test="${reservation.advanceTicketDiscount > 0}">
+											-<fmt:formatNumber value="${reservation.advanceTicketDiscount}" type="number" />
+											원
+											</c:when>
+											<c:otherwise>0원</c:otherwise>
+										</c:choose>
+									</td>
+									<th scope="row" class="lspacingm1">부가상품</th>
+									<td class="tr ng-binding">0원</td>
+								</tr> --%>
 							</tbody>
 						</table>
 					</div>
