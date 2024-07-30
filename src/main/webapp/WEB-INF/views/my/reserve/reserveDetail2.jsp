@@ -42,16 +42,16 @@
 								<tr class="line">
 									<th scope="row">티켓명</th>
 									<td class="ng-scope">
-										<span class="ng-binding ng-scope">${reservation.homeTeamName} vs ${reservation.awayTeamName}</span>
+										<span class="ng-binding ng-scope"> SSG 랜더스 vs 롯데자이언츠 </span>
 									</td>
 									<th scope="row">예매자</th>
-									<td class="ng-binding">${reservation.memberName}</td>
+									<td class="ng-binding">심지언</td>
 								</tr>
 								<tr>
 									<th scope="row">관람일시</th>
-									<td class="ng-binding">${reservation.gameDate}${reservation.gameTime}</td>
+									<td class="ng-binding">2024.07.30(화) 18:30</td>
 									<th scope="row">장소</th>
-									<td class="ng-binding">${reservation.venueName}</td>
+									<td class="ng-binding">인천 SSG 랜더스 필드</td>
 								</tr>
 								<tr>
 									<th scope="row" class="ng-scope">
@@ -60,9 +60,9 @@
 										</div>
 									</th>
 									<td>
-										<!-- 반복 -->
-										<p class="ng-binding ng-scope">${reservation.seatName} ${reservation.seatDetail}</p>
-										<!-- 반복 -->
+										<p class="ng-binding ng-scope">4층 일반석 301블록 B열 6번</p>
+										<p class="ng-binding ng-scope">4층 일반석 301블록 B열 7번</p>
+										<p class="ng-binding ng-scope">4층 일반석 301블록 B열 8번</p>
 									</td>
 
 									<th scope="row">티켓수령 방법</th>
@@ -70,10 +70,10 @@
 								</tr>
 								<tr>
 									<th scope="row">예매일</th>
-									<td class="ng-binding">${reservation.reservationDate}</td>
+									<td class="ng-binding">2024.07.27</td>
 									<th scope="row">현재상태</th>
 									<td class="ng-binding">
-										${reservation.status}
+										예매완료
 										<span class="ng-binding ng-hide">()</span>
 										<!-- 관리자 취소 시 괄호 안에 취소 사유 들어감 -->
 									</td>
@@ -83,8 +83,7 @@
 									<td>
 										<ul>
 											<li class="ng-scope">
-												<!-- totalAmount가 0일 때 : 스포츠 예매권 / 0이 아닐 때 : 신용카드 -->
-												<span class="ng-binding ng-scope">신용카드or스포츠 예매권</span>
+												<span class="ng-binding ng-scope"> 신용카드 간편결제 </span>
 											</li>
 										</ul>
 									</td>
@@ -131,7 +130,6 @@
 								</tr>
 							</thead>
 							<tbody style="font-family:'Pretendard-Regular'">
-								<!-- 반복 -->
 								<tr class="ng-scope">
 									<td>
 										<span class="checkbox">
@@ -139,17 +137,47 @@
 										</span>
 									</td>
 									<td class="font_option number">
-										<label for="reserve_num0" class="ng-binding"> ${reservation.reservationNumber} </label>
+										<label for="reserve_num0" class="ng-binding"> 1468853619 </label>
 									</td>
-									<td class="ellipsis ng-binding">${reservation.SeatName}</td>
-									<td class="ellipsis ng-binding">${reservation.ticketTypeName}</td>
-									<td class="ellipsis ng-binding">${reservation.seatBlock}블록 ${reservation.seatRow}열 ${reservation.seatNumber}번</td>
-									<td class="ng-binding">${reservation.ticketPrice}원</td>
-									<!-- cancelDeadline이 지나지 않았을 때 : 취소가능 | cancelDeadline이 지났을 때 취소불가 -->
-									<td class="color_point font_option ng-scope">취소가능 or 취소불가</td>
-									<td class="number color_point font_option ng-binding ng-scope">${reservation.cancelDeadline}</td>
+									<td class="ellipsis ng-binding">4층 일반석</td>
+									<td class="ellipsis ng-binding">일반</td>
+									<td class="ellipsis ng-binding">301블록 B열 6번</td>
+									<td class="ng-binding">11,000원</td>
+									<td class="color_point font_option ng-scope">취소가능</td>
+									<td class="number color_point font_option ng-binding ng-scope">2024.07.30 14:30</td>
 								</tr>
-								<!-- 반복 -->
+								<tr class="ng-scope">
+									<td>
+										<span class="checkbox">
+											<input type="radio" id="reserve_num1" name="reserve_num">
+										</span>
+									</td>
+									<td class="font_option number">
+										<label for="reserve_num1" class="ng-binding"> 1468853619 </label>
+									</td>
+									<td class="ellipsis ng-binding">4층 일반석</td>
+									<td class="ellipsis ng-binding">일반</td>
+									<td class="ellipsis ng-binding">301블록 B열 7번</td>
+									<td class="ng-binding">11,000원</td>
+									<td class="color_point font_option ng-scope">취소가능</td>
+									<td class="number color_point font_option ng-binding ng-scope">2024.07.30 14:30</td>
+								</tr>
+								<tr class="ng-scope">
+									<td>
+										<span class="checkbox">
+											<input type="radio" id="reserve_num2" name="reserve_num">
+										</span>
+									</td>
+									<td class="font_option number">
+										<label for="reserve_num2" class="ng-binding"> 1468853619 </label>
+									</td>
+									<td class="ellipsis ng-binding">4층 일반석</td>
+									<td class="ellipsis ng-binding">일반</td>
+									<td class="ellipsis ng-binding">301블록 B열 8번</td>
+									<td class="ng-binding">11,000원</td>
+									<td class="color_point font_option ng-scope">취소가능</td>
+									<td class="number color_point font_option ng-binding ng-scope">2024.07.30 14:30</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -157,7 +185,7 @@
 						<a class="btn btn_full ng-scope">취소하기</a>
 					</div>
 
-					<!-- 스포츠 예매권 사용했을 때만 보여주기 -->
+					<!-- hasAdvanceTickets -->
 					<h5 class="mgt40 text_tit">스포츠 예매권 정보</h5>
 					<div class="basic_tbl_v4">
 						<table>
@@ -180,7 +208,6 @@
 							</tbody>
 						</table>
 					</div>
-					<!-- 스포츠 예매권 사용했을 때만 보여주기 -->
 
 					<h5 class="mgt40 text_tit">결제정보</h5>
 					<div class="basic_tbl_v4">

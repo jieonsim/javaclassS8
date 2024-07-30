@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="${ctp}/css/common/common.css">
 <link rel="stylesheet" href="${ctp}/css/common/layout.css">
 <link rel="stylesheet" href="${ctp}/css/my/contents.css">
-<link rel="stylesheet" href="${ctp}/css/my/memberInfo/matchPassword.css">
+<link rel="stylesheet" href="${ctp}/css/common/paginate.css">
 <link rel="icon" href="${ctp}/images/common/favicon.ico">
 </head>
 <body>
@@ -101,9 +101,7 @@
 														<span class="ng-binding ng-scope">${reservation.homeTeamName} vs ${reservation.awayTeamName}</span>
 													</span>
 												</td>
-												<td class="fs12 number ng-binding">
-													${reservation.gameDate} ${reservation.gameTime}
-												</td>
+												<td class="fs12 number ng-binding">${reservation.gameDate}${reservation.gameTime}</td>
 												<td class="ng-binding">${reservation.ticketAmount}장</td>
 												<td class="fs12 number color_point ng-binding">${reservation.cancelDeadline}</td>
 												<td>
@@ -129,7 +127,26 @@
 							</tbody>
 						</table>
 					</div>
-					<jsp:include page="/WEB-INF/views/layout/paginate.jsp" />
+					<c:if test="${not empty reservations}">
+						<div class="paging" id="pagination">
+							<a href="?page=1" class="first ${paginationInfo.currentPage == 1 ? 'disabled' : ''}">맨앞</a>
+							<a href="?page=${paginationInfo.currentPage - 1}" class="prev ${paginationInfo.currentPage == 1 ? 'disabled' : ''}">이전</a>
+
+							<c:forEach begin="${paginationInfo.startPage}" end="${paginationInfo.endPage}" var="pageNum">
+								<c:choose>
+									<c:when test="${pageNum == paginationInfo.currentPage}">
+										<strong>${pageNum}</strong>
+									</c:when>
+									<c:otherwise>
+										<a href="?page=${pageNum}">${pageNum}</a>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+
+							<a href="?page=${paginationInfo.currentPage + 1}" class="next ${paginationInfo.currentPage == paginationInfo.totalPages ? 'disabled' : ''}">다음</a>
+							<a href="?page=${paginationInfo.totalPages}" class="end ${paginationInfo.currentPage == paginationInfo.totalPages ? 'disabled' : ''}">맨뒤</a>
+						</div>
+					</c:if>
 					<div class="notes2">
 						<h6>
 							<span></span>
@@ -147,5 +164,6 @@
 		</div>
 	</main>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
+	<script src="${ctp}/js/my/reserve/reserveList.js"></script>
 </body>
 </html>

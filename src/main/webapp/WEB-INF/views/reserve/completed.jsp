@@ -178,5 +178,6 @@
 			</div>
 		</div>
 	</div>
+	<script src="${ctp}/js/reserve/completed.js"></script>
 </body>
 </html>

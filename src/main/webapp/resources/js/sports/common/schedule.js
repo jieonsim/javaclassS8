@@ -55,4 +55,10 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	});
 
+	// 부모 창에서 메시지 수신 후 처리(예매 창 닫고 예매확인으로 이동)
+	window.addEventListener('message', function(e) {
+		if (e.data === 'navigateToReserveList') {
+			window.location.href = `${ctp}/my/reserve/list`;
+		}
+	});
 });

@@ -99,9 +99,21 @@ public class ReservationDAOImpl implements ReservationDAO {
 		return sqlSession.getMapper(ReservationDAO.class).getPriceForTicketType(sportId, teamId, venueId, seatId, ticketTypeId);
 	}
 
-	// memberId로 해당 유저의 예매완료 건 가져오기
+	// memberId로 해당 유저의 예매완료 리스트 가져오기
     @Override
-    public List<ReservationVO> getReservationListByMemberId(int memberId) {
-        return sqlSession.getMapper(ReservationDAO.class).getReservationListByMemberId(memberId);
+    public List<ReservationVO> getReservationListByMemberId(int memberId, int offset, int limit) {
+        return sqlSession.getMapper(ReservationDAO.class).getReservationListByMemberId(memberId, offset, limit);
     }
+    
+    // memberId로 해당 유저의 예매완료 건 수 가져오기
+    @Override
+    public int getReservationCountByMemberId(int memberId) {
+        return sqlSession.getMapper(ReservationDAO.class).getReservationCountByMemberId(memberId);
+    }
+    
+    // 마이페이지 > quickMenuWrap > 오늘 날짜 기준 관람 가능한 나의 예매티켓 갯수 보여주기
+	@Override
+	public int getAvailableReservationCount(int memberId) {
+		return sqlSession.getMapper(ReservationDAO.class).getAvailableReservationCount(memberId);
+	}
 }

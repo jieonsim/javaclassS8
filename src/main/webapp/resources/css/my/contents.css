@@ -1831,3 +1831,7 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .table-border-bottom{border-bottom: 1px solid #ecedf2}
 /*추가 마이페이지 quickMenuIcon*/
 .mypage .quick_menu_wrap .quick_menu_list .quick_menu_item .quickMenuIcon {font-size: 46px; color: black}
+/*추가 마이페이지 예매디테일*/
+.checkbox {width: 18px;height: 18px;border: 1px solid #878d95;border-radius: 50%;background: none;background-color: #fff;box-sizing: border-box}
+.checkbox.checked {background: url(../../images/icon/check-circle-fill.svg) center / 20px 20px no-repeat}
+span.checkbox.ng-scope{margin-left: 1px}

@@ -73,7 +73,7 @@
 	    AND ticketTypeId = #{ticketTypeId}
     </select>
     
-    <!-- memberId로 해당 유저의 예매완료 건 가져오기 -->
+    <!-- memberId로 해당 유저의 예매완료 리스트 가져오기 -->
 	<select id="getReservationListByMemberId" resultType="com.spring.javaclassS8.vo.reserve.ReservationVO">
 	    SELECT 
 	        r.id AS reservationId,
@@ -103,6 +103,25 @@
 	        AND r.status = '예매완료'
 	    ORDER BY 
 	        r.createdAt DESC
+	    LIMIT #{offset}, #{limit}
+	</select>
+	
+	<!-- memberId로 해당 유저의 예매완료 건 수 가져오기 -->
+	<select id="getReservationCountByMemberId" resultType="int">
+	    SELECT COUNT(*)
+	    FROM reservations
+	    WHERE memberId = #{memberId}
+	    AND status = '예매완료'
+	</select>
+	
+	<!-- 마이페이지 > quickMenuWrap > 오늘 날짜 기준 관람 가능한 나의 예매티켓 갯수 보여주기 -->
+	<select id="getAvailableReservationCount" resultType="int">
+		SELECT COUNT(*)
+	    FROM reservations r
+	    JOIN games g ON r.gameId = g.id
+	    WHERE r.memberId = #{memberId}
+	    AND r.status = '예매완료'
+	    AND CONCAT(g.gameDate, ' ', g.gameTime) > NOW()
 	</select>
 	
 	<!-- 예매 처리 : reservations 테이블 레코드 생성 -->
