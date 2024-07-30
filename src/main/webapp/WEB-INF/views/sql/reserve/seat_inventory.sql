@@ -11,11 +11,6 @@ CREATE TABLE seat_inventory (
     UNIQUE KEY (gameId, seatId) COMMENT '한 경기의 특정 좌석 등급은 하나의 재고만 가질 수 있음'
 );
 
-
-select * from seat_inventory where gameId = 45 and seatId = 82;
-
-
-
 INSERT INTO seat_inventory (gameId, seatId, totalCapacity, availableCapacity)
 SELECT 
     g.id AS gameId, 

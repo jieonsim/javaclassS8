@@ -99,7 +99,7 @@ public class ReservationDAOImpl implements ReservationDAO {
 		return sqlSession.getMapper(ReservationDAO.class).getPriceForTicketType(sportId, teamId, venueId, seatId, ticketTypeId);
 	}
 
-	// memberId로 해당 유저의 예매완료 리스트 가져오기
+	// 마이페이지 > 예매확인 뷰 | memberId로 해당 유저의 예매완료 리스트 가져오기
     @Override
     public List<ReservationVO> getReservationListByMemberId(int memberId, int offset, int limit) {
         return sqlSession.getMapper(ReservationDAO.class).getReservationListByMemberId(memberId, offset, limit);
@@ -116,4 +116,42 @@ public class ReservationDAOImpl implements ReservationDAO {
 	public int getAvailableReservationCount(int memberId) {
 		return sqlSession.getMapper(ReservationDAO.class).getAvailableReservationCount(memberId);
 	}
+
+    @Override
+    public ReservationVO getReservationById(int reservationId) {
+        return sqlSession.getMapper(ReservationDAO.class).getReservationById(reservationId);
+    }
+
+    @Override
+    public List<ReservationDetailVO> getReservationDetailsById(int reservationId) {
+        return sqlSession.getMapper(ReservationDAO.class).getReservationDetailsById(reservationId);
+    }
+
+    @Override
+    public List<Map<String, Object>> getAdvanceTicketsForReservation(int reservationId) {
+        return sqlSession.getMapper(ReservationDAO.class).getAdvanceTicketsForReservation(reservationId);
+    }
+
+	@Override
+	public List<Map<String, Object>> getAdvanceTicketPricesForReservation(int reservationId) {
+		return sqlSession.getMapper(ReservationDAO.class).getAdvanceTicketPricesForReservation(reservationId);
+	}
+
+//	// 마이페이지 > 예매확인 > 예매상세내역 뷰 | reservationId로 상세 예매내역 가져오기
+//	@Override
+//	public Map<String, Object> getReservationDetail(int reservationId) {
+//		return sqlSession.getMapper(ReservationDAO.class).getReservationDetail(reservationId);
+//	}
+//	
+//	// 마이페이지 > 예매확인 > 예매상세내역 뷰 | reservationId로 예매내역의 좌석 정보 가져오기
+//	@Override
+//	public List<Map<String, Object>> getReservationSeats(int reservationId) {
+//		return sqlSession.getMapper(ReservationDAO.class).getReservationSeats(reservationId);
+//	}
+//
+//	// 마이페이지 > 예매확인 > 예매상세내역 뷰 | reservationId로 각 매수별 상세 예매정보 가져오기
+//	@Override
+//	public List<Map<String, Object>> getReservationTickets(int reservationId) {
+//		return sqlSession.getMapper(ReservationDAO.class).getReservationTickets(reservationId);
+//	}
 }

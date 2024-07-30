@@ -12,4 +12,14 @@ public class ReservationDetailVO {
     private int seatRow;
     private int seatNumber;
     private int ticketPrice;
+    
+    // 추가
+    private String seatName;
+    private String ticketTypeName;
+    private String advanceTicketNumber;
+//    private String reservationNumber;
+//    private String seatName;
+//    private String ticketTypeName;
+//    private String cancelStatus;
+//    private String cancelDeadline;
 }

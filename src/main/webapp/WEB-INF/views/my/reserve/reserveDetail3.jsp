@@ -50,15 +50,20 @@
 								</tr>
 								<tr>
 									<th scope="row">관람일시</th>
-									<td class="ng-binding">${reservation.gameDate}&nbsp;${reservation.gameTime}</td>
+									<!-- gameDate 형식 : 2024.08.01(목) | gameTime 형식 : 18:30	 -->
+									<td class="ng-binding">${reservation.gameDate}${reservation.gameTime}</td>
 									<th scope="row">장소</th>
 									<td class="ng-binding">${reservation.venueName}</td>
 								</tr>
 								<tr>
-									<th scope="row" class="ng-scope">좌석</th>
+									<th scope="row" class="ng-scope">
+										<div class="seat_bx">
+											<button type="button" class="btn_seat">좌석</button>
+										</div>
+									</th>
 									<td>
-										<c:forEach items="${reservationDetails}" var="detail">
-											<p class="ng-binding ng-scope">${detail.seatName}&nbsp;${detail.seatBlock}블럭&nbsp;${detail.seatRow}열&nbsp;${detail.seatNumber}번</p>
+										<c:forEach items="${reservation.seats}" var="seat">
+											<p class="ng-binding ng-scope">${seat.seatName}${seat.seatBlock}블럭${seat.seatRow}열${seat.seatNumber}번</p>
 										</c:forEach>
 									</td>
 									<th scope="row">티켓수령 방법</th>
@@ -66,11 +71,13 @@
 								</tr>
 								<tr>
 									<th scope="row">예매일</th>
-									<td class="ng-binding">${reservation.formattedCreatedAt}</td>
+									<!-- 예매일 형식 : 2024.07.30 -->
+									<td class="ng-binding">${reservation.createdAt}</td>
 									<th scope="row">현재상태</th>
 									<td class="ng-binding">
 										${reservation.status}
 										<span class="ng-binding ng-hide">()</span>
+										<!-- 관리자 취소 시 괄호 안에 취소 사유 들어감 -->
 									</td>
 								</tr>
 								<tr>
@@ -78,6 +85,7 @@
 									<td>
 										<ul>
 											<li class="ng-scope">
+												<!-- totalAmount가 0일 때 : 스포츠 예매권 / 0이 아닐 때 : 신용카드 -->
 												<span class="ng-binding ng-scope">${reservation.paymentMethod}</span>
 											</li>
 										</ul>
@@ -125,7 +133,7 @@
 								</tr>
 							</thead>
 							<tbody style="font-family: 'Pretendard-Regular'">
-								<c:forEach items="${reservationDetails}" var="detail" varStatus="status">
+								<c:forEach items="${reservation.tickets}" var="ticket" varStatus="status">
 									<tr class="ng-scope">
 										<td>
 											<span class="checkbox">
@@ -133,22 +141,23 @@
 											</span>
 										</td>
 										<td class="font_option number">
-											<label for="reserve_num${status.index}" class="ng-binding">${reservation.reservationNumber}</label>
+											<label for="reserve_num${status.index}" class="ng-binding">${ticket.reservationNumber}</label>
 										</td>
-										<td class="ellipsis ng-binding">${detail.seatName}</td>
-										<td class="ellipsis ng-binding">${detail.ticketTypeName}</td>
-										<td class="ellipsis ng-binding">${detail.seatBlock}블록&nbsp;${detail.seatRow}열&nbsp;${detail.seatNumber}번</td>
-										<td class="ng-binding">
-											<fmt:formatNumber value="${detail.ticketPrice}" type="number" />
-											원
-										</td>
+										<td class="ellipsis ng-binding">${ticket.seatName}</td>
+										<td class="ellipsis ng-binding">${ticket.ticketTypeName}</td>
+										<td class="ellipsis ng-binding">${ticket.seatBlock}블록${ticket.seatRow}열${ticket.seatNumber}번</td>
+										<td class="ng-binding">${ticket.ticketPrice}원</td>
+										<!-- cancelDeadline이 지나지 않았을 때 : 취소가능 | cancelDeadline이 지났을 때 취소불가 -->
+										<c:set var="now" value="<%=new java.util.Date()%>" />
+										<fmt:formatDate var="currentDate" value="${now}" pattern="yyyy.MM.dd HH:mm" />
 										<td class="color_point font_option ng-scope">
 											<c:choose>
-												<c:when test="${reservation.status eq '예매완료'}">취소가능</c:when>
+												<c:when test="${currentDate le reservation.cancelDeadline}">취소가능</c:when>
 												<c:otherwise>취소불가</c:otherwise>
 											</c:choose>
 										</td>
-										<td class="number color_point font_option ng-binding ng-scope">${reservation.formattedCancelDeadline}</td>
+										<!-- cancelDeadline 형식 : 2024.08.01 16:00 -->
+										<td class="number color_point font_option ng-binding ng-scope">${ticket.cancelDeadline}</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -158,34 +167,32 @@
 						<a class="btn btn_full ng-scope">취소하기</a>
 					</div>
 
-					<!-- 스포츠 예매권 사용했을 때만 -->
-					<c:if test="${not empty advanceTickets}">
-						<h5 class="mgt40 text_tit">스포츠 예매권 정보</h5>
-						<div class="basic_tbl_v4">
-							<table>
-								<caption>
-									<span class="blind">스포츠 예매권 정보</span>
-								</caption>
-								<colgroup>
-									<col style="width: 120px">
-									<col>
-									<col style="width: 140px">
-									<col>
-								</colgroup>
-								<tbody>
-									<c:forEach items="${advanceTicketPrices}" var="ticket">
-										<tr class="line">
-											<th scope="row" class="lspacingm1">예매권 번호</th>
-											<td class="tr ng-binding">${ticket.advanceTicketNumber}</td>
-											<th scope="row" class="lspacingm1">사용매수</th>
-											<td class="tr ng-binding">1매</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-					</c:if>
-					<!-- 스포츠 예매권 사용했을 때만 -->
+					<!-- 스포츠 예매권 사용했을 때만 보여주기 -->
+					<h5 class="mgt40 text_tit">스포츠 예매권 정보</h5>
+					<div class="basic_tbl_v4">
+						<table>
+							<caption>
+								<span class="blind">스포츠 예매권 정보</span>
+							</caption>
+							<colgroup>
+								<col style="width: 120px">
+								<col>
+								<col style="width: 140px">
+								<col>
+							</colgroup>
+							<tbody>
+								<!-- 반복 -->
+								<tr class="line">
+									<th scope="row" class="lspacingm1">예매권 번호</th>
+									<td class="tr ng-binding">${reservation.reservationNumber}</td>
+									<th scope="row" class="lspacingm1">사용매수</th>
+									<td class="tr ng-binding">1매</td>
+								</tr>
+								<!-- 반복 -->
+							</tbody>
+						</table>
+					</div>
+					<!-- 스포츠 예매권 사용했을 때만 보여주기 -->
 
 					<h5 class="mgt40 text_tit">결제정보</h5>
 					<div class="basic_tbl_v4">
@@ -204,10 +211,8 @@
 									<th scope="row">총 결제금액</th>
 									<td colspan="3">
 										<span class="color_point">
-											<span class="number ng-binding">
-												<fmt:formatNumber value="${reservation.totalAmount}" type="number" />
-												원
-											</span>
+											<span class="number ng-binding">${reservation.totalAmount}원</span>
+											원
 										</span>
 									</td>
 								</tr>
@@ -215,29 +220,15 @@
 							<tbody>
 								<tr class="line">
 									<th scope="row" class="lspacingm1">티켓금액</th>
-									<td class="tr ng-binding">
-										<fmt:formatNumber value="${reservation.totalTicketPrice}" type="number" />
-										원
-									</td>
+									<!-- 여러 매수를 예매했을 경우 각 ticketPrice의 누적 총합이 들어가야함. -->
+									<td class="tr ng-binding">${reservaton.ticketPrice}원</td>
 									<th scope="row" class="lspacingm1">예매수수료</th>
-									<td class="tr ng-binding">
-										<fmt:formatNumber value="${reservation.bookingFee}" type="number" />
-										원
-									</td>
+									<td class="tr ng-binding">${reservation.bookingFee}원</td>
 								</tr>
 								<tr>
 									<th scope="row" class="lspacingm1">예매권 할인</th>
-									<td class="tr ng-scope">
-										<c:choose>
-											<c:when test="${reservation.advanceTicketDiscount > 0}">
-											-<fmt:formatNumber value="${reservation.advanceTicketDiscount}" type="number" />
-											원
-											</c:when>
-											<c:otherwise>0원</c:otherwise>
-										</c:choose>
-									</td>
-									<th scope="row" class="lspacingm1">부가상품</th>
-									<td class="tr ng-binding">0원</td>
+									<!-- 스포츠 예매권으로 예매가 되었을 때 스포츠예매권 권종 요금 누적의 총합이 들어가야함. 스포츠 예매권을 1매도 사용하지 않았을 경우에는 마이너스 기호없이 0원으로 처리-->
+									<td class="tr ng-scope">-${ㅇㅇ}원</td>
 								</tr>
 							</tbody>
 						</table>
@@ -263,6 +254,7 @@
 							<tbody>
 								<tr>
 									<td>취소 마감시간</td>
+									<!-- 형식 : 2024년 08월 01일 16:00 -->
 									<td colspan="3" class="color_point fbold tl end ng-binding">${reservation.cancelDeadline}</td>
 								</tr>
 								<tr class="ng-scope">
@@ -272,14 +264,16 @@
 										(취소 마감시간 내에 한함)
 									</td>
 									<td class="color_black tl ng-binding">예매당일</td>
-									<td class="color_black tl ng-binding ng-scope">${reservation.formattedCreatedAt}</td>
+									<!-- 형식 : 2024.07.30 -->
+									<td class="color_black tl ng-binding ng-scope">${reservation.createdAt}</td>
 									<td class="color_point tl end ng-scope">
 										<span class="color_point fbold">없음</span>
 									</td>
 								</tr>
 								<tr class="ng-scope">
 									<td class="color_black tl ng-binding">예매익일~취소마감시간 전</td>
-									<td class="color_black tl ng-binding ng-scope">${reservation.cancelPeriod}</td>
+									<!-- 형식 : 2024.07.28~2024.07.30 (cancelDeadline의 날짜만 나와야함) -->
+									<td class="color_black tl ng-binding ng-scope">${reservation.createdAt+1}~${reservation.cancelDeadline}</td>
 									<td class="color_black tl end ng-scope">
 										티켓 금액의
 										<span class="color_point fbold number ng-binding">10%</span>

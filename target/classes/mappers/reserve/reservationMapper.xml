@@ -73,7 +73,7 @@
 	    AND ticketTypeId = #{ticketTypeId}
     </select>
     
-    <!-- memberId로 해당 유저의 예매완료 리스트 가져오기 -->
+    <!-- 마이페이지 > 예매확인 뷰 | memberId로 해당 유저의 예매완료 리스트 가져오기 -->
 	<select id="getReservationListByMemberId" resultType="com.spring.javaclassS8.vo.reserve.ReservationVO">
 	    SELECT 
 	        r.id AS reservationId,
@@ -123,6 +123,147 @@
 	    AND r.status = '예매완료'
 	    AND CONCAT(g.gameDate, ' ', g.gameTime) > NOW()
 	</select>
+	
+	<select id="getReservationById" resultType="com.spring.javaclassS8.vo.reserve.ReservationVO">
+        SELECT r.*, 
+               g.gameDate, g.gameTime,
+               ht.teamName AS homeTeamName, 
+               at.teamName AS awayTeamName,
+               m.name AS memberName,
+               v.venueName,
+               CASE WHEN r.totalAmount = 0 THEN '스포츠 예매권' ELSE '신용카드' END AS paymentMethod
+        FROM reservations r
+        JOIN games g ON r.gameId = g.id
+        JOIN teams ht ON g.homeTeamId = ht.id
+        JOIN teams at ON g.awayTeamId = at.id
+        JOIN members m ON r.memberId = m.id
+        JOIN venues v ON g.venueId = v.id
+        WHERE r.id = #{reservationId}
+    </select>
+
+    <select id="getReservationDetailsById" resultType="com.spring.javaclassS8.vo.reserve.ReservationDetailVO">
+        SELECT rd.*, s.seatName, tt.name AS ticketTypeName
+        FROM reservation_details rd
+        JOIN seats s ON rd.seatId = s.id
+        JOIN ticket_types tt ON rd.ticketTypeId = tt.id
+        WHERE rd.reservationId = #{reservationId}
+    </select>
+
+    <select id="getAdvanceTicketsForReservation" resultType="java.util.HashMap">
+        SELECT at.advanceTicketNumber, at.expiresAt, p.price AS ticketPrice
+        FROM advance_ticket_usage atu
+        JOIN advance_tickets at ON atu.advanceTicketId = at.id
+        JOIN reservation_details rd ON atu.reservationId = rd.reservationId
+        JOIN prices p ON rd.seatId = p.seatId AND rd.ticketTypeId = p.ticketTypeId
+        WHERE atu.reservationId = #{reservationId}
+    </select>
+    
+    <select id="getAdvanceTicketPricesForReservation" resultType="java.util.HashMap">
+	    SELECT DISTINCT at.advanceTicketNumber, p.price
+	    FROM advance_ticket_usage atu
+	    JOIN advance_tickets at ON atu.advanceTicketId = at.id
+	    JOIN reservation_details rd ON atu.reservationId = rd.reservationId
+	    JOIN prices p ON rd.seatId = p.seatId AND p.ticketTypeId = 8
+	    WHERE atu.reservationId = #{reservationId}
+	</select>
+    
+	
+	<!-- 마이페이지 > 예매확인 > 예매상세내역 뷰 | reservationId로 상세 예매내역 가져오기 -->
+	<!-- <select id="getReservationDetail" resultType="java.util.HashMap">
+	    SELECT 
+	        r.reservationNumber,
+	        r.totalAmount,
+	        r.ticketAmount,
+	        r.bookingFee,
+	        r.status,
+	        r.createdAt,
+	        g.gameDate,
+	        g.gameTime,
+	        ht.teamName AS homeTeamName,
+	        at.teamName AS awayTeamName,
+	        v.venueName,
+	        m.name AS memberName,
+	        s.seatName,
+	        rd.seatBlock,
+	        rd.seatRow,
+	        rd.seatNumber,
+	        rd.ticketPrice,
+	        tt.name AS ticketTypeName,
+	        CASE 
+	            WHEN r.totalAmount = 0 THEN '스포츠 예매권'
+	            ELSE '신용카드'
+	        END AS paymentMethod,
+	        sbp.cancellationFeeRate,
+	        sbp.cancellationDeadlineMinutesBeforeStart
+	    FROM 
+	        reservations r
+	    JOIN 
+	        games g ON r.gameId = g.id
+	    JOIN 
+	        teams ht ON g.homeTeamId = ht.id
+	    JOIN 
+	        teams at ON g.awayTeamId = at.id
+	    JOIN 
+	        venues v ON g.venueId = v.id
+	    JOIN 
+	        members m ON r.memberId = m.id
+	    JOIN 
+	        reservation_details rd ON r.id = rd.reservationId
+	    JOIN 
+	        seats s ON rd.seatId = s.id
+	    JOIN 
+	        ticket_types tt ON rd.ticketTypeId = tt.id
+	    JOIN 
+	        sport_booking_policies sbp ON g.sportId = sbp.sportId
+	    WHERE 
+	        r.id = #{reservationId}
+	</select> -->
+    
+    <!-- 마이페이지 > 예매확인 > 예매상세내역 뷰 | reservationId로 예매내역의 좌석 정보 가져오기 -->
+    <!-- <select id="getReservationSeats" resultType="java.util.HashMap">
+	    SELECT 
+	        s.seatName,
+	        rd.seatBlock,
+	        rd.seatRow,
+	        rd.seatNumber
+	    FROM 
+	        reservation_details rd
+	    JOIN 
+	        seats s ON rd.seatId = s.id
+	    WHERE 
+	        rd.reservationId = #{reservationId}
+	</select> -->
+	
+	<!-- 마이페이지 > 예매확인 > 예매상세내역 뷰 | reservationId로 각 매수별 상세 예매정보 가져오기 -->
+	<!-- <select id="getReservationTickets" resultType="java.util.HashMap">
+	    SELECT 
+	        r.reservationNumber,
+	        s.seatName,
+	        tt.name AS ticketTypeName,
+	        rd.seatBlock,
+	        rd.seatRow,
+	        rd.seatNumber,
+	        rd.ticketPrice,
+	        CASE 
+	            WHEN DATE_SUB(CONCAT(g.gameDate, ' ', g.gameTime), INTERVAL sbp.cancellationDeadlineMinutesBeforeStart MINUTE) > NOW() THEN '취소가능'
+	            ELSE '취소불가'
+	        END AS cancelStatus,
+	        DATE_FORMAT(DATE_SUB(CONCAT(g.gameDate, ' ', g.gameTime), INTERVAL sbp.cancellationDeadlineMinutesBeforeStart MINUTE), '%Y.%m.%d %H:%i') AS cancelDeadline
+	    FROM 
+	        reservation_details rd
+	    JOIN 
+	        reservations r ON rd.reservationId = r.id
+	    JOIN 
+	        seats s ON rd.seatId = s.id
+	    JOIN 
+	        ticket_types tt ON rd.ticketTypeId = tt.id
+	    JOIN 
+	        games g ON r.gameId = g.id
+	    JOIN 
+	        sport_booking_policies sbp ON g.sportId = sbp.sportId
+	    WHERE 
+	        r.id = #{reservationId}
+	</select> -->
 	
 	<!-- 예매 처리 : reservations 테이블 레코드 생성 -->
 	<insert id="insertReservation" parameterType="com.spring.javaclassS8.vo.reserve.ReservationVO" useGeneratedKeys="true" keyProperty="id">

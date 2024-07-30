@@ -129,7 +129,7 @@
 									<th scope="col">취소(가능)일</th>
 								</tr>
 							</thead>
-							<tbody style="font-family:'Pretendard-Regular'">
+							<tbody style="font-family: 'Pretendard-Regular'">
 								<tr class="ng-scope">
 									<td>
 										<span class="checkbox">
@@ -247,6 +247,15 @@
 									<th scope="row" class="lspacingm1">예매수수료</th>
 									<td class="tr ng-binding">3,000원</td>
 								</tr>
+								<tr>
+									<th scope="row" class="lspacingm1">쿠폰 할인</th>
+									<!-- ngIf: reserve.payment.hasCoupons -->
+									<!-- ngIf: !reserve.payment.hasCoupons -->
+									<td class="tr ng-scope" ng-if="!reserve.payment.hasCoupons">0원</td>
+									<!-- end ngIf: !reserve.payment.hasCoupons -->
+									<th scope="row" class="lspacingm1">부가상품</th>
+									<td class="tr ng-binding">0원</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -285,9 +294,9 @@
 										<span class="color_point fbold">없음</span>
 									</td>
 								</tr>
-								<tr  class="ng-scope">
+								<tr class="ng-scope">
 									<td class="color_black tl ng-binding">예매익일~취소마감시간 전</td>
-									<td class="color_black tl ng-binding ng-scope" >2024.07.28~2024.07.30</td>
+									<td class="color_black tl ng-binding ng-scope">2024.07.28~2024.07.30</td>
 									<td class="color_black tl end ng-scope">
 										티켓 금액의
 										<span class="color_point fbold number ng-binding">10%</span>

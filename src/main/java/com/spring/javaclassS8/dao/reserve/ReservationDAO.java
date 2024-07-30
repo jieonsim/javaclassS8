@@ -55,7 +55,7 @@ public interface ReservationDAO {
 	int getPriceForTicketType(@Param("sportId") int sportId, @Param("teamId") int teamId, @Param("venueId") int venueId, @Param("seatId") int seatId,
 			@Param("ticketTypeId") int ticketTypeId);
 
-	// memberId로 해당 유저의 예매완료 리스트 가져오기
+	// 마이페이지 > 예매확인 뷰 | memberId로 해당 유저의 예매완료 리스트 가져오기
     List<ReservationVO> getReservationListByMemberId(@Param("memberId") int memberId, @Param("offset") int offset, @Param("limit") int limit);
     
     // memberId로 해당 유저의 예매완료 건 수 가져오기
@@ -63,4 +63,21 @@ public interface ReservationDAO {
     
     // 마이페이지 > quickMenuWrap > 오늘 날짜 기준 관람 가능한 나의 예매티켓 갯수 보여주기
 	int getAvailableReservationCount(int memberId);
+	
+	ReservationVO getReservationById(int reservationId);
+
+	List<ReservationDetailVO> getReservationDetailsById(int reservationId);
+
+	List<Map<String, Object>> getAdvanceTicketsForReservation(int reservationId);
+	
+	List<Map<String, Object>> getAdvanceTicketPricesForReservation(int reservationId);
+	
+//	// 마이페이지 > 예매확인 > 예매상세내역 뷰 | reservationId로 상세 예매내역 가져오기
+//	Map<String, Object> getReservationDetail(int reservationId);
+//	
+//	// 마이페이지 > 예매확인 > 예매상세내역 뷰 | reservationId로 예매내역의 좌석 정보 가져오기
+//	List<Map<String, Object>> getReservationSeats(int reservationId);
+//	
+//	// 마이페이지 > 예매확인 > 예매상세내역 뷰 | reservationId로 각 매수별 상세 예매정보 가져오기
+//	List<Map<String, Object>> getReservationTickets(int reservationId);
 }

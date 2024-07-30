@@ -46,9 +46,15 @@ public class MyReservationController {
 		}
 		return myReservationService.getAvailableReservationCount(member.getId());
 	}
-
-	@GetMapping("/detail")
-	public String getReservationDetail() {
-		return "my/reserve/reserveDetail";
-	}
+	
+	// 마이페이지 > 예매확인 > 예매디테일 뷰
+    @GetMapping("/detail")
+    public String getReservationDetail(@RequestParam("reservationId") int reservationId, Model model) {
+        Map<String, Object> reservationInfo = myReservationService.getReservationDetail(reservationId);
+        model.addAttribute("reservation", reservationInfo.get("reservation"));
+        model.addAttribute("reservationDetails", reservationInfo.get("reservationDetails"));
+        model.addAttribute("advanceTickets", reservationInfo.get("advanceTickets"));
+        model.addAttribute("advanceTicketPrices", reservationInfo.get("advanceTicketPrices"));
+        return "my/reserve/reserveDetail";
+    }
 }

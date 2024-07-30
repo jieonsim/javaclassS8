@@ -18,3 +18,5 @@ CREATE TABLE sport_booking_policies (
     FOREIGN KEY (sportId) REFERENCES sports(id),
     UNIQUE KEY (sportId)
 );
+
+desc sport_booking_policies;

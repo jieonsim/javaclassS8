@@ -8,3 +8,11 @@ CREATE TABLE advance_ticket_usage (
     FOREIGN KEY (reservationId) REFERENCES reservations(id),
     FOREIGN KEY (advanceTicketId) REFERENCES advance_tickets(id)
 );
+
+desc advance_ticket_usage;
+ Field           Type      Null Key Default           Extra
+ --------------- --------- ---- --- ----------------- --------------
+ id              int(11)   NO   PRI NULL              auto_increment
+ reservationId   int(11)   NO   MUL NULL              
+ advanceTicketId int(11)   NO   MUL NULL              
+ usedAt          timestamp NO       CURRENT_TIMESTAMP 
