@@ -43,7 +43,7 @@
 							<tbody>
 								<tr class="ng-scope line">
 									<th scope="row" rowspan="1" class="ng-scope">예매번호</th>
-									<td colspan="3" class="ng-binding">${reservation.reservationNumber}&nbsp;(총$&nbsp;{reservation.ticketAmount}매)</td>
+									<td colspan="3" class="ng-binding">${reservation.reservationNumber}&nbsp;(총${reservation.ticketAmount}매)</td>
 								</tr>
 								<tr>
 									<th scope="row">총 결제금액</th>
@@ -51,17 +51,26 @@
 										<fmt:formatNumber value="${reservation.totalAmount}" type="number" />
 										원
 									</td>
-									<th scope="row">티켓금액</th>
-									<td class="tr ng-binding">
-										<fmt:formatNumber value="${reservation.totalAmount}" type="number" />
-										원
-									</td>
+									<th scope="row">총 결제금액</th>
+									<td class="tr ng-binding"><fmt:formatNumber value="${reservation.totalAmount}" type="number" />
+										원</td>
 								</tr>
 								<tr>
-									<th scope="row">예매수수료</th>
-									<td class="tr ng-binding">0원
-									</td>
+									<th scope="row">티켓금액</th>
+									<td class="tr ng-binding">33,000원</td>
+									<th scope="row">배송비</th>
+									<td class="tr ng-binding">0원</td>
+								</tr>
+								<tr>
+									<th scope="row">수수료</th>
+									<td class="tr ng-binding">3,000원</td>
+									<th scope="row">휴대폰 결제 수수료</th>
+									<td class="tr ng-binding">0원</td>
+								</tr>
+								<tr>
 									<th scope="row">취소수수료</th>
+									<td class="tr ng-binding">0원</td>
+									<th scope="row">송금수수료</th>
 									<td class="tr ng-binding">0원</td>
 								</tr>
 							</tbody>
@@ -76,35 +85,10 @@
 							</tfoot>
 						</table>
 					</div>
-					<c:if test="${reservation.hasAdvanceTicket}">
-						<h5 class="mgt40 text_tit">스포츠 예매권 정보</h5>
-						<div class="basic_tbl_v4">
-							<table>
-								<caption>
-									<span class="blind">스포츠 예매권 정보</span>
-								</caption>
-								<colgroup>
-									<col style="width: 120px">
-									<col>
-									<col style="width: 140px">
-									<col>
-								</colgroup>
-								<tbody>
-									<c:forEach items="${advanceTicketPrices}" var="ticket">
-										<tr class="line">
-											<th scope="row" class="lspacingm1">예매권 번호</th>
-											<td class="tr ng-binding">${ticket.advanceTicketNumber}</td>
-											<th scope="row" class="lspacingm1">사용매수</th>
-											<td class="tr ng-binding">1매</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-					</c:if>
 					<div class="list_btn">
-						<button class="btn btn_full" id="cancelBtn">취소하기</button>
+						<a href="${ctp}/my/reserve/cancel/completed?reservationId=${reservation.id}" class="btn btn_full">취소하기</a>
 					</div>
+
 					<h5 class="mgt40 text_tit">취소 유의사항</h5>
 					<div class="basic_tbl basic_tbl_v2">
 						<table>
@@ -126,7 +110,7 @@
 							<tbody>
 								<tr>
 									<td>취소 마감시간</td>
-									<td colspan="3" class="color_point fbold tl end ng-binding">${reservation.cancelDeadline}</td>
+									<td colspan="3" class="color_point fbold tl end ng-binding">2024년 07월 30일 14:30</td>
 								</tr>
 								<tr class="ng-scope">
 									<td rowspan="2" class="vam ng-scope">
@@ -135,12 +119,12 @@
 										(취소 마감시간 내에 한함)
 									</td>
 									<td class="color_black tl ng-binding">예매당일</td>
-									<td class="color_black tl ng-binding ng-scope">${reservation.formattedCreatedAt}</td>
+									<td class="color_black tl ng-binding ng-scope">2024.07.27</td>
 									<td class="color_point tl end ng-scope">없음</td>
 								</tr>
 								<tr class="ng-scope">
 									<td class="color_black tl ng-binding">예매익일~취소마감시간 전</td>
-									<td class="color_black tl ng-binding ng-scope">${reservation.cancelPeriod}</td>
+									<td class="color_black tl ng-binding ng-scope">2024.07.28~2024.07.30</td>
 									<td class="color_black tl end ng-scope">
 										티켓 금액의 <strong class="color_point ng-binding">10%</strong>
 									</td>
@@ -179,7 +163,5 @@
 		</div>
 	</main>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
-	<script>const reservationId = ${reservation.id}</script>
-	<script src="${ctp}/js/my/reserve/cancel/confirm.js"></script>
 </body>
 </html>

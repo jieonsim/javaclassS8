@@ -172,12 +172,15 @@
 					</div>
 				</div>
 				<div class="reserve_btn">
-					<a class="btn btn_blank ng-scope">내역 프린트</a>
+					<a class="btn btn_blank ng-scope" id="printPopupBtn">내역 프린트</a>
 					<a href="${ctp}/my/reserve/list" class="btn btn_full">예매확인</a>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script>
+		var reservationId = ${reservationId};
+	</script>
 	<script src="${ctp}/js/reserve/completed.js"></script>
 </body>
 </html>

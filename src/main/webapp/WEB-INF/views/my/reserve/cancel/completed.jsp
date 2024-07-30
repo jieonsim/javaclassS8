@@ -11,7 +11,6 @@
 <link rel="stylesheet" href="${ctp}/css/common/common.css">
 <link rel="stylesheet" href="${ctp}/css/common/layout.css">
 <link rel="stylesheet" href="${ctp}/css/my/contents.css">
-<link rel="stylesheet" href="${ctp}/css/my/memberInfo/matchPassword.css">
 <link rel="icon" href="${ctp}/images/common/favicon.ico">
 </head>
 <body>
@@ -21,7 +20,7 @@
 			<jsp:include page="/WEB-INF/views/my/layout/quickMenuWrap.jsp" />
 			<div class="help_cont">
 				<jsp:include page="/WEB-INF/views/my/layout/mySidebar.jsp" />
-				<div class="help_rcont ng-scope" ng-controller="reserveCancelCompleteCtrl">
+				<div class="help_rcont ng-scope">
 					<h3 class="blind">예매관리</h3>
 
 					<div class="h3_line">
@@ -48,22 +47,11 @@
 									<th scope="row">예매번호</th>
 									<td class="ng-binding">1468853619</td>
 									<th scope="row">티켓명</th>
-									<!-- ngIf: reserve.displayProductType === 'SPORTS_PRODUCT_NAME' -->
-									<!-- ngIf: reserve.displayProductType === 'SPORTS_TEAM_MATCH' -->
-									<td ng-if="reserve.displayProductType === 'SPORTS_TEAM_MATCH'" class="ng-scope">
-										<!-- ngIf: reserve.leagueName -->
-										<span ng-if="reserve.leagueName" class="ng-binding ng-scope">
-											[2024 신한 SOL Bank KBO 리그]
-											<br>
+									<td class="ng-scope">
+										<span class="ng-binding ng-scope">
 										</span>
-										<!-- end ngIf: reserve.leagueName -->
-										<!-- ngIf: reserve.gameTitle -->
-										<!-- ngIf: reserve.teamMatchUseYn === 'Y' -->
-										<span ng-if="reserve.teamMatchUseYn === 'Y'" class="ng-binding ng-scope"> SSG 랜더스 vs 롯데자이언츠 </span>
-										<!-- end ngIf: reserve.teamMatchUseYn === 'Y' -->
+										<span class="ng-binding ng-scope"> SSG 랜더스 vs 롯데자이언츠 </span>
 									</td>
-									<!-- end ngIf: reserve.displayProductType === 'SPORTS_TEAM_MATCH' -->
-									<!-- ngIf: reserve.displayProductType === 'DEFAULT_PRODUCT_NAME' -->
 								</tr>
 								<tr>
 									<th scope="row">관람일시</th>
@@ -75,7 +63,7 @@
 						</table>
 					</div>
 					<div class="list_btn">
-						<a class="btn btn_full" ng-click="confirm()">확인하기</a>
+						<a class="btn btn_full">확인하기</a>
 					</div>
 
 					<h5 class="mgt40 text_tit">환불내역</h5>
@@ -96,18 +84,13 @@
 								<tr>
 									<th scope="row">환불방법</th>
 									<td>
-										<!-- ngRepeat: message in reserve.refundMethodMessages track by $index -->
-										<p ng-repeat="message in reserve.refundMethodMessages track by $index" class="ng-binding ng-scope">신용카드(간편결제) 환불</p>
-										<!-- end ngRepeat: message in reserve.refundMethodMessages track by $index -->
-										<!-- ngIf: reserve.isUsedBenepiaPoint -->
+										<p class="ng-binding ng-scope">신용카드(간편결제) 환불</p>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row">환불 일정</th>
 									<td>
-										<!-- ngRepeat: message in reserve.refundDescriptionMessages track by $index -->
-										<p ng-repeat="message in reserve.refundDescriptionMessages track by $index" class="ng-binding ng-scope">일반적으로 당사자의 취소처리가 완료된 3 ~ 6일 후 카드사의 취소가 확인됩니다.</p>
-										<!-- end ngRepeat: message in reserve.refundDescriptionMessages track by $index -->
+										<p class="ng-binding ng-scope">일반적으로 당사자의 취소 처리가 완료된 3 ~ 6일 후 카드사의 취소가 확인됩니다.</p>
 									</td>
 								</tr>
 							</tbody>
@@ -118,6 +101,5 @@
 		</div>
 	</main>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
-	<script src="${ctp}/js/my/memberInfo/changePassword.js"></script>
 </body>
 </html>

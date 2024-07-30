@@ -12,3 +12,5 @@ CREATE TABLE reservation_details (
     FOREIGN KEY (seatId) REFERENCES seats(id),
     FOREIGN KEY (ticketTypeId) REFERENCES ticket_types(id)
 );
+
+select seatId from reservation_details where reservationId = 35;

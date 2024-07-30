@@ -127,8 +127,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		})
 			.then(response => response.json())
 			.then(data => {
+				console.log("Server response:", data); 
 				if (data.success) {
-					window.location.href = `${ctp}/reserve/completed?reservationNumber=${data.reservationNumber}`;
+					window.location.href = `${ctp}/reserve/completed?reservationId=${data.reservationId}&reservationNumber=${data.reservationNumber}`;
 				} else {
 					alert('예약 처리 중 오류가 발생했습니다: ' + data.message);
 				}

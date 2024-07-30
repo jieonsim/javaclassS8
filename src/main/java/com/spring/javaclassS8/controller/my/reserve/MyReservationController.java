@@ -46,15 +46,41 @@ public class MyReservationController {
 		}
 		return myReservationService.getAvailableReservationCount(member.getId());
 	}
-	
+
 	// 마이페이지 > 예매확인 > 예매디테일 뷰
-    @GetMapping("/detail")
-    public String getReservationDetail(@RequestParam("reservationId") int reservationId, Model model) {
-        Map<String, Object> reservationInfo = myReservationService.getReservationDetail(reservationId);
-        model.addAttribute("reservation", reservationInfo.get("reservation"));
-        model.addAttribute("reservationDetails", reservationInfo.get("reservationDetails"));
-        model.addAttribute("advanceTickets", reservationInfo.get("advanceTickets"));
-        model.addAttribute("advanceTicketPrices", reservationInfo.get("advanceTicketPrices"));
-        return "my/reserve/reserveDetail";
-    }
+	@GetMapping("/detail")
+	public String getReservationDetail(@RequestParam("reservationId") int reservationId, Model model) {
+		Map<String, Object> reservationInfo = myReservationService.getReservationDetail(reservationId);
+		model.addAttribute("reservation", reservationInfo.get("reservation"));
+		model.addAttribute("reservationDetails", reservationInfo.get("reservationDetails"));
+		model.addAttribute("advanceTickets", reservationInfo.get("advanceTickets"));
+		model.addAttribute("advanceTicketPrices", reservationInfo.get("advanceTicketPrices"));
+		return "my/reserve/reserveDetail";
+	}
+
+	// 마이페이지 > 예매확인 > 예매디테일 > 내역 프린트
+	@GetMapping("/print")
+	public String getReservationPrint(@RequestParam("reservationId") int reservationId, Model model) {
+		Map<String, Object> reservationInfo = myReservationService.getReservationDetail(reservationId);
+		model.addAttribute("reservation", reservationInfo.get("reservation"));
+		model.addAttribute("reservationDetails", reservationInfo.get("reservationDetails"));
+		return "my/reserve/print";
+	}
+
+	// 마이페이지 > 예매확인 > 예매디테일 > 취소하기 컨펌 뷰
+	@GetMapping("/cancel/confirm")
+	public String getCancelConfirm(@RequestParam("reservationId") int reservationId, Model model) {
+		Map<String, Object> reservationInfo = myReservationService.getReservationDetail(reservationId);
+		model.addAttribute("reservation", reservationInfo.get("reservation"));
+		model.addAttribute("reservationDetails", reservationInfo.get("reservationDetails"));
+		model.addAttribute("advanceTickets", reservationInfo.get("advanceTickets"));
+		model.addAttribute("advanceTicketPrices", reservationInfo.get("advanceTicketPrices"));
+		return "my/reserve/cancel/confirm";
+	}
+
+	// 마이페이지 > 예매확인 > 예매디테일 > 취소 완료 뷰
+	@GetMapping("/cancel/completed")
+	public String getCancelCompleted(@RequestParam("reservationId") int reservationId) {
+		return "my/reserve/cancel/completed";
+	}
 }

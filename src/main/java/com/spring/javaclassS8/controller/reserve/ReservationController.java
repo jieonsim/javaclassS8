@@ -384,7 +384,7 @@ public class ReservationController {
                 session.setAttribute("tempReservation", tempReservation);
             }
 
-            return ResponseEntity.ok(Map.of("success", response.isSuccess(), "reservationNumber", response.getReservationNumber(), "message", response.getMessage()));
+            return ResponseEntity.ok(Map.of("success", response.isSuccess(), "reservationId", response.getReservationId(), "reservationNumber", response.getReservationNumber(), "message", response.getMessage()));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("success", false, "message", "예약 처리 중 오류가 발생했습니다: " + e.getMessage()));
@@ -393,7 +393,12 @@ public class ReservationController {
 
 	// 예매 완료 안내 뷰
 	@GetMapping("/completed")
-	public String reserveCompleted(@RequestParam String reservationNumber, Model model, HttpSession session) {
+	public String reserveCompleted(@RequestParam(required = false) Integer reservationId, @RequestParam String reservationNumber, Model model, HttpSession session) {
+		if (reservationId == null) {
+			// reservationId가 없는 경우 처리
+			return "redirect:/reserve/error";
+		}
+		
 		TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 
@@ -424,6 +429,7 @@ public class ReservationController {
 		int bookingFee = calculateBookingFee(tempReservation.getSelectedTickets(), bookingPolicy);
 		int totalAmount = ticketPrice + bookingFee;
 
+		model.addAttribute("reservationId", reservationId);
 		model.addAttribute("reservationNumber", reservationNumber);
 		model.addAttribute("member", member);
 		model.addAttribute("game", game);

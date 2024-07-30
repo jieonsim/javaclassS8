@@ -148,7 +148,7 @@ public class ReservationServiceImpl implements ReservationService {
 			reservationDAO.insertAdvanceTicketUsage(reservationId, request.getAdvanceTicketIds());
 		}
 
-		ReservationResponse response = new ReservationResponse(true, reservationNumber, "예매가 완료되었습니다.");
+		ReservationResponse response = new ReservationResponse(true, reservationId, reservationNumber, "예매가 완료되었습니다.");
 		response.setSeatDetails(seatDetails);
 		response.setTotalAmount(request.getTotalAmount());
 		response.setBookingFee(request.getBookingFee());

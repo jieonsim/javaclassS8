@@ -64,7 +64,7 @@ public class MyReservationServiceImpl implements MyReservationService {
 		return reservationDAO.getAvailableReservationCount(memberId);
 	}
 
-	// 마이페이지 > 예매확인 > 예매상세내역 뷰
+	// 마이페이지 > 예매확인 > 예매상세내역, 프린트, 취소컨펌 뷰를 위해 예매내역 가져오기
 	@Override
 	public Map<String, Object> getReservationDetail(int reservationId) {
 		Map<String, Object> result = new HashMap<>();

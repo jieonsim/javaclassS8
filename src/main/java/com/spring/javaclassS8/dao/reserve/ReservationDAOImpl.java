@@ -117,41 +117,27 @@ public class ReservationDAOImpl implements ReservationDAO {
 		return sqlSession.getMapper(ReservationDAO.class).getAvailableReservationCount(memberId);
 	}
 
+	// reservationId로 예매내역 가져오기
     @Override
     public ReservationVO getReservationById(int reservationId) {
         return sqlSession.getMapper(ReservationDAO.class).getReservationById(reservationId);
     }
 
+    // reservationId로 예매상세내역 가져오기
     @Override
     public List<ReservationDetailVO> getReservationDetailsById(int reservationId) {
         return sqlSession.getMapper(ReservationDAO.class).getReservationDetailsById(reservationId);
     }
 
+    // reservationId로 스포츠예매권으로 예매된 내역 가져오기
     @Override
     public List<Map<String, Object>> getAdvanceTicketsForReservation(int reservationId) {
         return sqlSession.getMapper(ReservationDAO.class).getAdvanceTicketsForReservation(reservationId);
     }
-
+    
+    // reservationId로 각 예매별 스포츠예매권 권종의 요금 가져오기
 	@Override
 	public List<Map<String, Object>> getAdvanceTicketPricesForReservation(int reservationId) {
 		return sqlSession.getMapper(ReservationDAO.class).getAdvanceTicketPricesForReservation(reservationId);
 	}
-
-//	// 마이페이지 > 예매확인 > 예매상세내역 뷰 | reservationId로 상세 예매내역 가져오기
-//	@Override
-//	public Map<String, Object> getReservationDetail(int reservationId) {
-//		return sqlSession.getMapper(ReservationDAO.class).getReservationDetail(reservationId);
-//	}
-//	
-//	// 마이페이지 > 예매확인 > 예매상세내역 뷰 | reservationId로 예매내역의 좌석 정보 가져오기
-//	@Override
-//	public List<Map<String, Object>> getReservationSeats(int reservationId) {
-//		return sqlSession.getMapper(ReservationDAO.class).getReservationSeats(reservationId);
-//	}
-//
-//	// 마이페이지 > 예매확인 > 예매상세내역 뷰 | reservationId로 각 매수별 상세 예매정보 가져오기
-//	@Override
-//	public List<Map<String, Object>> getReservationTickets(int reservationId) {
-//		return sqlSession.getMapper(ReservationDAO.class).getReservationTickets(reservationId);
-//	}
 }

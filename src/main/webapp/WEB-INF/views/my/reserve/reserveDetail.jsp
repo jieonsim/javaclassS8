@@ -89,7 +89,7 @@
 						</table>
 					</div>
 					<div class="list_btn ng-scope">
-						<a class="btn btn_full">프린트</a>
+						<a href="${ctp}/my/reserve/print?reserveId=${reservation.id}" class="btn btn_full" id="printPopupBtn">프린트</a>
 					</div>
 					<h5 class="mgt40 text_tit">예매내역</h5>
 					<h6 class="text_tit">티켓 예매내역</h6>
@@ -98,8 +98,7 @@
 							<caption>
 								<span class="blind">티켓 예매내역</span>
 							</caption>
-							<colgroup>
-								<col style="width: 40px">
+							<%-- <colgroup>
 								<col style="width: 70px">
 								<col>
 								<col>
@@ -107,14 +106,18 @@
 								<col style="width: 80px">
 								<col style="width: 60px">
 								<col style="width: 90px">
+							</colgroup> --%>
+							<colgroup>
+								<col style="width: 100px">
+								<col style="width: 140px">
+								<col style="width: 100px">
+								<col style="width: 145px">
+								<col style="width: 80px">
+								<col style="width: 70px">
+								<col style="width: 90px">
 							</colgroup>
 							<thead class="text-center">
 								<tr>
-									<th scope="col">
-										<span class="checkbox ng-scope">
-											<input type="radio" id="reserve_num1" name="reserve_num">
-										</span>
-									</th>
 									<th scope="col">예매번호</th>
 									<th scope="col">좌석등급</th>
 									<th scope="col">권종</th>
@@ -127,13 +130,8 @@
 							<tbody style="font-family: 'Pretendard-Regular'">
 								<c:forEach items="${reservationDetails}" var="detail" varStatus="status">
 									<tr class="ng-scope">
-										<td>
-											<span class="checkbox">
-												<input type="radio" id="reserve_num${status.index}" name="reserve_num">
-											</span>
-										</td>
 										<td class="font_option number">
-											<label for="reserve_num${status.index}" class="ng-binding">${reservation.reservationNumber}</label>
+											${reservation.reservationNumber}
 										</td>
 										<td class="ellipsis ng-binding">${detail.seatName}</td>
 										<td class="ellipsis ng-binding">${detail.ticketTypeName}</td>
@@ -155,7 +153,7 @@
 						</table>
 					</div>
 					<div class="list_btn">
-						<a class="btn btn_full ng-scope">취소하기</a>
+						<a href="${ctp}/my/reserve/cancel/confirm?reservationId=${reservation.id}" class="btn btn_full ng-scope">취소하기</a>
 					</div>
 
 					<c:if test="${reservation.hasAdvanceTicket}">
@@ -237,20 +235,6 @@
 									<th scope="row" class="lspacingm1">부가상품</th>
 									<td class="tr ng-binding">0원</td>
 								</tr>
- 								<%-- <tr>
-									<th scope="row" class="lspacingm1">예매권 할인</th>
-									<td class="tr ng-scope">
-										<c:choose>
-											<c:when test="${reservation.advanceTicketDiscount > 0}">
-											-<fmt:formatNumber value="${reservation.advanceTicketDiscount}" type="number" />
-											원
-											</c:when>
-											<c:otherwise>0원</c:otherwise>
-										</c:choose>
-									</td>
-									<th scope="row" class="lspacingm1">부가상품</th>
-									<td class="tr ng-binding">0원</td>
-								</tr> --%>
 							</tbody>
 						</table>
 					</div>
@@ -331,5 +315,7 @@
 		</div>
 	</main>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
+	<script>const reservationId = ${reservation.id};</script>
+	<script src="${ctp}/js/my/reserve/reserveDetail.js"></script>
 </body>
 </html>
