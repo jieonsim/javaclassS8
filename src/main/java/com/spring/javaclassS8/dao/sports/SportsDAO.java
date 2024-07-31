@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.spring.javaclassS8.vo.sports.GameVO;
+import com.spring.javaclassS8.vo.sports.TeamVO;
+import com.spring.javaclassS8.vo.sports.VenueVO;
 
 public interface SportsDAO {
 
@@ -14,4 +16,8 @@ public interface SportsDAO {
 
 	// 구단별 오늘 날짜 ~ 다음달 마지막 날까지 홈경기 가져오기
 	List<GameVO> getTeamHomeGames(@Param("sport") String sport, @Param("shortName") String shortName, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+
+	TeamVO findTeamByKeyword(String keyword);
+
+	VenueVO findVenueByKeyword(String keyword);
 }

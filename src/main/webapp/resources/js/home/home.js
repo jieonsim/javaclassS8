@@ -1,18 +1,5 @@
 /*js/home/home.js*/
 document.addEventListener('DOMContentLoaded', function() {
-	/*	const mySwiper = new Swiper('.swiper-container', {
-			direction: 'horizontal',
-			slidesPerView: 3,
-			spaceBetween: 30,
-			slidesPerGroup: 3,  // 한 번에 3개씩 슬라이드
-			loop: false,
-			loopFillGroupWithBlank: true,
-			navigation: {
-				nextEl: ".swiper-button-next",
-				prevEl: ".swiper-button-prev",
-			}
-		});*/
-
 	const mySwiper = new Swiper('.swiper-container', {
 		direction: 'horizontal',
 		slidesPerView: 3,

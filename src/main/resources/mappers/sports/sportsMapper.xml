@@ -48,4 +48,22 @@
 	      AND s.sportName = #{sport}
 	    ORDER BY g.gameDate, g.gameTime
     </select>
+    
+    <select id="findTeamByKeyword" resultType="com.spring.javaclassS8.vo.sports.TeamVO">
+	    SELECT t.*, s.sportName
+	    FROM teams t
+	    JOIN sports s ON t.sportId = s.id
+	    WHERE t.teamName LIKE CONCAT('%', #{keyword}, '%')
+	    OR t.shortName LIKE CONCAT('%', #{keyword}, '%')
+	    LIMIT 1
+    </select>
+
+    <select id="findVenueByKeyword" resultType="com.spring.javaclassS8.vo.sports.VenueVO">
+        SELECT v.*, s.sportName, t.shortName as teamShortName
+        FROM venues v
+        JOIN sports s ON v.sportId = s.id
+        JOIN teams t ON v.teamId = t.id
+        WHERE v.venueName LIKE CONCAT('%', #{keyword}, '%')
+        LIMIT 1
+    </select>
 </mapper>

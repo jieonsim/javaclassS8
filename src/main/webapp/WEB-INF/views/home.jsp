@@ -95,7 +95,7 @@
 							<img src="${ctp}/images/icon/fireworks.png" alt="이벤트 아이콘" class="banner-icon">
 							<div class="banner-info">
 								<h2 class="banner-title">티켓팡! 댓글 한 번에 무료 관람의 기회가!</h2>
-								<p class="banner-description">댓글 작성하고 추첨받아 스포츠 경기를 무료로 즐기세요!</p>
+								<p class="banner-description">댓글 작성하고 추첨받아 스포츠 경기를 무료로 즐기세요.</p>
 							</div>
 						</div>
 					</div>

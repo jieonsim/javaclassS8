@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.javaclassS8.vo.sports.GameVO;
+import com.spring.javaclassS8.vo.sports.TeamVO;
+import com.spring.javaclassS8.vo.sports.VenueVO;
 
 @Repository
 public class SportsDAOImpl implements SportsDAO {
@@ -25,5 +27,15 @@ public class SportsDAOImpl implements SportsDAO {
 	@Override
 	public List<GameVO> getTeamHomeGames(String sport, String shortName, LocalDate startDate, LocalDate endDate) {
 		return sqlSession.getMapper(SportsDAO.class).getTeamHomeGames(sport, shortName, startDate, endDate);
+	}
+
+	@Override
+	public TeamVO findTeamByKeyword(String keyword) {
+		return sqlSession.getMapper(SportsDAO.class).findTeamByKeyword(keyword);
+	}
+
+	@Override
+	public VenueVO findVenueByKeyword(String keyword) {
+		return sqlSession.getMapper(SportsDAO.class).findVenueByKeyword(keyword);
 	}
 }

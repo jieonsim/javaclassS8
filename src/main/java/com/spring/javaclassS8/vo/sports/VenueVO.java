@@ -13,4 +13,6 @@ public class VenueVO {
 	
 	private String sportName;
 	private String teamName;
+	
+	private String teamShortName;
 }
