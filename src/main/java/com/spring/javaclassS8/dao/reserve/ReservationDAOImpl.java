@@ -105,6 +105,12 @@ public class ReservationDAOImpl implements ReservationDAO {
         return sqlSession.getMapper(ReservationDAO.class).getReservationListByMemberId(memberId, offset, limit);
     }
     
+    // 마이페이지 > 예매확인 뷰 | memberId로 해당 유저의 취소완료 리스트 가져오기
+    @Override
+    public List<ReservationVO> getReservationCancelListByMemberId(int memberId, int offset, int limit) {
+    	return sqlSession.getMapper(ReservationDAO.class).getReservationCancelListByMemberId(memberId, offset, limit);
+    }
+    
     // memberId로 해당 유저의 예매완료 건 수 가져오기
     @Override
     public int getReservationCountByMemberId(int memberId) {
@@ -139,5 +145,35 @@ public class ReservationDAOImpl implements ReservationDAO {
 	@Override
 	public List<Map<String, Object>> getAdvanceTicketPricesForReservation(int reservationId) {
 		return sqlSession.getMapper(ReservationDAO.class).getAdvanceTicketPricesForReservation(reservationId);
+	}
+
+	@Override
+	public void updateReservationStatus(int reservationId, String status) {
+		sqlSession.getMapper(ReservationDAO.class).updateReservationStatus(reservationId, status);
+	}
+
+	@Override
+	public void restoreSeatInventoryForCancellation(int gameId, int seatId, int ticketAmount) {
+		sqlSession.getMapper(ReservationDAO.class).restoreSeatInventoryForCancellation(gameId, seatId, ticketAmount);
+	}
+
+	@Override
+	public List<Integer> getAdvanceTicketIdsForReservation(int reservationId) {
+		return sqlSession.getMapper(ReservationDAO.class).getAdvanceTicketIdsForReservation(reservationId);
+	}
+
+	@Override
+	public void resetAdvanceTickets(List<Integer> advanceTicketIds) {
+		sqlSession.getMapper(ReservationDAO.class).resetAdvanceTickets(advanceTicketIds);
+	}
+
+//	@Override
+//	public void deleteAdvanceTicketUsage(int reservationId) {
+//		sqlSession.getMapper(ReservationDAO.class).deleteAdvanceTicketUsage(reservationId);
+//	}
+
+	@Override
+	public void updateAdvanceTicketUsageStatus(int reservationId, String status) {
+		sqlSession.getMapper(ReservationDAO.class).updateAdvanceTicketUsageStatus(reservationId, status);
 	}
 }

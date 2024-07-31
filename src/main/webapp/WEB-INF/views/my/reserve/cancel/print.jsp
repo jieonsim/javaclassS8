@@ -103,6 +103,7 @@
 							</tr>
 						</tbody>
 					</table>
+					<span class="reserve_cancel" style="top: 0; right: 0;">예매취소</span>
 				</div>
 			</div>
 			<div class="block">

@@ -98,15 +98,6 @@
 							<caption>
 								<span class="blind">티켓 예매내역</span>
 							</caption>
-							<%-- <colgroup>
-								<col style="width: 70px">
-								<col>
-								<col>
-								<col>
-								<col style="width: 80px">
-								<col style="width: 60px">
-								<col style="width: 90px">
-							</colgroup> --%>
 							<colgroup>
 								<col style="width: 100px">
 								<col style="width: 140px">
@@ -300,7 +291,7 @@
 									<th scope="row">수수료</th>
 									<td>
 										<ul>
-											<li>취소마감시간이 공연전시 상품 및 스포츠 구단마다 상이하며, 마감시간이 지난 이후에는 취소가 불가능합니다.</li>
+											<li>취소마감시간이 지난 이후에는 취소가 불가능합니다.</li>
 											<li>취소 진행 시 취소 마감시간 확인 후 취소해주시기 바랍니다.</li>
 											<li>예매수수료는 예매일 당일 취소하실 경우만 환불되며, 그 이후 취소 시에는 환불되지 않습니다.</li>
 											<li>행사상의 문제로 인해 환불을 받으실 경우 별도의 수수료를 제공하지 않으며, 환불 주체가 티켓챔프가 아닌 행사 주최사가 될 수 있습니다.</li>

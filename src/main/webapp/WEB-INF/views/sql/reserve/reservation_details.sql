@@ -13,4 +13,17 @@ CREATE TABLE reservation_details (
     FOREIGN KEY (ticketTypeId) REFERENCES ticket_types(id)
 );
 
+desc reservation_details;
+ Field         Type    Null Key Default Extra
+ ------------- ------- ---- --- ------- --------------
+ id            int(11) NO   PRI NULL    auto_increment
+ reservationId int(11) NO   MUL NULL    
+ seatId        int(11) NO   MUL NULL    
+ ticketTypeId  int(11) NO   MUL NULL    
+ seatBlock     int(11) NO       NULL    
+ seatRow       int(11) NO       NULL    
+ seatNumber    int(11) NO       NULL    
+ ticketPrice   int(11) NO       NULL    
+
+
 select seatId from reservation_details where reservationId = 35;

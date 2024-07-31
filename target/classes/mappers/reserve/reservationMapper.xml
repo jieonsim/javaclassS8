@@ -106,6 +106,40 @@
 	    LIMIT #{offset}, #{limit}
 	</select>
 	
+    <!-- 마이페이지 > 예매확인 뷰 | memberId로 해당 유저의 취소완료 리스트 가져오기 -->
+	<select id="getReservationCancelListByMemberId" resultType="com.spring.javaclassS8.vo.reserve.ReservationVO">
+	    SELECT 
+	        r.id AS reservationId,
+	        r.reservationNumber,
+	        r.canceledAt,
+	        g.homeTeamId,
+	        ht.teamName AS homeTeamName,
+	        g.awayTeamId,
+	        at.teamName AS awayTeamName,
+	        g.gameDate,
+	        g.gameTime,
+	        r.ticketAmount,
+	        DATE_FORMAT(DATE_SUB(CONCAT(g.gameDate, ' ', g.gameTime), INTERVAL sbp.cancellationDeadlineMinutesBeforeStart MINUTE), '%Y.%m.%d %H:%i') AS cancelDeadline,
+	        r.status,
+	        r.createdAt
+	    FROM 
+	        reservations r
+	    JOIN 
+	        games g ON r.gameId = g.id
+	    JOIN 
+	        teams ht ON g.homeTeamId = ht.id
+	    JOIN 
+	        teams at ON g.awayTeamId = at.id
+	    JOIN 
+	        sport_booking_policies sbp ON g.sportId = sbp.sportId
+	    WHERE 
+	        r.memberId = #{memberId}
+	        AND r.status = '취소완료'
+	    ORDER BY 
+	        r.createdAt DESC
+	    LIMIT #{offset}, #{limit}
+	</select>
+	
 	<!-- memberId로 해당 유저의 예매완료 건 수 가져오기 -->
 	<select id="getReservationCountByMemberId" resultType="int">
 	    SELECT COUNT(*)
@@ -127,7 +161,7 @@
 	<!-- reservationId로 예매내역 가져오기 -->
 	<select id="getReservationById" resultType="com.spring.javaclassS8.vo.reserve.ReservationVO">
         SELECT r.*, 
-               g.gameDate, g.gameTime,
+               g.gameDate, g.gameTime, g.sportId,
                ht.teamName AS homeTeamName, 
                at.teamName AS awayTeamName,
                m.name AS memberName,
@@ -144,7 +178,7 @@
 
 	<!-- reservationId로 예매상세내역 가져오기 -->
     <select id="getReservationDetailsById" resultType="com.spring.javaclassS8.vo.reserve.ReservationDetailVO">
-        SELECT rd.*, s.seatName, tt.name AS ticketTypeName
+        SELECT rd.*, s.id AS seatId, s.seatName, tt.name AS ticketTypeName
         FROM reservation_details rd
         JOIN seats s ON rd.seatId = s.id
         JOIN ticket_types tt ON rd.ticketTypeId = tt.id
@@ -161,14 +195,21 @@
         WHERE atu.reservationId = #{reservationId}
     </select>
     
-    <!-- reservationId로 각 예매별 스포츠예매권 권종의 요금 가져오기 -->
+    <!-- reservationId로 각 예매별 스포츠예매권 권종의 요금과 스포츠예매권 정보 가져오기 -->
     <select id="getAdvanceTicketPricesForReservation" resultType="java.util.HashMap">
-	    SELECT DISTINCT at.advanceTicketNumber, p.price
+	    SELECT DISTINCT at.advanceTicketNumber, at.id, at.expiresAt, p.price
 	    FROM advance_ticket_usage atu
 	    JOIN advance_tickets at ON atu.advanceTicketId = at.id
 	    JOIN reservation_details rd ON atu.reservationId = rd.reservationId
 	    JOIN prices p ON rd.seatId = p.seatId AND p.ticketTypeId = 8
 	    WHERE atu.reservationId = #{reservationId}
+	</select>
+	
+	<!-- 예매내역에 스포츠예매권 사용되었는지 확인 -->
+	<select id="getAdvanceTicketIdsForReservation" resultType="int">
+	    SELECT advanceTicketId
+	    FROM advance_ticket_usage
+	    WHERE reservationId = #{reservationId}
 	</select>
 	
 	<!-- 예매 처리 : reservations 테이블 레코드 생성 -->
@@ -213,5 +254,40 @@
 	        #{ticketId}
 	    </foreach>
 	</update>
-    
+	
+	<!-- 취소 처리 : 취소 시 예매 상태를 '취소완료'로 업데이트 -->
+	<update id="updateReservationStatus">
+		UPDATE reservations
+	    SET status = #{status}, canceledAt = CURRENT_TIMESTAMP
+	    WHERE id = #{reservationId}
+	</update>
+	
+	<!-- 취소 처리 : 취소 시 좌석 수량 원복 -->
+	<update id="restoreSeatInventoryForCancellation">
+		UPDATE seat_inventory
+    	SET availableCapacity = availableCapacity + #{ticketAmount}
+    	WHERE gameId = #{gameId} AND seatId = #{seatId}
+	</update>
+	
+	<!-- 취소 처리 : 스포츠예매권의 예매 취소 시 예매권 사용 리셋 -->
+	<update id="resetAdvanceTickets">
+	    UPDATE advance_tickets
+	    SET used = false, usedAt = NULL, usedByMemberId = NULL
+	    WHERE id IN
+	    <foreach item="id" collection="list" open="(" separator="," close=")">
+	        #{id}
+	    </foreach>
+	</update>
+	
+	<update id="updateAdvanceTicketUsageStatus">
+	    UPDATE advance_ticket_usage
+	    SET status = #{status}
+	    WHERE reservationId = #{reservationId}
+	</update>
+	
+	<!-- 취소 처리 : 스포츠예매권의 예매 취소 시 사용된 예매권 테이블 레코드 삭제 -->
+	<!-- <delete id="deleteAdvanceTicketUsage">
+	    DELETE FROM advance_ticket_usage
+	    WHERE reservationId = #{reservationId}
+	</delete> -->
 </mapper>

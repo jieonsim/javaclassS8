@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -45,23 +46,23 @@
 							<tbody>
 								<tr class="line">
 									<th scope="row">예매번호</th>
-									<td class="ng-binding">1468853619</td>
+									<td class="ng-binding">${reservation.reservationNumber}</td>
 									<th scope="row">티켓명</th>
 									<td class="ng-scope">
-										<span class="ng-binding ng-scope">
-										</span>
-										<span class="ng-binding ng-scope"> SSG 랜더스 vs 롯데자이언츠 </span>
+										<span class="ng-binding ng-scope"> </span>
+										<span class="ng-binding ng-scope">${reservation.homeTeamName} vs ${reservation.awayTeamName}</span>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row">관람일시</th>
-									<td class="ng-binding">2024.07.30(화) 18:30</td>
+									<td class="ng-binding">${reservation.gameDate}&nbsp;${reservation.gameTime}</td>
 									<th scope="row">관람장소</th>
-									<td class="ng-binding">인천 SSG 랜더스 필드</td>
+									<td class="ng-binding">${reservation.venueName}</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
+					
 					<div class="list_btn">
 						<a class="btn btn_full">확인하기</a>
 					</div>
@@ -78,13 +79,19 @@
 								<tr class="line">
 									<th scope="row">환불금액</th>
 									<td class="fbold">
-										<span class="color_point ng-binding">36,000원</span>
+										<span class="color_point ng-binding">
+											<c:choose>
+												<c:when test="${cancelInfo.refundAmount == 0}">0원</c:when>
+												<c:otherwise>
+													<fmt:formatNumber value="${cancelInfo.refundAmount}" type="number" />원</c:otherwise>
+											</c:choose>
+										</span>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row">환불방법</th>
 									<td>
-										<p class="ng-binding ng-scope">신용카드(간편결제) 환불</p>
+										<p class="ng-binding ng-scope">${reservation.paymentMethod}</p>
 									</td>
 								</tr>
 								<tr>

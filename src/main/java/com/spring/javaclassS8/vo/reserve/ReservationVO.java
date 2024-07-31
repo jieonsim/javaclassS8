@@ -27,12 +27,16 @@ public class ReservationVO {
     private String venueName;
     private String paymentMethod;
     private String cancelDeadline;
-    private int totalTicketPrice; // 모든 티켷 가격의 합계
+    private int totalTicketPrice; // 모든 티켓 가격의 합계
     private int advanceTicketDiscount; // 예매권 할인 금액
     private String cancelPeriod; // 취소 가능 기간
     private String formattedCreatedAt;
     private String formattedCancelDeadline;
     private boolean hasAdvanceTicket;
+    private int sportId;
+    private int seatId;
+    private String formattedCanceledAt;
+    
     public boolean isHasAdvanceTicket() {
         return hasAdvanceTicket;
     }

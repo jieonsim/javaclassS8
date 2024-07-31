@@ -34,10 +34,10 @@
 					</p>
 					<ul class="mypage_tab">
 						<li class="on">
-							<a href="#">예매확인</a>
+							<a href="${ctp}/my/reserve/list">예매확인</a>
 						</li>
 						<li>
-							<a href="#">예매취소</a>
+							<a href="${ctp}/my/reserve/cancel/list">예매취소</a>
 						</li>
 					</ul>
 					<div class="sortbx">
@@ -107,9 +107,7 @@
 												<td>
 													<div class="reserve_condition1 ng-binding">
 														${reservation.status}
-														<span class="ng-binding ng-hide"> () </span>
 													</div>
-													<div class="reserve_condition2 ng-binding ng-hide"></div>
 												</td>
 											</tr>
 										</c:forEach>

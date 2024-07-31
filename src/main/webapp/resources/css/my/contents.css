@@ -1835,3 +1835,12 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .checkbox {width: 18px;height: 18px;border: 1px solid #878d95;border-radius: 50%;background: none;background-color: #fff;box-sizing: border-box}
 .checkbox.checked {background: url(../../images/icon/check-circle-fill.svg) center / 20px 20px no-repeat}
 span.checkbox.ng-scope{margin-left: 1px}
+/*추가*/
+.layer_mother .help {
+    width: 16px !important;
+    height: 16px !important;
+    background-image: url(../../images/icon/old-svg.svg) !important;
+    background-size: 593.7777777778px 559.1111111111px !important;
+    background-position: -568.8888888889px -334.2222222222px !important;
+    background-repeat: no-repeat !important;
+}

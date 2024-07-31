@@ -58,6 +58,9 @@ public interface ReservationDAO {
 	// 마이페이지 > 예매확인 뷰 | memberId로 해당 유저의 예매완료 리스트 가져오기
     List<ReservationVO> getReservationListByMemberId(@Param("memberId") int memberId, @Param("offset") int offset, @Param("limit") int limit);
     
+    // 마이페이지 > 예매확인 뷰 | memberId로 해당 유저의 취소완료 리스트 가져오기
+    List<ReservationVO> getReservationCancelListByMemberId(@Param("memberId") int memberId, @Param("offset") int offset, @Param("limit") int limit);
+    
     // memberId로 해당 유저의 예매완료 건 수 가져오기
     int getReservationCountByMemberId(int memberId);
     
@@ -76,4 +79,23 @@ public interface ReservationDAO {
 	// reservationId로 각 예매별 스포츠예매권 권종의 요금 가져오기
 	List<Map<String, Object>> getAdvanceTicketPricesForReservation(int reservationId);
 	
+	// 예매 취소 시 예매 상태를 취소로 업데이트
+	void updateReservationStatus(@Param("reservationId") int reservationId, @Param("status") String status);
+	
+	// 예매 취소 시 좌석 수량 원복
+	void restoreSeatInventoryForCancellation(@Param("gameId") int gameId, @Param("seatId") int seatId, @Param("ticketAmount") int ticketAmount);
+	
+	// 예매내역에 스포츠예매권 사용되었는지 확인
+	List<Integer> getAdvanceTicketIdsForReservation(int reservationId);
+	
+	// 스포츠예매권의 예매 취소 시 예매권 사용 리셋
+	void resetAdvanceTickets(List<Integer> advanceTicketIds);
+	
+	// 스포츠예매권의 예매 취소 시 사용된 예매권 테이블 레코드 삭제
+	// void deleteAdvanceTicketUsage(int reservationId);
+	
+	// 스포츠예매권의 예매 취소 시 사용된 예매권 테이블의 상테 업데이트
+	void updateAdvanceTicketUsageStatus(@Param("reservationId") int reservationId, @Param("status") String status);
+	
+
 }

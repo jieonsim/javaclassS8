@@ -101,7 +101,6 @@
 							</tbody>
 						</table>
 					</div>
-					<jsp:include page="/WEB-INF/views/layout/paginate.jsp" />
 					<div class="notes2">
 						<h6>
 							<span></span>
@@ -125,7 +124,6 @@
 			</div>
 		</div>
 	</main>
-	<jsp:include page="/WEB-INF/views/layout/moveTop.jsp" />
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
 	<script src="${ctp}/js/my/discount/advanceTicket.js"></script>
 </body>

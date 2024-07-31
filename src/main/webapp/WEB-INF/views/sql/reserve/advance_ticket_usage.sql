@@ -16,3 +16,6 @@ desc advance_ticket_usage;
  reservationId   int(11)   NO   MUL NULL              
  advanceTicketId int(11)   NO   MUL NULL              
  usedAt          timestamp NO       CURRENT_TIMESTAMP 
+ 
+ALTER TABLE advance_ticket_usage 
+ADD COLUMN status ENUM('USED', 'CANCELLED') NOT NULL DEFAULT 'USED';

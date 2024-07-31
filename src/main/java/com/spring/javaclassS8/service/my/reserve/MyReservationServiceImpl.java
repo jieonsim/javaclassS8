@@ -3,6 +3,7 @@ package com.spring.javaclassS8.service.my.reserve;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -13,11 +14,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.javaclassS8.dao.reserve.ReservationDAO;
 import com.spring.javaclassS8.utils.PaginationInfo;
 import com.spring.javaclassS8.vo.reserve.ReservationDetailVO;
 import com.spring.javaclassS8.vo.reserve.ReservationVO;
+import com.spring.javaclassS8.vo.sports.SportBookingPolicyVO;
 
 @Service
 public class MyReservationServiceImpl implements MyReservationService {
@@ -47,6 +50,46 @@ public class MyReservationServiceImpl implements MyReservationService {
 				LocalTime time = LocalTime.parse(reservation.getGameTime());
 				reservation.setGameTime(time.format(timeFormatter));
 			}
+		}
+
+		PaginationInfo paginationInfo = new PaginationInfo(totalCount, pageSize, page);
+
+		Map<String, Object> result = new HashMap<>();
+		result.put("reservations", reservations);
+		result.put("paginationInfo", paginationInfo);
+
+		return result;
+	}
+
+	// 마이페이지 > 예매취소 뷰
+	@Override
+	public Map<String, Object> getReservationCancelListByMemberId(int memberId, int page) {
+		int pageSize = 10;
+		int offset = (page - 1) * pageSize;
+
+		List<ReservationVO> reservations = reservationDAO.getReservationCancelListByMemberId(memberId, offset, pageSize);
+		int totalCount = reservationDAO.getReservationCountByMemberId(memberId);
+
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd(E)");
+		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+		SimpleDateFormat cancelDateFormatter = new SimpleDateFormat("yyyy.MM.dd");
+
+		for (ReservationVO reservation : reservations) {
+			if (reservation.getGameDate() != null) {
+				LocalDate date = LocalDate.parse(reservation.getGameDate());
+				reservation.setGameDate(date.format(dateFormatter));
+			}
+
+			if (reservation.getGameTime() != null) {
+				LocalTime time = LocalTime.parse(reservation.getGameTime());
+				reservation.setGameTime(time.format(timeFormatter));
+			}
+
+			if (reservation.getCanceledAt() != null) {
+				String formattedCanceledAt = cancelDateFormatter.format(reservation.getCanceledAt());
+				reservation.setFormattedCanceledAt(formattedCanceledAt);
+			}
+
 		}
 
 		PaginationInfo paginationInfo = new PaginationInfo(totalCount, pageSize, page);
@@ -105,6 +148,7 @@ public class MyReservationServiceImpl implements MyReservationService {
 
 			String cancelPeriod = outputFormatDateOnly.format(nextDay.getTime()) + "~" + outputFormatDateOnly.format(cancelDeadline.getTime());
 			reservation.setCancelPeriod(cancelPeriod);
+
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -126,5 +170,69 @@ public class MyReservationServiceImpl implements MyReservationService {
 		result.put("advanceTicketPrices", advanceTicketPrices);
 
 		return result;
+	}
+
+	@Override
+	public Map<String, Object> getCancelInfo(int reservationId) {
+		ReservationVO reservation = reservationDAO.getReservationById(reservationId);
+		List<ReservationDetailVO> reservationDetails = reservationDAO.getReservationDetailsById(reservationId);
+		SportBookingPolicyVO policy = reservationDAO.getBookingPolicyBySportId(reservation.getSportId());
+		List<Map<String, Object>> advanceTicketPrices = reservationDAO.getAdvanceTicketPricesForReservation(reservationId);
+
+		Map<String, Object> cancelInfo = new HashMap<>();
+		cancelInfo.put("reservation", reservation);
+
+		LocalDateTime now = LocalDateTime.now();
+		LocalDateTime reservationDate = reservation.getCreatedAt().toLocalDateTime();
+		LocalDateTime midnightAfterReservation = reservationDate.toLocalDate().plusDays(1).atStartOfDay();
+
+		boolean isFullRefund = now.isBefore(midnightAfterReservation);
+
+		int totalTicketPrice = reservationDetails.stream().mapToInt(ReservationDetailVO::getTicketPrice).sum();
+		int advanceTicketDiscount = advanceTicketPrices.stream().mapToInt(ticket -> ((Number) ticket.get("price")).intValue()).sum();
+
+		// 실제 결제된 티켓 금액 계산 (스포츠 예매권 할인 적용)
+		int actualTicketPrice = totalTicketPrice - advanceTicketDiscount;
+
+		int bookingFee = reservation.getBookingFee();
+		int cancellationFee = 0;
+		int refundAmount = reservation.getTotalAmount();
+
+		if (!isFullRefund) {
+			cancellationFee = (int) Math.round(actualTicketPrice * (policy.getCancellationFeeRate() / 100.0));
+			refundAmount = actualTicketPrice - cancellationFee;
+		}
+
+		cancelInfo.put("totalAmount", reservation.getTotalAmount());
+		cancelInfo.put("totalTicketPrice", actualTicketPrice);
+		cancelInfo.put("bookingFee", isFullRefund ? bookingFee : 0);
+		cancelInfo.put("cancellationFee", -cancellationFee);
+		cancelInfo.put("refundAmount", refundAmount);
+
+		return cancelInfo;
+	}
+
+	// 예매 취소 처리
+	@Override
+	@Transactional
+	public void cancelReservation(int reservationId) throws Exception {
+		// 1. 예매 정보 가져오기
+		ReservationVO reservation = reservationDAO.getReservationById(reservationId);
+		if (reservation == null || "취소완료".equals(reservation.getStatus())) {
+			throw new Exception("유효하지 않은 예매 또는 이미 취소된 예매입니다.");
+		}
+
+		// 2. 예매 상태 업데이트
+		reservationDAO.updateReservationStatus(reservationId, "취소완료");
+
+		// 3. 좌석 수량 원복
+		reservationDAO.restoreSeatInventoryForCancellation(reservation.getGameId(), reservation.getSeatId(), reservation.getTicketAmount());
+
+		// 4. 스포츠 예매권 처리
+		List<Integer> advanceTicketIds = reservationDAO.getAdvanceTicketIdsForReservation(reservationId);
+		if (!advanceTicketIds.isEmpty()) {
+			reservationDAO.resetAdvanceTickets(advanceTicketIds);
+			reservationDAO.updateAdvanceTicketUsageStatus(reservationId, "CANCELLED");
+		}
 	}
 }

@@ -27,84 +27,84 @@
 						<h4>취소상세</h4>
 					</div>
 					<p class="guide_txt">취소 및 환불 금액과 수수료를 확인하신 후, 취소를 진행해주세요.</p>
-
-					<h5 class="text_tit">취소내역</h5>
-					<div class="basic_tbl_v4">
-						<table>
-							<caption>
-								<span class="blind">티켓 취소내역</span>
-							</caption>
-							<colgroup>
-								<col style="width: 150px">
-								<col>
-								<col style="width: 180px">
-								<col>
-							</colgroup>
-							<tbody>
-								<tr class="ng-scope line">
-									<th scope="row" rowspan="1" class="ng-scope">예매번호</th>
-									<td colspan="3" class="ng-binding">${reservation.reservationNumber}&nbsp;(총$&nbsp;{reservation.ticketAmount}매)</td>
-								</tr>
-								<tr>
-									<th scope="row">총 결제금액</th>
-									<td class="tr ng-binding">
-										<fmt:formatNumber value="${reservation.totalAmount}" type="number" />
-										원
-									</td>
-									<th scope="row">티켓금액</th>
-									<td class="tr ng-binding">
-										<fmt:formatNumber value="${reservation.totalAmount}" type="number" />
-										원
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">예매수수료</th>
-									<td class="tr ng-binding">0원
-									</td>
-									<th scope="row">취소수수료</th>
-									<td class="tr ng-binding">0원</td>
-								</tr>
-							</tbody>
-							<tfoot>
-								<tr class="line">
-									<th scope="row" class="bgnone">총 환불금액</th>
-									<td colspan="3">
-										<span class="color_point ng-binding">36,000</span>
-										원
-									</td>
-								</tr>
-							</tfoot>
-						</table>
-					</div>
-					<c:if test="${reservation.hasAdvanceTicket}">
-						<h5 class="mgt40 text_tit">스포츠 예매권 정보</h5>
+					<form id="cancelForm" method="post">
+						<h5 class="text_tit">취소내역</h5>
 						<div class="basic_tbl_v4">
 							<table>
 								<caption>
-									<span class="blind">스포츠 예매권 정보</span>
+									<span class="blind">티켓 취소내역</span>
 								</caption>
 								<colgroup>
-									<col style="width: 120px">
+									<col style="width: 150px">
 									<col>
-									<col style="width: 140px">
+									<col style="width: 180px">
 									<col>
 								</colgroup>
 								<tbody>
-									<c:forEach items="${advanceTicketPrices}" var="ticket">
-										<tr class="line">
-											<th scope="row" class="lspacingm1">예매권 번호</th>
-											<td class="tr ng-binding">${ticket.advanceTicketNumber}</td>
-											<th scope="row" class="lspacingm1">사용매수</th>
-											<td class="tr ng-binding">1매</td>
-										</tr>
-									</c:forEach>
+									<tr class="ng-scope line">
+										<input type="hidden" name="reservationId" value="${reservation.id}">
+										<th scope="row" rowspan="1" class="ng-scope">예매번호</th>
+										<td colspan="3" class="ng-binding">${reservation.reservationNumber}&nbsp;(총&nbsp;${reservation.ticketAmount}매)</td>
+									</tr>
+									<tr>
+										<th scope="row">총 결제금액</th>
+										<td class="tr ng-binding">
+											<fmt:formatNumber value="${cancelInfo.totalAmount}" type="number" />
+											원
+										</td>
+										<th scope="row">티켓금액</th>
+										<td class="tr ng-binding">
+											<fmt:formatNumber value="${cancelInfo.totalTicketPrice}" type="number" />
+											원
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">예매수수료</th>
+										<td class="tr ng-binding"><fmt:formatNumber value="${cancelInfo.bookingFee}" type="number" />원</td>
+										<th scope="row">취소수수료</th>
+										<td class="tr ng-binding"><fmt:formatNumber value="${cancelInfo.cancellationFee}" type="number" />원</td>
+									</tr>
 								</tbody>
+								<tfoot>
+									<tr class="line">
+										<th scope="row" class="bgnone">총 환불금액</th>
+										<td colspan="3">
+											<span class="color_point ng-binding"><fmt:formatNumber value="${cancelInfo.refundAmount}" type="number" />원</span>
+										</td>
+									</tr>
+								</tfoot>
 							</table>
 						</div>
-					</c:if>
-					<div class="list_btn">
-						<button class="btn btn_full" id="cancelBtn">취소하기</button>
-					</div>
+						<c:if test="${reservation.hasAdvanceTicket}">
+							<h5 class="mgt40 text_tit">스포츠 예매권 정보</h5>
+							<div class="basic_tbl_v4">
+								<table>
+									<caption>
+										<span class="blind">스포츠 예매권 정보</span>
+									</caption>
+									<colgroup>
+										<col style="width: 120px">
+										<col>
+										<col style="width: 140px">
+										<col>
+									</colgroup>
+									<tbody>
+										<c:forEach items="${advanceTicketPrices}" var="ticket">
+											<tr class="line">
+												<th scope="row" class="lspacingm1">예매권 번호</th>
+												<td class="tr ng-binding">${ticket.advanceTicketNumber}</td>
+												<th scope="row" class="lspacingm1">사용매수</th>
+												<td class="tr ng-binding">1매</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</c:if>
+						<div class="list_btn">
+							<button type="submit" class="btn btn_full">취소하기</button>
+						</div>
+					</form>
 					<h5 class="mgt40 text_tit">취소 유의사항</h5>
 					<div class="basic_tbl basic_tbl_v2">
 						<table>
@@ -148,7 +148,6 @@
 							</tbody>
 						</table>
 					</div>
-
 					<h5 class="mgt40 text_tit">유의사항</h5>
 					<div class="tbl_notice">
 						<table>
@@ -179,7 +178,9 @@
 		</div>
 	</main>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
-	<script>const reservationId = ${reservation.id}</script>
+	<script>
+		const reservationId = ${reservation.id}
+	</script>
 	<script src="${ctp}/js/my/reserve/cancel/confirm.js"></script>
 </body>
 </html>

@@ -6,9 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	const input_old_password = document.getElementById('input_old_password');
 	const input_new_password = document.getElementById('input_new_password');
 	const input_confirm_password = document.getElementById('input_confirm_password');
-	const old_pw_msg = document.getElementById('old_pw_msg');
-	const pw_msg = document.getElementById('pw_msg');
-	const pw_re_msg = document.getElementById('pw_re_msg');
 
 	// 정규식 표현
 	const passwordRegex = /^(?!((?:[A-Za-z]+|\d+|[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+)$))[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,12}$/;

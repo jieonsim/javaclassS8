@@ -17,9 +17,4 @@ public class ReservationDetailVO {
     private String seatName;
     private String ticketTypeName;
     private String advanceTicketNumber;
-//    private String reservationNumber;
-//    private String seatName;
-//    private String ticketTypeName;
-//    private String cancelStatus;
-//    private String cancelDeadline;
 }

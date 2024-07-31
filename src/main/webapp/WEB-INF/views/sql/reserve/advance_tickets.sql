@@ -15,16 +15,18 @@ CREATE TABLE advance_tickets (
 
 desc advance_tickets;
  Field               Type        Null Key Default           Extra
- ------------------- ----------- ---- --- ----------------- ---------------------------
+ ------------------- ----------- ---- --- ----------------- --------------
  id                  int(11)     NO   PRI NULL              auto_increment
  adminId             int(11)     NO   MUL NULL              
  advanceTicketNumber varchar(16) NO   UNI NULL              
  used                tinyint(1)  YES      0                 
- expiresAt           timestamp   NO       CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
+ expiresAt           timestamp   NO       CURRENT_TIMESTAMP 
  issuedAt            timestamp   NO       CURRENT_TIMESTAMP 
  usedAt              timestamp   YES      NULL              
- usedByMemberId      int(11)     YES  MUL NULL   
+ usedByMemberId      int(11)     YES  MUL NULL       
  
- 
+ALTER TABLE advance_tickets
+MODIFY COLUMN expiresAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
  
  desc reservation;

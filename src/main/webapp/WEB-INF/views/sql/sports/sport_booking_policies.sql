@@ -20,3 +20,19 @@ CREATE TABLE sport_booking_policies (
 );
 
 desc sport_booking_policies;
+ Field                                  Type          Null Key Default           Extra
+ -------------------------------------- ------------- ---- --- ----------------- ---------------------------
+ id                                     int(11)       NO   PRI NULL              auto_increment
+ sportId                                int(11)       NO   UNI NULL              
+ bookingOpenDaysBefore                  int(11)       NO       7                 
+ bookingOpenTime                        time          NO       11:00:00          
+ bookingCloseMinutesAfterStart          int(11)       NO       60                
+ cancellationDeadlineMinutesBeforeStart int(11)       NO       120               
+ maxTicketsPerBooking                   int(11)       NO       8                 
+ maxTotalTickets                        int(11)       NO       16                
+ bookingFeePerTicket                    decimal(10,2) NO       1000.00           
+ cancellationFeeRate                    decimal(5,2)  NO       10.00             
+ fullRefundUntilMidnight                tinyint(1)    NO       1                 
+ createdAt                              timestamp     NO       CURRENT_TIMESTAMP 
+ updatedAt                              timestamp     NO       CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
+select * from sport_booking_policies;

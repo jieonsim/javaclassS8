@@ -14,3 +14,16 @@ CREATE TABLE seats (
     FOREIGN KEY (venueId) REFERENCES venues(id),
     UNIQUE KEY (sportId, teamId, venueId, seatName)
 );
+
+desc seats;
+ Field     Type        Null Key Default           Extra
+ --------- ----------- ---- --- ----------------- ---------------------------
+ id        int(11)     NO   PRI NULL              auto_increment
+ sportId   int(11)     NO   MUL NULL              
+ teamId    int(11)     NO   MUL NULL              
+ venueId   int(11)     NO   MUL NULL              
+ seatName  varchar(50) NO       NULL              
+ capacity  int(11)     NO       NULL              
+ createdAt timestamp   NO       CURRENT_TIMESTAMP 
+ updatedAt timestamp   NO       CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
+ seatColor varchar(7)  YES      NULL              
