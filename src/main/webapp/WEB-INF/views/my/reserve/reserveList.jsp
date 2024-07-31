@@ -74,9 +74,9 @@
 								<col style="width: 90px">
 								<col>
 								<col style="width: 135px">
-								<col style="width: 50px">
-								<col style="width: 100px">
-								<col style="width: 155px">
+								<col style="width: 70px">
+								<col style="width: 120px">
+								<col style="width: 115px">
 							</colgroup>
 							<thead class="text-center">
 								<tr>
@@ -105,7 +105,7 @@
 												<td class="ng-binding">${reservation.ticketAmount}장</td>
 												<td class="fs12 number color_point ng-binding">${reservation.cancelDeadline}</td>
 												<td>
-													<div class="reserve_condition1 ng-binding">
+													<div class="color_point ng-binding">
 														${reservation.status}
 													</div>
 												</td>

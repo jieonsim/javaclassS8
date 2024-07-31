@@ -104,6 +104,12 @@ document.addEventListener('DOMContentLoaded', function() {
 			alert(`입력한 좌석 수가 경기장의 남은 수용인원(${currentVenueCapacity - usedCapacity})울 초과합니다.`);
 			return;
 		}
+	
+		// 좌석 색상 체크
+		const colorInput = document.getElementById('inputSeatColor');
+		if (!colorInput.value) {
+			colorInput.value = '#000000'; // 기본 검은색으로 설정
+		}
 
 		// 폼 데이터 생성
 		const formData = new FormData(form);

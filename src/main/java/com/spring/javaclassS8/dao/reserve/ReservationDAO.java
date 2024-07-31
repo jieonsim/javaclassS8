@@ -1,5 +1,6 @@
 package com.spring.javaclassS8.dao.reserve;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -91,11 +92,13 @@ public interface ReservationDAO {
 	// 스포츠예매권의 예매 취소 시 예매권 사용 리셋
 	void resetAdvanceTickets(List<Integer> advanceTicketIds);
 	
-	// 스포츠예매권의 예매 취소 시 사용된 예매권 테이블 레코드 삭제
-	// void deleteAdvanceTicketUsage(int reservationId);
-	
 	// 스포츠예매권의 예매 취소 시 사용된 예매권 테이블의 상테 업데이트
 	void updateAdvanceTicketUsageStatus(@Param("reservationId") int reservationId, @Param("status") String status);
+
+	// 취소 마감시간 가져오기
+	int getCancellationDeadlineMinutes(int sportId);
+
+	List<GameVO> getUpcomingGames(@Param("sport") String sport, @Param("today") LocalDate today);
 	
 
 }

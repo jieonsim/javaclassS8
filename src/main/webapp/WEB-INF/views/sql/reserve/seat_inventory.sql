@@ -12,7 +12,18 @@ CREATE TABLE seat_inventory (
 );
 
 desc seat_inventory;
-
+ Field             Type      Null Key Default           Extra
+ ----------------- --------- ---- --- ----------------- ---------------------------
+ id                int(11)   NO   PRI NULL              auto_increment
+ gameId            int(11)   NO   MUL NULL              
+ seatId            int(11)   NO   MUL NULL              
+ totalCapacity     int(11)   NO       NULL              
+ availableCapacity int(11)   NO       NULL              
+ lastUpdated       timestamp NO       CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
+ 
+ 
+select * from seat_inventory; where gameId = 131 AND seatId = 133;
+ 
 
 INSERT INTO seat_inventory (gameId, seatId, totalCapacity, availableCapacity)
 SELECT 

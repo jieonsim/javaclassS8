@@ -38,7 +38,6 @@ public class HotIssueController {
 	@GetMapping("/api/news")
 	@ResponseBody
 	public List<NewsItem> fetchNewsItems(HttpServletRequest request) {
-		System.out.println("fetchNewsItems 메소드 시작");
 		List<NewsItem> newsItems = new ArrayList<>();
 
 		// ChromeDriver 경로 설정
@@ -78,14 +77,12 @@ public class HotIssueController {
 			driver.quit(); // 브라우저 종료
 		}
 
-		System.out.println("fetchNewsItems 메소드 종료");
 		return newsItems;
 	}
 
 	@GetMapping("/api/schedule")
 	@ResponseBody
 	public Map<String, Object> fetchSchedule(HttpServletRequest request) {
-		System.out.println("fetchSchedule 메소드 시작");
 		Map<String, Object> scheduleData = new HashMap<>();
 
 		String realPath = request.getSession().getServletContext().getRealPath("/resources/crawling/");
@@ -161,14 +158,12 @@ public class HotIssueController {
 			driver.quit();
 		}
 
-		System.out.println("fetchSchedule 메소드 종료");
 		return scheduleData;
 	}
 
 	@GetMapping("/api/kboRanking")
 	@ResponseBody
 	public Map<String, Object> fetchKBORanking(HttpServletRequest request) {
-		System.out.println("fetchKBORanking 메소드 시작");
 		Map<String, Object> rankingData = new HashMap<>();
 
 		String realPath = request.getSession().getServletContext().getRealPath("/resources/crawling/");
@@ -208,7 +203,6 @@ public class HotIssueController {
 
 			rankingData.put("date", date);
 			rankingData.put("teams", teams);
-			System.out.println("크롤링된 데이터: " + rankingData);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -217,7 +211,6 @@ public class HotIssueController {
 			driver.quit();
 		}
 
-		System.out.println("fetchKBORanking 메소드 종료");
 		return rankingData;
 	}
 }

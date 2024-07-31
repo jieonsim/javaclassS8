@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.spring.javaclassS8.vo.sports.GameVO;
 import com.spring.javaclassS8.vo.sports.PriceVO;
+import com.spring.javaclassS8.vo.sports.SeatInventoryVO;
 import com.spring.javaclassS8.vo.sports.SeatVO;
 import com.spring.javaclassS8.vo.sports.SportVO;
 import com.spring.javaclassS8.vo.sports.TeamVO;
@@ -247,34 +248,53 @@ public class AdminSportDAOImpl implements AdminSportDAO {
 	public List<TicketTypeVO> getTicketTypesByCategory(String category) {
 		return sqlSession.getMapper(AdminSportDAO.class).getTicketTypesByCategory(category);
 	}
-	
+
 	// 같은 정보로 이미 등록된 요금인지 확인
 	@Override
 	public int isPriceExists(PriceVO price) {
-	    return sqlSession.getMapper(AdminSportDAO.class).isPriceExists(price);
+		return sqlSession.getMapper(AdminSportDAO.class).isPriceExists(price);
 	}
-	
+
 	// 요금 등록 처리
 	@Override
 	public int insertPrice(PriceVO price) {
-	    return sqlSession.getMapper(AdminSportDAO.class).insertPrice(price);
+		return sqlSession.getMapper(AdminSportDAO.class).insertPrice(price);
 	}
-	
+
 	// 최근 등록된 요금 가져오기
 	@Override
 	public PriceVO getLastInsertedPrice() {
-	    return sqlSession.getMapper(AdminSportDAO.class).getLastInsertedPrice();
+		return sqlSession.getMapper(AdminSportDAO.class).getLastInsertedPrice();
 	}
 
 	// 권종 이름으로 tickeTypeId 가져오기
 	@Override
 	public Integer getTicketTypeIdByName(String ticketTypeName) {
-	    return sqlSession.getMapper(AdminSportDAO.class).getTicketTypeIdByName(ticketTypeName);
+		return sqlSession.getMapper(AdminSportDAO.class).getTicketTypeIdByName(ticketTypeName);
 	}
-	
+
+	// 등록 폼 내 선택된 경기장에 따른 좌석 등급 가져오기
 	@Override
 	public List<SeatVO> getSeatsByVenueName(String venueName) {
-	    return sqlSession.getMapper(AdminSportDAO.class).getSeatsByVenueName(venueName);
+		return sqlSession.getMapper(AdminSportDAO.class).getSeatsByVenueName(venueName);
+	}
+
+	// 경기장 고유번호, 스포츠 고유번호, 홈팀 고유번호로 좌석 등급 가져오기
+	@Override
+	public List<SeatVO> getSeatsByVenueIdAndSportIdAndTeamId(int venueId, int sportId, int teamId) {
+		return sqlSession.getMapper(AdminSportDAO.class).getSeatsByVenueIdAndSportIdAndTeamId(venueId, sportId, teamId);
+	}
+	
+	// 경기장 고유번호, 스포츠 고유번호, 홈팀 고유번호로 게임 가져오기
+	@Override
+	public List<GameVO> getGamesByVenueIdAndSportIdAndHomeTeamId(int venueId, int sportId, int homeTeamId) {
+		return sqlSession.getMapper(AdminSportDAO.class).getGamesByVenueIdAndSportIdAndHomeTeamId(venueId, sportId, homeTeamId);
+	}
+
+	// 좌석 잔여수량 설정
+	@Override
+	public void insertSeatInventory(SeatInventoryVO inventory) {
+		sqlSession.getMapper(AdminSportDAO.class).insertSeatInventory(inventory);
 	}
 
 

@@ -1,16 +1,35 @@
 package com.spring.javaclassS8.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.spring.javaclassS8.service.reserve.ReservationService;
+import com.spring.javaclassS8.vo.sports.GameVO;
 
 @Controller
 public class HomeController {
-
-	// 유저 메인
-	@GetMapping("/")
-	public String home() {
-		return "home";
-	}
+	
+    @Autowired
+    private ReservationService reservationService;
+	
+    @GetMapping("/")
+    public String home(Model model) {
+        List<GameVO> baseballGames = reservationService.getUpcomingGames("야구");
+        model.addAttribute("baseballGames", baseballGames);
+        return "home";
+    }
+    
+    @GetMapping("/getGames")
+    @ResponseBody
+    public List<GameVO> getGames(@RequestParam String sport) {
+        return reservationService.getUpcomingGames(sport);
+    }
 
 	// 어드민 메인
 	@GetMapping("/admin/main")

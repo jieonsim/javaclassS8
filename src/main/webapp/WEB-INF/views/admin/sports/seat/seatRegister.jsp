@@ -64,6 +64,10 @@
 											<label for="inputVenueName">좌석 수</label>
 											<input type="number" class="form-control form-control-lg" id="inputCapacity" name="capacity" placeholder="좌석 등급 수용 인원">
 										</div>
+										<div class="form-group">
+											<label for="inputSeatColor">좌석 등급 색상</label>
+											<input type="color" class="form-control form-control-lg" id="inputSeatColor" name="seatColor" value="#000000">
+										</div>
 										<button type="submit" class="btn btn-primary me-2">Submit</button>
 									</form>
 								</div>

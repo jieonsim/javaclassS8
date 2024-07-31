@@ -101,7 +101,8 @@ public interface AdminSportSerivce {
 
 	// 요금 등록 처리
 	PriceVO registerPrice(PriceVO price) throws IllegalArgumentException;
-
+	
+	// 등록 폼 내 선택된 경기장에 따른 좌석 등급 가져오기
 	List<SeatVO> getSeatsByVenueName(String venueName);
 
 }

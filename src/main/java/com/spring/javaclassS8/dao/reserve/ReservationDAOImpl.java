@@ -1,5 +1,6 @@
 package com.spring.javaclassS8.dao.reserve;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -167,13 +168,21 @@ public class ReservationDAOImpl implements ReservationDAO {
 		sqlSession.getMapper(ReservationDAO.class).resetAdvanceTickets(advanceTicketIds);
 	}
 
-//	@Override
-//	public void deleteAdvanceTicketUsage(int reservationId) {
-//		sqlSession.getMapper(ReservationDAO.class).deleteAdvanceTicketUsage(reservationId);
-//	}
-
+	// 스포츠예매권의 예매 취소 시 사용된 예매권 테이블의 상테 업데이트
 	@Override
 	public void updateAdvanceTicketUsageStatus(int reservationId, String status) {
 		sqlSession.getMapper(ReservationDAO.class).updateAdvanceTicketUsageStatus(reservationId, status);
 	}
+	
+	// 취소 마감시간 가져오기
+	@Override
+	public int getCancellationDeadlineMinutes(int sportId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+    @Override
+    public List<GameVO> getUpcomingGames(String sport, LocalDate today) {
+        return sqlSession.getMapper(ReservationDAO.class).getUpcomingGames(sport, today);
+    }
 }

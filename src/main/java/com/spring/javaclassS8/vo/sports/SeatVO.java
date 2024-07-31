@@ -19,4 +19,5 @@ public class SeatVO {
 	private String sportName;
 	private String teamName;
 	private String venueName;
+	private String seatColor;
 }

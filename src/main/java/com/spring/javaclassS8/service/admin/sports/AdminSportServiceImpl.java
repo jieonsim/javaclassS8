@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.spring.javaclassS8.dao.admin.sports.AdminSportDAO;
 import com.spring.javaclassS8.vo.sports.GameVO;
 import com.spring.javaclassS8.vo.sports.PriceVO;
+import com.spring.javaclassS8.vo.sports.SeatInventoryVO;
 import com.spring.javaclassS8.vo.sports.SeatVO;
 import com.spring.javaclassS8.vo.sports.SportVO;
 import com.spring.javaclassS8.vo.sports.TeamVO;
@@ -168,8 +169,27 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 	@Override
 	@Transactional
 	public boolean registerGame(GameVO game) {
-		return adminSportDAO.registerGame(game) > 0;
+		boolean result = adminSportDAO.registerGame(game) > 0;
+		if (result) {
+			// 새로 등록된 게임에 대한 seat_inventory 생성
+			List<SeatVO> seats = adminSportDAO.getSeatsByVenueIdAndSportIdAndTeamId(game.getVenueId(), game.getSportId(), game.getHomeTeamId());
+			for (SeatVO seat : seats) {
+				SeatInventoryVO inventory = new SeatInventoryVO();
+				inventory.setGameId(game.getId());
+				inventory.setSeatId(seat.getId());
+				inventory.setTotalCapacity(seat.getCapacity());
+				inventory.setAvailableCapacity(seat.getCapacity());
+				adminSportDAO.insertSeatInventory(inventory);
+			}
+		}
+		return result;
 	}
+
+//	@Override
+//	@Transactional
+//	public boolean registerGame(GameVO game) {
+//		return adminSportDAO.registerGame(game) > 0;
+//	}
 
 	// 가장 최근 등록된 게임 1개 가져오기
 	@Override
@@ -246,12 +266,73 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 		int result = adminSportDAO.insertSeat(seat);
 
 		if (result > 0) {
-			// 새로 등록된 좌석 정보 반환
-			return adminSportDAO.getRecentlyAddedSeat(seat.getVenueId());
-		} else {
-			throw new IllegalStateException("좌석 등록에 실패했습니다.");
-		}
+	        // 이 시점에서 seat 객체의 id가 설정되어 있어야 함
+	        System.out.println("Inserted seat ID: " + seat.getId());
+
+	        // 새로 등록된 좌석에 대한 seat_inventory 생성
+	        List<GameVO> games = adminSportDAO.getGamesByVenueIdAndSportIdAndHomeTeamId(
+	            seat.getVenueId(), seat.getSportId(), seat.getTeamId());
+	        
+	        for (GameVO game : games) {
+	            SeatInventoryVO inventory = new SeatInventoryVO();
+	            inventory.setGameId(game.getId());
+	            inventory.setSeatId(seat.getId());
+	            System.out.println("Creating inventory for game " + game.getId() + " and seat " + seat.getId());
+	            inventory.setTotalCapacity(seat.getCapacity());
+	            inventory.setAvailableCapacity(seat.getCapacity());
+	            adminSportDAO.insertSeatInventory(inventory);
+	        }
+
+	        return seat;
+	    } else {
+	        throw new IllegalStateException("좌석 등록에 실패했습니다.");
+	    }
 	}
+//	@Override
+//	@Transactional
+//	public SeatVO registerSeat(SeatVO seat) throws Exception {
+//		// sportName, teamName으로 각각의 id 조회
+//		Integer sportId = adminSportDAO.getSportIdByName(seat.getSportName());
+//		Integer teamId = adminSportDAO.getTeamIdByName(seat.getTeamName());
+//		
+//		// null 체크 추가
+//		if (sportId == null) {
+//			throw new IllegalArgumentException("해당 스포츠를 찾을 수 없습니다.");
+//		}
+//		if (teamId == null) {
+//			throw new IllegalArgumentException("해당 팀을 찾을 수 없습니다.");
+//		}
+//		
+//		// 조회한 sportId,teamId 값을 SeatVO에 설정
+//		seat.setSportId(sportId);
+//		seat.setTeamId(teamId);
+//		
+//		// 중복 체크
+//		if (adminSportDAO.isSeatExists(seat)) {
+//			throw new IllegalStateException("이미 등록된 좌석 등급입니다.");
+//		}
+//		
+//		// 경기장 총 수용인원 확인
+//		int venueCapacity = adminSportDAO.getVenueCapacity(seat.getVenueId());
+//		
+//		// 현재 사용 중인 좌석 수 확인
+//		int usedCapacity = adminSportDAO.getUsedCapacityByVenueId(seat.getVenueId());
+//		
+//		// 새로운 좌석 추가 시 총 수용인원을 초과하는지 확인
+//		if (usedCapacity + seat.getCapacity() > venueCapacity) {
+//			throw new IllegalStateException("좌석 추가 시 경기장의 총 수용인원을 초과합니다.");
+//		}
+//		
+//		// 좌석 등록 처리
+//		int result = adminSportDAO.insertSeat(seat);
+//		
+//		if (result > 0) {
+//			// 새로 등록된 좌석 정보 반환
+//			return adminSportDAO.getRecentlyAddedSeat(seat.getVenueId());
+//		} else {
+//			throw new IllegalStateException("좌석 등록에 실패했습니다.");
+//		}
+//	}
 
 	// 모든 좌석 등급 가져오기
 	@Override
@@ -327,7 +408,8 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 			throw new IllegalStateException("요금 등록에 실패했습니다.");
 		}
 	}
-
+	
+	// 등록 폼 내 선택된 경기장에 따른 좌석 등급 가져오기
 	@Override
 	public List<SeatVO> getSeatsByVenueName(String venueName) {
 		return adminSportDAO.getSeatsByVenueName(venueName);

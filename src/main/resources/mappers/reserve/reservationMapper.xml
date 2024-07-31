@@ -212,6 +212,61 @@
 	    WHERE reservationId = #{reservationId}
 	</select>
 	
+	<!-- getCancellationDeadlineMinutes -->
+	<select id="getCancellationDeadlineMinutes" resultType="int">
+	    SELECT cancellationDeadlineMinutesBeforeStart
+	    FROM sport_booking_policies
+	    WHERE sportId = #{sportId}
+	</select>
+	
+	<select id="getUpcomingGames" resultType="com.spring.javaclassS8.vo.sports.GameVO">
+	    SELECT g.*, 
+	           ht.shortName AS homeTeamShortName, 
+	           at.shortName AS awayTeamShortName,
+	           v.venueName,
+	           sbp.bookingOpenDaysBefore,
+	           sbp.bookingOpenTime,
+	           DATE_FORMAT(g.gameDate, '%Y.%m.%d(%a)') AS formattedGameDate,
+	           DATE_FORMAT(g.gameTime, '%H:%i') AS formattedGameTime,
+	           DATE_FORMAT(DATE_SUB(g.gameDate, INTERVAL sbp.bookingOpenDaysBefore DAY), '%Y.%m.%d(%a)') AS openDate,
+	           DATE_FORMAT(sbp.bookingOpenTime, '%H:%i') AS openTime
+	    FROM games g
+	    JOIN teams ht ON g.homeTeamId = ht.id
+	    JOIN teams at ON g.awayTeamId = at.id
+	    JOIN venues v ON g.venueId = v.id
+	    JOIN sports s ON g.sportId = s.id
+	    JOIN sport_booking_policies sbp ON g.sportId = sbp.sportId
+	    WHERE s.sportName = #{sport}
+	      AND g.gameDate >= #{today}
+	      AND DATE_SUB(g.gameDate, INTERVAL sbp.bookingOpenDaysBefore DAY) >= #{today}
+	    ORDER BY DATE_SUB(g.gameDate, INTERVAL sbp.bookingOpenDaysBefore DAY) ASC, g.gameTime ASC
+	    LIMIT 10
+	</select>
+
+<!-- 	<select id="getUpcomingGames" resultType="com.spring.javaclassS8.vo.sports.GameVO">
+        SELECT g.*, 
+               ht.shortName AS homeTeamShortName, 
+               at.shortName AS awayTeamShortName,
+               v.venueName,
+               sbp.bookingOpenDaysBefore,
+               sbp.bookingOpenTime,
+               DATE_FORMAT(g.gameDate, '%Y.%m.%d(%a)') AS formattedGameDate,
+               DATE_FORMAT(g.gameTime, '%H:%i') AS formattedGameTime,
+               DATE_FORMAT(DATE_SUB(g.gameDate, INTERVAL sbp.bookingOpenDaysBefore DAY), '%Y.%m.%d(%a)') AS openDate,
+               sbp.bookingOpenTime AS openTime
+        FROM games g
+        JOIN teams ht ON g.homeTeamId = ht.id
+        JOIN teams at ON g.awayTeamId = at.id
+        JOIN venues v ON g.venueId = v.id
+        JOIN sports s ON g.sportId = s.id
+        JOIN sport_booking_policies sbp ON g.sportId = sbp.sportId
+        WHERE s.sportName = #{sport}
+          AND g.gameDate >= #{today}
+          AND DATE_SUB(g.gameDate, INTERVAL sbp.bookingOpenDaysBefore DAY) >= #{today}
+        ORDER BY DATE_SUB(g.gameDate, INTERVAL sbp.bookingOpenDaysBefore DAY) ASC, g.gameTime ASC
+        LIMIT 10
+    </select> -->
+	
 	<!-- 예매 처리 : reservations 테이블 레코드 생성 -->
 	<insert id="insertReservation" parameterType="com.spring.javaclassS8.vo.reserve.ReservationVO" useGeneratedKeys="true" keyProperty="id">
 	    INSERT INTO reservations (reservationNumber, memberId, gameId, totalAmount, ticketAmount, bookingFee, status)
@@ -285,9 +340,4 @@
 	    WHERE reservationId = #{reservationId}
 	</update>
 	
-	<!-- 취소 처리 : 스포츠예매권의 예매 취소 시 사용된 예매권 테이블 레코드 삭제 -->
-	<!-- <delete id="deleteAdvanceTicketUsage">
-	    DELETE FROM advance_ticket_usage
-	    WHERE reservationId = #{reservationId}
-	</delete> -->
 </mapper>

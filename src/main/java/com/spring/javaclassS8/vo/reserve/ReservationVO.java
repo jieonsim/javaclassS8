@@ -36,12 +36,13 @@ public class ReservationVO {
     private int sportId;
     private int seatId;
     private String formattedCanceledAt;
+    private boolean isCancelable;;
     
-    public boolean isHasAdvanceTicket() {
-        return hasAdvanceTicket;
-    }
-
-    public void setHasAdvanceTicket(boolean hasAdvanceTicket) {
-        this.hasAdvanceTicket = hasAdvanceTicket;
-    }
+//    public boolean isHasAdvanceTicket() {
+//        return hasAdvanceTicket;
+//    }
+//
+//    public void setHasAdvanceTicket(boolean hasAdvanceTicket) {
+//        this.hasAdvanceTicket = hasAdvanceTicket;
+//    }
 }

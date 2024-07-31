@@ -390,7 +390,24 @@ public class AdminSportController {
 		return response;
 	}
 
-	// 좌석 등록 처리
+//	// 좌석 등록 처리
+//	@PostMapping("/seat/seatRegister")
+//	@ResponseBody
+//	public ResponseEntity<?> registerSeat(@ModelAttribute SeatVO seat) {
+//	    try {
+//	        SeatVO newSeat = adminSportService.registerSeat(seat);
+//	        Map<String, Object> response = new HashMap<>();
+//	        response.put("success", true);
+//	        response.put("seats", Collections.singletonList(newSeat));
+//	        return ResponseEntity.ok(response);
+//	    } catch (Exception e) {
+//	        e.printStackTrace(); // 서버 로그에 스택 트레이스 출력
+//	        Map<String, Object> response = new HashMap<>();
+//	        response.put("success", false);
+//	        response.put("message", "좌석 등록 중 오류가 발생했습니다: " + e.getMessage());
+//	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+//	    }
+//	}
 	@PostMapping("/seat/seatRegister")
 	@ResponseBody
 	public ResponseEntity<?> registerSeat(@ModelAttribute SeatVO seat) {

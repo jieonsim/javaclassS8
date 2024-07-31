@@ -40,4 +40,6 @@ public interface ReservationService {
 	// 예매 처리
 	ReservationResponse processReservation(ReservationRequest request) throws Exception;
 
+	List<GameVO> getUpcomingGames(String sport);
+
 }

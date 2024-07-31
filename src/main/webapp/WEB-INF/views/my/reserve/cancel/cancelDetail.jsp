@@ -236,7 +236,10 @@
 									<td colspan="3">
 										<span class="color_point">
 											<span class="number">
-												<span class="number ng-binding"><fmt:formatNumber value="${cancelInfo.refundAmount}" type="number" />원</span>
+												<span class="number ng-binding">
+													<fmt:formatNumber value="${cancelInfo.refundAmount}" type="number" />
+													원
+												</span>
 											</span>
 										</span>
 									</td>
@@ -245,15 +248,23 @@
 							<tbody>
 								<tr class="line">
 									<th scope="row" class="lspacingm1">티켓금액</th>
-									<td class="tr ng-binding"><fmt:formatNumber value="${cancelInfo.totalTicketPrice}" type="number" />원</td>
-									<th scope="row" class="lspacingm1">예매수수료
-									<div class="layer_mother">
+									<td class="tr ng-binding">
+										<fmt:formatNumber value="${cancelInfo.totalTicketPrice}" type="number" />
+										원
+									</td>
+									<th scope="row" class="lspacingm1">
+										예매수수료
+										<div class="layer_mother">
 											<a class="help">도움말보기</a>
 											<div class="layer only_txt" style="width: 220px; left: 22px; top: 3px">
 												<p class="layer_text">티켓 취소 시 환불되는 예매수수료 입니다. 예매수수료는 예매 당일 취소 시에만 환불됩니다.</p>
 											</div>
-										</div></th>
-									<td class="tr ng-binding"><fmt:formatNumber value="${cancelInfo.bookingFee}" type="number" />원</td>
+										</div>
+									</th>
+									<td class="tr ng-binding">
+										<fmt:formatNumber value="${cancelInfo.bookingFee}" type="number" />
+										원
+									</td>
 								</tr>
 								<tr>
 									<th scope="row" class="lspacingm1">
@@ -265,7 +276,10 @@
 											</div>
 										</div>
 									</th>
-									<td class="tr ng-binding"><fmt:formatNumber value="${cancelInfo.cancellationFee}" type="number" />원</td>
+									<td class="tr ng-binding">
+										<fmt:formatNumber value="${cancelInfo.cancellationFee}" type="number" />
+										원
+									</td>
 									<th scope="row" class="lspacingm1">부가상품</th>
 									<td class="tr ng-binding">0원</td>
 								</tr>
@@ -291,33 +305,55 @@
 									<th colspan="3" scope="col">취소 수수료</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>취소 마감시간</td>
-									<td colspan="3" class="color_point fbold tl end ng-binding">${reservation.cancelDeadline}</td>
-								</tr>
-								<tr class="ng-scope">
-									<td rowspan="2" class="vam ng-scope">
-										취소 수수료
-										<br>
-										(취소 마감시간 내에 한함)
-									</td>
-									<td class="color_black tl ng-binding">예매당일</td>
-									<td class="color_black tl ng-binding ng-scope">${reservation.formattedCreatedAt}</td>
-									<td class="color_point tl end ng-scope">
-										<span class="color_point fbold">없음</span>
-									</td>
-								</tr>
-								<tr class="ng-scope">
-									<td class="color_black tl ng-binding">예매익일~취소마감시간 전</td>
-									<td class="color_black tl ng-binding ng-scope">${reservation.cancelPeriod}</td>
-									<td class="color_black tl end ng-scope">
-										티켓 금액의
-										<span class="color_point fbold number ng-binding">10%</span>
-										부과
-									</td>
-								</tr>
-							</tbody>
+							<c:choose>
+								<c:when test="${reservation.cancelable}">
+									<!-- 취소 가능한 경우 -->
+									<tbody>
+										<tr>
+											<td>취소 마감시간</td>
+											<td colspan="3" class="color_point fbold tl end ng-binding">${reservation.cancelDeadline}</td>
+										</tr>
+										<tr class="ng-scope">
+											<td rowspan="2" class="vam ng-scope">
+												취소 수수료
+												<br>
+												(취소 마감시간 내에 한함)
+											</td>
+											<td class="color_black tl ng-binding">예매당일</td>
+											<td class="color_black tl ng-binding ng-scope">${reservation.formattedCreatedAt}</td>
+											<td class="color_point tl end ng-scope">
+												<span class="color_point fbold">없음</span>
+											</td>
+										</tr>
+										<tr class="ng-scope">
+											<td class="color_black tl ng-binding">예매익일~취소마감시간 전</td>
+											<td class="color_black tl ng-binding ng-scope">${reservation.cancelPeriod}</td>
+											<td class="color_black tl end ng-scope">
+												티켓 금액의
+												<span class="color_point fbold number ng-binding">10%</span>
+												부과
+											</td>
+										</tr>
+									</tbody>
+								</c:when>
+								<c:otherwise>
+									<!-- 취소 불가능한 경우 -->
+									<tbody>
+										<tr>
+											<td>취소 마감시간</td>
+											<td colspan="3" class="color_point fbold tl end ng-binding">${reservation.cancelDeadline} (기한 종료)</td>
+										</tr>
+										<tr>
+											<td rowspan="1" class="vam">
+												취소 수수료
+												<br>
+												(취소 마감시간 내에 한함)
+											</td>
+											<td class="tl color_point vam fbold" colspan="3">예매취소가 마감되어 취소/환불/변경 불가합니다.</td>
+										</tr>
+									</tbody>
+								</c:otherwise>
+							</c:choose>
 						</table>
 					</div>
 					<h5 class="mgt40 text_tit">유의사항</h5>

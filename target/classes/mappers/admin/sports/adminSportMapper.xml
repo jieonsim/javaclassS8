@@ -233,12 +233,25 @@
 	    SELECT id FROM ticket_types WHERE name = #{ticketTypeName}
 	</select>
 	
+	<!-- 등록 폼 내 선택된 경기장에 따른 좌석 등급 가져오기 -->
 	<select id="getSeatsByVenueName" resultType="com.spring.javaclassS8.vo.sports.SeatVO">
 	    SELECT s.* 
 	    FROM seats s
 	    JOIN venues v ON s.venueId = v.id
 	    WHERE v.venueName = #{venueName}
 	</select>
+	
+	<!-- 경기장 고유번호, 스포츠 고유번호, 팀 고유번호로 좌석 등급 가져오기 -->
+	<select id="getSeatsByVenueIdAndSportIdAndTeamId" resultType="com.spring.javaclassS8.vo.sports.SeatVO">
+        SELECT * FROM seats 
+        WHERE venueId = #{venueId} AND sportId = #{sportId} AND teamId = #{teamId}
+    </select>
+    
+    <!-- 경기장 고유번호, 스포츠 고유번호, 홈팀 고유번호로 게임 가져오기 -->
+    <select id="getGamesByVenueIdAndSportIdAndHomeTeamId" resultType="com.spring.javaclassS8.vo.sports.GameVO">
+        SELECT * FROM games 
+        WHERE venueId = #{venueId} AND sportId = #{sportId} AND homeTeamId = #{homeTeamId}
+    </select>
 
 	<!-- 스포츠 종목 등록 처리 -->
 	<insert id="insertSport" parameterType="String">
@@ -269,15 +282,21 @@
 	</insert>
 	
 	<!-- 좌석 등록 처리 -->
-	<insert id="insertSeat" parameterType="com.spring.javaclassS8.vo.sports.SeatVO">
-        INSERT INTO seats (sportId, teamId, venueId, seatName, capacity)
-        VALUES (#{sportId}, #{teamId}, #{venueId}, #{seatName}, #{capacity})
+	<insert id="insertSeat" parameterType="com.spring.javaclassS8.vo.sports.SeatVO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO seats (sportId, teamId, venueId, seatName, capacity, seatColor)
+        VALUES (#{sportId}, #{teamId}, #{venueId}, #{seatName}, #{capacity}, #{seatColor})
 	</insert>
 	
 	<!-- 요금 등록 처리 -->
     <insert id="insertPrice" parameterType="com.spring.javaclassS8.vo.sports.PriceVO">
 	    INSERT INTO prices (sportId, teamId, venueId, seatId, ticketTypeId, price)
 	    VALUES (#{sportId}, #{teamId}, #{venueId}, #{seatId}, #{ticketTypeId}, #{price})
+    </insert>
+    
+    <!-- 좌석 잔여수량 설정 -->
+    <insert id="insertSeatInventory" parameterType="com.spring.javaclassS8.vo.sports.SeatInventoryVO">
+        INSERT INTO seat_inventory (gameId, seatId, totalCapacity, availableCapacity)
+        VALUES (#{gameId}, #{seatId}, #{totalCapacity}, #{availableCapacity})
     </insert>
 	
 	<!-- 스포츠 이름 수정 -->

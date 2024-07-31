@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.spring.javaclassS8.vo.sports.GameVO;
 import com.spring.javaclassS8.vo.sports.PriceVO;
+import com.spring.javaclassS8.vo.sports.SeatInventoryVO;
 import com.spring.javaclassS8.vo.sports.SeatVO;
 import com.spring.javaclassS8.vo.sports.SportVO;
 import com.spring.javaclassS8.vo.sports.TeamVO;
@@ -140,7 +141,17 @@ public interface AdminSportDAO {
 
 	// 권종 이름으로 tickeTypeId 가져오기
 	Integer getTicketTypeIdByName(String ticketTypeName);
-
+	
+	// 등록 폼 내 선택된 경기장에 따른 좌석 등급 가져오기
 	List<SeatVO> getSeatsByVenueName(String venueName);
+	
+	// 경기장 고유번호, 스포츠 고유번호, 홈팀 고유번호로 좌석 등급 가져오기
+	List<SeatVO> getSeatsByVenueIdAndSportIdAndTeamId(@Param("venueId") int venueId, @Param("sportId") int sportId, @Param("teamId") int teamId);
+	
+	// 경기장 고유번호, 스포츠 고유번호, 홈팀 고유번호로 게임 가져오기
+	List<GameVO> getGamesByVenueIdAndSportIdAndHomeTeamId(@Param("venueId") int venueId, @Param("sportId") int sportId, @Param("homeTeamId") int homeTeamId);
+	
+	// 좌석 잔여수량 설정
+	void insertSeatInventory(SeatInventoryVO inventory);
 
 }
