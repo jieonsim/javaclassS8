@@ -30,11 +30,6 @@ public class HotIssueController {
 		return "hotIssue/main";
 	}
 
-	@GetMapping("/hotIssue2")
-	public String hotIssue2() {
-		return "hotIssue/main2";
-	}
-
 	@GetMapping("/api/news")
 	@ResponseBody
 	public List<NewsItem> fetchNewsItems(HttpServletRequest request) {

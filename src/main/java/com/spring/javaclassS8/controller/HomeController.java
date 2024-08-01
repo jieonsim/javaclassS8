@@ -31,12 +31,6 @@ public class HomeController {
         return reservationService.getUpcomingGames(sport);
     }
 
-	// 어드민 메인
-	@GetMapping("/admin/main")
-	public String adminMain() {
-		return "admin/main";
-	}
-
 	// 예매권 메일 테스트
 	@GetMapping("/advanceTicketMail")
 	public String advanceTicketMail() {

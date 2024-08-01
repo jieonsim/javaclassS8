@@ -23,23 +23,183 @@
 			<jsp:include page="/WEB-INF/views/admin/layout/sidebar.jsp" />
 			<div class="main-panel">
 				<div class="content-wrapper">
-					<div class="btn btn-primary" onclick="location.href='${ctp}/';">유저 페이지 홈으로 이동</div>
-					<div>admin main</div>
-					<div>admin main</div>
-					<div>admin main</div>
-					<div>admin main</div>
-					<div>admin main</div>
-					<div>admin main</div>
-					<div>admin main</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="home-tab">
+								<div class="tab-content tab-content-basic" style="padding: 0">
+									<div class="tab-pane fade active show" id="overview" role="tabpanel" aria-labelledby="overview">
+										<div class="row">
+											<div class="col-sm-12">
+												<div class="statistics-details d-flex align-items-center justify-content-between">
+													<div>
+														<p class="statistics-title">현재까지 총 예매건 수</p>
+														<h3 class="rate-percentage">32.53%</h3>
+														<p class="text-danger d-flex">
+															<i class="mdi mdi-menu-down"></i>
+															<span>-0.5%</span>
+														</p>
+													</div>
+													<div>
+														<p class="statistics-title">현재 진행 중인 이벤트 건 수</p>
+														<h3 class="rate-percentage">7,682</h3>
+														<p class="text-success d-flex">
+															<i class="mdi mdi-menu-up"></i>
+															<span>+0.1%</span>
+														</p>
+													</div>
+													<div>
+														<p class="statistics-title">총 회원 수</p>
+														<h3 class="rate-percentage">68.8</h3>
+														<p class="text-danger d-flex">
+															<i class="mdi mdi-menu-down"></i>
+															<span>68.8</span>
+														</p>
+													</div>
+													<div class="d-none d-md-block">
+														<p class="statistics-title">Avg. Time on Site</p>
+														<h3 class="rate-percentage">2m:35s</h3>
+														<p class="text-success d-flex">
+															<i class="mdi mdi-menu-down"></i>
+															<span>+0.8%</span>
+														</p>
+													</div>
+													<div class="d-none d-md-block">
+														<p class="statistics-title">New Sessions</p>
+														<h3 class="rate-percentage">68.8</h3>
+														<p class="text-danger d-flex">
+															<i class="mdi mdi-menu-down"></i>
+															<span>68.8</span>
+														</p>
+													</div>
+													<div class="d-none d-md-block">
+														<p class="statistics-title">Avg. Time on Site</p>
+														<h3 class="rate-percentage">2m:35s</h3>
+														<p class="text-success d-flex">
+															<i class="mdi mdi-menu-down"></i>
+															<span>+0.8%</span>
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-lg-6 grid-margin stretch-card">
+												<div class="card">
+													<div class="card-body">
+														<div class="chartjs-size-monitor">
+															<div class="chartjs-size-monitor-expand">
+																<div class=""></div>
+															</div>
+															<div class="chartjs-size-monitor-shrink">
+																<div class=""></div>
+															</div>
+														</div>
+														<h4 class="card-title">예매 현황 차트</h4>
+														<canvas id="lineChart" width="430" height="215" style="display: block; width: 430px; height: 215px;" class="chartjs-render-monitor"></canvas>
+													</div>
+												</div>
+											</div>
+											<div class="col-lg-6 grid-margin stretch-card">
+												<div class="card">
+													<div class="card-body">
+														<div class="chartjs-size-monitor">
+															<div class="chartjs-size-monitor-expand">
+																<div class=""></div>
+															</div>
+															<div class="chartjs-size-monitor-shrink">
+																<div class=""></div>
+															</div>
+														</div>
+														<h4 class="card-title">스포츠별 예매 비율</h4>
+														<canvas id="doughnutChart" width="430" height="215" style="display: block; width: 430px; height: 215px;" class="chartjs-render-monitor"></canvas>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-lg-6 grid-margin stretch-card">
+												<div class="card">
+													<div class="card-body">
+														<div class="chartjs-size-monitor">
+															<div class="chartjs-size-monitor-expand">
+																<div class=""></div>
+															</div>
+															<div class="chartjs-size-monitor-shrink">
+																<div class=""></div>
+															</div>
+														</div>
+														<h4 class="card-title">좌석 등급별 판매 현황</h4>
+														<canvas id="barChart" width="430" height="215" style="display: block; width: 430px; height: 215px;" class="chartjs-render-monitor"></canvas>
+													</div>
+												</div>
+											</div>
+											<div class="col-lg-6 grid-margin stretch-card">
+												<div class="card">
+													<div class="card-body">
+														<div class="chartjs-size-monitor">
+															<div class="chartjs-size-monitor-expand">
+																<div class=""></div>
+															</div>
+															<div class="chartjs-size-monitor-shrink">
+																<div class=""></div>
+															</div>
+														</div>
+														<h4 class="card-title">예매권 사용 현황 차트</h4>
+														<canvas id="areaChart" width="430" height="215" style="display: block; width: 430px; height: 215px;" class="chartjs-render-monitor"></canvas>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-lg-6 grid-margin grid-margin-lg-0 stretch-card">
+												<div class="card">
+													<div class="card-body">
+														<div class="chartjs-size-monitor">
+															<div class="chartjs-size-monitor-expand">
+																<div class=""></div>
+															</div>
+															<div class="chartjs-size-monitor-shrink">
+																<div class=""></div>
+															</div>
+														</div>
+														<h4 class="card-title">Pie chart</h4>
+														<canvas id="pieChart" width="480" height="240" style="display: block; width: 480px; height: 240px;" class="chartjs-render-monitor"></canvas>
+													</div>
+												</div>
+											</div>
+											<div class="col-lg-6 grid-margin grid-margin-lg-0 stretch-card">
+												<div class="card">
+													<div class="card-body">
+														<div class="chartjs-size-monitor">
+															<div class="chartjs-size-monitor-expand">
+																<div class=""></div>
+															</div>
+															<div class="chartjs-size-monitor-shrink">
+																<div class=""></div>
+															</div>
+														</div>
+														<h4 class="card-title">Scatter chart</h4>
+														<canvas id="scatterChart" width="480" height="240" style="display: block; width: 480px; height: 240px;" class="chartjs-render-monitor"></canvas>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<jsp:include page="/WEB-INF/views/admin/layout/footer.jsp" />
 			</div>
 		</div>
 	</div>
 	<script src="${ctp}/js/member/login/autoLogin.js"></script>
+	<script src="${ctp}/vendors/chart.js/Chart.min.js"></script>
 	<script src="${ctp}/js/admin/common/off-canvas.js"></script>
 	<script src="${ctp}/js/admin/common/hoverable-collapse.js"></script>
 	<script src="${ctp}/js/admin/common/template.js"></script>
 	<script src="${ctp}/js/admin/common/settings.js"></script>
+	<script src="${ctp}/js/admin/common/chart.js"></script>
 </body>
 </html>
