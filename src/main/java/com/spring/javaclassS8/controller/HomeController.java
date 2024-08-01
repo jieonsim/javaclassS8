@@ -1,4 +1,4 @@
-package com.spring.javaclassS8.controller.common;
+package com.spring.javaclassS8.controller;
 
 import java.util.List;
 
@@ -47,11 +47,5 @@ public class HomeController {
 	@GetMapping("/reservationCompletedMail")
 	public String reservationCompletedMail() {
 		return "mail/reservationCompletedMail";
-	}
-	
-	// 에러 페이지
-	@GetMapping("/error")
-	public String commonError() {
-		return "common/error";
 	}
 }

@@ -63,7 +63,7 @@ public class LoginController {
 		return ResponseEntity.ok(result);
 	}
 
-	// 자동로그인
+	// 자동로그인 처리를 위한 로그인 상태 확인
 	@GetMapping("/checkLoginStatus")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> checkLoginStatus(HttpServletRequest request, HttpSession session) {
@@ -83,5 +83,15 @@ public class LoginController {
 	        response.put("isLoggedIn", false);
 	    }
 	    return ResponseEntity.ok(response);
+	}
+	
+	// 로그인 인터셉터 처리를 위한 로그인 상태 확인
+	@GetMapping("/checkLogin")
+	@ResponseBody
+	public Map<String, Boolean> checkLogin(HttpSession session) {
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		Map<String, Boolean> response = new HashMap<>();
+		response.put("loggedIn", member != null);
+		return response;
 	}
 }

@@ -31,8 +31,8 @@
 						<img alt="에러메시지아이콘" src="${ctp}/images/icon/error.png">
 					</div>
 					<div class="complete-text">
-						<p id="completeText1">서비스 이용에 불편을 드려 죄송합니다.</p>
-						<p id="completeText2" class="mt-5">일시적인 서버 장애로 인하여 요청하신 페이지에 접속이 지연되고 있습니다.</p>
+						<p id="completeText1">현재 페이지에 접근할 수 있는 권한이 없습니다.</p>
+						<p id="completeText2">홈페이지로 돌아가시려면 아래 버튼을 클릭해 주세요.</p>
 					</div>
 				</div>
 				<div>
