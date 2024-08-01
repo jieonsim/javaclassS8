@@ -22,7 +22,6 @@
 			<span class="team_tab4">좌석도</span>
 		</a>
 	</li>
-	<!-- [D] 어드민 입력된 탭메뉴 일때 system 클래스 추가, 어드민에서 입력된 탭메뉴명은 em 영역으로 호출 -->
 	<li tabname="info" class="system ${param.activeTab == 'info' ? 'on' : ''}">
 		<a href="${ctp}/sports/baseball/${currentTeam}/info">
 			<em>구단안내</em>

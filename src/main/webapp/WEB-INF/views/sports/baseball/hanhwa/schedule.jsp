@@ -204,12 +204,9 @@
 							<div class="date ">19</div>
 							<dl class="match">
 								<dt class="blind">상대팀</dt>
-								<dd style="display:;" class="vs">
+								<dd class="vs">
 									<span class="ico_vs">vs</span>
 									<img src="http://image.toast.com/aaaaab/ticketlink/TKL_6/Property1=KIA.png" width="32" height="32" alt="">
-								</dd>
-								<dd style="display: none;" class="vs match_tit">
-									<img src="http://image.toast.com/aaaaab/ticketlink/TKL_6/Property1=KIA.png" alt="" height="32">
 								</dd>
 								<dt class="blind">장소</dt>
 								<dd>한화생명 Eagles Park</dd>

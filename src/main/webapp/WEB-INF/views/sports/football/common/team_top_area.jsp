@@ -13,46 +13,13 @@
 		</h5>
 		<div class="product_detail_option">
 			<div class="popup_btn_wrap">
-				<button type="button" class="product_option_btn type_clean">클린예매</button>
-				<div id="cleanReserveInfo" class="common_popup_wrap" style="display: none;">
-					<div class="common_popup" role="dialog">
-						<div class="common_popup_header">
-							<h3 class="common_popup_title">클린예매 서비스안내</h3>
-							<button type="button" id="cleanReserveClose" class="common_popup_close">
-								<span class="common_icon icon_close ty_sm"></span>
-								<span class="blind">닫기</span>
-							</button>
-						</div>
-						<div class="common_popup_content">
-							<div class="popup_section popup_clean_guide">
-								<p class="popup_desc">
-									<span class="text_medium">이 상품은 보안문자 입력 후 좌석 선택이 가능합니다.</span>
-								</p>
-								<div class="popup_imgbox">
-									<img src="//tketlink.dn.toastoven.net/markup_resources/2024061901_M/renewal/pcweb/img/clean_reserve_info@2x.jpg" alt="클린예매 서비스안내" class="popup_img">
-									<ol class="blind">
-										<li>보안문자 확인</li>
-										<li>위 이미지의 문자 입력</li>
-										<li>입력완료 후 예매할 좌석 선택</li>
-									</ol>
-								</div>
-								<p class="popup_desc">
-									<span class="text_gray">
-										-대/소문자 구분없음
-										<br>
-										-혼동하기 쉬운 문자 없음(I,L,O,Q 등)
-									</span>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
+				<a href="#" class="product_option_btn type_clean" data-toggle="popover" data-placement="bottom" data-content="보안문자 입력 후 좌석 선택 가능">클린예매</a>
 			</div>
 		</div>
 	</div>
-	<!-- 홈팀으로 설정하면 on 클래스 추가 + '홈팀'으로 텍스트 변경 -->
-	<a href="#" class="my_team">
-		<!-- <span class="blind">홈팀설정</span> -->
-		<span>홈팀설정</span>
-	</a>
 </div>
+<script>
+	$(document).ready(function() {
+		$('[data-toggle="popover"]').popover();
+	});
+</script>

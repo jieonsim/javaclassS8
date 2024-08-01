@@ -62,7 +62,8 @@ public class SportsController {
 
 	// 스포츠 구단별 경기일정
 	@GetMapping("/{sport}/{team}/schedule")
-	public String schedule(@PathVariable String sport, @PathVariable("team") String team) {
+	public String schedule(@PathVariable String sport, @PathVariable("team") String team, Model model) {
+		
 		return "sports/" + sport + "/" + team + "/schedule";
 	}
 

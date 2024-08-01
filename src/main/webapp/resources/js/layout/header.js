@@ -14,9 +14,18 @@ function convertTeamNameToUrlFriendly(teamName) {
         'lg': 'lg',
         '삼성': 'samsung',
         '한화': 'hanhwa',
-        '기아': 'kia',
+        'kia': 'kia',
         'ssg': 'ssg',
-        'kt': 'kt'
+        'kt': 'kt',
+        '케이티': 'kt',
+        '울산': 'uhfc',
+        '포항': 'steelers',
+        '광주': 'gwangjufc',
+        '전북현대': 'hyundaimotorsfc',
+        '인천': 'incheonutd',
+        '대구': 'daegufc',
+        'fc서울': 'fcseoul',
+        '김천': 'gimcheonfc'
     };
     return teamMap[teamName.toLowerCase()] || teamName.toLowerCase();
 }
@@ -46,6 +55,8 @@ function handleSearch(event) {
 		'이벤트': '/event/main',
 		'핫이슈': '/hotIssue',
 		'엘지': '/sports/baseball/lg/reservation',
+		'기아': '/sports/baseball/kia/reservation',
+		'기아타이거즈': '/sports/baseball/kia/reservation'
 	};
 
 	if (sportMappings[searchTerm]) {

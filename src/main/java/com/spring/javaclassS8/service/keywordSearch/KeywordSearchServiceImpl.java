@@ -51,18 +51,36 @@ public class KeywordSearchServiceImpl implements KeywordSearchService {
 
     private String convertTeamNameToUrlFriendly(String teamName) {
         switch (teamName.toLowerCase()) {
-            case "lg":
-                return "lg";
+        	case "lg":
+        		return "lg";
             case "삼성":
                 return "samsung";
             case "한화":
                 return "hanhwa";
-            case "기아":
+            case "kia":
                 return "kia";
             case "ssg":
                 return "ssg";
             case "kt":
                 return "kt";
+            case "케이티":
+            	return "kt";
+            case "울산":
+            	return "uhfc";
+            case "포항":
+            	return "steelers";
+            case "광주":
+            	return "gwangjufc";
+            case "전북현대":
+            	return "hyundaimotorsfc";
+            case "인천":
+            	return "incheonutd";
+            case "대구":
+            	return "daegufc";
+            case "fc서울":
+            	return "fcseoul";
+            case "김천":
+            	return "gimcheonfc";
             default:
                 return teamName.toLowerCase();
         }
