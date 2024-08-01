@@ -15,6 +15,8 @@ CREATE TABLE reservations (
     UNIQUE KEY (reservationNumber)
 );
 
+desc members;
+
 
 desc reservations;
  Field             Type                Null Key Default           Extra

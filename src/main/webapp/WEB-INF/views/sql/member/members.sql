@@ -16,3 +16,20 @@ CREATE TABLE members (
     PRIMARY KEY (id),
     UNIQUE KEY (email)
 );
+
+
+desc members;
+ Field            Type                 Null Key Default           Extra
+ ---------------- -------------------- ---- --- ----------------- ---------------------------
+ id               int(11)              NO   PRI NULL              auto_increment
+ email            varchar(255)         NO   UNI NULL              
+ password         varchar(255)         NO       NULL              
+ name             varchar(100)         NO       NULL              
+ phone            varchar(20)          NO       NULL              
+ createdAt        timestamp            NO       CURRENT_TIMESTAMP 
+ updatedAt        timestamp            NO       CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
+ role             enum('USER','ADMIN') NO       USER              
+ lastLoginAt      timestamp            YES      NULL              
+ status           tinyint(4)           NO       1                 
+ statusChangedAt  timestamp            YES      NULL              
+ suspensionReason varchar(255)         YES      NULL              

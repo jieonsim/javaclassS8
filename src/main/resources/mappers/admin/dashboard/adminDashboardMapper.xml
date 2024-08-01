@@ -1,7 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.javaclassS8.dao.admin.dashboard.AdminDashboardDAO">
-
+	
+	<!-- 현재까지 총 예매완료 건 수 -->
+	<select id="countCompletedReservations" resultType="int">
+		SELECT COUNT(*) 
+    	FROM reservations 
+		WHERE status = '예매완료' AND DATE(createdAt) = CURDATE()
+	</select>
+	
+	<!-- 현재까지 진행 중인 이벤트 건 수 -->
+	<select id="countOngoingEvents" resultType="int">
+		SELECT COUNT(*) FROM events WHERE status = 'ONGOING'
+	</select>
+	
+	<!-- 활동 중인 회원 수 -->
+	<select id="countActiveMembers" resultType="int">
+		SELECT COUNT(*) FROM members WHERE status = 1
+	</select>
+	
+	<!-- 현재 예매 오픈된 경기 수 -->
+	<select id="countOpenGames" resultType="int">
+		SELECT COUNT(*)
+        FROM games g
+        JOIN sport_booking_policies sbp ON g.sportId = sbp.sportId
+        WHERE NOW() BETWEEN
+        DATE_SUB(CONCAT(g.gameDate, ' ', g.gameTime), INTERVAL sbp.bookingCloseMinutesAfterStart MINUTE)
+        AND 
+        DATE_ADD(g.gameDate, INTERVAL sbp.bookingOpenDaysBefore DAY)
+        AND TIME(NOW()) >= sbp.bookingOpenTime;
+	</select>
+	
+	<!-- 예매 대비 취소율 -->
+	<select id="getCancellationRate" resultType="double">
+        SELECT 
+            (SELECT COUNT(*) FROM reservations WHERE status = '취소완료') / 
+            (SELECT COUNT(*) FROM reservations WHERE status IN ('예매완료', '취소완료')) * 100 AS cancellationRate;
+	</select>
+	
+	<!-- 이번달 예매수수료 수익 -->
+	<select id="getCurrentMonthRevenue" resultType="int">
+        SELECT SUM(bookingFee) AS totalBookingFeeRevenue
+        FROM reservations
+        WHERE status = '예매완료'
+          AND YEAR(createdAt) = YEAR(CURDATE())
+          AND MONTH(createdAt) = MONTH(CURDATE());;
+	</select>
+	
 	<select id="getReservationsLast6Months" resultType="com.spring.javaclassS8.vo.reserve.ReservationVO">
         SELECT r.*, s.sportName
         FROM reservations r

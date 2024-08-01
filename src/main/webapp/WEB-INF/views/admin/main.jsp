@@ -32,52 +32,28 @@
 											<div class="col-sm-12">
 												<div class="statistics-details d-flex align-items-center justify-content-between">
 													<div>
-														<p class="statistics-title">현재까지 총 예매건 수</p>
-														<h3 class="rate-percentage">32.53%</h3>
-														<p class="text-danger d-flex">
-															<i class="mdi mdi-menu-down"></i>
-															<span>-0.5%</span>
-														</p>
-													</div>
-													<div>
-														<p class="statistics-title">현재 진행 중인 이벤트 건 수</p>
-														<h3 class="rate-percentage">7,682</h3>
-														<p class="text-success d-flex">
-															<i class="mdi mdi-menu-up"></i>
-															<span>+0.1%</span>
-														</p>
-													</div>
-													<div>
-														<p class="statistics-title">총 회원 수</p>
-														<h3 class="rate-percentage">68.8</h3>
-														<p class="text-danger d-flex">
-															<i class="mdi mdi-menu-down"></i>
-															<span>68.8</span>
-														</p>
+														<p class="statistics-title">오늘자 예매완료 건 수</p>
+														<h3 class="rate-percentage" id="totalReservations">0건</h3>
 													</div>
 													<div class="d-none d-md-block">
 														<p class="statistics-title">현재 예매 오픈된 경기 수</p>
-														<h3 class="rate-percentage">2m:35s</h3>
-														<p class="text-success d-flex">
-															<i class="mdi mdi-menu-down"></i>
-															<span>+0.8%</span>
-														</p>
+														<h3 class="rate-percentage" id="openGames">건</h3>
 													</div>
 													<div class="d-none d-md-block">
-														<p class="statistics-title">등록된 경기 중 오픈 예정인 경기 수</p>
-														<h3 class="rate-percentage">68.8</h3>
-														<p class="text-danger d-flex">
-															<i class="mdi mdi-menu-down"></i>
-															<span>68.8</span>
-														</p>
+														<p class="statistics-title">예매 대비 취소율</p>
+														<h3 class="rate-percentage" id="cancellationRate">0%</h3>
 													</div>
 													<div class="d-none d-md-block">
-														<p class="statistics-title">오늘자 매출액</p>
-														<h3 class="rate-percentage">2m:35s</h3>
-														<p class="text-success d-flex">
-															<i class="mdi mdi-menu-down"></i>
-															<span>+0.8%</span>
-														</p>
+														<p class="statistics-title">이번달 예매수수료 수익</p>
+														<h3 class="rate-percentage" id="currentMonthRevenue">원</h3>
+													</div>
+													<div>
+														<p class="statistics-title">현재 진행 중인 이벤트 건 수</p>
+														<h3 class="rate-percentage" id="ongoingEvents">0건</h3>
+													</div>
+													<div>
+														<p class="statistics-title">활동 중인 총 회원 수</p>
+														<h3 class="rate-percentage" id="activeMembers">0명</h3>
 													</div>
 												</div>
 											</div>
@@ -152,6 +128,7 @@
 	<script src="${ctp}/js/admin/common/hoverable-collapse.js"></script>
 	<script src="${ctp}/js/admin/common/template.js"></script>
 	<script src="${ctp}/js/admin/common/settings.js"></script>
-	<script src="${ctp}/js/admin/dashboard/dashboard-chart.js"></script>
+	<script src="${ctp}/js/admin/dashboard/chart.js"></script>
+	<script src="${ctp}/js/admin/dashboard/static.js"></script>
 </body>
 </html>

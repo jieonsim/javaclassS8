@@ -327,10 +327,10 @@ $(function() {
 	}
 
 	// 모든 차트 로드
-	loadReservationChart();
+	/*loadReservationChart();*/
 	loadSportsPieChart();
-	loadBaseballTeamChart();
+	/*loadBaseballTeamChart();
 	loadFootballTeamChart();
-	loadAdvanceTicketChart();
+	loadAdvanceTicketChart();*/
 	loadTicketTypeChart();
 });

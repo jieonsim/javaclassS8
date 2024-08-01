@@ -24,6 +24,42 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
     @Autowired
     private AdminDashboardDAO adminDashboardDAO;
     
+    // 현재까지 총 예매완료 건 수
+	@Override
+	public int getTotalCompletedReservations() {
+		return adminDashboardDAO.countCompletedReservations();
+	}
+	
+	// 현재 진행 중인 이벤트 건 수
+	@Override
+	public int getOngoingEvents() {
+		return adminDashboardDAO.countOngoingEvents();
+	}
+	
+	// 활동 중인 회원 수
+	@Override
+	public int getActiveMembers() {
+		return adminDashboardDAO.countActiveMembers();
+	}
+	
+	// 현재 예매 오픈된 경기 수
+	@Override
+	public int getOpenGames() {
+		return adminDashboardDAO.countOpenGames();
+	}
+	
+	// 현재 예매 대비 취소율
+	@Override
+	public double getCancellationRate() {
+		return adminDashboardDAO.getCancellationRate();
+	}
+	
+	// 이번달 예매수수료 수익
+	@Override
+	public int getCurrentMonthRevenue() {
+		return adminDashboardDAO.getCurrentMonthRevenue();
+	}
+    
     @Override
     public Map<String, Object> getReservationData() {
         List<ReservationVO> reservations = adminDashboardDAO.getReservationsLast6Months();

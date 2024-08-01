@@ -198,8 +198,8 @@
 		</div>
 	</div>
 	<script>
-   		var gameId = ${gameId};
-   		var captchaVerified = ${captchaVerified};
+		var gameId = `${gameId}`;
+		var captchaVerified = `${captchaVerified}`;
 	</script>
 	<script src="${ctp}/js/reserve/seat.js"></script>
 </body>

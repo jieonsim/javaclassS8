@@ -141,9 +141,12 @@
 							</tbody>
 						</table>
 					</div>
-					<div class="list_btn">
-						<a href="${ctp}/my/reserve/cancel/confirm?reservationId=${reservation.id}" class="btn btn_full ng-scope">취소하기</a>
-					</div>
+
+					<c:if test="${reservation.cancelable}">
+						<div class="list_btn">
+							<a href="${ctp}/my/reserve/cancel/confirm?reservationId=${reservation.id}" class="btn btn_full ng-scope">취소하기</a>
+						</div>
+					</c:if>
 
 					<c:if test="${reservation.hasAdvanceTicket}">
 						<h5 class="mgt40 text_tit">스포츠 예매권 정보</h5>
@@ -281,7 +284,7 @@
 									<tbody>
 										<tr>
 											<td>취소 마감시간</td>
-											<td colspan="3" class="color_point fbold tl end ng-binding">${reservation.cancelDeadline} (기한 종료)</td>
+											<td colspan="3" class="color_point fbold tl end ng-binding">${reservation.cancelDeadline}(기한종료)</td>
 										</tr>
 										<tr>
 											<td rowspan="1" class="vam">
@@ -327,7 +330,7 @@
 	</main>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
 	<script>
-		const reservationId = ${reservation.id};
+		const reservationId = `${reservation.id}`;
 	</script>
 	<script src="${ctp}/js/my/reserve/reserveDetail.js"></script>
 </body>

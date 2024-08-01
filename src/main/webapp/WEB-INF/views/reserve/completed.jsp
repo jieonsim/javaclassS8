@@ -78,7 +78,7 @@
 						</div>
 						<div class="bx seat_bx ng-scope">
 							<dt>
-								<button type="button" class="btn_seat">좌석</button>
+								<button type="button" class="btn_seat" style="cursor: default;">좌석</button>
 							</dt>
 							<dd>
 								<c:forEach var="seatDetail" items="${seatDetails}">
@@ -179,7 +179,7 @@
 		</div>
 	</div>
 	<script>
-		var reservationId = ${reservationId};
+		var reservationId = `${reservationId}`;
 	</script>
 	<script src="${ctp}/js/reserve/completed.js"></script>
 </body>

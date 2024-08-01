@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -291,18 +291,18 @@
 								<label for="reserve_agree5">취소기한 및 취소수수료 동의</label>
 							</p>
 						</div>
-					    <input type="hidden" name="memberId" value="${member.id}">
-					    <input type="hidden" name="gameId" value="${game.id}">
-					    <input type="hidden" name="homeTeam" value="${game.homeTeamName}">
-					    <input type="hidden" name="awayTeam" value="${game.awayTeamName}">
-					    <input type="hidden" name="totalAmount" value="${totalAmount}">
-					    <input type="hidden" name="ticketAmount" value="${ticketAmount}">
-					    <input type="hidden" name="bookingFee" value="${bookingFee}">
-					    <input type="hidden" name="buyerEmail" value="${member.email}">
-					    <input type="hidden" name="buyerName" value="${member.name}">
-					    <input type="hidden" name="buyerTel" value="${member.phone}">
-					    <input type="hidden" name="seatId" value="${seat.id}">
-					    <c:forEach var="ticket" items="${tempReservation.selectedTickets}">
+						<input type="hidden" name="memberId" value="${member.id}">
+						<input type="hidden" name="gameId" value="${game.id}">
+						<input type="hidden" name="homeTeam" value="${game.homeTeamName}">
+						<input type="hidden" name="awayTeam" value="${game.awayTeamName}">
+						<input type="hidden" name="totalAmount" value="${totalAmount}">
+						<input type="hidden" name="ticketAmount" value="${ticketAmount}">
+						<input type="hidden" name="bookingFee" value="${bookingFee}">
+						<input type="hidden" name="buyerEmail" value="${member.email}">
+						<input type="hidden" name="buyerName" value="${member.name}">
+						<input type="hidden" name="buyerTel" value="${member.phone}">
+						<input type="hidden" name="seatId" value="${seat.id}">
+						<c:forEach var="ticket" items="${tempReservation.selectedTickets}">
 							<input type="hidden" name="ticketType" value="${ticket.type}">
 							<input type="hidden" name="ticketQuantity" value="${ticket.quantity}">
 							<input type="hidden" name="ticketPrice" value="${ticket.price}">
@@ -321,16 +321,16 @@
 		</div>
 	</div>
 	<script>
-	    var memberId = ${member.id};
-	    var gameId = ${game.id};
-	    var homeTeam = "${game.homeTeamShortName}";
-	    var awayTeam = "${game.awayTeamShortName}";
-	    var totalAmount = ${totalAmount};
-	    var ticketAmount = ${ticketAmount};
-	    var bookingFee = ${bookingFee};
-	    var buyerEmail = "${member.email}";
-	    var buyerName = "${member.name}";
-	    var buyerTel = "${member.phone}";
+		var memberId = `${member.id}`;
+		var gameId = `${game.id}`;
+		var homeTeam = "${game.homeTeamShortName}";
+		var awayTeam = "${game.awayTeamShortName}";
+		var totalAmount = `${totalAmount}`;
+		var ticketAmount = `${ticketAmount}`;
+		var bookingFee = `${bookingFee}`;
+		var buyerEmail = "${member.email}";
+		var buyerName = "${member.name}";
+		var buyerTel = "${member.phone}";
 	</script>
 	<script src="${ctp}/js/reserve/confirm.js"></script>
 </body>
