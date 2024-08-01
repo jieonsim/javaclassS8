@@ -99,58 +99,6 @@
 													</div>
 												</div>
 											</div>
-											<div class="col-lg-6 grid-margin stretch-card">
-												<div class="card">
-													<div class="card-body">
-														<div class="chartjs-size-monitor">
-															<div class="chartjs-size-monitor-expand">
-																<div class=""></div>
-															</div>
-															<div class="chartjs-size-monitor-shrink">
-																<div class=""></div>
-															</div>
-														</div>
-														<h4 class="card-title">스포츠별 예매 비율</h4>
-														<canvas id="doughnutChart" width="430" height="215" style="display: block; width: 430px; height: 215px;" class="chartjs-render-monitor"></canvas>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-6 grid-margin stretch-card">
-												<div class="card">
-													<div class="card-body">
-														<div class="chartjs-size-monitor">
-															<div class="chartjs-size-monitor-expand">
-																<div class=""></div>
-															</div>
-															<div class="chartjs-size-monitor-shrink">
-																<div class=""></div>
-															</div>
-														</div>
-														<h4 class="card-title">좌석 등급별 판매 현황</h4>
-														<canvas id="barChart" width="430" height="215" style="display: block; width: 430px; height: 215px;" class="chartjs-render-monitor"></canvas>
-													</div>
-												</div>
-											</div>
-											<div class="col-lg-6 grid-margin stretch-card">
-												<div class="card">
-													<div class="card-body">
-														<div class="chartjs-size-monitor">
-															<div class="chartjs-size-monitor-expand">
-																<div class=""></div>
-															</div>
-															<div class="chartjs-size-monitor-shrink">
-																<div class=""></div>
-															</div>
-														</div>
-														<h4 class="card-title">예매권 사용 현황 차트</h4>
-														<canvas id="areaChart" width="430" height="215" style="display: block; width: 430px; height: 215px;" class="chartjs-render-monitor"></canvas>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="row">
 											<div class="col-lg-6 grid-margin grid-margin-lg-0 stretch-card">
 												<div class="card">
 													<div class="card-body">
@@ -162,12 +110,14 @@
 																<div class=""></div>
 															</div>
 														</div>
-														<h4 class="card-title">Pie chart</h4>
+														<h4 class="card-title">스포츠별 에매 현황</h4>
 														<canvas id="pieChart" width="480" height="240" style="display: block; width: 480px; height: 240px;" class="chartjs-render-monitor"></canvas>
 													</div>
 												</div>
 											</div>
-											<div class="col-lg-6 grid-margin grid-margin-lg-0 stretch-card">
+										</div>
+										<div class="row">
+											<div class="col-lg-6 grid-margin stretch-card">
 												<div class="card">
 													<div class="card-body">
 														<div class="chartjs-size-monitor">
@@ -178,8 +128,58 @@
 																<div class=""></div>
 															</div>
 														</div>
-														<h4 class="card-title">Scatter chart</h4>
-														<canvas id="scatterChart" width="480" height="240" style="display: block; width: 480px; height: 240px;" class="chartjs-render-monitor"></canvas>
+														<h4 class="card-title">야구 구단별 예매 비율</h4>
+														<canvas id="doughnutChart" width="430" height="215" style="display: block; width: 430px; height: 215px;" class="chartjs-render-monitor"></canvas>
+													</div>
+												</div>
+											</div>
+											<div class="col-lg-6 grid-margin stretch-card">
+												<div class="card">
+													<div class="card-body">
+														<div class="chartjs-size-monitor">
+															<div class="chartjs-size-monitor-expand">
+																<div class=""></div>
+															</div>
+															<div class="chartjs-size-monitor-shrink">
+																<div class=""></div>
+															</div>
+														</div>
+														<h4 class="card-title">축구 구단별 예매 비율</h4>
+														<canvas id="doughnutChart" width="430" height="215" style="display: block; width: 430px; height: 215px;" class="chartjs-render-monitor"></canvas>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-6 grid-margin stretch-card">
+													<div class="card">
+														<div class="card-body">
+															<div class="chartjs-size-monitor">
+																<div class="chartjs-size-monitor-expand">
+																	<div class=""></div>
+																</div>
+																<div class="chartjs-size-monitor-shrink">
+																	<div class=""></div>
+																</div>
+															</div>
+															<h4 class="card-title">좌석 등급별 판매 현황</h4>
+															<canvas id="barChart" width="430" height="215" style="display: block; width: 430px; height: 215px;" class="chartjs-render-monitor"></canvas>
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6 grid-margin stretch-card">
+													<div class="card">
+														<div class="card-body">
+															<div class="chartjs-size-monitor">
+																<div class="chartjs-size-monitor-expand">
+																	<div class=""></div>
+																</div>
+																<div class="chartjs-size-monitor-shrink">
+																	<div class=""></div>
+																</div>
+															</div>
+															<h4 class="card-title">예매권 사용 현황 차트</h4>
+															<canvas id="areaChart" width="430" height="215" style="display: block; width: 430px; height: 215px;" class="chartjs-render-monitor"></canvas>
+														</div>
 													</div>
 												</div>
 											</div>

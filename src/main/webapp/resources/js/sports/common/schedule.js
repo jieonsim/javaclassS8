@@ -50,11 +50,34 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.querySelectorAll('.btn_reserve').forEach(button => {
 		button.addEventListener('click', function(e) {
 			e.preventDefault();
-			const gameId = this.getAttribute('href').split('=')[1];
-			window.open(`${ctp}/reserve/seat?gameId=` + gameId, '티켓챔프', 'width=990,height=820');
+			const gameId = this.getAttribute('href').split('gameId=')[1];
+
+			// AJAX 요청으로 로그인 상태 확인
+			fetch(`${ctp}/checkLogin`, {
+				method: 'GET',
+				credentials: 'include' // 쿠키를 포함하기 위해
+			}).then(response => response.json()).then(data => {
+				if (data.loggedIn) {
+					// 로그인 상태면 예매 창 열기
+					window.open(`${ctp}/reserve/seat?gameId=${gameId}`, '티켓챔프', 'width=990,height=820');
+				} else {
+					// 로그인 상태가 아니면 부모 창에서 로그인 페이지로 이동
+					window.location.href = `${ctp}/login`;
+				}
+			}).catch(error => {
+				console.error('Error checking login status:', error);
+			});
 		});
 	});
-
+	/*	// 예매하기 새 창 열기
+		document.querySelectorAll('.btn_reserve').forEach(button => {
+			button.addEventListener('click', function(e) {
+				e.preventDefault();
+				const gameId = this.getAttribute('href').split('=')[1];
+				window.open(`${ctp}/reserve/seat?gameId=` + gameId, '티켓챔프', 'width=990,height=820');
+			});
+		});
+	*/
 	// 부모 창에서 메시지 수신 후 처리(예매 창 닫고 예매확인으로 이동)
 	window.addEventListener('message', function(e) {
 		if (e.data === 'navigateToReserveList') {

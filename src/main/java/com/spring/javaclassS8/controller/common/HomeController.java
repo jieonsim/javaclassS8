@@ -1,4 +1,4 @@
-package com.spring.javaclassS8.controller;
+package com.spring.javaclassS8.controller.common;
 
 import java.util.List;
 
