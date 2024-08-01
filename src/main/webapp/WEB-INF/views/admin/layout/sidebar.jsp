@@ -146,49 +146,6 @@
 				</ul>
 			</div>
 		</li>
-		<li class="nav-item nav-category">CS</li>
-		<li class="nav-item">
-			<a class="nav-link" data-toggle="collapse" href="#CS" aria-expanded="false" aria-controls="CS">
-				<i class="menu-icon mdi mdi-help-circle-outline"></i>
-				<span class="menu-title">고객센터</span>
-				<i class="menu-arrow"></i>
-			</a>
-			<div class="collapse" id="CS">
-				<ul class="nav flex-column sub-menu">
-					<li class="nav-item">
-						<a class="nav-link" href="#">공지사항 리스트</a>
-					</li>
-				</ul>
-			</div>
-			<div class="collapse" id="CS">
-				<ul class="nav flex-column sub-menu">
-					<li class="nav-item">
-						<a class="nav-link" href="#">공지사항 등록</a>
-					</li>
-				</ul>
-			</div>
-			<div class="collapse" id="CS">
-				<ul class="nav flex-column sub-menu">
-					<li class="nav-item">
-						<a class="nav-link" href="#">FAQ 리스트</a>
-					</li>
-				</ul>
-			</div>
-			<div class="collapse" id="CS">
-				<ul class="nav flex-column sub-menu">
-					<li class="nav-item">
-						<a class="nav-link" href="#">FAQ 등록</a>
-					</li>
-				</ul>
-			</div>
-			<div class="collapse" id="CS">
-				<ul class="nav flex-column sub-menu">
-					<li class="nav-item">
-						<a class="nav-link" href="#">1:1문의</a>
-					</li>
-				</ul>
-			</div>
-		</li>
 		<li class="nav-item nav-category">USER HOME</li>
 		<li class="nav-item">
 			<a class="nav-link" href="${ctp}/">
@@ -196,5 +153,14 @@
 				<span class="menu-title">유저 홈으로 이동</span>
 			</a>
 		</li>
+		<c:if test="${not empty sessionScope.loginMember}">
+			<li class="nav-item nav-category">현재 로그인한 관리자 아이디</li>
+			<li class="nav-item">
+				<span class="nav-link">
+					<i class="menu-icon mdi mdi-account-card-details"></i>
+					<span class="menu-title">${loginMember.email}</span>
+				</span>
+			</li>
+		</c:if>
 	</ul>
 </nav>

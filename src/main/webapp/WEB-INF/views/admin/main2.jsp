@@ -92,7 +92,7 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">예매 현황 차트</h4>
-									<canvas id="reservationChart"></canvas>
+									<canvas id="areaChart"></canvas>
 								</div>
 							</div>
 						</div>
@@ -100,7 +100,7 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">스포츠 종목별 예매 비율</h4>
-									<canvas id="sportsPieChart"></canvas>
+									<canvas id="pieChart"></canvas>
 								</div>
 							</div>
 						</div>
@@ -110,7 +110,7 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">야구 팀별 홈경기 예매율</h4>
-									<canvas id="baseballTeamChart"></canvas>
+									<canvas id="doughnutChart"></canvas>
 								</div>
 							</div>
 						</div>
@@ -118,7 +118,7 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">축구 팀별 홈경기 예매율</h4>
-									<canvas id="footballTeamChart"></canvas>
+									<canvas id="doughnutChart"></canvas>
 								</div>
 							</div>
 						</div>
@@ -128,7 +128,7 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">예매권 사용 현황</h4>
-									<canvas id="advanceTicketChart"></canvas>
+									<canvas id="lineChart"></canvas>
 								</div>
 							</div>
 						</div>
@@ -136,7 +136,7 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">권종별 판매 현황</h4>
-									<canvas id="ticketTypeChart"></canvas>
+									<canvas id="barChart"></canvas>
 								</div>
 							</div>
 						</div>
@@ -152,6 +152,6 @@
 	<script src="${ctp}/js/admin/common/hoverable-collapse.js"></script>
 	<script src="${ctp}/js/admin/common/template.js"></script>
 	<script src="${ctp}/js/admin/common/settings.js"></script>
-	<script src="${ctp}/js/admin/dashboard/dashboard-chart.js"></script>
+	<script src="${ctp}/js/admin/common/chart.js"></script>
 </body>
 </html>

@@ -15,5 +15,7 @@ public class AdvanceTicketVO {
 	private Timestamp usedAt;
 	private Integer usedByMemberId;
 	private String formattedExpiresAt;
+	private String formattedIssuedAt;
+	private String formattedUsedAt;
 	// usedByMemberId는 null 허용이 필요해 Integer로 처리
 }

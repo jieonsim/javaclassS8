@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.javaclassS8.dao.admin.dashboard.AdminDashboardDAO">
+
+	<select id="getReservationsLast6Months" resultType="com.spring.javaclassS8.vo.reserve.ReservationVO">
+        SELECT r.*, s.sportName
+        FROM reservations r
+        JOIN games g ON r.gameId = g.id
+        JOIN sports s ON g.sportId = s.id
+        WHERE r.createdAt >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+        ORDER BY r.createdAt DESC
+    </select>
+
+    <select id="getSportsReservationCount" resultType="java.util.HashMap">
+        SELECT s.sportName, COUNT(*) as count
+        FROM reservations r
+        JOIN games g ON r.gameId = g.id
+        JOIN sports s ON g.sportId = s.id
+        GROUP BY s.sportName
+    </select>
+
+	<select id="getBaseballTeamReservationRate" resultType="com.spring.javaclassS8.vo.reserve.TeamReservationRateVO">
+	    SELECT t.teamName, 
+	           (COUNT(r.id) * 100.0 / (SELECT COUNT(*) FROM reservations r2 JOIN games g2 ON r2.gameId = g2.id JOIN sports s2 ON g2.sportId = s2.id WHERE s2.sportName = '야구')) as reservationRate
+	    FROM teams t
+	    LEFT JOIN games g ON t.id = g.homeTeamId
+	    LEFT JOIN reservations r ON g.id = r.gameId
+	    JOIN sports s ON t.sportId = s.id
+	    WHERE s.sportName = '야구'
+	    GROUP BY t.id, t.teamName
+	</select>
+	
+	<select id="getFootballTeamReservationRate" resultType="com.spring.javaclassS8.vo.reserve.TeamReservationRateVO">
+	    SELECT t.teamName, 
+	           (COUNT(r.id) * 100.0 / (SELECT COUNT(*) FROM reservations r2 JOIN games g2 ON r2.gameId = g2.id JOIN sports s2 ON g2.sportId = s2.id WHERE s2.sportName = '축구')) as reservationRate
+	    FROM teams t
+	    LEFT JOIN games g ON t.id = g.homeTeamId
+	    LEFT JOIN reservations r ON g.id = r.gameId
+	    JOIN sports s ON t.sportId = s.id
+	    WHERE s.sportName = '축구'
+	    GROUP BY t.id, t.teamName
+	</select>
+
+    <select id="getAllAdvanceTickets" resultType="com.spring.javaclassS8.vo.reserve.AdvanceTicketVO">
+        SELECT *, 
+               DATE_FORMAT(issuedAt, '%Y-%m-%d %H:%i:%s') as formattedIssuedAt,
+               DATE_FORMAT(usedAt, '%Y-%m-%d %H:%i:%s') as formattedUsedAt
+        FROM advance_tickets
+        ORDER BY issuedAt DESC
+    </select>
+
+    <select id="getTicketTypeSalesCount" resultType="com.spring.javaclassS8.vo.reserve.TicketTypeSalesVO">
+        SELECT tt.name as ticketTypeName, COUNT(*) as salesCount
+        FROM reservation_details rd
+        JOIN ticket_types tt ON rd.ticketTypeId = tt.id
+        GROUP BY tt.id, tt.name
+    </select>
+
+</mapper>
