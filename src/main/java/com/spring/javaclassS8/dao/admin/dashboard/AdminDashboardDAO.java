@@ -25,11 +25,12 @@ public interface AdminDashboardDAO {
 	// 예매 대비 취소율
 	double getCancellationRate();
 	
-	// 이번달 예매수수료 수익
-	int getCurrentMonthRevenue();
+	// 총 예매수수료 수익
+	int getTotalBookingFeeRevenue();
 	
 	List<ReservationVO> getReservationsLast6Months();
-
+	
+	// 스포츠 종목별 예매율
 	List<Map<String, Object>> getSportsReservationCount();
 
 	List<TeamReservationRateVO> getBaseballTeamReservationRate();
@@ -37,7 +38,8 @@ public interface AdminDashboardDAO {
 	List<TeamReservationRateVO> getFootballTeamReservationRate();
 
 	List<AdvanceTicketVO> getAllAdvanceTickets();
-
+	
+	// 권종별 판매 현황
 	List<TicketTypeSalesVO> getTicketTypeSalesCount();
 
 

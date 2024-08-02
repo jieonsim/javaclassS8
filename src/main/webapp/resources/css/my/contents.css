@@ -1499,12 +1499,6 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .event_bridge .contents{position:relative}
 .event_bridge .contents img{display:block}
 
-/* 삼성카드 탭탭 이벤트 */
-.event_bridge .samsungcard .btn_info, .event_bridge .samsungcard .btn_info2, .event_bridge .samsungcard .btn_reserve{position:absolute;top:0;left:0;font-size:0}
-.event_bridge .samsungcard .btn_reserve{top:1800px;left:50%;width:428px;height:108px;transform:translateX(-50%)}
-.event_bridge .samsungcard .btn_info, .event_bridge .samsungcard .btn_info2{top:3106px;width:437px;height:128px}
-.event_bridge .samsungcard .btn_info{left:87px}
-.event_bridge .samsungcard .btn_info2{left:534px}
 
 /* 테스트환경 접근 페이지 */
 #wrap.test_cont{min-width:320px}
@@ -1725,106 +1719,6 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .ly_member_leave .layer .member_leave{font-size: 14px;line-height: 24px;}
 .ly_member_leave .layer .txt_deco{color: #fa2828;font-weight:700;}
 .ly_member_leave .btn_blank{float:right;width:101px;margin-top:40px}
-
-/* 티켓링크 (여행) */
-.mypage_trip .table_box{border:1px solid #ECEDF2;}
-.mypage_trip .table_box tr:first-of-type td, 
-.mypage_trip .table_box tr:first-of-type th{border-top:0;}
-.mypage_trip .text_tit{margin-bottom:20px;}
-
-/* step */
-.mypage_trip .trip_reserve_step{width:100%;position:relative;height:110px;margin:20px 0 30px;}
-.mypage_trip .trip_reserve_step::before{content:"";width:100%;height:1px;background-color: #ccc;position: absolute;top:40%;left:0;}
-.mypage_trip .trip_reserve_step .trip_step{width:121%;position:absolute;top:30%;}
-.mypage_trip .trip_reserve_step li{width:20%;float:left;text-align:center;margin:0 auto;}
-.mypage_trip .trip_reserve_step .step1{margin-left:-76px;}
-.mypage_trip .trip_reserve_step .step4,.mypage_trip .trip_reserve_step .step5{color:#ccc;}
-.mypage_trip .trip_reserve_step .cir_txt{width:80px;text-align:center;margin:0 auto;}
-.mypage_trip .trip_reserve_step .circle{display:block;width:25px;height:25px;line-height:25px;border-radius:50%;margin:0 auto 8px;font-family:Roboto,-apple-system,BlinkMacSystemFont,Apple SD Gothic Neo,'Malgun Gothic',Arial,sans-serif;font-weight:400;font-size:10px;}
-.mypage_trip .trip_reserve_step .cir_full{background-color:#333;color:#fff;}
-.mypage_trip .trip_reserve_step .cir_line{line-height:25px;border:1px solid #333;letter-spacing:1px;background-color:#fff;color:#333;}
-.mypage_trip .trip_reserve_step .cir_ghost{line-height:25px;border:1px solid #ccc;letter-spacing:1px;background-color:#fff;color:#ccc;}
-/* 예약정보 -txt_small */
-.mypage_trip .txt_small{color:#A7ACB6;font-size:.75rem;font-size:12px;}
-/* 포함사항, 불포함사항 */.basic_tbl_v4 table tbody .td-inclusion ol li,.basic_tbl_v4 table tbody .td-notinclusion ol li{position:relative;}
-.basic_tbl_v4 table tbody .td-inclusion ol li:first-of-type::before{content:'';position:absolute;top:10px;left:-4px;display:block;width:2px;height:2px;border-radius:50%;background-color:#62676c;}
-.basic_tbl_v4 table tbody .td-inclusion ol li:not(:first-of-type)::before,.basic_tbl_v4 table tbody .td-notinclusion ol li::before{content:'';position:absolute;top:50%;left:-4px;display:block;width:2px;height:2px;border-radius:50%;background-color:#62676c;transform:translateY(-50%);}
-/* 부가설명 */
-.mypage_trip .tbl_desc_list{padding:10px 4px;}
-.mypage_trip .tbl_desc_list > .tbl_desc_item{position:relative;padding-left:15px;font-size:.8125rem;font-size:13px;color:#62676c;}
-.mypage_trip .tbl_desc_area > .tbl_desc_item{position:relative;padding-left:15px;color:#878d95;font-size:.75rem;font-size:13px;letter-spacing:.04em;font-weight:400;}
-/* 느낌표 */
-.tbl_desc_item.notice{margin-bottom:2px;}
-.tbl_desc_item.notice:before{display:block;content:'';position:absolute;left:-5px;bottom:0;}
-.mypage_trip .tbl_desc_area > .tbl_desc_item:before{content:'.';display:block;position:absolute;top:-4px;left:7px;}
-/* 여행자 정보 *//* 결제상세정보 */
-.basic_tbl_v4 .final_option .final_list{line-height:22px;}
-.mypage_trip .btn_box .btn{margin:3px;}
-/* 결제정보 */
-.mypage_trip div.txt_box{width:100%;}
-.mypage_trip .txt_wrap ul.txt_price{display:inline-block;width:100%;height:100%;margin-bottom:20px;outline:1px solid #ECEDF2;text-align:center;}
-.mypage_trip .txt_wrap .txt_price li{width:30%;padding-top:30px;padding-bottom:30px;float:left;font-size:16px;}
-.mypage_trip .txt_wrap .txt_price li~li{margin-left:5%;}
-/* txt_area */
-.mypage_trip .txt_area{padding:5px 10px;border-color:#ECEDF2;resize:none;}
-.mypage_trip .txt_area::placeholder{font-weight:400;color:#A7ACB6;}
-/* 환불정보 */
-.mypage_trip .tit_wrap .refund_desc_tit{display:inline-block;margin-right:5px;}
-/* radio float */
-.mypage_trip .radio_wrap{overflow:hidden;}
-.mypage_trip .radio_bx{padding:5px 10px;float:left;}
-/* 결제 수단 */
-.mypage_trip .common_dropdown,.mypage_trip input.pointpay{width:202px;}
-.mypage_trip .btn_wrap{padding:8px 18px;text-align:right;}
-/* 결제내역,현금영수증 신청 - 입금총액 */
-.mypage_trip .pay_history{margin-bottom:10px;}
-.mypage_trip .tit_wrap{overflow:hidden;}
-.mypage_trip .tit_wrap .tit_left{float:left;}
-.mypage_trip .tit_wrap p{float:right;}
-.mypage_trip .table_box{margin-top:12px;border-collapse:collapse;border-radius:2px;border-style:hidden;box-shadow:0 0 0 1px #ECEDF2;}
-.mypage_trip .table_box .td{color:#62676C;line-height:40px;}
-.mypage_trip .tbl_desc_list.history{padding-top:20px;}
-.mypage_trip .table_box .input_block > input{width:202px;}
-/* dropdown */
-.mypage_trip .dropdown_expand_btn{width:202px;height:30px;line-height:8px;color:#A7ACB6;max-width:none;}
-.dropdown_expand_btn[aria-expanded="true"]+.common_dropdown_list{width:202px;}
-.mypage_trip .dropdown_expand_btn,.mypage_trip .dropdown_expand_btn::before,.mypage_trip .dropdown_expand_btn[aria-expanded="true"],.mypage_trip .dropdown_expand_btn[aria-expanded="true"]::before,.mypage_trip .common_dropdown_list{border-radius:0;border-color:#e8eaf1;}
-.mypage_trip .common_dropdown_list > li > button{width:202px;color:#A7ACB6;}
-.mypage_trip .txt_right{text-align:right;}
-/* card_consent */
-.mypage_trip .card_consent_bx{border:1px solid #ECEDF2;padding:10px;}
-.mypage_trip .card_consent_bx .card_consent_list{height:100%;text-align:center;background-color:#F5F6F9;border-radius:15.5px;line-height:30px;margin-bottom:15px;}
-.mypage_trip .card_consent_bx .card_consent_list .card_consent{display:inline-block;}
-.mypage_trip .card_consent .label_checkbox{vertical-align:baseline;}
-.mypage_trip .card_consent_bx .card_consent_list a{display:inline-block;}
-/* 현금영수증 신청 */
-.mypage_trip p.tbl_desc_item.cash{margin-top:10px;}
-
-/* 여행박사 - 예약확인/취소 */
-.trip_mypage_reserve .help_rcont .basic_tbl table tbody tr td{padding:8px 18px;}
-.trip_mypage_reserve .help_rcont .basic_tbl table tbody tr td.reservation_day{padding:8px 7.5px 8px 18px}
-.trip_mypage_reserve .help_rcont .basic_tbl table tbody tr td.reservation_number{padding:8px 7.5px 8px 7.5px}
-.trip_mypage_reserve .help_rcont .basic_tbl table tbody tr td.product_name{padding:8px 7.5px 8px 7.5px; line-height:22px;text-align:left }
-.trip_mypage_reserve .help_rcont .basic_tbl table tbody tr td.product_name a{display: block;line-height:22px}
-.trip_mypage_reserve .help_rcont .basic_tbl table tbody tr td.start_day{padding:8px 7.5px 8px 7.5px;font-size:13px;font-weight:500}
-.trip_mypage_reserve .help_rcont .basic_tbl table tbody tr td.status{padding:8px 7.5px 8px 7.5px;}
-
-/* 여행박사 - 예약확인/취소 설명 내용 */
-.trip_mypage_reserve .notes2{margin-top:29px;padding:0;background-color:#fff}
-.trip_mypage_reserve .notes2 ol{padding-left:0}
-
-/* 여행박사 - 예약확인/취소 내역 조회 */
-.trip_mypage_reserve .reservation_info_wrap{width:100%;height:28px;margin-bottom:12px;line-height:28px}
-.trip_mypage_reserve .history{float:left}
-.trip_mypage_reserve .history li{float:left}
-.trip_mypage_reserve .history li:first-of-type::after{content:'';display:inline-block;width:1px;height:13px;background-color:#ecedf2;margin:0 6px}
-.trip_mypage_reserve .history li a span{font-size:16px;line-height:18px;color:#878D95}
-.trip_mypage_reserve .history li.active a span{font-weight:700;color:#242428}
-.trip_mypage_reserve .reservation_status{float:right}
-.trip_mypage_reserve .reservation_status dl dt{float:left;font-size:13px;margin-right:10px}
-.trip_mypage_reserve .reservation_status dl dd{float:left}
-.trip_mypage_reserve .reservation_status dl dd .selectbox .select{box-sizing:border-box;width:116px;border:1px solid #242428}
-.trip_mypage_reserve .reservation_status dl dd .selectbox .select::before{background-position: -640px -82px;top:0%;transform: rotate(180deg)}
 
 /*추가*/
 .btn_full:hover {color: white !important}

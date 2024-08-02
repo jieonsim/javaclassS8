@@ -19,11 +19,12 @@ public interface AdminDashboardService {
 	// 예매 대비 취소율
 	double getCancellationRate();
 	
-	// 이번달 예매수수료 수익
-	int getCurrentMonthRevenue();
+	// 총 예매수수료 수익
+	int getTotalBookingFeeRevenue();
 
 	Map<String, Object> getReservationData();
-
+	
+	// 스포츠 종목별 예매율
 	Map<String, Object> getSportsPieData();
 
 	Map<String, Object> getBaseballTeamData();
@@ -31,7 +32,8 @@ public interface AdminDashboardService {
 	Map<String, Object> getFootballTeamData();
 
 	Map<String, Object> getAdvanceTicketData();
-
+	
+	// 권종별 판매 현황
 	Map<String, Object> getTicketTypeData();
 
 }

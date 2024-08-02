@@ -65,16 +65,16 @@ function loadCancellationRate() {
 		}
 	});
 }
-// 이번달 예매수수료 수익
-function loadCurrentMonthRevenue() {
+// 총 예매수수료 수익
+function loadTotalBookingFeeRevenue() {
 	$.ajax({
-		url: `${ctp}/admin/currentMonthRevenue`,
+		url: `${ctp}/admin/totalBookingFeeRevenue`,
 		type: 'GET',
 		success: function(data) {
-			$('#currentMonthRevenue').text(formatNumberWithCommas(data) + '원');
+			$('#totalBookingFeeRevenue').text(formatNumberWithCommas(data) + '원');
 		},
 		error: function(error) {
-			console.log("Error fetching current month revenue:", error);
+			console.log("Error fetching total booking Fee revenue:", error);
 		}
 	});
 }
@@ -88,5 +88,5 @@ $(document).ready(function() {
 	loadActiveMembers();
 	loadOpenGames();
 	loadCancellationRate();
-	loadCurrentMonthRevenue();
+	loadTotalBookingFeeRevenue();
 });

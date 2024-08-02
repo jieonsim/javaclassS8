@@ -58,11 +58,11 @@ public class AdminDashboardController {
 		return adminDashboardService.getCancellationRate();
 	}
 	
-	// 이번달 매출액
-	@GetMapping("/currentMonthRevenue")
+	// 총 예매수수료 수익
+	@GetMapping("/totalBookingFeeRevenue")
 	@ResponseBody
-	public int getCurrentMonthRevenue() {
-		return adminDashboardService.getCurrentMonthRevenue();
+	public int getTotalBookingFeeRevenue() {
+		return adminDashboardService.getTotalBookingFeeRevenue();
 	}
 
 	// 최근 6개월 간 예매 매출액

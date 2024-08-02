@@ -37,15 +37,15 @@
 													</div>
 													<div class="d-none d-md-block">
 														<p class="statistics-title">현재 예매 오픈된 경기 수</p>
-														<h3 class="rate-percentage" id="openGames">건</h3>
+														<h3 class="rate-percentage" id="openGames">0건</h3>
 													</div>
 													<div class="d-none d-md-block">
 														<p class="statistics-title">예매 대비 취소율</p>
 														<h3 class="rate-percentage" id="cancellationRate">0%</h3>
 													</div>
 													<div class="d-none d-md-block">
-														<p class="statistics-title">이번달 예매수수료 수익</p>
-														<h3 class="rate-percentage" id="currentMonthRevenue">원</h3>
+														<p class="statistics-title">총 예매수수료 수익</p>
+														<h3 class="rate-percentage" id="totalBookingFeeRevenue">0원</h3>
 													</div>
 													<div>
 														<p class="statistics-title">현재 진행 중인 이벤트 건 수</p>
@@ -68,7 +68,7 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">예매 현황 차트</h4>
-									<canvas id="reservationChart"></canvas>
+									<canvas id="reservationChart" style="max-height: 400px;  height: 400px;"></canvas>
 								</div>
 							</div>
 						</div>
@@ -86,7 +86,7 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">야구 팀별 홈경기 예매율</h4>
-									<canvas id="baseballTeamChart"></canvas>
+									<canvas id="baseballTeamChart" style="max-height: 400px;  height: 400px;"></canvas>
 								</div>
 							</div>
 						</div>
@@ -94,7 +94,7 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">축구 팀별 홈경기 예매율</h4>
-									<canvas id="footballTeamChart"></canvas>
+									<canvas id="footballTeamChart" style="max-height: 400px;  height: 400px;"></canvas>
 								</div>
 							</div>
 						</div>
@@ -104,7 +104,7 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">예매권 사용 현황</h4>
-									<canvas id="advanceTicketChart"></canvas>
+									<canvas id="advanceTicketChart" style="max-height: 400px;  height: 400px;"></canvas>
 								</div>
 							</div>
 						</div>

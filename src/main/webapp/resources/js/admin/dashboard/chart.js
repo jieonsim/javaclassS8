@@ -62,7 +62,8 @@ $(function() {
 									beginAtZero: true,
 									max: maxValue,
 									callback: function(value) {
-										return value.toLocaleString() + '만원';
+										// return value.toLocaleString() + '만원';
+										return (value / 10000).toLocaleString() + '만원';
 									}
 								},
 								gridLines: {
@@ -327,10 +328,10 @@ $(function() {
 	}
 
 	// 모든 차트 로드
-	/*loadReservationChart();*/
+	loadReservationChart();
 	loadSportsPieChart();
-	/*loadBaseballTeamChart();
+	loadBaseballTeamChart();
 	loadFootballTeamChart();
-	loadAdvanceTicketChart();*/
+	loadAdvanceTicketChart();
 	loadTicketTypeChart();
 });
