@@ -180,7 +180,8 @@ public class ReservationDAOImpl implements ReservationDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
+	// 홈화면 경기일정에 경기 띄우기
     @Override
     public List<GameVO> getUpcomingGames(String sport, LocalDate today) {
         return sqlSession.getMapper(ReservationDAO.class).getUpcomingGames(sport, today);

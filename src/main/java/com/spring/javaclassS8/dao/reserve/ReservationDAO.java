@@ -97,7 +97,8 @@ public interface ReservationDAO {
 
 	// 취소 마감시간 가져오기
 	int getCancellationDeadlineMinutes(int sportId);
-
+	
+	// 홈화면 경기일정에 경기 띄우기
 	List<GameVO> getUpcomingGames(@Param("sport") String sport, @Param("today") LocalDate today);
 	
 

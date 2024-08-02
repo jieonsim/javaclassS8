@@ -31,7 +31,30 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	});
 
+	// 탭 버튼 클릭 이벤트 핸들러 수정
+	function updateGameList(sport) {
+		fetch(`${ctp}/getGames?sport=${sport}`)
+			.then(response => response.json())
+			.then(games => {
+				const gameList = document.getElementById('gameList');
+				gameList.innerHTML = '';
+				if (games.length === 0) {
+					// 경기가 없을 때 3개의 "nogame" 슬라이드 추가
+					for (let i = 0; i < 3; i++) {
+						gameList.appendChild(createGameElement());
+					}
+				} else {
+					games.forEach(game => {
+						const li = createGameElement(game);
+						gameList.appendChild(li);
+					});
+				}
+				mySwiper.update();
+			});
+	}
+
 	const tabButtons = document.querySelectorAll('.common_tab_btn');
+	// 탭 버튼 클릭 이벤트에 updateGameList 함수 연결
 	tabButtons.forEach(button => {
 		button.addEventListener('click', function() {
 			const sport = this.getAttribute('data-sport');
@@ -41,26 +64,30 @@ document.addEventListener('DOMContentLoaded', function() {
 			});
 			this.classList.add('active');
 			this.setAttribute('aria-selected', 'true');
-
-			fetch(`${ctp}/getGames?sport=${sport}`)
-				.then(response => response.json())
-				.then(games => {
-					const gameList = document.getElementById('gameList');
-					gameList.innerHTML = '';
-					games.forEach(game => {
-						const li = createGameElement(game);
-						gameList.appendChild(li);
-					});
-					mySwiper.update();
-				});
+			updateGameList(sport);
 		});
 	});
 
 	function createGameElement(game) {
+		if (!game) {
+			// 경기가 없을 때 "nogame" 슬라이드 생성
+			const li = document.createElement('li');
+			li.className = 'swiper-slide';
+			li.style = 'width: 354px; margin-right: 29px;';
+			li.innerHTML = `
+            <div class="match_card">
+                <img src="${ctp}/images/icon/nogame.png" alt="No games available">
+            </div>
+        `;
+			return li;
+		}
+
+		// 경기가 있을 때 기존 코드
 		const li = document.createElement('li');
 		li.className = 'swiper-slide';
+		li.style = 'width: 354px; margin-right: 29px;';
 		li.innerHTML = `
-            <div class="match_card">
+        <div class="match_card">
                 <div class="match_card_visual">
                     <div class="match_team_group">
                         <div class="match_team_imgbox">
@@ -80,17 +107,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <div class="match_card_btnarea">
                     <div class="common_btn_box">
-                        ${game.isOpenForBooking ?
-				`<a href="${ctp}/reserve/seat?gameId=${game.id}" class="common_btn btn_primary btn_large">예매하기</a>` :
+                        ${game.openForBooking ?
+				`<a href="${ctp}/reserve/seat?gameId=${game.id}" class="common_btn btn_primary btn_large btn_reserve">예매하기</a>` :
 				`<a class="common_btn btn_primary btn_large plan_sale" aria-disabled="true" tabindex="-1">${game.openDate} ${game.openTime} 오픈예정</a>`
 			}
                     </div>
                 </div>
-            </div>
-        `;
+            </div>`;
 		return li;
 	}
-
+	
 	// 예매하기 새 창 열기
 	document.querySelectorAll('.btn_reserve').forEach(button => {
 		button.addEventListener('click', function(e) {
@@ -114,20 +140,13 @@ document.addEventListener('DOMContentLoaded', function() {
 			});
 		});
 	});
-
-	/*	// 예매하기 새 창 열기
-		document.querySelectorAll('.btn_reserve').forEach(button => {
-			button.addEventListener('click', function(e) {
-				e.preventDefault();
-				const gameId = this.getAttribute('href').split('gameId=')[1];
-				window.open(`${ctp}/reserve/seat?gameId=${gameId}`, '티켓챔프', 'width=990,height=820');
-			});
-		});*/
-
 	// 부모 창에서 메시지 수신 후 처리(예매 창 닫고 예매확인으로 이동)
 	window.addEventListener('message', function(e) {
 		if (e.data === 'navigateToReserveList') {
 			window.location.href = `${ctp}/my/reserve/list`;
 		}
 	});
+
+	// 초기 로드 시 야구 경기 표시
+	updateGameList('야구');
 });

@@ -21,7 +21,9 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model) {
         List<GameVO> baseballGames = reservationService.getUpcomingGames("야구");
+        List<GameVO> footballGames = reservationService.getUpcomingGames("축구");
         model.addAttribute("baseballGames", baseballGames);
+        model.addAttribute("footballGames", footballGames);
         return "home";
     }
     
@@ -30,22 +32,4 @@ public class HomeController {
     public List<GameVO> getGames(@RequestParam String sport) {
         return reservationService.getUpcomingGames(sport);
     }
-
-	// 예매권 메일 테스트
-	@GetMapping("/advanceTicketMail")
-	public String advanceTicketMail() {
-		return "mail/advanceTicketMail";
-	}
-
-	// 인증번호 메일 테스트
-	@GetMapping("/certificationMail")
-	public String certificationMail() {
-		return "mail/certificationMail";
-	}
-
-	// 예매내역 메일 테스트
-	@GetMapping("/reservationCompletedMail")
-	public String reservationCompletedMail() {
-		return "mail/reservationCompletedMail";
-	}
 }

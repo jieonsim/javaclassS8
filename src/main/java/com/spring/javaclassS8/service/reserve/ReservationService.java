@@ -39,7 +39,8 @@ public interface ReservationService {
 
 	// 예매 처리
 	ReservationResponse processReservation(ReservationRequest request) throws Exception;
-
+	
+	// 홈 화면 예매일정에 경기 띄우기
 	List<GameVO> getUpcomingGames(String sport);
 
 }

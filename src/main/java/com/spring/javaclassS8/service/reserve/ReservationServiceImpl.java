@@ -235,34 +235,35 @@ public class ReservationServiceImpl implements ReservationService {
 	private int getPriceForTicketType(int sportId, int teamId, int venueId, int seatId, int ticketTypeId) {
 		return reservationDAO.getPriceForTicketType(sportId, teamId, venueId, seatId, ticketTypeId);
 	}
-
-    @Override
-    public List<GameVO> getUpcomingGames(String sport) {
-        List<GameVO> games = reservationDAO.getUpcomingGames(sport, LocalDate.now());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd(E)", Locale.KOREAN);
-        DateTimeFormatter parseFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
-        
-        for (GameVO game : games) {
-            try {
-                // formattedGameDate 변환
-                String datePart = game.getFormattedGameDate().substring(0, 10); // "yyyy.MM.dd" 부분만 추출
-                LocalDate gameDate = LocalDate.parse(datePart, parseFormatter);
-                game.setFormattedGameDate(gameDate.format(formatter));
-                
-                // openDate 변환
-                datePart = game.getOpenDate().substring(0, 10); // "yyyy.MM.dd" 부분만 추출
-                LocalDate openDate = LocalDate.parse(datePart, parseFormatter);
-                game.setOpenDate(openDate.format(formatter));
-                
-                // openForBooking 설정
-                LocalDateTime openDateTime = LocalDateTime.of(openDate, LocalTime.parse(game.getOpenTime()));
-                game.setOpenForBooking(LocalDateTime.now().isAfter(openDateTime));
-            } catch (Exception e) {
-                // 오류 처리
-                System.err.println("Error processing game: " + game.getId() + ", Error: " + e.getMessage());
-                game.setOpenForBooking(false); // 기본값 설정
-            }
-        }
-        return games;
-    }
+	
+	// 홈화면 경기일정에 경기 띄우기
+	@Override
+	public List<GameVO> getUpcomingGames(String sport) {
+	    List<GameVO> games = reservationDAO.getUpcomingGames(sport, LocalDate.now());
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd(E)", Locale.KOREAN);
+	    DateTimeFormatter parseFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+	    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+	    
+	    for (GameVO game : games) {
+	        try {
+	            // formattedGameDate 변환
+	            String datePart = game.getFormattedGameDate().substring(0, 10);
+	            LocalDate gameDate = LocalDate.parse(datePart, parseFormatter);
+	            game.setFormattedGameDate(gameDate.format(formatter));
+	            
+	            // openDate 변환
+	            datePart = game.getOpenDate().substring(0, 10);
+	            LocalDate openDate = LocalDate.parse(datePart, parseFormatter);
+	            game.setOpenDate(openDate.format(formatter));
+	            
+	            // openForBooking 설정
+	            LocalDateTime openDateTime = LocalDateTime.of(openDate, LocalTime.parse(game.getOpenTime(), timeFormatter));
+	            game.setOpenForBooking(LocalDateTime.now().isAfter(openDateTime));
+	        } catch (Exception e) {
+	            System.err.println("Error processing game: " + game.getId() + ", Error: " + e.getMessage());
+	            game.setOpenForBooking(false);
+	        }
+	    }
+	    return games;
+	}
 }
