@@ -67,7 +67,7 @@
 						<div class="col-lg-6 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">예매 현황 차트</h4>
+									<h4 class="card-title">최근 6개월 간 매출액 현황</h4>
 									<canvas id="reservationChart" style="max-height: 400px;  height: 400px;"></canvas>
 								</div>
 							</div>
@@ -75,8 +75,8 @@
 						<div class="col-lg-6 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">스포츠 종목별 예매 비율</h4>
-									<canvas id="sportsPieChart"></canvas>
+									<h4 class="card-title">예매권 발행 수 대비 사용 현황</h4>
+									<canvas id="advanceTicketChart" style="max-height: 400px;  height: 400px;"></canvas>
 								</div>
 							</div>
 						</div>
@@ -103,8 +103,8 @@
 						<div class="col-lg-6 grid-margin grid-margin-lg-0 stretch-card">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">예매권 사용 현황</h4>
-									<canvas id="advanceTicketChart" style="max-height: 400px;  height: 400px;"></canvas>
+									<h4 class="card-title">스포츠 종목별 예매 비율</h4>
+									<canvas id="sportsPieChart"></canvas>
 								</div>
 							</div>
 						</div>
