@@ -1,7 +1,4 @@
-/**
--이메일 아이디 찾기 성공 화면 
--사용된 곳 : views/member/search/showFoundEmail.jsp
- */
+/*js/member/search/showFoundEmail.js*/
 'use strict'
 
 function saveSelectedEmail() {

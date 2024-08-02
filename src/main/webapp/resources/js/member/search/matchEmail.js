@@ -1,8 +1,4 @@
-/**
-- 아이디찾기 depth1 이름 + 휴대폰번호 조합으로 찾기
-- 사용되는 페이지 : member/search/matchId.jsp 
- */
-
+/*js/member/search/matchEmail.js*/
 'use strict';
 
 document.addEventListener('DOMContentLoaded', function() {

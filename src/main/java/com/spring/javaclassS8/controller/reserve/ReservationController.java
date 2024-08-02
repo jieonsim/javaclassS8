@@ -93,8 +93,8 @@ public class ReservationController {
 	// 예매창 > 등급/좌석선택(depth1)
 	@GetMapping("/seat")
 	public String reserveSeat(@RequestParam("gameId") int gameId, Model model, HttpSession session) {
-		MemberVO member = (MemberVO) session.getAttribute("loginMember");
-		if (member == null) {
+		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
+		if (loginMember == null) {
 			return "redirect:/login";
 		}
 
@@ -143,8 +143,8 @@ public class ReservationController {
 	// 예매창 > 권종/할인/매수선택(depth2)
 	@GetMapping("/price")
 	public String reservePrice(HttpSession session, Model model) {
-		MemberVO member = (MemberVO) session.getAttribute("loginMember");
-		if (member == null) {
+		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
+		if (loginMember == null) {
 			return "redirect:/login";
 		}
 
@@ -183,7 +183,7 @@ public class ReservationController {
 		List<CategoryVO> categoryList = reservationService.getCategoriesWithRowspan(seatId);
 
 		// 스포츠 예매권
-		List<Map<String, Object>> advanceTickets = reservationService.getValidAdvanceTicketsByMemberId(member.getId());
+		List<Map<String, Object>> advanceTickets = reservationService.getValidAdvanceTicketsByMemberId(loginMember.getId());
 
 		model.addAttribute("tempReservation", tempReservation);
 		model.addAttribute("game", game);
@@ -308,8 +308,8 @@ public class ReservationController {
 			return "redirect:/reserve/error";
 		}
 
-		MemberVO member = (MemberVO) session.getAttribute("loginMember");
-		if (member == null) {
+		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
+		if (loginMember == null) {
 			return "redirect:/login";
 		}
 
@@ -345,7 +345,7 @@ public class ReservationController {
 		int totalAmount = ticketPrice + bookingFee;
 
 		model.addAttribute("tempReservation", tempReservation);
-		model.addAttribute("member", member);
+		model.addAttribute("member", loginMember);
 		model.addAttribute("game", game);
 		model.addAttribute("seat", seat);
 		model.addAttribute("ticketAmount", ticketAmount);
@@ -400,9 +400,9 @@ public class ReservationController {
 		}
 		
 		TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
-		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
 
-		if (tempReservation == null || member == null || System.currentTimeMillis() > tempReservation.getExpirationTime()) {
+		if (tempReservation == null || loginMember == null || System.currentTimeMillis() > tempReservation.getExpirationTime()) {
 			session.removeAttribute("tempReservation");
 			return "redirect:/reserve/error";
 		}
@@ -431,7 +431,7 @@ public class ReservationController {
 
 		model.addAttribute("reservationId", reservationId);
 		model.addAttribute("reservationNumber", reservationNumber);
-		model.addAttribute("member", member);
+		model.addAttribute("member", loginMember);
 		model.addAttribute("game", game);
 		model.addAttribute("seat", seat);
 		model.addAttribute("seatDetails", seatDetails);

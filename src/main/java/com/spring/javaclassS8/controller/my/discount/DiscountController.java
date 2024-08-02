@@ -30,12 +30,12 @@ public class DiscountController {
 	// 마이페이지 > 할인혜택 > 예매권 뷰
 	@GetMapping("/advanceTicket")
 	public String getAdvanceTicket(Model model, HttpSession session) {
-		MemberVO member = (MemberVO) session.getAttribute("loginMember");
-		if (member == null) {
-			return "redirect:/loing";
+		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
+		if (loginMember == null) {
+			return "redirect:/login";
 		}
 
-		List<Map<String, Object>> advanceTickets = advanceTicketService.getAdvanceTicketsByMemberId(member.getId());
+		List<Map<String, Object>> advanceTickets = advanceTicketService.getAdvanceTicketsByMemberId(loginMember.getId());
 		model.addAttribute("advanceTickets", advanceTickets);
 		return "my/discount/advanceTicket";
 	}
@@ -44,11 +44,11 @@ public class DiscountController {
 	@GetMapping("/filterAdvanceTickets")
 	@ResponseBody
 	public List<Map<String, Object>> filterAdvanceTickets(@RequestParam String stateType, HttpSession session) {
-		MemberVO member = (MemberVO) session.getAttribute("loginMember");
-		if (member == null) {
+		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
+		if (loginMember == null) {
 			return new ArrayList<>();
 		}
-		return advanceTicketService.getFilteredAdvanceTickets(member.getId(), stateType);
+		return advanceTicketService.getFilteredAdvanceTickets(loginMember.getId(), stateType);
 	}
 
 	// 마이페이지 > 할인혜택 > 예매권 등록 시 예매권번호 유효성 검사

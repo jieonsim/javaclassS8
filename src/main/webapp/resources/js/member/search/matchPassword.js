@@ -1,7 +1,4 @@
-/**
-비밀번호 찾기 Depth1 : 이름과 이메일 아이디로 계정 확인 후 해당 이메일로 인증번호 발송, 인증번호 확인 후 resetPassword로 이동
-사용되는 페이지 : member/search/matchPassword.jsp
- */
+/*js/member/search/matchPassword.js*/
 
 'use strict';
 

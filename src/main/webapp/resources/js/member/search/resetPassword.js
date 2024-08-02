@@ -1,8 +1,5 @@
-/**
-- 비밀번호 찾기 Depth2 : matchPassword에서 계정 확인 및 이메일 인증 거친 후 이동한 페이지
-- 사용되는 페이지 : views/member/search/resetPassword.jsp
-- email은 세션을 통해 input value로 들어가고 disabled 처리됨
-*/
+/*js/member/search/resertPassword.js
+email은 세션을 통해 input value로 들어가고 disabled 처리됨*/
 
 'use strict';
 
