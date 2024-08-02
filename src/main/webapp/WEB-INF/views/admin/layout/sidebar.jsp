@@ -19,7 +19,7 @@
 			<div class="collapse" id="user">
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item">
-						<a class="nav-link" href="#">회원리스트</a>
+						<a class="nav-link" href="${ctp}/admin/member/memberList">회원리스트</a>
 					</li>
 				</ul>
 			</div>
