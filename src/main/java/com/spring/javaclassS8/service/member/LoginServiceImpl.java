@@ -31,6 +31,9 @@ public class LoginServiceImpl implements LoginService {
 	public LoginResult login(LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response) {
 		MemberVO member = memberDAO.findByEmail(loginRequest.getEmail());
 		if (member != null && passwordEncoder.matches(loginRequest.getPassword(), member.getPassword())) {
+			if(member.getStatus() != 1) {
+				return new LoginResult(false, "현재 로그인할 수 없는 계정입니다.");
+			}
 			member.setLastLoginAt(new Timestamp(System.currentTimeMillis()));
 			memberDAO.updateLastLoginAt(member);
 
@@ -70,7 +73,7 @@ public class LoginServiceImpl implements LoginService {
 					AutoLoginTokenVO tokenVO = memberDAO.findAutoLoginToken(cookie.getValue());
 					if (tokenVO != null && tokenVO.getExpiresAt().after(new Timestamp(System.currentTimeMillis()))) {
 						MemberVO member = memberDAO.findById(tokenVO.getMemberId());
-						if (member != null) {
+						if (member != null && member.getStatus() == 1) {
 							member.setLastLoginAt(new Timestamp(System.currentTimeMillis()));
 							memberDAO.updateLastLoginAt(member);
 

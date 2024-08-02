@@ -58,7 +58,8 @@ function loadCancellationRate() {
 		url: `${ctp}/admin/dashboard/cancellationRate`,
 		type: 'GET',
 		success: function(data) {
-			$('#cancellationRate').text(data + '%');
+			var roundedData = parseFloat(data).toFixed(2); // 소수점 둘째 자리까지 반올림
+			$('#cancellationRate').text(roundedData + '%');
 		},
 		error: function(error) {
 			console.log("Error fetching cancellation rate:", error);

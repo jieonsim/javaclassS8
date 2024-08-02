@@ -20,7 +20,6 @@ public class CurrentPageInterceptor implements HandlerInterceptor {
 			String currentTeam = "";
 			String teamName = "";
 			String currentSelected = "";
-			//String currentMenu = "";
 
 			// 헤더 내비
 			if (uri.equals(contextPath + "/") || uri.equals(contextPath)) {
@@ -98,13 +97,11 @@ public class CurrentPageInterceptor implements HandlerInterceptor {
 				currentPage = "discount";
 			} else if (uri.startsWith(contextPath + "/my/activity")) {
 				currentPage = "activity";
+			} else if (uri.startsWith(contextPath + "/my/memberInfo/withdrawal")) {
+				currentPage = "withdrawal";
 			} else if (uri.startsWith(contextPath + "/my/memberInfo")) {
 				currentPage = "memberInfo";
 			}
-			
-			// 마이페이지 > 할인혜택 > 예매권 페이지의 현재 메뉴 처리
-			
-			
 
 			// 현재 로그인한 사용자의 역할 확인
 			boolean isAdmin = false;

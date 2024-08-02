@@ -62,6 +62,15 @@
 		WHERE id = #{memberId}
 	</update>
 	
+	<!-- 회원 탈퇴 처리 -->
+   	<update id="updateMemberStatus">
+      UPDATE members 
+      SET status = #{status}, 
+          statusChangedAt = CURRENT_TIMESTAMP, 
+          updatedAt = CURRENT_TIMESTAMP
+      WHERE id = #{memberId}
+    </update>
+	
 	<!-- 자동 로그인 토큰 삭제 -->
 	<delete id="deleteAutoLoginToken">
 		DELETE FROM auto_login_tokens WHERE token = #{token}

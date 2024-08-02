@@ -395,6 +395,7 @@ td .input_block .hyphen{color:#878d95}
 /* button */
 .btn_blank,.btn_full{padding:9px 11px;font-size:14px;font-weight:500;line-height:22px;text-align:center;vertical-align:middle}
 .btn_full{background:#242428;border:1px solid #242428;color:#fff}
+.btn_full:focus{box-shadow: none}
 .btn_full:hover{border-color:#000;background:#000}
 .btn_full_point{border:1px solid #fa2828;background:#fa2828;color:#fff}
 .btn_full_point:hover{border-color:#c82020;background:#c82020}

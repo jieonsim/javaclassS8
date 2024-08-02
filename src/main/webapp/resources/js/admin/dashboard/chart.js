@@ -5,7 +5,8 @@ function loadReservationChart() {
 		type: 'GET',
 		dataType: 'json',
 		success: function(response) {
-			var maxValue = Math.max(...response.data) * 1.1; // 최대값의 110%
+			//var maxValue = Math.max(...response.data) * 1.1; // 최대값의 110%
+			var maxValue = Math.ceil(Math.max(...response.data) * 1.1 / 10000) * 10000;
 			var ctx = document.getElementById('reservationChart').getContext('2d');
 			new Chart(ctx, {
 				type: 'line',

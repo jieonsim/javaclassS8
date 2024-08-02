@@ -761,7 +761,7 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .waitcan_contype2 li a{text-decoration:underline;}
 /** 마이페이지 --------------------------------------- **/
 /* 마이페이지 공통 */
-.refund_table .refund_history .refund_tit,.mypage .quick_menu h2,.mypage .quick_menu li.qmenu3 a span,.mypage .quick_menu li.qmenu4 a span,.mypage .quick_menu li.qmenu5 a span, .mypage h5 span,.mberguide dt,.mberoutbx dt,.bg_green .ico{display:inline-block;overflow:hidden;font-size:1px;line-height:999px !important;background:url(../img/sp_mypage.png) no-repeat}
+/* .refund_table .refund_history .refund_tit,.mypage .quick_menu h2,.mypage .quick_menu li.qmenu3 a span,.mypage .quick_menu li.qmenu4 a span,.mypage .quick_menu li.qmenu5 a span, .mypage h5 span,.mberguide dt,.mberoutbx dt,.bg_green .ico{display:inline-block;overflow:hidden;font-size:1px;line-height:999px !important;background:url(../img/sp_mypage.png) no-repeat} */
 .mypage.common_container {background: #f8f9fa;}
 .mypage .bx_tit{margin-bottom:37px}
 .mypage .bx_table .tit{display:block;height:16px;margin-bottom:8px;background-image:url(../img/sp_mypage.png);background-repeat:no-repeat;font-size:0}

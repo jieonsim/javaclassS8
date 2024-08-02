@@ -101,68 +101,72 @@ public class ReservationDAOImpl implements ReservationDAO {
 	}
 
 	// 마이페이지 > 예매확인 뷰 | memberId로 해당 유저의 예매완료 리스트 가져오기
-    @Override
-    public List<ReservationVO> getReservationListByMemberId(int memberId, int offset, int limit) {
-        return sqlSession.getMapper(ReservationDAO.class).getReservationListByMemberId(memberId, offset, limit);
-    }
-    
-    // 마이페이지 > 예매확인 뷰 | memberId로 해당 유저의 취소완료 리스트 가져오기
-    @Override
-    public List<ReservationVO> getReservationCancelListByMemberId(int memberId, int offset, int limit) {
-    	return sqlSession.getMapper(ReservationDAO.class).getReservationCancelListByMemberId(memberId, offset, limit);
-    }
-    
-    // memberId로 해당 유저의 예매완료 건 수 가져오기
-    @Override
-    public int getReservationCountByMemberId(int memberId) {
-        return sqlSession.getMapper(ReservationDAO.class).getReservationCountByMemberId(memberId);
-    }
-    
-    // 마이페이지 > quickMenuWrap > 오늘 날짜 기준 관람 가능한 나의 예매티켓 갯수 보여주기
+	@Override
+	public List<ReservationVO> getReservationListByMemberId(int memberId, int offset, int limit) {
+		return sqlSession.getMapper(ReservationDAO.class).getReservationListByMemberId(memberId, offset, limit);
+	}
+
+	// 마이페이지 > 예매확인 뷰 | memberId로 해당 유저의 취소완료 리스트 가져오기
+	@Override
+	public List<ReservationVO> getReservationCancelListByMemberId(int memberId, int offset, int limit) {
+		return sqlSession.getMapper(ReservationDAO.class).getReservationCancelListByMemberId(memberId, offset, limit);
+	}
+
+	// memberId로 해당 유저의 예매완료 건 수 가져오기
+	@Override
+	public int getReservationCountByMemberId(int memberId) {
+		return sqlSession.getMapper(ReservationDAO.class).getReservationCountByMemberId(memberId);
+	}
+
+	// 마이페이지 > quickMenuWrap > 오늘 날짜 기준 관람 가능한 나의 예매티켓 갯수 보여주기
 	@Override
 	public int getAvailableReservationCount(int memberId) {
 		return sqlSession.getMapper(ReservationDAO.class).getAvailableReservationCount(memberId);
 	}
 
 	// reservationId로 예매내역 가져오기
-    @Override
-    public ReservationVO getReservationById(int reservationId) {
-        return sqlSession.getMapper(ReservationDAO.class).getReservationById(reservationId);
-    }
+	@Override
+	public ReservationVO getReservationById(int reservationId) {
+		return sqlSession.getMapper(ReservationDAO.class).getReservationById(reservationId);
+	}
 
-    // reservationId로 예매상세내역 가져오기
-    @Override
-    public List<ReservationDetailVO> getReservationDetailsById(int reservationId) {
-        return sqlSession.getMapper(ReservationDAO.class).getReservationDetailsById(reservationId);
-    }
+	// reservationId로 예매상세내역 가져오기
+	@Override
+	public List<ReservationDetailVO> getReservationDetailsById(int reservationId) {
+		return sqlSession.getMapper(ReservationDAO.class).getReservationDetailsById(reservationId);
+	}
 
-    // reservationId로 스포츠예매권으로 예매된 내역 가져오기
-    @Override
-    public List<Map<String, Object>> getAdvanceTicketsForReservation(int reservationId) {
-        return sqlSession.getMapper(ReservationDAO.class).getAdvanceTicketsForReservation(reservationId);
-    }
-    
-    // reservationId로 각 예매별 스포츠예매권 권종의 요금 가져오기
+	// reservationId로 스포츠예매권으로 예매된 내역 가져오기
+	@Override
+	public List<Map<String, Object>> getAdvanceTicketsForReservation(int reservationId) {
+		return sqlSession.getMapper(ReservationDAO.class).getAdvanceTicketsForReservation(reservationId);
+	}
+
+	// reservationId로 각 예매별 스포츠예매권 권종의 요금 가져오기
 	@Override
 	public List<Map<String, Object>> getAdvanceTicketPricesForReservation(int reservationId) {
 		return sqlSession.getMapper(ReservationDAO.class).getAdvanceTicketPricesForReservation(reservationId);
 	}
 
+	// 예매 취소 시 예매 상태를 취소로 업데이트
 	@Override
 	public void updateReservationStatus(int reservationId, String status) {
 		sqlSession.getMapper(ReservationDAO.class).updateReservationStatus(reservationId, status);
 	}
 
+	// 예매 취소 시 좌석 수량 원복
 	@Override
 	public void restoreSeatInventoryForCancellation(int gameId, int seatId, int ticketAmount) {
 		sqlSession.getMapper(ReservationDAO.class).restoreSeatInventoryForCancellation(gameId, seatId, ticketAmount);
 	}
 
+	// 예매내역에 스포츠예매권 사용되었는지 확인
 	@Override
 	public List<Integer> getAdvanceTicketIdsForReservation(int reservationId) {
 		return sqlSession.getMapper(ReservationDAO.class).getAdvanceTicketIdsForReservation(reservationId);
 	}
 
+	// 스포츠예매권의 예매 취소 시 예매권 사용 리셋
 	@Override
 	public void resetAdvanceTickets(List<Integer> advanceTicketIds) {
 		sqlSession.getMapper(ReservationDAO.class).resetAdvanceTickets(advanceTicketIds);
@@ -173,17 +177,22 @@ public class ReservationDAOImpl implements ReservationDAO {
 	public void updateAdvanceTicketUsageStatus(int reservationId, String status) {
 		sqlSession.getMapper(ReservationDAO.class).updateAdvanceTicketUsageStatus(reservationId, status);
 	}
-	
+
 	// 취소 마감시간 가져오기
 	@Override
 	public int getCancellationDeadlineMinutes(int sportId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.getMapper(ReservationDAO.class).getCancellationDeadlineMinutes(sportId);
 	}
-	
+
 	// 홈화면 경기일정에 경기 띄우기
-    @Override
-    public List<GameVO> getUpcomingGames(String sport, LocalDate today) {
-        return sqlSession.getMapper(ReservationDAO.class).getUpcomingGames(sport, today);
-    }
+	@Override
+	public List<GameVO> getUpcomingGames(String sport, LocalDate today) {
+		return sqlSession.getMapper(ReservationDAO.class).getUpcomingGames(sport, today);
+	}
+
+	// memberId로 오늘 날짜로부터 관람일이 경과하지 않은 예매완료 건 가져오기
+	@Override
+	public List<ReservationVO> getAvailableReservationListByMemberId(int memberId) {
+		return sqlSession.getMapper(ReservationDAO.class).getAvailableReservationListByMemberId(memberId);
+	}
 }

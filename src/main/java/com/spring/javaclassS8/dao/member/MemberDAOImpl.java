@@ -88,4 +88,10 @@ public class MemberDAOImpl implements MemberDAO {
 	public int updatePassword(int memberId, String newPassword) {
 		return sqlSession.getMapper(MemberDAO.class).updatePassword(memberId, newPassword);
 	}
+
+	// 회원 탈퇴 처리
+	@Override
+	public boolean updateMemberStatus(int memberId, int status) {
+		return sqlSession.getMapper(MemberDAO.class).updateMemberStatus(memberId, status);
+	}
 }

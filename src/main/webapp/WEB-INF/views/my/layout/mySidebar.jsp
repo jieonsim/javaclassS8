@@ -32,7 +32,7 @@
 			<li class="${currentPage == 'memberInfo' ? 'on' : '' }">
 				<a href="${ctp}/my/memberInfo/info" class="my_lmenu52">회원정보수정</a>
 			</li>
-			<li>
+			<li class="${currentPage == 'withdrawal' ? 'on' : '' }">
 				<a href="${ctp}/my/memberInfo/withdrawal" class="my_lmenu53">회원탈퇴</a>
 			</li>
 		</ul>

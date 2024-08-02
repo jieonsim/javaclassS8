@@ -100,6 +100,9 @@ public interface ReservationDAO {
 	
 	// 홈화면 경기일정에 경기 띄우기
 	List<GameVO> getUpcomingGames(@Param("sport") String sport, @Param("today") LocalDate today);
+
+	// memberId로 오늘 날짜로부터 관람일이 경과하지 않은 예매완료 건 가져오기
+	List<ReservationVO> getAvailableReservationListByMemberId(int memberId);
 	
 
 }

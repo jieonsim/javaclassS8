@@ -18,7 +18,7 @@
 		<div class="gameSchedule">
 			<section class="common_section section_sport_open">
 				<div class="section_heading">
-					<h4 class="section_title">예매오픈일정</h4>
+					<h4 class="section_title">예매 오픈 일정</h4>
 				</div>
 				<div class="sport_open_filter">
 					<div class="common_tab type_capsule">

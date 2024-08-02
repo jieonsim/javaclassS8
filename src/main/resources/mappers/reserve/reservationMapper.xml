@@ -212,7 +212,7 @@
 	    WHERE reservationId = #{reservationId}
 	</select>
 	
-	<!-- getCancellationDeadlineMinutes -->
+	<!-- 취소 마감시간 가져오기 -->
 	<select id="getCancellationDeadlineMinutes" resultType="int">
 	    SELECT cancellationDeadlineMinutesBeforeStart
 	    FROM sport_booking_policies
@@ -242,6 +242,31 @@
 	      AND DATE_SUB(g.gameDate, INTERVAL sbp.bookingOpenDaysBefore DAY) >= #{today}
 	    ORDER BY DATE_SUB(g.gameDate, INTERVAL sbp.bookingOpenDaysBefore DAY) ASC, g.gameTime ASC
 	    LIMIT 10
+	</select>
+	
+	<!-- memberId로 오늘 날짜로부터 관람일이 경과하지 않은 예매완료 건 가져오기 -->
+	<select id="getAvailableReservationListByMemberId" resultType="com.spring.javaclassS8.vo.reserve.ReservationVO">
+	    SELECT 
+	        r.id AS reservationId,
+	        r.reservationNumber,
+	        g.gameDate,
+	        g.gameTime,
+	        ht.teamName AS homeTeamName,
+	        at.teamName AS awayTeamName
+	    FROM 
+	        reservations r
+	    JOIN 
+	        games g ON r.gameId = g.id
+	    JOIN 
+	        teams ht ON g.homeTeamId = ht.id
+	    JOIN 
+	        teams at ON g.awayTeamId = at.id
+	    WHERE 
+	        r.memberId = #{memberId}
+	        AND r.status = '예매완료'
+	        AND CONCAT(g.gameDate, ' ', g.gameTime) > NOW()
+	    ORDER BY 
+	        g.gameDate ASC, g.gameTime ASC
 	</select>
 
 	<!-- 예매 처리 : reservations 테이블 레코드 생성 -->

@@ -141,4 +141,34 @@ public class MemberInfoController {
 		}
 		return ResponseEntity.ok(response);
 	}
+	
+
+	// 마이페이지 >  회원정보관리 > 회원탈퇴 뷰
+	@GetMapping("/withdrawal")
+	public String getWithdrawal(HttpSession session, Model model) {
+		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
+		if (loginMember == null) {
+			return "redirect:/login";
+		}
+		
+		// memberId로 오늘 날짜로부터 관람일이 경과하지 않은 예매완료 건 가져오기
+		Map<String, Object> result = memberInfoService.getAvailableReservationListByMemberId(loginMember.getId());
+		model.addAttribute("reservations", result.get("reservations"));
+		return "my/memberInfo/withdrawal";
+	}
+	
+    @PostMapping("/withdraw")
+    @ResponseBody
+    public ResponseEntity<?> withdraw(HttpSession session) {
+        MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
+        if (loginMember == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+        
+        boolean success = memberInfoService.withdrawMember(loginMember.getId());
+        if (success) {
+            session.invalidate();
+        }
+        return ResponseEntity.ok(Map.of("success", success));
+    }
 }

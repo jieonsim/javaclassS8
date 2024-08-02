@@ -44,4 +44,7 @@ public interface MemberDAO {
 
 	// 마이페이지 비밀번호 변경 처리
 	public int updatePassword(@Param("memberId") int memberId, @Param("newPassword") String newPassword);
+
+	// 회원 탈퇴 처리
+	public boolean updateMemberStatus(@Param("memberId") int memberId, @Param("status") int status);
 }
