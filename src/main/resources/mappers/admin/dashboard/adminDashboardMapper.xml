@@ -43,6 +43,7 @@
         WHERE status = '예매완료'
 	</select>
 	
+	<!-- 최근 6개월 간 예매 매출액 -->
 	<select id="getReservationsLast6Months" resultType="com.spring.javaclassS8.vo.reserve.ReservationVO">
         SELECT r.*, s.sportName
         FROM reservations r
@@ -61,6 +62,7 @@
         GROUP BY s.sportName
     </select>
 
+	<!-- 야구 팀별 홈경기 예매율 -->
 	<select id="getBaseballTeamReservationRate" resultType="com.spring.javaclassS8.vo.reserve.TeamReservationRateVO">
 	    SELECT t.teamName, 
 	           (COUNT(r.id) * 100.0 / (SELECT COUNT(*) FROM reservations r2 JOIN games g2 ON r2.gameId = g2.id JOIN sports s2 ON g2.sportId = s2.id WHERE s2.sportName = '야구')) as reservationRate
@@ -72,6 +74,7 @@
 	    GROUP BY t.id, t.teamName
 	</select>
 	
+	<!-- 축구 팀별 홈경기 예매율 -->
 	<select id="getFootballTeamReservationRate" resultType="com.spring.javaclassS8.vo.reserve.TeamReservationRateVO">
 	    SELECT t.teamName, 
 	           (COUNT(r.id) * 100.0 / (SELECT COUNT(*) FROM reservations r2 JOIN games g2 ON r2.gameId = g2.id JOIN sports s2 ON g2.sportId = s2.id WHERE s2.sportName = '축구')) as reservationRate
@@ -83,6 +86,7 @@
 	    GROUP BY t.id, t.teamName
 	</select>
 
+	<!-- 예매권 발행 수 대비 사용 현황 -->
     <select id="getAllAdvanceTickets" resultType="com.spring.javaclassS8.vo.reserve.AdvanceTicketVO">
         SELECT *, 
                DATE_FORMAT(issuedAt, '%Y-%m-%d %H:%i:%s') as formattedIssuedAt,

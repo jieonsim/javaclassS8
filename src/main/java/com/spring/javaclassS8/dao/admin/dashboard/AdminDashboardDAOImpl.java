@@ -53,7 +53,7 @@ public class AdminDashboardDAOImpl implements AdminDashboardDAO {
 		return sqlSession.getMapper(AdminDashboardDAO.class).getTotalBookingFeeRevenue();
 	}
 	
-	
+	// 최근 6개월 간 예매 매출액
 	@Override
 	public List<ReservationVO> getReservationsLast6Months() {
 		return sqlSession.getMapper(AdminDashboardDAO.class).getReservationsLast6Months();
@@ -65,16 +65,19 @@ public class AdminDashboardDAOImpl implements AdminDashboardDAO {
 		return sqlSession.getMapper(AdminDashboardDAO.class).getSportsReservationCount();
 	}
 
+	// 야구 팀별 홈경기 예매율
 	@Override
 	public List<TeamReservationRateVO> getBaseballTeamReservationRate() {
 		return sqlSession.getMapper(AdminDashboardDAO.class).getBaseballTeamReservationRate();
 	}
 
+	// 축구 팀별 홈경기 예매율
 	@Override
 	public List<TeamReservationRateVO> getFootballTeamReservationRate() {
 		return sqlSession.getMapper(AdminDashboardDAO.class).getFootballTeamReservationRate();
 	}
 
+	// 예매권 발행 수 대비 사용 현황
 	@Override
 	public List<AdvanceTicketVO> getAllAdvanceTickets() {
 		return sqlSession.getMapper(AdminDashboardDAO.class).getAllAdvanceTickets();

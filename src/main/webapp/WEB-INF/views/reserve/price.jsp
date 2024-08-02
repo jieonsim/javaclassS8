@@ -252,7 +252,7 @@
 		</div>
 	</div>
 	<script>
-    	var gameId = `${tempReservation.gameId}`;
+    	var gameId = ${tempReservation.gameId};
 	    var advanceTicketsData = [
 	        <c:forEach items="${advanceTickets}" var="ticket" varStatus="status">
 	            {
@@ -262,7 +262,7 @@
 	            }<c:if test="${!status.last}">,</c:if>
 	        </c:forEach>
 	    ];
-	    var initialticketAmount = `${ticketAmount}`;
+	    var initialticketAmount = ${ticketAmount};
 	</script>
 	<script src="${ctp}/js/reserve/price.js"></script>
 </body>

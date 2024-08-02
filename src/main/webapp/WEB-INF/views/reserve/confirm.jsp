@@ -321,13 +321,13 @@
 		</div>
 	</div>
 	<script>
-		var memberId = `${member.id}`;
-		var gameId = `${game.id}`;
+		var memberId = ${member.id};
+		var gameId = ${game.id};
 		var homeTeam = "${game.homeTeamShortName}";
 		var awayTeam = "${game.awayTeamShortName}";
-		var totalAmount = `${totalAmount}`;
-		var ticketAmount = `${ticketAmount}`;
-		var bookingFee = `${bookingFee}`;
+		var totalAmount = ${totalAmount};
+		var ticketAmount = ${ticketAmount};
+		var bookingFee = ${bookingFee};
 		var buyerEmail = "${member.email}";
 		var buyerName = "${member.name}";
 		var buyerTel = "${member.phone}";

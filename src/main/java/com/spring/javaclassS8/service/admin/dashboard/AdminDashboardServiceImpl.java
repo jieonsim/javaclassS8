@@ -59,7 +59,8 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
 	public int getTotalBookingFeeRevenue() {
 		return adminDashboardDAO.getTotalBookingFeeRevenue();
 	}
-
+	
+	// 최근 6개월 간 예매 매출액
 	@Override
 	public Map<String, Object> getReservationData() {
 		List<ReservationVO> reservations = adminDashboardDAO.getReservationsLast6Months();
@@ -73,18 +74,21 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
 		return processPieChartData(sportsData, "sportName", "count");
 	}
 
+	// 야구 팀별 홈경기 예매율
 	@Override
 	public Map<String, Object> getBaseballTeamData() {
 		List<TeamReservationRateVO> teamData = adminDashboardDAO.getBaseballTeamReservationRate();
 		return processBarChartData(teamData);
 	}
 
+	// 축구 팀별 홈경기 예매율
 	@Override
 	public Map<String, Object> getFootballTeamData() {
 		List<TeamReservationRateVO> teamData = adminDashboardDAO.getFootballTeamReservationRate();
 		return processBarChartData(teamData);
 	}
-
+	
+	// 예매권 발행 수 대비 사용 현황
 	@Override
 	public Map<String, Object> getAdvanceTicketData() {
 		List<AdvanceTicketVO> tickets = adminDashboardDAO.getAllAdvanceTickets();
@@ -148,7 +152,6 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
 		result.put("labels", labels);
 		result.put("data", data);
 
-		System.out.println("processReservationData result : " + result);
 		return result;
 	}
 
@@ -165,7 +168,6 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
 		result.put("labels", labels);
 		result.put("data", values);
 
-		System.out.println("processBarChartData result : " + result);
 		return result;
 	}
 
@@ -194,7 +196,6 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
 		result.put("issuedData", issuedData);
 		result.put("usedData", usedData);
 
-		System.out.println("processAdvanceTicketData result : " + result);
 		return result;
 	}
 }

@@ -3,7 +3,7 @@
 // 현재까지 총 예매완료 건 수
 function loadTotalReservations() {
 	$.ajax({
-		url: `${ctp}/admin/totalReservations`,
+		url: `${ctp}/admin/dashboard/totalReservations`,
 		type: 'GET',
 		success: function(data) {
 			$('#totalReservations').text(data + '건');
@@ -16,7 +16,7 @@ function loadTotalReservations() {
 // 현재 진행 중인 이벤트 건 수
 function loadOngoingEvents() {
 	$.ajax({
-		url: `${ctp}/admin/ongoingEvents`,
+		url: `${ctp}/admin/dashboard/ongoingEvents`,
 		type: 'GET',
 		success: function(data) {
 			$('#ongoingEvents').text(data + '건');
@@ -29,7 +29,7 @@ function loadOngoingEvents() {
 // 활동 중인 회원 수
 function loadActiveMembers() {
 	$.ajax({
-		url: `${ctp}/admin/activeMembers`,
+		url: `${ctp}/admin/dashboard/activeMembers`,
 		type: 'GET',
 		success: function(data) {
 			$('#activeMembers').text(data + '명');
@@ -42,7 +42,7 @@ function loadActiveMembers() {
 // 현재 예매 오픈된 경기 수
 function loadOpenGames() {
 	$.ajax({
-		url: `${ctp}/admin/openGames`,
+		url: `${ctp}/admin/dashboard/openGames`,
 		type: 'GET',
 		success: function(data) {
 			$('#openGames').text(data + '건');
@@ -55,7 +55,7 @@ function loadOpenGames() {
 // 예매 대비 취소율
 function loadCancellationRate() {
 	$.ajax({
-		url: `${ctp}/admin/cancellationRate`,
+		url: `${ctp}/admin/dashboard/cancellationRate`,
 		type: 'GET',
 		success: function(data) {
 			$('#cancellationRate').text(data + '%');
@@ -68,7 +68,7 @@ function loadCancellationRate() {
 // 총 예매수수료 수익
 function loadTotalBookingFeeRevenue() {
 	$.ajax({
-		url: `${ctp}/admin/totalBookingFeeRevenue`,
+		url: `${ctp}/admin/dashboard/totalBookingFeeRevenue`,
 		type: 'GET',
 		success: function(data) {
 			$('#totalBookingFeeRevenue').text(formatNumberWithCommas(data) + '원');

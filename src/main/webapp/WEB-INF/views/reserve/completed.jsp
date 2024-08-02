@@ -179,7 +179,7 @@
 		</div>
 	</div>
 	<script>
-		var reservationId = `${reservationId}`;
+		var reservationId = ${reservationId};
 	</script>
 	<script src="${ctp}/js/reserve/completed.js"></script>
 </body>

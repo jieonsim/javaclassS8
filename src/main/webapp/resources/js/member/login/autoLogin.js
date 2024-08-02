@@ -5,8 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		myReserve: `${ctp}/my/reserve/list`,
 		login: `${ctp}/login`,
 		signup: `${ctp}/signup/agreement`,
-		helpMain: `${ctp}/help/main`,
-		adminMain: `${ctp}/admin/main`
+		admin: `${ctp}/admin/dashboard`
 	};
 
 	function checkLoginStatus() {
@@ -57,8 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <li class="nav-item"><a href="${API.myInfo}" class="nav-link">${user.email}</a></li>
             <li class="nav-item"><a href="${API.myReserve}" class="nav-link">예매확인/취소</a></li>
             <li class="nav-item"><a href="${API.logout}" class="nav-link">로그아웃</a></li>
-            <li class="nav-item"><a href="${API.helpMain}" class="nav-link">고객센터</a></li>
-            ${user.role === 'ADMIN' ? `<li class="nav-item"><a href="${API.adminMain}" class="nav-link">어드민</a></li>` : ''}
+            ${user.role === 'ADMIN' ? `<li class="nav-item"><a href="${API.admin}" class="nav-link">어드민</a></li>` : ''}
         `;
 	}
 
@@ -66,7 +64,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		return `
             <li class="nav-item"><a href="${API.login}" class="nav-link">로그인</a></li>
             <li class="nav-item"><a href="${API.signup}" class="nav-link">회원가입</a></li>
-            <li class="nav-item"><a href="${API.helpMain}" class="nav-link">고객센터</a></li>
         `;
 	}
 

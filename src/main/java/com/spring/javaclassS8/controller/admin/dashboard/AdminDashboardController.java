@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,15 +11,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.spring.javaclassS8.service.admin.dashboard.AdminDashboardService;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/dashboard")
 public class AdminDashboardController {
 
 	@Autowired
 	private AdminDashboardService adminDashboardService;
 
-	@GetMapping("/main")
-	public String dashboard(Model model) {
-		return "admin/main";
+	@GetMapping()
+	public String dashboard() {
+		return "admin/dashboard/dashboard";
 	}
 
 	// 오늘자 예매완료 건 수
@@ -93,7 +92,7 @@ public class AdminDashboardController {
 		return adminDashboardService.getFootballTeamData();
 	}
 
-	// 예매권 사용 현황(발행수 대비 사용 수 구하기)
+	// 예매권 발행 수 대비 사용 현황
 	@GetMapping("/getAdvanceTicketData")
 	@ResponseBody
 	public Map<String, Object> getAdvanceTicketData() {

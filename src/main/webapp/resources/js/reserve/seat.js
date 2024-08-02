@@ -95,7 +95,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	/////////////////////////////////////////////////////////////
 	// 좌석 등급 선택 시 배경 dimmed 처리 및 매수 선택 레이어 띄우기
-	const seatGrades = Array.from(document.querySelectorAll('#select_seat_grade li:not(:first-child)'));
+	//const seatGrades = Array.from(document.querySelectorAll('#select_seat_grade li:not(:first-child)'));
+	const seatGrades = Array.from(document.querySelectorAll('#select_seat_grade li'));
 	const selectCountAuto = document.querySelector('.select_count_auto');
 	const seat_quantity_dimmed = document.getElementById('seat_quantity_dimmed');
 

@@ -1,7 +1,7 @@
-// 예매 현황 차트 (매출액)
+// 최근 6개월 간 매출액 현황
 function loadReservationChart() {
 	$.ajax({
-		url: ctp + '/admin/getReservationData',
+		url: ctp + '/admin/dashboard/getReservationData',
 		type: 'GET',
 		dataType: 'json',
 		success: function(response) {
@@ -55,7 +55,7 @@ function loadReservationChart() {
 // 스포츠 종목별 예매 비율
 function loadSportsPieChart() {
 	$.ajax({
-		url: ctp + '/admin/getSportsPieData',
+		url: ctp + '/admin/dashboard/getSportsPieData',
 		type: 'GET',
 		dataType: 'json',
 		success: function(response) {
@@ -92,7 +92,7 @@ function loadSportsPieChart() {
 // 야구 팀별 홈경기 예매율
 function loadBaseballTeamChart() {
 	$.ajax({
-		url: ctp + '/admin/getBaseballTeamData',
+		url: ctp + '/admin/dashboard/getBaseballTeamData',
 		type: 'GET',
 		dataType: 'json',
 		success: function(response) {
@@ -145,7 +145,7 @@ function loadBaseballTeamChart() {
 // 축구 팀별 홈경기 예매율
 function loadFootballTeamChart() {
 	$.ajax({
-		url: ctp + '/admin/getFootballTeamData',
+		url: ctp + '/admin/dashboard/getFootballTeamData',
 		type: 'GET',
 		dataType: 'json',
 		success: function(response) {
@@ -195,10 +195,10 @@ function loadFootballTeamChart() {
 	});
 }
 
-// 예매권 사용 현황
+// 예매권 발행 수 대비 사용 현황
 function loadAdvanceTicketChart() {
 	$.ajax({
-		url: ctp + '/admin/getAdvanceTicketData',
+		url: ctp + '/admin/dashboard/getAdvanceTicketData',
 		type: 'GET',
 		dataType: 'json',
 		success: function(response) {
@@ -260,7 +260,7 @@ function loadAdvanceTicketChart() {
 // 권종별 판매 현황
 function loadTicketTypeChart() {
 	$.ajax({
-		url: ctp + '/admin/getTicketTypeData',
+		url: ctp + '/admin/dashboard/getTicketTypeData',
 		type: 'GET',
 		dataType: 'json',
 		success: function(response) {
