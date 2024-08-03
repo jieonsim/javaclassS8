@@ -34,37 +34,34 @@ public class SearchServiceImpl implements SearchService {
 	private BCryptPasswordEncoder passwordEncoder;
 
 	// 이름과 휴대폰 번호 조합으로 이메일 아이디 찾기
-    @Override
-    public Map<String, Object> findEmailByNameAndPhone(String name, String phone) {
-        List<MemberVO> members = memberDAO.findByNameAndPhone(name, phone);
-        Map<String, Object> result = new HashMap<>();
+	@Override
+	public Map<String, Object> findEmailByNameAndPhone(String name, String phone) {
+	    List<MemberVO> members = memberDAO.findByNameAndPhone(name, phone);
+	    Map<String, Object> result = new HashMap<>();
+	    List<Map<String, Object>> memberDetails = new ArrayList<>();
 
-        if (members.isEmpty()) {
-            result.put("exists", false);
-        } else {
-            List<Map<String, Object>> memberDetails = new ArrayList<>();
-            for (MemberVO member : members) {
-                if (member.getStatus() == 1) {  // status가 1인 경우만 처리
-                    String originalEmail = member.getEmail();
-                    String maskedEmail = maskEmail(originalEmail);
-                    Map<String, Object> memberDetail = new HashMap<>();
-                    memberDetail.put("originalEmail", originalEmail);
-                    memberDetail.put("maskedEmail", maskedEmail);
-                    memberDetail.put("createdAt", formatCreatedAt(member.getCreatedAt()));
-                    memberDetails.add(memberDetail);
-                }
-            }
-            if (memberDetails.isEmpty()) {
-                result.put("exists", false);
-            } else {
-                result.put("exists", true);
-                result.put("members", memberDetails);
-                session.setAttribute("searchResult", result);
-            }
-        }
+	    for (MemberVO member : members) {
+	        if (member.getStatus() == 1) {  // status가 1인 경우만 처리
+	            String originalEmail = member.getEmail();
+	            String maskedEmail = maskEmail(originalEmail);
+	            Map<String, Object> memberDetail = new HashMap<>();
+	            memberDetail.put("originalEmail", originalEmail);
+	            memberDetail.put("maskedEmail", maskedEmail);
+	            memberDetail.put("createdAt", formatCreatedAt(member.getCreatedAt()));
+	            memberDetails.add(memberDetail);
+	        }
+	    }
 
-        return result;
-    }
+	    if (memberDetails.isEmpty()) {
+	        result.put("exists", false);
+	    } else {
+	        result.put("exists", true);
+	        result.put("members", memberDetails);
+	    }
+
+	    session.setAttribute("searchResult", result);
+	    return result;
+	}
 
 	// 이메일 아이디 마스킹 처리
 	private String maskEmail(String email) {

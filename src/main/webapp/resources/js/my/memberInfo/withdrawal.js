@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			checkbox.checked = true;
 		}
 	});
-	
+
 	// 회원 탈퇴 폼 sumbit
 	form.addEventListener('submit', function(e) {
 		e.preventDefault();
@@ -29,23 +29,32 @@ document.addEventListener('DOMContentLoaded', function() {
 			return;
 		}
 
-		fetch(`${ctp}/my/memberInfo/withdraw`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		})
-			.then(response => response.json())
-			.then(data => {
-				if (data.success) {
-					window.location.href = `${ctp}/withdrawalCompleted`; // 탈퇴 완료 페이지로 리다이렉트
-				} else {
-					alert('회원 탈퇴 처리 중 오류가 발생했습니다.');
-				}
+		if (confirm('정말 탈퇴하시겠습니까? 이 작업은 취소할 수 없습니다.')) {
+			fetch(`${ctp}/my/memberInfo/withdraw`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				credentials: 'same-origin' // 세션 쿠키를 포함하기 위해
 			})
-			.catch(error => {
-				console.error('Error:', error);
-				alert('회원 탈퇴 처리 중 오류가 발생했습니다.');
-			});
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('서버 응답이 올바르지 않습니다.');
+					}
+					return response.json();
+				})
+				.then(data => {
+					if (data.success) {
+						window.location.href = `${ctp}/withdrawalCompleted`;
+					} else {
+						alert(data.message || '회원 탈퇴 처리 중 오류가 발생했습니다.');
+					}
+				})
+				.catch(error => {
+					console.error('Error:', error);
+					alert('회원 탈퇴 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+				});
+		}
+
 	});
 });
