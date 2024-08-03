@@ -17,7 +17,6 @@
 <body>
 	<div class="container-controller">
 		<jsp:include page="/WEB-INF/views/admin/layout/navbar.jsp" />
-
 		<div class="container-fluid page-body-wrapper">
 			<jsp:include page="/WEB-INF/views/admin/layout/settings-panel.jsp" />
 			<jsp:include page="/WEB-INF/views/admin/layout/sidebar.jsp" />
@@ -122,7 +121,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="${ctp}/js/member/login/autoLogin.js"></script>
+	<%-- <script src="${ctp}/js/member/login/autoLogin.js"></script> --%>
 	<script src="${ctp}/vendors/chart.js/Chart.min.js"></script>
 	<script src="${ctp}/js/admin/common/off-canvas.js"></script>
 	<script src="${ctp}/js/admin/common/hoverable-collapse.js"></script>

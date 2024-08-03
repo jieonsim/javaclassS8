@@ -10,11 +10,11 @@
 			</button>
 		</div>
 		<div>
-			<a class="navbar-brand brand-logo" href="${ctp}/admin/main">
+			<a class="navbar-brand brand-logo" href="${ctp}/admin/dashboard">
 				<i class="ph-bold ph-person-simple-throw" id="header_title_logo"></i>
 				<span class="logo-text">ticketchamp</span>
 			</a>
-			<a class="navbar-brand brand-logo-mini" href="${ctp}/admin/main">
+			<a class="navbar-brand brand-logo-mini" href="${ctp}/admin/dashboard">
 				<i class="ph-bold ph-person-simple-throw" id="header_title_logo"></i>
 			</a>
 		</div>

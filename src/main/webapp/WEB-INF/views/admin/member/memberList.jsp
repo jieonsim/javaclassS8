@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -29,85 +30,143 @@
 						<div class="col-lg-12 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">전체 회원리스트</h4>
-									<div class="d-flex justify-content-end">
-										<div class="mx-2">
-											<select class="form-control bg-white text-dark" id="inputCategory" name="eventCategory">
-												<option selected disabled>회원 상태 변경</option>
-												<option value="활동 중">활동 중</option>
-												<option value="활동 정지">활동 정지</option>
-											</select>
+									<div class="row">
+										<div class="col-sm-6">
+											<h4 class="card-title">전체 회원리스트</h4>
 										</div>
-										<div class="mx-2">
-											<label for="inputSearch"></label>
-											<div class="input-group">
-												<div class="input-group-prepend">
-													<button type="submit" class="input-group-text">
-														<i class="icon-search"></i>
-													</button>
+										<div class="col-sm-6">
+											<form id="searchForm" action="${ctp}/admin/member/search" method="GET">
+												<div class="input-group">
+													<select name="status" class="form-control bg-white text-dark">
+														<option value="">모든 상태</option>
+														<option value="1">활동 중</option>
+														<option value="2">활동 정지</option>
+														<option value="3">탈퇴</option>
+													</select>
+													<select name="role" class="form-control bg-white text-dark">
+														<option value="">모든 등급</option>
+														<option value="USER">유저</option>
+														<option value="ADMIN">관리자</option>
+													</select>
+													<label for="inputSearch"></label>
+													<input type="search" id="inputSearch" name="keyword" class="form-control" placeholder="Search Here" title="Search here">
+													<div class="input-group-prepend">
+														<button type="submit" class="input-group-text">
+															<i class="icon-search"></i>
+														</button>
+													</div>
+													<button type="button" class="btn btn-sm btn-secondary mx-2" id="resetBtn">전체조회</button>
 												</div>
-												<input type="search" id="inputSearch" name="keyword" class="form-control" placeholder="Search Here" title="Search here">
+											</form>
+										</div>
+									</div>
+									<form id="memberUpdateForm">
+										<div class="d-flex justify-content-end">
+											<div class="p-2">
+												<select class="form-control bg-white text-dark" id="inputStatus" name="status">
+													<option>활동 상태 변경</option>
+													<option value="1">활동 중</option>
+													<option value="2">활동 정지</option>
+													<option value="3">탈퇴</option>
+												</select>
+											</div>
+											<div class="p-2">
+												<select class="form-control bg-white text-dark" id="inputRole" name="role">
+													<option>등급 변경</option>
+													<option value="USER">유저</option>
+													<option value="ADMIN">관리자</option>
+												</select>
+											</div>
+											<div class="p-2">
+												<button type="button" class="btn btn-sm btn-primary" id="updateBtn">변경 적용</button>
 											</div>
 										</div>
-										<div class="mx-2">
-											<button type="button" class="btn btn-sm btn-secondary" id="resetBtn">전체조회</button>
+										<div class="table-responsive">
+											<table class="table">
+												<colgroup>
+													<col style="width: 5%" />
+													<col style="width: 10%" />
+													<col style="width: 5%" />
+													<col style="width: 10%" />
+													<col style="width: 10%" />
+													<col style="width: 10%" />
+													<col style="width: 10%" />
+													<col style="width: 10%" />
+													<col style="width: 10%" />
+												</colgroup>
+												<thead class="text-center">
+													<tr>
+														<th>
+															<div class="form-check m-0">
+																<label class="form-check-label m-0">
+																	<input type="checkbox" class="form-check-input" id="inputAllCheck" name="allCheck">
+																	<i class="input-helper"></i>
+																</label>
+															</div>
+														</th>
+														<th>이메일 아이디</th>
+														<th>이름</th>
+														<th>휴대폰번호</th>
+														<th>가입일시</th>
+														<th>활동상태</th>
+														<th>마지막 로그인 일시</th>
+														<th>활동상태 변경일시</th>
+														<th>등급</th>
+													</tr>
+												</thead>
+												<tbody class="text-center">
+													<c:forEach items="${members}" var="member">
+														<tr>
+															<td>
+																<div class="form-check m-0">
+																	<label class="form-check-label m-0">
+																		<input type="checkbox" class="form-check-input" data-member-id="${member.id}" id="inputMemberId_${member.id}" name="memberId">
+																		<i class="input-helper"></i>
+																	</label>
+																</div>
+															</td>
+															<td>${member.email}</td>
+															<td>${member.name}</td>
+															<td>${member.phone}</td>
+															<td>
+																<fmt:formatDate value="${member.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" />
+															</td>
+															<td>
+																<c:choose>
+																	<c:when test="${member.status == 1}">
+																		<label class="badge badge-success">활동 중</label>
+																	</c:when>
+																	<c:when test="${member.status == 2}">
+																		<label class="badge badge-warning">활동 정지</label>
+																	</c:when>
+																	<c:when test="${member.status == 3}">
+																		<label class="badge badge-danger">탈퇴</label>
+																	</c:when>
+																</c:choose>
+															</td>
+															<td>
+																<c:choose>
+																	<c:when test="${empty member.lastLoginAt}">로그인 기록 없음</c:when>
+																	<c:otherwise>
+																		<fmt:formatDate value="${member.lastLoginAt}" pattern="yyyy-MM-dd HH:mm:ss" />
+																	</c:otherwise>
+																</c:choose>
+															</td>
+															<td>
+																<c:choose>
+																	<c:when test="${empty member.statusChangedAt}">활동상태 변경 기록 없음</c:when>
+																	<c:otherwise>
+																		<fmt:formatDate value="${member.statusChangedAt}" pattern="yyyy-MM-dd HH:mm:ss" />
+																	</c:otherwise>
+																</c:choose>
+															</td>
+															<td class="${member.role == 'ADMIN' ? 'text-danger' : ''}">${member.role == 'ADMIN' ? '관리자' : '유저'}</td>
+														</tr>
+													</c:forEach>
+												</tbody>
+											</table>
 										</div>
-									</div>
-									<div class="table-responsive">
-										<table class="table">
-											<colgroup>
-												<col style="width: 5%" />
-												<col style="width: 10%" />
-												<col style="width: 5%" />
-												<col style="width: 10%" />
-												<col style="width: 10%" />
-												<col style="width: 10%" />
-												<col style="width: 10%" />
-												<col style="width: 10%" />
-												<col style="width: 10%" />
-											</colgroup>
-											<thead class="text-center">
-												<tr>
-													<th>
-														<div class="form-check m-0">
-															<label class="form-check-label m-0">
-																<input type="checkbox" class="form-check-input">
-																<i class="input-helper"></i>
-															</label>
-														</div>
-													</th>
-													<th>이메일 아이디</th>
-													<th>이름</th>
-													<th>휴대폰번호</th>
-													<th>가입일시</th>
-													<th>활동상태</th>
-													<th>마지막 로그인 일시</th>
-													<th>활동상태 변경일시</th>
-													<th>등급</th>
-												</tr>
-											</thead>
-											<tbody class="text-center">
-												<tr>
-													<td>
-														<div class="form-check m-0">
-															<label class="form-check-label m-0">
-																<input type="checkbox" class="form-check-input">
-																<i class="input-helper"></i>
-															</label>
-														</div>
-													</td>
-													<td>zieonsim@gmail.com</td>
-													<td>심지언</td>
-													<td>01012345678</td>
-													<td>2024-07-07 23:24:34</td>
-													<td>활동 중</td>
-													<td>2024-08-02 17:14:15</td>
-													<td>2024-08-02 15:53:19</td>
-													<td class="text-danger">관리자</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -121,5 +180,6 @@
 	<script src="${ctp}/js/admin/common/hoverable-collapse.js"></script>
 	<script src="${ctp}/js/admin/common/template.js"></script>
 	<script src="${ctp}/js/admin/common/settings.js"></script>
+	<script src="${ctp}/js/admin/member/memberList.js"></script>
 </body>
 </html>
