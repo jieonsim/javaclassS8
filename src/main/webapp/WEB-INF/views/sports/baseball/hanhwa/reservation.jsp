@@ -38,32 +38,38 @@
 							</div>
 							<div id="reservationContent">
 								<div id="scheduleListDiv" class="reserve_lst_bx">
-									<ul>
-										<c:forEach var="game" items="${games}">
-											<li class="_game_list" gamedate="${game.gameDate}" gametime="${game.gameTime}" bookingopendaysbefore="${game.bookingOpenDaysBefore}" bookingopentime="${game.bookingOpenTime}" bookingcloseminutesafterstart="${game.bookingCloseMinutesAfterStart}" data-game-id="${game.id}">
-												<span class="ico_todayopen">
-													<span class="text">오늘오픈</span>
-												</span>
-												<div class="match_day">
-													<div class="date">
-														<span class="date_num">
-															<fmt:parseDate value="${game.gameDate}" pattern="yyyy-MM-dd" var="parsedDate" />
-															<fmt:formatDate value="${parsedDate}" pattern="MM.dd" />
+									<c:choose>
+										<c:when test="${not hasGames}">
+											<div class="no_team">
+												<img src="${ctp}/images/sports/common/nogame.jpg" alt="현재 진행중인 경기가 없습니다">
+											</div>
+										</c:when>
+										<c:otherwise>
+											<ul>
+												<c:forEach var="game" items="${games}">
+													<li class="_game_list" gamedate="${game.gameDate}" gametime="${game.gameTime}" bookingopendaysbefore="${game.bookingOpenDaysBefore}" bookingopentime="${game.bookingOpenTime}" bookingcloseminutesafterstart="${game.bookingCloseMinutesAfterStart}" data-game-id="${game.id}">
+														<span class="ico_todayopen">
+															<span class="text">오늘오픈</span>
 														</span>
-													</div>
-													<div class="day_time">
-														<div class="day_lst day_${(parsedDate.day == 0) ? 7 : parsedDate.day}">
-															(
-															<fmt:formatDate value="${parsedDate}" pattern="E" />
-															)
+														<div class="match_day">
+															<div class="date">
+																<span class="date_num">
+																	<fmt:parseDate value="${game.gameDate}" pattern="yyyy-MM-dd" var="parsedDate" />
+																	<fmt:formatDate value="${parsedDate}" pattern="MM.dd" />
+																</span>
+															</div>
+															<div class="day_time">
+																<div class="day_lst day_${(parsedDate.day == 0) ? 7 : parsedDate.day}">
+																	(
+																	<fmt:formatDate value="${parsedDate}" pattern="E" />
+																	)
+																</div>
+																<div class="time">
+																	<span class="time_num">${fn:substring(game.gameTime, 0, 5)}</span>
+																</div>
+															</div>
 														</div>
-														<div class="time">
-															<span class="time_num">${fn:substring(game.gameTime, 0, 5)}</span>
-														</div>
-													</div>
-												</div>
-
-												<c:set var="emblemMap" value="${{
+														<c:set var="emblemMap" value="${{
                                                     'LG': 'lg',
                                                     'kt': 'kt',
                                                     'SSG': 'ssg',
@@ -75,32 +81,33 @@
                                                     '키움': 'kiwoom',
                                                     '롯데': 'lotte'
                                                 }}" />
-												<div class="match_team_info">
-													<div class="emblem_bx">
-														<span class="bx_img">
-															<img src="${ctp}/images/sports/baseball/emblem/${emblemMap[game.homeTeamShortName]}.png" alt="홈팀 엠블럼">
-														</span>
-														<span class="versus">VS</span>
-														<span class="bx_img">
-															<img src="${ctp}/images/sports/baseball/emblem/${emblemMap[game.awayTeamShortName]}.png" alt="원정팀 엠블럼">
-														</span>
-													</div>
-
-													<div class="match_info_bx">
-														<div class="team_name">
-															<span>${game.homeTeamShortName}</span>
-															vs
-															<span>${game.awayTeamShortName}</span>
+														<div class="match_team_info">
+															<div class="emblem_bx">
+																<span class="bx_img">
+																	<img src="${ctp}/images/sports/baseball/emblem/${emblemMap[game.homeTeamShortName]}.png" alt="홈팀 엠블럼">
+																</span>
+																<span class="versus">VS</span>
+																<span class="bx_img">
+																	<img src="${ctp}/images/sports/baseball/emblem/${emblemMap[game.awayTeamShortName]}.png" alt="원정팀 엠블럼">
+																</span>
+															</div>
+															<div class="match_info_bx">
+																<div class="team_name">
+																	<span>${game.homeTeamShortName}</span>
+																	vs
+																	<span>${game.awayTeamShortName}</span>
+																</div>
+																<div class="place">${game.venueName}</div>
+															</div>
 														</div>
-														<div class="place">${game.venueName}</div>
-													</div>
-												</div>
-												<div class="match_btn">
-													<!-- 버튼 내용은 JavaScript에서 동적으로 생성 -->
-												</div>
-											</li>
-										</c:forEach>
-									</ul>
+														<div class="match_btn">
+															<!-- 버튼 내용은 JavaScript에서 동적으로 생성 -->
+														</div>
+													</li>
+												</c:forEach>
+											</ul>
+										</c:otherwise>
+									</c:choose>
 								</div>
 							</div>
 						</div>

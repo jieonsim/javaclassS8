@@ -18,12 +18,25 @@
 	</select>
 
 	<!-- 경기 고유번호로 잔여 좌석 수 가져오기 -->
-    <select id="getSeatInventoriesByGameId" resultType="com.spring.javaclassS8.vo.sports.SeatInventoryVO">
+    <!-- <select id="getSeatInventoriesByGameId" resultType="com.spring.javaclassS8.vo.sports.SeatInventoryVO">
         SELECT si.*, s.seatName, s.seatColor
         FROM seat_inventory si
         JOIN seats s ON si.seatId = s.id
         WHERE si.gameId = #{gameId}
-    </select>
+    </select> -->
+    
+    <!-- 경기 고유번호로 요금 등록된 좌석의 잔여 좌석 수 및 좌석 이름 가져오기 -->
+    <select id="getSeatInventoriesWithPricesByGameId" resultType="com.spring.javaclassS8.vo.sports.SeatInventoryVO">
+    SELECT DISTINCT si.*, s.seatName, s.seatColor
+	    FROM seat_inventory si
+	    JOIN seats s ON si.seatId = s.id
+	    JOIN prices p ON s.id = p.seatId
+	    JOIN games g ON si.gameId = g.id
+	    WHERE si.gameId = #{gameId}
+	    AND p.sportId = g.sportId
+	    AND p.teamId = g.homeTeamId
+	    AND p.venueId = g.venueId
+	</select>
     
     <!-- 스포츠 고유번호로 1회 예매 시 최대 구매 가능 티켓 수 가져오기 -->
     <select id="getMaxTicketsPerBooking" resultType="int">

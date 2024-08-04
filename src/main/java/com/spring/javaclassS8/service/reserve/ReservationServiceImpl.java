@@ -58,9 +58,15 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	// 경기 고유번호로 잔여 좌석 수 가져오기
+//	@Override
+//	public List<SeatInventoryVO> getSeatInventoriesByGameId(int gameId) {
+//		return reservationDAO.getSeatInventoriesByGameId(gameId);
+//	}
+	
+	// 경기 고유번호로 요금 등록된 좌석의 잔여 좌석 수 및 좌석 이름 가져오기
 	@Override
-	public List<SeatInventoryVO> getSeatInventoriesByGameId(int gameId) {
-		return reservationDAO.getSeatInventoriesByGameId(gameId);
+	public List<SeatInventoryVO> getSeatInventoriesWithPricesByGameId(int gameId) {
+	    return reservationDAO.getSeatInventoriesWithPricesByGameId(gameId);
 	}
 
 	// 스포츠 고유번호로 1회 예매 시 최대 구매 가능 티켓 수 가져오기

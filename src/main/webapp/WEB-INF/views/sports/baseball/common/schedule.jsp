@@ -51,40 +51,51 @@
 											<th>예매</th>
 										</tr>
 									</thead>
-									<tbody data-has-games="${hasGames}">
-										<c:set var="prevDate" value="" />
-										<c:set var="gamesForDate" value="0" />
-
-										<c:forEach var="game" items="${games}" varStatus="status">
-											<c:if test="${game.gameDate ne prevDate}">
-												<c:if test="${not status.first}">
-													<c:set var="gamesForDate" value="0" />
-												</c:if>
-											</c:if>
-
-											<tr class="${gamesForDate % 2 == 0 ? '' : 'even'}">
-												<c:if test="${game.gameDate ne prevDate}">
-													<td rowspan="${fn:length(games.stream().filter(g -> g.gameDate eq game.gameDate).toList())}" class="date">
-														<em><fmt:parseDate value="${game.gameDate}" pattern="yyyy-MM-dd" var="parsedDate" /> <fmt:formatDate value="${parsedDate}" pattern="MM.dd" /></em> (
-														<fmt:formatDate value="${parsedDate}" pattern="E" />
-														)
-													</td>
-												</c:if>
-												<td class="match">
-													<span>${game.homeTeamName}</span>
-													vs
-													<span>${game.awayTeamName}</span>
+									<c:choose>
+										<c:when test="${not hasGames}">
+											<tbody>
+												<td colspan="4">
+													<div class="no_team">
+														<img src="${ctp}/images/sports/common/nogame.jpg" alt="현재 진행중인 경기가 없습니다">
+													</div>
 												</td>
-												<td>${game.venueName}</td>
-												<td class="_game_list" gamedate="${game.gameDate}" gametime="${game.gameTime}" bookingopendaysbefore="${game.bookingOpenDaysBefore}" bookingopentime="${game.bookingOpenTime}" bookingcloseminutesafterstart="${game.bookingCloseMinutesAfterStart}">
-													<a href="${ctp}/reserve/seat?gameId=${game.id}" class="btn btn_reserve">예매하기</a>
-													<span class="_sale_time"></span>
-												</td>
-											</tr>
-											<c:set var="prevDate" value="${game.gameDate}" />
-											<c:set var="gamesForDate" value="${gamesForDate + 1}" />
-										</c:forEach>
-									</tbody>
+											</tbody>
+										</c:when>
+										<c:otherwise>
+											<tbody data-has-games="${hasGames}">
+												<c:set var="prevDate" value="" />
+												<c:set var="gamesForDate" value="0" />
+												<c:forEach var="game" items="${games}" varStatus="status">
+													<c:if test="${game.gameDate ne prevDate}">
+														<c:if test="${not status.first}">
+															<c:set var="gamesForDate" value="0" />
+														</c:if>
+													</c:if>
+													<tr class="${gamesForDate % 2 == 0 ? '' : 'even'}">
+														<c:if test="${game.gameDate ne prevDate}">
+															<td rowspan="${fn:length(games.stream().filter(g -> g.gameDate eq game.gameDate).toList())}" class="date">
+																<em><fmt:parseDate value="${game.gameDate}" pattern="yyyy-MM-dd" var="parsedDate" /> <fmt:formatDate value="${parsedDate}" pattern="MM.dd" /></em> (
+																<fmt:formatDate value="${parsedDate}" pattern="E" />
+																)
+															</td>
+														</c:if>
+														<td class="match">
+															<span>${game.homeTeamName}</span>
+															vs
+															<span>${game.awayTeamName}</span>
+														</td>
+														<td>${game.venueName}</td>
+														<td class="_game_list" gamedate="${game.gameDate}" gametime="${game.gameTime}" bookingopendaysbefore="${game.bookingOpenDaysBefore}" bookingopentime="${game.bookingOpenTime}" bookingcloseminutesafterstart="${game.bookingCloseMinutesAfterStart}">
+															<a href="${ctp}/reserve/seat?gameId=${game.id}" class="btn btn_reserve">예매하기</a>
+															<span class="_sale_time"></span>
+														</td>
+													</tr>
+													<c:set var="prevDate" value="${game.gameDate}" />
+													<c:set var="gamesForDate" value="${gamesForDate + 1}" />
+												</c:forEach>
+											</tbody>
+										</c:otherwise>
+									</c:choose>
 								</table>
 							</div>
 						</div>

@@ -56,6 +56,7 @@ public class SportsController {
 
 		model.addAttribute("games", games);
 		model.addAttribute("team", team);
+		model.addAttribute("hasGames", !games.isEmpty());
 
 		return "sports/" + sport + "/" + team + "/reservation";
 	}

@@ -152,8 +152,6 @@
 						<input type="hidden" name="gameId" value="${game.id}">
 						<input type="hidden" name="seatId" value="">
 						<input type="hidden" name="ticketAmount" id="selectedQuantity" value="0">
-						<%-- <input type="hidden" id="existingReservationData" value="${existingReservation}">
-						<input type="hidden" id="currentDepthData" value="${currentDepth}"> --%>
 					</form>
 				</div>
 			</div>
