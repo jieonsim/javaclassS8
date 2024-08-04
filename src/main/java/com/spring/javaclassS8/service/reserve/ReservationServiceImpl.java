@@ -182,6 +182,7 @@ public class ReservationServiceImpl implements ReservationService {
 	    LocalDateTime cancelDeadline = gameDateTime.minusMinutes(cancellationDeadlineMinutes);
 	    reservation.setCancelDeadline(cancelDeadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 	    
+	    reservation.setReservationId(reservationId);
 	    // 8. 예매완료 메일 발송 처리
 	    String memberEmail = reservationDAO.getEmailByMemberId(request.getMemberId());
 	    try {

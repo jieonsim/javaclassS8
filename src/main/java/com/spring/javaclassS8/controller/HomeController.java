@@ -32,4 +32,10 @@ public class HomeController {
 	public List<GameVO> getGames(@RequestParam String sport) {
 		return reservationService.getUpcomingGames(sport);
 	}
+	
+	
+	@GetMapping("/reservationCancelCompletedMail")
+	public String reservationCancelCompletedMail() {
+		return "mail/reservationCancelCompletedMail";
+	}
 }

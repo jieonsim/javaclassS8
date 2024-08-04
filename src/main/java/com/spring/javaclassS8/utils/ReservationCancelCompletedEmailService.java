@@ -21,14 +21,14 @@ import com.spring.javaclassS8.vo.reserve.ReservationDetailVO;
 import com.spring.javaclassS8.vo.reserve.ReservationVO;
 
 @Service
-public class ReservationCompletedEmailService {
+public class ReservationCancelCompletedEmailService {
 
 	@Autowired
 	private JavaMailSender mailSender;
 
-	public void sendReservationCompletedEmail(String email, ReservationVO reservation, List<ReservationDetailVO> reservationDetails) throws MessagingException {
+	public void sendReservationCancelCompletedEmail(String email, ReservationVO reservation, List<ReservationDetailVO> reservationDetails) throws MessagingException {
 		String htmlContent = getHtmlTemplate(reservation, reservationDetails);
-		sendHtmlEmail(email, "[티켓챔프] 예매가 완료되었습니다", htmlContent);
+		sendHtmlEmail(email, "[티켓챔프] 예매가 취소되었습니다", htmlContent);
 	}
 	
 	private String getHtmlTemplate(ReservationVO reservation, List<ReservationDetailVO> reservationDetails) {
@@ -37,7 +37,6 @@ public class ReservationCompletedEmailService {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm");
         DateTimeFormatter reservationDateFormatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일");
         
-        int reservationId = reservation.getReservationId();
         String memberName = reservation.getMemberName();
         String reservationDate = reservation.getCreatedAt().toLocalDateTime().format(reservationDateFormatter);
         String ticketName = reservation.getHomeTeamName() + " vs " + reservation.getAwayTeamName();
@@ -243,7 +242,7 @@ public class ReservationCompletedEmailService {
         + "                        </tr>\r\n"
         + "                        <tr>\r\n"
         + "                            <td style=\"padding-top: 30px; text-align: center; line-height: 0;\">\r\n"
-        + "                                <a href=\"http://localhost:9090/javaclassS8/my/reserve/detail?reservationId="+reservationId+"\" target=\"_blank\" style=\"display: inline-block; padding: 24px 40px; background-color: black; color: white; border-radius: 5px; font-size: 16px; font-weight: bold; text-align: center; text-decoration: none; font-family: 돋움;\">예매내역보기</a>\r\n"
+        + "                                <a href=\"http://localhost:9090/javaclassS8/my/reserve/list\" target=\"_blank\" style=\"display: inline-block; padding: 24px 40px; background-color: black; color: white; border-radius: 5px; font-size: 16px; font-weight: bold; text-align: center; text-decoration: none; font-family: 돋움;\">예매내역보기</a>\r\n"
         + "                            </td>\r\n"
         + "                        </tr>\r\n"
         + "                        <tr>\r\n"

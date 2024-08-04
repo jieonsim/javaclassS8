@@ -181,6 +181,7 @@ public class MyReservationServiceImpl implements MyReservationService {
 	    return result;
 	}
 
+	// 취소 정보 가져오기
 	@Override
 	public Map<String, Object> getCancelInfo(int reservationId) {
 		ReservationVO reservation = reservationDAO.getReservationById(reservationId);
