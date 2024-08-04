@@ -234,7 +234,7 @@ public class ReservationCompletedEmailService {
         + "                        </tr>\r\n"
         + "                        <tr>\r\n"
         + "                            <td style=\"padding-top: 30px; text-align: center; line-height: 0;\">\r\n"
-        + "                                <button type=\"button\" onclick=\"window.open('http://localhost:9090/javaclassS8/')\" style=\"width:260px; height:56px; background-color:black; color:white; border-radius:5px; font-size:16px; font-weight: bold; cursor: pointer;\">예매내역보기</button>\r\n"
+        + "                                <a href=\"http://localhost:9090/javaclassS8/\" target=\"_blank\" style=\"display: inline-block; padding: 24px 40px; background-color: black; color: white; border-radius: 5px; font-size: 16px; font-weight: bold; text-align: center; text-decoration: none; font-family: 돋움;\">예매내역보기</a>\r\n"
         + "                            </td>\r\n"
         + "                        </tr>\r\n"
         + "                        <tr>\r\n"
