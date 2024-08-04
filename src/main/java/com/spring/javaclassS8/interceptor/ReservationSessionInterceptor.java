@@ -18,7 +18,7 @@ public class ReservationSessionInterceptor implements HandlerInterceptor {
 
         if (tempReservation != null && System.currentTimeMillis() > tempReservation.getExpirationTime()) {
             session.removeAttribute("tempReservation");
-            response.sendRedirect(request.getContextPath() + "/reserve/error");
+            response.sendRedirect(request.getContextPath() + "/error/reserve");
             return false;
         }
 

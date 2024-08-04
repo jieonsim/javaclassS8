@@ -38,7 +38,7 @@ public class ReservationVO {
     private String formattedCanceledAt;
     private boolean isCancelable;
     private String sportName;
-    
+    private int cancellationDeadlineMinutes;
 //    public boolean isHasAdvanceTicket() {
 //        return hasAdvanceTicket;
 //    }

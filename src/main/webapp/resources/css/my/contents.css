@@ -1200,14 +1200,14 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 #container.etc_wait .inner{padding:190px 0 0}
 
 /* cdn 에러페이지 */
-#wrap.error_wrap{height:100%;background-color:#f8f9fa;text-align:center}
+/* #wrap.error_wrap{height:100%;background-color:#f8f9fa;text-align:center}
 #wrap.error_wrap .etc_cont{height:100%;margin:0}
 #wrap.error_wrap .etc_cont:after{display:inline-block;height:100%;vertical-align:middle;content:''}
 #wrap.error_wrap .inner{display:inline-block;padding:0;vertical-align:middle}
-#wrap.error_wrap .error_box{width:100%;margin:0;font-size:0}
+#wrap.error_wrap .error_box{width:100%;margin:0;font-size:0} */
 
 /* 약관 */
-.common_container.front_cont{background: #f8f9fa;}
+/* .common_container.front_cont{background: #f8f9fa;}
 .front_tab{overflow:hidden;display: table;table-layout: fixed;width: 100%;}
 .front_tab li{display: table-cell;}
 .front_tab li:first-of-type a{margin-left: 0;}
@@ -1241,7 +1241,7 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .front_cont .front_area .inner_info_list{color:#62676c;padding-left:20px;text-indent:-20px;font-size: 14px;font-weight: 400}
 .front_cont .front_area .user_agree_btn{position:relative;padding-left:8px;color:#62676c;text-decoration:underline}
 .front_cont .front_area .user_agree_btn::before{content:'-';position:absolute;top:50%;left:0;display:block;transform:translateY(-50%)}
-.front_cont .front_area .user_agree_wrap{display:none;margin-bottom:19px}
+.front_cont .front_area .user_agree_wrap{display:none;margin-bottom:19px} */
 
 /*모바일 예매안내*/
 .mobile_reserve+p{margin-bottom:26px;line-height:18px}
@@ -1278,7 +1278,7 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .info_mobile_rsrv.noti .basic_tbl{border-top:1px solid #bababa;border-bottom:1px solid #ecedf2;margin-top:8px}
 
 /*광고 안내*/
-.common_container.addinfo_cont{background:#f8f9fa}
+/* .common_container.addinfo_cont{background:#f8f9fa}
 .addinfo_cont .event_cont_box_v2{padding:101px 31px}
 .ad_logo{margin:0 auto;font-size:70px;line-height:80px;font-weight:700;text-align:center;margin-bottom:30px}
 .addinfo_cont .ad_logo::before{display:inline-block;vertical-align:bottom;content:''}
@@ -1304,10 +1304,10 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .addinfo_cont .ad_step{width:800px;min-height:246px;margin:0 auto 40px;padding:40px 41px;border:1px solid #fa2828;box-sizing:border-box}
 .addinfo_cont .ad_step strong{display:block;margin-bottom:19px;font-size:16px;line-height:16px}
 .addinfo_cont .ad_step ol li{float:none;width:100%;min-height:22px;margin:0;padding:0 0 0 14px;color:#62676c;font-size:14px;text-indent:-12px;line-height:22px}
-.addinfo_cont .btn{display:block;width:228px;margin:0 auto;padding:13px 0;font-size:18px;text-align:center;font-weight:700;line-height:28px}
+.addinfo_cont .btn{display:block;width:228px;margin:0 auto;padding:13px 0;font-size:18px;text-align:center;font-weight:700;line-height:28px} */
 
 /* 공연메인 */
-.controller .pagination{position:absolute;bottom:19px;left:30px}
+/* .controller .pagination{position:absolute;bottom:19px;left:30px}
 .controller .control{position:absolute;bottom:10px;right:10px}
 .controller .pagination span{float:left;width:8px;height:8px;margin-right:6px;background:#878d95;border-radius:50%}
 .controller .pagination a{display:inline-block;overflow:hidden;margin: 0 0 0 -4px}
@@ -1325,7 +1325,7 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .submain_front .top_area .submain_goods li.on{left:0}
 .submain_front .top_area .submain_goods li:first-child{margin:0}
 @media screen and (-webkit-min-device-pixel-ratio:0){
-  /* safari only */
+  safari only
   ::i-block-chrome,.submain_front .top_area .submain_goods li img{border-radius:2px 0 0 2px}
 }
 
@@ -1368,10 +1368,10 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .hr_thmblst .info dt{display:block;visibility:hidden;overflow:hidden;position:absolute;top:-1000em;left:0;display:none}
 .hr_thmblst .info dd{color:#62676c;line-height:22px;font-size: 14px;}
 .hr_thmblst .btn{position:absolute;top:40px;right:0}
-.mbanner_left{position:absolute;top:342px;left:-116px;font-size:0}
+.mbanner_left{position:absolute;top:342px;left:-116px;font-size:0} */
 
 /* 공연상세 */
-.detail_box_top .detail_info_right.noinfo .noinfo_txt{display:block;height:322px;padding:0}
+/* .detail_box_top .detail_info_right.noinfo .noinfo_txt{display:block;height:322px;padding:0}
 .detail_info_right.noinfo .noinfo_txt .dummy{display:inline-block;height:100%;vertical-align:middle}
 .detail_info_right.noinfo .noinfo_txt .txt{display:inline-block;vertical-align:middle;display:inline;zoom:1}
 
@@ -1383,7 +1383,7 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .list_view .th_info .thumb{position:absolute;top:25px;left:20px;width:120px;height:146px}
 .list_view .th_info .title{font-size:16px;line-height:26px;letter-spacing:-1px;color:#242428;font-weight: 700;max-width:450px;margin-bottom: 8px;}
 .list_view .btn{margin-top:10px;padding:4px 11px;font-size:13px;font-weight:400;line-height:18px}
-
+ */
 /* 이벤트 */
 .reveiw_agree{background:#f8f9fa;padding:25px 20px 28px;margin-bottom:15px;color:#242428;font-size: 16px;line-height: 16px;}
 .reveiw_agree .agree_detail{font-size:12px;color:#878d95;line-height:18px;margin-top:15px;}
@@ -1392,7 +1392,7 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .reveiw_agree .input_block label{font-weight:700;font-size: 14px;line-height: 16px;}
 
 /* 앱설치 */
-.app_guide dt,.app_guide dd,.app_guide strong,.app_guide em,.app_guide p{display:block;overflow:hidden;background:url(../img/sp_app.png) no-repeat;line-height:999px}
+/* .app_guide dt,.app_guide dd,.app_guide strong,.app_guide em,.app_guide p{display:block;overflow:hidden;background:url(../img/sp_app.png) no-repeat;line-height:999px}
 .app_guide .app_top{min-height:616px;padding:102px 0 50px 626px;background:url(../img/bg_app2.png) no-repeat 42px 7px}
 .app_guide .app_top strong{width:211px;height:46px;margin-left:1px;background-position:0 0}
 .app_guide .app_top em{background-position:0 -50px;width:307px;height:140px;margin-top:21px}
@@ -1411,10 +1411,10 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .app_bot .appbot_right p{width:302px;height:34px;margin-top:19px;background-position:0 -664px}
 .app_bot .appbot_right dl{margin:24px 0 11px -14px}
 .app_bot .appbot_right dt{width:178px;height:178px;margin-right:16px;background-position:-479px -204px}
-.app_bot .appbot_right dd{width:105px;height:105px;margin-top:49px;background-position:-327px -394px}
+.app_bot .appbot_right dd{width:105px;height:105px;margin-top:49px;background-position:-327px -394px} */
 
 /* 스포츠 도메인 주소변경 */
-.spt_domain{height:100%;background:#fff}
+/* .spt_domain{height:100%;background:#fff}
 .spt_domain .spt_head{width:100%;height:81px;text-align:center;border-bottom:4px solid #fa2828}
 .spt_domain .spt_head h1{display:inline-block;width:100px;height:38px;margin-top:21px;background:url(../img/sp_etc.png) no-repeat -504px -89px}
 
@@ -1423,28 +1423,28 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .spt_domain .spt_cont p{font-size:12px;color:#242428;text-align:center;line-height:22px}
 .spt_domain .spt_cont a.btn{display:block;width:200px;height:40px;margin:32px auto 113px;text-indent:-9999px;cursor:pointer;background:url(../img/sp_etc.png) no-repeat -247px -666px}
 .spt_domain #footer{height:auto;padding-top:20px;border-top:1px solid #ecedf2;background:#fff}
-.spt_domain #footer p{font-family:'Roboto',-apple-system,BlinkMacSystemFont,Apple SD Gothic Neo,'Malgun Gothic',Arial,sans-serif; ;color:#878d95;text-align:center}
+.spt_domain #footer p{font-family:'Roboto',-apple-system,BlinkMacSystemFont,Apple SD Gothic Neo,'Malgun Gothic',Arial,sans-serif; ;color:#878d95;text-align:center} */
 
 /* 광고구좌 영역 */
-.box_banner a{display:block}
-.box_banner img{width:100%}
+/* .box_banner a{display:block}
+.box_banner img{width:100%} */
 
 /* 개인정보 처리방침 */
-.btn_companylist{display:block;text-decoration:underline}
+/* .btn_companylist{display:block;text-decoration:underline}
 .btn_companylist:hover{text-decoration:underline}
-.btn_companylist:after{display:inline-block;padding-left:3px;font-size:12px;line-height:12px;vertical-align:middle;content:'>'}
+.btn_companylist:after{display:inline-block;padding-left:3px;font-size:12px;line-height:12px;vertical-align:middle;content:'>'} */
 
 /* 마이페이지 > 예매정보 사용조건 */
-.basic_tbl.using_condition td{vertical-align:middle}
+/* .basic_tbl.using_condition td{vertical-align:middle}
 .using_condition .layer{width:400px;box-sizing:border-box}
 .using_condition .layer dt, .using_condition .layer dd{margin-top:7px}
 .using_condition .layer dt{width:24%;text-align:left;position: relative;padding-left: 4px;}
 .using_condition .layer dt:first-child{margin-top:0}
 .using_condition .layer dt:before{margin-right:4px;content:'';position: absolute;width: 2px;height: 2px;border-radius: 50%;background: #000;top: 50%;left: 0;transform: translateY(-50%);}
-.using_condition .layer dd{overflow:hidden}
+.using_condition .layer dd{overflow:hidden} */
 
 /* 고객센터 > 결제수단안내 페이지 개선 */
-.help_rcont .info_payment + .guide_txt{margin-bottom:15px;margin-top: 46px;}
+/* .help_rcont .info_payment + .guide_txt{margin-bottom:15px;margin-top: 46px;}
 .help_rcont .tabmenu{position:relative;height:95px;padding-left:184px;border:1px solid #ecedf2;border-right:0;font-size:0;box-sizing:border-box}
 .help_rcont .tabmenu li{display:inline-block;position:relative}
 .help_rcont .tabmenu li + li{margin-left:-1px}
@@ -1492,7 +1492,7 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .giftcard_step dd .step_dsc span:before{position:absolute;top:11px;left:0;width:0;height:0;border:4px solid #242428;border-right:0;border-top-color:transparent;border-bottom-color:transparent;content:''}
 .giftcard_step .bx_img{display:block;position:relative;margin-top:13px}
 .giftcard_step .bx_img + .bx_img{margin-top:52px}
-.giftcard_step .bx_img + .bx_img:before{position:absolute;top:-32px;left:232px;width:25px;height:13px;background:url(../img/sp_help.png) no-repeat -731px -777px;content:''}
+.giftcard_step .bx_img + .bx_img:before{position:absolute;top:-32px;left:232px;width:25px;height:13px;background:url(../img/sp_help.png) no-repeat -731px -777px;content:''} */
 
 /* 이벤트 페이지 (공통) */
 #wrap.event_bridge{min-width:auto}
@@ -1501,7 +1501,7 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 
 
 /* 테스트환경 접근 페이지 */
-#wrap.test_cont{min-width:320px}
+/* #wrap.test_cont{min-width:320px}
 .test_cont #container{max-width:540px;margin:0;background-color:transparent}
 .test_cont #container .inner{width:100%;padding:20px;box-sizing:border-box}
 .test_cont .tit{font-size:4.5em;margin-top:100px}
@@ -1532,7 +1532,7 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .sports_test .bx_input{display:block;position:relative}
 .sports_test .bx_input input{display:block;position:relative;z-index:1;width:100%;background-color:transparent}
 .sports_test .bx_input label{position:absolute;top:3px;left:5px;bottom:3px;margin:0;padding-left:4px;line-height:22px;color:#c5c5c5;text-align:left}
-
+ */
 
 
 @media only screen and (max-width:420px) {
@@ -1546,7 +1546,7 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 }
 
 /* 클린예매 서비스 팝업 */
-.ly_clean_reserve{position:absolute;z-index:20;width:410px;height:423px;padding:20px;border:1px solid #242428;box-sizing:border-box;background-color:#fff;font-weight:normal;text-align:center}
+/* .ly_clean_reserve{position:absolute;z-index:20;width:410px;height:423px;padding:20px;border:1px solid #242428;box-sizing:border-box;background-color:#fff;font-weight:normal;text-align:center}
 .ly_clean_reserve .sp{display:block;background-image:url(../img/sports/sp_sports_sub.png);background-repeat:no-repeat;font-size:0;vertical-align:middle}
 .ly_clean_reserve .pop_tit{display:block;padding-bottom:15px;border-bottom:1px solid #ecedf2}
 .ly_clean_reserve .pop_tit .sp{width:140px;height:17px;margin:0 auto;background-position:-344px -17px}
@@ -1556,10 +1556,10 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .ly_clean_reserve .lst_dsc li{margin-top:5px;;font-size:12px;color:#62676c;letter-spacing:-1px}
 .ly_clean_reserve .lst_dsc li:first-child{margin-top:0}
 .ly_clean_reserve .btn_close{position:absolute;top:0;right:0;padding:11px;border:0;background-color:transparent;cursor:pointer}
-.ly_clean_reserve .btn_close .sp{width:12px;height:11px;background-position:-347px -35px}
+.ly_clean_reserve .btn_close .sp{width:12px;height:11px;background-position:-347px -35px} */
 
 /* PAYCO VIP ZONE */
-.common_container.vip_zone{background: #f8f9fa;}
+/* .common_container.vip_zone{background: #f8f9fa;}
 .common_container.vip_zone .inner{padding-top: 0;}
 .vip_zone .inner{width:auto}
 .vip_zone .bx_img{position:relative;background-color:#1e1e1e;height:470px;font-size:0}
@@ -1619,9 +1619,9 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .vip_zone .lst_item .ico_tag.tag_dominant{background-position:-663px -120px}
 .vip_zone .lst_item .ico_tag.tag_advantage{background-position:-705px -120px}
 .vip_zone .lst_item .flag_bx .flag{margin-top:4px}
-
+ */
 /* PAYCO VIP ZONE > 레이어팝업 */
-.ly_payco_grade .pop_contents{width:550px;padding-top:69px;padding-bottom:47px;text-align:center;box-sizing:border-box}
+/* .ly_payco_grade .pop_contents{width:550px;padding-top:69px;padding-bottom:47px;text-align:center;box-sizing:border-box}
 .ly_payco_grade .tit{display:inline-block;position:relative;padding-left:112px;font-size:28px;font-weight:700;text-align:center;line-height:28px}
 .ly_payco_grade .tit::before{display:inline-block;position:absolute;left:0;top:50%;font-size:0;transform:translateY(-50%);content: ''}
 .ly_payco_grade .dsc{margin-top:14px;font-size:14px;color:#878d95;line-height:22px;letter-spacing:-1px;text-align:center}
@@ -1636,9 +1636,9 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .ly_discount .dsc{margin-top:14px;font-size:14px;color:#62676c;letter-spacing:-1px;text-align:center}
 .ly_discount .bx_img{display:block;margin-top:30px}
 .ly_discount .bx_img img{display:block;width:100%;height:auto}
-
+ */
 /* PAYCO 공연장 상세*/
-.venue_detail.common_container{background:#f8f9fa}
+/* .venue_detail.common_container{background:#f8f9fa}
 .venue_detail.common_container .inner{width:100%;padding-top:0;}
 .venue_detail .sp{font-size:0;line-height:normal;vertical-align:middle}
 .venue_detail .bx_slide{position:relative;height:470px;border-bottom:1px solid #e6e6e6;font-size:0}
@@ -1701,9 +1701,9 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .venue_detail .wrap_item.none .lst_item,
 .venue_detail .wrap_item.none .paging{display:none}
 .venue_detail .wrap_item.none .venue_empty{display:block;text-align:center;font-size: 14px;color: #62676c;}
-
+ */
 /* 소득공제 안내 */
-.common_container.etc_guide.deduction{padding-bottom: 0;}
+/* .common_container.etc_guide.deduction{padding-bottom: 0;}
 .common_container.etc_guide .inner{padding-top: 0;}
 .etc_guide.deduction .inner{width:auto}
 .etc_guide.deduction .inner:before,
@@ -1712,7 +1712,7 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 .etc_guide.deduction .inner:after{right:50%;background-image:url(../img/bg_left_deduction_guide.jpg)}
 .etc_guide.deduction .bx_info{position:relative;z-index:10;width:930px;height:2240px;margin:0 auto;background-image:url(../img/deduction_guide.png);font-size:0}
 .etc_guide.deduction .bx_info .btn_link{position:absolute;top:1425px;left:237px;width:144px;height:38px}
-
+ */
 /* 회원탈퇴 (레이어팝업) */
 .ly_pop_wrap.ly_member_leave{z-index:200;width:100%;height:100%}
 .ly_member_leave .layer{display:block;top:50%;left:50%;z-index:210;width:505px;margin:-182px 0 0 -205px;padding:45px 25px 23px;box-sizing:border-box}

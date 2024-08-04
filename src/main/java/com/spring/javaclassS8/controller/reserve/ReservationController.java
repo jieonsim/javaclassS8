@@ -459,10 +459,6 @@ public class ReservationController {
 		return bookingPolicy.getBookingFeePerTicket() * totalQuantity;
 	}
 
-	@GetMapping("/error")
-	public String error() {
-		return "reserve/error";
-	}
 
 	@GetMapping("/checkSession")
 	@ResponseBody

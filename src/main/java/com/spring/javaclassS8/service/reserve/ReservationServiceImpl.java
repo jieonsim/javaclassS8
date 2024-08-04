@@ -14,6 +14,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.javaclassS8.dao.reserve.ReservationDAO;
+import com.spring.javaclassS8.utils.ReservationCompletedEmailService;
 import com.spring.javaclassS8.vo.reserve.ReservationDetailVO;
 import com.spring.javaclassS8.vo.reserve.ReservationRequest;
 import com.spring.javaclassS8.vo.reserve.ReservationResponse;
@@ -44,8 +46,8 @@ public class ReservationServiceImpl implements ReservationService {
 	@Autowired
 	private HttpSession session;
 
-	// @Autowired
-	// private ReservationCompletedEmailService emailService;
+	@Autowired
+	private ReservationCompletedEmailService emailService;
 
 	//private static final Logger logger = LoggerFactory.getLogger(ReservationServiceImpl.class);
 
@@ -139,7 +141,7 @@ public class ReservationServiceImpl implements ReservationService {
 		ReservationVO reservation = createReservation(request, reservationNumber);
 		reservationDAO.insertReservation(reservation);
 		int reservationId = reservation.getId();
-
+		
 		// 5. reservation_details 테이블 레코드 생성
 		List<ReservationDetailVO> reservationDetails = createReservationDetails(reservationId, request, seatDetails);
 		reservationDAO.insertReservationDetails(reservationDetails);
@@ -153,7 +155,34 @@ public class ReservationServiceImpl implements ReservationService {
 			reservationDAO.insertAdvanceTicketUsage(reservationId, request.getAdvanceTicketIds());
 		}
 		
-		// 8. 예매완료 메일 발송 처리
+		// 새로 삽입된 예약 정보를 조회
+	    reservation = reservationDAO.getReservationById(reservationId);
+	    
+	    // 티켓 가격 총합 계산
+	    int totalTicketPrice = reservationDetails.stream().mapToInt(ReservationDetailVO::getTicketPrice).sum();
+	    reservation.setTotalTicketPrice(totalTicketPrice);
+
+	    // 예매권 할인 금액 계산
+	    List<Map<String, Object>> advanceTicketPrices = reservationDAO.getAdvanceTicketPricesForReservation(reservationId);
+	    int advanceTicketDiscount = advanceTicketPrices.stream().mapToInt(ticket -> ((Number) ticket.get("price")).intValue()).sum();
+	    reservation.setAdvanceTicketDiscount(advanceTicketDiscount);
+	    
+	    // cancellationDeadlineMinutes 설정
+	    int cancellationDeadlineMinutes = reservationDAO.getCancellationDeadlineMinutes(reservation.getSportId());
+	    reservation.setCancellationDeadlineMinutes(cancellationDeadlineMinutes);
+
+	    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	    LocalDateTime gameDateTime = LocalDateTime.parse(reservation.getGameDate() + " " + reservation.getGameTime(), inputFormatter);
+	    LocalDateTime cancelDeadline = gameDateTime.minusMinutes(cancellationDeadlineMinutes);
+	    reservation.setCancelDeadline(cancelDeadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+	    
+	    // 8. 예매완료 메일 발송 처리
+	    String memberEmail = reservationDAO.getEmailByMemberId(request.getMemberId());
+	    try {
+	        emailService.sendReservationCompletedEmail(memberEmail, reservation, reservationDetails);
+	    } catch (MessagingException e) {
+	        throw new RuntimeException("Failed to send confirmation email", e);
+	    }
 
 		ReservationResponse response = new ReservationResponse(true, reservationId, reservationNumber, "예매가 완료되었습니다.");
 		response.setSeatDetails(seatDetails);
@@ -203,6 +232,7 @@ public class ReservationServiceImpl implements ReservationService {
 		reservation.setTicketAmount(request.getTicketAmount());
 		reservation.setBookingFee(request.getBookingFee());
 		reservation.setStatus("예매완료");
+	    
 		return reservation;
 	}
 
@@ -210,6 +240,7 @@ public class ReservationServiceImpl implements ReservationService {
 	private List<ReservationDetailVO> createReservationDetails(int reservationId, ReservationRequest request, List<SeatDetailVO> seatDetails) {
 		List<ReservationDetailVO> reservationDetails = new ArrayList<>();
 		int seatIndex = 0;
+		SeatVO seat = reservationDAO.getSeatById(request.getSeatId());
 		for (TicketTypeRequest ticketType : request.getTicketTypes()) {
 			for (int i = 0; i < ticketType.getTicketQuantity(); i++) {
 				if (seatIndex >= seatDetails.size()) {
@@ -220,6 +251,7 @@ public class ReservationServiceImpl implements ReservationService {
 				detail.setReservationId(reservationId);
 				detail.setSeatId(request.getSeatId());
 				detail.setTicketTypeId(ticketType.getTicketTypeId());
+				detail.setSeatName(seat.getSeatName());
 				detail.setSeatBlock(seatDetail.getSeatBlock());
 				detail.setSeatRow(seatDetail.getSeatRow());
 				detail.setSeatNumber(seatDetail.getSeatNumber());

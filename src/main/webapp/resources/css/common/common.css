@@ -154,7 +154,6 @@ td .input_block .hyphen{color:#878d95}
 .inner{width:1120px;margin:0 auto;position:relative}
 
 /* calendar */
-.ui-datepicker{}
 .ui-datepicker .ui-datepicker-header{position:relative;margin-bottom:8px;text-align:center;height:15px;vertical-align:top}
 .ui-datepicker .ui-datepicker-header a{position:absolute;top:-1px;overflow:hidden;width:9px;height:13px;vertical-align:middle;line-height:-999px;cursor:pointer}
 .ui-datepicker .ui-datepicker-header a.ui-datepicker-prev{left:64px;transform:rotate(180deg)}
@@ -525,9 +524,9 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#242428}
 .basic_tbl_v9 table tbody tr:first-child td{padding:12px 0}
 
 /* 시설 > 로그인/로그아웃 버튼 */
-.bx_topinfo:after{display:block;clear:both;content:''}
+/* .bx_topinfo:after{display:block;clear:both;content:''}
 .bx_topinfo .guide_txt{float:left}
-.btn2.btn_login{float:right;width:78px;padding:6px 0 5px;box-sizing:border-box;border:1px solid #ecedf2;border-radius:2px;background:#f8f8f8;letter-spacing:-1px;font-size:12px;text-align:center}
+.btn2.btn_login{float:right;width:78px;padding:6px 0 5px;box-sizing:border-box;border:1px solid #ecedf2;border-radius:2px;background:#f8f8f8;letter-spacing:-1px;font-size:12px;text-align:center} */
 
 /* 레이어팝업 common */
 .ly_pop_wrap{position:absolute;top:0;left:0;z-index:100} /* 팝업창 안의 레이어팝업용도 */
@@ -583,7 +582,7 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#242428}
 .home .bx_etc .btn_close{position:absolute;top:9px;right:17px;background:none;font-size:0;cursor:pointer}
 .home .bx_etc .btn_close .sp{display:block;width:20px;height:20px;background:url(../img/sp.png) no-repeat -182px -537px}
 
-/* WEB Table 공통 UIO (190111~ 이후 점진적 적용 예정) */
+/* WEB Table 공통 UIO */
 /*.bx_table{background-color:yellow}*/
 .tbl_type{border-top:1px solid #cfd0d7;border-left:0;border-right:0;border-bottom:1px solid #ecedf2}
 .tbl_type .checkbox{margin:-2px 0 0 0}
@@ -600,15 +599,15 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#242428}
 .tbl_reserve_info td{letter-spacing:normal}
 
 /* 쿠폰 레이어 팝업 */
-#wrap_popup.coupon_wrap{background:#f8f9fa}
+/* #wrap_popup.coupon_wrap{background:#f8f9fa}
 #wrap_popup.coupon_wrap #container{padding:0;background:#f8f9fa}
-.ly_add_coupon{position:relative}
+.ly_add_coupon{position:relative} */
 
 /* 쿠폰 상단 */
-.ly_add_coupon .layer_pop_content{width:460px;padding:43px 30px 30px;background:#f8f9fa;border-radius:10px;text-align:center;box-sizing:border-box;z-index:200}
+/* .ly_add_coupon .layer_pop_content{width:460px;padding:43px 30px 30px;background:#f8f9fa;border-radius:10px;text-align:center;box-sizing:border-box;z-index:200}
 .ly_add_coupon .layer_title_area .layer_title{display:block;font-size:26px;line-height:26px;letter-spacing:-0.5px;color:#242428;background:none}
-
-.ly_add_coupon .coupon_content{margin-top:39px}
+ */
+/* .ly_add_coupon .coupon_content{margin-top:39px}
 .ly_add_coupon .coupon_content .coupon_box{position:relative;width:100%;margin-top:20px;padding:0 0 40px;border-radius:30px;background:#fff;box-sizing:border-box}
 .ly_add_coupon .coupon_content .coupon_box:first-child{margin:0}
 .ly_add_coupon .coupon_content .coupon_box.on{height:auto;padding-bottom:40px}
@@ -620,10 +619,10 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#242428}
 .ly_add_coupon .coupon_info_area .discount{height:36px;margin-top:8px;font-size:0;line-height:1;font-weight:bold;color:#fa2828}
 .ly_add_coupon .coupon_info_area .discount .txt{display:inline-block;padding:0;font-size:30px;letter-spacing:-0.25px;vertical-align:middle}
 .ly_add_coupon .coupon_info_area .discount .number{display:inline-block;font-size:36px;letter-spacing:-0.5px;vertical-align:middle}
-.ly_add_coupon .coupon_info_area .terms_txt{margin-top:15px;font-size:13px;line-height:1;font-weight:normal}
+.ly_add_coupon .coupon_info_area .terms_txt{margin-top:15px;font-size:13px;line-height:1;font-weight:normal} */
 
 /* 쿠폰 다운로드 버튼 */
-.ly_add_coupon .coupon_box .coupon_down_box{margin-top:-10px;padding:0 30px 20px;border-left:1px solid #ecedf2;border-right:1px solid #ecedf2;font-size:0;text-align:center}
+/* .ly_add_coupon .coupon_box .coupon_down_box{margin-top:-10px;padding:0 30px 20px;border-left:1px solid #ecedf2;border-right:1px solid #ecedf2;font-size:0;text-align:center}
 .ly_add_coupon .coupon_down_box .btn{display:block;width:100%;padding:9px 0;font-size:14px;font-weight:500;line-height:22px;cursor:pointer}
 .ly_add_coupon .coupon_down_box .btn:disabled{border:1px solid #e4e6e8;background:#e4e6e8;color:#a7acb6;cursor:default;font-weight:500}
 .ly_add_coupon .coupon_down_box .coupon_code{display:inline-block;width:233px;height:40px;border:1px solid #e8eaf1;border-right:0;color:#242428;text-align:center;box-sizing:border-box;font-size: 13px}
@@ -631,23 +630,23 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#242428}
 .ly_add_coupon .coupon_down_box .coupon_code:-ms-input-placeholder{color:#a7acb6}
 .ly_add_coupon .coupon_down_box .btn_full.code{display:inline-block;width:105px;padding:8px 0;border-left:0;border-radius:0;font-size:13px}
 .ly_add_coupon .coupon_box .no_coupon_txt{padding:20px 0;border:1px solid #ecedf2;border-bottom:0;font-size:14px;color:#878d95}
-
+ */
 /* 쿠폰 다운로드 도장마크 */
-.coupon_box .ico_down{position:absolute;top:26px;right:-18px;width:120px;padding:25px;color:#62676c;font-size:36px;font-weight:700;text-align:center;line-height:36px;letter-spacing:-0.04em;transform:rotate(-15deg);box-sizing:border-box}
+/* .coupon_box .ico_down{position:absolute;top:26px;right:-18px;width:120px;padding:25px;color:#62676c;font-size:36px;font-weight:700;text-align:center;line-height:36px;letter-spacing:-0.04em;transform:rotate(-15deg);box-sizing:border-box}
 .coupon_box .ico_down::before{position:absolute;left:50%;top:50%;width:120px;height:120px;border:1px solid #62676c;border-radius:50%;transform:translateX(-50%) translateY(-50%);box-sizing:border-box;content:''}
 .coupon_box .ico_down::after{position:absolute;left:50%;top:50%;width:110px;height:110px;border:1px solid #62676c;border-radius:55%;transform:translateX(-50%) translateY(-50%);box-sizing:border-box;content:''}
 .coupon_box.on .ico_down{display:none}
-
+ */
 /* 쿠폰 상세정보 */
-.ly_add_coupon .coupon_box .coupon_detail_box{display:none}
+/* .ly_add_coupon .coupon_box .coupon_detail_box{display:none}
 .ly_add_coupon .coupon_box.on .coupon_detail_box{display:block}
 .ly_add_coupon .coupon_detail_info{position:relative;border:1px solid #ecedf2;border-bottom:0}
 
 .ly_add_coupon .coupon_detail_info:before{position:absolute;top:-12px;left:-1px;width:12px;height:24px;border:1px solid #ecedf2;border-left:1px solid #f8f9fa;border-top-right-radius:12px;border-bottom-right-radius:12px;background:#f8f9fa;content:''}
 .ly_add_coupon .coupon_detail_info:after{position:absolute;top:-12px;right:-1px;width:12px;height:24px;border:1px solid #ecedf2;border-right:1px solid #f8f9fa;border-top-left-radius:12px;border-bottom-left-radius:12px;background:#f8f9fa;content:''}
-
+ */
 /* 쿠폰 상세 정보 - 테이블 */
-.ly_add_coupon .coupon_table_box{padding:30px}
+/* .ly_add_coupon .coupon_table_box{padding:30px}
 .ly_add_coupon .coupon_table_box .coupon_info_table{width:100%;color:#62676c}
 .ly_add_coupon .coupon_info_table th{padding:11px 0 0 0;font-size:14px;line-height:22px;text-align:left;vertical-align:top;font-weight:normal}
 .ly_add_coupon .coupon_info_table td{padding:11px 0 0 0;font-size:14px;line-height:22px;text-align:left;vertical-align:top;color: #242428;}
@@ -661,22 +660,22 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#242428}
 .ly_add_coupon .coupon_info_table .reserver_detail .reserve_txt{vertical-align:middle}
 .ly_add_coupon .coupon_info_table .reserver_detail .etc{vertical-align:middle}
 .ly_add_coupon .coupon_info_table .btn_reserver_detail{display:inline-block;cursor:pointer}
-/* 쿠폰 상세 정보 - 사용가능 정보 */
-.ly_add_coupon .coupon_use_info{padding:30px;border-top:1px dotted #ecedf2;font-size:16px}
+ *//* 쿠폰 상세 정보 - 사용가능 정보 */
+/* .ly_add_coupon .coupon_use_info{padding:30px;border-top:1px dotted #ecedf2;font-size:16px}
 .ly_add_coupon .coupon_use_info .coupon_use_info_item{margin-top:30px}
 .ly_add_coupon .coupon_use_info .coupon_use_info_item:first-child{margin:0}
 .ly_add_coupon .coupon_use_info .title{font-size:14px;line-height:22px;text-align:left;font-weight:400;color:#242428}
 .ly_add_coupon .coupon_use_info .title .link{text-decoration:underline;color:#242428}
 .ly_add_coupon .coupon_use_info .title .sub_category{display:block;margin-top:5px;font-size:12px;line-height:18px;letter-spacing:-0.5px}
-
+ */
 /* 쿠폰 상세 정보 - 유의사항 */
-.ly_add_coupon .coupon_notice_box{padding:30px;border-top:2px dotted #ecedf2;font-size:16px}
+/* .ly_add_coupon .coupon_notice_box{padding:30px;border-top:2px dotted #ecedf2;font-size:16px}
 .ly_add_coupon .coupon_notice_box .notice_title{font-size:14px;text-align:left;font-weight:400;letter-spacing:-0.5px;color:#242428}
 .ly_add_coupon .coupon_notice_box .notice_list{margin-top:12px;margin-left:7px;text-indent:-7px;text-align:left}
 .ly_add_coupon .coupon_notice_box .notice{margin:0;padding:0;font-size:13px;line-height:21px;letter-spacing:-0.5px;background:#fff;color:#878d95}
-
+ */
 /* 쿠폰 상세 정보 - dropdown_box */
-.select_wrap{margin-top:16px}
+/* .select_wrap{margin-top:16px}
 .select_wrap .dropdown_box{position:relative;margin-top:10px;background:#ffffff}
 .select_wrap .dropdown_box.is_show .dropdown_btn{border-color: #242428;}
 .select_wrap .dropdown_box:first-child{margin-top:0}
@@ -689,26 +688,26 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#242428}
 .select_wrap .dropdown_box .dropdown_list{display:none;overflow-y:auto;width:100%;max-height:146px;padding:7px 10px 8px;border:1px solid #242428;border-top:0;background:#ffffff;box-sizing:border-box;font-size: 14px;}
 .select_wrap .dropdown_box .dropdown_item .btn_item{display:block;width:100%;background:#ffffff;text-align:left}
 .select_wrap .dropdown_box .dropdown_item .btn_item .txt{padding:0;line-height:26px;text-align:left;color:#242428}
-
+ */
 /* 쿠폰 상세 정보 - dropdown_box 열렸을 때 */
-.select_wrap .dropdown_box.is_show .dropdown_list{display:block}
+/* .select_wrap .dropdown_box.is_show .dropdown_list{display:block}
 .select_wrap .dropdown_box.is_show .dropdown_btn .ico{background-position:-325px -289px}
-
+ */
 /* 쿠폰 상세 정보 - dropdown_box 스크롤바 설정 */
-.dropdown_box .dropdown_list::-webkit-scrollbar-width{width:29px;height:30px;border-left: 1px solid #242428;}
-.dropdown_box .dropdown_list::-webkit-scrollbar-thumb{border-right:0;border-bottom: 1px solid #242428;} /* 스크롤 바 막대 */
-.dropdown_box .dropdown_list::-webkit-scrollbar-button:start:decrement,.dropdown_box .dropdown_list::-webkit-scrollbar-button:end:increment{display:inline-block;height:29px;vertical-align:middle} /* 스크롤 바 위,아래 화살표버튼 */
-.dropdown_box .dropdown_list::-webkit-scrollbar-button:start:vertical{background:none;} /* 스크롤 바 위 화살표이미지 */
+/* .dropdown_box .dropdown_list::-webkit-scrollbar-width{width:29px;height:30px;border-left: 1px solid #242428;}
+.dropdown_box .dropdown_list::-webkit-scrollbar-thumb{border-right:0;border-bottom: 1px solid #242428;} 스크롤 바 막대
+.dropdown_box .dropdown_list::-webkit-scrollbar-button:start:decrement,.dropdown_box .dropdown_list::-webkit-scrollbar-button:end:increment{display:inline-block;height:29px;vertical-align:middle} 스크롤 바 위,아래 화살표버튼
+.dropdown_box .dropdown_list::-webkit-scrollbar-button:start:vertical{background:none;} 스크롤 바 위 화살표이미지
 .dropdown_box .dropdown_list::-webkit-scrollbar-button:end:vertical{background:#f8f9fa;border-left: 1px solid #242428;}
-
+ */
 /* 자세히보기 버튼 있는 경우 설정 & 자세히보기 버튼 */
-.ly_add_coupon .coupon_box .coupon_more{position:absolute;left:0;bottom:0;width:100%;border:1px solid #ecedf2;border-bottom-left-radius:30px;border-bottom-right-radius:30px;font-size:0;background:#fff;text-align:center;line-height:40px;cursor:pointer}
+/* .ly_add_coupon .coupon_box .coupon_more{position:absolute;left:0;bottom:0;width:100%;border:1px solid #ecedf2;border-bottom-left-radius:30px;border-bottom-right-radius:30px;font-size:0;background:#fff;text-align:center;line-height:40px;cursor:pointer}
 .ly_add_coupon .coupon_box .coupon_more .txt{display:inline-block;padding:0;font-size:14px;vertical-align:middle}
 .ly_add_coupon .coupon_box .coupon_more .ico{overflow:hidden;display:inline-block;margin-left:2px;font-size:1px;line-height:999px;vertical-align:middle;transform:rotate(90deg)}
 .ly_add_coupon .coupon_box.on .coupon_more .ico{transform:rotate(270deg)}
-
+ */
 /* 쿠폰 - 발급대상 레이어 */
-.ly_add_coupon .coupon_table_box .coupon_info_table .btn_reserve_box{display:inline-block;position:relative;vertical-align:middle}
+/* .ly_add_coupon .coupon_table_box .coupon_info_table .btn_reserve_box{display:inline-block;position:relative;vertical-align:middle}
 .ly_coupon_target{position:absolute;top:20px;right:-47px;width:336px;padding:20px;border:1px solid #242428;background:#ffffff;z-index:20;box-sizing:border-box;display: none;}
 #wrap_popup .ly_coupon_target .ly_tit{padding:0;border:0;font-size:14px;line-height:1;letter-spacing:-0.8px;text-align:left}
 .ly_coupon_target .coupon_table_box{padding:0;margin-top:10px;border-top:1px solid #d4d4d4}
@@ -716,93 +715,10 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#242428}
 .ly_coupon_target .coupon_table_box .coupon_target_table{color:#242428}
 .ly_coupon_target .coupon_table_box .coupon_target_table tr th, .ly_coupon_target .coupon_table_box .coupon_target_table tr td{padding:4px 0;font-size:13px;letter-spacing:0;text-align:left;vertical-align:top}
 .ly_coupon_target .coupon_table_box .coupon_target_table .txt{padding:0}
-
-/* 캐스팅(출연진) 팝업 */
-.layer_casting{overflow:hidden;width:990px;height:900px;padding:0;border-radius:14px;box-sizing:border-box}
-.layer_casting .ly_header{height:108px;padding:18px 0 15px;border-bottom:1px solid #cfd0d7;background-color:#f8f9fa}
-.layer_casting .ly_header .title{display:-webkit-box;overflow:hidden;position:absolute;top:50%;left:0;-webkit-transform:translateY(-50%);transform:translateY(-50%);width:100%;max-height:72px;padding:0 134px;font-size:26px;color:#242428;line-height:38px;letter-spacing:-0.5px;text-align:center;text-overflow:ellipsis;-webkit-line-clamp:2;-webkit-box-orient:vertical;box-sizing:border-box}
-.layer_casting .ly_content{overflow-x:hidden;overflow-y:auto;height:730px;background-color:#fff}
-.layer_casting .btn_close{top:20px;right:30px}
-.layer_casting .calendar_title{padding:0;border:none;letter-spacing:-0.03em}
-
-/* 캐스팅(출연진) 팝업 - 조회 영역 */
-.inquiry_select_wrap{background-color:#fff;text-align:center}
-.calendar_wrap{height:59px;background:#fff;border-bottom:1px solid #cfd0d7;font-size:0;text-align:center;box-sizing:border-box}
-.calendar_wrap:before{display:inline-block;height:100%;vertical-align:middle;content:''}
-.calendar_wrap .calendar_box{position:relative;font-size:0}
-.calendar_wrap .calendar_box, .calendar_wrap .during{display:inline-block;vertical-align:middle}
-.calendar_wrap .calendar_box .date{display:inline-block;font-size:18px;color:#242428;line-height:26px;vertical-align:middle}
-.calendar_wrap .during{padding:0 5px 0 10px;font-size:18px;font-weight:700}
-.calendar_wrap .calendar_box .btn_calendar{display:block}
-.calendar_wrap .calendar_box .btn_calendar::after{display:inline-block;width:19px;height:20px;margin-left:8px;vertical-align:middle;content:''}
-.calender_layer{position:absolute;right:-47px;z-index:3;width:266px;padding:21px 20px 10px;border:1px solid #878d95;background-color:#fff;box-sizing:border-box}
-.calender_layer .ui-datepicker{text-align:center}
-.calender_layer .ui-datepicker .ui-datepicker-header{margin-bottom:15px}
-.calender_layer .ui-datepicker table th, .calender_layer .ui-datepicker table td{width:32px;height:30px;padding:0;text-align:center;vertical-align:middle}
-
-.layer_casting .casting_slide_box{position:relative;max-width:894px;margin:0 auto;padding:30px 0 16px;text-align:center;box-sizing:border-box}
-.layer_casting .casting_slide_box .slide_btn_box{position:absolute;top:62px;z-index:1;width:100%;height:24px}
-.layer_casting .casting_slide_box .slide_inner{overflow:hidden;position:relative;z-index:2;max-width:784px;margin:0 auto}
-.layer_casting .casting_slide_box .casting_list{display:flex;margin: 0 auto}
-.layer_casting .casting_slide_box .casting_item{width:98px;box-sizing:border-box}
-.layer_casting .casting_slide_box .casting_item .btn_item{display:block}
-.layer_casting .casting_slide_box .actor_img{overflow:hidden;position:relative;width:78px;height:78px;margin:0 auto;border-radius:50%;background:url(../img/no_img.png) center/46px no-repeat #f5f6f9;box-sizing:border-box}
-.layer_casting .casting_slide_box .actor_img .actor_all{display:block;padding-top:23px;margin:0 auto;font-size:26px;font-weight:700;line-height:1;color:#e8eaf1}
-.layer_casting .casting_slide_box .actor_img img{position:absolute;left:0;top:0;width:100%;height:100%}
-.layer_casting .casting_slide_box .casting_item.all .actor_img{border:2px solid #ecedf2;background:#fff}
-.layer_casting .casting_slide_box .casting_item.all.active .actor_img{border-color:#242428}
-.layer_casting .casting_slide_box .casting_item .act_wrap{display:flex;align-items:center;width:88px;height:88px;margin:0 auto;border-radius:50%;box-sizing:border-box}
-.layer_casting .casting_slide_box .casting_item:hover .act_wrap{border:2px solid #242428}
-.layer_casting .casting_slide_box .casting_item.active .act_wrap{border:2px solid #242428}
-.layer_casting .casting_slide_box .casting_item.active .actor_img:before,.layer_casting .casting_slide_box .casting_item:hover .actor_img:before{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);z-index:2;content:''}
-.layer_casting .casting_slide_box .casting_item.active .actor_img::after,.layer_casting .casting_slide_box .casting_item:hover .actor_img::after{position:absolute;left:0;top:0;width:78px;height:78px;background:rgba(0,0,0,0.5);z-index:1;content:''}
-.layer_casting .casting_slide_box .casting_item.all.active .act_wrap{width:88px;height:88px;border:none}
-.layer_casting .casting_slide_box .casting_item.all.active:hover .act_wrap{width:88px;height:88px;border:none}
-.layer_casting .casting_slide_box .casting_item.all:hover .act_wrap{border:none}
-.layer_casting .casting_slide_box .casting_item.all:hover .act_wrap::after{display:none}
-.layer_casting .casting_slide_box .casting_item.all:hover .actor_all,.layer_casting .casting_slide_box .casting_item.all.active .actor_all{color:#242428}
-.layer_casting .casting_slide_box .casting_item.all .actor_img::after,.layer_casting .casting_slide_box .casting_item.all:hover .actor_img::after{background:none}
-.layer_casting .casting_slide_box .casting_item.all:hover .actor_img,.layer_casting .casting_slide_box .casting_item.all.active .actor_all{border-color:#242428}
-.layer_casting .casting_slide_box .casting_item.all:hover .actor_img:before, .layer_casting .casting_slide_box .casting_item.all.active .actor_img:before{background:none}
-.layer_casting .casting_slide_box .casting_item.all:hover .actor_name, .layer_casting .casting_slide_box .casting_item.all.active .actor_name{color:#242428}
-.casting_slide_box .actor_info{text-align:center}
-.casting_slide_box .actor_name{margin-top:6px;font-size:15px;line-height:22px}
-.casting_slide_box .actor_role{display:-webkit-box;overflow:hidden;width:84px;max-height:36px;margin:4px auto 0;font-size:13px;color:#878d95;line-height:18px;text-align:center;text-overflow:ellipsis;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.layer_casting .casting_slide_box .prev,.layer_casting .casting_slide_box .next{overflow:hidden;position:absolute;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);cursor:pointer}
-.layer_casting .casting_slide_box .prev{left:0;transform:translateY(-50%) rotate(180deg);}
-.layer_casting .casting_slide_box .next{right:0}
-.layer_casting .casting_slide_box.less_case .slide_btn_box{display:none}
-
-.inquiry_select_wrap .btn_wrap{padding-bottom:17px;border-bottom:1px solid #cfd0d7}
-.inquiry_select_wrap .btn_inquiry{width:110px;border:1px solid #242428;background:#fff;border-radius:6px;color:#242428;font-size:14px;line-height:36px;font-weight:500;box-sizing:border-box}
-.inquiry_select_wrap .btn_inquiry:hover{background:#f5f6f9}
-.inquiry_select_wrap .notice_box{border-bottom:1px solid #cfd0d7}
-.inquiry_select_wrap .notice_box .notice_txt{text-align: center;}
-.inquiry_select_wrap .notice_box .notice_txt em{display:inline-block;font-size:13px;color:#242428;vertical-align:middle;height: 38px;padding: 11px 0; box-sizing: border-box;}
-.inquiry_select_wrap .notice_box .notice_txt:before{display:inline-block;overflow:hidden;width:14px;height:14px;margin-right:4px;margin-top: 4px; background-image:url(../img/sp.png);background-repeat:no-repeat;background-position:-102px -178px;background-size:424px auto;vertical-align:middle;content:''}
-
-/* 캐스팅(출연진) 팝업 - 조회 결과 영역 */
-.inquiry_result_wrap{position:relative;min-height:453px;padding:31px 36px 59px 42px;box-sizing:border-box;background: #f8f9fa}
-.inquiry_result_wrap .result_table_box{padding:0 0 12px }
-.inquiry_result_wrap .result_table_box table{width:100%;table-layout:fixed}
-.inquiry_result_wrap .result_table_box tr:last-child td{border-bottom:0}
-.inquiry_result_wrap .result_table_box td{min-height:50px;padding:10px 0;border-bottom:1px solid #ecedf2;font-size:14px;color:#242428;line-height:24px;box-sizing:border-box}
-.inquiry_result_wrap .result_table_box tr:first-of-type td{padding: 0 0 10px;}
-.inquiry_result_wrap .result_table_box td em{color:#fa2828}
-.inquiry_result_wrap .result_table_box .sat{color:#3d85b9}
-.inquiry_result_wrap .result_table_box .sun{color:#dd6045}
-.inquiry_result_wrap .result_table_box .actor, .inquiry_result_wrap .result_table_box .date, .inquiry_result_wrap .result_table_box .day, .inquiry_result_wrap .result_table_box .time{display:inline-block;vertical-align:middle;}
-.inquiry_result_wrap .result_table_box .time{padding-left: 28px;}
-.inquiry_result_wrap .result_table_box .date, .inquiry_result_wrap .result_table_box .time{font-size:18px;font-family:'Roboto',-apple-system,BlinkMacSystemFont,Apple SD Gothic Neo,'Malgun Gothic',Arial,sans-serif;font-weight: 400;}
-.inquiry_result_wrap .result_table_box .day, .inquiry_result_wrap .result_table_box .actor{font-size:14px}
-.inquiry_result_wrap .result_table_box .day{padding-left: 28px;}
-.inquiry_result_wrap .result_table_box .btn{width:90px;padding:4px 11px;margin-left:10px;font-size:13px;font-weight:400;line-height:18px}
-.inquiry_result_wrap .notice_box{padding:20px 0 0 3px;border-top:1px solid #cfd0d7}
-.inquiry_result_wrap .notice_box .notice_txt{font-size:13px;color:#878d95}
-.inquiry_result_wrap .no_result{padding:151px 0 183px;text-align:center;font-size: 14px;color: #62676c;}
+ */
 
 /* 좌석 위치보기 툴팁 */
-.seat_bx{position:relative}
+/* .seat_bx{position:relative}
 .seat_bx .btn_seat{display:block;background:none;font-size:14px;color:#fa2828;text-decoration:underline;cursor:pointer}
 .seat_bx .tooltip{position:absolute;top:-25px;left:26px;width:71px;height:23px;background:#fff;border:1px solid #242428;text-align:center;font-size:14px;line-height:23px;letter-spacing:-1px}
 .seat_bx .tooltip::before,.seat_bx .tooltip::after{position:absolute;width:0;height:0;border-style:solid;content:''}
@@ -812,11 +728,11 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#242428}
 .seat_bx .tooltip .text{display:block;width:calc(100% - 5px);height:100%;padding-left:5px;font-size:14px;line-height:23px;color:#242428;text-align:left}
 .seat_bx .tooltip .btn_close{position:absolute;top:0;right:0;width:15px;height:23px}
 .seat_bx .tooltip .btn_close::before,.seat_bx .tooltip .btn_close::after{overflow:hidden;position:absolute;right:5px;top:11px;width:9px;height:1px;border-radius:1px;background-color:#242428;transform:rotate(45deg);content:''}
-.seat_bx .tooltip .btn_close::after{transform:rotate(-45deg)}
+.seat_bx .tooltip .btn_close::after{transform:rotate(-45deg)} */
 
 /* 예매확인/취소 여행안내 */
-.guide_line_box{display:flex;align-items:center;margin:40px 0 25px;padding:17px 20px;border:1px solid #ecedf2;border-radius:2px;background:#fff}
-.guide_line_box .guide_text{flex:1;margin-right:20px;font-size:13px;line-height:22px;color:#878d95}
+/* .guide_line_box{display:flex;align-items:center;margin:40px 0 25px;padding:17px 20px;border:1px solid #ecedf2;border-radius:2px;background:#fff}
+.guide_line_box .guide_text{flex:1;margin-right:20px;font-size:13px;line-height:22px;color:#878d95} */
 
 /* 예매 확인/취소 복사하기 */
 .copy_bx .code{color:#fa2828;line-height:18px;vertical-align:middle;word-break:break-all}
@@ -825,8 +741,3 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#242428}
 
 /* body 스크롤 락 */
 .no_scroll{overflow-y:scroll;position:fixed;width:100%;height:100%}
-
-
-/* 여행박사 - 예약확인/취소 테이블 */
-.trip_mypage_reserve .basic_tbl_v3 table thead th{padding:13px 0 12px}
-.trip_mypage_reserve .basic_tbl_v3.basic_tbl_v3_type1 table thead th{padding:14px 18px}

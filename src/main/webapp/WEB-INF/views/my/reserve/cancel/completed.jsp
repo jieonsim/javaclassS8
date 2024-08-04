@@ -64,7 +64,7 @@
 					</div>
 					
 					<div class="list_btn">
-						<a class="btn btn_full">확인하기</a>
+						<a href ="${ctp}/my/reserve/cancel/list" class="btn btn_full">확인하기</a>
 					</div>
 
 					<h5 class="mgt40 text_tit">환불내역</h5>

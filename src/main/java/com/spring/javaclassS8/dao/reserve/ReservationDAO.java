@@ -104,5 +104,8 @@ public interface ReservationDAO {
 	// memberId로 오늘 날짜로부터 관람일이 경과하지 않은 예매완료 건 가져오기
 	List<ReservationVO> getAvailableReservationListByMemberId(int memberId);
 	
+	// memberId로 회원 이메일 가져오기
+	String getEmailByMemberId(int memberId);
+	
 
 }

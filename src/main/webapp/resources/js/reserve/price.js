@@ -438,7 +438,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			.then(data => {
 				console.log('Parsed data:', data);
 				if (data.sessionExpired) {
-					window.location.href = `${ctp}/reserve/error`;
+					window.location.href = `${ctp}/error/reserve`;
 					return;
 				}
 				if (data.success) {
@@ -458,7 +458,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			.then(response => response.json())
 			.then(data => {
 				if (data.sessionExpired) {
-					window.location.href = `${ctp}/reserve/error`;
+					window.location.href = `${ctp}/error/reserve`;
 				}
 			})
 			.catch(error => console.error('Session check error:', error));

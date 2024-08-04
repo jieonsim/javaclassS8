@@ -116,37 +116,66 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>`;
 		return li;
 	}
-	
-	// 예매하기 새 창 열기
-	document.querySelectorAll('.btn_reserve').forEach(button => {
-		button.addEventListener('click', function(e) {
-			e.preventDefault();
-			const gameId = this.getAttribute('href').split('gameId=')[1];
 
-			// AJAX 요청으로 로그인 상태 확인
+	// 이벤트 위임을 사용하여 동적으로 생성되는 요소에도 이벤트 리스너를 등록
+	document.addEventListener('click', function(e) {
+		if (e.target.classList.contains('btn_reserve')) {
+			e.preventDefault();
+			const gameId = e.target.getAttribute('href').split('gameId=')[1];
+
 			fetch(`${ctp}/checkLogin`, {
 				method: 'GET',
-				credentials: 'include' // 쿠키를 포함하기 위해
+				credentials: 'include'
 			}).then(response => response.json()).then(data => {
 				if (data.loggedIn) {
-					// 로그인 상태면 예매 창 열기
 					window.open(`${ctp}/reserve/seat?gameId=${gameId}`, '티켓챔프', 'width=990,height=820');
 				} else {
-					// 로그인 상태가 아니면 부모 창에서 로그인 페이지로 이동
 					window.location.href = `${ctp}/login`;
 				}
 			}).catch(error => {
 				console.error('Error checking login status:', error);
 			});
-		});
+		}
 	});
-	// 부모 창에서 메시지 수신 후 처리(예매 창 닫고 예매확인으로 이동)
+
 	window.addEventListener('message', function(e) {
 		if (e.data === 'navigateToReserveList') {
 			window.location.href = `${ctp}/my/reserve/list`;
 		}
 	});
 
-	// 초기 로드 시 야구 경기 표시
 	updateGameList('야구');
+
+	/*	// 예매하기 새 창 열기
+		document.querySelectorAll('.btn_reserve').forEach(button => {
+			button.addEventListener('click', function(e) {
+				e.preventDefault();
+				const gameId = this.getAttribute('href').split('gameId=')[1];
+	
+				// AJAX 요청으로 로그인 상태 확인
+				fetch(`${ctp}/checkLogin`, {
+					method: 'GET',
+					credentials: 'include' // 쿠키를 포함하기 위해
+				}).then(response => response.json()).then(data => {
+					if (data.loggedIn) {
+						// 로그인 상태면 예매 창 열기
+						window.open(`${ctp}/reserve/seat?gameId=${gameId}`, '티켓챔프', 'width=990,height=820');
+					} else {
+						// 로그인 상태가 아니면 부모 창에서 로그인 페이지로 이동
+						window.location.href = `${ctp}/login`;
+					}
+				}).catch(error => {
+					console.error('Error checking login status:', error);
+				});
+			});
+		});
+		// 부모 창에서 메시지 수신 후 처리(예매 창 닫고 예매확인으로 이동)
+		window.addEventListener('message', function(e) {
+			if (e.data === 'navigateToReserveList') {
+				window.location.href = `${ctp}/my/reserve/list`;
+			}
+		});
+	
+		// 초기 로드 시 야구 경기 표시
+		updateGameList('야구');*/
 });

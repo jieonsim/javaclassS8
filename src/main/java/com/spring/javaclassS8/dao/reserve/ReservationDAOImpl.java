@@ -195,4 +195,10 @@ public class ReservationDAOImpl implements ReservationDAO {
 	public List<ReservationVO> getAvailableReservationListByMemberId(int memberId) {
 		return sqlSession.getMapper(ReservationDAO.class).getAvailableReservationListByMemberId(memberId);
 	}
+	
+	// memberId로 회원 이메일 가져오기
+	@Override
+	public String getEmailByMemberId(int memberId) {
+		return sqlSession.getMapper(ReservationDAO.class).getEmailByMemberId(memberId);
+	}
 }

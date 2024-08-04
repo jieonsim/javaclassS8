@@ -141,7 +141,9 @@ public class MyReservationController {
 	@GetMapping("/cancel/completed")
 	public String getCancelCompleted(@RequestParam("reservationId") int reservationId, Model model) {
 		Map<String, Object> reservationInfo = myReservationService.getReservationDetail(reservationId);
+		Map<String, Object> cancelInfo = myReservationService.getCancelInfo(reservationId);
 		model.addAttribute("reservation", reservationInfo.get("reservation"));
+		model.addAttribute("cancelInfo", cancelInfo);
 		return "my/reserve/cancel/completed";
 	}
 }

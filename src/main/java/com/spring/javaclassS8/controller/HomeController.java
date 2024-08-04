@@ -14,22 +14,27 @@ import com.spring.javaclassS8.vo.sports.GameVO;
 
 @Controller
 public class HomeController {
-	
-    @Autowired
-    private ReservationService reservationService;
-	
-    @GetMapping("/")
-    public String home(Model model) {
-        List<GameVO> baseballGames = reservationService.getUpcomingGames("야구");
-        List<GameVO> footballGames = reservationService.getUpcomingGames("축구");
-        model.addAttribute("baseballGames", baseballGames);
-        model.addAttribute("footballGames", footballGames);
-        return "home";
-    }
-    
-    @GetMapping("/getGames")
-    @ResponseBody
-    public List<GameVO> getGames(@RequestParam String sport) {
-        return reservationService.getUpcomingGames(sport);
-    }
+
+	@Autowired
+	private ReservationService reservationService;
+
+	@GetMapping("/")
+	public String home(Model model) {
+		List<GameVO> baseballGames = reservationService.getUpcomingGames("야구");
+		List<GameVO> footballGames = reservationService.getUpcomingGames("축구");
+		model.addAttribute("baseballGames", baseballGames);
+		model.addAttribute("footballGames", footballGames);
+		return "home";
+	}
+
+	@GetMapping("/getGames")
+	@ResponseBody
+	public List<GameVO> getGames(@RequestParam String sport) {
+		return reservationService.getUpcomingGames(sport);
+	}
+
+	@GetMapping("/reservationCompletedMail")
+	public String reservationCompletedMail() {
+		return "mail/reservationCompletedMail";
+	}
 }
