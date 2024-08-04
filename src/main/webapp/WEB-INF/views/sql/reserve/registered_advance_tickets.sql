@@ -9,3 +9,12 @@ CREATE TABLE registered_advance_tickets (
     FOREIGN KEY (advanceTicketId) REFERENCES advance_tickets(id),
     UNIQUE KEY (advanceTicketId)
 );
+
+desc registered_advance_tickets;
+ Field           Type      Null Key Default           Extra
+ --------------- --------- ---- --- ----------------- --------------
+ id              int(11)   NO   PRI NULL              auto_increment
+ memberId        int(11)   NO   MUL NULL              
+ advanceTicketId int(11)   NO   UNI NULL              
+ registeredAt    timestamp NO       CURRENT_TIMESTAMP 
+

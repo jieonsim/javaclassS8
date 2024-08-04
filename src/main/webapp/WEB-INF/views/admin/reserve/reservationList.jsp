@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -35,44 +36,60 @@
 											<colgroup>
 												<col style="width: 5%" />
 												<col style="width: 10%" />
+												<col style="width: 15%" />
+												<col style="width: 15%" />
+												<col style="width: 5%" />
+												<col style="width: 10%" />
 												<col style="width: 10%" />
 												<col style="width: 15%" />
 												<col style="width: 15%" />
-												<col style="width: 20%" />
-												<col style="width: 5%" />
-												<col style="width: 5%" />
 											</colgroup>
 											<thead class="text-center">
 												<tr>
-													<th>종목</th>
-													<th>날짜</th>
-													<th>시간</th>
-													<th>홈</th>
-													<th>어웨이</th>
-													<th>경기장</th>
-													<th colspan="2">비고</th>
+													<th>No.</th>
+													<th>예매번호</th>
+													<th>티켓명</th>
+													<th>경기일시</th>
+													<th>티켓매수</th>
+													<th>결제금액</th>
+													<th>예매상태</th>
+													<th>예매일시</th>
+													<th>취소일시</th>
 												</tr>
 											</thead>
 											<tbody class="text-center">
-												<c:forEach var="game" items="${games}">
-													<tr data-id="${game.id}">
-														<td>${game.sportName}</td>
-														<td class="game-gameDate">${game.gameDate}</td>
-														<td class="game-input" style="display: none;">
-															<input type="date" class="form-control text-center" name="gameDate" value="${game.gameDate}">
-														</td>
-														<td class="game-gameTime">${game.gameTime}</td>
-														<td class="game-input" style="display: none;">
-															<input type="time" class="form-control text-center" name="gameTime" value="${game.gameTime}">
-														</td>
-														<td>${game.homeTeamName}</td>
-														<td>${game.awayTeamName}</td>
-														<td>${game.venueName}</td>
+												<c:forEach items="${reservations}" var="reservation" varStatus="status">
+													<tr>
+														<td>${status.count}</td>
+														<td>${reservation.reservationNumber}</td>
+														<td>${reservation.homeTeamName}&nbsp;vs&nbsp;${reservation.awayTeamName}</td>
+														<td>${reservation.gameDate}&nbsp;${reservation.gameTime}</td>
+														<td>${reservation.ticketAmount}매</td>
 														<td>
-															<button class="badge badge-warning bg-white game-update-btn">수정</button>
+															<fmt:formatNumber value="${reservation.totalAmount}" type="number" />
+															원
 														</td>
 														<td>
-															<button class="badge badge-danger bg-white game-delete-btn">삭제</button>
+															<c:choose>
+																<c:when test="${reservation.status eq '예매완료'}">
+																	<label class="badge badge-success">${reservation.status}</label>
+																</c:when>
+																<c:when test="${reservation.status eq '취소완료'}">
+																	<label class="badge badge-danger">${reservation.status}</label>
+																</c:when>
+																<c:otherwise>
+																	<label class="badge badge-secondary">${reservation.status}</label>
+																</c:otherwise>
+															</c:choose>
+														</td>
+														<td>${reservation.createdAt}</td>
+														<td>
+															<c:choose>
+																<c:when test="${empty reservation.canceledAt}">취소 이력 없음</c:when>
+																<c:otherwise>
+																	<fmt:formatDate value="${reservation.canceledAt}" pattern="yyyy-MM-dd HH:mm:ss" />
+																</c:otherwise>
+															</c:choose>
 														</td>
 													</tr>
 												</c:forEach>
@@ -88,7 +105,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="${ctp}/js/admin/sports/game/gameList.js"></script>
 	<script src="${ctp}/js/admin/common/off-canvas.js"></script>
 	<script src="${ctp}/js/admin/common/hoverable-collapse.js"></script>
 	<script src="${ctp}/js/admin/common/template.js"></script>

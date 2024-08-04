@@ -14,10 +14,6 @@ CREATE TABLE reservations (
     FOREIGN KEY (gameId) REFERENCES games(id),
     UNIQUE KEY (reservationNumber)
 );
-
-desc members;
-
-
 desc reservations;
  Field             Type                Null Key Default           Extra
  ----------------- ------------------- ---- --- ----------------- --------------

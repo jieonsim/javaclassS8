@@ -84,7 +84,7 @@
 			<div class="collapse" id="reservation">
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item">
-						<a class="nav-link" href="#">예매리스트</a>
+						<a class="nav-link" href="${ctp}/admin/reservation/reservationList">예매리스트</a>
 					</li>
 				</ul>
 			</div>
@@ -105,7 +105,7 @@
 			<div class="collapse" id="advanceTicket">
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item">
-						<a class="nav-link" href="#">예매권 발행 리스트</a>
+						<a class="nav-link" href="${ctp}/admin/reservation/advanceTicket/advanceTicketList">예매권 리스트</a>
 					</li>
 				</ul>
 			</div>

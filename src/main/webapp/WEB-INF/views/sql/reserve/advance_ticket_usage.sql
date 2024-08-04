@@ -10,12 +10,14 @@ CREATE TABLE advance_ticket_usage (
 );
 
 desc advance_ticket_usage;
- Field           Type      Null Key Default           Extra
- --------------- --------- ---- --- ----------------- --------------
- id              int(11)   NO   PRI NULL              auto_increment
- reservationId   int(11)   NO   MUL NULL              
- advanceTicketId int(11)   NO   MUL NULL              
- usedAt          timestamp NO       CURRENT_TIMESTAMP 
+ Field           Type                     Null Key Default           Extra
+ --------------- ------------------------ ---- --- ----------------- --------------
+ id              int(11)                  NO   PRI NULL              auto_increment
+ reservationId   int(11)                  NO   MUL NULL              
+ advanceTicketId int(11)                  NO   MUL NULL              
+ usedAt          timestamp                NO       CURRENT_TIMESTAMP 
+ status          enum('USED','CANCELLED') NO       USED              
+
  
 ALTER TABLE advance_ticket_usage 
 ADD COLUMN status ENUM('USED', 'CANCELLED') NOT NULL DEFAULT 'USED';

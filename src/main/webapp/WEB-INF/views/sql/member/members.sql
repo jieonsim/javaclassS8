@@ -16,8 +16,6 @@ CREATE TABLE members (
     PRIMARY KEY (id),
     UNIQUE KEY (email)
 );
-
-
 desc members;
  Field            Type                 Null Key Default           Extra
  ---------------- -------------------- ---- --- ----------------- ---------------------------

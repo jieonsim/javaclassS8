@@ -10,5 +10,69 @@
 		VALUES (#{adminId}, #{advanceTicketNumber},
 		#{used}, #{expiresAt}, #{issuedAt})
 	</insert>
-
+	
+	<!-- 예매리스트 가져오기 -->
+	<select id="getAllReservations" resultType="com.spring.javaclassS8.vo.reserve.ReservationVO">
+	    SELECT 
+	        r.id,
+	        r.reservationNumber,
+	        ht.teamName AS homeTeamName,
+	        at.teamName AS awayTeamName,
+	        DATE_FORMAT(g.gameDate, '%Y-%m-%d') AS gameDate,
+	        DATE_FORMAT(g.gameTime, '%H:%i') AS gameTime,
+	        r.ticketAmount,
+	        r.totalAmount,
+	        r.status,
+	        DATE_FORMAT(r.createdAt, '%Y-%m-%d %H:%i:%s') AS createdAt,
+	        r.canceledAt
+	    FROM 
+	        reservations r
+	        JOIN games g ON r.gameId = g.id
+	        JOIN teams ht ON g.homeTeamId = ht.id
+	        JOIN teams at ON g.awayTeamId = at.id
+	    ORDER BY 
+	        r.createdAt DESC
+	</select>
+	
+	<!-- 예매권 발행 정보 가져오기 -->
+    <select id="getAdvanceTicketList" resultType="com.spring.javaclassS8.vo.reserve.AdvanceTicketInfoVO">
+       SELECT 
+           at.id,
+           at.advanceTicketNumber,
+           at.issuedAt,
+           at.expiresAt,
+           at.used,
+           CASE 
+               WHEN rat.id IS NULL THEN 'N'
+               ELSE 'Y'
+           END AS isRegistered,
+           CASE
+               WHEN at.used = 0 AND atu.id IS NULL THEN 'NONE'
+               WHEN at.used = 0 AND atu.status = 'CANCELLED' THEN 'CANCELLED'
+               WHEN at.used = 1 AND atu.status = 'USED' THEN 'USED'
+           END AS usageStatus,
+           rat.registeredAt,
+           m_reg.email AS registerEmail,
+           atu.usedAt,
+           m_used.email AS userEmail,
+           r.reservationNumber,
+           m_admin.email AS adminEmail
+       FROM 
+           advance_tickets at
+       LEFT JOIN 
+           registered_advance_tickets rat ON at.id = rat.advanceTicketId
+       LEFT JOIN 
+           advance_ticket_usage atu ON at.id = atu.advanceTicketId
+       LEFT JOIN 
+           reservations r ON atu.reservationId = r.id
+       LEFT JOIN 
+           members m_reg ON rat.memberId = m_reg.id
+       LEFT JOIN 
+           members m_used ON at.usedByMemberId = m_used.id
+       LEFT JOIN 
+           members m_admin ON at.adminId = m_admin.id
+       ORDER BY 
+           at.issuedAt DESC
+    </select>
+	
 </mapper>

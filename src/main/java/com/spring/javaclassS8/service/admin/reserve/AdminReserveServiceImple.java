@@ -16,7 +16,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.spring.javaclassS8.dao.admin.reserve.AdminReserveDAO;
 import com.spring.javaclassS8.vo.member.MemberVO;
+import com.spring.javaclassS8.vo.reserve.AdvanceTicketInfoVO;
 import com.spring.javaclassS8.vo.reserve.AdvanceTicketVO;
+import com.spring.javaclassS8.vo.reserve.ReservationVO;
 
 @Service
 public class AdminReserveServiceImple implements AdminReserveService {
@@ -77,4 +79,18 @@ public class AdminReserveServiceImple implements AdminReserveService {
 		}
 		return -1; // 로그인한 관리자가 없는 경우
 	}
+	
+	// 예매 리스트
+    @Override
+    public List<ReservationVO> getAllReservations() {
+        return adminReserveDAO.getAllReservations();
+    }
+
+	// 예매권 발행 리스트
+    @Override
+    public List<AdvanceTicketInfoVO> getAdvanceTicketList() {
+        return adminReserveDAO.getAdvanceTicketList();
+    }
+
+
 }
