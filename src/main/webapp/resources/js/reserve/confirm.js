@@ -107,6 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
 				buyer_tel: buyerTel,
 			}, function(rsp) {
 				if (rsp.success) {
+					document.getElementById('loading_layer').style.display = 'block';
+					document.getElementById('loading_dimmed').style.display = 'block';
 					// 결제 성공 시 서버에 데이터 전송
 					processReservation(requestData);
 				} else {
@@ -127,16 +129,20 @@ document.addEventListener('DOMContentLoaded', function() {
 		})
 			.then(response => response.json())
 			.then(data => {
-				console.log("Server response:", data); 
+				console.log("Server response:", data);
 				if (data.success) {
 					window.location.href = `${ctp}/reserve/completed?reservationId=${data.reservationId}&reservationNumber=${data.reservationNumber}`;
 				} else {
 					alert('예약 처리 중 오류가 발생했습니다: ' + data.message);
+					document.getElementById('loading_layer').style.display = 'none';
+					document.getElementById('loading_dimmed').style.display = 'none';
 				}
 			})
 			.catch(error => {
 				console.error('Error:', error);
 				alert('서버 통신 중 오류가 발생했습니다.');
+				document.getElementById('loading_layer').style.display = 'none';
+				document.getElementById('loading_dimmed').style.display = 'none';
 			});
 	}
 

@@ -32,9 +32,4 @@ public class HomeController {
 	public List<GameVO> getGames(@RequestParam String sport) {
 		return reservationService.getUpcomingGames(sport);
 	}
-
-	@GetMapping("/reservationCompletedMail")
-	public String reservationCompletedMail() {
-		return "mail/reservationCompletedMail";
-	}
 }

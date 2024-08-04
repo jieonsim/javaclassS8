@@ -1,10 +1,12 @@
 package com.spring.javaclassS8.utils;
 
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import javax.mail.MessagingException;
@@ -48,11 +50,17 @@ public class ReservationCompletedEmailService {
         String paymentMethod = reservation.getTotalAmount() == 0 ? "스포츠 예매권" : "신용카드";
         String reservationNumber = reservation.getReservationNumber();
         String venueName = reservation.getVenueName();
+        
         int totalTicketPrice = reservation.getTotalTicketPrice();
         int advanceTicketDiscount = reservation.getAdvanceTicketDiscount();
         int ticketPrice = totalTicketPrice - advanceTicketDiscount;
         int bookingFee = reservation.getBookingFee();
         int totalAmount = reservation.getTotalAmount();
+        
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.KOREA);
+        String formattedTicketPrice = numberFormat.format(ticketPrice);
+        String formattedBookingFee = numberFormat.format(bookingFee);
+        String formattedTotalAmount = numberFormat.format(totalAmount);
         
         // cancelDeadline 포맷팅
         String cancelDeadline = reservation.getCancelDeadline();
@@ -207,7 +215,7 @@ public class ReservationCompletedEmailService {
         + "                                                <span style=\"font-family: Arial;\"> 티켓금액 </span>\r\n"
         + "                                            </th>\r\n"
         + "                                            <td align=\"left\" valign=\"middle\" width=\"480\" height=\"31\" style=\"padding: 0 10px; border-top: 1px solid #ecedf2; font-size: 12px; color: #62676c\">\r\n"
-        + "                                                <span style=\"font-family: Arial;\"> " + ticketPrice + "원 </span>\r\n"
+        + "                                                <span style=\"font-family: Arial;\"> " + formattedTicketPrice + "원 </span>\r\n"
         + "                                            </td>\r\n"
         + "                                        </tr>\r\n"
         + "                                        <tr>\r\n"
@@ -215,7 +223,7 @@ public class ReservationCompletedEmailService {
         + "                                                <span style=\"font-family: Arial;\"> 예매수수료 </span>\r\n"
         + "                                            </th>\r\n"
         + "                                            <td align=\"left\" valign=\"middle\" width=\"480\" height=\"31\" style=\"padding: 0 10px; border-top: 1px solid #ecedf2; font-size: 12px; color: #62676c\">\r\n"
-        + "                                                <span style=\"font-family: Arial;\"> " + bookingFee + "원 </span>\r\n"
+        + "                                                <span style=\"font-family: Arial;\"> " + formattedBookingFee + "원 </span>\r\n"
         + "                                            </td>\r\n"
         + "                                        </tr>\r\n"
         + "                                        <tr>\r\n"
@@ -224,7 +232,7 @@ public class ReservationCompletedEmailService {
         + "                                            </th>\r\n"
         + "                                            <td align=\"left\" valign=\"middle\" width=\"480\" height=\"31\" style=\"padding: 0 10px; border-top: 1px solid #ecedf2; font-size: 12px; color: #fa2828\">\r\n"
         + "                                                <span style=\"font-family: Arial;\"> </span>\r\n"
-        + "                                                <strong><span style=\"font-family: Arial;\">" + totalAmount + "원</span></strong>\r\n"
+        + "                                                <strong><span style=\"font-family: Arial;\">" + formattedTotalAmount + "원</span></strong>\r\n"
         + "                                                <span style=\"font-family: Arial;\"> </span>\r\n"
         + "                                            </td>\r\n"
         + "                                        </tr>\r\n"
@@ -234,7 +242,7 @@ public class ReservationCompletedEmailService {
         + "                        </tr>\r\n"
         + "                        <tr>\r\n"
         + "                            <td style=\"padding-top: 30px; text-align: center; line-height: 0;\">\r\n"
-        + "                                <a href=\"http://localhost:9090/javaclassS8/\" target=\"_blank\" style=\"display: inline-block; padding: 24px 40px; background-color: black; color: white; border-radius: 5px; font-size: 16px; font-weight: bold; text-align: center; text-decoration: none; font-family: 돋움;\">예매내역보기</a>\r\n"
+        + "                                <a href=\"http://localhost:9090/javaclassS8/my/reserve/list\" target=\"_blank\" style=\"display: inline-block; padding: 24px 40px; background-color: black; color: white; border-radius: 5px; font-size: 16px; font-weight: bold; text-align: center; text-decoration: none; font-family: 돋움;\">예매내역보기</a>\r\n"
         + "                            </td>\r\n"
         + "                        </tr>\r\n"
         + "                        <tr>\r\n"

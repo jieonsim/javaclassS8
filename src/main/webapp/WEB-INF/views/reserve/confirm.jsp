@@ -319,6 +319,19 @@
 				</form>
 			</div>
 		</div>
+		<div class="ly_pop_wrap ly_captcha ng-isolate-scope" id="loading_layer" style="display: none;">
+			<div class="dimmed" id="loading_dimmed" style="display: none;"></div>
+			<div class="layer" style="width: 300px; height: 150px; top: 65%;">
+				<div class="area_captcha">
+					<div class="captcha_info" style="text-align: center">
+						<div class="bx_img" style="width: 200px; height: 50px; padding: 30px; font-family: Pretendard-Regular;">
+							<h3 style="margin-bottom: 5px;">예매 처리 중입니다.</h3>
+							<span style="font-size: 14px;">잠시만 기다려주세요.</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<script>
 		var memberId = ${member.id};

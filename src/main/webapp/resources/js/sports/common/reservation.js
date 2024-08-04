@@ -74,14 +74,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			});
 		});
 	});
-	/*	// 예매하기 새 창 열기
-		document.querySelectorAll('.btn_reserve').forEach(button => {
-			button.addEventListener('click', function(e) {
-				e.preventDefault();
-				const gameId = this.getAttribute('href').split('gameId=')[1];
-				window.open(`${ctp}/reserve/seat?gameId=${gameId}`, '티켓챔프', 'width=990,height=820');
-			});
-		});*/
 
 	// 부모 창에서 메시지 수신 후 처리(예매 창 닫고 예매확인으로 이동)
 	window.addEventListener('message', function(e) {
