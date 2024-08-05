@@ -18,8 +18,9 @@ public class AdminMemberServiceImple implements AdminMemberService {
 	
 	// 회원 리스트 - 모든 회원 정보 가져오기
 	@Override
-	public List<MemberVO> getAllMembers() {
-		return adminMemberDAO.getAllMembers();
+	public List<MemberVO> getAllMembers(int page, int pageSize) {
+		int offset = (page - 1) * pageSize;
+		return adminMemberDAO.getAllMembers(offset, pageSize);
 	}
 	
 	// 회원 정보(회원 등급 / 활동 상태 ) 업데이트
@@ -47,4 +48,10 @@ public class AdminMemberServiceImple implements AdminMemberService {
     public List<MemberVO> searchMembers(String keyword, Integer status, String role) {
         return adminMemberDAO.searchMembers(keyword, status, role);
     }
+    
+    // 전체 회원 수 가져오기(페이징)
+	@Override
+	public int getTotalMembersCount() {
+		return adminMemberDAO.getTotalMembersCount();
+	}
 }

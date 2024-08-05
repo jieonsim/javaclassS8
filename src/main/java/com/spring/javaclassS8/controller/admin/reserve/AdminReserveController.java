@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.javaclassS8.service.admin.reserve.AdminReserveService;
 import com.spring.javaclassS8.service.my.reserve.MyReservationService;
+import com.spring.javaclassS8.utils.PaginationInfo;
 import com.spring.javaclassS8.vo.reserve.AdvanceTicketInfoVO;
 import com.spring.javaclassS8.vo.reserve.AdvanceTicketVO;
 import com.spring.javaclassS8.vo.reserve.ReservationVO;
@@ -53,9 +54,16 @@ public class AdminReserveController {
 
 	// 예매 리스트
 	@GetMapping("/reservationList")
-	public String getReservationList(Model model) {
-		List<ReservationVO> reservations = adminReserveService.getAllReservations();
+	public String getReservationList(@RequestParam(defaultValue = "1") int page,Model model) {
+		int pageSize = 10;
+	    int totalCount = adminReserveService.getTotalReservationCount();
+	    PaginationInfo paginationInfo = new PaginationInfo(totalCount, pageSize, page);
+		
+		List<ReservationVO> reservations = adminReserveService.getAllReservations(page, pageSize);
+		
 		model.addAttribute("reservations", reservations);
+		model.addAttribute("paginationInfo", paginationInfo);
+		
 		return "admin/reserve/reservationList";
 	}
 
@@ -112,11 +120,17 @@ public class AdminReserveController {
 		return ResponseEntity.ok(response);
 	}
 
-	// 예매권 발행 리스트
+	// 예매권 리스트
 	@GetMapping("/advanceTicket/advanceTicketList")
-	public String getAdvanceTicketList(Model model) {
-		List<AdvanceTicketInfoVO> advanceTickets = adminReserveService.getAdvanceTicketList();
+	public String getAdvanceTicketList(@RequestParam(defaultValue = "1") int page, Model model) {
+	    int pageSize = 10;
+	    int totalCount = adminReserveService.getTotalAdvanceTicketsCount();
+	    PaginationInfo paginationInfo = new PaginationInfo(totalCount, pageSize, page);
+		
+		List<AdvanceTicketInfoVO> advanceTickets = adminReserveService.getAdvanceTicketList(page, pageSize);
+	    
 		model.addAttribute("advanceTickets", advanceTickets);
+		model.addAttribute("paginationInfo", paginationInfo);
 		return "admin/reserve/advanceTicket/advanceTicketList";
 	}
 }

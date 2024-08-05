@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.javaclassS8.dao.discount.AdvanceTicketDAO;
+import com.spring.javaclassS8.utils.PaginationInfo;
 import com.spring.javaclassS8.vo.member.MemberVO;
 
 @Service
@@ -72,8 +73,12 @@ public class AdvanceTicketServiceImpl implements AdvanceTicketService {
 
 	// memberId로 해당 유저에 등록된 예매권 정보 가져오기
 	@Override
-	public List<Map<String, Object>> getAdvanceTicketsByMemberId(int memberId) {
-		List<Map<String, Object>> tickets = advanceTicketDAO.getAdvanceTicketsByMemberId(memberId);
+	public Map<String, Object> getAdvanceTicketsByMemberId(int memberId, int page, int pageSize) {
+		int totalCount = advanceTicketDAO.getAdvanceTicketsCountByMemberId(memberId);
+	    PaginationInfo paginationInfo = new PaginationInfo(totalCount, pageSize, page);
+		
+	    int offset = (page - 1) * pageSize;
+		List<Map<String, Object>> tickets = advanceTicketDAO.getAdvanceTicketsByMemberId(memberId, offset, pageSize);
 
 		for (Map<String, Object> ticket : tickets) {
 			// 유효기간 형식 변경
@@ -94,7 +99,12 @@ public class AdvanceTicketServiceImpl implements AdvanceTicketService {
 				ticket.put("statusClass", "color_point");
 			}
 		}
-		return tickets;
+		
+	    Map<String, Object> result = new HashMap<>();
+	    result.put("advanceTickets", tickets);
+	    result.put("paginationInfo", paginationInfo);
+	    
+		return result;
 	}
 
 	// 마이페이지 > 할인혜택 > 예매권 > 사용가능/사용완료/유효기간만료 필터링

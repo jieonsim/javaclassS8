@@ -59,8 +59,8 @@ public class AdminEventDAOImpl implements AdminEventDAO {
 
 	// 이벤트 추첨 리스트
 	@Override
-	public List<EventDrawSummaryVO> getEventDrawSummaries() {
-		return sqlSession.getMapper(AdminEventDAO.class).getEventDrawSummaries();
+	public List<EventDrawSummaryVO> getEventDrawSummaries(int offset, int pageSize) {
+		return sqlSession.getMapper(AdminEventDAO.class).getEventDrawSummaries(offset, pageSize);
 	}
 
 	// 이벤트 당첨자 디테일
@@ -108,5 +108,23 @@ public class AdminEventDAOImpl implements AdminEventDAO {
 	    int updatedRows = sqlSession.update("com.spring.javaclassS8.dao.admin.event.AdminEventDAO.updateWinnerIsAnnounced", paramMap);
 	    System.out.println("Updated " + updatedRows + " rows for eventId: " + eventId + ", drawAt: " + drawAt);
 	    return updatedRows;
+	}
+
+	// 이벤트 전체 리스트 가져오기
+	@Override
+	public List<EventVO> getAllEvents(int offset, int pageSize) {
+		return sqlSession.getMapper(AdminEventDAO.class).getAllEvents(offset, pageSize);
+	}
+	
+	// 전체 이벤트 개수 가져오기 (페이징)
+	@Override
+	public int getTotalEventsCount() {
+		return sqlSession.getMapper(AdminEventDAO.class).getTotalEventsCount();
+	}
+	
+	// 전체 이벤트 추첨 개수 가져오기 (페이징)
+	@Override
+	public int getTotalDrawCount() {
+		return sqlSession.getMapper(AdminEventDAO.class).getTotalDrawCount();
 	}
 }

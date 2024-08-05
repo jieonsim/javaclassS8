@@ -2,6 +2,7 @@ package com.spring.javaclassS8.dao.sports;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,16 @@ public class SportsDAOImpl implements SportsDAO {
 	@Override
 	public VenueVO findVenueByKeyword(String keyword) {
 		return sqlSession.getMapper(SportsDAO.class).findVenueByKeyword(keyword);
+	}
+	
+	// 경기장 정보 가져오기
+	@Override
+	public VenueVO getTeamVenue(String sport, String shortName) {
+	    return sqlSession.getMapper(SportsDAO.class).getTeamVenue(sport, shortName);
+	}
+	
+	@Override
+	public List<Map<String, Object>> getSeatPricesForTeam(String sport, String shortName) {
+	    return sqlSession.getMapper(SportsDAO.class).getSeatPricesForTeam(sport, shortName);
 	}
 }

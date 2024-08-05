@@ -73,7 +73,7 @@ public interface AdminSportSerivce {
 	List<GameVO> getRecentGames(int limit);
 
 	// 모든 경기 디테일 가져오기(경기 리스트)
-	List<GameVO> getAllGamesDetails();
+	List<GameVO> getAllGamesDetails(int page, int pageSize);
 
 	// 경기 정보 수정
 	boolean updateGame(int id, String gameDate, String gameTime);
@@ -107,5 +107,11 @@ public interface AdminSportSerivce {
 	
 	// 스포츠, 팀, 경기장 정보로 등록된 게임이 있는지 확인
 	boolean hasGames(String type, int id);
+	
+	// 해당 게임으로 예매된 건이 있는지 확인
+	boolean hasReservations(int gameId);
+	
+	// 토탈 게임 수 가져오기(페이징)
+	int getTotalGamesCount();
 
 }

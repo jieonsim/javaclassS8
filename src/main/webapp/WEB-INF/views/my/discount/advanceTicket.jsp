@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="${ctp}/css/common/common.css">
 <link rel="stylesheet" href="${ctp}/css/common/layout.css">
 <link rel="stylesheet" href="${ctp}/css/my/contents.css">
+<link rel="stylesheet" href="${ctp}/css/common/paginate.css">
 <link rel="icon" href="${ctp}/images/common/favicon.ico">
 </head>
 <body>
@@ -97,10 +98,32 @@
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
-								<tr><td colspan="5" class="m-0 p-0"></td></tr>
+								<tr>
+									<td colspan="5" class="m-0 p-0"></td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
+					<c:if test="${not empty advanceTickets}">
+						<div class="paging" id="pagination">
+							<a href="?page=1" class="first ${paginationInfo.currentPage == 1 ? 'disabled' : ''}">맨앞</a>
+							<a href="?page=${paginationInfo.currentPage - 1}" class="prev ${paginationInfo.currentPage == 1 ? 'disabled' : ''}">이전</a>
+
+							<c:forEach begin="${paginationInfo.startPage}" end="${paginationInfo.endPage}" var="pageNum">
+								<c:choose>
+									<c:when test="${pageNum == paginationInfo.currentPage}">
+										<strong>${pageNum}</strong>
+									</c:when>
+									<c:otherwise>
+										<a href="?page=${pageNum}">${pageNum}</a>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+
+							<a href="?page=${paginationInfo.currentPage + 1}" class="next ${paginationInfo.currentPage == paginationInfo.totalPages ? 'disabled' : ''}">다음</a>
+							<a href="?page=${paginationInfo.totalPages}" class="end ${paginationInfo.currentPage == paginationInfo.totalPages ? 'disabled' : ''}">맨뒤</a>
+						</div>
+					</c:if>
 					<div class="notes2">
 						<h6>
 							<span></span>

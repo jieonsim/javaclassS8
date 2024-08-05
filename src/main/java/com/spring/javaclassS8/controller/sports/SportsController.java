@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.spring.javaclassS8.service.sports.SportsService;
 import com.spring.javaclassS8.vo.sports.GameVO;
+import com.spring.javaclassS8.vo.sports.VenueVO;
 
 @Controller
 @RequestMapping("/sports")
@@ -70,8 +72,10 @@ public class SportsController {
 
 	// 구단별 요금/할인카드
 	@GetMapping("/{sport}/{team}/price")
-	public String price(@PathVariable String sport, @PathVariable("team") String team) {
-		return "sports/" + sport + "/" + team + "/price";
+	public String price(@PathVariable String sport, @PathVariable("team") String team, Model model) {
+	    List<Map<String, Object>> seatPrices = sportsService.getSeatPricesForTeam(sport, team);
+	    model.addAttribute("seatPrices", seatPrices);
+	    return "sports/" + sport + "/" + team + "/price";
 	}
 
 	// 구단별 좌석도
@@ -82,7 +86,10 @@ public class SportsController {
 
 	// 구단별 구단안내
 	@GetMapping("/{sport}/{team}/info")
-	public String info(@PathVariable String sport, @PathVariable("team") String team) {
-		return "sports/" + sport + "/" + team + "/info";
+	public String info(@PathVariable String sport, @PathVariable("team") String team, Model model) {
+	    VenueVO venue = sportsService.getTeamVenue(sport, team);
+	    model.addAttribute("venueName", venue.getVenueName());
+	    model.addAttribute("address", venue.getAddress());
+	    return "sports/" + sport + "/" + team + "/info";
 	}
 }

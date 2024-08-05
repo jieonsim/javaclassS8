@@ -11,12 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
 	const thumbnailInfoInput = document.querySelector('.file-upload-info');
 	const thumbnailUploadBtn = document.getElementById('thumbnailUploadBtn');
 	const resetBtn = document.getElementById('resetBtn');
-	
+
 	CKEDITOR.replace('CKEDITOR', {
 		height: 700,
 		filebrowserUploadUrl: `${ctp}/admin/event/imageUpload`,
 		uploadUrl: `${ctp}/admin/event/imageUpload`,
-		imageUploadAllowedTypes: /^image\/(gif|jpe?g|png|jfif)$/i
+		imageUploadAllowedTypes: /^image\/(gif|jpe?g|png|jfif)$/i,
+		extraPlugins: 'uploadimage',
+		clipboard_handleImages: true
 	});
 
 	// 썸네일 업로드 버튼 클릭 이벤트
@@ -34,19 +36,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// 날짜 입력 필드 초기화 및 유효성 검사
 	const today = new Date().toISOString().split('T')[0];
+		startDateInput.min = today;
+		endDateInput.min = today;
+	
+		startDateInput.addEventListener('change', function() {
+			endDateInput.min = this.value;
+		});
+	
+		endDateInput.addEventListener('change', function() {
+			if (this.value < startDateInput.value) {
+				alert('종료일은 시작일 이후여야 합니다.');
+				this.value = '';
+			}
+		});
+	// 날짜 입력 필드 초기화 및 유효성 검사
+/*	const today = new Date().toISOString().split('T')[0];
 	startDateInput.min = today;
 	endDateInput.min = today;
 
 	startDateInput.addEventListener('change', function() {
-		endDateInput.min = this.value;
+		const selectedStartDate = this.value;
+		endDateInput.min = selectedStartDate > today ? selectedStartDate : today;
+		if (endDateInput.value && endDateInput.value < endDateInput.min) {
+			endDateInput.value = '';
+		}
 	});
 
 	endDateInput.addEventListener('change', function() {
-		if (this.value < startDateInput.value) {
+		if (this.value && this.value < startDateInput.value) {
 			alert('종료일은 시작일 이후여야 합니다.');
 			this.value = '';
 		}
-	});
+	});*/
 
 	// 폼 제출 이벤트
 	form.addEventListener('submit', function(e) {
@@ -63,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				.then(data => {
 					if (data.message) {
 						alert(data.message);
-						window.location.href = ctp + '/admin/event/list';
+						window.location.href = ctp + '/admin/event/eventList';
 					} else if (data.error) {
 						alert(data.error);
 					}
@@ -110,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	// 취소 버튼 이벤트 추가
 	resetBtn.addEventListener('click', function() {
 		if (confirm('이벤트 등록을 취소하시겠습니까?')) {
-			window.location.href = `${ctp}/admin/event/list`;
+			window.location.href = `${ctp}/admin/event/eventList`;
 		}
 	})
 });

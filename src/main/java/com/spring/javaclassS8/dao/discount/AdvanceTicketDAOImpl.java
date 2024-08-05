@@ -33,8 +33,8 @@ public class AdvanceTicketDAOImpl implements AdvanceTicketDAO {
 
 	// memberId로 해당 유저에 등록된 예매권 정보 가져오기
 	@Override
-	public List<Map<String, Object>> getAdvanceTicketsByMemberId(int memberId) {
-		return sqlSession.getMapper(AdvanceTicketDAO.class).getAdvanceTicketsByMemberId(memberId);
+	public List<Map<String, Object>> getAdvanceTicketsByMemberId(int memberId, int offset, int limit) {
+		return sqlSession.getMapper(AdvanceTicketDAO.class).getAdvanceTicketsByMemberId(memberId, offset, limit);
 	}
 
 	// 마이페이지 > 할인혜택 > 예매권 > 사용가능/사용완료/유효기간만료 필터링
@@ -53,5 +53,11 @@ public class AdvanceTicketDAOImpl implements AdvanceTicketDAO {
 	@Override
 	public Map<String, Object> findByAdvanceTicketNumber(String advanceTicketNumber) {
 		return sqlSession.getMapper(AdvanceTicketDAO.class).findByAdvanceTicketNumber(advanceTicketNumber);
+	}
+	
+	// memberId에 등록된 예매권 갯수 가져오기
+	@Override
+	public int getAdvanceTicketsCountByMemberId(int memberId) {
+	    return sqlSession.getMapper(AdvanceTicketDAO.class).getAdvanceTicketsCountByMemberId(memberId);
 	}
 }

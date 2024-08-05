@@ -66,4 +66,27 @@
         WHERE v.venueName LIKE CONCAT('%', #{keyword}, '%')
         LIMIT 1
     </select>
+    
+    <!-- 경기장 정보 가져오기 -->
+    <select id="getTeamVenue" resultType="com.spring.javaclassS8.vo.sports.VenueVO">
+	    SELECT v.venueName, v.address
+	    FROM venues v
+	    JOIN teams t ON v.teamId = t.id
+	    JOIN sports s ON t.sportId = s.id
+	    WHERE s.sportName = #{sport} AND t.shortName = #{shortName}
+    </select>
+    
+	<select id="getSeatPricesForTeam" resultType="java.util.HashMap">
+	    SELECT s.id AS seatId, s.seatName, tt.name AS ticketTypeName, p.price,
+	           (SELECT COUNT(DISTINCT p2.ticketTypeId) 
+	            FROM prices p2 
+	            WHERE p2.seatId = s.id) AS rowspan
+	    FROM seats s
+	    JOIN prices p ON s.id = p.seatId
+	    JOIN ticket_types tt ON p.ticketTypeId = tt.id
+	    JOIN teams t ON s.teamId = t.id
+	    JOIN sports sp ON t.sportId = sp.id
+	    WHERE sp.sportName = #{sport} AND t.shortName = #{shortName}
+	    ORDER BY s.id, tt.id
+	</select>
 </mapper>

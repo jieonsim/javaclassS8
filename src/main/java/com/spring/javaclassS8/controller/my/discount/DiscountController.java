@@ -29,15 +29,19 @@ public class DiscountController {
 
 	// 마이페이지 > 할인혜택 > 예매권 뷰
 	@GetMapping("/advanceTicket")
-	public String getAdvanceTicket(Model model, HttpSession session) {
-		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
-		if (loginMember == null) {
-			return "redirect:/login";
-		}
+	public String getAdvanceTicket(@RequestParam(defaultValue = "1") int page, Model model, HttpSession session) {
+	    MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
+	    if (loginMember == null) {
+	        return "redirect:/login";
+	    }
 
-		List<Map<String, Object>> advanceTickets = advanceTicketService.getAdvanceTicketsByMemberId(loginMember.getId());
-		model.addAttribute("advanceTickets", advanceTickets);
-		return "my/discount/advanceTicket";
+	    int pageSize = 10; // 한 페이지에 표시할 항목 수
+	    Map<String, Object> result = advanceTicketService.getAdvanceTicketsByMemberId(loginMember.getId(), page, pageSize);
+	    
+	    model.addAttribute("advanceTickets", result.get("advanceTickets"));
+	    model.addAttribute("paginationInfo", result.get("paginationInfo"));
+	    
+	    return "my/discount/advanceTicket";
 	}
 
 	// 마이페이지 > 할인혜택 > 예매권 > 사용가능/사용완료/유효기간만료 필터링

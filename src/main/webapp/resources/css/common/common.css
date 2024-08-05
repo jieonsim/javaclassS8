@@ -78,7 +78,7 @@ button{cursor:pointer}
 .mgt7{margin-top:7px !important}
 .mgt10{margin-top:10px !important}
 .mgt15{margin-top:15px !important}
-.mgt20{margin-top:20px !important}
+.mgt20{margin-top:20px !important;font-family:'Pretendard-Regular'}
 .mgt30{margin-top:30px !important}
 .mgt40{margin-top:40px !important}
 .mgt60{margin-top:60px !important}
@@ -420,7 +420,7 @@ td .input_block .hyphen{color:#878d95}
 .btn_red{display:inline-block;background:#fa2828;font-size:12px;color:#fff;cursor:pointer}
 
 .btn.btn_registration{width:122px;height:42px;background: #242428;color: #fff;border-radius: 6px;text-align: center;line-height: 42px;font-size: 14px;font-weight: 500;}
-.btn.btn_reserve{width:110px;padding:9px 11px;border:1px solid #fa2828;border-radius:6px;background:#fa2828;font-size:14px;font-weight:500;color:#fff;line-height:22px;text-align:center;box-sizing:border-box}
+.btn.btn_reserve{font-family:'Pretendard-Regular';width:110px;padding:9px 11px;border:1px solid #fa2828;border-radius:6px;background:#fa2828;font-size:14px;font-weight:500;color:#fff;line-height:22px;text-align:center;box-sizing:border-box}
 .btn.btn_reserve:focus{box-shadow: none}
 .btn.btn_reserve:hover{border-color:#c82020;background:#c82020}
 .btn.btn_reserve_scdl{width:110px;padding:9px 11px;border:1px solid #e4e6e8;border-radius:6px;background:#e4e6e8;font-size:14px;font-weight:500;color:#242428;line-height:22px;text-align:center;box-sizing:border-box;cursor:default !important;}

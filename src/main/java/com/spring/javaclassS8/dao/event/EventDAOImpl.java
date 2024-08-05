@@ -27,8 +27,8 @@ public class EventDAOImpl implements EventDAO {
 
 	// 진행 중인 이벤트만 가져오기
 	@Override
-	public List<EventVO> getOngoingEvents() {
-		return sqlSession.getMapper(EventDAO.class).getOngoingEvents();
+	public List<EventVO> getOngoingEvents(int offset, int limit) {
+		return sqlSession.getMapper(EventDAO.class).getOngoingEvents(offset, limit);
 	}
 
 	// 이벤트 아이디로 이벤트 데이터 가져오기
@@ -61,7 +61,7 @@ public class EventDAOImpl implements EventDAO {
 	public List<EventCommentVO> getAllEventComments(int eventId) {
 		return sqlSession.getMapper(EventDAO.class).getAllEventComments(eventId);
 	}
-	
+
 	// 이벤트 컨텐츠 디테일에 작성된 댓글 중 status가 active인것만 가져오기
 	@Override
 	public List<EventCommentVO> getActiveEventComments(int eventId) {
@@ -88,8 +88,8 @@ public class EventDAOImpl implements EventDAO {
 
 	// 이벤트 당첨자 발표 리스트
 	@Override
-	public List<WinnerEventVO> getWinnerEvents() {
-		return sqlSession.getMapper(EventDAO.class).getWinnerEvents();
+	public List<WinnerEventVO> getWinnerEvents(int offset, int limit) {
+		return sqlSession.getMapper(EventDAO.class).getWinnerEvents(offset, limit);
 	}
 
 	// 이벤트 당첨자 발표 디테일
@@ -100,13 +100,31 @@ public class EventDAOImpl implements EventDAO {
 
 	// 본인이 응모한 이벤트 리스트 가져오기
 	@Override
-	public List<EventParticipationVO> getEventParticipations(int memberId) {
-		return sqlSession.getMapper(EventDAO.class).getEventParticipations(memberId);
+	public List<EventParticipationVO> getEventParticipations(int memberId, int offset, int limit) {
+		return sqlSession.getMapper(EventDAO.class).getEventParticipations(memberId, offset, limit);
 	}
 
-	// memberId로 해당 member가 응모한 이벤트 갯수 가져오기
+	// memberId로 해당 member가 응모한 이벤트 중 현재 진행중인 이벤트 갯수 가져오기
 	@Override
 	public int getActiveEventCount(int memberId) {
 		return sqlSession.getMapper(EventDAO.class).getActiveEventCount(memberId);
+	}
+
+	// memberId로 해당 member가 응모한 이벤트 전체 갯수 가져오기 
+	@Override
+	public int getEventParticipationsCount(int memberId) {
+		return sqlSession.getMapper(EventDAO.class).getEventParticipationsCount(memberId);
+	}
+	
+	// 이벤트 당첨자 발표 게시글 갯수 가져오기
+	@Override
+	public int getWinnerEventsCount() {
+	    return sqlSession.getMapper(EventDAO.class).getWinnerEventsCount();
+	}
+		
+	// 진행 중인 이벤트 카운트 가져오기
+	@Override
+	public int getOngoingEventsCount() {
+	    return sqlSession.getMapper(EventDAO.class).getOngoingEventsCount();
 	}
 }

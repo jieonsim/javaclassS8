@@ -10,6 +10,8 @@
 <jsp:include page="/WEB-INF/views/common/utility.jsp" />
 <link rel="stylesheet" href="${ctp}/css/event/common.css">
 <link rel="stylesheet" href="${ctp}/css/event/event.css">
+<link rel="stylesheet" href="${ctp}/css/common/common.css">
+<link rel="stylesheet" href="${ctp}/css/common/paginate.css">
 <link rel="icon" href="${ctp}/images/common/favicon.ico">
 </head>
 <body>
@@ -43,6 +45,26 @@
 				</c:if>
 			</c:forEach>
 			<p class="nodata_txt" style="display: none;">등록된 이벤트가 없습니다.</p>
+			<c:if test="${not empty events}">
+				<div class="paging" id="pagination">
+					<a href="?page=1" class="first ${paginationInfo.currentPage == 1 ? 'disabled' : ''}">맨앞</a>
+					<a href="?page=${paginationInfo.currentPage - 1}" class="prev ${paginationInfo.currentPage == 1 ? 'disabled' : ''}">이전</a>
+
+					<c:forEach begin="${paginationInfo.startPage}" end="${paginationInfo.endPage}" var="pageNum">
+						<c:choose>
+							<c:when test="${pageNum == paginationInfo.currentPage}">
+								<strong>${pageNum}</strong>
+							</c:when>
+							<c:otherwise>
+								<a href="?page=${pageNum}">${pageNum}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+
+					<a href="?page=${paginationInfo.currentPage + 1}" class="next ${paginationInfo.currentPage == paginationInfo.totalPages ? 'disabled' : ''}">다음</a>
+					<a href="?page=${paginationInfo.totalPages}" class="end ${paginationInfo.currentPage == paginationInfo.totalPages ? 'disabled' : ''}">맨뒤</a>
+				</div>
+			</c:if>
 		</div>
 	</main>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />

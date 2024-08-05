@@ -4,9 +4,10 @@
 
 	<!-- 회원 리스트 - 모든 회원 정보 가져오기 -->
     <select id="getAllMembers" resultType="com.spring.javaclassS8.vo.member.MemberVO">
-        SELECT * FROM members ORDER BY createdAt DESC
+        SELECT * FROM members ORDER BY createdAt DESC LIMIT #{offset}, #{pageSize}
     </select>
     
+    <!-- 회원 조건 검색 -->
     <select id="searchMembers" resultType="com.spring.javaclassS8.vo.member.MemberVO">
 	    SELECT * FROM members
 	    <where>
@@ -23,6 +24,11 @@
 	        </if>
 	    </where>
 	    ORDER BY createdAt DESC
+	</select>
+	
+	<!-- 전체 회원 수 가져오기(페이징)  -->
+	<select id="getTotalMembersCount" resultType="int">
+		SELECT COUNT(*) FROM members
 	</select>
     
     <!-- 회원 활동 상태 변경 -->

@@ -32,6 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.javaclassS8.service.admin.event.AdminEventService;
 import com.spring.javaclassS8.service.event.EventService;
+import com.spring.javaclassS8.utils.PaginationInfo;
 import com.spring.javaclassS8.vo.event.EventCommentVO;
 import com.spring.javaclassS8.vo.event.EventDrawSummaryVO;
 import com.spring.javaclassS8.vo.event.EventVO;
@@ -53,11 +54,18 @@ public class AdminEventController {
 
 	// 이벤트 리스트
 	@GetMapping("/eventList")
-	public String getEventList(Model model) {
-		List<EventVO> events = eventService.getAllEvents();
+	public String getEventList(@RequestParam(defaultValue = "1") int page, Model model) {
+		int pageSize = 10;
+	    int totalCount = adminEventService.getTotalEventsCount();
+	    PaginationInfo paginationInfo = new PaginationInfo(totalCount, pageSize, page);
+	    
+		List<EventVO> events = adminEventService.getAllEvents(page, pageSize);
+		
 		model.addAttribute("events", events);
 		model.addAttribute("categories", EventCategory.values());
 		model.addAttribute("statuses", Status.values());
+		model.addAttribute("paginationInfo", paginationInfo);
+		
 		return "admin/event/list";
 	}
 
@@ -239,9 +247,16 @@ public class AdminEventController {
 
 	// 이벤트 추첨 리스트
 	@GetMapping("/drawList")
-	public String getwinnerList(Model model) {
-		List<EventDrawSummaryVO> drawSummaries = adminEventService.getEventDrawSummaries();
+	public String getwinnerList(@RequestParam(defaultValue = "1") int page, Model model) {
+		int pageSize = 10;
+	    int totalCount = adminEventService.getTotalDrawCount();
+	    PaginationInfo paginationInfo = new PaginationInfo(totalCount, pageSize, page);
+		
+		List<EventDrawSummaryVO> drawSummaries = adminEventService.getEventDrawSummaries(page, pageSize);
+		
 		model.addAttribute("drawSummaries", drawSummaries);
+		model.addAttribute("paginationInfo", paginationInfo);
+		
 		return "admin/event/drawList";
 	}
 

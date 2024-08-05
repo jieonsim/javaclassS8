@@ -8,6 +8,10 @@
 	</div>
 	<div class="seat_tit_area">
 		<h5 class="sp_tit seat">예매 가능한 좌석</h5>
+		<a class="info" href="${ctp}/my/discount/advanceTicket">
+			스포츠예매권이란
+			<span></span>
+		</a>
 	</div>
 	<div class="seat_lst_wrap">
 		<ul class="seat_lst">

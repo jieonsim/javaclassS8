@@ -2,15 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.javaclassS8.dao.admin.reserve.AdminReserveDAO">
 	
-	<!-- 예매권 발행 -->
-	<insert id="insertAdvanceTicket" useGeneratedKeys="true"
-		keyProperty="id">
-		INSERT INTO advance_tickets (adminId, advanceTicketNumber,
-		used, expiresAt, issuedAt)
-		VALUES (#{adminId}, #{advanceTicketNumber},
-		#{used}, #{expiresAt}, #{issuedAt})
-	</insert>
-	
 	<!-- 예매리스트 가져오기 -->
 	<select id="getAllReservations" resultType="com.spring.javaclassS8.vo.reserve.ReservationVO">
 	    SELECT 
@@ -32,6 +23,7 @@
 	        JOIN teams at ON g.awayTeamId = at.id
 	    ORDER BY 
 	        r.createdAt DESC
+	    LIMIT #{offset}, #{pageSize}
 	</select>
 	
 	<!-- 예매권 발행 정보 가져오기 -->
@@ -73,6 +65,25 @@
            members m_admin ON at.adminId = m_admin.id
        ORDER BY 
            at.issuedAt DESC
+       LIMIT #{offset}, #{pageSize}
     </select>
 	
+	<!-- 전체 예매 건 수 가져오기(페이징)  -->
+	<select id="getTotalReservationCount" resultType="int">
+		SELECT COUNT(*) FROM reservations
+	</select>
+	
+	<!-- 전체 예매권 발행 수 가져오기(페이징)  -->
+	<select id="getTotalAdvanceTicketsCount" resultType="int">
+		SELECT COUNT(*) FROM advance_tickets
+	</select>
+		
+	<!-- 예매권 발행 -->
+	<insert id="insertAdvanceTicket" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO advance_tickets (adminId, advanceTicketNumber,
+		used, expiresAt, issuedAt)
+		VALUES (#{adminId}, #{advanceTicketNumber},
+		#{used}, #{expiresAt}, #{issuedAt})
+	</insert>
 </mapper>

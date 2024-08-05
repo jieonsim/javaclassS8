@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.javaclassS8.service.admin.member.AdminMemberService;
+import com.spring.javaclassS8.utils.PaginationInfo;
 import com.spring.javaclassS8.vo.member.MemberUpdateRequest;
 import com.spring.javaclassS8.vo.member.MemberVO;
 
@@ -25,16 +26,17 @@ public class AdminMemberController {
 	private AdminMemberService adminMemberService;
 	
 	// 회원 리스트
-//	@GetMapping("/memberList")
-//	public String memberList(Model model) {
-//		model.addAttribute("members", adminMemberService.getAllMembers());
-//		return "admin/member/memberList";
-//	}
-	
 	@GetMapping("/memberList")
-	public String memberList(Model model) {
-	    List<MemberVO> members = adminMemberService.getAllMembers();
+	public String memberList(@RequestParam(defaultValue = "1") int page, Model model) {
+	    int pageSize = 10;
+	    int totalCount = adminMemberService.getTotalMembersCount();
+	    PaginationInfo paginationInfo = new PaginationInfo(totalCount, pageSize, page);
+	    
+	    List<MemberVO> members = adminMemberService.getAllMembers(page, pageSize);
+	    
 	    model.addAttribute("members", members);
+	    model.addAttribute("paginationInfo", paginationInfo);
+	    
 	    return "admin/member/memberList";
 	}
 	

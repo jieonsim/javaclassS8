@@ -193,8 +193,9 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 
 	// 모든 경기 디테일 가져오기(경기 리스트)
 	@Override
-	public List<GameVO> getAllGamesDetails() {
-		return adminSportDAO.getAllGamesDetails();
+	public List<GameVO> getAllGamesDetails(int page, int pageSize) {
+		int offset = (page - 1) * pageSize;
+		return adminSportDAO.getAllGamesDetails(offset, pageSize);
 	}
 
 	// 경기 정보 수정
@@ -369,4 +370,17 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 	public boolean hasGames(String type, int id) {
 	    return adminSportDAO.countGamesByTypeAndId(type, id) > 0;
 	}
+	
+	// 해당 게임으로 예매된 건이 있는지 확인
+	@Override
+	public boolean hasReservations(int gameId) {
+	    return adminSportDAO.countReservationsByGameId(gameId) > 0;
+	}
+	
+	// 토탈 게임 수 가져오기(페이징)
+	@Override
+	public int getTotalGamesCount() {
+	    return adminSportDAO.getTotalGamesCount();
+	}
 }
+

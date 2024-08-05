@@ -2,6 +2,7 @@ package com.spring.javaclassS8.dao.sports;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -20,4 +21,9 @@ public interface SportsDAO {
 	TeamVO findTeamByKeyword(String keyword);
 
 	VenueVO findVenueByKeyword(String keyword);
+
+	// 경기장 정보 가져오기
+	VenueVO getTeamVenue(@Param("sport") String sport, @Param("shortName") String shortName);
+
+	List<Map<String, Object>> getSeatPricesForTeam(@Param("sport") String sport, @Param("shortName") String shortName);
 }

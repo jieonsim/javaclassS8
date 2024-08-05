@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		height: 700,
 		filebrowserUploadUrl: `${ctp}/admin/event/imageUpload`,
 		uploadUrl: `${ctp}/admin/event/imageUpload`,
-		imageUploadAllowedTypes: /^image\/(gif|jpe?g|png|jfif)$/i
+		imageUploadAllowedTypes: /^image\/(gif|jpe?g|png|jfif)$/i,
+		extraPlugins: 'uploadimage',
+		clipboard_handleImages: true
 	});
 
 	// 썸네일 업로드 버튼 클릭 이벤트
@@ -37,11 +39,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// 날짜 입력 필드 초기화 및 유효성 검사
 	const today = new Date().toISOString().split('T')[0];
-	startDateInput.min = today;
-	endDateInput.min = today;
+
+	// 시작일이 과거인 경우를 처리
+	if (new Date(startDateInput.value) < new Date(today)) {
+		endDateInput.min = startDateInput.value;
+	} else {
+		startDateInput.min = today;
+		endDateInput.min = today;
+	}
 
 	startDateInput.addEventListener('change', function() {
-		endDateInput.min = this.value;
+		if (new Date(this.value) >= new Date(today)) {
+			endDateInput.min = this.value;
+		} else {
+			endDateInput.min = today;
+		}
 	});
 
 	endDateInput.addEventListener('change', function() {
@@ -59,9 +71,9 @@ document.addEventListener('DOMContentLoaded', function() {
 			for (instance in CKEDITOR.instances) {
 				CKEDITOR.instances[instance].updateElement();
 			}
-			
+
 			const formData = new FormData(form);
-			
+
 			// 썸네일 처리
 			if (!thumbnailInput.files[0] && thumbnailInfoInput.getAttribute(`data-original`)) {
 				formData.append('thumbnail', thumbnailInput.getAttribute(`data-original`));
@@ -75,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				.then(data => {
 					if (data.message) {
 						alert(data.message);
-						window.location.href = ctp + '/admin/event/list';
+						window.location.href = ctp + '/admin/event/eventList';
 					} else if (data.error) {
 						alert(data.error);
 					}
@@ -90,30 +102,42 @@ document.addEventListener('DOMContentLoaded', function() {
 	function validateForm() {
 		if (!titleInput.value.trim()) {
 			alert('이벤트 제목을 입력해주세요.');
+			titleInput.focus();
 			return false;
 		}
 		if (!categorySelect.value) {
 			alert('카테고리를 선택해주세요.');
+			categorySelect.focus();
 			return false;
 		}
 		if (!statusInput.value) {
-			alert('카테고리를 선택해주세요.');
+			alert('상태를 선택해주세요.');
+			statusInput.focus();
 			return false;
 		}
 		if (!startDateInput.value) {
 			alert('시작일을 선택해주세요.');
+			startDateInput.focus();
 			return false;
 		}
 		if (!endDateInput.value) {
 			alert('종료일을 선택해주세요.');
+			endDateInput.focus();
+			return false;
+		}
+		if (new Date(endDateInput.value) < new Date(startDateInput.value)) {
+			alert('종료일은 시작일 이후여야 합니다.');
+			endDateInput.focus();
 			return false;
 		}
 		if (!thumbnailInfoInput.value && !thumbnailInfoInput.getAttribute(`data-original`)) {
 			alert('썸네일 이미지를 업로드하세요.');
+			thumbnailUploadBtn.focus();
 			return false;
 		}
 		if (CKEDITOR.instances.CKEDITOR.getData().trim() === '') {
 			alert('이벤트 내용을 입력해주세요.');
+			CKEDITOR.instances.CKEDITOR.focus();
 			return false;
 		}
 		return true;
@@ -122,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	// 취소 버튼 이벤트 추가
 	resetBtn.addEventListener('click', function() {
 		if (confirm('변경 사항을 취소하시겠습니까?')) {
-			window.location.href = `${ctp}/admin/event/list`;
+			window.location.href = `${ctp}/admin/event/eventList`;
 		}
 	})
 });

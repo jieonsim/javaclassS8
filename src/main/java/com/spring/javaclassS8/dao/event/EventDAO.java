@@ -17,7 +17,7 @@ public interface EventDAO {
 	public List<EventVO> getAllEvents();
 
 	// 진행 중인 이벤트만 가져오기
-	public List<EventVO> getOngoingEvents();
+	public List<EventVO> getOngoingEvents(@Param("offset") int offset, @Param("limit") int limit);
 
 	// 이벤트 아이디로 이벤트 데이터 가져오기
 	public EventVO getEventById(int eventId);
@@ -48,15 +48,25 @@ public interface EventDAO {
 	public boolean updateEventParticipationStatus(@Param("commentId") int commentId, @Param("status") EventParticipantVO.Status status);
 
 	// 이벤트 당첨자 발표 리스트
-	public List<WinnerEventVO> getWinnerEvents();
+	//public List<WinnerEventVO> getWinnerEvents();
+	public List<WinnerEventVO> getWinnerEvents(@Param("offset") int offset, @Param("limit") int limit);
 
 	// 이벤트 당첨자 발표 디테일
 	public WinnerPostDetailVO getWinnerPostDetail(int winnerPostId);
 
 	// 본인이 응모한 이벤트 리스트 가져오기
-	public List<EventParticipationVO> getEventParticipations(int memberId);
+	public List<EventParticipationVO> getEventParticipations(@Param("memberId") int memberId, @Param("offset") int offset, @Param("limit") int limit);
 
 	// memberId로 해당 member가 응모한 이벤트 갯수 가져오기
 	public int getActiveEventCount(int memberId);
+	
+	// memberId로 해당 member가 응모한 이벤트 전체 갯수 가져오기
+	public int getEventParticipationsCount(int memberId);
+	
+	// 이벤트 당첨자 발표 게시글 갯수 가져오기
+	public int getWinnerEventsCount();
+
+	// 진행 중인 이벤트 카운트 가져오기
+	public int getOngoingEventsCount();
 
 }

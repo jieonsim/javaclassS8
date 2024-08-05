@@ -39,7 +39,6 @@
 												<col style="width: 15%" />
 												<col style="width: 15%" />
 												<col style="width: 20%" />
-												<%-- <col style="width: 10%" /> --%>
 												<col style="width: 5%" />
 												<col style="width: 5%" />
 											</colgroup>
@@ -51,7 +50,6 @@
 													<th>홈</th>
 													<th>어웨이</th>
 													<th>경기장</th>
-													<!-- <th>상태</th> -->
 													<th colspan="2">비고</th>
 												</tr>
 											</thead>
@@ -70,20 +68,19 @@
 														<td>${game.homeTeamName}</td>
 														<td>${game.awayTeamName}</td>
 														<td>${game.venueName}</td>
-														<%-- <td class="game-status">${game.status}</td>
-														<td class="game-input" style="display: none;">
-															<select class="form-control bg-white text-dark" name="status">
-																<c:forEach items="${statuses}" var="status">
-																	<option value="${status}" ${game.status eq status ? 'selected' : ''}>${status}</option>
-																</c:forEach>
-															</select>
-														</td> --%>
-														<td>
-															<button class="badge badge-warning bg-white game-update-btn">수정</button>
-														</td>
-														<td>
-															<button class="badge badge-danger bg-white game-delete-btn">삭제</button>
-														</td>
+														<c:if test="${!gameHasReservations[game.id]}">
+															<td>
+																<button class="badge badge-warning bg-white game-update-btn">수정</button>
+															</td>
+															<td>
+																<button class="badge badge-danger bg-white game-delete-btn">삭제</button>
+															</td>
+														</c:if>
+														<c:if test="${gameHasReservations[game.id]}">
+															<td colspan="2">
+																<span class="text-muted">해당 게임으로 예매내역이 있어 수정 및 삭제 불가</span>
+															</td>
+														</c:if>
 													</tr>
 												</c:forEach>
 											</tbody>
@@ -93,6 +90,23 @@
 							</div>
 						</div>
 					</div>
+					<ul class="pagination justify-content-center">
+						<c:if test="${paginationInfo.hasPreviousPage}">
+							<li class="page-item">
+								<a class="page-link" href="?page=${paginationInfo.currentPage - 1}">Previous</a>
+							</li>
+						</c:if>
+						<c:forEach begin="${paginationInfo.startPage}" end="${paginationInfo.endPage}" var="pageNum">
+							<li class="page-item ${pageNum == paginationInfo.currentPage ? 'active' : ''}">
+								<a class="page-link" href="?page=${pageNum}">${pageNum}</a>
+							</li>
+						</c:forEach>
+						<c:if test="${paginationInfo.hasNextPage}">
+							<li class="page-item">
+								<a class="page-link" href="?page=${paginationInfo.currentPage + 1}">Next</a>
+							</li>
+						</c:if>
+					</ul>
 				</div>
 				<jsp:include page="/WEB-INF/views/admin/layout/footer.jsp" />
 			</div>

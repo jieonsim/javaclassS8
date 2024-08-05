@@ -256,8 +256,9 @@ public class AdminEventServiceImpl implements AdminEventService {
 
 	// 이벤트 추첨 리스트
 	@Override
-	public List<EventDrawSummaryVO> getEventDrawSummaries() {
-		return adminEventDAO.getEventDrawSummaries();
+	public List<EventDrawSummaryVO> getEventDrawSummaries(int page, int pageSize) {
+		int offset = (page - 1) * pageSize;
+		return adminEventDAO.getEventDrawSummaries(offset, pageSize);
 	}
 
 	// 이벤트 당첨자 디테일
@@ -292,29 +293,8 @@ public class AdminEventServiceImpl implements AdminEventService {
 	        return false;
 	    }
 	}
-
-	// 이벤트 당첨자 대상으로 당첨 안내 및 예매권 번호 메일 발송
-//	@Override
-//	@Transactional
-//	public boolean sendWinnerEmails(int eventId, String drawAt) throws MessagingException {
-//		EventVO event = eventDAO.getEventById(eventId);
-//		Timestamp drawAtTimestamp;
-//
-//		try {
-//			drawAtTimestamp = Timestamp.valueOf(drawAt.replace('T', ' '));
-//		} catch (IllegalArgumentException e) {
-//			throw new IllegalArgumentException("Invalid drawAt format: " + drawAt, e);
-//		}
-//		List<WinnerDetailVO> winners = adminEventDAO.getWinnerDetailsByDrawAt(eventId, drawAtTimestamp);
-//
-//		for (WinnerDetailVO winner : winners) {
-//			eventEmailService.sendAdvanceTicketEmail(winner.getEmail(), event.getTitle(), winner.getAdvanceTicketNumber(), winner.getExpiresAt());
-//			// 이메일 발송 후 emailSentAt 업데이트
-//			adminEventDAO.updateEmailSentAt(winner.getWinnerId());
-//		}
-//
-//		return true;
-//	}
+	
+	// 당첨자 대상으로 메일 보내기
 	@Override
 	@Transactional
 	public boolean sendWinnerEmails(int eventId, String drawAt) throws MessagingException {
@@ -360,7 +340,6 @@ public class AdminEventServiceImpl implements AdminEventService {
 	// 이벤트 고유번호와 이벤트 추첨일시로 이벤트 당첨자 디테일 가져오기
 	@Override
 	public List<WinnerDetailVO> getWinnerDetailsByDrawAt(int eventId, Timestamp drawAt) {
-		System.out.println("Querying with eventId: " + eventId + " and drawAt: " + drawAt);
 		return adminEventDAO.getWinnerDetailsByDrawAt(eventId, drawAt);
 	}
 
@@ -368,5 +347,24 @@ public class AdminEventServiceImpl implements AdminEventService {
 	@Override
 	public boolean isEventAnnouncedByDrawAt(int eventId, Timestamp drawAt) {
 		return adminEventDAO.isEventAnnouncedByDrawAt(eventId, drawAt);
+	}
+
+	// 이벤트 전체 리스트 가져오기 
+	@Override
+	public List<EventVO> getAllEvents(int page, int pageSize) {
+		int offset = (page - 1) * pageSize;
+		return adminEventDAO.getAllEvents(offset, pageSize);
+	}
+	
+	// 전체 이벤트 개수 가져오기 (페이징)
+	@Override
+	public int getTotalEventsCount() {
+		return adminEventDAO.getTotalEventsCount();
+	}
+	
+	// 전체 이벤트 추첨 개수 가져오기 (페이징)
+	@Override
+	public int getTotalDrawCount() {
+		return adminEventDAO.getTotalDrawCount();
 	}
 }

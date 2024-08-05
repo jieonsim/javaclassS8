@@ -62,8 +62,9 @@
 															</td>
 														</c:if>
 														<c:if test="${sportHasGames[sport.id]}">
-															<td>해당 스포츠로 등록된 경기가 있어 수정 불가</td>
-															<td>해당 스포츠로 등록된 경기가 있어 삭제 불가</td>
+															<td colspan="2">
+																<span class="text-muted">해당 스포츠로 등록된 경기가 있어 수정 및 삭제 불가</span>
+															</td>
 														</c:if>
 													</tr>
 												</c:forEach>
@@ -115,8 +116,9 @@
 															</td>
 														</c:if>
 														<c:if test="${teamHasGames[team.id]}">
-															<td>해당 팀으로 등록된 경기가 있어 수정 불가</td>
-															<td>해당 팀으로 등록된 경기가 있어 삭제 불가</td>
+															<td colspan="2">
+																<span class="text-muted">해당 팀으로 등록된 경기가 있어 수정 및 삭제 불가</span>
+															</td>
 														</c:if>
 													</tr>
 												</c:forEach>
@@ -177,8 +179,9 @@
 															</td>
 														</c:if>
 														<c:if test="${venueHasGames[venue.id]}">
-															<td>해당 경기장으로 등록된 경기가 있어 수정 불가</td>
-															<td>해당 경기장으로 등록된 경기가 있어 삭제 불가</td>
+															<td colspan="2">
+																<span class="text-muted">해당 경기장으로 등록된 경기가 있어 수정 및 삭제 불가</span>
+															</td>
 														</c:if>
 													</tr>
 												</c:forEach>

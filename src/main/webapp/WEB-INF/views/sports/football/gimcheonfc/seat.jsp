@@ -6,8 +6,8 @@
 		<img src="${ctp}/images/sports/football/seat/gimcheonfc.png" alt="김천종합운동장 좌석도">
 	</h4>
 	<div class="seat_tit_area">
-		<h5 class="sp_tit seat">일반석</h5>
-		<a href="http://www.ticketlink.co.kr/my/discount/advanceticket-new" class="info">
+		<h5 class="sp_tit seat">예매 가능한 좌석</h5>
+		<a href="${ctp}/my/discount/advanceTicket" class="info">
 			스포츠예매권이란
 			<span></span>
 		</a>

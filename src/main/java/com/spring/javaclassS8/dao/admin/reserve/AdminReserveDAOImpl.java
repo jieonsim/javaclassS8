@@ -24,14 +24,25 @@ public class AdminReserveDAOImpl implements AdminReserveDAO {
 
 	// 예매 리스트
 	@Override
-	public List<ReservationVO> getAllReservations() {
-		return sqlSession.getMapper(AdminReserveDAO.class).getAllReservations();
+	public List<ReservationVO> getAllReservations(int offset, int pageSize) {
+		return sqlSession.getMapper(AdminReserveDAO.class).getAllReservations(offset, pageSize);
 	}
 
 	// 예매권 발행 정보 가져오기
 	@Override
-	public List<AdvanceTicketInfoVO> getAdvanceTicketList() {
-		return sqlSession.getMapper(AdminReserveDAO.class).getAdvanceTicketList();
+	public List<AdvanceTicketInfoVO> getAdvanceTicketList(int offset, int pageSize) {
+		return sqlSession.getMapper(AdminReserveDAO.class).getAdvanceTicketList(offset, pageSize);
 	}
-
+	
+	// 전체 예매 건 수 가져오기(페이징)
+	@Override
+	public int getTotalReservationCount() {
+		return sqlSession.getMapper(AdminReserveDAO.class).getTotalReservationCount();
+	}
+	
+	// 전체 예매권 발행 가져오기(페이징)
+	@Override
+	public int getTotalAdvanceTicketsCount() {
+		return sqlSession.getMapper(AdminReserveDAO.class).getTotalAdvanceTicketsCount();
+	}
 }

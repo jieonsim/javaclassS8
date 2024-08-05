@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.javaclassS8.dao.sports.SportsDAO;
 import com.spring.javaclassS8.vo.sports.GameVO;
+import com.spring.javaclassS8.vo.sports.VenueVO;
 
 @Service
 public class SportsServiceImpl implements SportsService {
@@ -62,5 +63,20 @@ public class SportsServiceImpl implements SportsService {
 		String dbSportName = sportNameMap.get(sport);
 		String shortName = teamNameMap.get(dbSportName).get(team.toLowerCase());
 		return sportsDAO.getTeamHomeGames(dbSportName, shortName, startDate, endDate);
+	}
+	
+	// 경기장 정보 가져오기
+	@Override
+	public VenueVO getTeamVenue(String sport, String team) {
+	    String dbSportName = sportNameMap.get(sport);
+	    String shortName = teamNameMap.get(dbSportName).get(team.toLowerCase());
+	    return sportsDAO.getTeamVenue(dbSportName, shortName);
+	}
+	
+	@Override
+	public List<Map<String, Object>> getSeatPricesForTeam(String sport, String team) {
+	    String dbSportName = sportNameMap.get(sport);
+	    String shortName = teamNameMap.get(dbSportName).get(team.toLowerCase());
+	    return sportsDAO.getSeatPricesForTeam(dbSportName, shortName);
 	}
 }

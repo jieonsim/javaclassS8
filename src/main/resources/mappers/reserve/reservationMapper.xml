@@ -16,14 +16,6 @@
 	    JOIN venues v ON g.venueId = v.id
 	    WHERE g.id = #{gameId}
 	</select>
-
-	<!-- 경기 고유번호로 잔여 좌석 수 가져오기 -->
-    <!-- <select id="getSeatInventoriesByGameId" resultType="com.spring.javaclassS8.vo.sports.SeatInventoryVO">
-        SELECT si.*, s.seatName, s.seatColor
-        FROM seat_inventory si
-        JOIN seats s ON si.seatId = s.id
-        WHERE si.gameId = #{gameId}
-    </select> -->
     
     <!-- 경기 고유번호로 요금 등록된 좌석의 잔여 좌석 수 및 좌석 이름 가져오기 -->
     <select id="getSeatInventoriesWithPricesByGameId" resultType="com.spring.javaclassS8.vo.sports.SeatInventoryVO">

@@ -15,7 +15,7 @@
 	
 	<!-- 진행 중인 이벤트만 가져오기 -->
 	<select id="getOngoingEvents" resultMap="eventResultMap">
-    	SELECT * FROM events WHERE status = 'ONGOING' ORDER BY startDate DESC
+    	SELECT * FROM events WHERE status = 'ONGOING' ORDER BY startDate DESC LIMIT #{offset}, #{limit}
 	</select>
 	
 	<!-- 이벤트 아이디로 이벤트 데이터 가져오기 -->
@@ -55,6 +55,7 @@
 	    JOIN events e ON wp.eventId = e.id
 	    WHERE wp.isPublished = true
 	    ORDER BY wp.createdAt DESC
+	    LIMIT #{offset}, #{limit}
 	</select>
 	
 	<!-- 이벤트 당첨자 발표 디테일 -->
@@ -66,7 +67,7 @@
 	</select>
 	
 	<!-- 본인이 응모한 이벤트 리스트 가져오기 -->
-	<select id="getEventParticipations" parameterType="int" resultType="com.spring.javaclassS8.vo.event.EventParticipationVO">
+	<select id="getEventParticipations" resultType="com.spring.javaclassS8.vo.event.EventParticipationVO">
         SELECT 
             e.title AS eventTitle,
             e.startDate,
@@ -81,6 +82,7 @@
              GROUP BY eventId) ep ON e.id = ep.eventId
         ORDER BY 
             ep.participatedAt DESC
+        LIMIT #{offset}, #{limit}    
 	</select>
 	
 	<!-- memberId로 해당 member가 응모한 이벤트 갯수 가져오기 -->
@@ -91,6 +93,25 @@
         WHERE ep.memberId = #{memberId}
           AND ep.status = 'ACTIVE'
           AND e.endDate >= CURDATE()
+	</select>
+	
+	<!-- memberId로 해당 member가 응모한 이벤트 전체 갯수 가져오기 -->
+	<select id="getEventParticipationsCount" parameterType="int" resultType="int">
+	    SELECT COUNT(DISTINCT ep.eventId)
+	    FROM event_participants ep
+	    WHERE ep.memberId = #{memberId} AND ep.status = 'ACTIVE'
+	</select>
+	
+	<!-- 이벤트 당첨자 발표 총 개수 -->
+	<select id="getWinnerEventsCount" resultType="int">
+	    SELECT COUNT(*)
+	    FROM winner_posts wp
+	    WHERE wp.isPublished = true
+	</select>
+	
+	<!-- 진행 중인 이벤트 총 개수 -->
+	<select id="getOngoingEventsCount" resultType="int">
+	    SELECT COUNT(*) FROM events WHERE status = 'ONGOING'
 	</select>
 	
 	<!-- 이벤트 컨텐츠 디테일에 댓글 달기 -->

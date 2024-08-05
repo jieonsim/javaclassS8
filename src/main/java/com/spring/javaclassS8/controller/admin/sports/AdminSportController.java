@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.javaclassS8.service.admin.sports.AdminSportSerivce;
+import com.spring.javaclassS8.utils.PaginationInfo;
 import com.spring.javaclassS8.vo.sports.GameVO;
 import com.spring.javaclassS8.vo.sports.PriceVO;
 import com.spring.javaclassS8.vo.sports.SeatVO;
@@ -332,10 +333,22 @@ public class AdminSportController {
 
 	// 모든 경기 리스트
 	@GetMapping("/game/gameList")
-	public String gameList(Model model) {
-		List<GameVO> games = adminSportService.getAllGamesDetails();
-
+	public String gameList(@RequestParam(defaultValue = "1") int page, Model model) {
+	    int pageSize = 10;
+	    int totalCount = adminSportService.getTotalGamesCount();
+	    PaginationInfo paginationInfo = new PaginationInfo(totalCount, pageSize, page);
+		
+		List<GameVO> games = adminSportService.getAllGamesDetails(page, pageSize);
+		Map<Integer, Boolean> gameHasReservations = new HashMap<>();
+		
+	    for (GameVO game : games) {
+	        gameHasReservations.put(game.getId(), adminSportService.hasReservations(game.getId()));
+	    }
+	    
 		model.addAttribute("games", games);
+		model.addAttribute("gameHasReservations", gameHasReservations);
+		model.addAttribute("paginationInfo", paginationInfo);
+		
 		return "admin/sports/game/gameList";
 	}
 

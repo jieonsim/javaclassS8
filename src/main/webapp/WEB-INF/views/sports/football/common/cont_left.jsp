@@ -40,10 +40,5 @@
 				<span class="sportsmenu1">전체일정</span>
 			</a>
 		</li>
-		<li class="_guideArea">
-			<a href="/help/guide/reservation">
-				<span class="sportsmenu2">예매가이드</span>
-			</a>
-		</li>
 	</ul>
 </div>

@@ -14,7 +14,7 @@ import com.spring.javaclassS8.vo.event.WinnerDetailVO;
 import com.spring.javaclassS8.vo.event.WinnerPostVO;
 
 public interface AdminEventService {
-
+	
 	// 이벤트 업로드
 	int insertEvent(EventVO event);
 
@@ -47,7 +47,7 @@ public interface AdminEventService {
 	boolean drawWinners(int eventId, int numOfWinners);
 
 	// 이벤트 추첨 리스트
-	List<EventDrawSummaryVO> getEventDrawSummaries();
+	List<EventDrawSummaryVO> getEventDrawSummaries(int page, int pageSize);
 
 	// 이벤트 당첨자 디테일
 	List<WinnerDetailVO> getWinnerDetails(int eventId);
@@ -66,5 +66,14 @@ public interface AdminEventService {
 
 	// 이벤트 고유번호와 이벤트 추첨일시로 이벤트 당첨 발표여부 확인
 	boolean isEventAnnouncedByDrawAt(int eventId, Timestamp drawAt);
+
+	// 전체 이벤트 가져오기
+	List<EventVO> getAllEvents(int page, int pageSize);
+	
+	// 전체 이벤트 개수 가져오기 (페이징)
+	int getTotalEventsCount();
+	
+	// 전체 이벤트 추첨 개수 가져오기 (페이징)
+	int getTotalDrawCount();
 	
 }

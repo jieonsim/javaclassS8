@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.spring.javaclassS8.service.event.EventService;
 import com.spring.javaclassS8.vo.event.EventCommentVO;
 import com.spring.javaclassS8.vo.event.EventVO;
-import com.spring.javaclassS8.vo.event.WinnerEventVO;
 import com.spring.javaclassS8.vo.event.WinnerPostDetailVO;
 import com.spring.javaclassS8.vo.member.MemberVO;
 
@@ -33,11 +32,20 @@ public class EventController {
 
 	// 이벤트 메인 화면
 	@GetMapping("/main")
-	public String getEventMain(Model model) {
-		List<EventVO> ongoingEvents = eventService.getOngoingEvents();
-		model.addAttribute("events", ongoingEvents);
-		return "event/main";
+	public String getEventMain(@RequestParam(defaultValue = "1") int page, Model model) {
+	    int pageSize = 9; // 한 페이지에 표시할 이벤트 수
+	    Map<String, Object> result = eventService.getOngoingEvents(page, pageSize);
+	    model.addAttribute("events", result.get("events"));
+	    model.addAttribute("paginationInfo", result.get("paginationInfo"));
+	    return "event/main";
 	}
+//	@GetMapping("/main")
+//	public String getEventMain(Model model) {
+//		
+//		List<EventVO> ongoingEvents = eventService.getOngoingEvents();
+//		model.addAttribute("events", ongoingEvents);
+//		return "event/main";
+//	}
 
 	// 이벤트 컨텐츠 디테일
 	@GetMapping("/detail")
@@ -114,11 +122,19 @@ public class EventController {
 	}
 
 	// 이벤트 당첨자 발표 리스트
+//	@GetMapping("/winner")
+//	public String getEventWinner(Model model) {
+//		List<WinnerEventVO> winnerEvents = eventService.getWinnerEvents();
+//		model.addAttribute("winnerEvents", winnerEvents);
+//		return "event/winner";
+//	}
 	@GetMapping("/winner")
-	public String getEventWinner(Model model) {
-		List<WinnerEventVO> winnerEvents = eventService.getWinnerEvents();
-		model.addAttribute("winnerEvents", winnerEvents);
-		return "event/winner";
+	public String getEventWinner(@RequestParam(defaultValue = "1") int page, Model model) {
+	    int pageSize = 10; // 페이지당 항목 수
+	    Map<String, Object> result = eventService.getWinnerEvents(page, pageSize);
+	    model.addAttribute("winnerEvents", result.get("winnerEvents"));
+	    model.addAttribute("paginationInfo", result.get("paginationInfo"));
+	    return "event/winner";
 	}
 
 	// 이벤트 당첨자 발표 디테일

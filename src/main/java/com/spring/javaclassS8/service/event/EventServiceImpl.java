@@ -2,13 +2,16 @@ package com.spring.javaclassS8.service.event;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.javaclassS8.dao.event.EventDAO;
+import com.spring.javaclassS8.utils.PaginationInfo;
 import com.spring.javaclassS8.vo.event.EventCommentVO;
 import com.spring.javaclassS8.vo.event.EventParticipantVO;
 import com.spring.javaclassS8.vo.event.EventParticipationVO;
@@ -29,9 +32,23 @@ public class EventServiceImpl implements EventService {
 	}
 
 	// 진행 중인 이벤트만 가져오기
+//	@Override
+//	public List<EventVO> getOngoingEvents() {
+//		return eventDAO.getOngoingEvents();
+//	}
 	@Override
-	public List<EventVO> getOngoingEvents() {
-		return eventDAO.getOngoingEvents();
+	public Map<String, Object> getOngoingEvents(int page, int pageSize) {
+	    int totalCount = eventDAO.getOngoingEventsCount();
+	    PaginationInfo paginationInfo = new PaginationInfo(totalCount, pageSize, page);
+	    
+	    int offset = (page - 1) * pageSize;
+	    List<EventVO> events = eventDAO.getOngoingEvents(offset, pageSize);
+
+	    Map<String, Object> result = new HashMap<>();
+	    result.put("events", events);
+	    result.put("paginationInfo", paginationInfo);
+
+	    return result;
 	}
 
 	// 이벤트 아이디로 이벤트 데이터 가져오기
@@ -92,18 +109,28 @@ public class EventServiceImpl implements EventService {
 
 	// 이벤트 당첨자 발표 리스트
 	@Override
-	public List<WinnerEventVO> getWinnerEvents() {
-		List<WinnerEventVO> events = eventDAO.getWinnerEvents();
-		DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+	public Map<String, Object> getWinnerEvents(int page, int pageSize) {
+	    int totalCount = eventDAO.getWinnerEventsCount();
+	    PaginationInfo paginationInfo = new PaginationInfo(totalCount, pageSize, page);
+	    
+	    int offset = (page - 1) * pageSize;
+	    List<WinnerEventVO> events = eventDAO.getWinnerEvents(offset, pageSize);
+	    
+	    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	    DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
 
-		for (WinnerEventVO event : events) {
-			LocalDate startDate = LocalDate.parse(event.getStartDate(), inputFormatter);
-			LocalDate endDate = LocalDate.parse(event.getEndDate(), inputFormatter);
-			event.setStartDate(startDate.format(outputFormatter));
-			event.setEndDate(endDate.format(outputFormatter));
-		}
-		return events;
+	    for (WinnerEventVO event : events) {
+	        LocalDate startDate = LocalDate.parse(event.getStartDate(), inputFormatter);
+	        LocalDate endDate = LocalDate.parse(event.getEndDate(), inputFormatter);
+	        event.setStartDate(startDate.format(outputFormatter));
+	        event.setEndDate(endDate.format(outputFormatter));
+	    }
+
+	    Map<String, Object> result = new HashMap<>();
+	    result.put("winnerEvents", events);
+	    result.put("paginationInfo", paginationInfo);
+
+	    return result;
 	}
 
 	// 이벤트 당첨자 발표 디테일
@@ -111,11 +138,21 @@ public class EventServiceImpl implements EventService {
 	public WinnerPostDetailVO getWinnerPostDetail(int winnerPostId) {
 		return eventDAO.getWinnerPostDetail(winnerPostId);
 	}
-
-	// 본인이 응모한 이벤트 리스트 가져오기
+	
+	// 마이페이지 이벤트 참여 리스트
 	@Override
-	public List<EventParticipationVO> getEventParticipations(int memberId) {
-		return eventDAO.getEventParticipations(memberId);
+	public Map<String, Object> getEventParticipations(int memberId, int page, int pageSize) {
+	    int totalCount = eventDAO.getEventParticipationsCount(memberId);
+	    PaginationInfo paginationInfo = new PaginationInfo(totalCount, pageSize, page);
+
+	    int offset = (page - 1) * pageSize;
+	    List<EventParticipationVO> participations = eventDAO.getEventParticipations(memberId, offset, pageSize);
+
+	    Map<String, Object> result = new HashMap<>();
+	    result.put("participations", participations);
+	    result.put("paginationInfo", paginationInfo);
+
+	    return result;
 	}
 
 	// memberId로 해당 member가 응모한 이벤트 갯수 가져오기

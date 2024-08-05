@@ -17,7 +17,7 @@ public interface AdvanceTicketDAO {
 	boolean registerTicket(@Param("advanceTicketNumber") String advanceTicketNumber, @Param("memberId") int memberId);
 
 	// memberId로 해당 유저에 등록된 예매권 정보 가져오기
-	List<Map<String, Object>> getAdvanceTicketsByMemberId(int memberId);
+	List<Map<String, Object>> getAdvanceTicketsByMemberId(@Param("memberId") int memberId, @Param("offset") int offset, @Param("limit") int limit);
 
 	// 마이페이지 > 할인혜택 > 예매권 > 사용가능/사용완료/유효기간만료 필터링
 	List<Map<String, Object>> getAdvanceTicketsByMemberIdAndState(@Param("memberId") int memberId, @Param("stateType") String stateType);
@@ -27,5 +27,8 @@ public interface AdvanceTicketDAO {
 
 	// 예매권번호로 예매권 정보 가져오기
 	Map<String, Object> findByAdvanceTicketNumber(String advanceTicketNumber);
+	
+	// memberId에 등록된 예매권 갯수 가져오기
+	int getAdvanceTicketsCountByMemberId(int memberId);
 
 }

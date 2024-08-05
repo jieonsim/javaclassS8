@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.javaclassS8.dao.admin.event.AdminEventDAO">
-
+	
+	<!-- 이벤트 전체 리스트 가져오기 -->
+	<select id="getAllEvents" resultType="com.spring.javaclassS8.vo.event.EventVO">
+    	SELECT * FROM events ORDER BY createdAt DESC LIMIT #{offset}, #{pageSize}
+	</select>
+	
 	<!-- 어드민 이벤트 리스트 조건 검색 -->
 	<select id="filterEvents"
 		resultType="com.spring.javaclassS8.vo.event.EventVO">
@@ -66,12 +71,23 @@
 	    JOIN events e ON w.eventId = e.id
 	    GROUP BY w.eventId, w.drawAt
 	    ORDER BY w.drawAt DESC
+	    LIMIT #{offset}, #{pageSize}
 	</select>
 	
 	<!-- 이벤트 아이디로 이벤트 정보 가져오기 -->
 	<select id="getEventById" resultType="com.spring.javaclassS8.vo.event.EventVO">
         SELECT * FROM events WHERE id = #{eventId}
     </select>
+    
+    <!-- 전체 이벤트 개수 가져오기 (페이징) -->
+	<select id="getTotalEventsCount" resultType="int">
+		SELECT COUNT(*) FROM events
+	</select>
+	
+    <!-- 전체 이벤트 추첨 개수 가져오기 (페이징) -->
+	<select id="getTotalDrawCount" resultType="int">
+		SELECT COUNT(*) FROM winners
+	</select>
     
 	<!-- 이벤트 업로드 -->
 	<insert id="insertEvent"

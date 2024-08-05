@@ -30,7 +30,7 @@
 						<div class="col-lg-12 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">예매권 발행 리스트</h4>
+									<h4 class="card-title">예매권 리스트</h4>
 									<div class="table-responsive">
 										<table class="table">
 											<colgroup>
@@ -100,6 +100,23 @@
 								</div>
 							</div>
 						</div>
+						<ul class="pagination justify-content-center">
+							<c:if test="${paginationInfo.hasPreviousPage}">
+								<li class="page-item">
+									<a class="page-link" href="?page=${paginationInfo.currentPage - 1}">Previous</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${paginationInfo.startPage}" end="${paginationInfo.endPage}" var="pageNum">
+								<li class="page-item ${pageNum == paginationInfo.currentPage ? 'active' : ''}">
+									<a class="page-link" href="?page=${pageNum}">${pageNum}</a>
+								</li>
+							</c:forEach>
+							<c:if test="${paginationInfo.hasNextPage}">
+								<li class="page-item">
+									<a class="page-link" href="?page=${paginationInfo.currentPage + 1}">Next</a>
+								</li>
+							</c:if>
+						</ul>
 					</div>
 				</div>
 				<jsp:include page="/WEB-INF/views/admin/layout/footer.jsp" />

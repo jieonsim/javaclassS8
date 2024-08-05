@@ -9,7 +9,7 @@
 		</div>
 		<div class="seat_tit_area">
 			<h5 class="sp_tit seat">예매 가능한 좌석</h5>
-			<a class="info" href="http://www.ticketlink.co.kr/my/discount/advanceticket-new">
+			<a class="info" href="${ctp}/my/discount/advanceTicket">
 				스포츠예매권이란
 				<span></span>
 			</a>

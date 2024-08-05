@@ -110,7 +110,8 @@
 	    JOIN teams ht ON g.HomeTeamId = ht.id
 	    JOIN teams at ON g.awayTeamId = at.id
 	    JOIN venues v ON g.venueId = v.id
-	    ORDER BY g.gameDate, ht.teamName
+	    ORDER BY g.gameDate DESC, ht.teamName
+	    LIMIT #{offset}, #{pageSize}
 	</select>
 	
 	<!-- 좌석 등록 폼 경기장별 현재 사용된 좌석 수 확인 -->
@@ -268,6 +269,18 @@
 	            venueId = #{id}
 	        </if>
 	    </where>
+	</select>
+	
+	<!-- 해당 게임으로 예매된 건이 있는지 확인 -->
+	<select id="countReservationsByGameId" resultType="int">
+	    SELECT COUNT(*) 
+	    FROM reservations
+	    WHERE gameId = #{gameId}
+	</select>
+	
+	<!-- 토탈 게임 수 가져오기(페이징) -->
+	<select id="getTotalGamesCount" resultType="int">
+	    SELECT COUNT(*) FROM games
 	</select>
 
 	<!-- 스포츠 종목 등록 처리 -->

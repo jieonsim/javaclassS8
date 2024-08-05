@@ -25,6 +25,7 @@
 	    JOIN registered_advance_tickets rat ON at.id = rat.advanceTicketId
 	    WHERE rat.memberId = #{memberId}
 	    ORDER BY at.expiresAt DESC
+	    LIMIT #{offset}, #{limit}
 	</select>
 	
 	<!-- 마이페이지 > 할인혜택 > 예매권 > 사용가능/사용완료/유효기간만료 필터링 -->
@@ -71,6 +72,14 @@
 	    WHERE rat.memberId = #{memberId}
 	    AND at.used = false
 	    AND at.expiresAt > NOW()
+	</select>
+	
+	<!-- memberId에 등록된 예매권 갯수 가져오기 -->
+	<select id="getAdvanceTicketsCountByMemberId" resultType="int">
+	    SELECT COUNT(*)
+	    FROM advance_tickets at
+	    JOIN registered_advance_tickets rat ON at.id = rat.advanceTicketId
+	    WHERE rat.memberId = #{memberId}
 	</select>
 	
 	<!-- 예매권 등록 처리 -->

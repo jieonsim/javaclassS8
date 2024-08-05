@@ -42,7 +42,7 @@ public class AdminReserveServiceImple implements AdminReserveService {
 			// 현재 날짜로부터 30일 이후의 자정(23:59:59)으로 만료 시간 설정
 			LocalDateTime expirationDate = LocalDate.now().plusDays(30).atTime(23, 59, 59);
 			ticket.setExpiresAt(Timestamp.valueOf(expirationDate));
-			
+
 			ticket.setIssuedAt(Timestamp.valueOf(LocalDateTime.now()));
 			ticket.setUsed(false);
 			ticket.setAdminId(adminId);
@@ -79,18 +79,30 @@ public class AdminReserveServiceImple implements AdminReserveService {
 		}
 		return -1; // 로그인한 관리자가 없는 경우
 	}
-	
+
 	// 예매 리스트
-    @Override
-    public List<ReservationVO> getAllReservations() {
-        return adminReserveDAO.getAllReservations();
-    }
+	@Override
+	public List<ReservationVO> getAllReservations(int page, int pageSize) {
+		int offset = (page - 1) * pageSize;
+		return adminReserveDAO.getAllReservations(offset, pageSize);
+	}
 
 	// 예매권 발행 리스트
-    @Override
-    public List<AdvanceTicketInfoVO> getAdvanceTicketList() {
-        return adminReserveDAO.getAdvanceTicketList();
-    }
+	@Override
+	public List<AdvanceTicketInfoVO> getAdvanceTicketList(int page, int pageSize) {
+		int offset = (page - 1) * pageSize;
+		return adminReserveDAO.getAdvanceTicketList(offset, pageSize);
+	}
 
+	// 전체 예매 건 수 가져오기 (페이징)
+	@Override
+	public int getTotalReservationCount() {
+		return adminReserveDAO.getTotalReservationCount();
+	}
 
+	// 전체 예매권 발행 수 가져오기 (페이징)
+	@Override
+	public int getTotalAdvanceTicketsCount() {
+		return adminReserveDAO.getTotalAdvanceTicketsCount();
+	}
 }

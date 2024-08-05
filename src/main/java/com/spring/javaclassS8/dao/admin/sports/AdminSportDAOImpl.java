@@ -155,8 +155,8 @@ public class AdminSportDAOImpl implements AdminSportDAO {
 
 	// 모든 경기 디테일 가져오기(경기 리스트)
 	@Override
-	public List<GameVO> getAllGamesDetails() {
-		return sqlSession.getMapper(AdminSportDAO.class).getAllGamesDetails();
+	public List<GameVO> getAllGamesDetails(int offset, int pageSize) {
+		return sqlSession.getMapper(AdminSportDAO.class).getAllGamesDetails(offset, pageSize);
 	}
 
 	// 경기 정보 수정
@@ -301,5 +301,17 @@ public class AdminSportDAOImpl implements AdminSportDAO {
 	@Override
 	public int countGamesByTypeAndId(String type, int id) {
 		return sqlSession.getMapper(AdminSportDAO.class).countGamesByTypeAndId(type, id);
+	}
+	
+	// 해당 게임으로 예매된 건이 있는지 확인
+	@Override
+	public int countReservationsByGameId(int gameId) {
+		return sqlSession.getMapper(AdminSportDAO.class).countReservationsByGameId(gameId);
+	}
+	
+	// 토탈 게임 수 가져오기(페이징)
+	@Override
+	public int getTotalGamesCount() {
+		return sqlSession.getMapper(AdminSportDAO.class).getTotalGamesCount();
 	}
 }

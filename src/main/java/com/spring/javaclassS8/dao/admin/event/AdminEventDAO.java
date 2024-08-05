@@ -33,7 +33,7 @@ public interface AdminEventDAO {
 	void insertWinner(WinnerVO winner);
 
 	// 이벤트 추첨 리스트
-	List<EventDrawSummaryVO> getEventDrawSummaries();
+	List<EventDrawSummaryVO> getEventDrawSummaries(@Param("offset") int offset, @Param("pageSize") int pageSize);
 
 	// 이벤트 당첨자 디테일
 	List<WinnerDetailVO> getWinnerDetails(int eventId);
@@ -55,4 +55,13 @@ public interface AdminEventDAO {
 
 	// winners 테이블의 isAnnounced 업데이트
 	int updateWinnerIsAnnounced(@Param("eventId") int eventId, @Param("drawAt") Timestamp drawAt);
+	
+	// 전체 이벤트 리스트 가져오기
+	List<EventVO> getAllEvents(@Param("offset") int offset, @Param("pageSize") int pageSize);
+	
+	// 전체 이벤트 개수 가져오기 (페이징)
+	int getTotalEventsCount();
+	
+	// 전체 이벤트 추첨 개수 가져오기 (페이징)
+	int getTotalDrawCount();
 }
