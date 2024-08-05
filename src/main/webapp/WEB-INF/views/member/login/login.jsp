@@ -80,25 +80,6 @@
 							</li>
 						</ul>
 					</div>
-					<div class="snsLogin">
-						<ul>
-							<li id="kakao_li">
-								<a href="#" class="kakao" id="openid_kakao">
-									<span>카카오톡</span>
-								</a>
-							</li>
-							<li id="naver_li">
-								<a href="#" class="naver" id="openid_naver">
-									<span>네이버</span>
-								</a>
-							</li>
-							<li id="apple_li">
-								<a href="#" class="apple" id="openid_apple">
-									<span>애플</span>
-								</a>
-							</li>
-						</ul>
-					</div>
 				</div>
 			</form>
 		</div>

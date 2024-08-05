@@ -71,13 +71,13 @@
 .basic_tbl.basic_tbl_v8 .inp_tx{border:1px solid #e8eaf1}
 
 /* 배송정보 변경 테이블 추가요소 영역 1209 */
-.test{background:url(../img/testtest.png) 0 0 no-repeat}
+/* .test{background:url(../img/testtest.png) 0 0 no-repeat}
 .tbl table th.input_th{vertical-align:middle}
 #container .tbl table th.input_th + td{padding:7px 10px 7px}
 .tbl table td.additional_product_list p{font-size:14px;line-height:20px}
 .tbl table td .sch_btn{background-color:transparent;margin-top:5px;padding:3px 12px 5px;border:1px solid #dcdde1;font-size:13px;color:#242428;border-radius: 6px;box-sizing: border-box;height: 28px;}
 .tbl table td .sch_btn:hover{border-color:#242428;background:#f5f6f9}
-/* //배송정보 변경 테이블 영역 추가요소 영역 1209 */
+ *//* //배송정보 변경 테이블 영역 추가요소 영역 1209 */
 
 #container .tbl .print_receipt{position:relative}
 #container .tbl .print_receipt .btn_blank{position:absolute;top:3px;right:10px;padding:4px 11px;font-size:13px;font-weight:400;line-height:18px;text-align:center}
@@ -160,7 +160,7 @@
 }
 
 /* 주소검색 */
-#wrap_member .srch_area.on{display:block;margin-top:30px;padding-top:18px;border-top:1px solid #ecedf2}
+/* #wrap_member .srch_area.on{display:block;margin-top:30px;padding-top:18px;border-top:1px solid #ecedf2}
 #wrap_member .srch_area{margin-top:30px;padding-top:18px;border-top:1px solid #ecedf2}
 #wrap_member .srch_result{margin-top:30px;padding:82px 0;border:1px solid #e8eaf1;font-size:12px;color:#242428;line-height:14px;text-align:center}
 #wrap_member .srch_result strong{display:inline-block;margin-bottom:6px;color:#242428}
@@ -201,7 +201,7 @@
 #wrap_member .srch_area .address_info .addinfo_guide.on{display:block}
 #wrap_member .srch_area .twin_button{margin-top:28px}
 #wrap_member .address_info button.btn_srch{overflow:hidden;position:absolute;top:8px;right:10px;line-height:999px}
-
+ */
 /* 버튼 */
 #wrap_member button{cursor:pointer}
 #wrap_member button.btn{width:100%;margin-top:6px}
@@ -248,14 +248,14 @@
 #wrap_member .btn_gender .on + label::before{border-left:0;border-right:1px solid #e8eaf1}
 
 /* 회원전환 */
-#wrap_member .skyblue_box{border:1px solid #ecedf2;background:#f5f6f9;line-height:20px;padding:17px 20px 18px;margin-top:10px;}
+/* #wrap_member .skyblue_box{border:1px solid #ecedf2;background:#f5f6f9;line-height:20px;padding:17px 20px 18px;margin-top:10px;}
 #wrap_member .skyblue_box strong{color:#62676c;line-height:30px;}
 #wrap_member .skyblue_box_v2{text-align:center;padding:25px 0;}
 #wrap_member .skyblue_box_v3{padding-top:10px;}
 #wrap_member .skyblue_box li{position:relative;padding:0 24px 0 22px;text-indent:-22px;font-size:13px}
-
+ */
 /* 본인인증 */
-#wrap_member .certification{}
+/* #wrap_member .certification{}
 #wrap_member .certification li{border:1px solid #e6ebf1;margin-bottom:10px;position:relative;}
 #wrap_member .certification li .radio{position:absolute;top:30px;left:20px;}
 #wrap_member .certification li label{font-size:15px;font-weight:bold;display:block;text-align:center;height:47px;padding-top:28px;*padding-top:10px;cursor:pointer;}
@@ -286,23 +286,23 @@
 #wrap_member .guidance_v5 strong{display:inline}
 #wrap_member .find_id_result{display:block;font-size:15px;text-align:center;border:1px solid #e6ebf1;padding:25px 0;}
 #wrap_member .find_id_result + .twin_button{margin-top:10px;}
-
+ */
 /* 시설>로그인 */
-#wrap_member .btn_view{position:absolute;right:0;top:0;}
+/* #wrap_member .btn_view{position:absolute;right:0;top:0;}
 #wrap_member .btn_view a{text-decoration:underline;color:#878d95;font-size:12px;line-height: 14px;}
 #wrap_member .btn_view em{display:none}
 #wrap_member .select_sex{margin:-14px 0 20px;*overflow:hidden;*padding-top:1px}
 #wrap_member .notice + .input_txt_area{margin-top:10px}
 #wrap_member .input_txt_area .btn_view{top:17px;right:20px}
-
+ */
 /* 시설회원 */
-#wrap_member.ins #header{height:39px;border-color:#242428}
+/* #wrap_member.ins #header{height:39px;border-color:#242428}
 #wrap_member.ins .login_tab li.on{background-color:#242428;border-color:#242428}
 #wrap_member.ins .input_txt_area+strong.title,
 #wrap_member.ins .notice+strong.title,
 #wrap_member.ins button.btn{margin-top:20px}
 #wrap_member.ins #header h2{display:block;font-size:21px;line-height:39px}
-
+ */
 /* 고객센터 할인카드안내 */
 /* #wrap_cardinfo #container{margin:0 20px 0 21px;padding-bottom:30px;background-color:#fff}
 #wrap_cardinfo h1{display:block;padding:27px 0 9px;background:none;border-bottom:1px solid #ecedf2;font-size:15px;color:#242428;line-height:normal !important}
@@ -377,7 +377,7 @@ h5.tit{font-size:12px;margin-bottom:10px}
 .basic_tbl_v4 + .cancel_tab{margin-top:20px}
 
 /*이용약관*/
-#wrap_member .front_area{line-height:1.6}
+/* #wrap_member .front_area{line-height:1.6}
 #wrap_member .front_area h4{margin-top:18px;font-size:13px}
 #wrap_member .front_area h4:first-child{margin-top:0}
 #wrap_member .front_area h5{margin-top:18px;font-size:12px}
@@ -394,7 +394,7 @@ h5.tit{font-size:12px;margin-bottom:10px}
 #wrap_member .front_area table td{padding:9px 5px 10px;border:1px solid #ecedf2}
 #wrap_member .front_area .lst_bx{margin-top:10px;padding:10px;border:1px solid #ecedf2}
 #wrap_member .front_area .lst_bx .btn_link{text-decoration:underline}
-
+ */
 /*예매 확인 취소*/
 #wrap_popup #header p{margin:5px 0 10px 28px;font-size:12px;color:#e7e7e7}
 
@@ -422,18 +422,18 @@ h5.tit{font-size:12px;margin-bottom:10px}
 #wrap_popup .impt_noti .basic_tbl.basic_tbl_v3 td{padding:8px 0}
 
 /* 예매확인/취소 > 좌석보기 */
-#wrap_popup .seat_bx{position:relative}
+/* #wrap_popup .seat_bx{position:relative}
 #wrap_popup .seat_bx .btn_seat{display:block;background:none;font-size:14px;color:#fa2828;text-decoration:underline;cursor:pointer}
 #wrap_popup .seat_bx .tooltip{position:absolute;top:-26px;left:25px;width:77px;height:34px;padding:0;background:url(../img/sp@2x.png) no-repeat;background-size:500px auto;}
 #wrap_popup .seat_bx .tooltip a{display:block;width:100%;height:100%;cursor:default}
 #wrap_popup .seat_bx .tooltip .btn_close{position:absolute;top:2px;right:4px;width:16px;height:22px;background:none}
-
-h3+.notice{margin:5px 0 15px}
+ */
+/* h3+.notice{margin:5px 0 15px}
 .notice{margin-top:17px;font-size:12px;color:#878d95;line-height:18px}
 .notice.lst{margin-top:17px}
 .notice.lst li{padding-left:17px;font-size:12px;text-indent:-17px}
 .notice.lst2 li{padding-left:10px;text-indent:-10px}
-
+ */
 /*예매 필수 정보 입력*/
 .white_box{border:1px solid #d4d4d4;border-radius:2px}
 .white_box table{width:100%}
@@ -443,19 +443,19 @@ h3+.notice{margin:5px 0 15px}
 .white_box .select{background-position:100% -31px}
 
 /*점검*/
-h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:16px;background:url(../img/sp_etc.png) no-repeat -378px -299px;line-height:999px}
+/* h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:16px;background:url(../img/sp_etc.png) no-repeat -378px -299px;line-height:999px}
 .skyblue_box .check_noti{overflow:hidden;max-width:302px;margin:2px auto 0;font-size:13px;color:#878d95}
 .skyblue_box .check_noti dt{position:absolute;padding-left:5px}
 .skyblue_box .check_noti dd{margin-bottom:4px}
 .skyblue_box .check_noti dt:before{display:block;position:absolute;top:8px;left:-2px;width:3px;height:3px;background:#bbbfc3;content:''}
 .skyblue_box .check_noti dt:after{display:inline-block;margin-left:4px;content:':'}
 .skyblue_box .check_noti dd{padding-left:65px}
-
+ */
 /* 팬클럽 */
-.guide_penclub{padding-bottom:9px;line-height:18px;font-size:12px;color:#878d95}
+/* .guide_penclub{padding-bottom:9px;line-height:18px;font-size:12px;color:#878d95} */
 
 /* 영어예매가이드 */
-#wrap_enguide h3.tit,#wrap_enguide h3.tit2,#wrap_enguide .section_top .step,#wrap_enguide .num,#wrap_enguide .qna{background:url(../img/sp_enguide.gif) no-repeat;display:inline-block;overflow:hidden;font-size:1px;line-height:999px}
+/* #wrap_enguide h3.tit,#wrap_enguide h3.tit2,#wrap_enguide .section_top .step,#wrap_enguide .num,#wrap_enguide .qna{background:url(../img/sp_enguide.gif) no-repeat;display:inline-block;overflow:hidden;font-size:1px;line-height:999px}
 #wrap_enguide .top_area{height:23px;padding:38px 15px 7px;border-bottom:4px solid #242428}
 #wrap_enguide .top_area h1{float:left;width:57px;height:22px;margin-top:0;background-position:-145px -201px}
 #wrap_enguide .top_area h2{float:left;margin-left:6px;font-size:14px;line-height:22px;color:#242428;letter-spacing:-1px}
@@ -502,16 +502,16 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 #wrap_enguide .qna.a1{background-position:-72px -92px}
 #wrap_enguide .qna.a2{background-position:-97px -92px}
 #wrap_enguide div.color_point{padding-bottom:10px}
-
+ */
 
 /* 스마트티켓 : 팝업 */
-#wrap_popup .smt_info_bx{height:34px;padding:17px 0 21px 42px}
+/* #wrap_popup .smt_info_bx{height:34px;padding:17px 0 21px 42px}
 #wrap_popup .smt_info_bx dt, #wrap_popup .smt_info_bx dd{float:left;margin:0 16px 0 0;font-size:12px;line-height:20px;color:#878d95}
 #wrap_popup .smt_info_bx dt{color:#242428}
 .mobile_info_bx{margin-bottom:9px;text-align:center}
-
+ */
 /* 스마트티켓 알아보기 : 팝업 */
-#wrap_popup.smt_ticket_inf{height:auto;padding-bottom:52px}
+/* #wrap_popup.smt_ticket_inf{height:auto;padding-bottom:52px}
 .smt_ticket_inf h1{display:block;height:97px;font-size: 32px;line-height: 97px;text-align: center;font-weight: 700;background: #fff;}
 .smt_ticket_inf .main_banner{overflow:hidden;height:362px;background:#3bb431 url(../img/smart/bg_smart1.jpg) no-repeat 50% 0;line-height:999px}
 .smt_ticket_inf .section{margin-top:60px}
@@ -520,25 +520,25 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .smt_ticket_inf .sec3{height:649px;background:url(../img/smart/bg_smart4.jpg) no-repeat 50% 0}
 .smt_ticket_inf .sec4{height:420px;background:#edeff2 url(../img/smart/bg_smart5.jpg) no-repeat 50% 0}
 .smt_ticket_inf .sec5{height:201px;background:url(../img/smart/bg_smart6.jpg) no-repeat 50% 0}
-
+ */
 /* 스마트티켓 사용법(manual) : 팝업 */
-#wrap_popup.smt_ticket_inf_manual{height:auto}
+/* #wrap_popup.smt_ticket_inf_manual{height:auto}
 .smt_ticket_inf_manual .sec_header{overflow:hidden;height:274px;background:#3bb431 url(../img/smart/bg_smart_manual1.jpg) no-repeat 50% 0;line-height:999px}
 .smt_ticket_inf_manual .sec{height:364px;background:url(../img/smart/bg_smart_manual2.jpg) no-repeat 50% 0}
 .smt_ticket_inf_manual .sec2{height:311px;background:url(../img/smart/bg_smart_manual3.jpg) no-repeat 50% 0}
 .smt_ticket_inf_manual .sec3{height:305px;background:url(../img/smart/bg_smart_manual4.jpg) no-repeat 50% 0}
 .smt_ticket_inf_manual .sec4{height:157px;background:#edeff2 url(../img/smart/bg_smart_manual5.jpg) no-repeat 50% 0}
 .smt_ticket_inf_manual .sec5{height:189px;background:url(../img/smart/bg_smart_manual6.jpg) no-repeat 50% 0}
-
+ */
 /* 원주 동부 프로미 멤버십 */
-.membership_info{overflow:hidden;margin-bottom:20px;padding:0 11px;border:1px solid #78d2c4;background:#f9f9f9}
+/* .membership_info{overflow:hidden;margin-bottom:20px;padding:0 11px;border:1px solid #78d2c4;background:#f9f9f9}
 .membership_info li{float:left;margin-left:141px;padding:13px 0 9px;font-size:0}
 .membership_info li:first-child{margin-left:0}
 .membership_info .tit{display:inline-block;margin-right:18px;font-size:12px;color:#62676c;vertical-align:middle}
 .membership_info .txt{display:inline-block;margin:-1px 0 1px;font-family:Montserrat-R;font-weight:bold;font-size:15px;color:#00aa8f;vertical-align:middle}
-
+ */
 /* 포인트 공통 */
-#wrap_popup #container.point_cont{padding:30px 30px 19px}
+/* #wrap_popup #container.point_cont{padding:30px 30px 19px}
 #wrap_popup .point_cont h2{border-bottom:0}
 #wrap_popup .point_cont h2.sp{overflow:hidden;width:165px;height:31px;border:0;background:url(../img/sp_pop.png) no-repeat -247px -78px;line-height:999px}
 .point_cont .lt_noti2{margin-top:9px}
@@ -556,10 +556,10 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .point_cont .request_bx .use ul{margin-top:10px}
 .point_cont .request_bx .use label{margin-left:9px;font-weight:bold;color:#242428}
 .point_cont .noti_txt{padding:10px 0 8px 18px;font-size:12px;color:#717070}
-
+ */
 
 /* 반응형 common */
-.ly_pop_wrap .pop_container{position:fixed;top:15px;right:15px;bottom:15px;left:15px;padding:0;border:1px solid #242428;background:#f8f9fa}
+/* .ly_pop_wrap .pop_container{position:fixed;top:15px;right:15px;bottom:15px;left:15px;padding:0;border:1px solid #242428;background:#f8f9fa}
 .pop_container .pop_header{padding:10px 48px 7px 10px;border-bottom:1px solid #ecedf2;background:#fff;font-size:14px;color:#242428}
 .pop_container .pop_content{overflow:hidden;position:absolute;top:48px;left:0;right:0;bottom:0}
 .pop_container .sp{background-image:url(../92_webview/img/sp.png);background-repeat:no-repeat;background-size:221px auto}
@@ -591,15 +591,15 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .pop_content .inp_txt input{width:100%;border:0;font-size:12px;-webkit-appearance:none}
 .pop_content .inp_txt input::placeholder{color:#a7acb6}
 .pop_content .inp_txt label{position:absolute;font-size:13px;color:#cfcfcf}
-
+ */
 
 /* 개인정보 처리방침 */
-.btn_companylist{display:block;text-decoration:underline}
+/* .btn_companylist{display:block;text-decoration:underline}
 .btn_companylist:hover{text-decoration:underline}
 .btn_companylist:after{display:inline-block;padding-left:3px;font-size:12px;line-height:12px;vertical-align:middle;content:'>'}
-
+ */
 /* 업체리스트 팝업 */
-#wrap_popup.company_list #container{padding:38px 20px 50px}
+/* #wrap_popup.company_list #container{padding:38px 20px 50px}
 .company_list .area_search{padding-bottom:24px;border-bottom:1px solid #ecedf2}
 .company_list .area_search .ico_search{display:block;width:65px;height:65px;margin:0 auto}
 .company_list .area_search .top_dsc{display:block;height:13px;margin:24px auto 0;color:#242428;font-size:13px;font-weight:700;text-align:center;line-height:13px}
@@ -614,9 +614,9 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .company_list .basic_tbl_v3 td{color:#242428;line-height: 16px;padding: 11px 0 10px;}
 .company_list .basic_tbl_v3 tr:first-child td{padding-top:10px}
 .company_list .basic_tbl_v3 .no_data td{height:128px;color:#62676c}
-
+ */
 /* 11_privacy_policy 내 레이어팝업 (개인정보) */
-.ly_pop_wrap.privacy{position:fixed;top:0;left:0;right:0;bottom:0;z-index:300}
+/* .ly_pop_wrap.privacy{position:fixed;top:0;left:0;right:0;bottom:0;z-index:300}
 .privacy .dimmed{display:block;right:0;bottom:0;z-index:0;width:auto;height:auto}
 .privacy .pop_content{position:fixed;left:8px;right:8px;padding:0 20px 30px;background:#fff;border-radius:2px;box-sizing:border-box}
 .privacy .pop_content .ly_tit{margin-bottom:20px;padding:14px 0;border-bottom:1px solid #cfd0d7;font-size:15px;line-height:22px}
@@ -628,9 +628,9 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .privacy .paginate{margin-top:18px;padding:00;border-top:0;font-size:0}
 .privacy .pop_content .btn_cls{position:absolute;top:0;right:0;padding:17px;background:none;font-size:0}
 .privacy .pop_content .btn_cls::before{display:inline-block;content:''}
-
+ */
 /* 브릿지 관련 팝업 */
-#wrap.pop_bridge{min-width:auto}
+/* #wrap.pop_bridge{min-width:auto}
 #wrap.pop_bridge .header{position:relative;height:65px;padding:34px 0 0 38px;border-bottom:4px solid #ffc72a;box-sizing:border-box;}
 #wrap.pop_bridge .header h1{display:block;background-image:url(../img/sp_pop.png);background-repeat:no-repeat}
 #wrap.pop_bridge .header .ico{position:absolute;background-image:url(../img/sp_pop.png);background-repeat:no-repeat}
@@ -648,23 +648,23 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .pop_bridge .contents thead tr:first-child th,
 .pop_bridge .contents thead tr:first-child td{border-bottom:0}
 .pop_bridge .contents em{display:block}
-
+ */
 /* 레탑코리아 팝업 */
-.pop_bridge.letape .header{background-color:#242428}
+/* .pop_bridge.letape .header{background-color:#242428}
 .pop_bridge.letape .header h1{width:245px;height:17px;background-position:-702px 0}
 .pop_bridge.letape .ico{top:20px;right:46px;width:74px;height:74px;background-position:-639px -210px}
-
+ */
 /* 레탑코리아 > 대회약관 국문 팝업*/
-.pop_bridge.letape.kor h1{width:225px;background-position:-715px -210px}
+/* .pop_bridge.letape.kor h1{width:225px;background-position:-715px -210px}
 .pop_bridge.letape.kor .contents h2{margin-top:0}
 .pop_bridge.letape.kor .contents dl + h2{margin-top:50px}
 .pop_bridge.letape.kor .contents dd{padding-left:0;text-indent:0}
 .pop_bridge.letape.kor .contents dd + dt{margin-top:17px}
 .pop_bridge.letape.kor .contents dd ul{margin:0}
 .pop_bridge.letape.kor .contents dd li{padding-left:19px;text-indent:-19px}
-
+ */
 /* 레탑코리아 > 대회약관 영문 팝업*/
-.pop_bridge.letape.eng h1{width:225px;background-position:-715px -229px}
+/* .pop_bridge.letape.eng h1{width:225px;background-position:-715px -229px}
 .pop_bridge.letape.eng .contents h2{margin-top:0}
 .pop_bridge.letape.eng .contents h2,
 .pop_bridge.letape.eng .contents dt{text-transform:uppercase}
@@ -673,28 +673,28 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .pop_bridge.letape.eng .contents dd + dt{margin-top:17px}
 .pop_bridge.letape.eng .contents dd ul{margin:0}
 .pop_bridge.letape.eng .contents dd li{padding-left:19px;text-indent:-19px}
-
+ */
 /* 티켓 예매확인/취소 */
 .sports .basic_tbl_v3 th{padding:10px 0;line-height:18px}
 .sports .basic_tbl_v3 tbody td{vertical-align:middle}
 
 /* 주소팝업 */
-#wrap_member.address #header h1{display:block;width:auto;height:auto;margin:0;padding:12px 0;background:none;font-size:14px;font-weight:bold;line-height:normal !important;vertical-align:baseline}
+/* #wrap_member.address #header h1{display:block;width:auto;height:auto;margin:0;padding:12px 0;background:none;font-size:14px;font-weight:bold;line-height:normal !important;vertical-align:baseline}
 #wrap_member.address #container{padding-bottom:90px}
 .address_info .noti{margin-bottom:-14px;color:#fa2828}
-
+ */
 /* 시설웹 > 배너영역 */
-#wrap_popup #container.banner_type{padding-top:118px}
+/* #wrap_popup #container.banner_type{padding-top:118px}
 .bx_banner a{display:table-cell;border:1px solid #ecedf2}
 .bx_banner{display:table;position:absolute;top:0;left:0;right:0;width:100%;padding:10px 30px;box-sizing:border-box;background-color:#f8f9fa;table-layout:fixed}
 .bx_banner img{display:block;width:100%;height:auto}
-
+ */
 /* 2018 시즌 추가 ------------------------------------------------------------ */
 /* 폰트 common */
-.ly_pop_wrap3 div, .ly_pop_wrap3 table, .ly_pop_wrap3 input, .ly_pop_wrap3 button, .ly_pop_wrap3 p, .place_popup div, .place_popup table, .place_popup button, .place_popup p, .place_popup input, .place_popup button, .pop_place div, .pop_place input, .pop_place button, .pop_place a, .pop_place p, .pop_place table{font-family:'Notosans',-apple-system,BlinkMacSystemFont,Apple SD Gothic Neo,'Malgun Gothic',Arial,sans-serif}
+/* .ly_pop_wrap3 div, .ly_pop_wrap3 table, .ly_pop_wrap3 input, .ly_pop_wrap3 button, .ly_pop_wrap3 p, .place_popup div, .place_popup table, .place_popup button, .place_popup p, .place_popup input, .place_popup button, .pop_place div, .pop_place input, .pop_place button, .pop_place a, .pop_place p, .pop_place table{font-family:'Notosans',-apple-system,BlinkMacSystemFont,Apple SD Gothic Neo,'Malgun Gothic',Arial,sans-serif} */
 
 /* 팝업 UIO common */
-.place_popup input[type='checkbox']{-webkit-appearance:none}
+/* .place_popup input[type='checkbox']{-webkit-appearance:none}
 .place_popup table .txt_color{color:#242428}
 .place_popup table .txt_weight{font-weight:700}
 .place_popup .bx_btn{margin-top:20px;font-size:0;text-align:center}
@@ -721,9 +721,9 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .place_popup .btn_link2:after{position:absolute;right:0;content:'>'}
 .place_popup .ly_ticket_history .bx_input{width:calc(100% - 130px);border:1px solid #e8eaf1;color:#242428}
 .place_popup .ly_ticket_history .ipt_txt::placeholder{color:#a7acb6}
-
+ */
 /* 시설 웹 > 예매하기 (상품리스트) 팝업 */
-.place_popup{position:relative;width:990px;min-height:890px}
+/* .place_popup{position:relative;width:990px;min-height:890px}
 .place_popup2{width:600px}
 .place_popup .header{position:relative;height:82px;padding:0 40px 0 58px;border-bottom:1px solid #242428;box-sizing:border-box;font-size:0}
 .place_popup .place_pop_tit{display:block;padding-right:52%;background:none}
@@ -789,9 +789,9 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .place_popup2 .mypage_detail .basic_tbl td:first-child{text-align:center}
 .place_popup2 .mypage_detail .basic_tbl.coupon_info .data_none{height:264px}
 .place_popup2 .mypage_detail .basic_tbl.coupon_info .data_none_txt{margin-top:20px}
-
+ */
 /* 시설 > 예매확인/취소 팝업 */
-.place_popup .container.mypage{padding:30px 40px 35px}
+/* .place_popup .container.mypage{padding:30px 40px 35px}
 .place_popup .lst_tab{display:table;table-layout:fixed;width:100%;}
 .place_popup .lst_tab li{display:table-cell;text-align:center}
 .place_popup .lst_tab li a{display:block;height:60px;border:1px solid #dcdde1;font-size:16px;color:#242428;line-height:58px;box-sizing:border-box}
@@ -825,9 +825,9 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .basic_tbl.reserve_info .status .btn_blank:hover{text-decoration:none}
 .basic_tbl.reserve_info .data_none{height:430px}
 .place_popup .mypage .btn_link2{margin-top:6px}
-
+ */
 /* 시설 > 예매확인/취소 팝업 (상세) */
-.place_popup .container.mypage_detail{padding-top:25px}
+/* .place_popup .container.mypage_detail{padding-top:25px}
 .place_popup .top_noti{padding:15px 40px 16px;border-bottom:1px solid #ecedf2;background-color:#f8f9fa;font-size:13px;line-height:20px;letter-spacing:-0.06em}
 .place_popup .tbl_tit{margin-top:56px;font-weight:400;font-size:16px;color:#242428;letter-spacing:-0.06em}
 .place_popup .tbl_tit:first-child{margin-top:0}
@@ -908,9 +908,9 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .tbl_notice .type_number li{padding-left:10px;text-indent:-10px}
 .tbl_notice .type_number li:before{display:none}
 .tbl_notice+.tbl_notice{margin-top:20px}
-
+ */
 /* 시설 > 예매확인/취소 > 좌석보기 */
-.place_popup .seat_bx{position:relative}
+/* .place_popup .seat_bx{position:relative}
 .place_popup .seat_bx .btn_seat{display:block;background:none;font-size:14px;color:#242428;text-decoration:underline;cursor:pointer}
 .place_popup .seat_bx .tooltip{position:absolute;top:-25px;left:26px;width:71px;height:23px;padding:0;background:#fff;border:1px solid #242428;text-align:center;font-size:14px;line-height:23px;letter-spacing:-1px}
 .place_popup .seat_bx .tooltip::before{position:absolute;left:0;bottom:-5px;z-index:1;width:0;height:0;border-color:#fff transparent;border-style:solid;border-width:5.5px 5.5px 0 0;content:''}
@@ -919,9 +919,9 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .place_popup .seat_bx .tooltip .btn_close{position:absolute;top:7px;right:5px;width:10px;height:10px}
 .place_popup .seat_bx .tooltip .btn_close::before{overflow:hidden;position:absolute;left:0;top:4px;width:9px;height:1px;border-radius:1px;background-color:#242428;transform:rotate(45deg);content:''}
 .place_popup .seat_bx .tooltip .btn_close::after{overflow:hidden;position:absolute;left:0;top:4px;width:9px;height:1px;border-radius:1px;background-color:#242428;transform:rotate(-45deg);content:''}
-
+ */
 /* 마이페이지 > 보유예매권(게임권/쿠폰) 팝업 */
-.place_popup .txt_dsc.type2{margin-top:16px}
+/* .place_popup .txt_dsc.type2{margin-top:16px}
 .place_popup .basic_tbl.coupon_info{margin-top:18px}
 .place_popup .basic_tbl.coupon_info thead th{padding:0 15px}
 .place_popup .basic_tbl.coupon_info td{padding:15px 0}
@@ -929,10 +929,10 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .place_popup .basic_tbl.coupon_info .disabled td{color:#a7acb6}
 .place_popup .basic_tbl.coupon_info .data_none{height:430px}
 .place_popup .basic_tbl.coupon_info .data_none td{text-align:center;color:#62676c}
-
+ */
 /* 시설회원/비회원 로그인 */
 /* (ntas) 파트너관리 > 시설회원/비회원 팝업 */
-#wrap.pop_place{overflow:hidden;width:990px;min-width:0;height:auto;min-height:890px;background-color:#f8f9fa;font-size:14px;color:#62676c}
+/* #wrap.pop_place{overflow:hidden;width:990px;min-width:0;height:auto;min-height:890px;background-color:#f8f9fa;font-size:14px;color:#62676c}
 .pop_place .header{height:82px;border-bottom:1px solid #242428;box-sizing:border-box;background-color:#fff;font-size:22px;color:#242428;line-height:80px;letter-spacing:-0.06em;text-align:center}
 .pop_place .header .team_name{font-weight:700}
 .pop_place .contents.top{background-color:#fff}
@@ -995,9 +995,9 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .pop_place .bx_btn2{padding:0 22px;font-size:14px}
 .pop_place .bx_btn2 span{vertical-align:middle}
 .pop_place .bx_btn2 button{display:inline-block;width:105px;height:auto;margin-left:15px;padding:9px 0;font-size:14px;line-height:22px}
-
+ */
 /* (ntas) 파트너관리 > 시설회원/비회원 > 레이어팝업 */
-.ly_pop_wrap3{position:fixed;top:0;left:0;right:0;bottom:0;z-index: 300}
+/* .ly_pop_wrap3{position:fixed;top:0;left:0;right:0;bottom:0;z-index: 300}
 .bx_layer .dimmed{display:block;opacity:0.3}
 .bx_layer .ly_pop_place .ico_close{padding:32px}
 .bx_layer .ico_close{position:absolute;top:0;right:0;font-size:0;background:none}
@@ -1016,7 +1016,7 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .ly_pop_place .pop_contents .lst_dsc li{line-height:22px;letter-spacing:-0.5px}
 .ly_pop_place .pop_contents .lst_dsc dd{line-height:22px}
 .ly_pop_place .pop_contents .lst_dsc_sub{padding-left:20px;text-indent:-20px}
-
+ */
 /* 예매권 이용조회 (레이어팝업) */
 .ly_pop_wrap3.ly_ticket_history{font-size:0;text-align:center}
 .bx_layer .ly_pop_place.ly_ticket_history .ico_close{padding:28px}
@@ -1040,7 +1040,7 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .ly_ticket_history .basic_tbl table tbody tr td:nth-child(3){padding:21px 0 17px;font-family:'Roboto',-apple-system,BlinkMacSystemFont,Apple SD Gothic Neo,Roboto,Arial,sans-serif}
 
 /* LG 트윈스 포인트 할인 */
-.lg_twins .member_info{padding:20px 17px;border-top:1px solid #ecedf2;background-color:#fff;font-weight:400}
+/* .lg_twins .member_info{padding:20px 17px;border-top:1px solid #ecedf2;background-color:#fff;font-weight:400}
 .lg_twins .member_info::after{display:block;clear:both;content:''}
 .lg_twins .member_info .info_dsc{float:right;font-size:13px;color:#62676c;line-height:18px}
 .lg_twins .member_info .info_dsc:first-child{float:left}
@@ -1048,7 +1048,7 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .lg_twins .bx_point{position:relative;padding:12px 83px 12px 42px;border:1px solid #ecedf2;border-left:0;border-right:0;background-color:#fff}
 .lg_twins .bx_point .inp_txt{padding-bottom:7px}
 .lg_twins .bx_point .txt{position:absolute;top:22px;right:45px;margin:0;font-size:12px;color:#242428}
-
+ */
 /* 클린예매 서비스 팝업 */
 .ly_clean_reserve{position:absolute;z-index:20;width:410px;height:435px;padding:0 20px;border:1px solid #242428;box-sizing:border-box;background-color:#fff;font-weight:normal;text-align:center}
 .ly_clean_reserve .sp{display:block}
@@ -1061,7 +1061,7 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .ly_clean_reserve .btn_close{position:absolute;top:18px;right:20px;border:0;background-color:transparent;cursor:pointer}
 
 /*예매권 좌석확인*/
-#wrap_select{padding:0 13px;box-sizing:border-box;}
+/* #wrap_select{padding:0 13px;box-sizing:border-box;}
 #wrap_select #header{min-height:40px;background:#fff;position:relative;padding-top:30px;margin-bottom:30px;border-bottom:1px solid #cfd0d7;}
 #wrap_select #header h1{background:none;font-size:16px}
 #wrap_select #container{background:#fff;margin:0;min-height:100px}
@@ -1075,7 +1075,7 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .select_lst h3{margin:10px 0;font-size:12px;}
 .select_lst .logo{display:block;width:80px;height:80px;margin:0 auto;}
 .select_lst .desc{font-size:12px;color:#62676c;line-height:16px;word-wrap:break-word;word-break:keep-all}
-
+ */
 
 /* 예매페이지 > 팝업 Table UIO */
 #wrap_popup .pop_tbl_type .tit{border-bottom:0}
@@ -1114,7 +1114,6 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .pop_reserve_history.barcode_none .reserve_cancel{top:166px;right:47px}
 .pop_reserve_history.barcode_none .reserve_hold{top:166px;right:47px}
 
-/* 20190402 어드민과 싱크 맞춤용 CSS 수정 */
 .pop_reserve_history .bx_barcode_type > span{line-height:18px;letter-spacing:-1px}
 .pop_reserve_history .bx_barcode_type > span b{display:block;margin:-10px 0 -14px;padding-top:10px;border-top:1px solid #ecedf2;font-size:12px;color:#878d95}
 
@@ -1140,15 +1139,9 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .mypage_detail .tbl_add_info .elp{color:#242428}
 .mypage_detail .tbl_add_info .elp .tit{font-size:14px}
 
-/* 시즌권 잔여횟수 팝업 모바일 대응 */
-.popup_residual{width:600px}
-.popup_residual .basic_tbl table tbody tr:first-child td{padding-top:9px}
-@media screen and (max-width:768px){
-  .popup_residual{width:auto}
-}
 
 /* 현금영수증 2019.06.05 */
-#pop_wrap{position: relative;text-align:center}
+/* #pop_wrap{position: relative;text-align:center}
 .ly_flrplan{padding:20px}
 .cash_receipt_wrap{width:460px;padding:10px 10px 30px 10px;background:#f8f9fa;box-sizing:border-box}
 .cash_receipt_wrap h1{display:block;background:none}
@@ -1159,9 +1152,9 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .cash_receipt_wrap .logo{display:inline-block;overflow:hidden;margin-bottom:-1px}
 .cash_receipt_wrap .tit_text{display:inline-block;margin-left:5px;font-size:18px;font-weight:700;line-height:17px}
 .cash_receipt_wrap .sub_tit{display:block;margin-top:3px;font-size:12px;color:#878d95}
-.cash_receipt_wrap .content{height:auto;margin-top:14px}
+.cash_receipt_wrap .content{height:auto;margin-top:14px} */
 /* 테이블 스타일 지정 */
-.cash_receipt_wrap .receipt_table{margin-top:10px}
+/* .cash_receipt_wrap .receipt_table{margin-top:10px}
 .cash_receipt_wrap .receipt_table th,.cash_receipt_wrap .receipt_table td{height:23px;padding:0 6px;text-align:left;border:1px solid #ecedf2;border-collapse:collapse;box-sizing:border-box;vertical-align:middle;font-size: 14px;line-height: 17px;}
 .cash_receipt_wrap .receipt_table th{letter-spacing:-0.5px;font-weight:normal;font-size:12px;border-top:0;border-bottom:0}
 .cash_receipt_wrap .receipt_table .main_tit{height:25px;border:none;background:#62676c;font-size:12px;font-weight:400;color:#fff;vertical-align:middle}
@@ -1179,9 +1172,9 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .cash_receipt_wrap .btn_box .btn.btn_full:hover{border-color:#000;background:#000}
 .cash_receipt_wrap .btn_box .btn.btn_blank{border-color:#dcdde1;background-color:#fff;color:#242428}
 .cash_receipt_wrap .btn_box .btn.btn_blank:hover{border-color:#242428;background:#f5f6f9}
-
+ */
 /* 시설 > 마이페이지 > 쿠폰존 */
-.mypage_coupon .tab_menu_wrap{margin-top:30px}
+/* .mypage_coupon .tab_menu_wrap{margin-top:30px}
 .mypage_coupon .tab_menu_wrap:after{clear:both;display:block;content:''}
 .mypage_coupon .tab_menu_wrap .tab_menu{float:left;padding-top:6px}
 .mypage_coupon .tab_menu_wrap .tab_menu:after{clear:both;display:block;content:''}
@@ -1200,9 +1193,9 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .mypage_coupon .coupon_register_box .register_input::placeholder{color:#a7acb6}
 .mypage_coupon .coupon_register_box .register_input:-ms-input-placeholder{color:#a7acb6}
 .mypage_coupon .coupon_register_box .btn_full{width:90px;margin-left:10px;padding:6px 0;color:#fff;font-size:14px;line-height:22px;cursor:pointer}
-
+ */
 /* 시설 > 마이페이지 > 쿠폰존 - 테이블 */
-.mypage_coupon .basic_tbl{margin-top:21px}
+/* .mypage_coupon .basic_tbl{margin-top:21px}
 .mypage_coupon .basic_tbl thead th{height:56px;padding:0;line-height:40px;font-weight:normal;text-align:center}
 .mypage_coupon .basic_tbl tbody tr td{padding:14px 0 12px;font-size:15px;vertical-align:middle;color:#242428}
 .mypage_coupon .basic_tbl tbody tr td:first-child{padding-left:20px;padding-right:30px}
@@ -1215,24 +1208,25 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .mypage_coupon .basic_tbl .coupon_condition:disabled{text-decoration:none;cursor:default}
 .mypage_coupon .basic_tbl .point{color:#878d95}
 .mypage_coupon .basic_tbl .condition_box{display:inline-block;position:relative;font-size:15px}
-.mypage_coupon .basic_tbl.nodata td{padding:156px 60px;text-align:center;color:#62676c}/* 사용가능한 쿠폰 없을경우 */
+.mypage_coupon .basic_tbl.nodata td{padding:156px 60px;text-align:center;color:#62676c}사용가능한 쿠폰 없을경우
 
 .notice_box{width:910px;padding:25px 22px 20px 0;font-size:14px;line-height:20px;box-sizing:border-box}
 .notice_box .notice_tit{height:24px;color:#242428;font-size:14px;line-height:22px}
 .notice_box .notice_list .notice_item{position:relative;padding-left:6px;color:#62676c;font-size:13px;line-height:22px;letter-spacing:-1px}
 .notice_box .notice_list .notice_item::before{position:absolute;left:0;top:10px;width:3px;height:1px;background-color:#62676c;content:''}
 .notice_box.notes2 .notice_list{margin-top:13px}
-/* 쿠폰 사용내역 레이어 팝업 */
-.mypage_coupon .basic_tbl .condition_box .ly_coupon_condition{display:none;position:absolute;top:20px;right:0;width:336px;margin-bottom: 10px;padding:19px 20px 11px;border:1px solid #242428;background:#fff;box-sizing:border-box;z-index:10}
+ */
+ /* 쿠폰 사용내역 레이어 팝업 */
+/* .mypage_coupon .basic_tbl .condition_box .ly_coupon_condition{display:none;position:absolute;top:20px;right:0;width:336px;margin-bottom: 10px;padding:19px 20px 11px;border:1px solid #242428;background:#fff;box-sizing:border-box;z-index:10}
 .mypage_coupon .condition_box .ly_coupon_condition .ly_tit{font-size:14px;line-height:1;text-align:left;letter-spacing:-0.5px}
 .mypage_coupon .condition_box .ly_coupon_condition .condition_table{margin-top:10px;border-top:1px solid #ecedf2;font-size:13px;text-align:left}
 .mypage_coupon .condition_box .ly_coupon_condition .condition_table th,.mypage_coupon .condition_box .ly_coupon_condition .condition_table td{height:30px;padding:0;font-size:13px;line-height:18px;text-align:left}
 .mypage_coupon .condition_box .ly_coupon_condition .condition_table tr:first-child th,.mypage_coupon .condition_box .ly_coupon_condition .condition_table tr:first-child td{padding-top:2px}
 .mypage_coupon .condition_box .ly_coupon_condition .btn_close{position:absolute;top:1px;right:1px;width:30px;height:30px;background:#fff}
 .mypage_coupon .condition_box .ly_coupon_condition .btn_close::before{position:absolute;right:20px;content:''}
-
+ */
 /* 시설 >  쿠폰존 */
-.container.coupon_zone{padding:40px 40px 45px 40px;box-sizing:border-box}
+/* .container.coupon_zone{padding:40px 40px 45px 40px;box-sizing:border-box}
 .coupon_cont_box{position:relative;min-height:479px;border-top:0;background:#fff}
 .coupon_cont_box .event_list:after{display:block;clear:both;content:''}
 .coupon_cont_box .event_item{position:relative;width:435px;height:209px;margin-bottom:30px;background:url(../img/bg_coupon.png) no-repeat;background-size:100% auto;box-sizing:border-box}
@@ -1253,12 +1247,13 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .coupon_cont_box .event_item.nodata{text-align:center}
 .coupon_cont_box .event_item.nodata:before{display:inline-block;height:100%;vertical-align:middle;content:''}
 
-.coupon_cont_box .nodata_txt{font-size:30px;line-height:1;color:#a7acb6;vertical-align:middle;letter-spacing:-0.04em} /* 리스트 없을 때 comming soon 텍스트 */
-.coupon_cont_box .nodata_dsc_txt{margin-top:13px;color:#62676c;font-size:16px} /* 리스트 없을 때 준비 중 텍스트 */
-.coupon_cont_box .event_item.nodata .nodata_txt{display:inline-block} /* 쿠폰 안 comming soon 텍스트 */
+.coupon_cont_box .nodata_txt{font-size:30px;line-height:1;color:#a7acb6;vertical-align:middle;letter-spacing:-0.04em} 리스트 없을 때 comming soon 텍스트
+.coupon_cont_box .nodata_dsc_txt{margin-top:13px;color:#62676c;font-size:16px} 리스트 없을 때 준비 중 텍스트
+.coupon_cont_box .event_item.nodata .nodata_txt{display:inline-block} 쿠폰 안 comming soon 텍스트
 
-/* 시설 > 쿠폰존 - 리스트 없을 경우 */
-.coupon_cont_box.nodata{text-align:center}
+ */
+ /* 시설 > 쿠폰존 - 리스트 없을 경우 */
+/* .coupon_cont_box.nodata{text-align:center}
 .coupon_cont_box.nodata .event_list_inner{display:none}
 .coupon_cont_box.nodata .nodata_area{height:445px;padding-top:170px;box-sizing:border-box}
 
@@ -1273,42 +1268,11 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .popup .txt{font-size:13px;color:#242428;line-height:22px;letter-spacing:-1px}
 
 .bx_radio{padding:12px 0 0}
-
-/* 레이어팝업 - 대구fc SKY PASS 로그인 20220127 이전*/
-.ly_pop_daegufc{position:relative;width:440px;padding:0;border:1px solid #0068b7;box-sizing:border-box}
-.ly_pop_daegufc button{cursor:pointer}
-.ly_pop_daegufc .ly_header{position:relative;padding:22px 30px 23px;background:#9fd1f1;box-sizing:border-box}
-.ly_pop_daegufc .ly_header .tit{font-size:20px;color:#fff;font-weight:500;line-height:24px}
-.ly_pop_daegufc .ly_content{position:relative;padding-top:20px;text-align:center;box-sizing:border-box}
-.ly_pop_daegufc .ly_content .logo{text-align:center}
-.ly_pop_daegufc .ly_content .logo img{display:inline-block;width:71px}
-.ly_pop_daegufc .ly_content .inp_wrap{padding:11px 60px 20px;box-sizing:border-box}
-.ly_pop_daegufc .ly_content .inp_row{margin-top:10px}
-.ly_pop_daegufc .ly_content .inp_row:first-child{margin-top:0}
-.ly_pop_daegufc .ly_content .inp_txt{width:100%;height:50px;padding:0 20px;border:1px solid #e8eaf1;font-size:14px;text-align:center;box-sizing:border-box}
-.ly_pop_daegufc .ly_content .inp_txt::placeholder{color:#a7acb6}
-.ly_pop_daegufc .ly_content .inp_txt:-ms-input-placeholder{color:#a7acb6}
-.ly_pop_daegufc .ly_content .notice_area{padding:16px 60px 20px;border-top:1px solid #ecedf2;background:#f8f9fa;text-align:left;box-sizing:border-box}
-.ly_pop_daegufc .ly_content .notice_bx .notice_tit{font-size:15px;font-weight:normal;color:#242428;line-height:26px}
-.ly_pop_daegufc .ly_content .notice_bx .desc{display:block;font-size:14px;line-height:18px;color:#878d95}
-.ly_pop_daegufc .notice_area .btn_area{display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-top:21px}
-.ly_pop_daegufc .notice_area .btn_full{-webkit-box:1;-webkit-flex:1 1 auto;-ms-flex:1 1 auto;flex:1 1 auto;height:48px;margin-left:2px;padding:16px 0;border-color:#0068b7;background:#0068b7;font-size:16px;line-height:1;box-sizing:border-box}
-.ly_pop_daegufc .notice_area .btn_full:hover{border-color:#01477C;background:#01477C}
-.ly_pop_daegufc .confirm_area{position:relative;padding:10px 125px 10px 60px;border-top:1px solid #dedede;background:#fbfbfb;text-align:left;box-sizing:border-box}
-.ly_pop_daegufc .confirm_area .desc{display:inline-block;font-size:14px;font-weight:400;color:#242428;line-height:26px}
-.ly_pop_daegufc .confirm_area .btn_full{position:absolute;top:10px;right:60px;width:65px;height:28px;padding:1px 0;border:1px solid #dcdde1;background:#fff;font-size:13px;color:#444444;line-height:24px;box-sizing:border-box}
-.ly_pop_daegufc .btn_area .btn:first-child{margin:0}
-/* 레이어팝업 - 대구fc SKY PASS 확인하기 */
-.ly_pop_daegufc.membership .notice_area{padding-bottom:30px}
-.ly_pop_daegufc.membership .confirm_area{padding:15px 60px 19px;border:0;background:#8cb8e2;color:#fff;text-align:center}
-.ly_pop_daegufc.membership .confirm_area .desc{font-size:16px;color:#fff}
-.ly_pop_daegufc.membership .confirm_area .membership_txt{display:block;height:50px;margin-top:10px;padding:12px 0;background:#fff;font-size:18px;font-weight:700;color:#0068b7;line-height:26px;text-align:center;box-sizing:border-box}
-.ly_pop_daegufc .btn_close{position:absolute;top:8px;right:19px;padding:10px;background:none;appearance:none;-webkit-appearance:none;box-sizing:border-box}
-.ly_pop_daegufc .btn_close::before{display:inline-block;vertical-align:middle;content:''}
+ */
 /* 회원 배경색 */
 .common_container.mem_cont{background: #faf9fa;}
 /* 모바일티켓 */
-.mobile_ticket{display:table;table-layout:fixed;width:100%;overflow:hidden;max-width:360px;height:50px;margin:0 auto;background:#242428;border-radius:2px;color:#fff;box-sizing:border-box}
+/* .mobile_ticket{display:table;table-layout:fixed;width:100%;overflow:hidden;max-width:360px;height:50px;margin:0 auto;background:#242428;border-radius:2px;color:#fff;box-sizing:border-box}
 .mobile_ticket .tit{display:table-cell;position:relative;width:50%;padding:9px 13px;font-size:15px;font-weight:700;line-height:32px;letter-spacing:-1px;vertical-align:middle;text-align:center}
 .mobile_ticket .tit:before{display:inline-block;margin-top:-2px;margin-right:8px;vertical-align:middle;content:''}
 .mobile_ticket .info{display:table-cell;padding:0 0 0 14px;font-size:11px;vertical-align:middle;color:#fff;font-size:12px;text-align:left;border-left:1px dashed #fff}
@@ -1316,8 +1280,8 @@ h3.payco{overflow:hidden;position:absolute;top:7px;right:15px;width:58px;height:
 .mobile_ticket.type1 .tit,.mobile_ticket.type1 .info{color:#242428}
 .mobile_ticket.type1 .info{border-color:#242428}
 .mobile_ticket.type2{background:#e4e6e8}
-.mobile_ticket.type2 .tit,.mobile_ticket.type2 .info{color:#a7acb6}
+.mobile_ticket.type2 .tit,.mobile_ticket.type2 .info{color:#a7acb6} */
 
 /* 멤버십번호 찾기 */
-#wrap.pop_place.membership{background-color:#fff}
-.pop_place.membership .inp_lst+.bx_btn{margin-top:30px}
+/* #wrap.pop_place.membership{background-color:#fff}
+.pop_place.membership .inp_lst+.bx_btn{margin-top:30px} */

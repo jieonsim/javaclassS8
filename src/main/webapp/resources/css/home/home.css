@@ -274,6 +274,7 @@ li {
 	display: block;
 	font-size: 18px;
 	line-height: 26px;
+	font-family: 'Pretendard-Regular';
 }
 
 .match_card_place {
@@ -284,6 +285,7 @@ li {
 	font-size: 15px;
 	line-height: 22px;
 	color: gray;
+	font-family: 'Pretendard-Light';
 }
 
 .match_card_btnarea {
@@ -364,6 +366,7 @@ li {
 	border: 1px solid #e4e6e8;
 	background-color: #e4e6e8;
 	color: #5F5F5F;
+	font-family: 'Pretendard-SemiBold';
 }
 
 .common_btn_box .common_btn {
@@ -526,14 +529,15 @@ a {
 
 .banner-title {
 	font-size: 18px;
-	font-weight: bold;
 	margin-bottom: 5px;
 	color: #333;
+	font-family: 'Pretendard-Bold';
 }
 
 .banner-description {
 	font-size: 14px;
 	color: #666;
+	font-family: 'Pretendard-Regular';
 }
 
 /* 스와이퍼 반응형 디자인을 위한 미디어 쿼리 */

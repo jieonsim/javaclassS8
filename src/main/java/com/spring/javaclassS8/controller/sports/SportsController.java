@@ -63,13 +63,6 @@ public class SportsController {
 		return "sports/" + sport + "/" + team + "/reservation";
 	}
 
-	// 스포츠 구단별 경기일정
-	@GetMapping("/{sport}/{team}/schedule")
-	public String schedule(@PathVariable String sport, @PathVariable("team") String team, Model model) {
-		
-		return "sports/" + sport + "/" + team + "/schedule";
-	}
-
 	// 구단별 요금/할인카드
 	@GetMapping("/{sport}/{team}/price")
 	public String price(@PathVariable String sport, @PathVariable("team") String team, Model model) {

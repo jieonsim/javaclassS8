@@ -75,5 +75,4 @@ public interface AdminEventService {
 	
 	// 전체 이벤트 추첨 개수 가져오기 (페이징)
 	int getTotalDrawCount();
-	
 }

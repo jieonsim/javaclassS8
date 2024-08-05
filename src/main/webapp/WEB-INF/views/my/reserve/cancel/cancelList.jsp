@@ -40,33 +40,6 @@
 							<a href="${ctp}/my/reserve/cancel/list">예매취소</a>
 						</li>
 					</ul>
-					<div class="sortbx">
-						<dl class="daysortbx fl">
-							<dt>기간별 조회</dt>
-							<dd>
-								<ul class="daysort">
-									<li class="ng-scope">
-										<a href="javascript:;" class="ng-binding">15일</a>
-									</li>
-									<li class="ng-scope on">
-										<a href="javascript:;" class="ng-binding">1개월</a>
-									</li>
-									<li class="ng-scope">
-										<a href="javascript:;" class="ng-binding">2개월</a>
-									</li>
-									<li class="ng-scope">
-										<a href="javascript:;" class="ng-binding">3개월</a>
-									</li>
-								</ul>
-							</dd>
-						</dl>
-					</div>
-					<p class="guide_txt v2">
-						예매한 내역이 확인이 안되실 경우
-						<a href="/cs/inquiry" onclick="window.open(this.href, '', 'left=100, top=100, width=880, height=900'); return false;">1:1 상담 문의</a>
-						를 이용해주세요.
-					</p>
-
 					<div class="basic_tbl basic_tbl_v3">
 						<table>
 							<caption>예매확인/취소 리스트</caption>

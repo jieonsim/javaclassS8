@@ -190,7 +190,7 @@ td .input_block .hyphen{color:#878d95}
 .selectbox_v4 .select{background-position:100% -90px;line-height:36px}
 
 .select_with{padding-bottom:2px}
-.select_with .selectbox{display:inline-block;float:left}
+.select_with .selectbox{display:inline-block}
 .select_with .input{border-color:#e8eaf1 !important;height:27px !important;line-height:27px !important;float:left;margin-left:3px;vertical-align:top !important}
 
 /* table */
@@ -375,11 +375,11 @@ td .input_block .hyphen{color:#878d95}
 /* .layer_main_pop_wrap .main_pop_footer .btn_close .sp{display:block;overflow:hidden;width:12px;height:11px;margin:0 auto;background-image:url(../img/sp.png);background-repeat:no-repeat;background-size:424px auto;background-position:-222px -32px;font-size:1px;line-height:999px} */
 
 /* 메인 합업 하단 버튼*/
-.layer_main_pop_wrap .main_pop_footer .btn_today + .btn_close{position:relative}
-.layer_main_pop_wrap .main_pop_footer .btn_today + .btn_close::before{position:absolute;top:50%;width:1px;height:80px;background:#ecedf2;transform:translateY(-50%);content:''}
+/* .layer_main_pop_wrap .main_pop_footer .btn_today + .btn_close{position:relative}
+.layer_main_pop_wrap .main_pop_footer .btn_today + .btn_close::before{position:absolute;top:50%;width:1px;height:80px;background:#ecedf2;transform:translateY(-50%);content:''} */
 
 /* 메인 플래시 배너 팝업 */
-.full_page_pop{position:fixed;left:0;top:0;right:0;bottom:0;z-index:1000;width:100%;height:100%}
+/* .full_page_pop{position:fixed;left:0;top:0;right:0;bottom:0;z-index:1000;width:100%;height:100%}
 .full_page_pop .dimmed{display:block;z-index:1000;opacity:0.8}
 .layer_flash_pop_wrap{position:fixed;top:50%;left:50%;z-index:1000;transform:translateX(-50%) translateY(-50%)}
 .layer_flash_pop_wrap .flash_pop_item{width:600px}
@@ -390,7 +390,7 @@ td .input_block .hyphen{color:#878d95}
 .layer_flash_pop_wrap .pop_btn_close{position:absolute;right:0;top:0;width:60px;height:60px;border:1px solid #fff;border-radius:50%;background-color:#000;opacity:0.5}
 .layer_flash_pop_wrap .pop_btn_close::before{position:absolute;left:15px;top:28px;width:28px;height:2px;background-color:#fff;transform:rotate(-45deg);content:''}
 .layer_flash_pop_wrap .pop_btn_close::after{position:absolute;left:15px;top:28px;width:28px;height:2px;background-color:#fff;transform:rotate(45deg);content:''}
-
+ */
 /* button */
 .btn_blank,.btn_full{padding:9px 11px;font-size:14px;font-weight:500;line-height:22px;text-align:center;vertical-align:middle}
 .btn_full{background:#242428;border:1px solid #242428;color:#fff}
@@ -469,14 +469,14 @@ td .input_block .hyphen{color:#878d95}
 .place_popup .coupon_zone .paginate{padding-top:10px;padding-bottom:40px}
 
 /* sns */
-.social{position:absolute;top:30px;right:30px;margin-top:21px;border:1px solid #dcdde1;border-radius:2px;background:#fff;font-size:0;line-height:30px;color:#242428}
+/* .social{position:absolute;top:30px;right:30px;margin-top:21px;border:1px solid #dcdde1;border-radius:2px;background:#fff;font-size:0;line-height:30px;color:#242428}
 .social:after{display:block;clear:both;content:''}
 .social li{display:inline-block}
 .social li + li{border-left: 1px solid #dcdde1}
 .social li a{display:block;width:30px;height:30px;text-align:center}
 .social li a::before{display:inline-block;vertical-align:middle;content:''}
 .social li.url a span{font-size:11px;font-weight:500;text-decoration:underline}
-
+ */
 /* dimmed */
 .loading_layer{display:none;position:fixed;top:0;left:0;z-index:1000;width:100%;height:100%}
 .dimmed{display:none;position:fixed;top:0;left:0;z-index:200;width:100%;height:100%;background:#000;opacity:.5;filter:alpha(opacity=50);-ms-filter:'progid:DXImageTransform.Microsoft.Alpha(Opacity=50)'}
@@ -512,7 +512,7 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#242428}
 .ico_dnld{width:18px;height:15px;margin:-2px 0 2px 5px;background-position:-389px -15px;vertical-align:middle}
 
 /* 시설 > 시즌권 잔여횟수 */
-.btn.view{width:100px;padding:10px 0;background-color:#242428;border-radius:6px;color:#fff;line-height:22px}
+/* .btn.view{width:100px;padding:10px 0;background-color:#242428;border-radius:6px;color:#fff;line-height:22px}
 .basic_tbl_v8{border:1px solid #ecedf2;border-radius:3px}
 .basic_tbl_v8 table tbody th{padding-left:20px;border-top:1px solid #ecedf2;background:#f8f9fa;font-weight:500;color:#242428;text-align:left}
 .basic_tbl_v8 table tbody tr:first-child th{border-top:0}
@@ -522,7 +522,7 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#242428}
 .basic_tbl_v9 table tbody td{padding:9px 0 10px;font-size:14px;font-weight:700;color:#242428;letter-spacing:-1px}
 .basic_tbl_v9 table tbody tr:first-child th{border-top:0}
 .basic_tbl_v9 table tbody tr:first-child td{padding:12px 0}
-
+ */
 /* 시설 > 로그인/로그아웃 버튼 */
 /* .bx_topinfo:after{display:block;clear:both;content:''}
 .bx_topinfo .guide_txt{float:left}
@@ -532,7 +532,7 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#242428}
 .ly_pop_wrap{position:absolute;top:0;left:0;z-index:100} /* 팝업창 안의 레이어팝업용도 */
 .ly_pop_wrap2{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;font-size:0;text-align:center} /* 기본 팝업 구조 */
 .ly_pop_wrap2:before{display:inline-block;height:100%;vertical-align:middle;content:''}
-.ly_pop_wrap2 .dimmed{display:block;position:fixed;top:0;left:0;right:0;bottom:0;background:#242428;background-color:rgba(0,0,0,.8);opacity:0.8;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"}
+.ly_pop_wrap2 .dimmed{display:block;position:fixed;top:0;left:0;right:0;bottom:0;background:#242428;background-color:rgba(0,0,0,.8);opacity:0.8}
 .ly_pop_wrap2::before{display:inline-block;content:''}
 .ly_pop_wrap2 .pop_contents{display:inline-block;position:relative;z-index:1000;padding:60px 37px;border-radius:5px;vertical-align:middle;background-color:#fff;text-align:left}
 .ly_pop_wrap2 .pop_contents .btn_close{position:absolute;top:0;right:0;padding:20px 19px;background-color:transparent;cursor:pointer}
@@ -582,7 +582,6 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#242428}
 .home .bx_etc .btn_close{position:absolute;top:9px;right:17px;background:none;font-size:0;cursor:pointer}
 .home .bx_etc .btn_close .sp{display:block;width:20px;height:20px;background:url(../img/sp.png) no-repeat -182px -537px}
 
-/* WEB Table 공통 UIO */
 /*.bx_table{background-color:yellow}*/
 .tbl_type{border-top:1px solid #cfd0d7;border-left:0;border-right:0;border-bottom:1px solid #ecedf2}
 .tbl_type .checkbox{margin:-2px 0 0 0}

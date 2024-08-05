@@ -7,14 +7,9 @@
 			<span class="team_tab1">예매하기</span>
 		</a>
 	</li>
-	<li tabname="schedule" class="${param.activeTab == 'schedule' ? 'on' : ''}">
-		<a href="${ctp}/sports/baseball/${currentTeam}/schedule">
-			<span class="team_tab2">경기일정</span>
-		</a>
-	</li>
 	<li tabname="price" class="${param.activeTab == 'price' ? 'on' : ''}">
 		<a href="${ctp}/sports/baseball/${currentTeam}/price">
-			<span class="team_tab3">요금/할인카드</span>
+			<span class="team_tab3">요금</span>
 		</a>
 	</li>
 	<li tabname="seat" class="${param.activeTab == 'seat' ? 'on' : ''}">
