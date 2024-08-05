@@ -76,7 +76,7 @@ public class MyReservationController {
 		return "my/reserve/reserveDetail";
 	}
 	
-	// 마이페이지 > 예매확인 > 예매디테일 뷰
+	// 마이페이지 > 취소확인 > 취소디테일 뷰
 	@GetMapping("/cancel/detail")
 	public String getReservationCancelDetail(@RequestParam("reservationId") int reservationId, Model model) {
 		Map<String, Object> reservationInfo = myReservationService.getReservationDetail(reservationId);

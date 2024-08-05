@@ -129,10 +129,27 @@ public class AdminSportController {
 		List<SportVO> sports = adminSportService.getAllSportsDetails();
 		List<TeamVO> teams = adminSportService.getAllTeamsDetails();
 		List<VenueVO> venues = adminSportService.getAllVenuesDetails();
+		
+	    Map<Integer, Boolean> sportHasGames = new HashMap<>();
+	    Map<Integer, Boolean> teamHasGames = new HashMap<>();
+	    Map<Integer, Boolean> venueHasGames = new HashMap<>();
 
+	    for (SportVO sport : sports) {
+	        sportHasGames.put(sport.getId(), adminSportService.hasGames("sport", sport.getId()));
+	    }
+	    for (TeamVO team : teams) {
+	        teamHasGames.put(team.getId(), adminSportService.hasGames("team", team.getId()));
+	    }
+	    for (VenueVO venue : venues) {
+	        venueHasGames.put(venue.getId(), adminSportService.hasGames("venue", venue.getId()));
+	    }
+	    
 		model.addAttribute("sports", sports);
 		model.addAttribute("teams", teams);
 		model.addAttribute("venues", venues);
+	    model.addAttribute("sportHasGames", sportHasGames);
+	    model.addAttribute("teamHasGames", teamHasGames);
+	    model.addAttribute("venueHasGames", venueHasGames);
 
 		return "admin/sports/sportList";
 	}

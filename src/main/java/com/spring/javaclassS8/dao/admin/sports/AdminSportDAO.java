@@ -153,5 +153,8 @@ public interface AdminSportDAO {
 	
 	// 좌석 잔여수량 설정
 	void insertSeatInventory(SeatInventoryVO inventory);
+	
+	// 스포츠, 팀, 경기장으로 등록된 게임이 있는지
+	int countGamesByTypeAndId(@Param("type") String type, @Param("id") int id);
 
 }

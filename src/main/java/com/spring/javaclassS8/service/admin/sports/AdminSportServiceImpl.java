@@ -185,12 +185,6 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 		return result;
 	}
 
-//	@Override
-//	@Transactional
-//	public boolean registerGame(GameVO game) {
-//		return adminSportDAO.registerGame(game) > 0;
-//	}
-
 	// 가장 최근 등록된 게임 1개 가져오기
 	@Override
 	public List<GameVO> getRecentGames(int limit) {
@@ -288,51 +282,6 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 	        throw new IllegalStateException("좌석 등록에 실패했습니다.");
 	    }
 	}
-//	@Override
-//	@Transactional
-//	public SeatVO registerSeat(SeatVO seat) throws Exception {
-//		// sportName, teamName으로 각각의 id 조회
-//		Integer sportId = adminSportDAO.getSportIdByName(seat.getSportName());
-//		Integer teamId = adminSportDAO.getTeamIdByName(seat.getTeamName());
-//		
-//		// null 체크 추가
-//		if (sportId == null) {
-//			throw new IllegalArgumentException("해당 스포츠를 찾을 수 없습니다.");
-//		}
-//		if (teamId == null) {
-//			throw new IllegalArgumentException("해당 팀을 찾을 수 없습니다.");
-//		}
-//		
-//		// 조회한 sportId,teamId 값을 SeatVO에 설정
-//		seat.setSportId(sportId);
-//		seat.setTeamId(teamId);
-//		
-//		// 중복 체크
-//		if (adminSportDAO.isSeatExists(seat)) {
-//			throw new IllegalStateException("이미 등록된 좌석 등급입니다.");
-//		}
-//		
-//		// 경기장 총 수용인원 확인
-//		int venueCapacity = adminSportDAO.getVenueCapacity(seat.getVenueId());
-//		
-//		// 현재 사용 중인 좌석 수 확인
-//		int usedCapacity = adminSportDAO.getUsedCapacityByVenueId(seat.getVenueId());
-//		
-//		// 새로운 좌석 추가 시 총 수용인원을 초과하는지 확인
-//		if (usedCapacity + seat.getCapacity() > venueCapacity) {
-//			throw new IllegalStateException("좌석 추가 시 경기장의 총 수용인원을 초과합니다.");
-//		}
-//		
-//		// 좌석 등록 처리
-//		int result = adminSportDAO.insertSeat(seat);
-//		
-//		if (result > 0) {
-//			// 새로 등록된 좌석 정보 반환
-//			return adminSportDAO.getRecentlyAddedSeat(seat.getVenueId());
-//		} else {
-//			throw new IllegalStateException("좌석 등록에 실패했습니다.");
-//		}
-//	}
 
 	// 모든 좌석 등급 가져오기
 	@Override
@@ -413,5 +362,11 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 	@Override
 	public List<SeatVO> getSeatsByVenueName(String venueName) {
 		return adminSportDAO.getSeatsByVenueName(venueName);
+	}
+	
+	// 스포츠, 팀, 경기장으로 등록된 게임이 있는지
+	@Override
+	public boolean hasGames(String type, int id) {
+	    return adminSportDAO.countGamesByTypeAndId(type, id) > 0;
 	}
 }

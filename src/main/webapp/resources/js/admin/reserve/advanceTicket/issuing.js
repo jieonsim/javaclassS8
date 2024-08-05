@@ -1,5 +1,5 @@
 /**
- * /admin/reservation/advanaceTicket/issuing 예매권 발행하기
+ * /admin/reserve/advanaceTicket/issuing 예매권 발행하기
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			return;
 		}
 
-		fetch(ctp + '/admin/reservation/advanceTicket/issuing', {
+		fetch(ctp + '/admin/reserve/advanceTicket/issuing', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

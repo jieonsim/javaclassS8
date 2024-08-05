@@ -113,7 +113,7 @@
 									<th scope="col">좌석번호</th>
 									<th scope="col">가격</th>
 									<th scope="col">취소여부</th>
-									<th scope="col">취소(가능)일</th>
+									<th scope="col">취소일</th>
 								</tr>
 							</thead>
 							<tbody style="font-family: 'Pretendard-Regular'">

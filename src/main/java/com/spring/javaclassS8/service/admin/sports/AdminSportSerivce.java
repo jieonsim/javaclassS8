@@ -104,5 +104,8 @@ public interface AdminSportSerivce {
 	
 	// 등록 폼 내 선택된 경기장에 따른 좌석 등급 가져오기
 	List<SeatVO> getSeatsByVenueName(String venueName);
+	
+	// 스포츠, 팀, 경기장 정보로 등록된 게임이 있는지 확인
+	boolean hasGames(String type, int id);
 
 }

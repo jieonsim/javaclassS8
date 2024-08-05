@@ -252,6 +252,23 @@
         SELECT * FROM games 
         WHERE venueId = #{venueId} AND sportId = #{sportId} AND homeTeamId = #{homeTeamId}
     </select>
+    
+    <!-- 스포츠, 팀, 경기장으로 등록된 게임이 있는지 -->
+    <select id="countGamesByTypeAndId" resultType="int">
+	    SELECT COUNT(*) 
+	    FROM games
+	    <where>
+	        <if test="type == 'sport'">
+	            sportId = #{id}
+	        </if>
+	        <if test="type == 'team'">
+	            homeTeamId = #{id} OR awayTeamId = #{id}
+	        </if>
+	        <if test="type == 'venue'">
+	            venueId = #{id}
+	        </if>
+	    </where>
+	</select>
 
 	<!-- 스포츠 종목 등록 처리 -->
 	<insert id="insertSport" parameterType="String">

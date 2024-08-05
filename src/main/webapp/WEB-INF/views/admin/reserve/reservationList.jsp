@@ -61,7 +61,19 @@
 												<c:forEach items="${reservations}" var="reservation" varStatus="status">
 													<tr>
 														<td>${status.count}</td>
-														<td>${reservation.reservationNumber}</td>
+														<td>
+															<c:choose>
+																<c:when test="${reservation.status eq '예매완료'}">
+																	<a href="${ctp}/admin/reserve/reservationDetail?reservationId=${reservation.id}" class="text-dark">${reservation.reservationNumber}</a>
+																</c:when>
+																<c:when test="${reservation.status eq '취소완료'}">
+																	<a href="${ctp}/admin/reserve/cancel/cancelDetail?reservationId=${reservation.id}" class="text-dark">${reservation.reservationNumber}</a>
+																</c:when>
+																<c:otherwise>
+																	${reservation.reservationNumber}
+																</c:otherwise>
+															</c:choose>
+														</td>
 														<td>${reservation.homeTeamName}&nbsp;vs&nbsp;${reservation.awayTeamName}</td>
 														<td>${reservation.gameDate}&nbsp;${reservation.gameTime}</td>
 														<td>${reservation.ticketAmount}매</td>

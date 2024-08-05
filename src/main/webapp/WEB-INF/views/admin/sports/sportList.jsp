@@ -53,12 +53,18 @@
 														<td class="sport-input" style="display: none;">
 															<input type="text" class="form-control text-center" name="sportName" value="${sport.sportName}">
 														</td>
-														<td>
-															<button class="badge badge-warning bg-white sport-update-btn">수정</button>
-														</td>
-														<td>
-															<button class="badge badge-danger bg-white sport-delete-btn">삭제</button>
-														</td>
+														<c:if test="${!sportHasGames[sport.id]}">
+															<td>
+																<button class="badge badge-warning bg-white sport-update-btn">수정</button>
+															</td>
+															<td>
+																<button class="badge badge-danger bg-white sport-delete-btn">삭제</button>
+															</td>
+														</c:if>
+														<c:if test="${sportHasGames[sport.id]}">
+															<td>해당 스포츠로 등록된 경기가 있어 수정 불가</td>
+															<td>해당 스포츠로 등록된 경기가 있어 삭제 불가</td>
+														</c:if>
 													</tr>
 												</c:forEach>
 											</tbody>
@@ -100,12 +106,18 @@
 														<td class="team-input" style="display: none;">
 															<input type="text" class="form-control text-center" name="shortName" value="${team.shortName}">
 														</td>
-														<td>
-															<button class="badge badge-warning bg-white team-update-btn">수정</button>
-														</td>
-														<td>
-															<button class="badge badge-danger bg-white team-delete-btn">삭제</button>
-														</td>
+														<c:if test="${!teamHasGames[team.id]}">
+															<td>
+																<button class="badge badge-warning bg-white team-update-btn">수정</button>
+															</td>
+															<td>
+																<button class="badge badge-danger bg-white team-delete-btn">삭제</button>
+															</td>
+														</c:if>
+														<c:if test="${teamHasGames[team.id]}">
+															<td>해당 팀으로 등록된 경기가 있어 수정 불가</td>
+															<td>해당 팀으로 등록된 경기가 있어 삭제 불가</td>
+														</c:if>
 													</tr>
 												</c:forEach>
 											</tbody>
@@ -123,11 +135,11 @@
 											<colgroup>
 												<col style="width: 5%" />
 												<col style="width: 10%" />
-												<col style="width: 20%" />
-												<col style="width: 30%" />
 												<col style="width: 15%" />
-												<col style="width: 5%" />
-												<col style="width: 5%" />
+												<col style="width: 20%" />
+												<col style="width: 10%" />
+												<col style="width: 20%" />
+												<col style="width: 20%" />
 											</colgroup>
 											<thead class="text-center">
 												<tr>
@@ -156,12 +168,18 @@
 														<td class="venue-input" style="display: none;">
 															<input type="number" class="form-control text-center" name="capacity" value="${venue.capacity}">
 														</td>
-														<td>
-															<button class="badge badge-warning bg-white venue-update-btn">수정</button>
-														</td>
-														<td>
-															<button class="badge badge-danger bg-white venue-delete-btn">삭제</button>
-														</td>
+														<c:if test="${!venueHasGames[venue.id]}">
+															<td>
+																<button class="badge badge-warning bg-white venue-update-btn">수정</button>
+															</td>
+															<td>
+																<button class="badge badge-danger bg-white venue-delete-btn">삭제</button>
+															</td>
+														</c:if>
+														<c:if test="${venueHasGames[venue.id]}">
+															<td>해당 경기장으로 등록된 경기가 있어 수정 불가</td>
+															<td>해당 경기장으로 등록된 경기가 있어 삭제 불가</td>
+														</c:if>
 													</tr>
 												</c:forEach>
 											</tbody>

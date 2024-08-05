@@ -284,7 +284,7 @@ public class AdminSportDAOImpl implements AdminSportDAO {
 	public List<SeatVO> getSeatsByVenueIdAndSportIdAndTeamId(int venueId, int sportId, int teamId) {
 		return sqlSession.getMapper(AdminSportDAO.class).getSeatsByVenueIdAndSportIdAndTeamId(venueId, sportId, teamId);
 	}
-	
+
 	// 경기장 고유번호, 스포츠 고유번호, 홈팀 고유번호로 게임 가져오기
 	@Override
 	public List<GameVO> getGamesByVenueIdAndSportIdAndHomeTeamId(int venueId, int sportId, int homeTeamId) {
@@ -297,5 +297,9 @@ public class AdminSportDAOImpl implements AdminSportDAO {
 		sqlSession.getMapper(AdminSportDAO.class).insertSeatInventory(inventory);
 	}
 
-
+	// 스포츠, 팀, 경기장으로 등록된 게임이 있는지
+	@Override
+	public int countGamesByTypeAndId(String type, int id) {
+		return sqlSession.getMapper(AdminSportDAO.class).countGamesByTypeAndId(type, id);
+	}
 }

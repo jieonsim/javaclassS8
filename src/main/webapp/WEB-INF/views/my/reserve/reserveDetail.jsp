@@ -68,10 +68,7 @@
 									<th scope="row">예매일</th>
 									<td class="ng-binding">${reservation.formattedCreatedAt}</td>
 									<th scope="row">현재상태</th>
-									<td class="ng-binding">
-										${reservation.status}
-										<span class="ng-binding ng-hide">()</span>
-									</td>
+									<td class="ng-binding">${reservation.status}</td>
 								</tr>
 								<tr>
 									<th scope="row">결제수단</th>
@@ -115,7 +112,7 @@
 									<th scope="col">좌석번호</th>
 									<th scope="col">가격</th>
 									<th scope="col">취소여부</th>
-									<th scope="col">취소(가능)일</th>
+									<th scope="col">취소가능일</th>
 								</tr>
 							</thead>
 							<tbody style="font-family: 'Pretendard-Regular'">
