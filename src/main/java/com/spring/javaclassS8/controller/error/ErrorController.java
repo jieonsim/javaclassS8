@@ -25,4 +25,22 @@ public class ErrorController {
 	public String accessDenied() {
 		return "error/accessDenied";
 	}
+	
+	// 404 에러 페이지
+	@GetMapping("/404")
+	public String error404() {
+		return "error/404";
+	}
+	
+	// 405 에러 페이지
+	@GetMapping("/405")
+	public String error405() {
+		return "error/405";
+	}
+	
+	// 500 에러 페이지
+	@GetMapping("/500")
+	public String error500() {
+		return "error/500";
+	}
 }
