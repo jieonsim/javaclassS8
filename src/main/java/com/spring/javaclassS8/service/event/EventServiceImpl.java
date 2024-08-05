@@ -32,10 +32,6 @@ public class EventServiceImpl implements EventService {
 	}
 
 	// 진행 중인 이벤트만 가져오기
-//	@Override
-//	public List<EventVO> getOngoingEvents() {
-//		return eventDAO.getOngoingEvents();
-//	}
 	@Override
 	public Map<String, Object> getOngoingEvents(int page, int pageSize) {
 	    int totalCount = eventDAO.getOngoingEventsCount();

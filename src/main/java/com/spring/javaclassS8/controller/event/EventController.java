@@ -39,13 +39,6 @@ public class EventController {
 	    model.addAttribute("paginationInfo", result.get("paginationInfo"));
 	    return "event/main";
 	}
-//	@GetMapping("/main")
-//	public String getEventMain(Model model) {
-//		
-//		List<EventVO> ongoingEvents = eventService.getOngoingEvents();
-//		model.addAttribute("events", ongoingEvents);
-//		return "event/main";
-//	}
 
 	// 이벤트 컨텐츠 디테일
 	@GetMapping("/detail")
@@ -122,12 +115,6 @@ public class EventController {
 	}
 
 	// 이벤트 당첨자 발표 리스트
-//	@GetMapping("/winner")
-//	public String getEventWinner(Model model) {
-//		List<WinnerEventVO> winnerEvents = eventService.getWinnerEvents();
-//		model.addAttribute("winnerEvents", winnerEvents);
-//		return "event/winner";
-//	}
 	@GetMapping("/winner")
 	public String getEventWinner(@RequestParam(defaultValue = "1") int page, Model model) {
 	    int pageSize = 10; // 페이지당 항목 수

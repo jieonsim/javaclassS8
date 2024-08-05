@@ -159,7 +159,7 @@ public class SearchServiceImpl implements SearchService {
 
 		if (member == null || member.getStatus() != 1) {
 			result.put("success", false);
-			result.put("error", "USER_NOT_FOUOND");
+			result.put("error", "USER_NOT_FOUND");
 			return result;
 		}
 
