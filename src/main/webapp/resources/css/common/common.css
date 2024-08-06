@@ -216,13 +216,13 @@ td .input_block .hyphen{color:#878d95}
 .basic_tbl_v4 table{width:100%;border-bottom:1px solid #ecedf2;border-top: 1px solid #cfd0d7;}
 .basic_tbl_v4 table tr:first-of-type td,.basic_tbl_v4 table tr:first-of-type th{border-top:1px solid #cfd0d7;}
 .basic_tbl_v4 table tfoot tr:first-of-type td,.basic_tbl_v4 table tfoot tr:first-of-type th{border-top: 1px solid #ecedf2;}
-.basic_tbl_v4 table tbody th, .basic_tbl_v4 table tbody td,.basic_tbl_v4 table tfoot th{padding:7px 8px 7px 18px;border-top:1px solid #ecedf2;color:#242428;line-height:22px;text-align:left;word-break:break-all;font-size: 14px;}
+.basic_tbl_v4 table tbody th, .basic_tbl_v4 table tbody td,.basic_tbl_v4 table tfoot th{font-family:'Pretendard-Regular';padding:7px 8px 7px 18px;border-top:1px solid #ecedf2;color:#242428;line-height:22px;text-align:left;word-break:break-all;font-size: 14px;}
 .basic_tbl_v4 table tbody th{color: #62676c;}
 .basic_tbl_v4 table tbody .line th,.basic_tbl_v4 table tbody .line td, .basic_tbl2 .line th{border-top:1px solid #cfd0d7 !important}
 .basic_tbl2 .line tr:first-child th, .basic_tbl2 .line tr:first-child td{border-top:0}
 .basic_tbl_v4 .final th,.basic_tbl_v4 .final td{border-top:1px solid #ecedf2;background:#fff}
 .basic_tbl_v4 table .th{border-right:1px solid #ececec}
-.basic_tbl_v4 table tbody th,.basic_tbl_v4 table tfoot th{background:#f8f9fa;font-weight:400;color:#62676c}
+.basic_tbl_v4 table tbody th,.basic_tbl_v4 table tfoot th{font-family:'Pretendard-Medium';background:#f8f9fa;font-weight:400;color:#62676c}
 .basic_tbl_v4 table tbody .tr,.basic_tbl_v4 table tfoot .tr{padding-left:0;padding-right:20px}
 .basic_tbl_v4 table tbody .bg_f{background:#fff !important}
 .basic_tbl_v4 table tbody .btn_blank{margin:-5px 0 -3px 4px;padding:4px 11px;font-size:13px;font-weight:400;line-height:18px;color:#242428;}
@@ -393,7 +393,7 @@ td .input_block .hyphen{color:#878d95}
  */
 /* button */
 .btn_blank,.btn_full{padding:9px 11px;font-size:14px;font-weight:500;line-height:22px;text-align:center;vertical-align:middle}
-.btn_full{background:#242428;border:1px solid #242428;color:#fff}
+.btn_full{font-family:'Pretendard-Medium';background:#242428;border:1px solid #242428;color:#fff}
 .btn_full:focus{box-shadow: none}
 .btn_full:hover{border-color:#000;background:#000}
 .btn_full_point{border:1px solid #fa2828;background:#fa2828;color:#fff}

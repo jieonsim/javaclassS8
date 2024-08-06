@@ -451,12 +451,21 @@ a {
 	line-height: 0;
 }
 
+.common_icon {
+	font-size: 0;
+	line-height: 0;
+}
+
 .common_icon::after {
 	display: inline-block;
 	width: 100%;
 	height: 100%;
 	background: center/100% no-repeat;
 	content: "";
+}
+
+.icon_versus::after {
+	background-image: url(../../images/icon/vs.svg);
 }
 
 .common_icon.ty_xs {

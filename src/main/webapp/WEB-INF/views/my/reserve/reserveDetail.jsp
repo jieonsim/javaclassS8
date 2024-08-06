@@ -241,8 +241,8 @@
 							</colgroup>
 							<thead>
 								<tr>
-									<th scope="col">구분</th>
-									<th colspan="3" scope="col">취소 수수료</th>
+									<th scope="col" style="text-align: center">구분</th>
+									<th colspan="3" scope="col" style="text-align: center">취소 수수료</th>
 								</tr>
 							</thead>
 							<c:choose>
@@ -324,6 +324,7 @@
 				</div>
 			</div>
 		</div>
+		<jsp:include page="/WEB-INF/views/layout/moveTop.jsp" />
 	</main>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
 	<script>

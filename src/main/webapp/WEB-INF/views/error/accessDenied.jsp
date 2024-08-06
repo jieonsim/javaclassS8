@@ -32,7 +32,7 @@
 					</div>
 					<div class="complete-text">
 						<p id="completeText1">현재 페이지에 접근할 수 있는 권한이 없습니다.</p>
-						<p id="completeText2">홈페이지로 돌아가시려면 아래 버튼을 클릭해 주세요.</p>
+						<p id="completeText2" class="mt-3">홈페이지로 돌아가시려면 아래 버튼을 클릭해 주세요.</p>
 					</div>
 				</div>
 				<div>

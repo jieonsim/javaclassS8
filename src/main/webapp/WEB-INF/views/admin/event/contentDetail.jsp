@@ -58,7 +58,7 @@
 									</div>
 									<div class="list_btn d-flex justify-content-center" style="font-family: 'Pretendard-Regular'; height: 45px;">
 										<div class="px-2">
-											<a href="${ctp}/admin/event/list" class="btn btn-inverse-dark btn-fw">목록보기</a>
+											<a href="${ctp}/admin/event/eventList" class="btn btn-inverse-dark btn-fw">목록보기</a>
 										</div>
 										<div class="px-2">
 											<a href="#" class="btn btn-inverse-success btn-fw" id="drawBtn" data-toggle="modal" data-target="#drawWinners">추첨하기</a>

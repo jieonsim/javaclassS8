@@ -136,7 +136,7 @@ public class ReservationServiceImpl implements ReservationService {
 		// 2. 상세 좌석번호 생성
 		List<SeatDetailVO> seatDetails = generateSeatNumbers(request.getTicketAmount());
 
-		// 3. completed.jsp에 상세 좌석번호 보여주기 위해 TempReservation 업데이트
+		// 3. 예매완료 페이지에 상세 좌석번호 보여주기 위해 TempReservation 업데이트
 		TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
 		if (tempReservation != null) {
 			tempReservation.setSeatDetails(seatDetails);

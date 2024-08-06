@@ -103,9 +103,7 @@
 				</div>
 			</div>
 		</main>
-		<button type="button" id="back_to_top" class="btn_move_top is-active is-stuck" onclick="window.scrollTo(0,0);">
-			<span class="blind">맨 위로 이동하기</span>
-		</button>
+		<jsp:include page="/WEB-INF/views/layout/moveTop.jsp" />
 	</div>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
 	<script src="${ctp}/js/sports/common/schedule.js"></script>

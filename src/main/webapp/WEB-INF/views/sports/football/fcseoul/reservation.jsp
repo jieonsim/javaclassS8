@@ -116,6 +116,7 @@
 				</div>
 			</div>
 		</main>
+		<jsp:include page="/WEB-INF/views/layout/moveTop.jsp" />
 	</div>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
 	<script src="${ctp}/js/sports/common/reservation.js"></script>

@@ -29,8 +29,6 @@
 					<p class="guide_txt">
 						<span class="color_point">예매번호</span>
 						를 클릭하면 예매 상세 내용을 확인할 수 있습니다.
-						<br>
-						공연/전시 예매 내역은 하단의 공연/전시 탭을 선택하면 확인할 수 있습니다.
 					</p>
 					<ul class="mypage_tab">
 						<li class="on">
@@ -133,6 +131,7 @@
 				</div>
 			</div>
 		</div>
+		<jsp:include page="/WEB-INF/views/layout/moveTop.jsp" />
 	</main>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
 	<script src="${ctp}/js/my/reserve/reserveList.js"></script>

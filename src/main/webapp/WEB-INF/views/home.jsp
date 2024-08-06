@@ -131,6 +131,7 @@
 				</a>
 			</div>
 		</div>
+		<jsp:include page="/WEB-INF/views/layout/moveTop.jsp" />
 	</div>
 	<jsp:include page="/WEB-INF/views/layout/footer.jsp" />
 	<script src="${ctp}/js/home/home.js"></script>

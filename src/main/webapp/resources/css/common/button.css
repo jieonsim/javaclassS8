@@ -1,5 +1,16 @@
 @charset "UTF-8";
 
+.blind {
+	overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+}
+
 .btn_move_top {
 	visibility: hidden;
 	position: fixed;
@@ -38,11 +49,6 @@
 .btn_move_top.is-active {
 	visibility: visible;
 	opacity: 1;
-}
-
-.btn_move_top.is-stuck {
-	position: absolute;
-	bottom: 285px;
 }
 
 @media screen and (max-width: 1296px) {
