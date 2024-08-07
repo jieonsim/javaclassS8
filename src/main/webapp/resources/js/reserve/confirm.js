@@ -90,6 +90,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		if (requestData.totalAmount === 0) {
 			// 결제 금액이 0원일 경우 결제없이 바로 예매 처리
+			document.getElementById('loading_layer').style.display = 'block';
+			document.getElementById('loading_dimmed').style.display = 'block';
 			processReservation(requestData);
 		} else {
 			// 결제 API 호출

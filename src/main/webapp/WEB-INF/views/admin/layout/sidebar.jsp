@@ -88,13 +88,6 @@
 					</li>
 				</ul>
 			</div>
-			<div class="collapse" id="reservation">
-				<ul class="nav flex-column sub-menu">
-					<li class="nav-item">
-						<a class="nav-link" href="#">예매조회</a>
-					</li>
-				</ul>
-			</div>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" data-toggle="collapse" href="#advanceTicket" aria-expanded="false" aria-controls="advanceTicket">

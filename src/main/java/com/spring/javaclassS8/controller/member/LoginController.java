@@ -45,7 +45,6 @@ public class LoginController {
 		if (result.isSuccess()) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", result.getMember());
-			System.out.println("로그인 성공: " + result.getMember());
 
 			// 로그인 성공 후 selectedEmail 세션 삭제
 			session.removeAttribute("selectedEmail");

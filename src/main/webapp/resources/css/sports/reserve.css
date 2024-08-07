@@ -1369,7 +1369,8 @@ input[type=range]::-ms-tooltip{display:none}
 .reserve_left .select_area .img_seat{text-align:center;}
 
 .reserve_left .select_area.v2{width:620px;height:529px;padding:20px;}
-.reserve_left .select_area.v2 strong.title{display:block;background:#5d5d5d;text-align:center;height:40px;line-height:43px;vertical-align:top;}
+/*수정*/
+.reserve_left .select_area.v2 strong.title{display:inline-block;background:#5d5d5d;text-align:center;height:40px;line-height:43px;vertical-align:top;}
 .reserve_left .select_area.v2 strong.title span{width:54px;height:12px;background-position:-273px -177px}
 
 .reserve_left .select_area.v2 .wrap_seat{width:100%;text-align:center;height:359px;padding:50px 0;overflow:auto;}
@@ -1434,7 +1435,8 @@ input[type=range]::-ms-tooltip{display:none}
 .layer .rest_info.seat .seat_list li{height:22px;line-height:22px;padding:0 10px;}
 .rest_info.seat.premium{margin-top:15px;}
 .rest_info.seat.premium strong{border-bottom:0;height:auto;padding-bottom:10px;margin-bottom:0;line-height:14px;font-weight:400;font-size:13px;}
-.rest_info.seat.premium .seat_list a{display:block;height:22px;margin:0 -10px;padding:0 10px;vertical-align:top;}
+/*수정*/
+.rest_info.seat.premium .seat_list a{display:inline-block;height:22px;margin:0 -10px;padding:0 10px;vertical-align:top;}
 .rest_info.seat.premium .seat_list a:hover,
 .rest_info.seat.premium .seat_list a.on{background:#cfe9c3;}
 .rest_info.seat.premium .seat_list .seat_level{width:auto;max-width:99px;min-width:30px;padding-right:1px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}

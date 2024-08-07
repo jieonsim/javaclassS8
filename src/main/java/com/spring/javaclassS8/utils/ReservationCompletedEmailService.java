@@ -243,7 +243,7 @@ public class ReservationCompletedEmailService {
         + "                        </tr>\r\n"
         + "                        <tr>\r\n"
         + "                            <td style=\"padding-top: 30px; text-align: center; line-height: 0;\">\r\n"
-        + "                                <a href=\"http://localhost:9090/javaclassS8/my/reserve/detail?reservationId="+reservationId+"\" target=\"_blank\" style=\"display: inline-block; padding: 24px 40px; background-color: black; color: white; border-radius: 5px; font-size: 16px; font-weight: bold; text-align: center; text-decoration: none; font-family: 돋움;\">예매내역보기</a>\r\n"
+        + "                                <a href=\"http://49.142.157.251:9090/javaclassS8/my/reserve/detail?reservationId="+reservationId+"\" target=\"_blank\" style=\"display: inline-block; padding: 24px 40px; background-color: black; color: white; border-radius: 5px; font-size: 16px; font-weight: bold; text-align: center; text-decoration: none; font-family: 돋움;\">예매내역보기</a>\r\n"
         + "                            </td>\r\n"
         + "                        </tr>\r\n"
         + "                        <tr>\r\n"

@@ -28,7 +28,7 @@
 					</div>
 					<p class="guide_txt">
 						<span class="color_point">예매번호</span>
-						를 클릭하면 예매 상세 내용을 확인할 수 있습니다.
+						를 클릭하면 취소 상세 내용을 확인할 수 있습니다.
 					</p>
 					<ul class="mypage_tab">
 						<li>

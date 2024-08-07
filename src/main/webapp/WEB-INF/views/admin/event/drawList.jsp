@@ -32,60 +32,12 @@
 						<div class="col-12 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
-									<form id="searchForm">
-										<div class="d-flex justify-content-between">
-											<h4 class="card-title">이벤트 추첨 리스트</h4>
-											<div class="d-flex justify-content-end mb-2">
-												<div class="mx-2">
-													<%-- <select class="form-control bg-white text-dark" id="inputCategory" name="eventCategory">
-														<option selected disabled>카테고리별 조회</option>
-														<c:forEach var="category" items="${categories}">
-															<option value="${category}">${category.displayName}</option>
-														</c:forEach>
-													</select> --%>
-												</div>
-												<div class="mx-2">
-													<%-- <select class="form-control bg-white text-dark" id="inputStatus" name="status">
-														<option selected disabled>상태별 조회</option>
-														<c:forEach var="status" items="${statuses}">
-															<option value="${status}">${status.displayName}</option>
-														</c:forEach>
-													</select> --%>
-												</div>
-												<div class="mx-2">
-													<button type="button" class="btn btn-sm btn-secondary" id="resetBtn">전체조회</button>
-												</div>
-											</div>
-										</div>
-										<div class="d-flex justify-content-between pb-3">
-											<p class="card-description mb-0">
-												이벤트명 클릭 시 당첨자 리스트를 확인할 수 있습니다.
-												<br>
-												상세 페이지로 이동하여 당첨자 발표 포스팅 및 메일 발송이 가능합니다.
-											</p>
-											<div class="d-flex justify-content-end align-items-end">
-												<div class="mx-2">
-													<label for="inputStartDate"></label>
-													<input type="date" id="inputStartDate" name="startDate" class="form-control">
-												</div>
-												<div class="mx-2">
-													<label for="inputEndDate"></label>
-													<input type="date" id="inputEndDate" name="endDate" class="form-control">
-												</div>
-												<div class="mx-2">
-													<label for="inputSearch"></label>
-													<div class="input-group">
-														<div class="input-group-prepend">
-															<button type="submit" class="input-group-text">
-																<i class="icon-search"></i>
-															</button>
-														</div>
-														<input type="search" id="inputSearch" name="keyword" class="form-control" placeholder="Search Here" title="Search here">
-													</div>
-												</div>
-											</div>
-										</div>
-									</form>
+									<h4 class="card-title">이벤트 추첨 리스트</h4>
+									<p class="card-description mb-0">
+										이벤트명 클릭 시 당첨자 리스트를 확인할 수 있습니다.
+										<br>
+										상세 페이지로 이동하여 당첨자 발표 포스팅 및 메일 발송이 가능합니다.
+									</p>
 									<div class="table-responsive">
 										<table class="table">
 											<thead class="text-center">
