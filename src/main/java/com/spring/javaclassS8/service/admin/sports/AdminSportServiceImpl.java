@@ -175,14 +175,14 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 			return false;
 		}
 
-		// 새로 삽입된 게임의 상세 정보를 가져옵니다
+		// 새로 삽입된 게임의 상세 정보를 가져오기
 		GameVO insertedGame = adminSportDAO.getGameDetails(game.getId());
 		if (insertedGame == null) {
 			System.err.println("Failed to retrieve inserted game details");
 			return false;
 		}
 
-		// 게임 객체를 업데이트합니다
+		// 게임 객체를 업데이트
 		game.setSportId(insertedGame.getSportId());
 		game.setHomeTeamId(insertedGame.getHomeTeamId());
 		game.setVenueId(insertedGame.getVenueId());
