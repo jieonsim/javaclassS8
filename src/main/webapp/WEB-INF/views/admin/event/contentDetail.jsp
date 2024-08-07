@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="${ctp}/css/admin/vertical-layout-light/style.css">
 <link rel="stylesheet" href="${ctp}/css/event/common.css">
 <link rel="stylesheet" href="${ctp}/css/event/event.css">
-<link rel="icon" href="${ctp}/images/admin/favicon.ico">
+<link rel="icon" href="${ctp}/images/admin/favicon.ico?v=2">
 </head>
 <body>
 	<div class="container-controller">

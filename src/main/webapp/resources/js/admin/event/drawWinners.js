@@ -1,6 +1,4 @@
-/**
- * admin/event/draw.js
- */
+/*admin/event/draw.js*/
 document.addEventListener('DOMContentLoaded', function() {
 	const downButton = document.getElementById('down');
 	const upButton = document.getElementById('up');
@@ -76,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					alert('이벤트 추첨 및 당첨자 예매권 발행이 완료되었습니다.');
 					window.location.href = `${ctp}/admin/event/drawList`;
 				} else {
-					alert('이벤트 추첨에 실패했습니다: ' + (data.message || ''));
+					alert(data.message || '이벤트 추첨에 실패했습니다.');
 				}
 			})
 			.catch(error => {

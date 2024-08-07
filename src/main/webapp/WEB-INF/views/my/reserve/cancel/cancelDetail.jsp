@@ -179,7 +179,7 @@
 									<th scope="row">총 결제금액</th>
 									<td colspan="3">
 										<span class="color_point">
-											<span class="number ng-binding">
+											<span class="number ng-binding" style="font-family:'Pretendard-Regular';">
 												<fmt:formatNumber value="${reservation.totalAmount}" type="number" />
 												원
 											</span>
@@ -236,7 +236,7 @@
 									<td colspan="3">
 										<span class="color_point">
 											<span class="number">
-												<span class="number ng-binding">
+												<span class="number ng-binding" style="font-family:'Pretendard-Regular';">
 													<fmt:formatNumber value="${cancelInfo.refundAmount}" type="number" />
 													원
 												</span>

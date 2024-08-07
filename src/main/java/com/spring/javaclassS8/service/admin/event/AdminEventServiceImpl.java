@@ -227,7 +227,8 @@ public class AdminEventServiceImpl implements AdminEventService {
 	public boolean drawWinners(int eventId, int numOfWinners) {
 		List<Integer> participants = adminEventDAO.getActiveParticipants(eventId);
 		if (participants.size() < numOfWinners) {
-			return false;
+			//return false;
+			throw new IllegalArgumentException("참여자 수보다 당첨자 수가 많을 수 없습니다.");
 		}
 
 		// 랜덤 추첨

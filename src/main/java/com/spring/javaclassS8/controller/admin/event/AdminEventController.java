@@ -56,16 +56,16 @@ public class AdminEventController {
 	@GetMapping("/eventList")
 	public String getEventList(@RequestParam(defaultValue = "1") int page, Model model) {
 		int pageSize = 10;
-	    int totalCount = adminEventService.getTotalEventsCount();
-	    PaginationInfo paginationInfo = new PaginationInfo(totalCount, pageSize, page);
-	    
+		int totalCount = adminEventService.getTotalEventsCount();
+		PaginationInfo paginationInfo = new PaginationInfo(totalCount, pageSize, page);
+
 		List<EventVO> events = adminEventService.getAllEvents(page, pageSize);
-		
+
 		model.addAttribute("events", events);
 		model.addAttribute("categories", EventCategory.values());
 		model.addAttribute("statuses", Status.values());
 		model.addAttribute("paginationInfo", paginationInfo);
-		
+
 		return "admin/event/list";
 	}
 
@@ -220,7 +220,7 @@ public class AdminEventController {
 	public ResponseEntity<Map<String, Integer>> getParticipantCount(@RequestParam("eventId") int eventId) {
 		int count = adminEventService.getParticipantCount(eventId);
 		Map<String, Integer> response = new HashMap<>();
-		response.put("pariticipantCount", count);
+		response.put("participantCount", count);
 		return ResponseEntity.ok(response);
 	}
 
@@ -236,8 +236,13 @@ public class AdminEventController {
 			Map<String, Object> response = new HashMap<>();
 			response.put("success", success);
 			return ResponseEntity.ok(response);
+		} catch (IllegalArgumentException e) {
+			Map<String, Object> response = new HashMap<>();
+			response.put("success", false);
+			response.put("message", e.getMessage());
+			return ResponseEntity.badRequest().body(response);
 		} catch (Exception e) {
-			e.printStackTrace(); // 서버 로그에 스택 트레이스 출력
+			e.printStackTrace();
 			Map<String, Object> response = new HashMap<>();
 			response.put("success", false);
 			response.put("message", "An error occurred: " + e.getMessage());
@@ -249,14 +254,14 @@ public class AdminEventController {
 	@GetMapping("/drawList")
 	public String getwinnerList(@RequestParam(defaultValue = "1") int page, Model model) {
 		int pageSize = 10;
-	    int totalCount = adminEventService.getTotalDrawCount();
-	    PaginationInfo paginationInfo = new PaginationInfo(totalCount, pageSize, page);
-		
+		int totalCount = adminEventService.getTotalDrawCount();
+		PaginationInfo paginationInfo = new PaginationInfo(totalCount, pageSize, page);
+
 		List<EventDrawSummaryVO> drawSummaries = adminEventService.getEventDrawSummaries(page, pageSize);
-		
+
 		model.addAttribute("drawSummaries", drawSummaries);
 		model.addAttribute("paginationInfo", paginationInfo);
-		
+
 		return "admin/event/drawList";
 	}
 
@@ -267,9 +272,9 @@ public class AdminEventController {
 		List<WinnerDetailVO> winnerDetails = adminEventService.getWinnerDetailsByDrawAt(eventId, drawAt);
 		EventVO event = adminEventService.getEventById(eventId);
 		boolean isAnnounced = adminEventService.isEventAnnouncedByDrawAt(eventId, drawAt);
-		
-	    // 결과 확인을 위한 로그
-	    System.out.println("Number of winners: " + winnerDetails.size());
+
+		// 결과 확인을 위한 로그
+		System.out.println("Number of winners: " + winnerDetails.size());
 
 		model.addAttribute("winnerDetails", winnerDetails);
 		model.addAttribute("eventTitle", event.getTitle());
@@ -284,65 +289,65 @@ public class AdminEventController {
 	@PostMapping("/uploadWinnerAnnouoncement")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> uploadWinnerAnnouoncement(@RequestBody WinnerPostVO winnerPost, HttpSession session) {
-	    Map<String, Object> response = new HashMap<>();
+		Map<String, Object> response = new HashMap<>();
 
-	    try {
-	        MemberVO admin = (MemberVO) session.getAttribute("loginMember");
-	        if (admin == null) {
-	            throw new RuntimeException("관리자 로그인이 필요합니다.");
-	        }
+		try {
+			MemberVO admin = (MemberVO) session.getAttribute("loginMember");
+			if (admin == null) {
+				throw new RuntimeException("관리자 로그인이 필요합니다.");
+			}
 
-	        winnerPost.setAdminId(admin.getId());
-	        
-	        System.out.println("Received drawAt: " + winnerPost.getDrawAt());
+			winnerPost.setAdminId(admin.getId());
 
-	        boolean result = adminEventService.createWinnerPost(winnerPost);
+			System.out.println("Received drawAt: " + winnerPost.getDrawAt());
 
-	        if (result) {
-	            response.put("success", true);
-	            response.put("message", "당첨자 발표가 정상적으로 완료되었습니다.");
-	        } else {
-	            response.put("success", false);
-	            response.put("message", "당첨자 발표에 실패했습니다.");
-	        }
-	    } catch (Exception e) {
-	        response.put("success", false);
-	        response.put("message", "당첨자 발표 중 오류가 발생했습니다: " + e.getMessage());
-	        e.printStackTrace();
-	    }
-	    return ResponseEntity.ok(response);
+			boolean result = adminEventService.createWinnerPost(winnerPost);
+
+			if (result) {
+				response.put("success", true);
+				response.put("message", "당첨자 발표가 정상적으로 완료되었습니다.");
+			} else {
+				response.put("success", false);
+				response.put("message", "당첨자 발표에 실패했습니다.");
+			}
+		} catch (Exception e) {
+			response.put("success", false);
+			response.put("message", "당첨자 발표 중 오류가 발생했습니다: " + e.getMessage());
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(response);
 	}
-	
+
 	// 이벤트 당첨자 대상으로 메일 발송
 	@PostMapping("/sendWinnerEmails")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> sendWinnerEmails(@RequestBody Map<String, Object> request) {
-	    int eventId = Integer.parseInt(request.get("eventId").toString());
-	    String drawAt = (String) request.get("drawAt");
-	    Map<String, Object> response = new HashMap<>();
-	    
-	    System.out.println("Received request for sendWinnerEmails - eventId: " + eventId + ", drawAt: " + drawAt);
-	    
-	    if (drawAt == null || drawAt.isEmpty()) {
-	        response.put("success", false);
-	        response.put("message", "drawAt 값이 없습니다.");
-	        return ResponseEntity.ok(response);
-	    }
-	    
-	    try {
-	        boolean result = adminEventService.sendWinnerEmails(eventId, drawAt);
-	        if (result) {
-	            response.put("success", true);
-	            response.put("message", "메일 발송이 완료되었습니다.");
-	        } else {
-	            response.put("success", false);
-	            response.put("message", "메일 발송에 실패했습니다.");
-	        }
-	    } catch (Exception e) {
-	        response.put("success", false);
-	        response.put("message", "메일 발송 중 오류가 발생했습니다: " + e.getMessage());
-	    }
-	    
-	    return ResponseEntity.ok(response);
+		int eventId = Integer.parseInt(request.get("eventId").toString());
+		String drawAt = (String) request.get("drawAt");
+		Map<String, Object> response = new HashMap<>();
+
+		System.out.println("Received request for sendWinnerEmails - eventId: " + eventId + ", drawAt: " + drawAt);
+
+		if (drawAt == null || drawAt.isEmpty()) {
+			response.put("success", false);
+			response.put("message", "drawAt 값이 없습니다.");
+			return ResponseEntity.ok(response);
+		}
+
+		try {
+			boolean result = adminEventService.sendWinnerEmails(eventId, drawAt);
+			if (result) {
+				response.put("success", true);
+				response.put("message", "메일 발송이 완료되었습니다.");
+			} else {
+				response.put("success", false);
+				response.put("message", "메일 발송에 실패했습니다.");
+			}
+		} catch (Exception e) {
+			response.put("success", false);
+			response.put("message", "메일 발송 중 오류가 발생했습니다: " + e.getMessage());
+		}
+
+		return ResponseEntity.ok(response);
 	}
 }

@@ -44,7 +44,8 @@ public class HotIssueController {
 
 		WebDriver driver = new ChromeDriver(options);
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
+		//WebDriverWait wait = new WebDriverWait(driver, 10);
+		
 		try {
 			driver.get("https://sports.daum.net/news/ranking");
 
@@ -88,6 +89,7 @@ public class HotIssueController {
 
 		WebDriver driver = new ChromeDriver(options);
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		//WebDriverWait wait = new WebDriverWait(driver, 10);
 
 		try {
 			driver.get("https://sports.daum.net/");
@@ -169,6 +171,7 @@ public class HotIssueController {
 
 		WebDriver driver = new ChromeDriver(options);
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		//WebDriverWait wait = new WebDriverWait(driver, 10);
 
 		try {
 			driver.get("https://www.koreabaseball.com/Default.aspx");

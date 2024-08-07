@@ -13,13 +13,13 @@
 							<div class="input-group">
 								<label for="numOfWinners" style="font-family: 'Pretendard-Regular'; font-size: 17px;">추첨할 인원을 선택해주세요.</label>
 								<span class="input-group-btn data-dwn">
-									<button class="btn btn-inverse-dark btn-fw py-2" id="down">
+									<button class="btn btn-inverse-dark btn-fw py-2" id="down" type="button">
 										<span class="ph ph-minus"></span>
 									</button>
 								</span>
 								<input type="text" class="form-control text-center" id="numOfWinners" name="numOfWinners" value="1" min="1" max="10">
 								<span class="input-group-btn data-up">
-									<button class="btn btn-inverse-dark btn-fw py-2" id="up">
+									<button class="btn btn-inverse-dark btn-fw py-2" id="up" type="button">
 										<span class="ph ph-plus"></span>
 									</button>
 								</span>
