@@ -110,7 +110,8 @@ public class ReservationController {
 		game.setGameDate(DateTimeFormatUtils.formatDate(game.getGameDate()));
 		game.setGameTime(DateTimeFormatUtils.formatTime(game.getGameTime()));
 
-		//List<SeatInventoryVO> seatInventories = reservationService.getSeatInventoriesByGameId(gameId);
+		// List<SeatInventoryVO> seatInventories =
+		// reservationService.getSeatInventoriesByGameId(gameId);
 		List<SeatInventoryVO> seatInventories = reservationService.getSeatInventoriesWithPricesByGameId(gameId);
 		int maxTicketsPerBooking = reservationService.getMaxTicketsPerBooking(game.getSportId());
 
@@ -227,10 +228,13 @@ public class ReservationController {
 	public ResponseEntity<?> saveTicketSelection(@RequestBody Map<String, Object> ticketSelectionData, HttpSession session) {
 		try {
 			TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
-			if (tempReservation == null || System.currentTimeMillis() > tempReservation.getExpirationTime()) {
-				session.removeAttribute("tempReservation");
-				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "세션이 만료되었습니다. 다시 예매를 진행해 주세요.", "sessionExpired", true));
-			}
+            if (tempReservation == null || System.currentTimeMillis() > tempReservation.getExpirationTime()) {
+                session.removeAttribute("tempReservation");
+                Map<String, Object> response = new HashMap<>();
+                response.put("error", "세션이 만료되었습니다. 다시 예매를 진행해 주세요.");
+                response.put("sessionExpired", true);
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+            }
 
 			@SuppressWarnings("unchecked")
 			List<Map<String, Object>> ticketsData = (List<Map<String, Object>>) ticketSelectionData.get("tickets");
@@ -292,10 +296,15 @@ public class ReservationController {
 			tempReservation.setCurrentDepth(2);
 			session.setAttribute("tempReservation", tempReservation);
 
-			return ResponseEntity.ok().contentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8)).body(Map.of("success", true, "message", "티켓 선택이 저장되었습니다."));
+			Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("message", "티켓 선택이 저장되었습니다.");
+            return ResponseEntity.ok().contentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8)).body(response);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResponseEntity.badRequest().contentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8)).body(Map.of("error", "티켓 선택을 저장하는 중 오류가 발생했습니다."));
+            Map<String, Object> response = new HashMap<>();
+            response.put("error", "티켓 선택을 저장하는 중 오류가 발생했습니다.");
+            return ResponseEntity.badRequest().contentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8)).body(response);
 		}
 	}
 
@@ -365,7 +374,7 @@ public class ReservationController {
 
 		return "reserve/confirm";
 	}
-	
+
 	// 결제 및 예매 요청
     @PostMapping("/paymentAndReserve")
     @ResponseBody
@@ -385,10 +394,18 @@ public class ReservationController {
                 session.setAttribute("tempReservation", tempReservation);
             }
 
-            return ResponseEntity.ok(Map.of("success", response.isSuccess(), "reservationId", response.getReservationId(), "reservationNumber", response.getReservationNumber(), "message", response.getMessage()));
+            Map<String, Object> responseMap = new HashMap<>();
+            responseMap.put("success", response.isSuccess());
+            responseMap.put("reservationId", response.getReservationId());
+            responseMap.put("reservationNumber", response.getReservationNumber());
+            responseMap.put("message", response.getMessage());
+            return ResponseEntity.ok(responseMap);
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("success", false, "message", "예약 처리 중 오류가 발생했습니다: " + e.getMessage()));
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("success", false);
+            errorResponse.put("message", "예약 처리 중 오류가 발생했습니다: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
@@ -399,7 +416,7 @@ public class ReservationController {
 			// reservationId가 없는 경우 처리
 			return "redirect:/reserve/error";
 		}
-		
+
 		TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
 		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
 
@@ -459,16 +476,20 @@ public class ReservationController {
 		int totalQuantity = selectedTickets.stream().filter(ticket -> !"ADVANCE_TICKET".equals(ticket.getType())).mapToInt(TicketVO::getQuantity).sum();
 		return bookingPolicy.getBookingFeePerTicket() * totalQuantity;
 	}
-
-
-	@GetMapping("/checkSession")
-	@ResponseBody
-	public ResponseEntity<?> checkSession(HttpSession session) {
-		TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
-		if (tempReservation == null || System.currentTimeMillis() > tempReservation.getExpirationTime()) {
-			session.removeAttribute("tempReservation");
-			return ResponseEntity.ok(Map.of("sessionExpired", true));
-		}
-		return ResponseEntity.ok(Map.of("sessionExpired", false));
-	}
+	
+	
+	// 세션 체크
+    @GetMapping("/checkSession")
+    @ResponseBody
+    public ResponseEntity<?> checkSession(HttpSession session) {
+        TempReservation tempReservation = (TempReservation) session.getAttribute("tempReservation");
+        Map<String, Object> response = new HashMap<>();
+        if (tempReservation == null || System.currentTimeMillis() > tempReservation.getExpirationTime()) {
+            session.removeAttribute("tempReservation");
+            response.put("sessionExpired", true);
+        } else {
+            response.put("sessionExpired", false);
+        }
+        return ResponseEntity.ok(response);
+    }
 }

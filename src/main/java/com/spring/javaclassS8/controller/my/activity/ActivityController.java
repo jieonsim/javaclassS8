@@ -23,18 +23,6 @@ public class ActivityController {
 	private EventService eventService;
 
 	// 마이페이지 > 활동관리 > 참여 이벤트 뷰
-//	@GetMapping("/event")
-//	public String getEventPArticipations(@RequestParam(defaultValue = "1") int page, HttpSession session, Model model) {
-//		MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
-//		if (loginMember == null) {
-//			return "redirect:/login";
-//		}
-//		
-//		List<EventParticipationVO> paritipations = eventService.getEventParticipations(loginMember.getId());
-//		model.addAttribute("paritipations", paritipations);
-//
-//		return "my/activity/event";
-//	}
 	@GetMapping("/event")
 	public String getEventParticipations(@RequestParam(defaultValue = "1") int page, HttpSession session, Model model) {
 	    MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");

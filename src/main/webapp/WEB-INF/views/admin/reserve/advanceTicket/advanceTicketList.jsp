@@ -85,6 +85,9 @@
 																<c:when test="${ticket.usageStatus eq 'USED'}">
 																	<label class="badge badge-danger">USED</label>
 																</c:when>
+																<c:otherwise>
+																	<label class="badge badge-primary">UNKNOWN</label>
+																</c:otherwise>
 															</c:choose>
 														</td>
 														<td>

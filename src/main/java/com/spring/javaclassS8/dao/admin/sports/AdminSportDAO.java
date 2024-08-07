@@ -163,4 +163,8 @@ public interface AdminSportDAO {
 	// 토탈 게임 수 가져오기(페이징)
 	int getTotalGamesCount();
 
+	int insertGame(GameVO game);
+
+	GameVO getGameDetails(int gameId);
+
 }

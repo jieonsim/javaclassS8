@@ -169,18 +169,32 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 	@Override
 	@Transactional
 	public boolean registerGame(GameVO game) {
-		boolean result = adminSportDAO.registerGame(game) > 0;
-		if (result) {
-			// 새로 등록된 게임에 대한 seat_inventory 생성
-			List<SeatVO> seats = adminSportDAO.getSeatsByVenueIdAndSportIdAndTeamId(game.getVenueId(), game.getSportId(), game.getHomeTeamId());
-			for (SeatVO seat : seats) {
-				SeatInventoryVO inventory = new SeatInventoryVO();
-				inventory.setGameId(game.getId());
-				inventory.setSeatId(seat.getId());
-				inventory.setTotalCapacity(seat.getCapacity());
-				inventory.setAvailableCapacity(seat.getCapacity());
-				adminSportDAO.insertSeatInventory(inventory);
-			}
+		boolean result = adminSportDAO.insertGame(game) > 0;
+		if (!result) {
+			System.err.println("Failed to insert game");
+			return false;
+		}
+
+		// 새로 삽입된 게임의 상세 정보를 가져옵니다
+		GameVO insertedGame = adminSportDAO.getGameDetails(game.getId());
+		if (insertedGame == null) {
+			System.err.println("Failed to retrieve inserted game details");
+			return false;
+		}
+
+		// 게임 객체를 업데이트합니다
+		game.setSportId(insertedGame.getSportId());
+		game.setHomeTeamId(insertedGame.getHomeTeamId());
+		game.setVenueId(insertedGame.getVenueId());
+
+		List<SeatVO> seats = adminSportDAO.getSeatsByVenueIdAndSportIdAndTeamId(game.getVenueId(), game.getSportId(), game.getHomeTeamId());
+		for (SeatVO seat : seats) {
+			SeatInventoryVO inventory = new SeatInventoryVO();
+			inventory.setGameId(game.getId());
+			inventory.setSeatId(seat.getId());
+			inventory.setTotalCapacity(seat.getCapacity());
+			inventory.setAvailableCapacity(seat.getCapacity());
+			adminSportDAO.insertSeatInventory(inventory);
 		}
 		return result;
 	}
@@ -261,27 +275,25 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 		int result = adminSportDAO.insertSeat(seat);
 
 		if (result > 0) {
-	        // 이 시점에서 seat 객체의 id가 설정되어 있어야 함
-	        System.out.println("Inserted seat ID: " + seat.getId());
+			// 이 시점에서 seat 객체의 id가 설정되어 있어야 함
+			System.out.println("Inserted seat ID: " + seat.getId());
 
-	        // 새로 등록된 좌석에 대한 seat_inventory 생성
-	        List<GameVO> games = adminSportDAO.getGamesByVenueIdAndSportIdAndHomeTeamId(
-	            seat.getVenueId(), seat.getSportId(), seat.getTeamId());
-	        
-	        for (GameVO game : games) {
-	            SeatInventoryVO inventory = new SeatInventoryVO();
-	            inventory.setGameId(game.getId());
-	            inventory.setSeatId(seat.getId());
-	            System.out.println("Creating inventory for game " + game.getId() + " and seat " + seat.getId());
-	            inventory.setTotalCapacity(seat.getCapacity());
-	            inventory.setAvailableCapacity(seat.getCapacity());
-	            adminSportDAO.insertSeatInventory(inventory);
-	        }
+			// 새로 등록된 좌석에 대한 seat_inventory 생성
+			List<GameVO> games = adminSportDAO.getGamesByVenueIdAndSportIdAndHomeTeamId(seat.getVenueId(), seat.getSportId(), seat.getTeamId());
 
-	        return seat;
-	    } else {
-	        throw new IllegalStateException("좌석 등록에 실패했습니다.");
-	    }
+			for (GameVO game : games) {
+				SeatInventoryVO inventory = new SeatInventoryVO();
+				inventory.setGameId(game.getId());
+				inventory.setSeatId(seat.getId());
+				inventory.setTotalCapacity(seat.getCapacity());
+				inventory.setAvailableCapacity(seat.getCapacity());
+				adminSportDAO.insertSeatInventory(inventory);
+			}
+
+			return seat;
+		} else {
+			throw new IllegalStateException("좌석 등록에 실패했습니다.");
+		}
 	}
 
 	// 모든 좌석 등급 가져오기
@@ -358,29 +370,28 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 			throw new IllegalStateException("요금 등록에 실패했습니다.");
 		}
 	}
-	
+
 	// 등록 폼 내 선택된 경기장에 따른 좌석 등급 가져오기
 	@Override
 	public List<SeatVO> getSeatsByVenueName(String venueName) {
 		return adminSportDAO.getSeatsByVenueName(venueName);
 	}
-	
+
 	// 스포츠, 팀, 경기장으로 등록된 게임이 있는지
 	@Override
 	public boolean hasGames(String type, int id) {
-	    return adminSportDAO.countGamesByTypeAndId(type, id) > 0;
+		return adminSportDAO.countGamesByTypeAndId(type, id) > 0;
 	}
-	
+
 	// 해당 게임으로 예매된 건이 있는지 확인
 	@Override
 	public boolean hasReservations(int gameId) {
-	    return adminSportDAO.countReservationsByGameId(gameId) > 0;
+		return adminSportDAO.countReservationsByGameId(gameId) > 0;
 	}
-	
+
 	// 토탈 게임 수 가져오기(페이징)
 	@Override
 	public int getTotalGamesCount() {
-	    return adminSportDAO.getTotalGamesCount();
+		return adminSportDAO.getTotalGamesCount();
 	}
 }
-

@@ -1,5 +1,6 @@
 package com.spring.javaclassS8.controller.admin.member;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,12 +42,13 @@ public class AdminMemberController {
 	}
 	
 	// 회원 정보(회원 등급 / 활동 상태 ) 업데이트
-    @PostMapping("/update")
-    public ResponseEntity<Map<String, Object>> updateMembers(@RequestBody MemberUpdateRequest request) {
-        boolean success = adminMemberService.updateMembers(request);
-        Map<String, Object> response = Map.of("success", success);
-        return ResponseEntity.ok(response);
-    }
+	@PostMapping("/update")
+	public ResponseEntity<Map<String, Object>> updateMembers(@RequestBody MemberUpdateRequest request) {
+	    boolean success = adminMemberService.updateMembers(request);
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("success", success);
+	    return ResponseEntity.ok(response);
+	}
 	
 	// 회원 리스트 페이지 내 검색
     @GetMapping("/search")

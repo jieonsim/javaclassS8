@@ -157,18 +157,21 @@ public class MemberInfoController {
 		return "my/memberInfo/withdrawal";
 	}
 	
-    @PostMapping("/withdraw")
-    @ResponseBody
-    public ResponseEntity<?> withdraw(HttpSession session) {
-        MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
-        if (loginMember == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-        }
-        
-        boolean success = memberInfoService.withdrawMember(loginMember.getId());
-        if (success) {
-            session.invalidate();
-        }
-        return ResponseEntity.ok(Map.of("success", success));
-    }
+	// 탈퇴 처리
+	@PostMapping("/withdraw")
+	@ResponseBody
+	public ResponseEntity<?> withdraw(HttpSession session) {
+	    MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
+	    if (loginMember == null) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+	    }
+	    
+	    boolean success = memberInfoService.withdrawMember(loginMember.getId());
+	    if (success) {
+	        session.invalidate();
+	    }
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("success", success);
+	    return ResponseEntity.ok(response);
+	}
 }

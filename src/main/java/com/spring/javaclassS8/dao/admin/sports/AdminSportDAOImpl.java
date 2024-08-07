@@ -314,4 +314,14 @@ public class AdminSportDAOImpl implements AdminSportDAO {
 	public int getTotalGamesCount() {
 		return sqlSession.getMapper(AdminSportDAO.class).getTotalGamesCount();
 	}
+
+	@Override
+	public int insertGame(GameVO game) {
+		return sqlSession.getMapper(AdminSportDAO.class).insertGame(game);
+	}
+
+	@Override
+	public GameVO getGameDetails(int gameId) {
+		return sqlSession.getMapper(AdminSportDAO.class).getGameDetails(gameId);
+	}
 }

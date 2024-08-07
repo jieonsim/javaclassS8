@@ -301,7 +301,7 @@
 	</insert>
 	
 	<!-- 경기 등록 처리 -->
-	<insert id="registerGame" parameterType="com.spring.javaclassS8.vo.sports.GameVO">
+	<insert id="insertGame" parameterType="com.spring.javaclassS8.vo.sports.GameVO" useGeneratedKeys="true" keyProperty="id">
 	    INSERT INTO games (sportId, homeTeamId, awayTeamId, venueId, gameDate, gameTime)
 	    SELECT s.id, ht.id, at.id, v.id, #{gameDate}, #{gameTime}
 	    FROM sports s
@@ -310,6 +310,12 @@
 	    JOIN venues v ON v.sportId = s.id AND v.teamId = ht.id AND v.venueName = #{venueName}
 	    LIMIT 1
 	</insert>
+	
+	<select id="getGameDetails" parameterType="int" resultType="com.spring.javaclassS8.vo.sports.GameVO">
+	    SELECT id, sportId, homeTeamId, venueId
+	    FROM games
+	    WHERE id = #{id}
+	</select>
 	
 	<!-- 좌석 등록 처리 -->
 	<insert id="insertSeat" parameterType="com.spring.javaclassS8.vo.sports.SeatVO" useGeneratedKeys="true" keyProperty="id">
