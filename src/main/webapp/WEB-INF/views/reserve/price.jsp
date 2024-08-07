@@ -94,7 +94,7 @@
 																</div>
 															</c:if>
 															<c:if test="${price.ticketTypeName eq '스포츠 예매권'}">
-																<button type="button" class="btn_ly _certifyDivButton close" data-seat-id="${seat.id}" data-game-id="${game.id}">
+																<button type="button" id="certifyDivButton" class="btn_ly _certifyDivButton close" data-seat-id="${seat.id}" data-game-id="${game.id}">
 																	<span class="blind"></span>
 																</button>
 															</c:if>
