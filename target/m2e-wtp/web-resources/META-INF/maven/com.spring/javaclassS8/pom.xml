@@ -227,7 +227,7 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>4.18.1</version>
+			<version>3.141.59</version>
 		</dependency>
 		
 		<!-- backend 체크를 위한 validator 라이브러리 (data 검증 : 유효성검사) -->

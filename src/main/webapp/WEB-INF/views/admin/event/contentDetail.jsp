@@ -94,8 +94,15 @@
 																<dd class="review_date">
 																	<fmt:formatDate value="${comment.createdAt}" pattern="yyyy-MM-dd HH:mm" />
 																</dd>
+																<c:if test="${comment.status eq 'ACTIVE'}">
+																	<dt>삭제</dt>
+																	<dd class="ml-auto">
+																		<button class="commentDeleteBtn" data-comment-id="${comment.id}" style="border: none; background: none;">
+																			<span class="badge badge-pill badge-secondary">삭제</span>
+																		</button>
+																	</dd>
+																</c:if>
 																<c:if test="${comment.status eq 'DELETED'}">
-																	<dt>수정</dt>
 																	<dd class="ml-auto">
 																		<span class="badge badge-pill badge-secondary">삭제된 댓글</span>
 																	</dd>
@@ -121,5 +128,6 @@
 	<script src="${ctp}/js/admin/common/hoverable-collapse.js"></script>
 	<script src="${ctp}/js/admin/common/template.js"></script>
 	<script src="${ctp}/js/admin/common/settings.js"></script>
+	<script src="${ctp}/js/admin/event/contentDetail.js"></script>
 </body>
 </html>

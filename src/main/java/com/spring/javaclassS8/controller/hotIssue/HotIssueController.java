@@ -1,6 +1,5 @@
 package com.spring.javaclassS8.controller.hotIssue;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,8 +42,8 @@ public class HotIssueController {
 		options.addArguments("--headless"); // 브라우저를 열지 않고 백그라운드에서 실행
 
 		WebDriver driver = new ChromeDriver(options);
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		//WebDriverWait wait = new WebDriverWait(driver, 10);
+		//WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(driver, 10);
 		
 		try {
 			driver.get("https://sports.daum.net/news/ranking");
@@ -88,8 +87,8 @@ public class HotIssueController {
 		options.addArguments("--headless");
 
 		WebDriver driver = new ChromeDriver(options);
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		//WebDriverWait wait = new WebDriverWait(driver, 10);
+		//WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(driver, 10);
 
 		try {
 			driver.get("https://sports.daum.net/");
@@ -170,8 +169,8 @@ public class HotIssueController {
 		options.addArguments("--headless");
 
 		WebDriver driver = new ChromeDriver(options);
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		//WebDriverWait wait = new WebDriverWait(driver, 10);
+		//WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(driver, 10);
 
 		try {
 			driver.get("https://www.koreabaseball.com/Default.aspx");
