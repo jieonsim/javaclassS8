@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <td class="text-center">${index + 1}</td>
                     <td class="text-center">${event.eventCategory}</td>
                     <td>
-                        <a href="${ctp}/admin/event/detail?eventId=${event.id}" style="text-decoration: none; color: #212529;">${event.title}</a>
+                        <a href="${ctp}/admin/event/contentDetail?eventId=${event.id}" style="text-decoration: none; color: #212529;">${event.title}</a>
                     </td>
                     <td class="text-center">${event.startDate}</td>
                     <td class="text-center">${event.endDate}</td>
