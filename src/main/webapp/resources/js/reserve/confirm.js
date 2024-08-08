@@ -1,4 +1,12 @@
 /*js/reserve/confirm.js */
+// 체크박스 메시지
+const checkboxMessages = {
+	'reserve_agree1': '주문자 정보 수집에 동의해주세요.',
+	'reserve_agree2': '개인정보 제 3자 제공에 동의해주세요.',
+	'reserve_agree3': 'KBO리그 SAFE캠페인에 동의해주세요.',
+	'reserve_agree4': '프로스포츠 암표 근절 및 암표매매에 따른 제재사항에 동의해주세요.',
+	'reserve_agree5': '취소기한 및 취소수수료에 동의해주세요.'
+};
 document.addEventListener('DOMContentLoaded', function() {
 	// 예매자 확인 및 취소수수료 동의 체크박스
 	document.querySelectorAll('.checkbox').forEach(span => {
