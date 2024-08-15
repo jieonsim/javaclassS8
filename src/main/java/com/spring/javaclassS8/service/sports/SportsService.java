@@ -19,5 +19,6 @@ public interface SportsService {
 	// 경기장 정보 가져오기
 	VenueVO getTeamVenue(String sport, String team);
 
+	// 각 스포츠,팀에 따른 좌석 등급 및 요금 가져오기
 	List<Map<String, Object>> getSeatPricesForTeam(String sport, String team);
 }

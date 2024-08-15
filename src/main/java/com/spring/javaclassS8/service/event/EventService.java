@@ -38,7 +38,6 @@ public interface EventService {
 	public boolean deleteEventComment(int commentId);
 
 	// 이벤트 당첨자 발표 리스트
-	//public List<WinnerEventVO> getWinnerEvents();
 	public Map<String, Object> getWinnerEvents(int page, int pageSize);
 
 	// 이벤트 당첨자 발표 디테일

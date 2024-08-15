@@ -30,11 +30,13 @@ public class SportsDAOImpl implements SportsDAO {
 		return sqlSession.getMapper(SportsDAO.class).getTeamHomeGames(sport, shortName, startDate, endDate);
 	}
 
+	// 키워드로 팀 검색
 	@Override
 	public TeamVO findTeamByKeyword(String keyword) {
 		return sqlSession.getMapper(SportsDAO.class).findTeamByKeyword(keyword);
 	}
 
+	// 키워드로 경기장 검색
 	@Override
 	public VenueVO findVenueByKeyword(String keyword) {
 		return sqlSession.getMapper(SportsDAO.class).findVenueByKeyword(keyword);
@@ -46,6 +48,7 @@ public class SportsDAOImpl implements SportsDAO {
 	    return sqlSession.getMapper(SportsDAO.class).getTeamVenue(sport, shortName);
 	}
 	
+	// 각 스포츠, 팀별로 좌석 등급과 권종별 요금 가져오기
 	@Override
 	public List<Map<String, Object>> getSeatPricesForTeam(String sport, String shortName) {
 	    return sqlSession.getMapper(SportsDAO.class).getSeatPricesForTeam(sport, shortName);

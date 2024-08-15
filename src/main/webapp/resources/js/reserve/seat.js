@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				// 좌석 ID input hidden 필드에 설정
 				document.querySelector('input[name="seatId"]').value = seatId;
 				// 브라우저 콘솔에 seatId 출력해보기
-				console.log('Selected Seat ID:', seatId);
+				//console.log('Selected Seat ID:', seatId);
 			}
 		});
 	});

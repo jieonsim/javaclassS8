@@ -49,6 +49,7 @@
 	    ORDER BY g.gameDate, g.gameTime
     </select>
     
+    <!-- 키워드로 팀 검색 -->
     <select id="findTeamByKeyword" resultType="com.spring.javaclassS8.vo.sports.TeamVO">
 	    SELECT t.*, s.sportName
 	    FROM teams t
@@ -58,6 +59,7 @@
 	    LIMIT 1
     </select>
 
+	<!-- 키워드로 경기장 검색 -->
     <select id="findVenueByKeyword" resultType="com.spring.javaclassS8.vo.sports.VenueVO">
         SELECT v.*, s.sportName, t.shortName as teamShortName
         FROM venues v
@@ -76,6 +78,7 @@
 	    WHERE s.sportName = #{sport} AND t.shortName = #{shortName}
     </select>
     
+    <!-- 각 스포츠, 팀별로 좌석 등급과 권종별 요금 가져오기 -->
 	<select id="getSeatPricesForTeam" resultType="java.util.HashMap">
 	    SELECT s.id AS seatId, s.seatName, tt.name AS ticketTypeName, p.price,
 	           (SELECT COUNT(DISTINCT p2.ticketTypeId) 

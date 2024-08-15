@@ -17,7 +17,8 @@ public class HomeController {
 
 	@Autowired
 	private ReservationService reservationService;
-
+	
+	// 홈 화면
 	@GetMapping("/")
 	public String home(Model model) {
 		List<GameVO> baseballGames = reservationService.getUpcomingGames("야구");
@@ -27,15 +28,10 @@ public class HomeController {
 		return "home";
 	}
 
+	// 홈 화면에 각 스포츠별 경기일정 가져오기
 	@GetMapping("/getGames")
 	@ResponseBody
 	public List<GameVO> getGames(@RequestParam String sport) {
 		return reservationService.getUpcomingGames(sport);
-	}
-	
-	
-	@GetMapping("/reservationCancelCompletedMail")
-	public String reservationCancelCompletedMail() {
-		return "mail/reservationCancelCompletedMail";
 	}
 }

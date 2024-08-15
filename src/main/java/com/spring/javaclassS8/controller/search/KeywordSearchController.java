@@ -16,6 +16,7 @@ public class KeywordSearchController {
 	@Autowired
 	private KeywordSearchService keywordSearchService;
 
+	// 헤더 검색
 	@GetMapping("/search")
 	@ResponseBody
 	public Map<String, Object> search(@RequestParam String keyword) {

@@ -364,7 +364,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		document.querySelectorAll('.select._price_cnt').forEach(function(select) {
 			const quantity = parseInt(select.textContent);
-			console.log('Selected quantity:', quantity); // 디버깅용
+			//console.log('Selected quantity:', quantity); // 디버깅용
 
 			if (quantity > 0) {
 				const selectList = select.nextElementSibling;
@@ -382,8 +382,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 		});
 
-		console.log('Total selected tickets:', selectedTickets.length); // 디버깅용
-		console.log('Total selected quantity:', totalSelectedQuantity); // 디버깅용
+		//console.log('Total selected tickets:', selectedTickets.length); // 디버깅용
+		//console.log('Total selected quantity:', totalSelectedQuantity); // 디버깅용
 
 		if (selectedTickets.length === 0) {
 			alert('티켓종류 및 매수를 선택해주세요.');
@@ -421,7 +421,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			selectedAdvanceTickets: selectedAdvanceTickets
 		};
 
-		console.log('Ticket selection data:', ticketSelectionData); // 디버깅용
+		//console.log('Ticket selection data:', ticketSelectionData); // 디버깅용
 
 		fetch(`${ctp}/reserve/saveTicketSelection`, {
 			method: 'POST',

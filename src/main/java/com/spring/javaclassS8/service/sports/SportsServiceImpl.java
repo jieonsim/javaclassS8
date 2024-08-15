@@ -73,6 +73,7 @@ public class SportsServiceImpl implements SportsService {
 	    return sportsDAO.getTeamVenue(dbSportName, shortName);
 	}
 	
+	// 각 스포츠,팀에 따른 좌석 등급 및 요금 가져오기
 	@Override
 	public List<Map<String, Object>> getSeatPricesForTeam(String sport, String team) {
 	    String dbSportName = sportNameMap.get(sport);

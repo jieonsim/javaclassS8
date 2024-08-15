@@ -102,6 +102,7 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
 		return processPieChartData(ticketTypeData);
 	}
 
+	// 파이 차트
 	private Map<String, Object> processPieChartData(List<Map<String, Object>> data, String labelField, String valueField) {
 		Map<String, Object> result = new HashMap<>();
 		List<String> labels = new ArrayList<>();
@@ -121,6 +122,7 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
 		return result;
 	}
 
+	// 파이 차트
 	private Map<String, Object> processPieChartData(List<TicketTypeSalesVO> data) {
 		Map<String, Object> result = new HashMap<>();
 		List<String> labels = new ArrayList<>();
@@ -137,6 +139,7 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
 		return result;
 	}
 
+	// 예매현황 데이터
 	private Map<String, Object> processReservationData(List<ReservationVO> reservations) {
 		Map<String, Object> result = new HashMap<>();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
@@ -155,6 +158,7 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
 		return result;
 	}
 
+	// 바 차트
 	private Map<String, Object> processBarChartData(List<TeamReservationRateVO> data) {
 		Map<String, Object> result = new HashMap<>();
 		List<String> labels = new ArrayList<>();
@@ -171,6 +175,7 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
 		return result;
 	}
 
+	// 예매권 데이터
 	private Map<String, Object> processAdvanceTicketData(List<AdvanceTicketVO> tickets) {
 		Map<String, Object> result = new HashMap<>();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");

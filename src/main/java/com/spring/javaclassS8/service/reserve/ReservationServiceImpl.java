@@ -49,8 +49,6 @@ public class ReservationServiceImpl implements ReservationService {
 	@Autowired
 	private ReservationCompletedEmailService emailService;
 
-	//private static final Logger logger = LoggerFactory.getLogger(ReservationServiceImpl.class);
-
 	// 경기 고유번호로 경기 정보 가져오기
 	@Override
 	public GameVO getGameById(int gameId) {

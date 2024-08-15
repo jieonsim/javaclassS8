@@ -18,12 +18,15 @@ public interface SportsDAO {
 	// 구단별 오늘 날짜 ~ 다음달 마지막 날까지 홈경기 가져오기
 	List<GameVO> getTeamHomeGames(@Param("sport") String sport, @Param("shortName") String shortName, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
+	// 키워드로 팀 검색
 	TeamVO findTeamByKeyword(String keyword);
 
+	// 키워드로 경기장 검색
 	VenueVO findVenueByKeyword(String keyword);
 
 	// 경기장 정보 가져오기
 	VenueVO getTeamVenue(@Param("sport") String sport, @Param("shortName") String shortName);
 
+	// 각 스포츠, 팀별로 좌석 등급과 권종별 요금 가져오기
 	List<Map<String, Object>> getSeatPricesForTeam(@Param("sport") String sport, @Param("shortName") String shortName);
 }
