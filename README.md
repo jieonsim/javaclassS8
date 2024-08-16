@@ -89,7 +89,7 @@
 - 자동 로그인 구현
 - 로그인 성공 시 홈화면으로 이동 및 헤더에 로그인한 이메일 아이디 노출
 <p align="center">
-<img src="https://github.com/user-attachments/assets/ef1cae58-b8b0-47d7-9d0e-5c4f1a4ecad4" alt="로그인GIF" width="70%">
+<img src="https://github.com/user-attachments/assets/543a0e88-00fe-4b25-a2a3-31df71a919ff" alt="로그인GIF" width="70%">
 </p>
 
 
