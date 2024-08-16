@@ -8,7 +8,7 @@
 - [사이트 바로가기](http://49.142.157.251:9090/javaclassS8/)
 - [프로젝트 PPT](https://drive.google.com/file/d/1bmj5CtD9-SUZuZjP3VzfuW1oEs7kOt9n/view?usp=sharing)
 - [발표 영상](https://youtu.be/gPB3dMz0ztY)
-- [기획서 및 제작과정](https://docs.google.com/spreadsheets/d/1e1T5jBh-7tM7CjCwONiFs9F7OIGQVMUJmeAd8-6eK-Q/edit?usp=sharing)
+- [기획 및 제작과정](https://docs.google.com/spreadsheets/d/1e1T5jBh-7tM7CjCwONiFs9F7OIGQVMUJmeAd8-6eK-Q/edit?usp=sharing)
 <hr>
 
 ## 1️⃣ 사용 기술 스택
