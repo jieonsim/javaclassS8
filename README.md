@@ -68,8 +68,11 @@
 
 ## 3️⃣ 기능별 화면 및 소개
 ### ✔ 메인 화면
+- 오늘 날짜 기준으로 아직 예매가 오픈되지 않은 경기와 예매 일정을 종목별로 보여줌
+- 오픈 일시가 경과될 경우 예매하기 버튼으로 활성화
 <p align="center">
   <img src="https://github.com/user-attachments/assets/38212d84-73c3-4934-9ae0-1987014aa67a" alt="메인화면" width="70%">
+  <img src="https://github.com/user-attachments/assets/01ac53f0-e182-41f2-b33a-f86049ff55f8" alt="메인화면GIF" width="70%">
 </p>
 
 
