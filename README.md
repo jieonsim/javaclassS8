@@ -104,6 +104,11 @@
 <img src="https://github.com/user-attachments/assets/a8fe6727-eccf-4d1f-8911-1c6e4817e847" alt="스포츠별 전체일정 구단별 예매하기 페이지 GIF" width="70%">
 </p>
 
+- 실시간 예매 오픈 알림 : 당일 예매 오픈 경기 강조 표시로 신속한 티켓 구매 기회 제공
+<p align="center">
+<img src="https://github.com/user-attachments/assets/5ba397cf-7cca-4a98-9a7d-095127129bfc" alt="실시간 예매 오픈 알림" width="70%">
+</p>
+
 ### ✔ 이벤트
 ### ✔ 예매
 ### ✔ 마이페이지
