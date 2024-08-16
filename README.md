@@ -17,11 +17,11 @@
 <img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=OpenJDK&logoColor=white">
 <img src="https://img.shields.io/badge/Spring-6DB33F?style=flat-square&logo=Spring&logoColor=white">
 <img src="https://img.shields.io/badge/Spring Security-00AB77?style=flat-square&amp;logo=springsecurity&amp;logoColor=white">
-<img src="https://img.shields.io/badge/log4j2-BEFCFF?style=flat-square&amp;logo=&amp;logoColor=white">
+<img src="https://img.shields.io/badge/apachetomcat-F8DC75?style=flat-square&amp;logo=apachetomcat&amp;logoColor=black">
+<img src="https://img.shields.io/badge/log4j-BEFCFF?style=flat-square&amp;logo=&amp;logoColor=white">
 <br><br>
   
 📌 <strong>Database</strong><br><br>
-<img src="https://img.shields.io/badge/apachetomcat-F8DC75?style=flat-square&amp;logo=apachetomcat&amp;logoColor=black">
 <img src="https://img.shields.io/badge/mysql-4479A1?style=flat-square&logo=mysql&logoColor=white">
 <img src="https://img.shields.io/badge/MyBatis-9EB0A2?style=flat-square&amp;logo=&amp;logoColor=white">
 <br><br>
