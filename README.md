@@ -11,7 +11,7 @@
 <hr>
 
 ## 1️⃣ 사용 기술 스택
-<div align="left">
+<div align="center">
 <h4>Backend</h4>
 <img src="https://img.shields.io/badge/Java8-007396?style=flat-square&logo=OpenJDK&logoColor=white">
 <img src="https://img.shields.io/badge/Spring Framework-6DB33F?style=flat-square&logo=Spring&logoColor=white">
@@ -68,6 +68,11 @@
 
 ## 3️⃣ 기능별 화면 및 소개
 ### ✔ 메인 화면
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/38212d84-73c3-4934-9ae0-1987014aa67a" alt="메인화면" width="70%">
+</p>
+
+
 ### ✔ 회원가입
 ### ✔ 로그인
 ### ✔ 계정 찾기 - 아이디 찾기
