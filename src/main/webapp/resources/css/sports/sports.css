@@ -50,6 +50,10 @@ ul, ol {
 	font-family: 'Pretendard-Regular';
 }
 
+.sports_sub .location_path b {
+	font-family: 'Pretendard-Bold';
+}
+
 .sports_sub .current_time {
 	float: right;
 	vertical-align: top;
@@ -110,11 +114,11 @@ ul, ol {
 }
 
 .sports_cont .cont_left .sportsmenuTEAM, .sports_cont .cont_left .sportsmenu1, .sports_cont .cont_left .sportsmenu2 {
-	font-family: 'Pretendard-SemiBold';
+	font-family: 'Pretendard-Bold';
 }
 
 .sports_cont .cont_left .left_sportsmenu .left_submenu {
-	font-family: 'Pretendard-Regular';
+	font-family: 'Pretendard-SemiBold';
 }
 
 .sports_cont .cont_left a:hover {
@@ -170,9 +174,11 @@ ul, ol {
 	line-height: 18px
 }
 
-.sports_cont .left_sportsmenu li.on a {
-	/* background: url(../img/sports/ico_menuon.gif) no-repeat 200px 50% */
-	background: url(../../../images/icon/caret-right.svg) no-repeat 200px 50%
+.sports_cont .left_sportsmenu li.on a:after {
+	width: 16px;
+	height: 16px;
+	background: url("../../images/icon/arrow-right.svg");
+	background-repeat: no-repeat;
 }
 
 .sports_cont .left_sportsmenu li span {
@@ -694,7 +700,8 @@ ul, ol {
 
 .reserve_lst_bx .match_day {
 	display: table-cell;
-	width: 160px;
+	/* width: 160px; */
+	width: 200px;
 	font-size: 0;
 	padding-left: 20px
 }
@@ -955,6 +962,15 @@ ul, ol {
 	content: ''
 }
 
+.reserve_lst_bx ul li.today_frame .ico_todayopen .text::before {
+	width: 16px;
+    height: 16px;
+    background-image: url(../../images/icon/old-svg.svg);
+    background-size: 660px 629px;
+    background-position: -640px -460px;
+    background-repeat: no-repeat;
+}
+
 .reserve_lst_bx ul li.today_frame {
 	border-top: 0
 }
@@ -1015,9 +1031,18 @@ ul, ol {
 	font-size: 0;
 }
 
+.sports_cont .sch_date a {
+	width: 16px;
+    height: 16px;
+    background-image: url(../../images/icon/old-svg.svg);
+    background-size: 660px 629px;
+    background-position: -552px -581px;
+    background-repeat: no-repeat;
+}
+
 .sports_cont .sch_date a.prev {
 	left: 0px;
-	transform: translateY(-50%) rotate(180deg)
+	transform: translateY(-50%) rotate(180deg);
 }
 
 .sports_cont .sch_date a.next {
@@ -3633,6 +3658,35 @@ ul, ol {
 	cursor: pointer
 }
 
+/* 클린예매 */
+.product_option_btn.type_clean {
+	background-color: rgba(0, 0, 0, 0);
+	border-color: #1aa8bb;
+	color: #1aa8bb;
+}
+
+.product_option_btn {
+	position: relative;
+	padding: 5px 25px 5px 9px;
+	border: 1px solid #dcdde1;
+	border-radius: 6px;
+	font-size: 13px;
+	line-height: 18px;
+	color: #242428;
+}
+
+.product_option_btn::after {
+	position: absolute;
+	top: 50%;
+	right: 12px;
+	margin-top: -2px;
+	border-style: solid;
+	border-color: rgba(0, 0, 0, 0);
+	border-top-color: currentColor;
+	border-width: 4.5px 3.5px;
+	content: "";
+}
+
 .cont_right .team_top_area .my_team {
 	overflow: hidden;
 	position: absolute;
@@ -4017,7 +4071,9 @@ ul, ol {
 .sports_sub .section_season_off .tit_wrap .season_off_tit {
 	font-size: 40px;
 	display: inline-block;
-	position: relative
+	position: relative;
+	font-family: 'Pretendard-Bold';
+	letter-spacing: 1px;
 }
 
 .sports_sub .section_season_off .tit_wrap .season_off_tit::after {
@@ -4025,7 +4081,7 @@ ul, ol {
 	content: "";
 	width: 110px;
 	height: 37px;
-	background: url(../img/sports/season_off_icon.png) no-repeat 0 0/100%;
+	background: url(../../images/icon/season_off_icon.png) no-repeat 0 0/100%;
 	top: -10px;
 	right: -110px;
 }
@@ -4045,14 +4101,16 @@ ul, ol {
 .sports_sub .season_off_content .con_txt {
 	font-size: 20px;
 	line-height: 46px;
-	font-weight: 500
+	font-weight: 500;
+	font-family: 'Pretendard-SemiBold';
 }
 
 .sports_sub .season_off_content .con_txt span {
 	display: inline-block;
 	width: 46px;
 	height: 46px;
-	background: url(../img/sports/desc_icon.png) no-repeat 0 0/100%;
+	/* background: url(../../images/icon/desc_icon.png) no-repeat 0 0/100%; */
+	background: url(../../images/icon/megaphone.png) no-repeat 0 0/100%;
 	vertical-align: middle;
 	margin-right: 10px;
 }
@@ -4065,7 +4123,8 @@ ul, ol {
 	line-height: 28px;
 }
 
-.sports_sub .sub_alarm {
+/* season off alarm 필요없음 */
+/* .sports_sub .sub_alarm {
 	font-size: 16px;
 	line-height: 27px;
 	margin-top: 8px;
@@ -4087,7 +4146,7 @@ ul, ol {
 	display: inline-block;
 	background: url(../img/sports/alarm_toggle_on.png) no-repeat 0 0/100%;
 	margin-left: 5px;
-}
+} */
 
 /* 비시즌 스와이퍼 */
 .sports_sub .common_section {

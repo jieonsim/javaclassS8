@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
-<%-- 미리 문자열을 결합합니다 --%>
-<c:set var="homeUri" value="${ctp}/" />
-<c:set var="javaclassUri" value="${ctp}/javaclassS8" />
-<c:set var="baseballUri" value="${ctp}/sports/baseball" />
 <link rel="stylesheet" href="${ctp}/css/layout/header.css">
-
 <!-- 모바일 헤더 -->
 <div class="m_header">
 	<div class="container-fluid">
@@ -37,9 +31,6 @@
 							<li class="nav-item">
 								<a href="${ctp}/signup/agreement" class="nav-link">회원가입</a>
 							</li>
-							<li class="nav-item">
-								<a href="${ctp}/help/main" class="nav-link">고객센터</a>
-							</li>
 						</c:when>
 						<c:otherwise>
 							<!-- 로그인 후 -->
@@ -47,13 +38,10 @@
 								<a href="${ctp}/my/memberInfo/info" class="nav-link">${loginMember.email}</a>
 							</li>
 							<li class="nav-item">
-								<a href="${ctp}/my/reserve" class="nav-link">예매확인/취소</a>
+								<a href="${ctp}/my/reserve/list" class="nav-link">예매확인/취소</a>
 							</li>
 							<li class="nav-item">
 								<a href="${ctp}/logout" class="nav-link">로그아웃</a>
-							</li>
-							<li class="nav-item">
-								<a href="${ctp}/help/main" class="nav-link">고객센터</a>
 							</li>
 							<!-- 관리자 -->
 							<c:if test="${loginMember.role eq 'ADMIN'}">
@@ -90,28 +78,25 @@
 			<nav class="header_gnb_area">
 				<ul class="nav">
 					<li class="nav-item">
-						<a class="nav-link ${currentPage == 'home' ? 'is-active' : ''}" href="${ctp}/">홈</a>
+						<a class="nav-link" href="${ctp}/" <c:if test="${currentPage == 'home'}">aria-current="page"</c:if>>홈</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link ${currentPage == 'baseball' ? 'is-active' : ''}" href="${ctp}/sports/baseball/main">야구</a>
+						<a class="nav-link" href="${ctp}/sports/baseball/main" <c:if test="${currentPage == 'baseball'}">aria-current="page"</c:if>>야구</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/sports/football">축구</a>
+						<a class="nav-link" href="${ctp}/sports/football/main" <c:if test="${currentPage == 'football'}">aria-current="page"</c:if>>축구</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/sports/basketball/off-season">농구</a>
+						<a class="nav-link" href="${ctp}/sports/basketball/off-season" <c:if test="${currentPage == 'basketball'}">aria-current="page"</c:if>>농구</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/sports/volleyball/off-season">배구</a>
+						<a class="nav-link" href="${ctp}/sports/volleyball/off-season" <c:if test="${currentPage == 'volleyball'}">aria-current="page"</c:if>>배구</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/event/main">이벤트</a>
+						<a class="nav-link" href="${ctp}/event/main" <c:if test="${currentPage == 'event'}">aria-current="page"</c:if>>이벤트</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/community/main">커뮤니티</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/community/main">굿즈샵</a>
+						<a class="nav-link" href="${ctp}/hotIssue" <c:if test="${currentPage == 'hotIssue'}">aria-current="page"</c:if>>스포츠 핫이슈</a>
 					</li>
 				</ul>
 			</nav>
@@ -179,5 +164,4 @@
 		</button>
 	</div>
 </nav>
-<script src="${ctp}/js/layout/header.js"></script>
 <script src="${ctp}/js/member/login/autoLogin.js"></script>

@@ -5,5 +5,36 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-
+	  <interceptors>
+        <interceptor>
+            <mapping path="/**"/>
+            <beans:bean class="com.spring.javaclassS8.interceptor.CurrentPageInterceptor"/>
+        </interceptor>
+        <interceptor>
+        	<mapping path="/**"/>
+        	<exclude-mapping path="/login"/>
+        	<exclude-mapping path="/logout"/>
+        	<exclude-mapping path="/resources/**"/>
+        	<beans:bean class="com.spring.javaclassS8.interceptor.AutoLoginInterceptor"/>
+        </interceptor>
+            <interceptor>
+	        <mapping path="/reserve/**"/>
+	        <exclude-mapping path="/reserve/error"/>
+	        <beans:bean class="com.spring.javaclassS8.interceptor.ReservationSessionInterceptor"/>
+	    </interceptor>
+	    <interceptor>
+            <mapping path="/reserve/**"/>
+            <mapping path="/my/**"/>
+            <exclude-mapping path="/reserve/error"/>
+            <exclude-mapping path="/login"/>
+            <beans:bean class="com.spring.javaclassS8.interceptor.LoginCheckInterceptor"/>
+        </interceptor>
+        <interceptor>
+	      	<mapping path="/admin/**"/>
+	      	<exclude-mapping path="/login"/>
+	      	<exclude-mapping path="/logout"/>
+	      	<exclude-mapping path="/resources/**"/>
+	      	<beans:bean class="com.spring.javaclassS8.interceptor.AdminCheckInterceptor"/>
+       </interceptor>
+    </interceptors>
 </beans:beans>
