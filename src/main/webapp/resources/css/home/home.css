@@ -396,6 +396,7 @@ li {
 	color: #fff;
 	cursor: pointer;
 	width: 100%;
+	font-family: 'Pretendard-Regular';
 }
 
 .common_btn.btn_primary:hover {
