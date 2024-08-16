@@ -75,8 +75,15 @@
   <img src="https://github.com/user-attachments/assets/802ba981-0270-4119-a803-1a6247151868" alt="메인화면GIF" width="70%">
 </p>
 
-
 ### ✔ 회원가입
+- 이메일, 비밀번호, 이름, 휴대폰 번호 입력
+- 프론트엔드 유효성 검사 처리
+- 입력한 이메일로 인증번호 발송(SMTP)
+- 이메일 인증번호 발송 전 중복 체크
+<p align="center">
+<img src="https://github.com/user-attachments/assets/83426e4e-da98-48a0-9633-f5f65972abd6" alt="회원가입GIF" width="70%">
+</p>
+
 ### ✔ 로그인
 ### ✔ 계정 찾기 - 아이디 찾기
 ### ✔ 계정 찾기 - 비밀번호 찾기
