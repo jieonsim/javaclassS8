@@ -34,10 +34,6 @@
 .scrollbar-vista>.scroll-element.scroll-y .scroll-bar_bottom{top:auto;bottom:0;height:2px;background:#616161}
 
 /* 레이아웃 공통 */
-/*.has_ban:after{position:absolute;top:0;left:0;right:0;bottom:0;background:#000;opacity:0.6;
-filter:alpha(opacity=60);
--ms-filter:alpha(opacity=60);
--ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";content:''}*/
 #wrap_reserve{position:relative;width:990px;height:100%;margin:0;padding:0}
 #wrap_reserve.error{background-color:#f8f9fa}
 #header{position:fixed;z-index:100;width:990px;background:#fff;margin:0;padding:0}
