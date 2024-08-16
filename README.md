@@ -5,10 +5,9 @@
 > 제작 기간 : 2024.06.24 - 2024.08.06<br>
 > 인원 : 1명 (개인 프로젝트)
 
-- [사이트 바로가기](http://49.142.157.251:9090/javaclassS8/)
-- [프로젝트 PPT](https://drive.google.com/file/d/1bmj5CtD9-SUZuZjP3VzfuW1oEs7kOt9n/view?usp=sharing)
-- [발표 영상](https://youtu.be/gPB3dMz0ztY)
-- [기획 및 제작과정](https://docs.google.com/spreadsheets/d/1e1T5jBh-7tM7CjCwONiFs9F7OIGQVMUJmeAd8-6eK-Q/edit?usp=sharing)
+👉🏻 [사이트 바로가기](http://49.142.157.251:9090/javaclassS8/)
+- Test ID : `zieonsim@gmail.com`
+- Test PW : `zieonsim1`
 <hr>
 
 ## 1️⃣ 사용 기술 스택
@@ -40,5 +39,40 @@
 <img src="https://img.shields.io/badge/chartjs-FF6384?style=flat-square&logo=chartdotjs&logoColor=white">
 <img src="https://img.shields.io/badge/swiper-6332F6?style=flat-square&logo=swiper&logoColor=white">
 </div>
-  
-## 2️⃣ 프로젝트 주요 기능
+<hr>
+
+## 2️⃣ 주요 기능
+#### 1. 회원
+- 회원가입
+- 로그인
+- 계정 찾기 (아이디 찾기 / 비밀번호 찾기)
+- 마이페이지(예매확인, 예매취소, 예매권 등록, 예매권 사용내역 확인, 참여 이벤트 확인, 회원정보수정, 회원탈퇴)
+#### 2. 스포츠
+- 각 스포츠별 경기 및 예매 전체일정 리스트
+- 각 구단별 경기 및 예매 일정 리스트
+#### 3. 이벤트
+- 이벤트 CRUD
+- 이벤트 당첨자 추첨
+- 이벤트 당첨자 대상으로 예매권 발행 및 안내 메일 발송
+#### 4. 예매
+- 각 경기별 예매
+- 발행된 예매권 사용 가능
+- 포트원 결제 모듈 및 KG 이니시스를 이용한 결제 지원
+#### 5. 어드민
+- 스포츠, 구단, 경기장, 좌석 등급, 요금, 경기 관리
+- 회원 관리
+- 이벤트 관리
+- 예매권 관리
+- 통계 관리(차트)
+<hr>
+
+## 3️⃣ 기능별 화면 및 소개
+### ✔ 메인 화면
+### ✔ 회원가입
+### ✔ 로그인
+### ✔ 계정 찾기 - 아이디 찾기
+### ✔ 계정 찾기 - 비밀번호 찾기
+### ✔ 이벤트
+### ✔ 로그인
+
+
