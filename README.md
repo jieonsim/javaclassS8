@@ -12,19 +12,19 @@
 
 ## 1️⃣ 사용 기술 스택
 <div align="left">
-<h4>📌 Backend</h4>
+<h4>Backend</h4>
 <img src="https://img.shields.io/badge/Java8-007396?style=flat-square&logo=OpenJDK&logoColor=white">
 <img src="https://img.shields.io/badge/Spring Framework-6DB33F?style=flat-square&logo=Spring&logoColor=white">
 <img src="https://img.shields.io/badge/Spring Security-00AB77?style=flat-square&amp;logo=springsecurity&amp;logoColor=white">
 <img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=flat-square&amp;logo=apachetomcat&amp;logoColor=black">
 <br>
   
-<h4>📌 Database</h4>
+<h4>Database</h4>
 <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white">
 <img src="https://img.shields.io/badge/MyBatis-9EB0A2?style=flat-square&amp;logo=&amp;logoColor=white">
 <br>
   
-<h4>📌 Frontend</h4>
+<h4>Frontend</h4>
 <img src="https://img.shields.io/badge/javascript-F7DF1E?style=flat-square&logo=javascript&logoColor=black">
 <img src="https://img.shields.io/badge/jquery-0769AD?style=flat-square&logo=jquery&logoColor=white">
 <img src="https://img.shields.io/badge/JSP-BEFCFF?style=flat-square&amp;logo=&amp;logoColor=white">
@@ -33,7 +33,7 @@
 <img src="https://img.shields.io/badge/bootstrap-7952B3?style=flat-square&logo=bootstrap&logoColor=white">
 <br>
 
-<h4>📌 Library</h4>
+<h4>Library</h4>
 <img src="https://img.shields.io/badge/ckeditor4-0287D0?style=flat-square&logo=ckeditor4&logoColor=white">
 <img src="https://img.shields.io/badge/PortOne-FF6633?style=flat-square&logo=PortOne&logoColor=white">
 <img src="https://img.shields.io/badge/chartjs-FF6384?style=flat-square&logo=chartdotjs&logoColor=white">
