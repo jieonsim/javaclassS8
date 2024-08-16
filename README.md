@@ -70,10 +70,9 @@
 ### ✔ 메인 화면
 - 아직 예매가 오픈되지 않은 경기의 일정과 예매 오픈일시를 종목별로 확인할 수 있음
 - Swiper 라이브러리 이용
-- 오픈 일시가 경과될 경우 예매하기 버튼으로 활성화됨
+- 예매 오픈 시간이 지났을 경우 '예매하기' 버튼으로 활성화됨
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/38212d84-73c3-4934-9ae0-1987014aa67a" alt="메인화면" width="70%">
-  <img src="https://github.com/user-attachments/assets/802ba981-0270-4119-a803-1a6247151868" alt="메인화면 GIF" width="70%">
+  <img src="https://github.com/user-attachments/assets/dab1d89d-3304-4cbe-9e2c-109eea887f35" alt="메인화면 GIF" width="70%">
 </p>
 
 ### ✔ 회원가입
