@@ -73,7 +73,7 @@
 - 오픈 일시가 경과될 경우 예매하기 버튼으로 활성화됨
 <p align="center">
   <img src="https://github.com/user-attachments/assets/38212d84-73c3-4934-9ae0-1987014aa67a" alt="메인화면" width="70%">
-  <img src="https://github.com/user-attachments/assets/802ba981-0270-4119-a803-1a6247151868" alt="메인화면GIF" width="70%">
+  <img src="https://github.com/user-attachments/assets/802ba981-0270-4119-a803-1a6247151868" alt="메인화면 GIF" width="70%">
 </p>
 
 ### ✔ 회원가입
@@ -82,7 +82,7 @@
 - 입력한 이메일로 인증번호 발송(SMTP)
 - 이메일 인증번호 발송 전 중복 체크
 <p align="center">
-<img src="https://github.com/user-attachments/assets/83426e4e-da98-48a0-9633-f5f65972abd6" alt="회원가입GIF" width="70%">
+<img src="https://github.com/user-attachments/assets/83426e4e-da98-48a0-9633-f5f65972abd6" alt="회원가입 GIF" width="70%">
 </p>
 
 ### ✔ 로그인
@@ -90,12 +90,20 @@
 - 자동 로그인 구현
 - 로그인 성공 시 홈화면으로 이동 및 헤더에 로그인한 이메일 아이디 노출
 <p align="center">
-<img src="https://github.com/user-attachments/assets/543a0e88-00fe-4b25-a2a3-31df71a919ff" alt="로그인GIF" width="70%">
+<img src="https://github.com/user-attachments/assets/543a0e88-00fe-4b25-a2a3-31df71a919ff" alt="로그인 GIF" width="70%">
 </p>
 
 ### ✔ 계정 찾기 - 아이디 찾기
 ### ✔ 계정 찾기 - 비밀번호 찾기
 ### ✔ 스포츠별 전체일정 / 구단별 예매하기 페이지
+- 스포츠별 전체 일정: 오늘부터 이번 달 마지막 경기까지의 일정 확인
+  - 오늘 경기의 경우, 예매 마감 시간이 지나면 '예매하기' 버튼이 '경기종료'로 자동 변경
+- 구단별 예매하기: 오늘부터 다음 달 마지막 경기까지 선택한 구단의 홈 경기를 확인
+  - 오늘 경기의 경우, 예매 마감 시간이 지나면 일정에서 자동으로 제거
+<p align="center">
+<img src="https://github.com/user-attachments/assets/a8fe6727-eccf-4d1f-8911-1c6e4817e847" alt="스포츠별 전체일정 구단별 예매하기 페이지 GIF" width="70%">
+</p>
+
 ### ✔ 이벤트
 ### ✔ 예매
 ### ✔ 마이페이지
