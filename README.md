@@ -69,8 +69,8 @@
 ## 3️⃣ 기능별 화면 및 소개
 ### ✔ 메인 화면
 - 아직 예매가 오픈되지 않은 경기의 일정과 예매 오픈일시를 종목별로 확인
-- Swiper 라이브러리 이용
 - 예매 오픈 시간이 지났을 경우 '예매하기' 버튼으로 활성화
+- Swiper 라이브러리 이용
 <p align="center">
   <img src="https://github.com/user-attachments/assets/dab1d89d-3304-4cbe-9e2c-109eea887f35" alt="메인화면 GIF" width="70%">
 </p>
@@ -92,7 +92,14 @@
 <img src="https://github.com/user-attachments/assets/543a0e88-00fe-4b25-a2a3-31df71a919ff" alt="로그인 GIF" width="70%">
 </p>
 
-### ✔ 계정 찾기 - 아이디 찾기
+### ✔ 아이디 찾기
+- 이름 + 휴대폰 번호 조합으로 이메일 아이디 찾기
+- 계정이 존재할 경우 마스킹된 이메일 아이디와 가입일자를 안내
+- 입력한 정보로 가입된 아이디가 여러 개일 경우 로그인할 아이디 선택 가
+<p align="center">
+<img src="https://github.com/user-attachments/assets/f30608e5-0fa8-46f3-a23a-1dcbf73e6102" alt="아이디찾기 GIF" width="70%">
+</p>
+
 ### ✔ 계정 찾기 - 비밀번호 찾기
 ### ✔ 스포츠별 전체일정 / 구단별 예매하기 페이지
 - <strong>공통</strong> : 예매가 오픈되기 전에는 오픈 예정 일시가 표시되며, 오픈 후에는 '예매하기' 버튼이 표시됨
