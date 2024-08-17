@@ -105,9 +105,8 @@
 - 계정이 존재할 경우 입력한 이메일로 인증번호 발송
 - 인증번호 일치 시 새로운 비밀번호 설정 가능
 <p align="center">
-<img src="https://github.com/user-attachments/assets/f30608e5-0fa8-46f3-a23a-1dcbf73e6102" alt="아이디찾기 GIF" width="70%">
+<img src="https://github.com/user-attachments/assets/f69b97a9-05c3-48db-b65e-c8c00770a63c" alt="비밀번호찾기 GIF" width="70%">
 </p>
-
 
 ### ✔ 스포츠별 전체일정 / 구단별 예매하기 페이지
 - <strong>공통</strong> : 예매가 오픈되기 전에는 오픈 예정 일시가 표시되며, 오픈 후에는 '예매하기' 버튼이 표시됨
