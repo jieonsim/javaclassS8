@@ -13,7 +13,6 @@ public interface EventService {
 	public List<EventVO> getAllEvents();
 
 	// 진행 중인 이벤트만 가져오기
-	//public List<EventVO> getOngoingEvents();
 	public Map<String, Object> getOngoingEvents(int page, int pageSize);
 
 	// 이벤트 아이디로 이벤트 데이터 가져오기
@@ -48,5 +47,4 @@ public interface EventService {
 
 	// memberId로 해당 member가 응모한 이벤트 갯수 가져오기
 	public int getActiveEventCount(int memberId);
-	
 }

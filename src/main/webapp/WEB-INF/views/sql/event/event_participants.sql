@@ -13,3 +13,38 @@ CREATE TABLE event_participants (
     FOREIGN KEY (memberId) REFERENCES members(id),
     UNIQUE KEY unique_event_member (eventId, memberId, status)
 );
+
+desc events;
+
+ Field         Type                               Null Key Default           Extra
+ ------------- ---------------------------------- ---- --- ----------------- ---------------------------
+ id            int(11)                            NO   PRI NULL              auto_increment
+ adminId       int(11)                            NO   MUL NULL              
+ eventCategory enum('예매권','기타')                   NO       NULL              
+ title         varchar(255)                       NO       NULL              
+ content       text                               NO       NULL              
+ thumbnail     varchar(255)                       NO       NULL              
+ startDate     date                               NO       NULL              
+ endDate       date                               NO       NULL              
+ status        enum('ONGOING','ENDED','UPCOMING') NO       ONGOING           
+ createdAt     timestamp                          NO       CURRENT_TIMESTAMP 
+ updatedAt     timestamp                          NO       CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
+
+ Field     Type                     Null Key Default           Extra
+ --------- ------------------------ ---- --- ----------------- ---------------------------
+ id        int(11)                  NO   PRI NULL              auto_increment
+ eventId   int(11)                  NO   MUL NULL              
+ memberId  int(11)                  NO   MUL NULL              
+ comment   text                     NO       NULL              
+ status    enum('ACTIVE','DELETED') NO       ACTIVE            
+ createdAt timestamp                NO       CURRENT_TIMESTAMP 
+ updatedAt timestamp                NO       CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
+
+ Field          Type                       Null Key Default           Extra
+ -------------- -------------------------- ---- --- ----------------- --------------
+ id             int(11)                    NO   PRI NULL              auto_increment
+ eventId        int(11)                    NO   MUL NULL              
+ memberId       int(11)                    NO   MUL NULL              
+ status         enum('ACTIVE','CANCELLED') NO       ACTIVE            
+ participatedAt timestamp                  NO       CURRENT_TIMESTAMP 
+ cancelledAt    timestamp                  YES      NULL              

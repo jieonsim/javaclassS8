@@ -23,11 +23,11 @@
     	SELECT * FROM events WHERE id = #{id}
 	</select>
 	
-	<!-- 이벤트 응모 여부 확인 -->
-	<select id="hasParticipated" resultType="boolean">
-		SELECT COUNT(*) > 0
-   	 	FROM event_participants
-    	WHERE eventId = #{eventId} AND memberId = #{memberId} AND status = 'ACTIVE'
+	<!-- 이벤트 응모 여부 확인 및 상태 반환 -->
+	<select id="getParticipationStatus" resultType="string">
+	    SELECT status
+	    FROM event_participants
+	    WHERE eventId = #{eventId} AND memberId = #{memberId}
 	</select>
 	
 	<!-- 이벤트 컨텐츠 디테일에 작성된 모든 댓글 가져오기 -->
@@ -120,10 +120,17 @@
 		VALUES (#{eventId}, #{memberId}, #{comment})
 	</insert>
 	
-	<!-- 이벤트 응모 처리하기 -->
-	<insert id="insertEventParticipant">
-		INSERT INTO event_participants (eventId, memberId)
-		VALUES (#{eventId}, #{memberId})
+	<!-- 이벤트 참여 상태 업데이트 또는 새로운 참여 추가 -->
+	<insert id="insertOrUpdateEventParticipant">
+	    INSERT INTO event_participants (eventId, memberId, status, participatedAt, cancelledAt)
+	    VALUES (#{eventId}, #{memberId}, 'ACTIVE', CURRENT_TIMESTAMP, NULL)
+	    ON DUPLICATE KEY UPDATE
+	        status = 'ACTIVE',
+	        participatedAt = CASE 
+	            WHEN status = 'CANCELLED' THEN CURRENT_TIMESTAMP 
+	            ELSE participatedAt 
+	        END,
+	        cancelledAt = NULL
 	</insert>
 	
 	<!-- 이벤트 컨텐츠의 댓글 내용 수정 -->
@@ -133,6 +140,11 @@
 		WHERE id = #{commentId}
 	</update>
 	
+	<!-- 이벤트 댓글 정보 가져오기 -->
+	<select id="getEventCommentById" resultType="com.spring.javaclassS8.vo.event.EventCommentVO">
+	    SELECT * FROM event_comments WHERE id = #{commentId}
+	</select>
+	
 	<!-- 이벤트 컨텐츠의 댓글 삭제 -> event_comments 테이블의 status 필드 데이터 업데이트 -->
 	<update id="updateEventCommentStatus">
 		UPDATE event_comments
@@ -141,11 +153,38 @@
 	</update>
 	
 	<!-- 이벤트 참여 철회 -> event_participants 테이블의 status 필드 데이터 업데이트 -->
-	<update id="updateEventParticipationStatus">
-		UPDATE event_participants
-		SET status = #{status}, cancelledAt = CURRENT_TIMESTAMP
-		WHERE eventId = (SELECT eventId FROM event_comments WHERE id = #{commentId})
-		AND memberId = (SELECT memberId FROM event_comments WHERE id = #{commentId})
+	<update id="updateEventParticipationToCancelled">
+	    UPDATE event_participants
+	    SET status = 'CANCELLED', 
+	        cancelledAt = CURRENT_TIMESTAMP
+	    WHERE eventId = #{eventId} AND memberId = #{memberId}
 	</update>
+	
+	<!-- 이벤트 응모 여부 확인하기 -->
+	<select id="getEventParticipation" resultType="com.spring.javaclassS8.vo.event.EventParticipantVO">
+	    SELECT * FROM event_participants
+	    WHERE eventId = #{eventId} AND memberId = #{memberId} AND status = 'ACTIVE'
+	</select>
+	
+	<!-- 이벤트 재 참여 시 CANCELLED 상태에서 ACTIVE로 업데이트 -->
+	<update id="updateEventParticipation">
+	    UPDATE event_participants
+	    SET status = 'ACTIVE', 
+	        participatedAt = CURRENT_TIMESTAMP,
+	        cancelledAt = NULL
+	    WHERE eventId = #{eventId} AND memberId = #{memberId}
+	</update>
+	
+	<!-- 이벤트 참여 기록이 전혀 없는 경우 새로 삽입 -->
+	<insert id="insertEventParticipation">
+	    INSERT INTO event_participants (eventId, memberId, status, participatedAt)
+	    VALUES (#{eventId}, #{memberId}, 'ACTIVE', CURRENT_TIMESTAMP)
+	</insert>
+	
+	<!-- 이벤트 ACTIVE 참여가 없는 경우, CANCELLED 상태의 참여가 있는지 확인 -->
+	<select id="getCancelledEventParticipation" resultType="com.spring.javaclassS8.vo.event.EventParticipantVO">
+	    SELECT * FROM event_participants
+	    WHERE eventId = #{eventId} AND memberId = #{memberId} AND status = 'CANCELLED'
+	</select>
 
 </mapper>

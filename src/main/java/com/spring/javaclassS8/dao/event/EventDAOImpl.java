@@ -39,21 +39,32 @@ public class EventDAOImpl implements EventDAO {
 
 	// 이벤트 응모 여부 확인
 	@Override
-	public boolean hasParticipated(int eventId, int memberId) {
-		return sqlSession.getMapper(EventDAO.class).hasParticipated(eventId, memberId);
+	public String getParticipationStatus(int eventId, int memberId) {
+	    return sqlSession.getMapper(EventDAO.class).getParticipationStatus(eventId, memberId);
 	}
 
 	// 이벤트 컨텐츠 디테일에 댓글 달기
 	@Override
 	public void insertEventComment(int eventId, int memberId, String comment) {
 		sqlSession.getMapper(EventDAO.class).insertEventComment(eventId, memberId, comment);
-
 	}
 
 	// 이벤트 응모 처리하기
 	@Override
-	public void insertEventParticipant(int eventId, int memberId) {
-		sqlSession.getMapper(EventDAO.class).insertEventParticipant(eventId, memberId);
+	public void insertOrUpdateEventParticipant(int eventId, int memberId) {
+	    sqlSession.getMapper(EventDAO.class).insertOrUpdateEventParticipant(eventId, memberId);
+	}
+	
+	// 이벤트 댓글 정보 가져오기
+	@Override
+	public EventCommentVO getEventCommentById(int commentId) {
+	    return sqlSession.getMapper(EventDAO.class).getEventCommentById(commentId);
+	}
+	
+	// 이벤트 참여 철회 -> event_participants 테이블의 status 필드 데이터 업데이트
+	@Override
+	public boolean updateEventParticipationToCancelled(int eventId, int memberId) {
+	    return sqlSession.getMapper(EventDAO.class).updateEventParticipationToCancelled(eventId, memberId);
 	}
 
 	// 이벤트 컨텐츠 디테일에 작성된 모든 댓글 가져오기
@@ -78,12 +89,6 @@ public class EventDAOImpl implements EventDAO {
 	@Override
 	public boolean updateEventCommentStatus(int commentId, EventCommentVO.Status status) {
 		return sqlSession.getMapper(EventDAO.class).updateEventCommentStatus(commentId, status);
-	}
-
-	// 이벤트 참여 철회 -> event_participants 테이블의 status 필드 데이터 업데이트
-	@Override
-	public boolean updateEventParticipationStatus(int commentId, EventParticipantVO.Status status) {
-		return sqlSession.getMapper(EventDAO.class).updateEventParticipationStatus(commentId, status);
 	}
 
 	// 이벤트 당첨자 발표 리스트
@@ -126,5 +131,29 @@ public class EventDAOImpl implements EventDAO {
 	@Override
 	public int getOngoingEventsCount() {
 	    return sqlSession.getMapper(EventDAO.class).getOngoingEventsCount();
+	}
+
+	// 이벤트 응모 여부 확인하기
+	@Override
+	public EventParticipantVO getEventParticipation(int eventId, int memberId) {
+	    return sqlSession.getMapper(EventDAO.class).getEventParticipation(eventId, memberId);
+	}
+
+	// 이벤트 재 참여 시 CANCELLED 상태에서 ACTIVE로 업데이트
+	@Override
+	public void updateEventParticipation(int eventId, int memberId) {
+	    sqlSession.getMapper(EventDAO.class).updateEventParticipation(eventId, memberId);
+	}
+
+	// 이벤트 참여 기록이 전혀 없는 경우 새로 삽입
+	@Override
+	public void insertEventParticipation(int eventId, int memberId) {
+	    sqlSession.getMapper(EventDAO.class).insertEventParticipation(eventId, memberId);
+	}
+
+	// 이벤트 ACTIVE 참여가 없는 경우, CANCELLED 상태의 참여가 있는지 확인
+	@Override
+	public EventParticipantVO getCancelledEventParticipation(int eventId, int memberId) {
+		return sqlSession.getMapper(EventDAO.class).getCancelledEventParticipation(eventId, memberId);
 	}
 }
