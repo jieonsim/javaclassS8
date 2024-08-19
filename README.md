@@ -162,20 +162,32 @@
 7. 티켓 금액과 예매 수수료(장당 1,000원) 누적
 8. 스포츠 예매권 선택 시, 마이페이지에서 등록한 예매권 사용 또는 새로 등록 후 사용 가능
 9. 스포츠 예매권은 티켓 금액과 수수료 누적 제외
+<p align="center">
+<img src="https://github.com/user-attachments/assets/8ed1f06a-aba0-4b2b-920e-640cde6f74e3" alt="예매3 GIF" width="70%">
+</p>
 
 #### ☑️ 예매확인
 10. 예매자 확인 및 취소기한/수수료 동의 후 결제 가능
 11. 약관 미동의 시 결제 불가
+<p align="center">
+<img src="https://github.com/user-attachments/assets/8d0ef359-b5b8-466b-9849-be3df33b3e97" alt="예매4 GIF" width="70%">
+</p>
 
 #### ☑️ 결제
 12. 포트원 결제 API로 결제 및 예매 처리
 13. 예매권으로 결제 금액이 0원일 경우 결제 없이 예매만 진행
+<p align="center">
+<img src="https://github.com/user-attachments/assets/958e1c61-5467-4431-ba98-38a7a6e96f5b" alt="예매5 GIF" width="70%">
+</p>
 
 #### ☑️ 예매완료
 14. 결제 완료 후 생성된 예매번호, 상세 좌석번호 등 확인 가능
 15. 내역 프린트 및 PDF 저장 가능
-16. '예매확인' 버튼 클릭 시 마이페이지 > 예매관리 > 예매확인/취소 > 예매확인 리스트로 이동
-17. 예매번호 클릭 시 상세 예매내역으로 이동
+16. '예매확인' 버튼 시 마이페이지 > 예매관리 > 예매확인/취소 > 예매확인 리스트로 이동
+17. 예매확인 리스트에서 예매번호 시 상세 예매내역으로 이동
+<p align="center">
+<img src="https://github.com/user-attachments/assets/2062bcfd-a542-49ad-92bf-4dcbe8d0e66d" alt="예매6 GIF">
+</p>
 
 ### ✔ 마이페이지
 #### ☑️ 회원정보관리 > 회원정보수정 > 비밀번호 변경
