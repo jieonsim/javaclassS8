@@ -134,9 +134,11 @@
 - 이벤트당 한 번만 댓글 작성 및 참여 가능
 - 당첨자 발표 게시글에서 마스킹된 이메일 아이디 확인 가능
 <p align="center">
-<img src="https://github.com/user-attachments/assets/d5114717-2f9c-41c7-9881-dc4d42e96758" alt="이벤트 GIF" width="70%">
+<img src="https://github.com/user-attachments/assets/d5114717-2f9c-41c7-9881-dc4d42e96758" alt="이벤트 댓글 작성 수정 삭제 GIF" width="70%">
 </p>
-
+<p align="center">
+<img src="https://github.com/user-attachments/assets/46ec10a6-3456-406f-9752-f664fbbc193b" alt="이벤트 당첨자 발표 확인 GIF" width="70%">
+</p>
 
 ### ✔ 예매
 ### ✔ 마이페이지
