@@ -147,7 +147,7 @@
 2. 예매 창 접속 시 CAPTCHA 생성 및 검증
 3. 보안문자 일치 시에만 다음 단계로 이동 가능
 <p align="center">
-<img src="https://github.com/user-attachments/assets/de17049b-82af-4685-9ef7-941fa1cbc2ac" alt="예매1 GIF">
+<img src="https://github.com/user-attachments/assets/1b29af2b-fa42-454d-8f40-9be4546cbff3" alt="예매1 GIF">
 </p>
 
 #### ☑️ 등급/좌석 선택
