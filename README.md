@@ -153,6 +153,9 @@
 #### ☑️ 등급/좌석 선택
 4. 좌석 등급 리스트에서 좌석 선택
 5. 매수 선택 후 다음 단계로 이동
+<p align="center">
+<img src="https://github.com/user-attachments/assets/d9284d88-3e12-4328-8d9d-0f9f68b2e822" alt="예매2 GIF">
+</p>
 
 #### ☑️ 권종/할인/매수 선택
 6. 매수에 맞춰 원하는 권종 선택
