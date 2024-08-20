@@ -237,10 +237,16 @@
 <img src="https://github.com/user-attachments/assets/afe49b34-9d69-4bd9-b80f-8fbc0e87d594" alt="이벤트업로드 GIF" width="70%">
 </p>
 
-#### 2. 이벤트 참여자 대상으로 추첨 ⬇️
+#### 2. 이벤트 참여자 대상으로 추첨 및 당첨자 발표, 당첨 안내 및 예매권 메일 발송 ⬇️
 <p align="center">
-<img src="https://github.com/user-attachments/assets/7b305d1a-b2de-4a4c-8fbd-7d9ce9f217c3" alt="이벤트업로드 추첨 당첨자발표 GIF" width="70%">
+<img src="https://github.com/user-attachments/assets/0e181d89-7358-41ba-a082-c2fd03142d89" alt="추첨 및 당첨자 발표 GIF" width="70%">
 </p>
+
+#### 3. 이벤트 당첨자 발표 유저 페이지 ⬇️
+<p align="center">
+<img src="https://github.com/user-attachments/assets/4fdaa225-e2a9-4d8f-a2b5-065026390475" alt="당첨자 발표 유저 페이지 GIF" width="70%">
+</p>
+
 
 ### ✔ 스포츠 핫이슈
 - 실시간 스포츠 기사와 국내외 주요 경기 일정, KBO 팀 랭킹을 볼 수 있는 페이지
