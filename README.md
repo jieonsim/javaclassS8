@@ -179,10 +179,11 @@
 <img src="https://github.com/user-attachments/assets/2062bcfd-a542-49ad-92bf-4dcbe8d0e66d" alt="예매6 GIF">
 </p>
 
+#### ☑️ 예매완료 메일 발송
 18. 회원 메일로 예매 완료 메일이 발송됨
 19. 메일 본문 내 '예매내역보기' 클릭 시 마이페이지 예매확인으로 이동
 <p align="center">
-<img src="https://github.com/user-attachments/assets/2062bcfd-a542-49ad-92bf-4dcbe8d0e66d" alt="예매6 GIF">
+<img src="https://github.com/user-attachments/assets/ea6d19f4-f3bc-4195-b6e8-ec719a929a7d" alt="예매완료메일" width="70%">
 </p>
 
 ### ✔ 마이페이지
