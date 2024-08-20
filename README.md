@@ -232,12 +232,12 @@
 - 예매권 발행 및 사용 내역 확인 가능
 - 이벤트 콘텐츠 업로드 및 추첨, 당첨자 발표 가능
 
-1. 이벤트 업로드 ⬇️
+#### 1. 이벤트 업로드 ⬇️
 <p align="center">
-<img src="https://github.com/user-attachments/assets/7b305d1a-b2de-4a4c-8fbd-7d9ce9f217c3" alt="이벤트업로드 추첨 당첨자발표 GIF" width="70%">
+<img src="https://github.com/user-attachments/assets/afe49b34-9d69-4bd9-b80f-8fbc0e87d594" alt="이벤트업로드 GIF" width="70%">
 </p>
 
-2. 이벤트 참여자 대상으로 추첨 ⬇️
+#### 2. 이벤트 참여자 대상으로 추첨 ⬇️
 <p align="center">
 <img src="https://github.com/user-attachments/assets/7b305d1a-b2de-4a4c-8fbd-7d9ce9f217c3" alt="이벤트업로드 추첨 당첨자발표 GIF" width="70%">
 </p>
