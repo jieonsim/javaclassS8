@@ -13,6 +13,8 @@
 <br>
 
 📹 [발표 영상 - 유튜브로 바로보기](https://youtu.be/gPB3dMz0ztY)
+
+💭 [기획 및 제작과정 - PDF로 바로보기](https://docs.google.com/spreadsheets/d/1e1T5jBh-7tM7CjCwONiFs9F7OIGQVMUJmeAd8-6eK-Q/edit?usp=sharing)
 <hr>
 
 ## 1️⃣ 사용 기술 스택
