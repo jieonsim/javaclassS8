@@ -191,7 +191,7 @@
 - 예매내역 확인 및 취소마감시간 내 취소 가능
 - 예매 익일부터 취소수수료 부과 및 예매 수수료 미반환
 <p align="center">
-<img src="https://github.com/user-attachments/assets/bb14328d-1ffe-4bee-bd8f-bb9c84f6975c" alt="예매확인취소" width="70%">
+<img src="https://github.com/user-attachments/assets/bb14328d-1ffe-4bee-bd8f-bb9c84f6975c" alt="예매확인취소 GIF" width="70%">
 </p>
 
 #### ☑️ 할인혜택 > 예매권
@@ -227,13 +227,12 @@
 
 ### ✔ 어드민
 - 회원 등급 및 활동 상태 변경
-- 예매 내역 확인 및 예매자가 아니더라도 예매 취소 가능
 - 스포츠 종목, 구단, 경기장, 경기, 요금, 좌석 등록 및 관리
-<br>
-
-⬇️ 이벤트 콘텐츠 업로드 및 추첨, 당첨자 발
+- 예매 내역 확인 및 예매자가 아니더라도 예매 취소 가능
+- 예매권 발행 및 사용 내역 확인 가능
+- 이벤트 콘텐츠 업로드 및 추첨, 당첨자 발표 ⬇️
 <p align="center">
-<img src="https://github.com/user-attachments/assets/7b305d1a-b2de-4a4c-8fbd-7d9ce9f217c3" alt="참여 이벤트" width="70%">
+<img src="https://github.com/user-attachments/assets/7b305d1a-b2de-4a4c-8fbd-7d9ce9f217c3" alt="이벤트업로드 추첨 당첨자발표 GIF" width="70%">
 </p>
 
 ### ✔ 스포츠 핫이슈
@@ -242,5 +241,5 @@
 - 진행 상황 표시와 재미있는 스포츠 사실들을 함께 제공하여 기다리는 동안 사용자의 관심을 유지
 - 스포츠 기사 클릭 시 기사 링크로 이동함
 <p align="center">
-<img src="https://github.com/user-attachments/assets/d042d028-0b47-44b4-bf0b-f0dbcc0e97d4" alt="스포츠핫이슈" width="70%">
+<img src="https://github.com/user-attachments/assets/d042d028-0b47-44b4-bf0b-f0dbcc0e97d4" alt="스포츠핫이슈 GIF" width="70%">
 </p>
