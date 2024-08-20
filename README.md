@@ -192,8 +192,15 @@
 - 예매 익일부터 취소수수료 부과 및 예매 수수료 미반환
 
 #### ☑️ 할인혜택 > 예매권
-- 이벤트 당첨 시 회원 메일로 당첨 축하 안내와 예매권 번호 발송
-- 메일로 전달받은 예매권 번호를 마이페이지에서 등록 가능
+- 이벤트 당첨 시 회원 메일로 당첨 축하 안내와 예매권 번호가 발송됨
+<p align="center">
+<img src="https://github.com/user-attachments/assets/5bf27361-6806-44b3-9ef6-74864a6cd45a" alt="이벤트당첨안내메일" width="70%">
+</p>
+
+- 메일로 전달받은 예매권 번호 마이페이지에서 등록 가능
+<p align="center">
+<img src="https://github.com/user-attachments/assets/e8ee4c05-85ee-4aa0-9b63-a8536781597e" alt="예매권등록 GIF" width="70%">
+</p>
 
 #### ☑️ 회원정보관리 > 회원정보수정
 - 비밀번호 확인 후 회원 정보 수정 가능, 불일치 시 변경 불가
