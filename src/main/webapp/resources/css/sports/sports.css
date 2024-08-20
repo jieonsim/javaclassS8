@@ -539,6 +539,10 @@ ul, ol {
 	font-weight: 500;
 }
 
+.rightcont_inner .team_tab li a:hover {
+	color: #242428;
+}
+
 .rightcont_inner .team_tab li span, .rightcont_inner .team_tab li.system em {
 	background-image: none;
 	font-size: 14px;

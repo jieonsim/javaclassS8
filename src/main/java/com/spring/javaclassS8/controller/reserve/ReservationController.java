@@ -110,8 +110,6 @@ public class ReservationController {
 		game.setGameDate(DateTimeFormatUtils.formatDate(game.getGameDate()));
 		game.setGameTime(DateTimeFormatUtils.formatTime(game.getGameTime()));
 
-		// List<SeatInventoryVO> seatInventories =
-		// reservationService.getSeatInventoriesByGameId(gameId);
 		List<SeatInventoryVO> seatInventories = reservationService.getSeatInventoriesWithPricesByGameId(gameId);
 		int maxTicketsPerBooking = reservationService.getMaxTicketsPerBooking(game.getSportId());
 
