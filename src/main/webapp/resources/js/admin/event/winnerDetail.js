@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				alert(data.message);
 				if (data.success) {
 					winnerAnnouncementBox.style.display = 'none';
-					announcementBtn.style.display = 'none';
+					/*announcementBtn.style.display = 'none';*/
 				}
 			})
 			.catch(error => {

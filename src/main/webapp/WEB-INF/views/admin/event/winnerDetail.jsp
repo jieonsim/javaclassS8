@@ -38,11 +38,11 @@
 											당첨자 리스트
 										</h4>
 										<div class="d-flex justify-content-end mb-2">
-												<c:if test="${!isAnnounced}">
+												<%-- <c:if test="${!isAnnounced}"> --%>
 													<div class="mx-2">
 														<button type="button" class="btn btn-sm btn-secondary" id="announcementBtn">당첨자 발표 업로드</button>
 													</div>
-												</c:if>
+												<%-- </c:if> --%>
 											<div class="mx-2">
 												<button type="button" class="btn btn-sm btn-secondary" id="sendMailBtn">당첨 안내 및 예매권 메일 발송</button>
 											</div>

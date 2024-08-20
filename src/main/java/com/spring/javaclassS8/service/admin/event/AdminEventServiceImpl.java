@@ -345,10 +345,10 @@ public class AdminEventServiceImpl implements AdminEventService {
 	}
 
 	// 이벤트 고유번호와 이벤트 추첨일시로 이벤트 당첨 발표여부 확인
-	@Override
-	public boolean isEventAnnouncedByDrawAt(int eventId, Timestamp drawAt) {
-		return adminEventDAO.isEventAnnouncedByDrawAt(eventId, drawAt);
-	}
+//	@Override
+//	public boolean isEventAnnouncedByDrawAt(int eventId, Timestamp drawAt) {
+//		return adminEventDAO.isEventAnnouncedByDrawAt(eventId, drawAt);
+//	}
 
 	// 이벤트 전체 리스트 가져오기 
 	@Override

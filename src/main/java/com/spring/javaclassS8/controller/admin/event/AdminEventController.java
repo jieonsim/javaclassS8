@@ -271,16 +271,13 @@ public class AdminEventController {
 		Timestamp drawAt = Timestamp.valueOf(drawAtStr.replace('T', ' '));
 		List<WinnerDetailVO> winnerDetails = adminEventService.getWinnerDetailsByDrawAt(eventId, drawAt);
 		EventVO event = adminEventService.getEventById(eventId);
-		boolean isAnnounced = adminEventService.isEventAnnouncedByDrawAt(eventId, drawAt);
-
-		// 결과 확인을 위한 로그
-		System.out.println("Number of winners: " + winnerDetails.size());
+		// boolean isAnnounced = adminEventService.isEventAnnouncedByDrawAt(eventId, drawAt);
 
 		model.addAttribute("winnerDetails", winnerDetails);
 		model.addAttribute("eventTitle", event.getTitle());
 		model.addAttribute("eventId", eventId);
 		model.addAttribute("drawAt", drawAt);
-		model.addAttribute("isAnnounced", isAnnounced);
+		// model.addAttribute("isAnnounced", isAnnounced);
 
 		return "admin/event/winnerDetail";
 	}

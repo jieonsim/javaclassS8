@@ -162,11 +162,11 @@
 	</select>
 
 	<!-- 이벤트 고유번호와 이벤트 추첨일시로 이벤트 당첨 발표여부 확인 -->
-	<select id="isEventAnnouncedByDrawAt" resultType="boolean">
+	<!-- <select id="isEventAnnouncedByDrawAt" resultType="boolean">
 	    SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END
 	    FROM winners
 	    WHERE eventId = #{eventId}
 	    AND DATE(drawAt) = DATE(#{drawAt})
 	    AND isAnnounced = true
-	</select>
+	</select> -->
 </mapper>

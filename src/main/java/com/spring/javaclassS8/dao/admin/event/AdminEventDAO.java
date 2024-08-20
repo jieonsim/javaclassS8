@@ -51,7 +51,7 @@ public interface AdminEventDAO {
 	List<WinnerDetailVO> getWinnerDetailsByDrawAt(@Param("eventId") int eventId, @Param("drawAt") Timestamp drawAt);
 
 	// 이벤트 고유번호와 이벤트 추첨일시로 이벤트 당첨 발표여부 확인
-	boolean isEventAnnouncedByDrawAt(@Param("eventId") int eventId, @Param("drawAt") Timestamp drawAt);
+	// boolean isEventAnnouncedByDrawAt(@Param("eventId") int eventId, @Param("drawAt") Timestamp drawAt);
 
 	// winners 테이블의 isAnnounced 업데이트
 	int updateWinnerIsAnnounced(@Param("eventId") int eventId, @Param("drawAt") Timestamp drawAt);

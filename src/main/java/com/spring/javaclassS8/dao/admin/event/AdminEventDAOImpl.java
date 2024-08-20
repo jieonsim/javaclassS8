@@ -94,10 +94,10 @@ public class AdminEventDAOImpl implements AdminEventDAO {
 	}
 
 	// 이벤트 고유번호와 이벤트 추첨일시로 이벤트 당첨 발표여부 확인
-	@Override
-	public boolean isEventAnnouncedByDrawAt(int eventId, Timestamp drawAt) {
-		return sqlSession.getMapper(AdminEventDAO.class).isEventAnnouncedByDrawAt(eventId, drawAt);
-	}
+//	@Override
+//	public boolean isEventAnnouncedByDrawAt(int eventId, Timestamp drawAt) {
+//		return sqlSession.getMapper(AdminEventDAO.class).isEventAnnouncedByDrawAt(eventId, drawAt);
+//	}
 	
 	// 당첨자 발표 후 winners 테이블의 isAnnounced 업데이트
 	@Override

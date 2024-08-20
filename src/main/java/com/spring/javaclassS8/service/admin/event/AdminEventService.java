@@ -65,7 +65,7 @@ public interface AdminEventService {
 	List<WinnerDetailVO> getWinnerDetailsByDrawAt(int eventId, Timestamp drawAt);
 
 	// 이벤트 고유번호와 이벤트 추첨일시로 이벤트 당첨 발표여부 확인
-	boolean isEventAnnouncedByDrawAt(int eventId, Timestamp drawAt);
+	// boolean isEventAnnouncedByDrawAt(int eventId, Timestamp drawAt);
 
 	// 전체 이벤트 가져오기
 	List<EventVO> getAllEvents(int page, int pageSize);
