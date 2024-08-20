@@ -196,13 +196,17 @@
 - 메일로 전달받은 예매권 번호를 마이페이지에서 등록 가능
 
 #### ☑️ 회원정보관리 > 회원정보수정
-- 이름과 휴대폰 번호 수정 가능
+- 비밀번호 확인 후 회원 정보 수정 가능, 불일치 시 변경 불가
+- 이름과 휴대폰 번호만 수정할 수 있음
+<p align="center">
+<img src="https://github.com/user-attachments/assets/7bec0627-c708-4272-b125-8bab55606945" alt="회원정보수정 GIF" width="70%">
+</p>
 
 #### ☑️ 회원정보관리 > 회원정보수정 > 비밀번호 변경
 - 현재 비밀번호와 신규 비밀번호, 신규 비밀번호 확인 입력 후 변경 가능
 - 현재 비밀번호와 동일한 비밀번호로 변경 불가
 <p align="center">
-<img src="https://github.com/user-attachments/assets/92c9d11f-c4f7-48d0-93be-4b4dcbfe5b27" alt="비밀번호 변경" width="70%">
+<img src="https://github.com/user-attachments/assets/92c9d11f-c4f7-48d0-93be-4b4dcbfe5b27" alt="비밀번호 변경 GIF" width="70%">
 </p>
 
 #### ☑️ 활동관리 > 참여 이벤트
