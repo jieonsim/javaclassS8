@@ -207,6 +207,9 @@
 
 #### ☑️ 활동관리 > 참여 이벤트
 - 본인이 응모한 이벤트와 응모일 확인 가능
+<p align="center">
+<img src="https://github.com/user-attachments/assets/7b305d1a-b2de-4a4c-8fbd-7d9ce9f217c3" alt="참여 이벤트" width="70%">
+</p>
 
 ### ✔ 어드민
 ### ✔ 스포츠 핫이슈
