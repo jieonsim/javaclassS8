@@ -63,7 +63,14 @@
 
 <hr>
 
-## 3️⃣ 기능별 화면 및 소개
+## 3️⃣ ERD
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/bf60d53e-3a54-4ec7-8319-ba9c0546a4a6" alt="티켓챔프 ERD" width="70%">
+</p>
+
+<hr>
+
+## 4️⃣ 기능별 화면 및 소개
 ### ✔ 메인 화면
 - 아직 예매가 오픈되지 않은 경기의 일정과 예매 오픈일시를 종목별로 확인
 - 예매 오픈 시간이 지났을 경우 '예매하기' 버튼으로 활성화
