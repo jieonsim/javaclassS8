@@ -289,3 +289,15 @@
 <p align="center">
 <img src="https://github.com/user-attachments/assets/d042d028-0b47-44b4-bf0b-f0dbcc0e97d4" alt="스포츠핫이슈 GIF" width="70%">
 </p>
+
+<hr>
+
+
+프로젝트에 대한 더 자세한 내용과 개발 과정이 궁금하시다면,<br>
+아래 프로젝트 PPT를 통해 확인하실 수 있습니다. 
+<br><br>
+💁🏻 [프로젝트 PPT - PDF로 바로보기](https://drive.google.com/file/d/1_CHga5fahvz1s-E7umZdtXcqqta1ay9V/view?usp=sharing)
+<br>
+<br>
+<br>
+감사합니다.
