@@ -242,6 +242,15 @@
 <img src="https://github.com/user-attachments/assets/92c9d11f-c4f7-48d0-93be-4b4dcbfe5b27" alt="비밀번호 변경 GIF" width="70%">
 </p>
 
+#### ☑️ 회원정보관리 > 회원탈퇴
+- 관람일이 지나지 않은 예매 티켓이 있을 경우, 회원 탈퇴 불가
+- 관람일이 지나지 않은 티켓이 있으면, 해당 티켓의 경기 정보가 표시됨
+- 관람일이 지난 후 또는 예매 취소 시 회원 탈퇴가 가능
+<p align="center">
+<img src="https://github.com/user-attachments/assets/087fd679-5453-4086-a143-7a1813177f53" alt="회원탈퇴 GIF" width="70%">
+</p>
+
+
 #### ☑️ 활동관리 > 참여 이벤트
 - 본인이 응모한 이벤트와 응모일 확인 가능
 <p align="center">
