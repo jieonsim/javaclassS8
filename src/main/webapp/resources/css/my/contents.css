@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.controller span,.controller a{display:inline-block;overflow:hidden;font-size:1px;line-height:999px;background:url(../img/sp.png) no-repeat}
+/* .controller span,.controller a{display:inline-block;overflow:hidden;font-size:1px;line-height:999px;background:url(../img/sp.png) no-repeat} */
 
 .ng-hide:not(.ng-hide-animate) {display:none !important}
 
@@ -100,7 +100,7 @@
 .event_top_list{margin-bottom:37px;display: flex;display: -webkit-box;width: 100%;justify-content: space-between;}
 .event_top_list li{width:356px;margin-left:26px;border-radius:2px;box-shadow: 0px 1px 2px rgb(0 0 0 / 15%);box-sizing: border-box;}
 .event_top_list li:first-child{margin-left:0}
-.event_top_list li a{display:block;background:url(../img/img_defalt_evt.jpg) no-repeat 0 0;height:568px;position:relative}
+/* .event_top_list li a{display:block;background:url(../img/img_defalt_evt.jpg) no-repeat 0 0;height:568px;position:relative} */
 .event_top_list li .event_top_info{background:#fff;padding:19px 21px 24px;display: block;box-sizing: border-box; height:148px;width: 100%;position: absolute;left: 0;right: 0;bottom: 0;}
 .event_top_list li .event_top_info dd{color:#878d95;line-height:20px}
 .event_top_list li .event_top_info .event_title{overflow:hidden;width:100%;font-size:16px;font-weight:700;letter-spacing:-1px;color:#242428;margin:0 0 5px 0;line-height:20px;max-height:40px;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;}
@@ -161,8 +161,8 @@
 .common_container.event_cont .inner{padding-top: 0;}
 
 /** 고객센터 **/
-.help_rcont .btn_view,.help_rcont .basic_tbl tbody td .num,.help_rcont .num_lst .num,.help_rcont .help_info .ico_help,.info_mobile_rsrv h5 span,.info_mobile_rsrv h5 strong,.info_mobile_rsrv.noti h5{display:inline-block;overflow:hidden;font-size:1px;line-height:999px !important;background:url(../img/sp_help.png) no-repeat}
-a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hidden;font-size:1px;line-height:999px !important;background:url(../img/sp_help_img.png) no-repeat}
+/* .help_rcont .btn_view,.help_rcont .basic_tbl tbody td .num,.help_rcont .num_lst .num,.help_rcont .help_info .ico_help,.info_mobile_rsrv h5 span,.info_mobile_rsrv h5 strong,.info_mobile_rsrv.noti h5{display:inline-block;overflow:hidden;font-size:1px;line-height:999px !important;background:url(../img/sp_help.png) no-repeat} */
+/* a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hidden;font-size:1px;line-height:999px !important;background:url(../img/sp_help_img.png) no-repeat} */
 
 /* 고객센터 quick menu */
 .common_container.cs_center{background: #f8f9fa;}
@@ -361,14 +361,14 @@ a.btn_partner, .help_rcont .partner_step.v2 dl{display:inline-block;overflow:hid
 /* .refund_table .refund_history .refund_tit,.mypage .quick_menu h2,.mypage .quick_menu li.qmenu3 a span,.mypage .quick_menu li.qmenu4 a span,.mypage .quick_menu li.qmenu5 a span, .mypage h5 span,.mberguide dt,.mberoutbx dt,.bg_green .ico{display:inline-block;overflow:hidden;font-size:1px;line-height:999px !important;background:url(../img/sp_mypage.png) no-repeat} */
 .mypage.common_container {background: #f8f9fa;}
 .mypage .bx_tit{margin-bottom:37px}
-.mypage .bx_table .tit{display:block;height:16px;margin-bottom:8px;background-image:url(../img/sp_mypage.png);background-repeat:no-repeat;font-size:0}
+/* .mypage .bx_table .tit{display:block;height:16px;margin-bottom:8px;background-image:url(../img/sp_mypage.png);background-repeat:no-repeat;font-size:0} */
 /* 마이페이지 - quick menu */
 .mypage .quick_menu h2{background-position:-72px -198px;width:120px;height:28px}
 .mypage .quick_menu ul{overflow:hidden;float:left;width:743px;margin:44px 0 0 39px}
 .mypage .quick_menu li{width:auto;height:44px;padding:4px 28px 4px 37px;text-align:left}
 .mypage .quick_menu li:first-child{background:none;padding-left:0}
 .mypage .quick_menu li.qmenu5{padding-right:0}
-.mypage .quick_menu li a{display:block;height:19px;background:url(../img/sp_mypage.png) no-repeat;padding:25px 0 0 51px;font-family:'Roboto',-apple-system,BlinkMacSystemFont,Apple SD Gothic Neo,'Malgun Gothic',Arial,sans-serif; ;font-size:20px;font-weight:bold;color:#fa2828;letter-spacing:0}
+/* .mypage .quick_menu li a{display:block;height:19px;background:url(../img/sp_mypage.png) no-repeat;padding:25px 0 0 51px;font-family:'Roboto',-apple-system,BlinkMacSystemFont,Apple SD Gothic Neo,'Malgun Gothic',Arial,sans-serif; ;font-size:20px;font-weight:bold;color:#fa2828;letter-spacing:0} */
 .mypage .quick_menu li a:hover{text-decoration:underline}
 .mypage .quick_menu li.qmenu1{background:none;padding-left:0}
 .mypage .quick_menu li.qmenu1 a{width:97px;background-position:-286px -213px}

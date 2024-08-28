@@ -99,9 +99,9 @@
 .lt_noti2 a{color:#878d95}
 .lt_noti3 {margin:5px 0 22px 0}
 .lt_noti3 li{padding-left:8px;text-indent:-8px;color:#878d95;font-size:12px;line-height:20px;letter-spacing:-1px}
-.lt_noti3 ul li{padding-left:6px;background:url(../img/bg_dot3.png) no-repeat 0 7px;text-indent:0}
+/* .lt_noti3 ul li{padding-left:6px;background:url(../img/bg_dot3.png) no-repeat 0 7px;text-indent:0} */
 .lt_noti4 {width:400px;margin:17px 0 0 0}
-.lt_noti4 li{padding:0 0 0 10px;background:url(../img/bg_dot2.png) no-repeat 1px 7px;color:#878d95;font-size:13px;line-height:18px;letter-spacing:0}
+/* .lt_noti4 li{padding:0 0 0 10px;background:url(../img/bg_dot2.png) no-repeat 1px 7px;color:#878d95;font-size:13px;line-height:18px;letter-spacing:0} */
 .lt_noti4 a{color:#878d95}
 .mypage_account{padding:21px 0 0 0;border-top:1px solid #ecedf2;color:#242428;font-weight:700}
 .mypage_account .checkbox.checked{margin-top:-2px}
