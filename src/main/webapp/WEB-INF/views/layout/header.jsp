@@ -14,7 +14,6 @@
 		</div>
 	</div>
 </div>
-
 <!-- 데스크톱 헤더 -->
 <header class="common_header">
 	<div class="header_util bg-light py-2">
@@ -101,19 +100,20 @@
 				</ul>
 			</nav>
 			<div class="header_search ml-auto">
-				<div class="search-wrapper input-group">
-					<input type="search" class="form-control" placeholder="검색어를 입력해 주세요">
-					<div class="input-group-append">
-						<button class="btn" type="button">
-							<i class="ph ph-magnifying-glass"></i>
-						</button>
+				<form onsubmit="return handleSearch(event)">
+					<div class="search-wrapper input-group">
+						<input type="search" id="searchInput" class="form-control" placeholder="검색어를 입력해 주세요">
+						<div class="input-group-append">
+							<button class="btn" type="submit">
+								<i class="ph ph-magnifying-glass"></i>
+							</button>
+						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	</div>
 </header>
-
 <!-- 모바일 툴바 -->
 <nav class="m_toolbar">
 	<ul class="toolbar_menu">
@@ -165,3 +165,4 @@
 	</div>
 </nav>
 <script src="${ctp}/js/member/login/autoLogin.js"></script>
+<script src="${ctp}/js/layout/header.js"></script>
