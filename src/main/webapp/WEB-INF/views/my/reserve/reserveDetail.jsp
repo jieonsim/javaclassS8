@@ -128,9 +128,16 @@
 										</td>
 										<td class="color_point font_option ng-scope">
 											<c:choose>
-												<c:when test="${reservation.status eq '예매완료'}">취소가능</c:when>
-												<c:otherwise>취소불가</c:otherwise>
-											</c:choose>
+				                                <c:when test="${reservation.status eq '취소완료'}">
+				                                    취소완료
+				                                </c:when>
+				                                <c:when test="${reservation.cancelable}">
+				                                    취소가능
+				                                </c:when>
+				                                <c:otherwise>
+				                                    취소불가
+				                                </c:otherwise>
+				                            </c:choose>
 										</td>
 										<td class="number color_point font_option ng-binding ng-scope">${reservation.formattedCancelDeadline}</td>
 									</tr>

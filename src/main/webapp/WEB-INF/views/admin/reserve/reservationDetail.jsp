@@ -93,7 +93,7 @@
 													<th>좌석번호</th>
 													<th>가격</th>
 													<th>취소여부</th>
-													<th>취소(가능)일</th>
+													<th>취소가능일</th>
 												</tr>
 											</thead>
 											<tbody class="text-center">
@@ -109,9 +109,16 @@
 														</td>
 														<td>
 															<c:choose>
-																<c:when test="${reservation.status eq '예매완료'}">취소가능</c:when>
-																<c:otherwise>취소불가</c:otherwise>
-															</c:choose>
+								                                <c:when test="${reservation.status eq '취소완료'}">
+								                                    취소완료
+								                                </c:when>
+								                                <c:when test="${reservation.cancelable}">
+								                                    취소가능
+								                                </c:when>
+								                                <c:otherwise>
+								                                    취소불가
+								                                </c:otherwise>
+							                            </c:choose>
 														</td>
 														<td>${reservation.formattedCancelDeadline}</td>
 													</tr>
