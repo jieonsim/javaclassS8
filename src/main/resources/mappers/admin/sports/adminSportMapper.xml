@@ -377,6 +377,11 @@
         DELETE FROM venues WHERE id = #{id}
     </delete>
     
+    <!-- 게임 ID로 좌석 잔여수량 데이터 삭제 -->
+    <delete id="deleteSeatInventoryByGameId" parameterType="int">
+    	DELETE FROM seat_inventory WHERE gameId = #{gameId}
+	</delete>
+
     <!-- 경기 삭제 -->
     <delete id="deleteGame" parameterType="int">
     	DELETE FROM games WHERE id = #{id}

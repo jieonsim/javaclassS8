@@ -226,7 +226,11 @@ public class AdminSportServiceImpl implements AdminSportSerivce {
 	@Override
 	@Transactional
 	public void deleteGame(int id) throws Exception {
-		adminSportDAO.deleteGame(id);
+		// 먼저 관련된 seat_inventory 데이터를 삭제
+	    adminSportDAO.deleteSeatInventoryByGameId(id);
+	    
+	    // 그 다음 게임을 삭제
+	    adminSportDAO.deleteGame(id);
 	}
 
 	// 좌석 등록 폼 경기장별 현재 사용된 좌석 수 확인

@@ -163,8 +163,13 @@ public interface AdminSportDAO {
 	// 토탈 게임 수 가져오기(페이징)
 	int getTotalGamesCount();
 
+	// 게임 등록
 	int insertGame(GameVO game);
 
+	// 게임 디테일 가져오기
 	GameVO getGameDetails(int gameId);
+
+	// 게임 ID로 좌석 잔여수량 데이터 삭제
+	void deleteSeatInventoryByGameId(int gameId);
 
 }

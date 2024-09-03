@@ -324,4 +324,10 @@ public class AdminSportDAOImpl implements AdminSportDAO {
 	public GameVO getGameDetails(int gameId) {
 		return sqlSession.getMapper(AdminSportDAO.class).getGameDetails(gameId);
 	}
+	
+	// 게임 ID로 좌석 잔여수량 데이터 삭제
+	@Override
+	public void deleteSeatInventoryByGameId(int gameId) {
+	    sqlSession.getMapper(AdminSportDAO.class).deleteSeatInventoryByGameId(gameId);
+	}
 }
