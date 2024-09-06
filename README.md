@@ -1,4 +1,4 @@
-# 티켓챔프 Ticket Champ ⚾
+![image](https://github.com/user-attachments/assets/f9f7b2fd-937b-4470-b6d9-eb20f95fb219)# 티켓챔프 Ticket Champ ⚾
 티켓챔프는 스포츠 경기의 티켓을 예매할 수 있는 웹 애플리케이션으로,<br>
 예매는 물론 이벤트 및 예매권을 통한 사용자 참여 독려 및 어드민 운영 관리 기능을 제공합니다.
 
@@ -12,7 +12,7 @@
 💁🏻 [프로젝트 PPT - PDF로 바로보기](https://drive.google.com/file/d/1_CHga5fahvz1s-E7umZdtXcqqta1ay9V/view?usp=sharing)
 <br>
 
-🎟️ [시연 영상 - YouTube로 바로보기](https://youtu.be/Xo0DVDYQWwo)
+🎟️ [시연 영상 - YouTube로 바로보기](https://youtu.be/VcXZStlagqQ)
 
 📹 [발표 영상 - YouTube로 바로보기](https://youtu.be/gPB3dMz0ztY)
 
