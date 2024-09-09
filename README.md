@@ -9,7 +9,7 @@
 - Test ID : `zieonsim@gmail.com`
 - Test PW : `zieonsim1`
 
-💁🏻 [프로젝트 PPT - PDF로 바로보기](https://drive.google.com/file/d/1_CHga5fahvz1s-E7umZdtXcqqta1ay9V/view?usp=sharing)
+💁🏻 [프로젝트 상세 설명 PPT - PDF로 바로보기](https://drive.google.com/file/d/1_CHga5fahvz1s-E7umZdtXcqqta1ay9V/view?usp=sharing)
 <br>
 
 🎟️ [시연 영상 - YouTube로 바로보기](https://youtu.be/yu-Ihtg_adE)
