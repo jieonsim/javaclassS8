@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/f9f7b2fd-937b-4470-b6d9-eb20f95fb219)# 티켓챔프 Ticket Champ ⚾
+# 티켓챔프 Ticket Champ ⚾
 티켓챔프는 스포츠 경기의 티켓을 예매할 수 있는 웹 애플리케이션으로,<br>
 예매는 물론 이벤트 및 예매권을 통한 사용자 참여 독려 및 어드민 운영 관리 기능을 제공합니다.
 
